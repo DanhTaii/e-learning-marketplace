@@ -3,99 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/cart.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/home.css">
+    <link rel="stylesheet" href="./assets/css/cart.css">
+    <script src="./assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
+    <!--    <script src=""></script>-->
+
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+        });
+    </script>
+
+    <script>
+        $(function(){
+            $("#footer").load("footer.html");
+        });
+    </script>
+
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="./assets/fonts/normalize.css-master/normalize.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <!-- Roboto Font -->
+    <!--    <link rel="stylesheet" href="./assets/fonts/static/." as="font" type="font/ttf" crossorigin>-->
 </head>
 <body>
-<header class="web__header">
-    <div class="grid">
-        <div class="header__box">
-            <div class="header__logo">
-                SKILL
-            </div>
-            <div class="header__browse">
-                <div class="browse__text">Browse</div>
-                <i class="browse__icon fa-solid fa-angle-down"></i>
-            </div>
-            <div class="header__community">Community</div>
-            <div class="header__search">
-                <div class="search__icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <div class="search__input">
-                    <input type="text" class="input__text"
-                           placeholder="Search classes, digital product, teachers,...">
-                </div>
-            </div>
-            <div class="header__class">My Class</div>
-            <div class="header__notification">
-                <i class="notification__icon fa-solid fa-bell"></i>
-            </div>
-        </div>
-    </div>
-</header>
+<div id="header"></div>
 <div class="web__container">
-    <div class="main-content-wrapper">
-        <div class="shopping-cart-column">
-            <h1>Shopping Cart</h1>
-            <p class="cart-summary">4 Courses in Cart</p>
+    <div class="grid">
+        <div class="cart-layout">
+            <div class="cart-layout__shopping-column shopping-cart">
+                <h1 class="shopping-cart__title h1">Shopping Cart</h1>
+                <p class="shopping-cart__summary summary">4 Courses in Cart</p>
+                <div class="shopping-cart__cart-items cart-items">
 
-            <div class="cart-items">
+                    <div class="cart-items__detail">
+                        <div class="detail__image-container">
+                            <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" height="526"
+                                width="526" class="detail__image image"/>
+                        </div>
+                        <div class="detail__info">
 
-                <div class="items-detail">
-                    <div class="image-item">
-                        <img src="assets/image/appstore.png" class="course-image">
+                            <div class="info__name-group">
+                                <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</h2>
+                                <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                            </div>
+                            <div class="info__rating-group">
+                                <span class="rating-group__tags tags">Bestseller</span>
+                                <span class="rating-group__rating rating">4.6 ⭐⭐⭐⭐⭐</span>
+                                <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                            </div>
+                            <div class="info__stats course-stats">
+                                <span class="stats__hours">40.5 total hours</span>
+                                <span>•</span>
+                                <span class="stats__lecture">544 lectures</span>
+                                <span>•</span>
+                                <span class="stats__level">All Levels</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="items-info">
-
-                        <div class="items-name">
-                            <h2 class="title-course">The Complete Full-Stack Web Development Bootcamp</h2>
-                            <span class="author-course">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                    <div class="cart-items__action-price-group action-price-group">
+                        <div class="cart-items__action items-action">
+                            <a href="" class="action__link">Remove</a>
+                            <a href="" class="action__link">Save for later</a>
+                            <a href="" class="action__link">Move to Wishlist</a>
                         </div>
-                        <div class="items-rating">
-                            <span class="items-tag">Bestseller</span>
-                            <span class="rating">4.6 ⭐⭐⭐⭐⭐</span>
-                            <span class="rating-count">(52,111 ratings)</span>
-                        </div>
-                        <div class="course-stats">
-                            <span>40.5 total hours</span>
-                            <span>•</span>
-                            <span>544 lectures</span>
-                            <span>•</span>
-                            <span>All Levels</span>
+                        <div class="cart-items__price items-price">
+                            <span class="price">₫2,499,000</span>
+                            <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
                         </div>
                     </div>
-                </div>
-                <div class="action-price-group">
-                <div class="items-action">
-                    <a href="" class="action-link">Remove</a>
-                    <a href="" class="action-link">Save for later</a>
-                    <a href="" class="action-link">Move to Wishlist</a>
-                </div>
-                <div class="items-price">
-                    <span class="price">₫2,499,000</span>
-                    <span class="price-icon">⚯</span></div>
+
                 </div>
 
             </div>
 
-        </div>
-
-        <div class="checkout-summary-column">
-            <div class="checkout-total">
-                <p class="total-label">Total</p>
-                <p class="total-amount">₫2,499,000</p>
-            </div>
-            <div class="checkout-button">
-                <button class="btn btn-checkout">Process to Checkout -></button>
-                <span class="charge-note">You won't be charged yet</span>
-            </div>
-            <div class="btn coupon-button">
-                <button class="btn-coupon">Apply Coupon</button>
+            <div class="cart-layout__checkout-column checkout-summary">
+                <div class="checkout__total">
+                    <p class="total__label">Total:</p>
+                    <p class="total__amount">₫2,499,000</p>
+                </div>
+                <div class="checkout__checkout-button checkout-button">
+                    <button class="btn btn__checkout">Process to Checkout &#8594;</button>
+                    <span class="charge-note">You won't be charged yet</span>
+                </div>
+                <div class="btn checkout__coupon-button ">
+                    <button class="btn-coupon">Apply Coupon</button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <!--    <div class="saved-for-later">-->
@@ -162,7 +164,7 @@
 <!--        </div>-->
 <!--    </div>*/-->
 
-</div>
+<div id="footer"></div>
 
 
 </body>
