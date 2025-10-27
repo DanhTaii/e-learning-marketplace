@@ -1,0 +1,208 @@
+.web__container {
+    padding: 0 60px;
+    max-width: 100%;
+
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.cart-summary {
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 16px;
+
+
+}
+
+/* bo cuc hinh cua Gio hang va Purchase */
+.main-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 20px;
+
+}
+
+.shopping-cart-column {
+    flex-grow: 1;
+    max-width: 100%;
+    margin-right: 40px;
+}
+.checkout-summary-column {
+    width: 250px;
+    flex-shrink: 0;
+    margin-top: 100px;
+}
+
+/* phan chia bo cuc 1 (Detail/PriceAction) */
+.cart-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding: 20px 0;
+}
+
+/* phan chia bo cuc 2 (Text va Image)*/
+.items-detail {
+    display: flex;
+
+}
+
+.image-item {
+    width: 150px;
+    margin-right: 16px;
+    border: 1px solid black;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.course-image {
+    max-width: 100%;
+    height: auto;
+
+
+}
+
+/* phan chia bo cuc 3 Text */
+.items-info {
+    padding-left: 0;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+}
+
+.title-course {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.author-course {
+    font-size: 7px;
+    line-height: 1.4;
+    margin-bottom: 5px;
+
+}
+
+.items-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+
+.items-tag {
+    background-color: #01FF85; /* Màu vàng nhạt */
+    border-radius: 5px;
+    color: #333;
+    font-weight: bold;
+    padding: 1px 5px;
+    margin-right: 10px;
+    font-size: 0.75em;
+}
+
+.rating {
+    color: #b78001; /* Màu sao vàng */
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.ratings-count {
+    font-size: 0.85em;
+    color: #555;
+}
+
+
+.course-stats {
+    font-size: 0.85em;
+    color: #555;
+}
+
+
+/* dieu chinh bo cuc cho action va price */
+.action-price-group{
+    display: flex;
+    justify-content: space-between;
+    min-width: 150px;
+    margin-left: 20px;
+    height: 100%;
+}
+
+.items-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.action-link {
+    color: #3722D3;
+    font-size: 10px;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+
+.price {
+    font-size: 10px;
+    font-weight: bold;
+    color: #3722D3;
+}
+
+
+
+
+.total-label {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.total-amount {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.checkout-button {
+    border-bottom: 1px solid lightgrey;
+}
+
+.btn-checkout {
+    background-color: #01FF85;
+    color: black;
+    font-weight: bold;
+    font-size: 9px;
+    border: none;
+    border-radius: 2px;
+    margin-top: 8px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 7px ;
+}
+
+.charge-note {
+    color: #555555;
+
+}
+
+.btn-coupon {
+    background-color: #3722D3;
+    color: white;
+    font-weight: bold;
+    font-size: 9px;
+    border: none;
+    border-radius: 2px;
+    margin-top: 5px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 7px
+}
