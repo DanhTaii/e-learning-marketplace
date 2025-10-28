@@ -28,12 +28,24 @@ html{
     width: 100%;
 }
 
-.grid__row {
+/*loại này là để cho khoảng cách giữa các cột là 10px*/
+.grid__row-1{
     display: flex;
     flex-wrap: wrap;
     /* thông thường khoảng cách giữa 2 cột trên pc là 24px nên mỗi đối tượng cách 12px + lại là vừa */
     margin-left: -5px;
     margin-right: -5px;
+}
+.grid__column-10{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 83.3333%;
+}
+/* 12/5=2.4 */
+.grid__column-2-4{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%; /* 100% / 5 = 20% */
 }
 
 .grid__column-2{
@@ -42,18 +54,30 @@ html{
     width: 16.6667%;
 }
 
-.grid__column-2-4{
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 20%;
+/*loại này là để cho khoảng cách giữa các cột là 16px*/
+.grid__row-2{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -8px;
 }
 
-.grid__column-10{
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 83.3333%;
+/* 12/3 = 4*/
+.grid__column-3{
+    padding-right: 8px;
+    padding-left: 8px;
+    width: 25%;
 }
-
+.grid__column-4{
+    padding-right: 8px;
+    padding-left: 8px;
+    width: 33.333%;
+}
+.grid__colum-9 {
+    padding-right: 8px;
+    padding-left: 8px;
+    width: 75%;
+}
 
 /*Header*/
 .web__header{
@@ -218,6 +242,7 @@ html{
     border: solid 1px var(--white-color);
     color: var(--white-color);
     width: 34%;
+    margin-right: 5px;
 }
 .search__icon{
     font-size: 2.4rem;
@@ -258,7 +283,7 @@ html{
     font-weight: 600;
     color: var(--white-color);
     cursor: pointer;
-    margin-left: 150px;
+    margin-left: 140px;
 }
 .header__class:hover{
     color: var(--bright-green);
