@@ -78,7 +78,12 @@ html{
     padding-left: 8px;
     width: 75%;
 }
-
+.grid__column-7{
+    width: 58.333%;
+}
+.grid__column-5{
+    width: 41.667%;
+}
 /*Header*/
 .web__header{
     background-color: var(--dark-blue);
@@ -167,6 +172,7 @@ html{
     z-index: 3;
 }
 .title{
+
     color: #394649;
     font-size: 1.5rem;
     font-weight: 700;
