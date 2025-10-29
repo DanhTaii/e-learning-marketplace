@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/home.css">
     <link rel="stylesheet" href="../assets/css/cart.css">
@@ -11,13 +11,13 @@
     <!--    <script src=""></script>-->
 
     <script>
-        $(function(){
+        $(function () {
             $("#header").load("header.html");
         });
     </script>
 
     <script>
-        $(function(){
+        $(function () {
             $("#footer").load("footer.html");
         });
     </script>
@@ -32,139 +32,477 @@
     <!--    <link rel="stylesheet" href="./assets/fonts/static/." as="font" type="font/ttf" crossorigin>-->
 </head>
 <body>
-<div id="header"></div>
-<div class="web__container">
-    <div class="grid">
-        <div class="cart-layout">
-            <div class="cart-layout__shopping-column shopping-cart">
-                <h1 class="shopping-cart__title h1">Shopping Cart</h1>
-                <p class="shopping-cart__summary summary">4 Courses in Cart</p>
-                <div class="shopping-cart__cart-items cart-items">
+<div class="web">
+    <div id="header"></div>
+    <div class="web__container">
+        <div class="grid">
+            <div class="cart-layout">
 
-                    <div class="cart-items__detail">
-                        <div class="detail__image-container">
-                            <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" height="526"
-                                 width="526" class="detail__image image"/>
+                <div class="cart-layout__shopping-column shopping-cart">
+                    <div class="shopping-cart">
+                        <h1 class="shopping-cart__title h1">Shopping Cart</h1>
+                        <p class="shopping-cart__summary summary">3 Courses in Cart</p>
+                        <div class="shopping-cart__cart-items cart-items">
+
+                            <div class="cart-items__detail">
+                                <div class="detail__image-container">
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                         height="526"
+                                         width="526" class="detail__image image"/>
+                                </div>
+                                <div class="detail__info">
+
+                                    <div class="info__name-group">
+                                        <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful Guidelines
+                                            for Stunning Spreads</h2>
+                                        <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                                    </div>
+                                    <div class="info__rating-group">
+                                        <span class="rating-group__tags tags">Bestseller</span>
+                                        <span class="rating-group__rating rating">4.6
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        </span>
+                                        <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                                    </div>
+                                    <div class="info__stats course-stats">
+                                        <span class="stats__hours">40.5 total hours</span>
+                                        <span>•</span>
+                                        <span class="stats__lecture">544 lectures</span>
+                                        <span>•</span>
+                                        <span class="stats__level">All Levels</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-items__action-price-group action-price-group">
+                                <div class="cart-items__action items-action">
+                                    <a href="" class="action__link">Remove</a>
+                                    <a href="" class="action__link">Move to Wishlist</a>
+                                </div>
+                                <div class="cart-items__price items-price">
+                                    <span class="price">₫2,499,000</span>
+                                    <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="detail__info">
+                        <div class="shopping-cart__cart-items cart-items">
 
-                            <div class="info__name-group">
-                                <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</h2>
-                                <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                            <div class="cart-items__detail">
+                                <div class="detail__image-container">
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                         height="526"
+                                         width="526" class="detail__image image"/>
+                                </div>
+                                <div class="detail__info">
+
+                                    <div class="info__name-group">
+                                        <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful
+                                            Guidelines
+                                            for Stunning Spreads</h2>
+                                        <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                                    </div>
+                                    <div class="info__rating-group">
+                                        <span class="rating-group__tags tags">Bestseller</span>
+                                        <span class="rating-group__rating rating">4.6
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        </span>
+                                        <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                                    </div>
+                                    <div class="info__stats course-stats">
+                                        <span class="stats__hours">40.5 total hours</span>
+                                        <span>•</span>
+                                        <span class="stats__lecture">544 lectures</span>
+                                        <span>•</span>
+                                        <span class="stats__level">All Levels</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="info__rating-group">
-                                <span class="rating-group__tags tags">Bestseller</span>
-                                <span class="rating-group__rating rating">4.6 ⭐⭐⭐⭐⭐</span>
-                                <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                            <div class="cart-items__action-price-group action-price-group">
+                                <div class="cart-items__action items-action">
+                                    <a href="" class="action__link">Remove</a>
+                                    <a href="" class="action__link">Move to Wishlist</a>
+                                </div>
+                                <div class="cart-items__price items-price">
+                                    <span class="price">₫2,499,000</span>
+                                    <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
+                                </div>
                             </div>
-                            <div class="info__stats course-stats">
-                                <span class="stats__hours">40.5 total hours</span>
-                                <span>•</span>
-                                <span class="stats__lecture">544 lectures</span>
-                                <span>•</span>
-                                <span class="stats__level">All Levels</span>
+
+                        </div>
+                        <div class="shopping-cart__cart-items cart-items">
+
+                            <div class="cart-items__detail">
+                                <div class="detail__image-container">
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                         height="526"
+                                         width="526" class="detail__image image"/>
+                                </div>
+                                <div class="detail__info">
+
+                                    <div class="info__name-group">
+                                        <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful
+                                            Guidelines
+                                            for Stunning Spreads</h2>
+                                        <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                                    </div>
+                                    <div class="info__rating-group">
+                                        <span class="rating-group__tags tags">Bestseller</span>
+                                        <span class="rating-group__rating rating">4.6
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        </span>
+                                        <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                                    </div>
+                                    <div class="info__stats course-stats">
+                                        <span class="stats__hours">40.5 total hours</span>
+                                        <span>•</span>
+                                        <span class="stats__lecture">544 lectures</span>
+                                        <span>•</span>
+                                        <span class="stats__level">All Levels</span>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="cart-items__action-price-group action-price-group">
+                                <div class="cart-items__action items-action">
+                                    <a href="" class="action__link">Remove</a>
+                                    <a href="" class="action__link">Move to Wishlist</a>
+                                </div>
+                                <div class="cart-items__price items-price">
+                                    <span class="price">₫2,499,000</span>
+                                    <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="cart-items__action-price-group action-price-group">
-                        <div class="cart-items__action items-action">
-                            <a href="" class="action__link">Remove</a>
-                            <a href="" class="action__link">Save for later</a>
-                            <a href="" class="action__link">Move to Wishlist</a>
-                        </div>
-                        <div class="cart-items__price items-price">
-                            <span class="price">₫2,499,000</span>
-                            <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
-                        </div>
-                    </div>
+                    <div class="wishlisted-layout">
+                        <div class="cart-layout__shopping-column shopping-cart">
 
+                            <p class="shopping-cart__summary summary">Recently wishlisted</p>
+                            <div class="shopping-cart__cart-items cart-items">
+
+                                <div class="cart-items__detail">
+                                    <div class="detail__image-container">
+                                        <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                             height="526"
+                                             width="526" class="detail__image image"/>
+                                    </div>
+                                    <div class="detail__info">
+
+                                        <div class="info__name-group">
+                                            <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful
+                                                Guidelines
+                                                for Stunning Spreads</h2>
+                                            <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                                        </div>
+                                        <div class="info__rating-group">
+                                            <span class="rating-group__tags tags">Bestseller</span>
+                                            <span class="rating-group__rating rating">4.6
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        </span>
+                                            <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                                        </div>
+                                        <div class="info__stats course-stats">
+                                            <span class="stats__hours">40.5 total hours</span>
+                                            <span>•</span>
+                                            <span class="stats__lecture">544 lectures</span>
+                                            <span>•</span>
+                                            <span class="stats__level">All Levels</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-items__action-price-group action-price-group">
+                                    <div class="cart-items__action items-action">
+                                        <a href="" class="action__link">Remove</a>
+                                        <a href="" class="action__link">Move to Wishlist</a>
+                                    </div>
+                                    <div class="cart-items__price items-price">
+                                        <span class="price">₫2,499,000</span>
+                                        <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="shopping-cart__cart-items cart-items">
+
+                                <div class="cart-items__detail">
+                                    <div class="detail__image-container">
+                                        <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                             height="526"
+                                             width="526" class="detail__image image"/>
+                                    </div>
+                                    <div class="detail__info">
+
+                                        <div class="info__name-group">
+                                            <h2 class="name__title title">The Sketchbook Fillers' Club: Four Powerful
+                                                Guidelines
+                                                for Stunning Spreads</h2>
+                                            <span class="name__author author">By Dr. Angela Yu, Developer and Lead Instructor</span>
+                                        </div>
+                                        <div class="info__rating-group">
+                                            <span class="rating-group__tags tags">Bestseller</span>
+                                            <span class="rating-group__rating rating">4.6
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        </span>
+                                            <span class="rating-group__rating-count ratings-count">(52,111 ratings)</span>
+                                        </div>
+                                        <div class="info__stats course-stats">
+                                            <span class="stats__hours">40.5 total hours</span>
+                                            <span>•</span>
+                                            <span class="stats__lecture">544 lectures</span>
+                                            <span>•</span>
+                                            <span class="stats__level">All Levels</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-items__action-price-group action-price-group">
+                                    <div class="cart-items__action items-action">
+                                        <a href="" class="action__link">Remove</a>
+                                        <a href="" class="action__link">Move to Wishlist</a>
+                                    </div>
+                                    <div class="cart-items__price items-price">
+                                        <span class="price">₫2,499,000</span>
+                                        <i class="fa-solid fa-tag price-icon" style="color: #3722d3;"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
 
+                <div class="cart-layout__checkout-column checkout-summary">
+                    <div class="checkout__total">
+                        <p class="total__label">Total:</p>
+                        <p class="total__amount">₫2,499,000</p>
+                    </div>
+                    <div class="checkout__checkout-button checkout-button">
+                        <button class="btn btn__checkout">Process to Checkout &#8594;</button>
+                        <span class="charge-note">You won't be charged yet</span>
+                    </div>
+                    <div class="btn checkout__coupon-button ">
+                        <button class="btn-coupon">Apply Coupon</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="cart-layout__checkout-column checkout-summary">
-                <div class="checkout__total">
-                    <p class="total__label">Total:</p>
-                    <p class="total__amount">₫2,499,000</p>
+            <div class="grid__row-2">
+                <div class="product__small-title">You might also like</div>
+                <div class="grid__column-3">
+                    <div class="product__small-advertisement">
+                        <div class="small-advertisement__image">
+                            <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                 alt="" class="img-2">
+                        </div>
+                        <div class="small-advertisement__content">
+                            <div class="content__top">
+                                <div class="content__author-name">Dylan Mierzwinski</div>
+                                <div class="content__rate">
+                                    <div class="rate__icon">
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                    <div class="rate__number">4.9</div>
+                                </div>
+                            </div>
+                            <div class="content__paragraph">
+                                <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</p>
+                            </div>
+                            <div class="content__list">
+                                <div class="content__list-item">Brush Pen</div>
+                            </div>
+                            <div class="content__quick-info">
+                                <div class="quick-info__level">
+                                    <div class="level__icon icon">
+                                        <i class="fa-solid fa-signal"></i>
+                                    </div>
+                                    <div class="level__text text">Any level</div>
+                                </div>
+                                <div class="quick-info__users">
+                                    <div class="users__icon icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div class="users__text text">4.5k</div>
+                                </div><div class="quick-info__time">
+                                <div class="time__icon icon">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div class="time__text text">1h 42m</div>
+                            </div>
+                                <div class="quick-info__save">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="checkout__checkout-button checkout-button">
-                    <button class="btn btn__checkout">Process to Checkout &#8594;</button>
-                    <span class="charge-note">You won't be charged yet</span>
+                <div class="grid__column-3">
+                    <div class="product__small-advertisement">
+                        <div class="small-advertisement__image">
+                            <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                 alt="" class="img-2">
+                        </div>
+                        <div class="small-advertisement__content">
+                            <div class="content__top">
+                                <div class="content__author-name">Dylan Mierzwinski</div>
+                                <div class="content__rate">
+                                    <div class="rate__icon">
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                    <div class="rate__number">4.9</div>
+                                </div>
+                            </div>
+                            <div class="content__paragraph">
+                                <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</p>
+                            </div>
+                            <div class="content__list">
+                                <div class="content__list-item">Brush Pen</div>
+                            </div>
+                            <div class="content__quick-info">
+                                <div class="quick-info__level">
+                                    <div class="level__icon icon">
+                                        <i class="fa-solid fa-signal"></i>
+                                    </div>
+                                    <div class="level__text text">Any level</div>
+                                </div>
+                                <div class="quick-info__users">
+                                    <div class="users__icon icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div class="users__text text">4.5k</div>
+                                </div><div class="quick-info__time">
+                                <div class="time__icon icon">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div class="time__text text">1h 42m</div>
+                            </div>
+                                <div class="quick-info__save">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="btn checkout__coupon-button ">
-                    <button class="btn-coupon">Apply Coupon</button>
+                <div class="grid__column-3">
+                    <div class="product__small-advertisement">
+                        <div class="small-advertisement__image">
+                            <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                 alt="" class="img-2">
+                        </div>
+                        <div class="small-advertisement__content">
+                            <div class="content__top">
+                                <div class="content__author-name">Dylan Mierzwinski</div>
+                                <div class="content__rate">
+                                    <div class="rate__icon">
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                    <div class="rate__number">4.9</div>
+                                </div>
+                            </div>
+                            <div class="content__paragraph">
+                                <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</p>
+                            </div>
+                            <div class="content__list">
+                                <div class="content__list-item">Brush Pen</div>
+                            </div>
+                            <div class="content__quick-info">
+                                <div class="quick-info__level">
+                                    <div class="level__icon icon">
+                                        <i class="fa-solid fa-signal"></i>
+                                    </div>
+                                    <div class="level__text text">Any level</div>
+                                </div>
+                                <div class="quick-info__users">
+                                    <div class="users__icon icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div class="users__text text">4.5k</div>
+                                </div><div class="quick-info__time">
+                                <div class="time__icon icon">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div class="time__text text">1h 42m</div>
+                            </div>
+                                <div class="quick-info__save">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="grid__column-3">
+                    <div class="product__small-advertisement">
+                        <div class="small-advertisement__image">
+                            <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                 alt="" class="img-2">
+                        </div>
+                        <div class="small-advertisement__content">
+                            <div class="content__top">
+                                <div class="content__author-name">Dylan Mierzwinski</div>
+                                <div class="content__rate">
+                                    <div class="rate__icon">
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                    <div class="rate__number">4.9</div>
+                                </div>
+                            </div>
+                            <div class="content__paragraph">
+                                <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</p>
+                            </div>
+                            <div class="content__list">
+                                <div class="content__list-item">Brush Pen</div>
+                            </div>
+                            <div class="content__quick-info">
+                                <div class="quick-info__level">
+                                    <div class="level__icon icon">
+                                        <i class="fa-solid fa-signal"></i>
+                                    </div>
+                                    <div class="level__text text">Any level</div>
+                                </div>
+                                <div class="quick-info__users">
+                                    <div class="users__icon icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div class="users__text text">4.5k</div>
+                                </div><div class="quick-info__time">
+                                <div class="time__icon icon">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div class="time__text text">1h 42m</div>
+                            </div>
+                                <div class="quick-info__save">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-
+    <div id="footer"></div>
 </div>
-
-<!--    <div class="saved-for-later">-->
-<!--        <p class="save-summary">Saved for later</p>-->
-<!--        <div class="save-items">-->
-<!--            <div class="items-detail">-->
-<!--                <div class="items-info">-->
-<!--                    <img src="assets/image/ggplay.png" height="34" width="160" class="course-image">-->
-<!--                    <h2 class="title-course">Title</h2>-->
-<!--                    <span class="author-course">By</span>-->
-<!--                </div>-->
-<!--                <div class="items-rating">-->
-<!--                    <span class="items-tag">Bestseller</span>-->
-<!--                    <span class="rating">4.6</span>-->
-<!--                    <span class="rating-count">(52.111 ratings)</span>-->
-<!--                </div>-->
-<!--                <div class="course-stats">-->
-<!--                    <span>40.5 total hours</span>-->
-<!--                    <span>•</span>-->
-<!--                    <span>544 lectures</span>-->
-<!--                    <span>•</span>-->
-<!--                    <span>All Levels</span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="items-action">-->
-<!--                <a href="" class="action-link">Remove</a>-->
-<!--                <a href="" class="action-link">Move to Cart</a>-->
-<!--            </div>-->
-<!--            <div class="items-price">-->
-<!--                <span class="price">₫2,499,000</span>-->
-<!--                <span class="price-icon">⚯</span></div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div class="wishlisted">-->
-<!--        <p class="wishlisted-summary">Recently wishlisted</p>-->
-<!--        <div class="wishlist-items">-->
-<!--            <div class="items-detail">-->
-<!--                <div class="items-info">-->
-<!--                    <img src="assets/image/ggplay.png" height="34" width="160" class="course-image">-->
-<!--                    <h2 class="title-course">Title</h2>-->
-<!--                    <span class="author-course">By</span>-->
-<!--                </div>-->
-<!--                <div class="items-rating">-->
-<!--                    <span class="items-tag">Bestseller</span>-->
-<!--                    <span class="rating">4.6</span>-->
-<!--                    <span class="rating-count">(52.111 ratings)</span>-->
-<!--                </div>-->
-<!--                <div class="course-stats">-->
-<!--                    <span>40.5 total hours</span>-->
-<!--                    <span>•</span>-->
-<!--                    <span>544 lectures</span>-->
-<!--                    <span>•</span>-->
-<!--                    <span>All Levels</span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="items-action">-->
-<!--                <a href="" class="action-link">Remove</a>-->
-<!--                <a href="" class="action-link">Move to Cart</a>-->
-<!--            </div>-->
-<!--            <div class="items-price">-->
-<!--                <span class="price">₫2,499,000</span>-->
-<!--                <span class="price-icon">⚯</span></div>-->
-<!--        </div>-->
-<!--    </div>*/-->
-
-<div id="footer"></div>
 
 
 </body>

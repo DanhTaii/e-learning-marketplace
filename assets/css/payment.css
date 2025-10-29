@@ -1,0 +1,83 @@
+.payment-layout {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    background-color: #e0e0e0;
+    width: 65%;
+    padding: 3rem;
+
+}
+
+.detail__price {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.price__original, .price__discount, .price__total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+}
+.amount{
+    font-size: 1.4rem;
+}
+
+.info > span {
+    display: block;
+
+}
+
+.invoice {
+    background-color: #e50000;
+    width: 100%;
+}
+
+.detail__title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.index {
+    border-top: 1px solid #ff0000;
+    font-weight: bold;
+    padding-top: 5px;
+    margin-bottom: 1rem;
+}
+
+
+.index_btn {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.pay-btn {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.6rem;
+    cursor: pointer;
+    background-color: #01FF85;
+    color: black;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 8px 15px;
+}
+
+.shop-icon {
+    font-size: 1.4rem;
+}
+
+.order__items{
+    background-color: #01FF85;
+    width: 100%;
+}
+.items__detail{
+    background-color: white;
+width: 50%;
+}

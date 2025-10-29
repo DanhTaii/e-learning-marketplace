@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/payment.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
+    <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
+    <!--    <script src=""></script>-->
+
+    <script>
+        $(function () {
+            $("#header").load("header.html");
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $("#footer").load("footer.html");
+        });
+    </script>
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+
+    <!-- Roboto Font -->
+    <!--    <link rel="stylesheet" href="./assets/fonts/static/." as="font" type="font/ttf" crossorigin>-->
+</head>
+<body>
+<div class="web">
+    <div id="header"></div>
+    <div class="web__container">
+        <div class="grid">
+            <div class="payment-layout">
+                <div class="grid__column-7">
+                    <div class="order">
+                        <div class="order__items">
+                            <div class="">
+                            <span>Order details (1 course)</span>
+                        </div>
+                            <div class="items__detail" >
+                                <div class="items__image-container">
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                         height="526" width="526" class="img"/></div>
+                                <div class=""></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="grid__column-5">
+                    <div class="invoice">
+                        <div class="invoice__info ">
+                            <div class="info__detail info">
+                                <span class="detail__title ">Order summary</span>
+                                <div class="detail__price">
+                                    <div class="price__original">
+                                        <span class="price__original original">Original Price: </span>
+                                        <span class="price__original amount">2</span>
+                                    </div>
+                                    <div class="price__discount">
+                                        <span class="price__discount discount">Discounts (82% Off): </span>
+                                        <span class="price__discount amount">3</span>
+
+                                    </div>
+                                    <div class="price__total index">
+                                        <span class="price__total ">Total: </span>
+                                        <span class="price__total amount">4</span>
+                                    </div>
+
+
+                                </div>
+                                <div class="invoice__pay-btn index_btn">
+                                    <button class="pay-btn"><i class="fa-solid fa-bag-shopping shop-icon"
+                                                               style="color: #000000;"></i> Pay $454
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</div>
+</body>
+</html>
