@@ -4,31 +4,84 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
-<!--    <script src=""></script>-->
-
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/course-detail.css">
     <script>
-        $(function(){
+        $(function () {
             $("#header").load("header.html");
-        });
-    </script>
-
-    <script>
-        $(function(){
             $("#footer").load("footer.html");
         });
     </script>
-
 </head>
-
 <body>
-<div id="header"></div>
+<div class="web">
+    <div id="header"></div>
+    <div class="course-detail__container">
+        <div class="section-1">
+            <div class="grid">
+                <div class="section-1__content">
+                    <div class="section-1__block">
+                        <div class="section-1__img">
+                            <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                 alt="" class="">
+                            <!--&lt;!&ndash;                            <video playsinline="playsinline" muted="muted" src="blob:https://www.skillshare.com/f537c174-cab4-4ea5-b5b6-fe6be0a4a35d"></video>&ndash;&gt;-->
+                            <!--                            <iframe src="https://www.youtube.com/embed/RXwih2z6bQ4?list=RDRXwih2z6bQ4" title="[𝟏 𝐡𝐨𝐮𝐫] Dept - Strawberry Champagne🍓🥂" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+                        </div>
+                    </div>
 
-<h1>My Website</h1>
-<div id="content">
-    <p>Lorem ipsum ....</p>
+                    <div class="section-1__context">
+                        <span class="section-1__title">Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning Spreads</span>
+                        <div class="section-1__sub-title">Dylan Mierzwinski, Illustrator & Lover of Flowers</div>
+                        <div class="section-1__button">
+                            <a>Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-2">
+            <div class="grid">
+                <div class="section-2__content">
+                    <div class="course-detail__title">About this class</div>
+                    <div class="course-detail__context">Learn how to fill your sketchbook with expressive illustrations
+                        using gouache, markers, colored
+                        pencils,
+                        and more—no matter your skill level. This beginner-friendly class includes 7 start-to-finish
+                        demos
+                        and 4
+                        gentle but powerful guidelines to help you build confidence and find joy in the sketchbook
+                        process
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-detail__stroke"></div>
+
+        <div class="section-3">
+            <div class="grid">
+                <div class="section-3__content">
+                    <div class="course-detail__title">Related Skills</div>
+                    <div class="section-3__list-skill">
+                        <ul class="section-3_ul">
+                            <li class="section-3_li first">Time Management</li>
+                            <li class="section-3_li">Self Improvement</li>
+                            <li class="section-3_li">Control your self</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    <div class="course-detail__stroke"></div>-->
+
+    <div id="footer"></div>
 </div>
-<div id="footer"></div>
-
 </body>
 </html>
