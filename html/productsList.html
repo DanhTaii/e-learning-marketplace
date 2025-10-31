@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Products List</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/productsList.css">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <!-- Roboto Font -->
+    <!--    <link rel="stylesheet" href="./assets/fonts/static/." as="font" type="font/ttf" crossorigin>-->
+    <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</head>
+<body>
+    <div class="web">
+        <div id="header"></div>
+        <div class="web__container">
+            <div class="grid">
+                <div class="grid__row-2">
+                    <div class="container__filter">
+                        <div class="filter__text">
+                            <span>Sort by:</span>
+                        </div>
+                        <div class="filter__button">
+                            <button class="btn">Popular</button>
+                        </div>
+                        <div class="filter__button">
+                            <button class="btn">Lastest</button>
+                        </div>
+                        <div class="filter__price">
+                            <div class="price__text">
+                                <a href="">Price</a>
+                            </div>
+                            <div class="price__icon">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                            <div class="price__list-box">
+                                <ul class="price__list">
+                                    <li value="" class="price__list-item">Low to high price</li>
+                                    <li value="" class="price__list-item">High to low price</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter__category">
+                            <div class="category__text">All classes</div>
+                            <div class="category__icon">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                            <div class="category__list-box">
+                                <ul class="category__list">
+                                    <li value="" class="category__list-item">All classes</li>
+                                    <li value="" class="category__list-item">AI & Innovation</li>
+                                    <li value="" class="category__list-item">Animation & 3D</li>
+                                    <li value="" class="category__list-item">Art & Illustration</li>
+                                    <li value="" class="category__list-item">Crafts & DIY</li>
+                                    <li value="" class="category__list-item">Creative Career</li>
+                                    <li value="" class="category__list-item">Creativity & Inspiration</li>
+                                    <li value="" class="category__list-item">Design</li>
+                                    <li value="" class="category__list-item">Development</li>
+                                    <li value="" class="category__list-item">Film & Video</li>
+                                    <li value="" class="category__list-item">Home & Lifestyle</li>
+                                    <li value="" class="category__list-item">Marketing & Business</li>
+                                    <li value="" class="category__list-item">Music & Audio</li>
+                                    <li value="" class="category__list-item">Personal Development</li>
+                                    <li value="" class="category__list-item">Photography</li>
+                                    <li value="" class="category__list-item">Productivity</li>
+                                    <li value="" class="category__list-item">Writing & Publishing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+</html>
