@@ -5,7 +5,7 @@
 /*}*/
 div{
     font-size: medium;
-    color: black;
+    /*color: black;*/
 }
 .course-detail__container{
     /*background: #1C2329;*/
@@ -20,6 +20,7 @@ div{
 .course-detail__context{
     color: #1C2329;
     line-height: 3rem;
+    font-size: medium;
 }
 .course-detail__stroke{
     width: 1200px;
@@ -58,28 +59,59 @@ div{
     width: 50%;
     /*background: #3722D3;*/
 }
+.section-1__img iframe{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.section-1__img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.section-1__option {
+    display: flex;
+    /*width: 100%;*/
+    align-items: center;
+}
+.section-1__option-item{
+    margin: 10px;
+}
+.section-1__icon:hover{
+    color: #01FF85;
+}
+.section-1__icon-list:hover{
+    border: 2px solid #01FF85;
+}
+.section-1__option-item:hover {
+    /*background: #01FF85;*/
+}
+.section-1__icon{
+    color: white;
+    font-size: 20px;
+}
+.section-1__icon-list {
+    padding: 7px;
+    cursor: pointer;
+     border: 2px solid white;
+    border-radius:5px ;
+}
  .section-1__button{
     padding: 10px;
-     /*margin-bottom: 30px;*/
+     /*margin: 30px;*/
     color: #002333;
     border-radius: 5px;
     background: #01FF85;
     font-weight: bold;
      font-size: 25px;
-    width: 100px;
+    width: 25%;
      text-align: center;
-
+     cursor: pointer;
 }
- .section-1__img iframe{
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
+.section-1__price{
+     color: white;
+    margin-bottom:10px ;
  }
- .section-1__img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 /*Section 2*/
  .section-2{
@@ -106,3 +138,40 @@ div{
     overflow: auto;
 }
 
+/*Section 4*/
+.section-4__content{
+
+}
+.section-4__list-lessons ul{
+    padding-left: 0px;
+}
+.section-4__list-lessons ul li{
+    color: #1C2329;
+    font-size: 1.4rem;
+    /*font-weight: bold;*/
+    padding: 10px 0;
+    list-style-type: none;
+}
+.section-4__lesson-container{
+
+}
+.section-4__lesson-item{
+    width: 1200px
+}
+.section-4__lesson-information{
+    display: flex;
+}
+.section-4__lesson-time{
+    text-align: right;
+    width: 5%;
+}
+.section-4__lesson-title{
+    width: 60%;
+}
+.section-4__lesson-icon .fa-circle-play{
+    font-size: medium;
+    color: #1C2329;
+}
+.section-4__lesson-icon{
+    width: 3%;
+}
