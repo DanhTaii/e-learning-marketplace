@@ -5,8 +5,6 @@
     margin-top: 40px;
 }
 .container__category-title{
-    font-size: 1.5rem;
-    font-weight: 700;
     margin-bottom: 10px;
     color: var(--dark-blue);
     padding: 10px 0 10px 10px;
@@ -21,7 +19,6 @@
     padding: 0;
 }
 .container__category-list-item{
-    font-size: 1.4rem;
     padding: 10px 0 10px 10px;
     color: var(--dark-blue);
     border-radius: 5px;
@@ -32,8 +29,6 @@
 }
 
 .product__big-title{
-    font-size: 3.6rem;
-    font-weight: 700;
     color: var(--dark-blue);
     margin: 60px 0;
 }
@@ -86,7 +81,6 @@
     margin-left: 20px;
 }
 .content__content{
-    font-size: 1.4rem;
     color: var(--dark-blue);
     text-decoration: none;
     margin: 2px 0;
@@ -100,14 +94,13 @@
     color: var(--dark-blue);
 }
 .time-and-save__time{
-    font-size: 1.4rem;
+
 }
 .time-and-save__save-icon{
     font-size: 2.2rem;
 }
 
 .product__small-title{
-    font-size: 3rem;
     font-weight: 600;
     margin: 40px 0;
     width: 100%;
@@ -142,26 +135,21 @@
     margin: 5px 0;
 }
 .content__author-name{
-    font-size: 1.2rem;
     font-weight: 500;
 }
 .content__rate{
     display: flex;
 }
 .rate__icon i{
-    font-size: 1.2rem;
     font-weight: 500;
     margin-right: 3px;
     position: relative;
     top: 2px;
 }
 .rate__number{
-    font-size: 1.2rem;
     font-weight: 500;
 }
 .content__paragraph p{
-    font-size: 1.6rem;
-    font-weight: 700;
     color: var(--dark-blue);
     margin: 15px 0;
 }
@@ -198,9 +186,7 @@
     position: relative;
     top: -2px;
 }
-.text{
-    font-size: 1.3rem;
-}
+
 .quick-info__save{
     font-size: 2.6rem;
     position: relative;

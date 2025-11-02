@@ -9,7 +9,6 @@
     height: 50px;
 }
 .filter__text span{
-    font-size: 1.8rem;
     margin-left: 30px;
     text-align: center;
 }
@@ -20,7 +19,6 @@
     align-items: center;
 }
 .btn{
-    font-size: 1.6rem;
     border-radius: 5px;
     background-color: var(--white-color);
     cursor: pointer;
@@ -57,13 +55,10 @@
     z-index: 10;
 }
 .price__text a{
-    font-size: 1.6rem;
     text-decoration: none;
     color: var(--dark-blue);
 }
-.price__icon i{
-    font-size: 1.6rem;
-}
+
 .price__list-box{
     position: absolute;
     top: calc(100% + 3px);
@@ -78,7 +73,7 @@
     padding: 10px;
 }
 .price__list-item{
-    font-size: 1.6rem;
+
     margin: 10px 0;
     padding: 5px 10px;
     border-radius: 4px;
@@ -116,10 +111,10 @@
     z-index: 1;
 }
 .category__text{
-    font-size: 1.6rem;
+
 }
 .category__icon{
-    font-size: 1.6rem;
+
 }
 .category__list-box{
     position: absolute;
@@ -136,7 +131,6 @@
     padding: 10px;
 }
 .category__list-item{
-    font-size: 1.6rem;
     margin: 10px 0;
     padding: 5px 10px;
     border-radius: 4px;
@@ -149,8 +143,6 @@
     display: block;
 }
 .container__title{
-    font-size: 3.6rem;
-    font-weight: 600;
     margin: 40px 0 60px;
     color: var(--dark-blue);
     width: 100%;
@@ -184,26 +176,21 @@
     margin: 5px 0;
 }
 .content__author-name{
-    font-size: 1.2rem;
     font-weight: 500;
 }
 .content__rate{
     display: flex;
 }
 .rate__icon i{
-    font-size: 1.2rem;
     font-weight: 500;
     margin-right: 3px;
     position: relative;
     top: 2px;
 }
 .rate__number{
-    font-size: 1.2rem;
     font-weight: 500;
 }
 .content__paragraph p{
-    font-size: 1.6rem;
-    font-weight: 700;
     color: var(--dark-blue);
     margin: 15px 0;
 }
@@ -215,10 +202,11 @@
     background-color: var(--hover-color);
     padding: 2px 9px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .content__quick-info{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
 }
@@ -235,16 +223,9 @@
     align-items: center;
 }
 .icon{
-    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
     margin-right: 4px;
-    position: relative;
-    top: -2px;
-}
-.text{
-    font-size: 1.3rem;
-}
-.quick-info__save{
-    font-size: 2.6rem;
     position: relative;
     top: -2px;
 }
