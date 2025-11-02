@@ -3,124 +3,152 @@
 /*    !*font-family: Roboto;*!*/
 /*    box-sizing: border-box;*/
 /*}*/
-div{
-    font-size: medium;
-    /*color: black;*/
-}
+
+/*div{*/
+/*    font-size: medium;*/
+/*    !*color: black;*!*/
+/*}*/
 .course-detail__container{
     /*background: #1C2329;*/
+    /*margin-top: 20px;*/
 }
-.course-detail__title{
-    color: #1C2329;
+/*CHo chữ cần màu chứ k phải title*/
+.color__dark-blue {
+    color: var(--dark-blue);
     font-weight: bold;
-    font-size: 3rem;
-    line-height: 3rem;
-    margin-bottom: 14px;
 }
-.course-detail__context{
-    color: #1C2329;
-    line-height: 3rem;
-    font-size: medium;
+/*CHo các tiêu đề nhỏ hơn tiêu đề chính*/
+.style__sub-title {
+    color: var(--dark-blue);
+    font-weight: bold;
+    font-size: 2.4rem;
+    margin-top: 2.4rem;
 }
-.course-detail__stroke{
-    width: 1200px;
-    background: #DCDEE1;
-    padding: 1px;
-    border-radius: 10px;
-    margin: 20px auto;
+/*Cho các chữ nội dung nhỏ*/
+.style__text{
+    color: #5F6368;
 }
+
 /*Section 1*/
+.section-1__stroke{
+    border: solid 1px #D9D9D9;;
+    margin: 24px 0;
+}
+
+.grid__column-8{
+    width: 66.667%;
+}
+.grid__column-4{
+    width: 33.333%;
+}
 .section-1{
-    padding: 55px;
-    background: #002333;
+    /*background: #01FF85;*/
+    margin-top: 20px;
 }
-.section-1__content{
+.section-1__breadcrumb{
     display: flex;
-    align-items: center;
+    margin-left: -8px;
 }
-.section-1__context{
-    padding: 40px;
-    width: 50%;
+.section-1__breadcrumb-item{
+    /*padding-left: 8px;*/
+    /*padding-right: 8px;*/
+    padding: 0 8px;
+}
+.section-1__breadcrumb-name{
+    color: var(--bright-green);
+    font-weight: bold;
+}
+.section-1__main-title{
+    padding-top: 45px;
+    margin-left: -8px;
+    color: var(--dark-blue);
 }
 .section-1__sub-title{
-    color: #DCDEE1;
-    font-size: 1.6rem;
-    font-weight: 1;
-    line-height: 50px;
+    color: #5F6368;
+    padding-top: 30px;
 }
-.section-1__title{
-    color: white;
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 50px;
-}
-.section-1__block{
-    /*padding: 10px;*/
-    width: 50%;
-    /*background: #3722D3;*/
-}
-.section-1__img iframe{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.section-1__img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.section-1__option {
+
+.section-1__rating{
     display: flex;
-    /*width: 100%;*/
-    align-items: center;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: 30px;
+    padding-left: -8px;
 }
-.section-1__option-item{
-    margin: 10px;
+.section-1__rating-item{
+    padding: 8px;
+    margin:0 8px;
 }
-.section-1__icon:hover{
-    color: #01FF85;
+
+.section-1__rating-star{
+    display: flex;
 }
-.section-1__icon-list:hover{
-    border: 2px solid #01FF85;
+.section-1__rating-star-item{
+    padding: 0 4px;
+    color: #F8D706;
 }
-.section-1__option-item:hover {
-    /*background: #01FF85;*/
-}
-.section-1__icon{
-    color: white;
-    font-size: 20px;
-}
-.section-1__icon-list {
-    padding: 7px;
-    cursor: pointer;
-     border: 2px solid white;
-    border-radius:5px ;
-}
- .section-1__button{
-    padding: 10px;
-     /*margin: 30px;*/
-    color: #002333;
-    border-radius: 5px;
-    background: #01FF85;
+.section-1__best-seller{
+    /*border: ;*/
+    background: #ADC2E2;
+    color: #2C67A9;
+    border-radius: 2px;
     font-weight: bold;
-     font-size: 25px;
-    width: 25%;
-     text-align: center;
-     cursor: pointer;
 }
-.section-1__price{
-     color: white;
-    margin-bottom:10px ;
- }
+.section-1__high-rated{
+    background: #FFE1B2;
+    color: #8B4309;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.section-1__rating-quantity{
+    color: var(--bright-green);
+    font-weight: bold;
+}
+.section-1__creator{
+    margin-top: 18px;
+}
+.section-1__creator-title{
+    color: #5F6368;
+}
+.section-1__creator-name{
+    color: var(--bright-green);
+    font-weight: bold;
+}
+
+.section-1__updated{
+    margin-left: -8px;
+    margin-top: 14px;
+}
+.section-1__updated-item .fa-calendar-days{
+    font-size: 1.6rem;
+}
+.section-1__updated-item{
+    color: #5F6368;
+    padding: 0 8px;
+    margin-top: 22px;
+}
 
 /*Section 2*/
- .section-2{
-     padding-top: 20px;
- }
+.section-2__list-container{
+    display: flex;
 
-/*Section 3*/
+}
+.section-2__skills{
+    border: solid 1px #D9D9D9 ;
+    padding: 2.4rem;
+}
+.section-2__list li{
+    padding: 2.4rem;
+    list-style-type: none;
+}
+
+
 .section-3__content{
     height: 100%;
+}
+.section-3__title{
+    font-size: 2.4rem;
+    margin-bottom: 24px;
 }
 .section-3__list-skill ul li{
     color: #394649;
@@ -136,42 +164,4 @@ div{
 .section-3__list-skill ul{
     padding: 0;
     overflow: auto;
-}
-
-/*Section 4*/
-.section-4__content{
-
-}
-.section-4__list-lessons ul{
-    padding-left: 0px;
-}
-.section-4__list-lessons ul li{
-    color: #1C2329;
-    font-size: 1.4rem;
-    /*font-weight: bold;*/
-    padding: 10px 0;
-    list-style-type: none;
-}
-.section-4__lesson-container{
-
-}
-.section-4__lesson-item{
-    width: 1200px
-}
-.section-4__lesson-information{
-    display: flex;
-}
-.section-4__lesson-time{
-    text-align: right;
-    width: 5%;
-}
-.section-4__lesson-title{
-    width: 60%;
-}
-.section-4__lesson-icon .fa-circle-play{
-    font-size: medium;
-    color: #1C2329;
-}
-.section-4__lesson-icon{
-    width: 3%;
 }
