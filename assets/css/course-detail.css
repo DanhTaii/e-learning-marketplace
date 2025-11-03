@@ -1,16 +1,15 @@
-/*body{*/
-/*    margin: 0;*/
-/*    !*font-family: Roboto;*!*/
-/*    box-sizing: border-box;*/
+
+/*@font-face {*/
+/*    font-family: 'Roboto';*/
+/*    src: url('../fonts/static/Roboto-Light.ttf') format('truetype');*/
+/*    font-weight: 300;*/
+/*    font-style: normal;*/
 /*}*/
 
-/*div{*/
-/*    font-size: medium;*/
-/*    !*color: black;*!*/
-/*}*/
 .course-detail__container{
     /*background: #1C2329;*/
     /*margin-top: 20px;*/
+    /*display: flex;*/
 }
 /*CHo chữ cần màu chứ k phải title*/
 .color__dark-blue {
@@ -18,11 +17,17 @@
     font-weight: bold;
 }
 /*CHo các tiêu đề nhỏ hơn tiêu đề chính*/
+.font__sub-title {
+    font-weight: 300;
+}
 .style__sub-title {
     color: var(--dark-blue);
     font-weight: bold;
     font-size: 2.4rem;
-    margin-top: 2.4rem;
+    margin-bottom: 2.4rem;
+}
+.section__space{
+    margin-bottom: 3.2rem;
 }
 /*Cho các chữ nội dung nhỏ*/
 .style__text{
@@ -34,16 +39,20 @@
     border: solid 1px #D9D9D9;;
     margin: 24px 0;
 }
-
 .grid__column-8{
     width: 66.667%;
 }
-.grid__column-4{
+.grid__column-4-in-12{
     width: 33.333%;
 }
-.section-1{
+.container-1{
     /*background: #01FF85;*/
     margin-top: 20px;
+    padding: 0 8px 0 0;
+}
+.section-1{
+    background: var(--dark-blue);
+    padding: 20px;
 }
 .section-1__breadcrumb{
     display: flex;
@@ -54,6 +63,9 @@
     /*padding-right: 8px;*/
     padding: 0 8px;
 }
+.fa-angle-right{
+    color: var(--white-color);
+}
 .section-1__breadcrumb-name{
     color: var(--bright-green);
     font-weight: bold;
@@ -61,10 +73,11 @@
 .section-1__main-title{
     padding-top: 45px;
     margin-left: -8px;
-    color: var(--dark-blue);
+    color: var(--white-color);
 }
 .section-1__sub-title{
-    color: #5F6368;
+    color: var(--white-color);
+    font-weight: 300;
     padding-top: 30px;
 }
 
@@ -108,13 +121,12 @@
     margin-top: 18px;
 }
 .section-1__creator-title{
-    color: #5F6368;
+    color: var(--white-color);
 }
 .section-1__creator-name{
     color: var(--bright-green);
     font-weight: bold;
 }
-
 .section-1__updated{
     margin-left: -8px;
     margin-top: 14px;
@@ -123,7 +135,7 @@
     font-size: 1.6rem;
 }
 .section-1__updated-item{
-    color: #5F6368;
+    color: var(--white-color);
     padding: 0 8px;
     margin-top: 22px;
 }
@@ -131,18 +143,21 @@
 /*Section 2*/
 .section-2__list-container{
     display: flex;
-
 }
 .section-2__skills{
     border: solid 1px #D9D9D9 ;
     padding: 2.4rem;
+    margin-top: 30px;
+}
+.section-2__list ul{
+    padding-left: 0;
+    /*Không hiểu tại sao lại có*/
 }
 .section-2__list li{
-    padding: 2.4rem;
+    padding: 0.8rem 1.2rem; /* gọn hơn nhiều */
     list-style-type: none;
 }
-
-
+/*Section3*/
 .section-3__content{
     height: 100%;
 }
@@ -151,17 +166,137 @@
     margin-bottom: 24px;
 }
 .section-3__list-skill ul li{
-    color: #394649;
+    color: var(--dark-blue);
     font-size: 1.4rem;
     font-weight: bold;
     padding: 5px;
     margin: 0 5px;
-    border: 1px solid #DCDEE1;
-    border-radius: 3px;
+    border: 1px solid #D9D9D9;
+    border-radius: 1px;
     float: left;
     list-style-type: none;
+
 }
 .section-3__list-skill ul{
     padding: 0;
     overflow: auto;
+}
+.section-3__list-skill ul::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+/*Section 4 in Container 1*/
+.section-4__courses li.first{
+    list-style-type: none;
+}
+.section-4__courses ul{
+    padding-left: 0;
+}
+.section-4__courses ul li{
+    float: left;
+    /*padding: 0 16px;*/
+    padding-right: 25px;
+}
+/*Container 2*/
+.container-2{
+    /*background: var(--dark-blue);*/
+    margin: 20px 0;
+    /*padding: 0 16px;*/
+}
+.container-2__img {
+    height: 225px;
+}
+
+img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.container-2__information {
+    padding: 1.6rem 5.0rem;
+    background: var(--dark-blue);
+}
+.container-2__price span{
+    padding: 0 5px;
+    /*margin-left: -10px;*/
+    /*margin-right: -10px;*/
+}
+.container-2__price{
+    display: flex;
+    align-items: center;
+    padding: 2.4rem 0;
+}
+.container-2__original-price{
+    text-line-through: single;
+    color: red;
+    font-weight: bold;
+}
+.container-2__discount{
+    color: red;
+}
+.container-2__sold-price{
+    font-size: 2.4rem;
+    color: var(--white-color);
+    font-weight: bold;
+}
+.container-2__option {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.container-2__icon{
+    color: white;
+    font-size: 20px;
+}
+.container-2__icon-list {
+    padding: 11px;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius:5px ;
+}
+.container-2__button-add {
+    margin-right: 10px;
+    padding: 1.4rem;
+    color: #002333;
+    border-radius: 5px;
+    background: #01FF85;
+    font-weight: bold;
+    font-size: 1.6rem;
+    width: 240px;
+    border: solid 1px var(--bright-green);
+    cursor: pointer;
+}
+.container-2__button-buy {
+    padding: 14px;
+    margin-top: 10px;
+    color: var(--white-color);
+    border: solid 1px white;
+    border-radius: 5px;
+    background: #002333;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    /*object-fit:cover;*/
+}
+.container-2__note {
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    padding: 28px 0;
+}
+.container-2__summary-information ul li{
+    padding: 13px 0;
+}
+.container-2__summary-information ul{
+    padding-left: 20px ;
+}
+.container-2__subtitle {
+    color: var(--white-color);
+    font-weight: bold;
+}
+.style__text-var {
+    color: white;
+    font-weight: 300;
 }
