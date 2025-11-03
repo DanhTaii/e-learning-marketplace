@@ -53,6 +53,8 @@
 .section-1{
     background: var(--dark-blue);
     padding: 20px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
 }
 .section-1__breadcrumb{
     display: flex;
@@ -148,6 +150,7 @@
     border: solid 1px #D9D9D9 ;
     padding: 2.4rem;
     margin-top: 30px;
+    border-radius: 3px;
 }
 .section-2__list ul{
     padding-left: 0;
@@ -186,23 +189,94 @@
     display: block;
     clear: both;
 }
+
 /*Section 4 in Container 1*/
-.section-4__courses li.first{
+/*ul li lần một*/
+.section-4__sub-duration li.first{
     list-style-type: none;
 }
-.section-4__courses ul{
+.section-4__sub-duration{
+    margin-bottom: 20px;
+}
+.section-4__sub-duration ul{
     padding-left: 0;
 }
-.section-4__courses ul li{
+.section-4__sub-duration ul li{
     float: left;
     /*padding: 0 16px;*/
     padding-right: 25px;
 }
+.section-4__sub-duration::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+/*ul li lần 2*/
+.section-4__list-video ul{
+    padding-left: 0px;
+}
+.section-4__list-video ul li{
+    /*color: #1C2329;*/
+    /*font-size: 1.4rem;*/
+    /*font-weight: bold;*/
+    /*padding: 10px 0;*/
+    list-style-type: none;
+    margin-bottom: -1px;
+}
+.section-4__lesson-information{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    border: solid 1px var(--dark-blue);
+    border-radius: 1px;
+    background: #F4F4F4;
+    padding: 16px;
+    cursor: pointer;
+}
+.section-4__lesson-time{
+    text-align: right;
+    width: 15%;
+    font-weight: 300;
+}
+.section-4__lesson-title{
+    width: 78%;
+    font-weight: 500;
+}
+.section-4__lesson-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+}
+
+.section-4__lesson-icon .fa-circle-play{
+    font-size: medium;
+    color: #1C2329;
+}
+/*Section 5*/
+.section-5__requirement ul {
+    padding-left: 20px;
+}
+.section-5__list-item{
+    font-weight: 300;
+    padding: 5px 0;
+}
+
+/*Section6*/
+.section-6__description li {
+    padding: 5px 0;
+}
+.section-6__content-bold{
+    font-weight: 500;
+}
+
+
 /*Container 2*/
 .container-2{
     /*background: var(--dark-blue);*/
     margin: 20px 0;
     /*padding: 0 16px;*/
+
 }
 .container-2__img {
     height: 225px;
@@ -212,10 +286,14 @@ img{
     width: 100%;
     height: auto;
     object-fit: cover;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
 }
 .container-2__information {
     padding: 1.6rem 5.0rem;
     background: var(--dark-blue);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 .container-2__price span{
     padding: 0 5px;
