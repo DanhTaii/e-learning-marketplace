@@ -74,12 +74,12 @@ html{
     padding-left: 8px;
     width: 75%;
 }
-.grid__column-7{
-    width: 58.333%;
+.grid__column-8{
+    width: 66.667%;
+    padding-right: 8px;
+    padding-left: 8px;
 }
-.grid__column-5{
-    width: 41.667%;
-}
+
 
 /*Cac co chu*/
 .text-header{
