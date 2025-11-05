@@ -1,10 +1,30 @@
 :root{
+    /*Main color*/
     --dark-blue: #002333;
     --bright-green: #01FF85;
+    --blue : #3722D3;
     --light-grey: #DCDEE1;
     --text-color: #000000;
     --white-color: #FFFFFF;
     --hover-color: lightgrey;
+
+    /*Font Size*/
+    --text-xs: 1.0rem;
+    --text-sm: 1.2rem;
+    --text-base: 1.4rem;
+    --text-lg: 1.6rem;
+    --text-xl: 1.8rem;
+    --text-2xl: 2.0rem;
+    --text-3xl: 2.4rem;
+    --text-4xl: 3.0rem;
+    --text-5xl: 3.6rem;
+
+    /*Font Weight*/
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
 }
 
 html{
@@ -18,6 +38,7 @@ html{
     font-family: "Roboto", sans-serif;
 }
 
+/*Grid System*/
 .grid{
     width: 1200px;
     max-width: 100%;
@@ -64,15 +85,15 @@ html{
     padding-left: 8px;
     width: 25%;  /* 1 đối tượng trong 1200px 100% chia 4*/
 }
-.grid__column-4{
-    padding-right: 8px;
-    padding-left: 8px;
-    width: 33.333%;  /* 1 đối tượng trong chiều dài của colum 9 100% chia 3 */
-}
 .grid__colum-9{
     padding-right: 8px;
     padding-left: 8px;
     width: 75%;
+}
+.grid__column-4{
+    padding-right: 8px;
+    padding-left: 8px;
+    width: 33.333%;  /* 1 đối tượng trong chiều dài của colum 9 100% chia 3 */
 }
 .grid__column-8{
     width: 66.667%;
@@ -85,15 +106,7 @@ html{
     padding-left: 8px;
 }
 
-
-/*Cac co chu*/
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/static/Roboto-Thin.ttf') format('truetype');
-    font-weight: 100;
-    font-style: normal;
-}
-
+/*Cac bieens thể của Roboto dựa trên Font weight*/
 @font-face {
     font-family: 'Roboto';
     src: url('../fonts/static/Roboto-Light.ttf') format('truetype');
@@ -110,13 +123,6 @@ html{
 
 @font-face {
     font-family: 'Roboto';
-    src: url('../fonts/static/Roboto-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Roboto';
     src: url('../fonts/static/Roboto-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
@@ -128,40 +134,95 @@ html{
     font-weight: 700;
     font-style: normal;
 }
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/static/Roboto-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-}
 .text-header{
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
 }
 .text-big-title{
-    font-size: 3.6rem;
-    font-weight: 700;
+    font-size: var(--text-5xl);
+    font-weight: var(--fw-bold);
 }
 .text-small-title{
-    font-size: 3rem;
-    font-weight: 600;
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
 }
 .text-li{
-    font-size: 1.4rem;
+    font-size: var(--text-base);
 }
 .text-big{
-    font-size: 1.6rem;
+    font-size: var(--text-lg);
 }
 .text-medium{
-    font-size: 1.4rem;
+    font-size: var(--text-base);
 }
 .text-mini{
-    font-size: 1.2rem;
+    font-size: var(--text-sm);
 }
 .text-paragraph p {
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+}
+/*Các loại button*/
+.green-button {
+    margin-top: 20px;
+    font-size: var(--text-lg);
+    border-radius: 4px;
+    background: var(--bright-green);
+    color: var(--dark-blue);
+    border: solid 1px #01FF85;
+    width: 100%;
+    padding: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.green-button:hover {
+    background: var(--bright-green);
+    color: var(--dark-blue);
+    border: solid 1px #01FF85;
+}
+.dark-button {
+    margin-top: 20px;
+    font-size: var(--text-lg);
+    border-radius: 4px;
+    background: var(--white-color);
+    color: var(--dark-blue);
+    border: solid 1px var(--dark-blue);
+    width: 100%;
+    padding: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.dark-button:hover{
+    background: var(--blue);
+    color: var(--white-color);
+    border: solid 1px var(--blue);
+}
+.blue-button {
+    margin-top: 20px;
+    font-size: var(--text-lg);
+    border-radius: 4px;
+    background: var(--blue);
+    color: var(--white-color);
+    border: solid 1px var(--blue);
+    width: 100%;
+    padding: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.blue-button__line {
+    margin-top: 20px;
+    font-size: var(--text-lg);
+    border-radius: 4px;
+    background: var(--white-color);
+    color: var(--blue);
+    border: solid 1px var(--blue);
+    width: 100%;
+    padding: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.blue-button__line:hover{
+    background: #3722D320;
 }
 
 /*Header*/
