@@ -5,38 +5,34 @@
 
 }
 
-.h1{
+.h1 {
+    display: block;
+    margin-top: 60px;
     line-height: 1;
 }
 
 .summary {
-    font-weight: 500;
+    display: block;
+    padding: 4rem 0;
+
     line-height: 1.2;
-    font-size: 1.6rem;
-
 
 }
 
-/* bo cuc hinh cua Gio hang va Purchase */
-.cart-layout {
+.layout {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-top: 20px;
+    flex-direction: column;
 
 }
 
-.shopping-cart {
-    flex-grow: 1;
-    max-width: 100%;
-    margin-right: 40px;
-    min-width: 600px;
-}
+.layout__checkout-summary {
+border: 3px solid black;
 
-.checkout-summary {
-    width: 250px;
-    flex-shrink: 0;
-    margin-top: 100px;
+    align-self: flex-end;
+    width: 40rem;
+    margin: 50px 20px 0 0;
+    padding: 15px;
+
 }
 
 /* phan chia bo cuc 1 (Detail/PriceAction) */
@@ -44,7 +40,7 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     border-top: 1px solid lightgrey;
     padding: 20px 0;
 
@@ -54,22 +50,21 @@
 .cart-items__detail {
     display: flex;
 
-
 }
 
 .detail__image-container {
-    width: 150px;
+    width: 17%;
     margin-right: 16px;
-    border: 1px solid black;
     flex-shrink: 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(134, 134, 134, 0.5);
 }
 
 .image {
-    max-width: 100%;
+    border-radius: 0.5rem;
+    width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: inherit;
     object-position: center;
 
 }
@@ -85,74 +80,64 @@
 
 }
 
-.title {
-    font-size: 2.2rem;
+.name__title {
     font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 1rem;
     line-height: 1.2;
 }
 
-.author {
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 5px;
-
+p {
+    margin: 0;
 }
 
+
 .info__rating-group {
+    margin-top: 1.5rem;
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-    font-size: 1.8rem;
     min-width: 300px;
 }
 
 
 .tags {
-    background-color: #01FF85;
-    border-radius: 5px;
-    color: #333;
-    font-weight: bold;
-
-    padding: 5px 12px;
-    margin-right: 10px;
-
+    background-color: var(--hover-color);
+    padding: 2px 9px;
+    border-radius: 10px;
 }
 
 .rating {
-
-    font-weight: bold;
-    margin-right: 0.8em;
-
+    margin: 0 0.8rem;
 }
 
 .ratings-count {
-    font-size: 0.8em;
     color: #555;
 }
-
 
 .course-stats {
-    font-size: 1.8rem;
+    margin-top: 0.7rem;
     color: #555;
 }
 
+.course-stats > span {
+    display: inline-block;
+    margin-right: 0.7rem;
+}
 
-/* dieu chinh bo cuc cho action va price */
+
 .action-price-group {
     display: flex;
     justify-content: space-between;
-    margin-left: 20px;
+    margin-left: 2rem;
     height: 100%;
-    gap: 70px;
+    gap: 7rem;
 }
 
 .items-action {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    min-width: 250px;
+    min-width: 11rem;
 }
 
 .action__link {
@@ -167,15 +152,10 @@
 .action__link:hover {
     background-color: rgba(55, 34, 211, 0.17);
     border-radius: 2px;
-    padding: 5px 10px;;
-
 }
 
 .items-price {
-    display: flex;
-    gap: 5px
-
-
+    min-width: 140px;
 }
 
 .price-icon {
@@ -186,18 +166,23 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #3722D3;
+}
+
+.checkout-summary {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 5rem;
 
 }
 
 .total__label {
-    font-size: 2rem;
-    margin: 0 0 10px;
+    margin: 0 0 2.2rem 0;
 }
 
 .total__amount {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0;
+
+    margin-bottom: 1.9rem;
 }
 
 /* phan Checkout */
@@ -217,10 +202,11 @@
     border: none;
     border-radius: 2px;
     margin-top: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     width: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     padding: 8px 15px;
+
 }
 
 .btn__checkout:hover {
@@ -234,15 +220,15 @@
 }
 
 .btn-coupon {
-    background-color: #3722D3;
+    background-color: #ffffff;
     cursor: pointer;
     text-align: center;
-    color: white;
+    color: #3722D3;
     font-weight: bold;
     font-size: 1.6rem;
-    border: none;
+    border: 1px solid black;
     border-radius: 2px;
-    margin-top: 5px;
+    margin-top: 19px;
     width: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     padding: 8px 15px
@@ -250,4 +236,20 @@
 
 .btn-coupon:hover {
     box-shadow: 0 0 5px #3722D3;
+}
+
+.scrollable-order-list {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 10px;
+padding-top: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.cart-items__tick {
+    margin: 0 5rem;
+}
+
+.cart-items__tick .tick {
+    transform: scale(1.5);
 }
