@@ -162,6 +162,14 @@ html{
     font-size: var(--text-lg);
     font-weight: var(--fw-bold);
 }
+
+/*chuyen giua cac trang*/
+.turn-page{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 /*Các loại button*/
 .green-button {
     margin-top: 20px;
