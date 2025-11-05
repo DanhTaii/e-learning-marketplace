@@ -120,3 +120,8 @@ input::placeholder {
     padding-left: 2rem;
     justify-items: center;
 }
+
+/*Security*/
+.security__title {
+    margin-top: 4.4rem;
+}
