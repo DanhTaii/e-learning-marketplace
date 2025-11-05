@@ -2,9 +2,287 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Profile user</title>
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
 </head>
 <body>
+<div class="web">
+    <header class="web__header">
+        <div class="grid">
+            <div class="header__box">
+                <div class="header__logo">
+                    SKILL
+                </div>
+                <div class="header__browse">
+                    <div class="browse__text text-header">Browse</div>
+                    <i class="browse__icon text-header fa-solid fa-angle-down"></i>
+                    <div class="browse__display">
+                        <div class="browse__container">
+                            <div class="browse__container-box-1">
+                                <div class="browse__box-category">
+                                    <div class="box__title">
+                                        <span class="category__title title">CLASSES BY CATEGORY</span>
+                                    </div>
+                                    <ul class="browse__box-category-list list">
+                                        <li class="browse__box-category-list-item text-list-item text-li">AI &
+                                            Innovation
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Animation &
+                                            3D
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Art &
+                                            IllustrationS
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Crafts & DIY
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Creative
+                                            Career
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Creativity &
+                                            Inspiration
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Design</li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Development
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Film & Video
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Home &
+                                            Lifestyle
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Marketing &
+                                            Business
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Music &
+                                            Audio
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Personal
+                                            Development
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="browse__container-box-2">
+                                <div class="browse__container-box-2-1 box-2">
+                                    <div class="box__title">
+                                        <span class="category__title title">BY CONTENT TYPE</span>
+                                    </div>
+                                    <ul class="browse__container-box-2-list list">
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">All
+                                                    Classes</a>
+                                            </div>
+                                        </li>
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">All Learning
+                                                    Path</a>
+                                            </div>
+                                        </li>
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">All Student
+                                                    Project</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="browse__container-box-2-2 box-2">
+                                    <div class="box__title">
+                                        <span class="category__title title">SHOP</span>
+                                    </div>
+                                    <ul class="browse__container-box-2-list list">
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">Digital
+                                                    Product</a>
+                                            </div>
+                                        </li>
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">1-on-1
+                                                    Sessions</a>
+                                            </div>
+                                        </li>
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">Live
+                                                    Sessions</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="browse__container-box-2-3 box-2">
+                                    <div class="box__title">
+                                        <span class="category__title title">EXPLORE</span>
+                                    </div>
+                                    <ul class="browse__container-box-2-list list">
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">Blog</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__community text-header">Community</div>
+                <div class="header__search">
+                    <div class="search__icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="search__input">
+                        <input type="text" class="input__text text-medium"
+                               placeholder="Search classes, digital product, teachers,...">
+                    </div>
+                </div>
+                <div class="header__class text-header">My Classes</div>
+                <div class="header__cart">
+                    <i class="text-header fa-solid fa-cart-shopping"></i>
+                    <div class="cart__display">
+                        <div class="header__cart-list header__cart-list--no-cart">
+                            <img src="../assets/image/no_cart.png" alt="" class="header__cart-list-no-cart-img">
+                            <span class="text-medium">No products</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__notification">
+                    <i class="notification__icon fa-solid fa-bell text-header"></i>
+                </div>
+                <div class="header__user">
+                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                         class="user__avatar">
+                    <div class="user__display">
+                        <div class="user__container">
+                            <div class="user__profile">
+                                <div class="user__profile-avatar">
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                         class="user__avatar-mini">
+                                </div>
+                                <div class="user__profile-name">
+                                    <a href="" class="name-text text-header">Ngoc Minh</a>
+                                </div>
+                                <div class="user__profile-bio">
+                                    <a href="" class="bio-text">Add bio</a>
+                                </div>
+                                <div class="user__profile-btn">
+                                    <button class="user-btn button__btn text-header">View Profile</button>
+                                </div>
+                            </div>
+                            <div class="user__menu">
+                                <ul class="user__menu-list">
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            My Classes
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Account Settings
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Language: English
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Team Plans
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Refer a Friends
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Redeem Perks
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Help
+                                        </div>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <div class="user__menu-list-item-box sign-out text-li">
+                                            Sign out
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <div class="user-profile__container grid">
+
+        <div class="grid__row-2">
+
+            <div class="grid__column-3 overall">
+                <div class="profile-block">
+                    <div class="profile-block__title">Profile</div>
+                    <div class="profile-block__avatar text-big-title">DN</div>
+                    <div class="profile-block__name text-big-title">DanhTai</div>
+                    <button class="profile-block__button text-medium">Share public profile</button>
+                </div>
+                <div class="profile-menu">
+                    <ul>
+                        <li class="profile-menu__item text-big">Profile</li>
+                        <li class="profile-menu__item text-big">Payment methods</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="grid__colum-9">
+                <div class="information__container">
+                    <div class="personal-detail">
+                        <div class="personal-detail__title style__title">
+                            Personal detail
+                        </div>
+
+                        <div class="personal-detail__block">
+                            <div class="personal-detail__row-1">
+                                <div class="personal-detail__column-1 personal-detail__column-items">
+                                    <div class="personal-detail__sub-title style__sub-title">First name</div>
+                                    <div class="personal-detail__input">
+                                        <input type="text" placeholder="Enter your first name">
+                                    </div>
+                                </div>
+                                <div class="personal-detail__column-2 personal-detail__column-items">
+                                    <div class="personal-detail__sub-title style__sub-title">Last name</div>
+                                    <div class="personal-detail__input">
+                                        <input type="text" placeholder="Enter your last name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="personal-detail__row-2">
+                                <div class="personal-detail__email personal-detail__column-items">
+                                    <div class="personal-detail__sub-title style__sub-title">Your email</div>
+                                    <div class="personal-detail__input">
+                                        <input type="text" placeholder="hoangtai160205@gmail.com">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
