@@ -1,31 +1,66 @@
 .web__container{
 
 }
-.container__category{
-    margin-top: 40px;
+
+.container__intro{
+    background-color: var(--dark-blue);
+    border-top: solid 1px var(--bright-green);
 }
-.container__category-title{
-    margin-bottom: 10px;
-    color: var(--dark-blue);
-    padding: 10px 0 10px 10px;
+.intro__slogan{
+    padding-top: 60px;
+    color: var(--white-color);
+    margin-bottom: 30px;
+}
+.intro__benefits{
+    margin-bottom: 30px;
+    display: flex;
+}
+.benefits-box-2{
+    margin-left: 80px;
+}
+.text-icon{
+    font-size: 2.4rem;
+}
+.list-item__text{
+    font-size: 2.4rem;
+    position: relative;
+    top: -1px;
+    font-weight: 400;
+}
+.benefits__list{
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+.list-item__icon{
+    color: var(--bright-green);
+    margin-right: 10px;
+}
+.list-item__text{
+    color: var(--white-color);
+}
+.intro__stats{
+    display: flex;
+}
+.stats__box{
+    background-color: var(--bright-green);
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 40px;
     border-radius: 5px;
-}
-.container__category-title:hover{
-    cursor: pointer;
-    background-color: var(--hover-color);
-}
-.container__category-list{
-    list-style: none;
-    padding: 0;
-}
-.container__category-list-item{
-    padding: 10px 0 10px 10px;
     color: var(--dark-blue);
-    border-radius: 5px;
 }
-.container__category-list-item:hover{
-    cursor: pointer;
-    background-color: var(--hover-color);
+.stats__number{
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.stats__text{
+    font-weight: 700;
+}
+.intro__image-box{
+    padding-top: 30px;
 }
 
 .product__big-title{
