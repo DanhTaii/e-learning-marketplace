@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -11,21 +10,77 @@
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/course-detail.css">
     <!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">-->
-    <link rel="stylesheet" href="../assets/css/font.css">
-    <script>
-        $(function () {
-            $("#header").load("header.html");
-            $("#footer").load("footer.html");
-        });
-    </script>
 </head>
 <body>
 <div class="web">
 
-    <div id="header"></div>
-
     <div class="course-detail__container grid">
         <div class="grid__row-2">
+            <div class="container-2 grid__column-4-in-12">
+                <div class="container-2__img img__icon">
+                    <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                         alt="" class="">
+                </div>
+
+                <div class="container-2__information">
+                    <div class="container-2__price">
+                        <span class="container-2__sold-price">đ399.000</span>
+                        <span class="container-2__original-price text-medium">đ1.399.000</span>
+                        <span class="container-2__discount text-medium">80%</span>
+                    </div>
+
+                    <div class="container-2__option-group">
+                        <div class="container-2__option">
+                            <button class="container-2__button-add">
+                                Add to cart
+                            </button>
+
+                            <div class="container-2__icon-list">
+                                <i class="fa-solid fa-bookmark container-2__icon"></i>
+                            </div>
+                        </div>
+                        <button class="container-2__button-buy">
+                            Buy now
+                        </button>
+                    </div>
+
+                    <div class="container-2__note text-medium">
+                        <span>30-Day Money - Back Guarantee</span>
+                    </div>
+
+                    <div class="container-2__summary-information">
+                        <div class="container-2__subtitle text-big">
+                            This course includes:
+                        </div>
+                        <ul>
+                            <li class="text-li style__text style__text-var">
+                                7.5 hours on-demand video
+                            </li>
+                            <li class="text-li  style__text  style__text-var">
+                                1 practice test
+                            </li>
+                            <li class="text-li  style__text  style__text-var">
+                                125 articles
+                            </li>
+                            <li class="text-li  style__text style__text-var">
+                                3 downloadable resources
+                            </li>
+                            <li class="text-li  style__text style__text-var">
+                                Access on mobile and TV
+                            </li>
+                            <li class="text-li  style__text style__text-var">
+                                Full lifetime access
+                            </li>
+                            <li class="text-li  style__text style__text-var">
+                                Closed captions
+                            </li>
+                            <li class="text-li  style__text style__text-var">
+                                Certificate of completion
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="container-1 grid__column-8">
                 <div class="section-1 section__space">
@@ -215,90 +270,28 @@
                         Hallo German learner!
                     </div>
                     <br>
-                    <div class="section-6__content text-medium font__sub-title">My name is Sandra and I will be your guide through the secrets of the German language. Welcome
+                    <div class="section-6__content text-medium font__sub-title">My name is Sandra and I will be your
+                        guide through the secrets of the German language. Welcome
                         to the full starter kit of the German language for total beginners!
                     </div>
                     <br>
-                    <div class="section-6__content section-6__content-bold text-medium font__sub-title"> This course is for you if:</div>
+                    <div class="section-6__content section-6__content-bold text-medium font__sub-title"> This course is
+                        for you if:
+                    </div>
                     <br>
                     <ul>
-                        <li class="text-medium font__sub-title">You are a complete beginner and don’t know any German at all</li>
+                        <li class="text-medium font__sub-title">You are a complete beginner and don’t know any German at
+                            all
+                        </li>
                         <li class="text-medium font__sub-title">You want short and straight to the point lessons</li>
-                        <li class="text-medium font__sub-title">You need a lot of exercises, repetition and motivation to stay on track</li>
+                        <li class="text-medium font__sub-title">You need a lot of exercises, repetition and motivation
+                            to stay on track
+                        </li>
                     </ul>
                 </div>
             </div>
-
-            <div class="container-2 grid__column-4-in-12">
-                <div class="container-2__img img__icon">
-                    <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
-                         alt="" class="">
-                </div>
-
-                <div class="container-2__information">
-                    <div class="container-2__price">
-                        <span class="container-2__sold-price">đ399.000</span>
-                        <span class="container-2__original-price text-medium">đ1.399.000</span>
-                        <span class="container-2__discount text-medium">80%</span>
-                    </div>
-
-                    <div class="container-2__option-group">
-                        <div class="container-2__option">
-                            <button class="container-2__button-add">
-                                Add to cart
-                            </button>
-
-                            <div class="container-2__icon-list">
-                                <i class="fa-solid fa-bookmark container-2__icon"></i>
-                            </div>
-                        </div>
-                        <button class="container-2__button-buy">
-                            Buy now
-                        </button>
-                    </div>
-
-                    <div class="container-2__note text-medium">
-                        <span>30-Day Money - Back Guarantee</span>
-                    </div>
-
-                    <div class="container-2__summary-information">
-                        <div class="container-2__subtitle text-big">
-                            This course includes:
-                        </div>
-                        <ul>
-                            <li class="text-li style__text style__text-var">
-                                7.5 hours on-demand video
-                            </li>
-                            <li class="text-li  style__text  style__text-var">
-                                1 practice test
-                            </li>
-                            <li class="text-li  style__text  style__text-var">
-                                125 articles
-                            </li>
-                            <li class="text-li  style__text style__text-var">
-                                3 downloadable resources
-                            </li>
-                            <li class="text-li  style__text style__text-var">
-                                Access on mobile and TV
-                            </li>
-                            <li class="text-li  style__text style__text-var">
-                                Full lifetime access
-                            </li>
-                            <li class="text-li  style__text style__text-var">
-                                Closed captions
-                            </li>
-                            <li class="text-li  style__text style__text-var">
-                                Certificate of completion
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-
-    <div id="footer"></div>
 
 </div>
 </body>

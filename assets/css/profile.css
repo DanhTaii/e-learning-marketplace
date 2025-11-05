@@ -1,0 +1,122 @@
+
+.style__sub-title {
+    font-size: 2rem;
+    color: var(--dark-blue);
+    font-weight: 600;
+}
+.style__title {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--dark-blue);
+    line-height: 3.6rem;
+    margin-bottom: 3.4rem;
+}
+
+.overall{
+    margin-top: 6rem;
+}
+
+.profile-block {
+    /*2 số cuối trong mã màu là độ đậm 50%*/
+    border: solid 2px #00233380;
+    padding: 3rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.profile-block__title {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+.profile-block__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border-radius: 50%;
+    border: solid 2px #01FF85;
+    background: #1C2329;
+    font-weight: 400;
+    color: white;
+    width: 130px;
+    height: 130px;
+}
+.profile-block__name {
+    margin-top: 20px;
+}
+.profile-block__button {
+    margin-top: 20px;
+    /*font-size: 1.2rem;*/
+    border-radius: 4px;
+    background: white;
+    color: #3722D3;
+    border: solid 1px #3722D3;
+    width: 100%;
+    padding: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.profile-block__button:hover {
+    background: #3722D320;
+}
+/*profile menu*/
+.profile-menu {
+    /*2 số cuối trong mã màu là độ đậm 50%*/
+    border: solid 2px #00233380;
+    padding: 3rem;
+    border-radius: 4px;
+    margin-top: 3rem;
+}
+.profile-menu ul {
+    padding-left: 0;
+    /*margin-top: -2rem;*/
+    /*margin-bottom: -2rem;*/
+}
+.profile-menu li {
+    padding-bottom: 4rem;
+    list-style-type: none;
+    font-weight: 500;
+}
+.profile-menu__item:last-child {
+    padding-bottom: 0;
+}
+
+/*information*/
+.information__container {
+    margin-top: 6rem;
+}
+.personal-detail__block {
+    border: solid 2px #00233380;
+    padding: 4rem;
+    border-radius: 4px;
+}
+/*Hàng 1 của khối Personal detial*/
+.personal-detail__row-1 {
+    display: flex;
+}
+.personal-detail__column-1 {
+    padding-right: 10rem;
+}
+.personal-detail__column-items input {
+    margin-top: 10px;
+    width: 350px;
+    /*object-fit: inherit;*/
+    /*position: inherit;*/
+    height: 4rem;
+}
+/*Hàng 2 của khôí personal detail*/
+.personal-detail__row-2 {
+    margin-top: 2.5rem;
+}
+.personal-detail__email input {
+    width: 80rem;
+}
+
+/*Tùy chỉnh toàn input*/
+input::placeholder {
+    font-size: 1.4rem;
+    font-weight: 300;
+    padding-left: 2rem;
+    justify-items: center;
+}
