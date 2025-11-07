@@ -434,6 +434,7 @@ html{
 }
 .header__class:hover{
     color: var(--bright-green);
+    cursor: pointer;
 }
 
 .header__cart{
