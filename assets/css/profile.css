@@ -1,15 +1,15 @@
 
 .style__sub-title {
-    font-size: 2rem;
+    font-size: var(--text-lg);
     color: var(--dark-blue);
     font-weight: 600;
 }
 .style__title {
-    font-size: 3.2rem;
+    font-size: var(--text-xl);
     font-weight: 900;
     color: var(--dark-blue);
     line-height: 3.6rem;
-    margin-bottom: 3.4rem;
+    margin-bottom: 1rem;
 }
 
 .overall{
@@ -18,7 +18,7 @@
 
 .profile-block {
     /*2 số cuối trong mã màu là độ đậm 50%*/
-    border: solid 2px #00233380;
+    border: solid 1px #00233380;
     padding: 3rem;
     border-radius: 4px;
     display: flex;
@@ -26,8 +26,9 @@
     flex-direction: column;
 }
 .profile-block__title {
-    font-size: 2.4rem;
+    font-size: var(--text-2xl);
     font-weight: bold;
+    margin-top: 2rem;
 }
 .profile-block__avatar {
     display: flex;
@@ -35,16 +36,16 @@
     justify-content: center;
     margin-top: 20px;
     border-radius: 50%;
-    border: solid 2px #01FF85;
+    border: solid 1px #01FF85;
     background: #1C2329;
     font-weight: 400;
     color: white;
     width: 130px;
     height: 130px;
 }
-.profile-block__name {
-    margin-top: 20px;
-}
+/*.profile-block__name {*/
+/*    margin-top: 20px;*/
+/*}*/
 .profile-block__button {
     margin-top: 20px;
     /*font-size: 1.2rem;*/
@@ -63,7 +64,7 @@
 /*profile menu*/
 .profile-menu {
     /*2 số cuối trong mã màu là độ đậm 50%*/
-    border: solid 2px #00233380;
+    border: solid 1px #00233380;
     padding: 3rem;
     border-radius: 4px;
     margin-top: 3rem;
@@ -87,7 +88,7 @@
     margin-top: 6rem;
 }
 .personal-detail__block {
-    border: solid 2px #00233380;
+    border: solid 1px #00233380;
     padding: 4rem;
     border-radius: 4px;
 }
@@ -115,13 +116,19 @@
 
 /*Tùy chỉnh toàn input*/
 input::placeholder {
-    font-size: 1.4rem;
+    font-size: var(--text-sm);
     font-weight: 300;
-    padding-left: 2rem;
+    padding-left: 0.5rem;
     justify-items: center;
 }
 
 /*Security*/
 .security__title {
-    margin-top: 4.4rem;
+    margin-top: 3rem;
+}
+
+.choice {
+    margin-bottom: 2rem;
+    width: 200px;
+    float: right;
 }

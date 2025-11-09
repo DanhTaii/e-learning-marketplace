@@ -37,6 +37,9 @@ html{
     line-height: 1.6rem;
     font-family: "Roboto", sans-serif;
 }
+body {
+    background: #F4F4F4;
+}
 
 /*Grid System*/
 .grid{
@@ -147,7 +150,7 @@ html{
     font-weight: var(--fw-semibold);
 }
 .text-li{
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
 }
 .text-big{
     font-size: var(--text-lg);
