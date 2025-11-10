@@ -253,6 +253,26 @@
                         <span class="shopping-cart__summary summary text-paragraph ">
                         <p>3 Courses in Cart</p>
                     </span>
+
+                        <div class="shopping-cart__sub-title">
+                            <div class="sub-title__column1">
+                                <input type="checkbox" class="tick" name="tick">
+                                <div class="sub_title__title text-paragraph">
+                                    <p>Items</p>
+                                </div>
+                            </div>
+
+                            <div class="sub-title__action-price-group action-price-group">
+                                <div class="sub-title__action text-paragraph">
+                                    <p>Action</p>
+                                </div>
+                                <div class="sub-title__price text-paragraph">
+                                    <p>Price</p>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="scrollable-order-list">
                             <div class="shopping-cart__cart-items cart-items">
                                 <div class="cart-items__tick">
@@ -502,218 +522,239 @@
                         </div>
                     </div>
                 </div>
-                <div class="layout__checkout-summary">
 
-                    <div class="checkout__total">
-                        <p class="total__label text-big">Total:</p>
-                        <p class="total__amount text-small-title">533.100 VND</p>
+            </div>
+            <div class="layout__checkout-summary grid">
+                <div class="checkout__row2">
+
+                    <div class="grid__column-4">
+                        <div class="row2__column1">
+                            <div class="tick">
+                                <input type="checkbox" class="tick" name="tick">
+                            </div>
+                            <div class="text-medium choose">Choose all (5)</div>
+                            <div class="text-medium remove">Remove</div>
+                            <div class="text-medium wishlisted">Move to wishlisted</div>
+                        </div>
                     </div>
-                    <div class="checkout__checkout-button checkout-button">
-                        <button class="btn btn__checkout">Process to Checkout </button>
-                        <span class="charge-note">You won't be charged yet</span>
-                    </div>
-                    <div class="btn checkout__coupon-button ">
-                        <button class="btn-coupon">Apply Coupon</button>
+                    <div class="grid__column-5">
+                        <div class="checkout__total">
+                            <div class="total_title">
+                                <div class="total__label text-medium">
+                                    Total (3 items in cart):
+                                    <span class="total__amount">533.100 VND</span>
+                                </div>
+                                <div class="charge-note">You won't be charged yet</div>
+                            </div>
+
+                            <div class="checkout__checkout-button checkout-button">
+                                <button class="btn btn__checkout">Process to Checkout</button>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
+
             </div>
             <div class="grid__row-2">
 
-            <div class="product__small">
-                <div class="grid">
-                    <div class="grid__row-2">
-                        <div class="product__small-title text-small-title">You also might like this</div>
-                        <div class="grid__column-3">
-                            <div class="product__small-advertisement">
-                                <div class="small-advertisement__image">
-                                    <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
-                                         alt="" class="img-2">
-                                </div>
-                                <div class="small-advertisement__content">
-                                    <div class="content__top">
-                                        <div class="content__author-name text-mini">Dylan Mierzwinski</div>
-                                        <div class="content__rate">
-                                            <div class="rate__icon">
-                                                <i class="text-mini fa-regular fa-star"></i>
-                                            </div>
-                                            <div class="rate__number text-mini">4.9</div>
-                                        </div>
+                <div class="product__small">
+                    <div class="grid">
+                        <div class="grid__row-2">
+                            <div class="product__small-title text-small-title">You also might like this</div>
+                            <div class="grid__column-3">
+                                <div class="product__small-advertisement">
+                                    <div class="small-advertisement__image">
+                                        <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                             alt="" class="img-2">
                                     </div>
-                                    <div class="text-paragraph">
-                                        <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
-                                            Spreads</p>
-                                    </div>
-                                    <div class="content__list">
-                                        <div class="content__list-item">Brush Pen</div>
-                                    </div>
-                                    <div class="content__quick-info">
-                                        <div class="quick-info__level">
-                                            <div class="level__icon icon">
-                                                <i class="text-medium fa-solid fa-signal"></i>
+                                    <div class="small-advertisement__content">
+                                        <div class="content__top">
+                                            <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                            <div class="content__rate">
+                                                <div class="rate__icon">
+                                                    <i class="text-mini fa-regular fa-star"></i>
+                                                </div>
+                                                <div class="rate__number text-mini">4.9</div>
                                             </div>
-                                            <div class="level__text text text-medium">Any level</div>
                                         </div>
-                                        <div class="quick-info__users">
-                                            <div class="users__icon icon">
-                                                <i class="text-medium fa-solid fa-users"></i>
+                                        <div class="text-paragraph">
+                                            <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                                Spreads</p>
+                                        </div>
+                                        <div class="content__list">
+                                            <div class="content__list-item">Brush Pen</div>
+                                        </div>
+                                        <div class="content__quick-info">
+                                            <div class="quick-info__level">
+                                                <div class="level__icon icon">
+                                                    <i class="text-medium fa-solid fa-signal"></i>
+                                                </div>
+                                                <div class="level__text text text-medium">Any level</div>
                                             </div>
-                                            <div class="users__text text text-medium">4.5k</div>
-                                        </div>
-                                        <div class="quick-info__time">
-                                            <div class="time__icon icon">
-                                                <i class="text-medium fa-regular fa-clock"></i>
+                                            <div class="quick-info__users">
+                                                <div class="users__icon icon">
+                                                    <i class="text-medium fa-solid fa-users"></i>
+                                                </div>
+                                                <div class="users__text text text-medium">4.5k</div>
                                             </div>
-                                            <div class="time__text text text-medium">1h 42m</div>
-                                        </div>
-                                        <div class="quick-info__save">
-                                            <i class="fa-regular fa-bookmark"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid__column-3">
-                            <div class="product__small-advertisement">
-                                <div class="small-advertisement__image">
-                                    <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
-                                         alt="" class="img-2">
-                                </div>
-                                <div class="small-advertisement__content">
-                                    <div class="content__top">
-                                        <div class="content__author-name text-mini">Dylan Mierzwinski</div>
-                                        <div class="content__rate">
-                                            <div class="rate__icon">
-                                                <i class="text-mini fa-regular fa-star"></i>
+                                            <div class="quick-info__time">
+                                                <div class="time__icon icon">
+                                                    <i class="text-medium fa-regular fa-clock"></i>
+                                                </div>
+                                                <div class="time__text text text-medium">1h 42m</div>
                                             </div>
-                                            <div class="rate__number text-mini">4.9</div>
-                                        </div>
-                                    </div>
-                                    <div class="text-paragraph">
-                                        <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
-                                            Spreads</p>
-                                    </div>
-                                    <div class="content__list">
-                                        <div class="content__list-item">Brush Pen</div>
-                                    </div>
-                                    <div class="content__quick-info">
-                                        <div class="quick-info__level">
-                                            <div class="level__icon icon">
-                                                <i class="text-medium fa-solid fa-signal"></i>
+                                            <div class="quick-info__save">
+                                                <i class="fa-regular fa-bookmark"></i>
                                             </div>
-                                            <div class="level__text text text-medium">Any level</div>
-                                        </div>
-                                        <div class="quick-info__users">
-                                            <div class="users__icon icon">
-                                                <i class="text-medium fa-solid fa-users"></i>
-                                            </div>
-                                            <div class="users__text text text-medium">4.5k</div>
-                                        </div>
-                                        <div class="quick-info__time">
-                                            <div class="time__icon icon">
-                                                <i class="text-medium fa-regular fa-clock"></i>
-                                            </div>
-                                            <div class="time__text text text-medium">1h 42m</div>
-                                        </div>
-                                        <div class="quick-info__save">
-                                            <i class="fa-regular fa-bookmark"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="grid__column-3">
-                            <div class="product__small-advertisement">
-                                <div class="small-advertisement__image">
-                                    <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
-                                         alt="" class="img-2">
-                                </div>
-                                <div class="small-advertisement__content">
-                                    <div class="content__top">
-                                        <div class="content__author-name text-mini">Dylan Mierzwinski</div>
-                                        <div class="content__rate">
-                                            <div class="rate__icon">
-                                                <i class="text-mini fa-regular fa-star"></i>
-                                            </div>
-                                            <div class="rate__number text-mini">4.9</div>
-                                        </div>
+                            <div class="grid__column-3">
+                                <div class="product__small-advertisement">
+                                    <div class="small-advertisement__image">
+                                        <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                             alt="" class="img-2">
                                     </div>
-                                    <div class="text-paragraph">
-                                        <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
-                                            Spreads</p>
-                                    </div>
-                                    <div class="content__list">
-                                        <div class="content__list-item">Brush Pen</div>
-                                    </div>
-                                    <div class="content__quick-info">
-                                        <div class="quick-info__level">
-                                            <div class="level__icon icon">
-                                                <i class="text-medium fa-solid fa-signal"></i>
+                                    <div class="small-advertisement__content">
+                                        <div class="content__top">
+                                            <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                            <div class="content__rate">
+                                                <div class="rate__icon">
+                                                    <i class="text-mini fa-regular fa-star"></i>
+                                                </div>
+                                                <div class="rate__number text-mini">4.9</div>
                                             </div>
-                                            <div class="level__text text text-medium">Any level</div>
                                         </div>
-                                        <div class="quick-info__users">
-                                            <div class="users__icon icon">
-                                                <i class="text-medium fa-solid fa-users"></i>
+                                        <div class="text-paragraph">
+                                            <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                                Spreads</p>
+                                        </div>
+                                        <div class="content__list">
+                                            <div class="content__list-item">Brush Pen</div>
+                                        </div>
+                                        <div class="content__quick-info">
+                                            <div class="quick-info__level">
+                                                <div class="level__icon icon">
+                                                    <i class="text-medium fa-solid fa-signal"></i>
+                                                </div>
+                                                <div class="level__text text text-medium">Any level</div>
                                             </div>
-                                            <div class="users__text text text-medium">4.5k</div>
-                                        </div>
-                                        <div class="quick-info__time">
-                                            <div class="time__icon icon">
-                                                <i class="text-medium fa-regular fa-clock"></i>
+                                            <div class="quick-info__users">
+                                                <div class="users__icon icon">
+                                                    <i class="text-medium fa-solid fa-users"></i>
+                                                </div>
+                                                <div class="users__text text text-medium">4.5k</div>
                                             </div>
-                                            <div class="time__text text text-medium">1h 42m</div>
-                                        </div>
-                                        <div class="quick-info__save">
-                                            <i class="fa-regular fa-bookmark"></i>
+                                            <div class="quick-info__time">
+                                                <div class="time__icon icon">
+                                                    <i class="text-medium fa-regular fa-clock"></i>
+                                                </div>
+                                                <div class="time__text text text-medium">1h 42m</div>
+                                            </div>
+                                            <div class="quick-info__save">
+                                                <i class="fa-regular fa-bookmark"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="grid__column-3">
-                            <div class="product__small-advertisement">
-                                <div class="small-advertisement__image">
-                                    <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
-                                         alt="" class="img-2">
+                            <div class="grid__column-3">
+                                <div class="product__small-advertisement">
+                                    <div class="small-advertisement__image">
+                                        <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                             alt="" class="img-2">
+                                    </div>
+                                    <div class="small-advertisement__content">
+                                        <div class="content__top">
+                                            <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                            <div class="content__rate">
+                                                <div class="rate__icon">
+                                                    <i class="text-mini fa-regular fa-star"></i>
+                                                </div>
+                                                <div class="rate__number text-mini">4.9</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-paragraph">
+                                            <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                                Spreads</p>
+                                        </div>
+                                        <div class="content__list">
+                                            <div class="content__list-item">Brush Pen</div>
+                                        </div>
+                                        <div class="content__quick-info">
+                                            <div class="quick-info__level">
+                                                <div class="level__icon icon">
+                                                    <i class="text-medium fa-solid fa-signal"></i>
+                                                </div>
+                                                <div class="level__text text text-medium">Any level</div>
+                                            </div>
+                                            <div class="quick-info__users">
+                                                <div class="users__icon icon">
+                                                    <i class="text-medium fa-solid fa-users"></i>
+                                                </div>
+                                                <div class="users__text text text-medium">4.5k</div>
+                                            </div>
+                                            <div class="quick-info__time">
+                                                <div class="time__icon icon">
+                                                    <i class="text-medium fa-regular fa-clock"></i>
+                                                </div>
+                                                <div class="time__text text text-medium">1h 42m</div>
+                                            </div>
+                                            <div class="quick-info__save">
+                                                <i class="fa-regular fa-bookmark"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="small-advertisement__content">
-                                    <div class="content__top">
-                                        <div class="content__author-name text-mini">Dylan Mierzwinski</div>
-                                        <div class="content__rate">
-                                            <div class="rate__icon">
-                                                <i class="text-mini fa-regular fa-star"></i>
-                                            </div>
-                                            <div class="rate__number text-mini">4.9</div>
-                                        </div>
+                            </div>
+                            <div class="grid__column-3">
+                                <div class="product__small-advertisement">
+                                    <div class="small-advertisement__image">
+                                        <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                             alt="" class="img-2">
                                     </div>
-                                    <div class="text-paragraph">
-                                        <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
-                                            Spreads</p>
-                                    </div>
-                                    <div class="content__list">
-                                        <div class="content__list-item">Brush Pen</div>
-                                    </div>
-                                    <div class="content__quick-info">
-                                        <div class="quick-info__level">
-                                            <div class="level__icon icon">
-                                                <i class="text-medium fa-solid fa-signal"></i>
+                                    <div class="small-advertisement__content">
+                                        <div class="content__top">
+                                            <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                            <div class="content__rate">
+                                                <div class="rate__icon">
+                                                    <i class="text-mini fa-regular fa-star"></i>
+                                                </div>
+                                                <div class="rate__number text-mini">4.9</div>
                                             </div>
-                                            <div class="level__text text text-medium">Any level</div>
                                         </div>
-                                        <div class="quick-info__users">
-                                            <div class="users__icon icon">
-                                                <i class="text-medium fa-solid fa-users"></i>
+                                        <div class="text-paragraph">
+                                            <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                                Spreads</p>
+                                        </div>
+                                        <div class="content__list">
+                                            <div class="content__list-item">Brush Pen</div>
+                                        </div>
+                                        <div class="content__quick-info">
+                                            <div class="quick-info__level">
+                                                <div class="level__icon icon">
+                                                    <i class="text-medium fa-solid fa-signal"></i>
+                                                </div>
+                                                <div class="level__text text text-medium">Any level</div>
                                             </div>
-                                            <div class="users__text text text-medium">4.5k</div>
-                                        </div>
-                                        <div class="quick-info__time">
-                                            <div class="time__icon icon">
-                                                <i class="text-medium fa-regular fa-clock"></i>
+                                            <div class="quick-info__users">
+                                                <div class="users__icon icon">
+                                                    <i class="text-medium fa-solid fa-users"></i>
+                                                </div>
+                                                <div class="users__text text text-medium">4.5k</div>
                                             </div>
-                                            <div class="time__text text text-medium">1h 42m</div>
-                                        </div>
-                                        <div class="quick-info__save">
-                                            <i class="fa-regular fa-bookmark"></i>
+                                            <div class="quick-info__time">
+                                                <div class="time__icon icon">
+                                                    <i class="text-medium fa-regular fa-clock"></i>
+                                                </div>
+                                                <div class="time__text text text-medium">1h 42m</div>
+                                            </div>
+                                            <div class="quick-info__save">
+                                                <i class="fa-regular fa-bookmark"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -723,11 +764,8 @@
                 </div>
             </div>
         </div>
-        </div>
 
     </div>
-</div>
-<div id="footer"></div>
 </div>
 
 
