@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile user</title>
-    <!-- Normalize CSS -->
+    <title>My course</title>
+    <link rel="stylesheet" href="../assets/css/my-course.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/profile.css">
 </head>
 <body>
+
 <div class="web">
     <header class="web__header">
         <div class="grid">
@@ -227,183 +228,251 @@
         </div>
     </header>
 
-    <div class="user-profile__container grid">
+    <div class="my-course__container grid">
 
-        <div class="grid__row-2">
+        <div class="my-course__title">My Courses</div>
 
-            <div class="grid__column-3 overall">
-                <div class="profile-block">
-                    <div class="profile-block__avatar text-big-title">DN</div>
-                    <div class="profile-block__title">DanhTai</div>
-                    <button class="profile-block__button text-medium">Share public profile</button>
+        <div class="my-course__selection">
+            <ul>
+                <li>
+                    <div class="sidebar__name">
+                        <a href="" class="button">All course</a>
+                        <div class="stroke"></div>
+                    </div>
+                </li>
+                <li><a href="" class="button">In progress</a></li>
+                <li><a href="" class="button">Completed</a></li>
+            </ul>
+
+        </div>
+        <div class="stroke"></div>
+
+        <div class="search__container">
+            <div class="my-course__search">
+                <div class="my-course__input">
+                    <input type="text" placeholder="Search your course">
                 </div>
-                <div class="profile-menu">
-                    <ul>
-                        <li class="profile-menu__item text-big">Profile</li>
-                        <li class="profile-menu__item text-big">Payment methods</li>
-                    </ul>
-                </div>
 
-            </div>
-
-            <div class="grid__colum-9">
-                <div class="information__container">
-                    <div class="personal-detail">
-                        <div class="personal-detail__title style__title">
-                            Personal detail
-                        </div>
-
-                        <div class="personal-detail__block">
-                            <div class="personal-detail__row-1">
-                                <div class="personal-detail__column-1 personal-detail__column-items">
-                                    <div class="personal-detail__sub-title style__sub-title">First name</div>
-                                    <div class="personal-detail__input">
-                                        <input type="text" placeholder="Enter your first name">
-                                    </div>
-                                </div>
-                                <div class="personal-detail__column-2 personal-detail__column-items">
-                                    <div class="personal-detail__sub-title style__sub-title">Last name</div>
-                                    <div class="personal-detail__input">
-                                        <input type="text" placeholder="Enter your last name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="personal-detail__row-2">
-                                <div class="personal-detail__email personal-detail__column-items">
-                                    <div class="personal-detail__sub-title style__sub-title">Your email</div>
-                                    <div class="personal-detail__input">
-                                        <input type="text" placeholder="hoangtai160205@gmail.com">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="security">
-                        <div class="security__title style__title">
-                            Security
-                        </div>
-                        <div class="personal-detail__block">
-                            <div class="personal-detail__row-1">
-                                <div class="personal-detail__column-1 personal-detail__column-items">
-                                    <div class="personal-detail__sub-title style__sub-title">New password</div>
-                                    <div class="personal-detail__input">
-                                        <input type="text" placeholder="Enter your new password">
-                                    </div>
-                                </div>
-                                <div class="personal-detail__column-2 personal-detail__column-items">
-                                    <div class="personal-detail__sub-title style__sub-title">Retype your new password</div>
-                                    <div class="personal-detail__input">
-                                        <input type="text" placeholder="Retype your new password">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="choice">
-                        <button class="blue-button text-medium">Save changes</button>
-                    </div>
+                <div class="my-course__button-search">
+                    <button class="button"><i class="text-li fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
         </div>
+
+        <div class="yeah">
+            <div class="grid__row-2">
+                <div class="grid__column-4">
+                    <a href="./course-detail.html" class="turn-page">
+                        <div class="product__small-advertisement">
+                            <div class="small-advertisement__image">
+                                <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                     alt="" class="img-2">
+                            </div>
+                            <div class="small-advertisement__content">
+                                <div class="content__top">
+                                    <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                    <div class="content__rate">
+                                        <div class="rate__icon">
+                                            <i class="text-mini fa-regular fa-star"></i>
+                                        </div>
+                                        <div class="rate__number text-mini">4.9</div>
+                                    </div>
+                                </div>
+                                <div class="text-paragraph">
+                                    <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                        Spreads</p>
+                                </div>
+                                <div class="content__list">
+                                    <div class="content__list-item">Brush Pen</div>
+                                </div>
+                                <div class="content__quick-info">
+                                    <div class="quick-info__level">
+                                        <div class="level__icon icon">
+                                            <i class="text-medium fa-solid fa-signal"></i>
+                                        </div>
+                                        <div class="level__text text text-medium">Any level</div>
+                                    </div>
+                                    <div class="quick-info__users">
+                                        <div class="users__icon icon">
+                                            <i class="text-medium fa-solid fa-users"></i>
+                                        </div>
+                                        <div class="users__text text text-medium">4.5k</div>
+                                    </div>
+                                    <div class="quick-info__time">
+                                        <div class="time__icon icon">
+                                            <i class="text-medium fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="time__text text text-medium">1h 42m</div>
+                                    </div>
+                                    <div class="quick-info__save">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="grid__column-4">
+                    <a href="./course-detail.html" class="turn-page">
+                        <div class="product__small-advertisement">
+                            <div class="small-advertisement__image">
+                                <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                     alt="" class="img-2">
+                            </div>
+                            <div class="small-advertisement__content">
+                                <div class="content__top">
+                                    <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                    <div class="content__rate">
+                                        <div class="rate__icon">
+                                            <i class="text-mini fa-regular fa-star"></i>
+                                        </div>
+                                        <div class="rate__number text-mini">4.9</div>
+                                    </div>
+                                </div>
+                                <div class="text-paragraph">
+                                    <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                        Spreads</p>
+                                </div>
+                                <div class="content__list">
+                                    <div class="content__list-item">Brush Pen</div>
+                                </div>
+                                <div class="content__quick-info">
+                                    <div class="quick-info__level">
+                                        <div class="level__icon icon">
+                                            <i class="text-medium fa-solid fa-signal"></i>
+                                        </div>
+                                        <div class="level__text text text-medium">Any level</div>
+                                    </div>
+                                    <div class="quick-info__users">
+                                        <div class="users__icon icon">
+                                            <i class="text-medium fa-solid fa-users"></i>
+                                        </div>
+                                        <div class="users__text text text-medium">4.5k</div>
+                                    </div>
+                                    <div class="quick-info__time">
+                                        <div class="time__icon icon">
+                                            <i class="text-medium fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="time__text text text-medium">1h 42m</div>
+                                    </div>
+                                    <div class="quick-info__save">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="grid__column-4">
+                    <a href="./course-detail.html" class="turn-page">
+                        <div class="product__small-advertisement">
+                            <div class="small-advertisement__image">
+                                <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                     alt="" class="img-2">
+                            </div>
+                            <div class="small-advertisement__content">
+                                <div class="content__top">
+                                    <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                    <div class="content__rate">
+                                        <div class="rate__icon">
+                                            <i class="text-mini fa-regular fa-star"></i>
+                                        </div>
+                                        <div class="rate__number text-mini">4.9</div>
+                                    </div>
+                                </div>
+                                <div class="text-paragraph">
+                                    <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                        Spreads</p>
+                                </div>
+                                <div class="content__list">
+                                    <div class="content__list-item">Brush Pen</div>
+                                </div>
+                                <div class="content__quick-info">
+                                    <div class="quick-info__level">
+                                        <div class="level__icon icon">
+                                            <i class="text-medium fa-solid fa-signal"></i>
+                                        </div>
+                                        <div class="level__text text text-medium">Any level</div>
+                                    </div>
+                                    <div class="quick-info__users">
+                                        <div class="users__icon icon">
+                                            <i class="text-medium fa-solid fa-users"></i>
+                                        </div>
+                                        <div class="users__text text text-medium">4.5k</div>
+                                    </div>
+                                    <div class="quick-info__time">
+                                        <div class="time__icon icon">
+                                            <i class="text-medium fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="time__text text text-medium">1h 42m</div>
+                                    </div>
+                                    <div class="quick-info__save">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="grid__column-4">
+                    <a href="./course-detail.html" class="turn-page">
+                        <div class="product__small-advertisement">
+                            <div class="small-advertisement__image">
+                                <img srcset="https://static.skillshare.com/cdn-cgi/image/width=375,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 375w, https://static.skillshare.com/cdn-cgi/image/width=600,quality=90,format=auto/uploads/video/thumbnails/fe558bd84fbe87b20cab2f4cf54ed37c/original 600w"
+                                     alt="" class="img-2">
+                            </div>
+                            <div class="small-advertisement__content">
+                                <div class="content__top">
+                                    <div class="content__author-name text-mini">Dylan Mierzwinski</div>
+                                    <div class="content__rate">
+                                        <div class="rate__icon">
+                                            <i class="text-mini fa-regular fa-star"></i>
+                                        </div>
+                                        <div class="rate__number text-mini">4.9</div>
+                                    </div>
+                                </div>
+                                <div class="text-paragraph">
+                                    <p>The Sketchbook Fillers' Club: Four Powerful Guidelines for Stunning
+                                        Spreads</p>
+                                </div>
+                                <div class="content__list">
+                                    <div class="content__list-item">Brush Pen</div>
+                                </div>
+                                <div class="content__quick-info">
+                                    <div class="quick-info__level">
+                                        <div class="level__icon icon">
+                                            <i class="text-medium fa-solid fa-signal"></i>
+                                        </div>
+                                        <div class="level__text text text-medium">Any level</div>
+                                    </div>
+                                    <div class="quick-info__users">
+                                        <div class="users__icon icon">
+                                            <i class="text-medium fa-solid fa-users"></i>
+                                        </div>
+                                        <div class="users__text text text-medium">4.5k</div>
+                                    </div>
+                                    <div class="quick-info__time">
+                                        <div class="time__icon icon">
+                                            <i class="text-medium fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="time__text text text-medium">1h 42m</div>
+                                    </div>
+                                    <div class="quick-info__save">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <footer class="web__footer">
-        <div class="grid">
-            <div class="grid__row-1">
-                <div class="grid__column-2-4">
-                    <h3 class="footer__heading text-big">Company</h3>
-                    <ul class="footer-list">
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-big">About</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Careers</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Press</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Blog</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="grid__column-2-4">
-                    <h3 class="footer__heading text-big">Work With Us</h3>
-                    <ul class="footer-list">
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Affilate Program</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Partnerships</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="grid__column-2-4">
-                    <h3 class="footer__heading text-big">Teach With Us</h3>
-                    <ul class="footer-list">
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Become a Teacher</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Teacher Help Center</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Teacher Rules</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="grid__column-2-4">
-                    <h3 class="footer__heading text-big">Shop</h3>
-                    <ul class="footer-list">
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Gift Memberships</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Digital Production</a>
-                        </li>
-                        <li class="footer-item">
-                            <a href="" class="footer-item__link text-medium">Live Sessions</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="grid__column-2-4">
-                    <h3 class="footer__heading text-big">Mobile</h3>
-                    <div class="footer__download">
-                        <div class="footer__download-apps">
-                            <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/appstore.png" alt="App Store"
-                                     class="footer__download-app-img">
-                            </a>
-                            <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/ggplay.png" alt="Google Play"
-                                     class="footer__download-app-img">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            <div class="grid">
-                <ul class="ul__text text-medium">© Skillshare, Inc. 2025
-                    <li class="footer__text text-medium">Help</li>
-                    <li class="footer__text text-medium">Privacy</li>
-                    <li class="footer__text text-medium">Privacy</li>
-                    <li class="footer__text text-medium">Terms</li>
-                    <li class="footer__text text-medium">Your Privacy Choices</li>
-                    <li class="footer__text text-medium">Notice to CA Residents</li>
-                </ul>
-            </div>
-            <div class="grid">
-                <p class="ul__text text-medium">Responsible for Content Management: Group 21</p>
-            </div>
-            <div class="grid">
-                <p class="ul__text text-medium">© 2025 - Copyright belongs to Group 21</p>
-            </div>
-        </div>
-    </footer>
+
 </div>
+
+
 </body>
 </html>
