@@ -18,12 +18,13 @@
 
 .profile-block {
     /*2 số cuối trong mã màu là độ đậm 50%*/
-    border: solid 1px #00233380;
+    /*border: solid 1px #00233380;*/
     padding: 3rem;
     border-radius: 4px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    background: var(--white-color);
 }
 .profile-block__title {
     font-size: var(--text-2xl);
@@ -88,23 +89,14 @@
     margin-top: 6rem;
 }
 .personal-detail__block {
-    border: solid 1px #00233380;
+    /*border: solid 1px var(--light-grey);*/
     padding: 4rem;
     border-radius: 4px;
+    background: var(--white-color);
 }
 /*Hàng 1 của khối Personal detial*/
-.personal-detail__row-1 {
-    display: flex;
-}
 .personal-detail__column-1 {
     padding-right: 10rem;
-}
-.personal-detail__column-items input {
-    margin-top: 10px;
-    width: 350px;
-    /*object-fit: inherit;*/
-    /*position: inherit;*/
-    height: 4rem;
 }
 /*Hàng 2 của khôí personal detail*/
 .personal-detail__row-2 {
@@ -113,15 +105,23 @@
 .personal-detail__email input {
     width: 80rem;
 }
-
 /*Tùy chỉnh toàn input*/
-input::placeholder {
+.personal-detail__input{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 350px;
+    height: 4rem;
+}
+input {
+    border: solid 1px var(--light-grey);
+    border-radius: 3px;
+    width: 100%;
+    height: 100%;
+    padding-left: 1rem;
     font-size: var(--text-sm);
     font-weight: 300;
-    padding-left: 0.5rem;
-    justify-items: center;
 }
-
 /*Security*/
 .security__title {
     margin-top: 3rem;

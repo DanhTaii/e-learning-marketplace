@@ -1,31 +1,47 @@
 
-
+.sidebar_stroke{
+    width: 100%;
+    border: solid 2px ;
+    height: 0;
+    position: absolute;
+    top: calc(100% - 1.8px);
+    z-index: 10;
+}
 .stroke {
     width: 100%;
-    border: solid 1px ;
+    border: solid 1px var(--light-grey);
     height: 0;
+    margin: 2rem 0;
+    position: absolute;
+    z-index: 1;
 }
 /*Title*/
 .my-course__title {
     font-size: var(--text-5xl);
     margin-top: 6rem;
+    line-height: 4rem;
 }
 /*Selection*/
+.sidebar__name{
+    position: relative;
+}
 .my-course__selection {
     display: flex;
-    margin-top: 4rem;
+    margin-top: 3rem;
+    margin-bottom: -2rem;
 }
 .my-course__selection li a{
     list-style-type: none;
     color: black;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 500;
 }
 .my-course__selection li:first-child{
     color: var(--blue);
 }
 .my-course__selection li:first-child a{
     color: var(--blue);
+    font-weight: 700;
 }
 .my-course__selection li {
     list-style-type: none;
@@ -47,15 +63,18 @@
 /*Search*/
 .my-course__search {
     display: flex;
-    width: 30%;
+    width: 100%;
     align-items: center;
+    margin-top: 2rem;
+
+}
+.search_blank {
+    width: 250%;
 }
 
 .my-course__button-search {
     width: 10%;
     height: 30px;
-    /*height: 3.3px;*/
-    /*padding: 1rem;*/
     margin-left: 10px;
     display: flex;
     align-items: center;
@@ -84,7 +103,6 @@ button{
     border: solid 1px #D9D9D9;
     border-radius: 3px;
 }
-
 .my-course__search input::placeholder {
     /*padding: 1rem;*/
     font-size: var(--text-lg);
@@ -98,7 +116,7 @@ button{
     margin: 2rem 0;
     width: 100%;
 }
-.yeah {
-    margin-top: 8rem;
+.list-course {
+    margin-top: 80rem;
 }
 
