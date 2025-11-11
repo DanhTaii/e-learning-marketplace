@@ -507,6 +507,54 @@ body {
 .notification__icon{
     cursor: pointer;
 }
+.header__notification {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Cho phép nhận focus */
+.header__notification:focus {
+    outline: none;
+}
+
+/* Popup mặc định ẩn */
+.notification__popup {
+    position: absolute;
+    top: 44px;
+    right: 0;
+    width: 300px;
+    max-height: 400px;
+    background: var(--white-color);
+    padding: 16px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(50px);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+/* Hiện popup khi phần tử cha có focus */
+.header__notification:focus-within .notification__popup {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+/* Ngăn đổi màu chữ khi hover chuông */
+.notification__popup h4,
+.notification__popup li {
+    color: #333;
+}
+
+.notification__popup li:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
 
 .header__user{
     display: flex;
