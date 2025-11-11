@@ -1,0 +1,64 @@
+.header__title {
+    margin: 60px 0 20px 0;
+}
+
+.history-box {
+    background-color: var(--white-color);
+    border: 1px solid var(--light-grey);
+    padding: 20px 20px;
+    margin-bottom: 60px;
+    width: 100%;
+    max-height: 550px;
+    overflow-y: auto;
+    border-radius: 7px;
+}
+
+.box__content {
+    margin-bottom: 3rem;
+}
+
+.time {
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-light);
+}
+
+.text {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-regular);
+}
+.text1{
+    font-weight: var(--fw-bold);
+    font-size: var(--text-lg);
+}
+
+.box__row1 {
+    margin: 0.5rem 0;
+    padding-left: 10px;
+}
+
+.box__row2 {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    align-items: center;
+}
+
+.btn-receipt {
+    background-color: var(--bright-green);
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 40px;
+    border-radius: 5px;
+    color: var(--dark-blue);
+    width: 100%;
+    border: none;
+}
+
+.receipt {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+}
