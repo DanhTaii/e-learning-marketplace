@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+</head>
+<body>
+
+<div class="web">
+    <div class="web__container">
+        <div class="grid">
+            <div class="grid__row-2">
+                <div class="grid__column-2 container-1">
+                    <div class="container-1__title">Softskill</div>
+                    <div class="container-1__menu">
+                        <ul>
+                            <li>
+                                <div class="menu-item__student student-list">
+                                    <span class="container-1__menu-items">
+                                    <a href="">
+                                        <i class="fa-solid fa-user"></i>
+                                        Students
+                                    </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="">
+                                        <i class="fa-solid fa-users-between-lines"></i>
+                                        Courses
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__order">
+                                    <a href=""><i class="fa-solid fa-receipt"></i>
+                                        Orders</a>
+                                </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid__column-10 container-2">
+                    <div class="container-2__header"></div>
+                    <div class="grid__row-2 container-2__grid">
+                        <div class="container-2__header">
+                            <div class="header__title">Students</div>
+                        </div>
+
+                        <div class="container-2__filter">
+                            <div class="filter__selection">
+                                <div class="filter__selection-input">
+                                    <div class="filter__selection-items filter__selection-name">
+                                        <div class="filter__item-name">Name: </div>
+                                        <input placeholder="" type="text" >
+                                    </div>
+                                    <div class="filter__selection-items">
+                                        <div class="filter__item-phone">Phone: </div>
+                                        <input placeholder="" type="text">
+                                    </div>
+                                    <div class="filter__selection-items">
+                                        <div class="filter__item-phone">From date: </div>
+                                        <input placeholder="" type="datetime-local">
+                                    </div>
+                                </div>
+
+                                <div class="filter__button-search">
+                                    <button class="button">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-2__list-student">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Role</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <th>011</th>
+                                    <th>Danh Tai</th>
+                                    <th>abd@gmail.com</th>
+                                    <th>+84000099777</th>
+                                    <th>Admin</th>
+                                    <th>11/02/2025</th>
+                                    <th>Edit / Delete</th>
+                                </tr>
+                                <tr>
+                                    <th>012</th>
+                                    <th>Minh</th>
+                                    <th>abd@gmail.com</th>
+                                    <th>+84000099777</th>
+                                    <th>User</th>
+                                    <th>11/02/2025</th>
+                                    <th>Edit / Delete</th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

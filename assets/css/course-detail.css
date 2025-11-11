@@ -1,15 +1,10 @@
 
-/*@font-face {*/
-/*    font-family: 'Roboto';*/
-/*    src: url('../fonts/static/Roboto-Light.ttf') format('truetype');*/
-/*    font-weight: 300;*/
-/*    font-style: normal;*/
-/*}*/
-
+.dark-bg{
+    background: var(--dark-blue);
+    height: 34rem;
+}
 .course-detail__container{
-    /*background: #1C2329;*/
-    /*margin-top: 20px;*/
-    /*display: flex;*/
+    margin-top: -35rem;
 }
 /*CHo chữ cần màu chứ k phải title*/
 .color__dark-blue {
@@ -47,6 +42,7 @@
 .section-1{
     background: var(--dark-blue);
     padding: 20px;
+    padding-left: 0;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 }
@@ -67,9 +63,9 @@
     font-weight: bold;
 }
 .section-1__main-title{
-    padding-top: 45px;
-    margin-left: -8px;
+    padding-top: 38px;
     color: var(--white-color);
+    line-height: 4rem;
 }
 .section-1__sub-title{
     color: var(--white-color);
@@ -115,6 +111,7 @@
 }
 .section-1__creator{
     margin-top: 18px;
+    display: flex;
 }
 .section-1__creator-title{
     color: var(--white-color);
@@ -122,6 +119,7 @@
 .section-1__creator-name{
     color: var(--bright-green);
     font-weight: bold;
+    padding-left: 5px;
 }
 .section-1__updated{
     margin-left: -8px;
@@ -141,10 +139,11 @@
     display: flex;
 }
 .section-2__skills{
-    border: solid 1px #D9D9D9 ;
+    /*border: solid 1px #D9D9D9 ;*/
     padding: 2.4rem;
     margin-top: 30px;
     border-radius: 3px;
+    background: var(--white-color);
 }
 .section-2__list ul{
     padding-left: 0;
@@ -168,7 +167,7 @@
     font-weight: bold;
     padding: 5px;
     margin: 0 5px;
-    border: 1px solid #D9D9D9;
+    border: 1px solid var(--light-grey);
     border-radius: 1px;
     float: left;
     list-style-type: none;
@@ -267,32 +266,33 @@
 
 /*Container 2*/
 .container-2{
-    /*background: var(--dark-blue);*/
     margin: 20px 0;
-    /*padding: 0 16px;*/
-
+}
+.grid__column-4-in-12 {
+    margin-left: -8px;
+}
+.grid__column-8 {
+    padding-left: 30px;
 }
 .container-2__img {
     height: 225px;
+    margin: -1.6rem -5rem;
 }
-
 img{
     width: 100%;
-    height: auto;
-    object-fit: cover;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 }
 .container-2__information {
     padding: 1.6rem 5.0rem;
-    background: var(--dark-blue);
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
+    background: var(--white-color);
+    border-radius: 7px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+
 }
 .container-2__price span{
     padding: 0 5px;
-    /*margin-left: -10px;*/
-    /*margin-right: -10px;*/
 }
 .container-2__price{
     display: flex;
@@ -309,7 +309,7 @@ img{
 }
 .container-2__sold-price{
     font-size: 2.4rem;
-    color: var(--white-color);
+    color: var(--dark-blue);
     font-weight: bold;
 }
 .container-2__option {
@@ -318,13 +318,13 @@ img{
     align-items: center;
 }
 .container-2__icon{
-    color: white;
+    color: var(--dark-blue);
     font-size: 20px;
 }
 .container-2__icon-list {
     padding: 11px;
     cursor: pointer;
-    border: 1px solid white;
+    border: 1px solid var(--dark-blue);
     border-radius:5px ;
 }
 .container-2__button-add {
@@ -353,7 +353,7 @@ img{
     /*object-fit:cover;*/
 }
 .container-2__note {
-    color: var(--white-color);
+    color: var(--dark-blue);
     display: flex;
     justify-content: center;
     padding: 28px 0;
@@ -365,10 +365,10 @@ img{
     padding-left: 20px ;
 }
 .container-2__subtitle {
-    color: var(--white-color);
+    color: var(--dark-blue);
     font-weight: bold;
 }
 .style__text-var {
-    color: white;
+    color: var(--dark-blue);
     font-weight: 300;
 }
