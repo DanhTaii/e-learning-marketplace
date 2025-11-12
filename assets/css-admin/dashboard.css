@@ -44,3 +44,68 @@
     font-size: var(--text-5xl);
     font-weight: var(--fw-semibold);
 }
+.visualization {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2rem;
+}
+.top-course {
+    /*border-radius: 7px;*/
+    border: 1px solid var(--light-grey);
+    background: var(--white-color);
+}
+.top-course__title{
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
+    line-height: 4rem;
+    padding: 1rem 1rem;
+}
+.chart {
+    background: var(--white-color);
+    width: 63%;
+    /*display: flex;*/
+    /*height: 60%;*/
+}
+.column-chart__1 {
+    height: 80%;
+    color: var(--dark-blue);
+}
+.bar-chart {
+    position: relative;
+    height: 94%;
+}
+.bar-chart__grid {
+    height: 100%;
+}
+.vertical-axis {
+    position: absolute;
+    height: 100%;
+    border: 1px solid var(--dark-blue);
+    display: flex;
+    align-items: flex-end;
+    width: 1px;
+}
+.horizontal-line {
+    position: absolute;
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    display: flex;
+    align-items: flex-end;
+    height: 1px;
+}
+/*Chinhr từng con của horizontal-line có độ cao nahast định*/
+.horizontal-line:nth-child(2) {top : 0%}
+.horizontal-line:nth-child(3) {top : 25%}
+.horizontal-line:nth-child(4) {top : 50%}
+.horizontal-line:nth-child(5) {top : 75%}
+
+.bar-chart__bar {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 50px;   /* Đẩy cột ra khỏi trục */
+    padding-right: 20px;
+}
