@@ -26,6 +26,7 @@
 .container-1__menu li i{
     color: var(--white-color);
     font-size: var(--text-3xl);
+    margin-right: 1rem;
 }
 .container-1__menu li {
     margin: 2rem 0;
@@ -34,12 +35,15 @@
 .container-1__menu ul {
     padding-left: 0;
 }
+.container-1__menu-items a span{
+    font-size: var(--text-xl);
+    font-weight: var(--fw-medium);
+}
 .container-1__menu-items a{
     font-size: var(--text-xl);
-    font-weight: var(--fw-semibold);
+    /*font-weight: var(--fw-medium);*/
     color: var(--white-color);
     text-decoration: none;
-    padding-left: 1rem;
 }
 .student-list{
     background: var(--bright-blue);
