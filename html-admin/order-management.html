@@ -2,9 +2,199 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Order Management</title>
+    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
+<div class="web">
+    <div class="web__container">
+        <div class="grid">
+            <div class="grid__row-2">
+                <div class="grid__column-2 container-1">
+                    <div class="container-1__title">Softskill</div>
+                    <div class="container-1__menu">
+                        <ul>
+                            <li>
+                                <div class="menu-item__student ">
+                                    <span class="container-1__menu-items">
+                                    <a href="./dashboard.html">
+                                        <i class="fa-solid fa-table-columns"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items">
+                                    <a href="./users-management.html">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span>Students</span>
+                                    </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="./courses-management.html">
+                                        <i class="fa-solid fa-users-between-lines"></i>
+                                        <span>Courses</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="./lesson-management.html">
+                                        <i class="fa-solid fa-book"></i>
+                                        <span>Lesson</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="./tag-management.html">
+                                        <i class="fa-solid fa-tags"></i>
+                                        <span>Tag</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student student-list">
+                                    <span class="container-1__menu-items menu-item__order">
+                                    <a href="./order-management.html">
+                                        <i class="fa-solid fa-receipt"></i>
+                                        <span>Orders</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
+                <div class="grid__column-10 container-2">
+                    <div class="container-2__header"></div>
+                    <div class="grid__row-2 container-2__grid">
+                        <div class="container-2__header">
+                            <div class="header__title">Order</div>
+                        </div>
+
+                        <div class="container-2__filter">
+                            <div class="filter__selection">
+                                <div class="filter__selection-input">
+                                    <div class="filter__selection-items filter__selection-name">
+                                        <div class="filter__item-name">Title:</div>
+                                        <input placeholder="" type="text" class="input__font">
+                                    </div>
+                                    <div class="filter__selection-items">
+                                        <div class="filter__item-phone">From date:</div>
+                                        <input placeholder="" type="datetime-local" class="input__font">
+                                    </div>
+                                    <div class="filter__selection-items">
+                                        <div class="filter__item-phone">To date:</div>
+                                        <input placeholder="" type="datetime-local" class="input__font">
+                                    </div>
+                                </div>
+
+                                <div class="filter__button-search">
+                                    <button class="button" type="submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-2__list-student">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Order Code</th>
+                                    <th>User ID</th>
+                                    <th>User name</th>
+                                    <th>Payment method</th>
+                                    <th>Total Amount</th>
+                                    <th>Final Amount</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <th>ORD101</th>
+                                    <th>001</th>
+                                    <th>Danh Tai</th>
+                                    <th>Momo</th>
+                                    <th>200.00</th>
+                                    <th>180.00</th>
+                                    <th>paid</th>
+                                    <th>11/02/2025</th>
+                                    <th>View / Edit / Delete</th>
+                                </tr>
+                                <tr>
+                                    <th>ORD102</th>
+                                    <th>001</th>
+                                    <th>Danh Tai</th>
+                                    <th>Zalo Pay</th>
+                                    <th>850.00</th>
+                                    <th>480.00</th>
+                                    <th>paid</th>
+                                    <th>11/02/2025</th>
+                                    <th>View / Edit / Delete</th>
+                                </tr>
+                                <tr>
+                                    <th>ORD103</th>
+                                    <th>001</th>
+                                    <th>Danh Tai</th>
+                                    <th>Momo</th>
+                                    <th>530.00</th>
+                                    <th>480.00</th>
+                                    <th>paid</th>
+                                    <th>11/02/2025</th>
+                                    <th>View / Edit / Delete</th>
+                                </tr>
+                                <tr>
+                                    <th>ORD104</th>
+                                    <th>001</th>
+                                    <th>Danh Tai</th>
+                                    <th>Google Pay</th>
+                                    <th>900.00</th>
+                                    <th>780.00</th>
+                                    <th>paid</th>
+                                    <th>11/02/2025</th>
+                                    <th>View / Edit / Delete</th>
+                                </tr>
+                                <tr>
+                                    <th>ORD105</th>
+                                    <th>001</th>
+                                    <th>Danh Tai</th>
+                                    <th>VNPay</th>
+                                    <th>3600.0</th>
+                                    <th>1200.0</th>
+                                    <th>paid</th>
+                                    <th>11/02/2025</th>
+                                    <th>View / Edit / Delete</th>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
