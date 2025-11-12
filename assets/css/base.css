@@ -113,6 +113,11 @@ body {
     padding-right: 8px;
     padding-left: 8px;
 }
+.grid__column-7{
+    width: 58.333%;
+    padding-right: 8px;
+    padding-left: 8px;
+}
 .grid__column-8{
     width: 66.667%;
     padding-right: 8px;

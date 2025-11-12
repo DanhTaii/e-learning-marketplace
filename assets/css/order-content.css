@@ -1,0 +1,138 @@
+.layout {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column1 {
+    margin-top: 2rem;
+}
+
+.column2 {
+    margin-top: 2rem;
+height: 710px;
+    background-color: var(--white-color);
+}
+
+.image-container {
+    width: 100%;
+    margin-right: 16px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.content-container {
+    margin-top: 10px;
+    margin-bottom: 60px;
+    background-color: var(--white-color);
+}
+
+.container__title-video {
+    font-size: var(--text-5xl);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.review-box__header {
+    padding: 20px;
+}
+
+.user__avatar1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+}
+
+.review-box__comment {
+    display: flex;
+    margin-top: 25px;
+    border-bottom: 1px solid var(--light-grey);
+    padding-bottom: 1rem;
+}
+
+.comment__user {
+    margin-right: 3rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.box {
+    margin-bottom: 0.5rem;
+}
+
+.box__date {
+    display: flex;
+    align-content: center;
+}
+
+.star {
+    margin-right: 0.5rem;
+    padding-top: 0.1rem;
+}
+
+.box__like-dislike {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.text-3xl {
+    font-size: var(--text-3xl);
+}
+
+.text-lg {
+    font-size: var(--text-xl);
+}
+
+.bold {
+    font-weight: var(--fw-bold);
+}
+
+.light {
+    font-weight: var(--fw-light);
+}
+
+.regular {
+    font-weight: var(--fw-regular);
+}
+
+.content__box {
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    padding: 10px;
+    max-height: 635px;
+    overflow-y: auto;
+
+}
+
+.box__column1 {
+    margin-right: 15px;
+}
+
+.tick {
+    transform: scale(1.2);
+}
+
+.content__header {
+    margin: 25px 0 2rem 10px;
+}
+
+.box__content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--light-grey);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.column2__header {
+    margin-bottom: 1rem;
+}
