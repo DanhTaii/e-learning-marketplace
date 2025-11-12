@@ -37,6 +37,6 @@
 /* PHẦN QUAN TRỌNG NHẤT */
 /* Khi modal này là :target (tức là URL là #my-modal)
    nó sẽ hiện ra */
-.modal-backdrop:target {
-    display: flex; /* Hiện ra */
-}
+/*.modal-backdrop:target {*/
+/*    display: flex; !* Hiện ra *!*/
+/*}*/

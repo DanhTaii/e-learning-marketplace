@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Management</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="../assets/css-admin/admin.css">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css-admin/dashboard.css">
+
 </head>
 <body>
 
@@ -20,8 +22,8 @@
                     <div class="container-1__menu">
                         <ul>
                             <li>
-                                <div class="menu-item__student ">
-                                    <span class="container-1__menu-items">
+                                <div class="menu-item__student student-list">
+                                    <span class="container-1__menu-items ">
                                     <a href="./dashboard.html">
                                         <i class="fa-solid fa-table-columns"></i>
                                         <span>Dashboard</span>
@@ -30,7 +32,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="menu-item__student student-list">
+                                <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
                                     <a href="./users-management.html">
                                         <i class="fa-solid fa-user"></i>
@@ -87,69 +89,48 @@
                     <div class="container-2__header"></div>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Students</div>
+                            <div class="header__title">Dashboard</div>
                         </div>
 
-                        <div class="container-2__filter">
-                            <div class="filter__selection">
-                                <div class="filter__selection-input">
-                                    <div class="filter__selection-items filter__selection-name">
-                                        <div class="filter__item-name">Name: </div>
-                                        <input placeholder="" type="text" >
+                        <div class="list-card">
+                            <ul>
+                                <li>
+                                    <div class="card-information">
+                                        <div class="card-content">
+                                            <div>Doanh thu</div>
+                                            <div class="card-icon"><i class="fa-solid fa-money-check-dollar"></i></i></div>
+                                        </div>
+                                        <div class="card-content__number">250+</div>
                                     </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">Phone: </div>
-                                        <input placeholder="" type="text">
+                                </li>
+                                <li>
+                                    <div class="card-information">
+                                        <div class="card-content">
+                                            <div class="card-title">Đơn hàng</div>
+                                            <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></i></div>
+                                        </div>
+                                        <div class="card-content__number">250+</div>
                                     </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">From date: </div>
-                                        <input placeholder="" type="datetime-local">
+                                </li>
+                                <li>
+                                    <div class="card-information">
+                                        <div class="card-content">
+                                            <div>Người dùng</div>
+                                            <div class="card-icon"><i class="fa-solid fa-user"></i></div>
+                                        </div>
+                                        <div class="card-content__number">250+</div>
                                     </div>
-                                </div>
-
-                                <div class="filter__button-search">
-                                    <button class="button">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="container-2__list-student">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Created at</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Danh Tai</th>
-                                    <th>abd@gmail.com</th>
-                                    <th>+84000099777</th>
-                                    <th>Admin</th>
-                                    <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
-                                </tr>
-                                <tr>
-                                    <th>012</th>
-                                    <th>Minh</th>
-                                    <th>abd@gmail.com</th>
-                                    <th>+84000099777</th>
-                                    <th>User</th>
-                                    <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
-                                </tr>
-                                </tbody>
-                            </table>
+                                </li>
+                                <li>
+                                    <div class="card-information">
+                                        <div class="card-content">
+                                            <div>Khóa học</div>
+                                            <div class="card-icon"><i class="fa-solid fa-tags"></i></div>
+                                        </div>
+                                        <div class="card-content__number">250+</div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
