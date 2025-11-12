@@ -1,5 +1,5 @@
 
-:root{
+:root {
     --bright-blue: #264457;
 }
 
@@ -8,7 +8,8 @@
     width: 100%;
     height: 100vh;
 }
-.container-1__title{
+
+.container-1__title {
     color: var(--white-color);
     font-size: var(--text-5xl);
     font-weight: var(--fw-bold);
@@ -16,52 +17,62 @@
     /*margin-bottom: 6rem;*/
 }
 
-.container-1__menu li .fa-books{
+.container-1__menu li .fa-books {
 
 }
 
-.container-1__menu{
+.container-1__menu {
     margin-top: 6rem;
 }
-.container-1__menu li i{
+
+.container-1__menu li i {
     color: var(--white-color);
     font-size: var(--text-3xl);
     margin-right: 1rem;
 }
+
 .container-1__menu li {
     margin: 2rem 0;
     list-style-type: none;
 }
+
 .container-1__menu ul {
     padding-left: 0;
 }
-.container-1__menu-items a span{
+
+.container-1__menu-items a span {
     font-size: var(--text-xl);
     font-weight: var(--fw-medium);
 }
-a{
+
+a {
     font-size: var(--text-xl);
     /*font-weight: var(--fw-medium);*/
     color: var(--white-color);
     text-decoration: none;
 }
-.student-list{
+
+.student-list {
     background: var(--bright-blue);
 }
+
 .menu-item__student {
     width: 100%;
     height: 100%;
     border-radius: 3px;
     padding: 0.5rem;
 }
+
 /*Container 2*/
-.container-2{
+.container-2 {
     padding: 0 !important;
 }
+
 .container-2__grid {
     padding: 0 1rem;
     margin-top: -8rem;
 }
+
 .container-2__header {
     background: var(--white-color);
     height: 8rem;
@@ -71,21 +82,24 @@ a{
     align-items: center;
     justify-content: space-between;
 }
-.admin-create__buttons button{
+
+.admin-create__buttons button {
     background: var(--dark-blue);
-    color: var(--white-color) ;
+    color: var(--white-color);
     padding: 1rem 2rem;
     font-size: var(--text-lg);
     border: solid 1px var(--dark-blue);
     border-radius: 3px;
     cursor: pointer;
 }
-.admin-create__buttons{
+
+.admin-create__buttons {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.admin-create__buttons i{
+
+.admin-create__buttons i {
     margin-right: 0.5rem;
     font-size: var(--text-base);
 }
@@ -96,6 +110,12 @@ a{
     font-weight: var(--fw-semibold);
     line-height: 5rem;
 }
+
+.title__admin {
+    margin-top: 2rem;
+    font-size: var(--text-xl);
+}
+
 .container-2__list-student {
     display: flex;
     align-items: center;
@@ -103,6 +123,7 @@ a{
     margin-top: 2rem;
     width: 100%;
 }
+
 /*Filter*/
 .container-2__filter {
     margin-top: 2rem;
@@ -113,6 +134,7 @@ a{
     align-items: center;
     width: 100%;
 }
+
 .filter__selection {
     display: flex;
     flex-wrap: wrap;
@@ -120,41 +142,107 @@ a{
     justify-content: space-between;
     align-items: center;
 }
+
+/*Create*/
+.container-2__create {
+    margin-top: 2rem;
+    background: var(--white-color);
+    /*height: 6rem;*/
+    display: flex;
+    padding: 2rem;
+    width: 100%;
+
+}
+
+.create__selection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.create__selection-input {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+
+}
+
+.create__selection-items {
+    font-size: var(--text-2xl);
+    flex: 1;
+}
+
+.input__create {
+    width: 100%;
+}
+
+.create__selection-items--wide {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.create__selection-items--wide .input__create {
+    width: 100%;
+}
+
+.create__btn-create {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.create-btn {
+    border-radius: 4px;
+    color: var(--white-color);
+    background-color: black;
+    padding: 8px 15px;
+    font-weight: var(--fw-regular);
+}
+
 input {
     width: 100%;
     border: 1px solid var(--light-grey);
-    border-radius: 3px ;
+    border-radius: 3px;
     color: var(--dark-blue);
     font-weight: var(--fw-regular);
     padding: 0.5rem 1rem;
 }
+
 .input__font {
     font-size: var(--text-sm);
 }
+
 select {
     font-size: var(--text-sm);
     border: 1px solid var(--light-grey);
-    border-radius: 3px ;
+    border-radius: 3px;
     color: var(--dark-blue);
     font-weight: var(--fw-regular);
     padding: 0.5rem 1rem;
 }
-.filter__selection-items{
+
+.filter__selection-items {
     font-size: var(--text-2xl);
     padding-right: 2rem;
     /*width: 30%;*/
 }
-.filter__selection-input{
+
+.filter__selection-input {
     display: flex;
     width: 90%;
 }
-.filter__button-search{
+
+.filter__button-search {
     display: flex;
     width: 10%;
     align-items: center;
     justify-content: center;
 }
-.button{
+
+.button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,6 +252,7 @@ select {
     border-radius: 3px;
     cursor: pointer;
 }
+
 .fa-magnifying-glass {
     display: flex;
     align-items: center;
@@ -178,11 +267,13 @@ table {
     background: var(--white-color);
     width: 100%;
 }
+
 /*Xử lý thằng đầu cho in đậm và có đường kẻ trên*/
 thead th {
     font-weight: var(--fw-bold);
     border-top: 1px solid var(--light-grey);
 }
+
 /* Nhóm table, th, và td và áp dụng cho cả 3 */
 /*Giair quyết đường kẻ chung cho table*/
 table, th, td {
@@ -191,11 +282,13 @@ table, th, td {
     padding: 1rem;
     border-bottom: 1px solid var(--light-grey);
 }
+
 /*Thêm đường kẻ cho các con ở bên trái*/
-th:first-child{
+th:first-child {
     border-left: 1px solid var(--light-grey);
 }
+
 /*Thêm đường kẻ cho các con ở bên phải*/
-th:last-child{
+th:last-child {
     border-right: 1px solid var(--light-grey);
 }

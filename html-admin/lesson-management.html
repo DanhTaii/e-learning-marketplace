@@ -2,9 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lesson Management</title>
+    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
+<div class="web">
+    <div class="web__container">
+        <div class="grid">
+            <div class="grid__row-2">
+                <div class="grid__column-2 container-1">
+                    <div class="container-1__title">Softskill</div>
+                    <div class="container-1__menu">
+                        <ul>
+                            <li>
+                                <div class="menu-item__student ">
+                                    <span class="container-1__menu-items">
+                                    <a href="./dashboard.html">
+                                        <i class="fa-solid fa-table-columns"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items">
+                                    <a href="./users-management.html">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span>Students</span>
+                                    </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="./courses-management.html">
+                                        <i class="fa-solid fa-users-between-lines"></i>
+                                        <span>Courses</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student student-list">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="./lesson-management.html">
+                                        <i class="fa-solid fa-book"></i>
+                                        <span>Lesson</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__course">
+                                    <a href="./tag-management.html">
+                                        <i class="fa-solid fa-tags"></i>
+                                        <span>Tag</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item__student">
+                                    <span class="container-1__menu-items menu-item__order">
+                                    <a href="./order-management.html">
+                                        <i class="fa-solid fa-receipt"></i>
+                                        <span>Orders</span>
+                                    </a>
+                                </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
+                <div class="grid__column-10 container-2">
+                    <div class="container-2__header"></div>
+                    <div class="grid__row-2 container-2__grid">
+                        <div class="container-2__header">
+                            <div class="header__title">Lesson</div>
+                        </div>
+                        <div class="title__admin">New lesson</div>
+                        <div class="container-2__create">
+                            <div class="create__selection">
+                                <div class="create__selection-input">
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-name">Order index:</div>
+                                        <input placeholder="" type="text" class="input__create">
+                                    </div>
+                                    <div class="create__selection-items--wide">
+                                        <div class="create__selection-items">
+                                            <div class="filter__item-phone">Course ID:</div>
+                                            <input placeholder="" type="text" class="input__create">
+                                        </div>
+                                        <div class="create__selection-items">
+                                            <div class="filter__item-phone">Title:</div>
+                                            <input placeholder="" type="text" class="input__create">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="create__selection-input">
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-name">Duration:</div>
+                                        <input placeholder="" type="text" class="input__create">
+                                    </div>
+                                    <div class="create__selection-items--wide">
+                                        <div class="create__selection-items">
+                                            <div class="filter__item-phone">Video URL:</div>
+                                            <input placeholder="" type="text" class="input__create">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="create__btn-create">
+                                        <button type="submit" class="create-btn text-medium">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title__admin">All lesson</div>
+                        <div class="container-2__filter">
+                            <div class="filter__selection">
+                                <div class="filter__selection-input">
+                                    <div class="filter__selection-items filter__selection-name">
+                                        <div class="filter__item-name">Course:</div>
+                                        <input placeholder="" type="text" class="input__font">
+                                    </div>
+                                    <div class="filter__selection-items">
+                                        <div class="filter__item-phone">From date:</div>
+                                        <input placeholder="" type="datetime-local" class="input__font">
+                                    </div>
+                                    <div class="filter__selection-items">
+                                        <div class="filter__item-phone">To date:</div>
+                                        <input placeholder="" type="datetime-local" class="input__font">
+                                    </div>
+                                </div>
+
+                                <div class="filter__button-search">
+                                    <button class="button" type="submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-2__list-student">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Index</th>
+                                    <th>Course</th>
+                                    <th>Title</th>
+                                    <th>Video URL</th>
+                                    <th>Duration</th>
+                                    <th>Preview</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>001</td>
+                                    <td>Khóa học A</td>
+                                    <td>Bài 1</td>
+                                    <td>https://</td>
+                                    <td>2min</td>
+                                    <td>Yes</td>
+                                    <td>11/02/2025</td>
+                                    <td>Edit / Delete</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>002</td>
+                                    <td>Khóa học A</td>
+                                    <td>Bài 2</td>
+                                    <td>https://</td>
+                                    <td>2min</td>
+                                    <td>Yes</td>
+                                    <td>11/02/2025</td>
+                                    <td>Edit / Delete</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>003</td>
+                                    <td>Khóa học A</td>
+                                    <td>Bài 3</td>
+                                    <td>https://</td>
+                                    <td>2min</td>
+                                    <td>Yes</td>
+                                    <td>11/02/2025</td>
+                                    <td>Edit / Delete</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>004</td>
+                                    <td>Khóa học A</td>
+                                    <td>Bài 4</td>
+                                    <td>https://</td>
+                                    <td>2min</td>
+                                    <td>Yes</td>
+                                    <td>11/02/2025</td>
+                                    <td>Edit / Delete</td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
