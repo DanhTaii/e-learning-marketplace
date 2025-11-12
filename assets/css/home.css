@@ -162,7 +162,12 @@
 .time-and-save__save-icon{
     font-size: 2.2rem;
 }
-
+.product__small-advertisement{
+    transition: transform 0.2s ease;
+}
+.product__small-advertisement:hover{
+    transform: translateY(-5px);
+}
 .product__small-title{
     font-weight: 600;
     margin: 40px 0;
@@ -189,6 +194,9 @@
 }
 .small-advertisement__content{
     padding: 10px;
+    background-color: var(--white-color);
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
 }
 .content__top{
     display: flex;

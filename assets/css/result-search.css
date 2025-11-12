@@ -38,6 +38,12 @@
 }
 
 .product__small-advertisement{
+    transition: transform 0.2s ease;
+}
+.product__small-advertisement:hover{
+    transform: translateY(-5px);
+}
+.product__small-advertisement{
     cursor: pointer;
     width: 100%;
     border-radius: 8px;
@@ -57,6 +63,9 @@
 }
 .small-advertisement__content{
     padding: 10px;
+    background-color: var(--white-color);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 .content__top{
     display: flex;
