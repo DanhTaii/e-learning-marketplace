@@ -65,20 +65,14 @@
 }
 
 
-.index_btn {
+.index-btn {
     padding-top: 15px;
     text-align: center;
+    width: 100%;
+    height: auto;
 }
 
 .pay-btn {
-    width: 100%;
-    font-weight: bold;
-    font-size: 1.6rem;
-    cursor: pointer;
-    background-color: #01FF85;
-    color: black;
-    border: none;
-    border-radius: 5px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     padding: 8px 15px;
 }
@@ -122,14 +116,6 @@
     margin-bottom: 8px;
 }
 
-.payment-method__box input {
-    padding: 8px 10px;
-    font-size: 1.6rem;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid var(--light-grey);
-}
-
 .row1__card-number,
 .row2__new-password,
 .row3__name-card {
@@ -161,15 +147,12 @@
 .box__row4 {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 
 .row4__btn {
-    background-color: var(--bright-green);
-    border: none;
-    padding: 14px 60px;
-    color: black;
-    font-weight: 700;
-    border-radius: 7px;
+    width: 20%;
+    padding: 14px 10px;
 }
 
 .title__1 {

@@ -24,7 +24,10 @@
     flex-direction: column;
 
 }
-
+.text-2xl{
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-semibold);
+}
 .layout__checkout-summary {
 
     border-radius: 7px;
@@ -235,30 +238,19 @@ p {
     font-size: 1.9rem;
 }
 
-.checkout-button {
-    margin: 0 auto;
+.header__button {
+    margin-left: 2rem;
+    width: 100%;
 }
 
-.btn__checkout {
+.button__btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    background-color: #01FF85;
-    color: black;
-    font-weight: bold;
-    font-size: 1.6rem;
-    border: none;
-    border-radius: 2px;
-    width: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     padding: 13px 15px;
 
 
-}
-
-.btn__checkout:hover {
-    box-shadow: 0 0 5px #01FF85;
 }
 
 .charge-note {
@@ -268,24 +260,24 @@ p {
 
 }
 
-.btn-coupon {
-    background-color: #ffffff;
-    cursor: pointer;
-    text-align: center;
-    color: #3722D3;
-    font-weight: bold;
-    font-size: 1.6rem;
-    border: 1px solid black;
-    border-radius: 2px;
-    margin-top: 19px;
-    width: 100%;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    padding: 8px 15px
-}
+/*.btn-coupon {*/
+/*    background-color: #ffffff;*/
+/*    cursor: pointer;*/
+/*    text-align: center;*/
+/*    color: #3722D3;*/
+/*    font-weight: bold;*/
+/*    font-size: 1.6rem;*/
+/*    border: 1px solid black;*/
+/*    border-radius: 2px;*/
+/*    margin-top: 19px;*/
+/*    width: 100%;*/
+/*    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);*/
+/*    padding: 8px 15px*/
+/*}*/
 
-.btn-coupon:hover {
-    box-shadow: 0 0 5px #3722D3;
-}
+/*.btn-coupon:hover {*/
+/*    box-shadow: 0 0 5px #3722D3;*/
+/*}*/
 
 .scrollable-order-list {
     border-radius: 7px;

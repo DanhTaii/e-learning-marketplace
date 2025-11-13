@@ -1,3 +1,12 @@
+/*
+Mục 1: color
+Mục 2: grid system
+Mục 3: font:size-weight
+Mục 4: button
+Mục 5: input
+Mục 6: header-footer
+
+*/
 :root{
     /*Main color*/
     --dark-blue: #002333;
@@ -126,7 +135,7 @@ body {
 .grid__column-4-in-12{
     width: 33.333%;
     padding-right: 8px;
-    padding-left: 8px;
+    padding-left: 8px
 }
 
 /*Cac bieens thể của Roboto dựa trên Font weight*/
@@ -194,67 +203,51 @@ body {
 }
 
 /*Các loại button*/
-.green-button {
-    margin-top: 20px;
-    font-size: var(--text-lg);
-    border-radius: 4px;
-    background: var(--bright-green);
-    color: var(--dark-blue);
-    border: solid 1px #01FF85;
-    width: 100%;
-    padding: 1.4rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-.green-button:hover {
-    background: var(--bright-green);
-    color: var(--dark-blue);
-    border: solid 1px #01FF85;
-}
 .dark-button {
-    margin-top: 20px;
-    font-size: var(--text-lg);
-    border-radius: 4px;
-    background: #F4F4F4;
-    /*background: var(--dark-blue);*/
-    color: var(--dark-blue);
-    border: solid 1px var(--dark-blue);
+    border: none;
+    color: var(--white-color);
     width: 100%;
-    padding: 1.4rem;
-    font-weight: bold;
+    height: 100%;
+    background: var(--dark-blue);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    border-radius: 5px;
     cursor: pointer;
 }
 .dark-button:hover{
-    background: var(--dark-blue);
-    color: var(--white-color);
-    border: solid 1px var(--dark-blue);
+    background: #01364E;
 }
-.blue-button {
-    margin-top: 20px;
-    font-size: var(--text-lg);
-    border-radius: 4px;
-    background: var(--blue);
-    color: var(--white-color);
-    border: solid 1px var(--blue);
+/*Thuộc thẻ div để bọc btn*/
+.header__button{
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+}
+/*Thuộc thẻ button nằm trong div có chứa thuộc tiính header-btn*/
+.button__btn{
+    border: none;
+    color: var(--dark-blue);
     width: 100%;
-    padding: 1.4rem;
-    font-weight: bold;
+    height: 100%;
+    background-color: var(--bright-green);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    border-radius: 5px;
     cursor: pointer;
 }
-.blue-button__line {
-    margin-top: 20px;
-    font-size: var(--text-lg);
-    border-radius: 4px;
-    background: var(--white-color);
-    color: var(--blue);
-    border: solid 1px var(--blue);
-    width: 100%;
-    padding: 1.4rem;
-    font-weight: bold;
-    cursor: pointer;
+.button__btn:hover{
+    background: #0CDA77;
 }
-.blue-button__line:hover{
-    background: #3722D320;
+
+/*Input style*/
+.input-style {
+    padding: 8px 10px;
+    font-size: 1.6rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--light-grey);
 }
 
 /*Header*/
@@ -690,24 +683,6 @@ img{
     color: red;
 }
 
-.header__button{
-    width: 120px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    margin-left: 0px;
-}
-.button__btn{
-    border: none;
-    color: var(--dark-blue);
-    width: 100%;
-    height: 100%;
-    background-color: var(--bright-green);
-    /*font-size: 1.6rem;*/
-    /*font-weight: 700;*/
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 /* Footer */
 .web__footer{
