@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="../assets/css-admin/dashboard.css">
+    <link rel="stylesheet" href="../assets/css-admin/courses-management.css">
 
 </head>
 <body>
@@ -161,7 +162,17 @@
                                     <th>500</th>
                                     <th>Yes</th>
                                     <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
+                                    <td class="action__button">
+                                        <a href="#course-detail">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>011</th>
@@ -173,7 +184,17 @@
                                     <th>500</th>
                                     <th>Yes</th>
                                     <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
+                                    <td class="action__button">
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>011</th>
@@ -185,7 +206,17 @@
                                     <th>500</th>
                                     <th>Yes</th>
                                     <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
+                                    <td class="action__button">
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>011</th>
@@ -197,7 +228,17 @@
                                     <th>500</th>
                                     <th>Yes</th>
                                     <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
+                                    <td class="action__button">
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>011</th>
@@ -209,7 +250,17 @@
                                     <th>500</th>
                                     <th>Yes</th>
                                     <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
+                                    <td class="action__button">
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>011</th>
@@ -221,10 +272,63 @@
                                     <th>500</th>
                                     <th>Yes</th>
                                     <th>11/02/2025</th>
-                                    <th>Edit / Delete</th>
+                                    <td class="action__button">
+                                        <a href="#course-detail">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="course-detail" class="modal__course-detail">
+                    <div class="modal__course-content">
+                        <div class="course__header">
+                            <div class="course__title">COURSE DETAIL</div>
+                            <div class="x__icon">
+                                <a href="#" class=""><i class="fa-solid fa-x"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="course-body">
+                            <div class="create__selection-input space__section">
+                                <div class="create__selection-items">
+                                    <div class="filter__item-name">Order index:</div>
+                                    <input placeholder="" type="text" class="input__create">
+                                </div>
+                                <div class="create__selection-items--wide">
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-phone">Course ID:</div>
+                                        <input placeholder="" type="text" class="input__create">
+                                    </div>
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-phone">Title:</div>
+                                        <input placeholder="Khong bic" type="text" class="input__create">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="create__selection-input space__section">
+                                <div class="create__selection-items">
+                                    <div class="filter__item-name">Order index:</div>
+                                    <input placeholder="" type="text" class="input__create">
+                                </div>
+                                <div class="create__selection-items--wide">
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-phone">Course ID:</div>
+                                        <input placeholder="" type="text" class="input__create">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
