@@ -325,5 +325,8 @@ p {
 }
 
 .sub-title__action {
-    margin-right: 5rem;
+    margin-right: 3.4rem;
+}
+ul{
+    padding: 0;
 }
