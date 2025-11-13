@@ -284,11 +284,11 @@ table, th, td {
 }
 
 /*Thêm đường kẻ cho các con ở bên trái*/
-th:first-child {
+td:first-child,th:first-child{
     border-left: 1px solid var(--light-grey);
 }
 
 /*Thêm đường kẻ cho các con ở bên phải*/
-th:last-child {
+td:last-child ,th:last-child{
     border-right: 1px solid var(--light-grey);
 }
