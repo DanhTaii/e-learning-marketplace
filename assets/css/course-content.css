@@ -35,8 +35,23 @@ height: 710px;
 
 .container__title-video {
     font-size: var(--text-5xl);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 20px;
+}
+.text-xl{
+    font-size: var(--text-xl);
+}
+.container__sub-header{
+    display: flex;
+    padding:0 0 20px 20px;
+}
+.sub__header{
+    margin-right: 15px;
+
+}
+.container__sub-header > div{
+    display: flex;
+    flex-direction: column;
 }
 
 .review-box__header {
@@ -82,7 +97,9 @@ height: 710px;
     flex-direction: row;
 
 }
-
+.text-4xl{
+    font-size: var(--text-4xl);
+}
 .text-3xl {
     font-size: var(--text-3xl);
 }

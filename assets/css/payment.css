@@ -228,10 +228,13 @@
     font-weight: bold;
 }
 .price-header{
-    padding-right: 4.9rem;
+    padding-right: 6.9rem;
 }
 .content__name {
     max-width: 450px;
+}
+ul{
+    padding: 0;
 }
 .scrollable-order-list {
     border-radius: 7px;

@@ -18,8 +18,8 @@
 }
 
 .time {
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-light);
+    font-size: var(--text-xl);
+    font-weight: var(--fw-regular);
 }
 
 .text {
