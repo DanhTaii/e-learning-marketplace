@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css-admin/users-management.css">
+
 </head>
 <body>
 
@@ -138,7 +140,7 @@
                                     <td>Admin</td>
                                     <td>11/02/2025</td>
                                     <td class="action__button">
-                                        <a href="">
+                                        <a href="#user-detail">
                                             <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
                                         </a>
                                         <a href="">
@@ -157,7 +159,7 @@
                                     <td>User</td>
                                     <td>11/02/2025</td>
                                     <td class="action__button">
-                                        <a href="">
+                                        <a href="#user-detail">
                                             <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
                                         </a>
                                         <a href="">
@@ -173,6 +175,37 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="user-detail" class="modal__course-detail">
+                    <div class="modal__course-content">
+                        <div class="course__header">
+                            <div class="course__title">USER DETAIL</div>
+                            <div class="x__icon">
+                                <a href="#" class=""><i class="fa-solid fa-x"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="course-body">
+                            <div class="create__selection-input">
+                                <div class="create__selection-items">
+                                    <div class="filter__item-name">Order index:</div>
+                                    <input placeholder="" type="text" class="input__create">
+                                </div>
+                                <div class="create__selection-items--wide">
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-phone">Course ID:</div>
+                                        <input placeholder="" type="text" class="input__create">
+                                    </div>
+                                    <div class="create__selection-items">
+                                        <div class="filter__item-phone">Title:</div>
+                                        <input placeholder="" type="text" class="input__create">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

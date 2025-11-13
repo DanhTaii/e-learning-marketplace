@@ -1,4 +1,7 @@
 
+.space__section {
+    margin-top: 2rem;
+}
 /* Lớp nền mờ (ẩn ban đầu) */
 .modal__course-detail {
     display: none;
