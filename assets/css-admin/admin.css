@@ -281,6 +281,23 @@ table, th, td {
     font-weight: var(--fw-regular);
     padding: 1rem;
     border-bottom: 1px solid var(--light-grey);
+    text-align: center;
+}
+td .action__button {
+    display: flex;
+}
+.icon-action {
+    font-size: var(--text-2xl);
+    cursor: pointer;
+    padding: 0 4px;
+    padding-bottom: 0.4rem;
+    color: var(--dark-blue);
+}
+td a span:hover {
+    font-size: var(--text-2xl);
+    background: var(--dark-blue);
+    color: var(--white-color);
+    border-radius: 3px;
 }
 
 /*Thêm đường kẻ cho các con ở bên trái*/
