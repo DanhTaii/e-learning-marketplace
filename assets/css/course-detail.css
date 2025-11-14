@@ -13,7 +13,7 @@
 }
 /*CHo các tiêu đề nhỏ hơn tiêu đề chính*/
 .font__sub-title {
-    font-weight: 300;
+    font-weight: var(--fw-medium);
 }
 .style__sub-title {
     color: var(--dark-blue);
@@ -26,7 +26,7 @@
 }
 /*Cho các chữ nội dung nhỏ*/
 .style__text{
-    color: #5F6368;
+    /*color: #5F6368;*/
 }
 
 /*Section 1*/
@@ -53,7 +53,15 @@
 .section-1__breadcrumb-item{
     /*padding-left: 8px;*/
     /*padding-right: 8px;*/
+    font-size: var(--text-base);
     padding: 0 8px;
+    cursor: pointer;
+}
+.section-1__breadcrumb-item:hover{
+    background: var(--bright-blue);
+    border-radius: 0.3rem;
+    /*padding: 2rem;*/
+    /*color: var(--dark-blue);*/
 }
 .fa-angle-right{
     color: var(--white-color);
@@ -139,7 +147,7 @@
     display: flex;
 }
 .section-2__skills{
-    /*border: solid 1px #D9D9D9 ;*/
+    border: solid 1px var(--light-grey) ;
     padding: 2.4rem;
     margin-top: 30px;
     border-radius: 3px;
@@ -171,7 +179,7 @@
     border-radius: 1px;
     float: left;
     list-style-type: none;
-
+    background: var(--white-color);
 }
 .section-3__list-skill ul{
     padding: 0;
@@ -206,15 +214,15 @@
 }
 /*ul li lần 2*/
 .section-4__list-video ul{
-    padding-left: 0px;
+    padding-left: 0;
 }
+
 .section-4__list-video ul li{
-    /*color: #1C2329;*/
-    /*font-size: 1.4rem;*/
-    /*font-weight: bold;*/
-    /*padding: 10px 0;*/
     list-style-type: none;
-    margin-bottom: -1px;
+    margin: 0.5rem 0;
+}
+.section-4__list-video ul li:hover{
+    background: var(--dark-blue);
 }
 .section-4__lesson-information{
     display: flex;
@@ -222,13 +230,17 @@
     justify-items: center;
     border: solid 1px var(--dark-blue);
     border-radius: 1px;
-    background: #F4F4F4;
+    background: var(--white-color);
     padding: 16px;
     cursor: pointer;
 }
+.section-4__lesson-information:hover{
+    background: var(--dark-blue);
+    color: var(--white-color);
+}
 .section-4__lesson-time{
     text-align: right;
-    width: 15%;
+    width: 25%;
     font-weight: 300;
 }
 .section-4__lesson-title{
@@ -263,20 +275,95 @@
     font-weight: 500;
 }
 
+/*Section 7 cho phần reviews*/
+.review-box__header span {
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-bold);
+}
+.user__avatar1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+}
+
+.review-box__comment {
+    display: flex;
+    margin-top: 25px;
+    border-top: 1px solid var(--light-grey);
+    padding-top: 1rem;
+}
+
+.comment__user {
+    margin-right: 3rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.box span{
+    font-size: var(--text-lg);
+
+}
+.box {
+    margin-bottom: 0.5rem;
+}
+.review-in4 {
+    display:  flex;
+    align-items: center;
+}
+.box .review__name {
+    font-weight: var(--fw-semibold);
+}
+.box .review__time {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-light);
+    text-align: center;
+    margin-left: 1rem;
+}
+.box__date {
+    display: flex;
+    align-content: center;
+}
+
+.star {
+    margin-right: 0.5rem;
+    padding-top: 0.1rem;
+}
+
+.box__comment {
+    margin-top: 1rem;
+}
+
+.box__like-dislike {
+    display: flex;
+    flex-direction: row;
+
+}
+
 
 /*Container 2*/
 .container-2{
     margin: 20px 0;
+    /*Cho phép các thành phần bám dính trên giao diện */
+    /*Nếu thằng cha bị kéo hết thì thănng con cũng sẽ bị kéo theo*/
+    position: sticky;
+    /* Khoảng cách từ đỉnh trình duyệt đến cái CONTAINER này*/
+    /*Khi kéo trình duyệt mà đỉnh của trình duyệt cách với CONTAINER 10px
+    thì sẽ giữ khoảng cách cố định đó mà không luwost qua nó*/
+    top: 10px;
+    align-self: flex-start; /* Giữ nó ở đầu cột khi cuộn */
 }
 .grid__column-4-in-12 {
     margin-left: -8px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
 }
 .grid__column-8 {
     padding-left: 30px;
 }
 .container-2__img {
     height: 225px;
-    margin: -1.6rem -5rem;
+    margin: -1.6rem -2rem;
 }
 img{
     width: 100%;
@@ -284,23 +371,22 @@ img{
     border-top-right-radius: 7px;
 }
 .container-2__information {
-    padding: 1.6rem 5.0rem;
+    padding: 1.6rem 2.0rem;
     background: var(--white-color);
     border-radius: 7px;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 
 }
-.container-2__price span{
-    padding: 0 5px;
-}
 .container-2__price{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     padding: 2.4rem 0;
+    gap: 0.5rem;
 }
 .container-2__original-price{
-    text-line-through: single;
+    text-decoration: line-through;
     color: red;
     font-weight: bold;
 }
@@ -312,22 +398,40 @@ img{
     color: var(--dark-blue);
     font-weight: bold;
 }
-.container-2__option {
-    display: flex;
+.container-2__option-group {
     width: 100%;
-    align-items: center;
+}
+.container-2__option {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2rem;
+}
+.add__button{
+    flex: 1;
+    width: 220% !important;
+    height: 100%;
+    margin-left: 0 !important;
 }
 .container-2__icon{
-    color: var(--dark-blue);
-    font-size: 20px;
+    color: var(--white-color);
+    font-size: var(--text-2xl);
 }
-.container-2__icon-list {
-    padding: 11px;
-    cursor: pointer;
-    border: 1px solid var(--dark-blue);
-    border-radius:5px ;
+.bookmark__button {
+    width: 100%;
+    height: 100%;
+    margin-left: 0 !important;
+}
+.bookmark__button button {
+    padding: 1.2rem;
+}
+.bookmark__a {
+    width: 100%;
+    height: 100%;
 }
 .container-2__button-add {
+    flex: 1;
     margin-right: 10px;
     padding: 1.4rem;
     color: #002333;
@@ -335,7 +439,7 @@ img{
     background: #01FF85;
     font-weight: bold;
     font-size: 1.6rem;
-    width: 240px;
+    /*width: 100%;*/
     border: solid 1px var(--bright-green);
     cursor: pointer;
 }
@@ -343,7 +447,6 @@ img{
     padding: 14px;
     margin-top: 10px;
     color: var(--white-color);
-    border: solid 1px white;
     border-radius: 5px;
     background: #002333;
     font-weight: bold;

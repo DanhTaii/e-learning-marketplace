@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Course detail</title>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/course-detail.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">-->
+
 </head>
 <body>
 <div class="web">
@@ -229,9 +229,9 @@
             </div>
         </div>
     </header>
+    <div class="dark-bg"></div>
 
     <div class="web__container">
-        <div class="dark-bg"></div>
         <div class="course-detail__container grid">
             <div class="grid__row-2">
                 <div class="container-2 grid__column-4-in-12">
@@ -249,17 +249,26 @@
 
                         <div class="container-2__option-group">
                             <div class="container-2__option">
-                                <button class="container-2__button-add">
-                                    Add to cart
-                                </button>
-
-                                <div class="container-2__icon-list">
-                                    <i class="fa-solid fa-bookmark container-2__icon"></i>
-                                </div>
+<!--                                <a href="" class="turn-page">-->
+                                    <div class="header__button add__button">
+                                        <button class="container-2__button-add button__btn">
+                                            Add to cart
+                                        </button>
+                                    </div>
+<!--                                </a>-->
+                                <a href="" class="turn-page">
+                                    <div class="header__button bookmark__button">
+                                        <button class="dark-button">
+                                            <i class="fa-solid fa-bookmark container-2__icon"></i>
+                                        </button>
+                                    </div>
+                                </a>
                             </div>
-                            <button class="container-2__button-buy">
-                                Buy now
-                            </button>
+                            <a href="./payment.html">
+                                <button class="container-2__button-buy dark-button">
+                                    Buy now
+                                </button>
+                            </a>
                         </div>
 
                         <div class="container-2__note text-medium">
@@ -304,7 +313,7 @@
                     <div class="section-1 section__space">
                         <div class="section-1__breadcrumb">
 
-                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name text-li">
+                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
                                 Suy nghĩ
                             </div>
 
@@ -312,7 +321,7 @@
                                 <i class="fa-duotone fa-solid fa-angle-right"></i>
                             </div>
 
-                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name text-li">
+                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
                                 Tư duy
                             </div>
 
@@ -320,7 +329,7 @@
                                 <i class="fa-duotone fa-solid fa-angle-right "></i>
                             </div>
 
-                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name text-li">
+                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
                                 Tư duy phản biện
                             </div>
                         </div>
@@ -354,12 +363,14 @@
                                     <i class="fa-duotone fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(113.485 rating)</div>
+                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(113.485 rating)
+                            </div>
                         </div>
 
                         <div class="section-1__creator">
                             <span class="section-1__creator-title text-big font__sub-title">Created by</span>
-                            <a href="./instructor-profile.html" class="section-1__creator-name text-big turn-page">Admin</a>
+                            <a href="./instructor-profile.html"
+                               class="section-1__creator-name text-big turn-page">Admin</a>
                         </div>
 
                         <div class="section-1__updated">
@@ -375,7 +386,8 @@
                         <div class="section-2__list-container">
                             <div class="section-2__list">
                                 <ul>
-                                    <li class="text-li style__text"><i class="fa-duotone fa-solid fa-check"></i>How to speak
+                                    <li class="text-li style__text"><i class="fa-duotone fa-solid fa-check"></i>How to
+                                        speak
                                         and
                                         write German (beginner A1 level) and have fun while doing so!
                                     </li>
@@ -387,7 +399,8 @@
                             </div>
                             <div class="section-2__list">
                                 <ul>
-                                    <li class="text-li style__text"><i class="fa-duotone fa-solid fa-check"></i>Develop all
+                                    <li class="text-li style__text"><i class="fa-duotone fa-solid fa-check"></i>Develop
+                                        all
                                         the
                                         necessary language skills to finally get fluent in German
                                     </li>
@@ -437,10 +450,11 @@
                                 <li>
                                     <div class="section-4__lesson-information">
                                         <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-play"></i>
                                         </div>
                                         <div class="section-4__lesson-title text-medium">Before we begin</div>
-                                        <div class="section-4__lesson-time course-detail__context text-medium">7 lectures -
+                                        <div class="section-4__lesson-time course-detail__context text-medium">7
+                                            lectures -
                                             24min
                                         </div>
                                     </div>
@@ -448,7 +462,7 @@
                                 <li>
                                     <div class="section-4__lesson-information">
                                         <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-play"></i>
                                         </div>
                                         <div class="section-4__lesson-title text-medium">Before we begin</div>
                                         <div class="section-4__lesson-time text-medium">7 lectures - 24min</div>
@@ -457,7 +471,7 @@
                                 <li>
                                     <div class="section-4__lesson-information">
                                         <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-play"></i>
                                         </div>
                                         <div class="section-4__lesson-title text-medium">Before we begin</div>
                                         <div class="section-4__lesson-time text-medium">7 lectures - 24min</div>
@@ -465,21 +479,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-
-                    <div class="section-5__requirement section__space">
-                        <div class="style__sub-title"> Requirements</div>
-                        <ul>
-                            <li class="text-medium section-5__list-item">
-                                You don't need any prior knowledge to start this course - we will start from the beginning
-                                and gradually build up your knowledge!
-
-                            </li>
-                            <li class="text-medium section-5__list-item"> The only thing you need is motivation to learn the
-                                language and a little spare time to
-                                watch the videos and do the exercises.
-                            </li>
-                        </ul>
                     </div>
 
                     <div class="section-6__description section__space">
@@ -493,19 +492,108 @@
                             to the full starter kit of the German language for total beginners!
                         </div>
                         <br>
-                        <div class="section-6__content section-6__content-bold text-medium font__sub-title"> This course is
+                        <div class="section-6__content section-6__content-bold text-medium font__sub-title"> This course
+                            is
                             for you if:
                         </div>
                         <br>
                         <ul>
-                            <li class="text-medium font__sub-title">You are a complete beginner and don’t know any German at
+                            <li class="text-medium font__sub-title">You are a complete beginner and don’t know any
+                                German at
                                 all
                             </li>
-                            <li class="text-medium font__sub-title">You want short and straight to the point lessons</li>
-                            <li class="text-medium font__sub-title">You need a lot of exercises, repetition and motivation
+                            <li class="text-medium font__sub-title">You want short and straight to the point lessons
+                            </li>
+                            <li class="text-medium font__sub-title">You need a lot of exercises, repetition and
+                                motivation
                                 to stay on track
                             </li>
                         </ul>
+                    </div>
+
+                    <div class="section-7__review section__space">
+                        <div class="review-box__header style__sub-title">
+                            <span class="">Reviews</span>
+                        </div>
+                        <div class="review-box__comment">
+                            <div class="comment__user header__user">
+                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                     class="user__avatar1">
+                            </div>
+                            <div class="comment__box">
+                                <div class="box__name box">
+                                    <div class="review-in4">
+                                        <span class="review__name">Hoang Danh Tai</span>
+                                        <span class="review__time">5 months ago</span>
+                                    </div>
+                                </div>
+                                <div class="box__date box">
+                                <span class="star">
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                </span>
+                                </div>
+                                <div class="box__comment box">
+                                    <span class="">Learn German language with fun bite-size lessons for beginners</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-box__comment">
+                            <div class="comment__user header__user">
+                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                     class="user__avatar1">
+                            </div>
+                            <div class="comment__box">
+                                <div class="box__name box">
+                                    <div class="review-in4">
+                                        <span class="review__name">Hoang Danh Tai</span>
+                                        <span class="review__time">5 months ago</span>
+                                    </div>
+                                </div>
+                                <div class="box__date box">
+                                <span class="star">
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                </span>
+                                </div>
+                                <div class="box__comment box">
+                                    <span class="">Learn German language with fun bite-size lessons for beginners</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-box__comment">
+                            <div class="comment__user header__user">
+                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                     class="user__avatar1">
+                            </div>
+                            <div class="comment__box">
+                                <div class="box__name box">
+                                    <div class="review-in4">
+                                        <span class="review__name">Hoang Danh Tai</span>
+                                        <span class="review__time">5 months ago</span>
+                                    </div>
+                                </div>
+                                <div class="box__date box">
+                                <span class="star">
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                </span>
+                                </div>
+                                <div class="box__comment box">
+                                    <span class="">Learn German language with fun bite-size lessons for beginners</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

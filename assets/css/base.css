@@ -12,7 +12,8 @@ Mục 6: header-footer
     --dark-blue: #002333;
     --bright-green: #01FF85;
     --blue : #3722D3;
-    --light-grey: #D9D9D9;
+    --bright-blue: #264457;
+    --light-grey: #a4a4a4;
     --text-color: #000000;
     --white-color: #FFFFFF;
     --hover-color: lightgrey;
@@ -215,7 +216,9 @@ body {
     cursor: pointer;
 }
 .dark-button:hover{
-    background: #01364E;
+    /*background: #01364E;*/
+    box-shadow: 0 0 5px 3px rgba(15, 122, 176, 1);
+    /*border: 1px solid var(--dark-blue);*/
 }
 /*Thuộc thẻ div để bọc btn*/
 .header__button{
