@@ -3,7 +3,7 @@
     width: 100%;
 }
 .container__filter{
-    width: 60%;
+    width: 90%;
     display: flex;
     margin-bottom: 20px;
     align-items: center;
@@ -13,7 +13,7 @@
     height: 50px;
 }
 .filter__text span{
-    font-size: 1.8rem;
+    font-size: var(--text-xl);
     margin-left: 30px;
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@
     cursor: pointer;
     border: none;
     height: 70%;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 .btn:hover{
     background-color: var(--bright-green);
@@ -147,6 +147,7 @@
     padding: 10px;
     height: 50vh;
     overflow-y: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
 .category__list-item{
     font-size: 1.6rem;
