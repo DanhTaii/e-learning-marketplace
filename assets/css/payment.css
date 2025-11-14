@@ -223,9 +223,15 @@
     padding-right: 10px;
 
 }
-.items__price{
-    color: var(--blue);
-    font-weight: bold;
+.amount-origin{
+    font-size: var(--text-base);
+    font-weight: var(--fw-light);
+    text-decoration: line-through;
+}
+.amount-discounted{
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+    color: #3722D3;
 }
 .price-header{
     padding-right: 6.9rem;
