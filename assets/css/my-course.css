@@ -121,3 +121,27 @@ button{
     margin-top: 80rem;
 }
 
+.progress-display {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-top: 2rem;
+}
+.progress-display__crossbar {
+    position: relative;
+    width: 100%;
+    background: var(--light-grey);
+    padding: 0.2rem;
+}
+.progress-display__percentage {
+    position: absolute;
+    width: 36%;
+    background: var(--bright-green);
+    padding: 0.2rem;
+    z-index: 10;
+}
+.progress__text {
+    font-size: var(--text-base);
+    margin-top: 1rem;
+}
+
