@@ -472,6 +472,13 @@ body {
     color: var(--bright-green);
     cursor: pointer;
 }
+.header__wishlist{
+    margin-left: 25px;
+    color: var(--white-color);
+}
+.header__wishlist:hover{
+    color: var(--bright-green);
+}
 
 .header__cart{
     display: flex;
@@ -481,8 +488,10 @@ body {
     margin-left: 25px;
     position: relative;
 }
-.header__cart:hover .cart__display{
+.header__cart:hover{
     color: var(--bright-green);
+}
+.header__cart:hover .cart__display{
     display: block;
 }
 .cart__display{

@@ -136,5 +136,5 @@
     font-size: var(--text-2xl);
 }
 .quick-info__save:hover{
-    color: var(--bright-green);
+    color: red;
 }
