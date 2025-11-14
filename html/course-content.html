@@ -20,9 +20,11 @@
 <header class="web__header">
     <div class="grid">
         <div class="header__box">
-            <div class="header__logo">
-                SKILL
-            </div>
+            <a href="./home.html" class="turn-page">
+                <div class="header__logo">
+                    SKILL
+                </div>
+            </a>
             <div class="header__browse">
                 <div class="browse__text text-header">Browse</div>
                 <i class="browse__icon text-header fa-solid fa-angle-down"></i>
@@ -34,9 +36,11 @@
                                     <span class="category__title title">CLASSES BY CATEGORY</span>
                                 </div>
                                 <ul class="browse__box-category-list list">
-                                    <li class="browse__box-category-list-item text-list-item text-li">AI &
-                                        Innovation
-                                    </li>
+                                    <a href="result-search.html" class="turn-page">
+                                        <li class="browse__box-category-list-item text-list-item text-li">AI &
+                                            Innovation
+                                        </li>
+                                    </a>
                                     <li class="browse__box-category-list-item text-list-item text-li">Animation &
                                         3D
                                     </li>
@@ -117,7 +121,8 @@
                                     <li class="browse__container-box-2-list-item">
                                         <div class="item-box">
                                             <a href="" class="text-list-item text-list-item-2 text-li">Live
-                                                Sessions</a>
+                                                Sessions
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
@@ -148,9 +153,11 @@
                            placeholder="Search classes, digital product, teachers,...">
                 </div>
             </div>
-            <div class="header__class text-header">My Classes</div>
+            <div class="header__class text-header">My Courses</div>
             <div class="header__cart">
-                <i class="text-header fa-solid fa-cart-shopping"></i>
+                <a href="./cart.html" class="turn-page">
+                    <i class="text-header fa-solid fa-cart-shopping"></i>
+                </a>
                 <div class="cart__display">
                     <div class="header__cart-list header__cart-list--no-cart">
                         <img src="../assets/image/no_cart.png" alt="" class="header__cart-list-no-cart-img">
@@ -158,8 +165,14 @@
                     </div>
                 </div>
             </div>
-            <div class="header__notification">
-                <i class="notification__icon fa-solid fa-bell text-header"></i>
+            <!-- Toggle checkbox ẩn -->
+            <div class="header__notification" tabindex="0">
+                <div class="notification-wrapper">
+                    <i class="notification__icon fa-solid fa-bell text-header"></i>
+                </div>
+                <div class="notification__popup">
+                    <div class="text-header">Bạn chưa có thông báo!</div>
+                </div>
             </div>
             <div class="header__user">
                 <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
@@ -168,7 +181,8 @@
                     <div class="user__container">
                         <div class="user__profile">
                             <div class="user__profile-avatar">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                     alt=""
                                      class="user__avatar-mini">
                             </div>
                             <div class="user__profile-name">
@@ -177,51 +191,41 @@
                             <div class="user__profile-bio">
                                 <a href="" class="bio-text">Add bio</a>
                             </div>
-                            <div class="user__profile-btn">
-                                <button class="user-btn button__btn text-header">View Profile</button>
-                            </div>
+                            <a href="./profile.html" class="turn-page">
+                                <div class="user__profile-btn">
+                                    <button class="user-btn button__btn text-header">View Profile</button>
+                                </div>
+                            </a>
                         </div>
                         <div class="user__menu">
                             <ul class="user__menu-list">
                                 <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        My Classes
-                                    </div>
+                                    <a href="./my-course.html" class="turn-page">
+                                        <div class="user__menu-list-item-box text-li">
+                                            My Courses
+                                        </div>
+                                    </a>
                                 </li>
                                 <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        Account Settings
-                                    </div>
+                                    <a href="./my-wishlist.html" class="turn-page">
+                                        <div class="user__menu-list-item-box text-li">
+                                            My Wishlist
+                                        </div>
+                                    </a>
                                 </li>
                                 <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        Language: English
-                                    </div>
+                                    <a href="./order-history.html" class="turn-page">
+                                        <div class="user__menu-list-item-box text-li">
+                                            Order history
+                                        </div>
+                                    </a>
                                 </li>
                                 <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        Team Plans
-                                    </div>
-                                </li>
-                                <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        Refer a Friends
-                                    </div>
-                                </li>
-                                <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        Redeem Perks
-                                    </div>
-                                </li>
-                                <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box text-li">
-                                        Help
-                                    </div>
-                                </li>
-                                <li class="user__menu-list-item">
-                                    <div class="user__menu-list-item-box sign-out text-li">
-                                        Sign out
-                                    </div>
+                                    <a href="./default.html" class="turn-page">
+                                        <div class="user__menu-list-item-box sign-out text-li">
+                                            Sign out
+                                        </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -246,31 +250,35 @@
                 </div>
                 <div class="container__sub-header">
                     <div class="sub-header__rating-star sub__header">
-                        <div class="star"></div>
-                        <span><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i></span>
-                        <div class="number-rating"></div>
-                        <span class="text-mini">2,473 ratings</span>
+                        <div class="star1">
+                            <div class="star1__number">
+                                <span class="text-xl">4.6</span></div>
+                            <div class="star1__star-icon"><i class="fa-solid fa-star icon-star"
+                                                             style="color: #FFD43B; font-size: var(--text-sm)"></i>
+                            </div>
+                        </div>
+                        <div class="number-rating">
+                            <span class="text-sm">2,473 ratings</span></div>
                     </div>
 
                     <div class="sub-header__student-count sub__header">
-                        <div class="count"></div>
-                        <span class="text-xl">195.867</span>
-                        <div class="student"></div>
-                        <span class="text-mini">Students</span>
+                        <div class="count"> <span class="text-xl">195.867</span></div>
+
+                        <div class="student"><span class="text-sm">Students</span></div>
+
                     </div>
                     <div class="sub-header__duration sub__header">
-                        <div class="time"></div>
-                        <span class="text-xl">6 Hours</span>
-                        <div class="total text-mini"></div>
-                        <span class="text-mini">Total</span>
+                        <div class="time"> <span class="text-xl">6 Hours</span></div>
+
+                        <div class="total text-mini"><span class="text-sm">Total</span></div>
+
                     </div>
                 </div>
 
-                <div class="container__review-box">
-                    <div class="review-box__header">
-                        <span class="text-3xl bold">Reviews</span>
+                <div class="section-7__review section__space">
+                    <div class="review-box__header style__sub-title">
+                        <span class="">Reviews</span>
                     </div>
-
                     <div class="review-box__comment">
                         <div class="comment__user header__user">
                             <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
@@ -278,7 +286,10 @@
                         </div>
                         <div class="comment__box">
                             <div class="box__name box">
-                                <span class="text-lg">Hoang Danh Tai</span>
+                                <div class="review-in4">
+                                    <span class="review__name">Hoang Danh Tai</span>
+                                    <span class="review__time">5 months ago</span>
+                                </div>
                             </div>
                             <div class="box__date box">
                                 <span class="star">
@@ -288,13 +299,11 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                 </span>
-                                <span class="light text-lg">5 months ago</span>
                             </div>
                             <div class="box__comment box">
-                                <span class="text-lg">Learn German language with fun bite-size lessons for beginners</span>
+                                <span class="">Learn German language with fun bite-size lessons for beginners</span>
                             </div>
                         </div>
-
                     </div>
                     <div class="review-box__comment">
                         <div class="comment__user header__user">
@@ -303,7 +312,10 @@
                         </div>
                         <div class="comment__box">
                             <div class="box__name box">
-                                <span class="text-lg">Ho Le Minh Loc</span>
+                                <div class="review-in4">
+                                    <span class="review__name">Hoang Danh Tai</span>
+                                    <span class="review__time">5 months ago</span>
+                                </div>
                             </div>
                             <div class="box__date box">
                                 <span class="star">
@@ -313,13 +325,11 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                 </span>
-                                <span class="light text-lg">5 months ago</span>
                             </div>
                             <div class="box__comment box">
-                                <span class="text-lg">Learn German language with fun bite-size lessons for beginners</span>
+                                <span class="">Learn German language with fun bite-size lessons for beginners</span>
                             </div>
                         </div>
-
                     </div>
                     <div class="review-box__comment">
                         <div class="comment__user header__user">
@@ -328,7 +338,10 @@
                         </div>
                         <div class="comment__box">
                             <div class="box__name box">
-                                <span class="text-lg">Nguyễn Ngọc Minh</span>
+                                <div class="review-in4">
+                                    <span class="review__name">Hoang Danh Tai</span>
+                                    <span class="review__time">5 months ago</span>
+                                </div>
                             </div>
                             <div class="box__date box">
                                 <span class="star">
@@ -338,13 +351,11 @@
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                 </span>
-                                <span class="light text-lg">5 months ago</span>
                             </div>
                             <div class="box__comment box">
-                                <span class="text-lg">Learn German language with fun bite-size lessons for beginners</span>
+                                <span class="">Learn German language with fun bite-size lessons for beginners</span>
                             </div>
                         </div>
-
                     </div>
 
                 </div>

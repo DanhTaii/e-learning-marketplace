@@ -49,7 +49,7 @@
     display: flex;
     width: 100%;
     align-content: center;
-    margin-left: 2.7rem;
+    margin-left: 0.7rem;
 
 
 }
@@ -58,6 +58,7 @@
     margin-left: 1rem;
     font-weight: 700;
     width: 70%;
+    cursor: pointer;
 }
 
 .tick > input {
@@ -70,12 +71,14 @@
     width: 50%;
     color: #CC0D0D;
     font-weight: 700;
+    cursor: pointer;
 
 }
 
 .wishlisted {
     width: 70%;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .checkout__total {
@@ -290,7 +293,7 @@ p {
 }
 
 .cart-items__tick {
-    margin: 0 5rem;
+    margin: 0 3rem;
 }
 
 .cart-items__tick .tick {
@@ -317,7 +320,7 @@ p {
 .sub-title__column1 > .tick {
     transform: scale(1.5);
     margin-right: 5rem;
-    margin-left: 4.4rem;
+    margin-left: 2.2rem;
 }
 
 .sub-title__action-price-group {
@@ -328,5 +331,9 @@ p {
     margin-right: 3.4rem;
 }
 ul{
+    padding: 0;
+}
+a{
+    margin: 0;
     padding: 0;
 }
