@@ -162,6 +162,10 @@
 }
 .time-and-save__save-icon{
     font-size: var(--text-2xl);
+    color: var(--dark-blue);
+}
+.time-and-save__save-icon:hover{
+    color: red;
 }
 .product__small-advertisement{
     transition: transform 0.2s ease;
@@ -295,5 +299,5 @@
     font-size: var(--text-2xl);
 }
 .quick-info__save:hover{
-    color: var(--bright-green);
+    color: red;
 }
