@@ -52,10 +52,22 @@ a {
     text-decoration: none;
 }
 
+.student-list:hover {
+    background: var(--bright-blue);
+}
 .student-list {
     background: var(--bright-blue);
 }
 
+.menu-item__student span{
+    font-size: var(--text-xl);
+}
+.menu-item__student .fa-solid{
+    font-size: var(--text-xl);
+}
+.menu-item__student:hover {
+    background: var(--bright-blue);
+}
 .menu-item__student {
     width: 100%;
     height: 100%;
