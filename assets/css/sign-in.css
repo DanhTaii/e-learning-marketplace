@@ -53,13 +53,12 @@
 .box-1__title{
     line-height: 3.6rem;
     padding-bottom: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 38px;
     border-bottom: solid 10px var(--bright-green);
 }
 .box-1__content{
-    font-size: 2.6rem;
+    font-size: var(--text-3xl);
     line-height: 3rem;
-    margin-bottom: 107px;
 }
 
 
@@ -80,13 +79,16 @@
     margin-bottom: 40px;
 }
 .form__input{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     width: 100%;
 }
 .input-text{
     width: 100%;
     padding: 10px;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-shadow: none;
 }
 .input-3{
     margin-bottom: 3px;
@@ -112,7 +114,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 24px;
     border-bottom: solid 3px var(--hover-color);
 }
 .sign-in-option-1{
@@ -132,7 +134,7 @@
 .form__helps{
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 .help__no--account{
     display: flex;
@@ -147,7 +149,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 40px;
 }
 .socials__box{
     width: 55px;

@@ -57,6 +57,11 @@ body {
     max-width: 100%;
     margin: 0 auto;
 }
+.grid-2{
+    width: 800px;
+    max-width: 100%;
+    margin: 0 auto;
+}
 
 .grid__full-width {
     width: 100%;
@@ -192,8 +197,19 @@ body {
     font-size: var(--text-sm);
 }
 .text-paragraph p {
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     font-weight: var(--fw-bold);
+    line-height: 2rem;
+
+    /* overflow nghĩa là khi thg con chòi ra khỏi thì sẽ xử lý như nào hidden là ẩn đi */
+    /* cách 1 */
+    /* lưu ý: chỉ có những web đc hỗ trợ mới làm đc cách này */
+    overflow: hidden;
+    /* display: block để khi nào ko đc hỗ trợ thì hiện như bthuong */
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 /*chuyen giua cac trang*/
@@ -613,6 +629,7 @@ img{
     right: 0;
     cursor: default;
     z-index: 10;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 .user__profile{
@@ -644,7 +661,7 @@ img{
 .bio-text{
     font-size: 1rem;
     text-decoration: none;
-    color: var(--light-grey);
+    color: #696969;
     cursor: pointer;
 }
 .user__profile-btn{
@@ -665,7 +682,7 @@ img{
     padding: 0;
 }
 .user__menu-list-item{
-    width: 80%;
+    width: 100%;
 }
 .user__menu-list-item-box{
     width: 100%;
