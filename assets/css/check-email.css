@@ -50,8 +50,10 @@
     height: 500px;
     color: var(--white-color);
 }
-.box-1__icon{
-    font-size: 15rem;
+.img{
+    width: 150px;
+    height: 130px;
+    object-fit: inherit;
 }
 .box-2{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -65,11 +67,11 @@
     cursor: default;
 }
 .form__span{
-    margin-top: 60px;
+    margin: 15px 0 55px;
 }
 .form__input{
     width: 100%;
-    margin-top: 5px;
+    margin: 10px 0 25px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -89,7 +91,7 @@
     border-bottom: solid 2px var(--dark-blue);
 }
 .support{
-    width: 18%;
+    width: 30%;
 }
 .box-btn{
     background-color: var(--bright-green);
@@ -103,10 +105,10 @@
     justify-content: center;
 }
 .form__turn-back{
-    margin-top: 15px;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
-    padding-bottom: 87px;
+    padding-bottom: 42px;
 }
 .text__span{
     color: #808080;
@@ -114,4 +116,7 @@
 }
 .resend:hover{
     color: var(--bright-green);
+}
+.span__text{
+    color: rgb(128, 128, 128);
 }
