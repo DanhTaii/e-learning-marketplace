@@ -1,6 +1,6 @@
 
 .list-card {
-    margin-top: 2rem;
+    margin: 3rem 0;
     display: flex;
     width: 100%;
 }
@@ -29,9 +29,10 @@
     color: var(--dark-blue);
     font-size: var(--text-5xl);
     padding: 2rem;
+    transition: transform 0.2s ease;
 }
 .card-information:hover {
-
+    transform: translateY(-5px);
 }
 .card-content__number {
     margin-top: 2rem;
