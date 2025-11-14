@@ -220,25 +220,31 @@ p {
 }
 
 .price-icon {
-    font-size: 1.6rem;
+    font-size: var(--text-lg);
 }
 
-.price {
-    font-size: 1.5rem;
-    font-weight: bold;
+.price-discounted {
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
     color: #3722D3;
+}
+.price-origin{
+    font-size: var(--text-base);
+    font-weight: var(--fw-light);
+    text-decoration: line-through;
 }
 
 
 .total__label {
     margin-bottom: 0.7rem;
-
+    display: flex;
 }
-
-.total__amount {
-    color: var(--blue);
-    font-weight: 700;
-    font-size: 1.9rem;
+.label__name{
+    margin-right: 1rem;
+}
+.total__price{
+    display: flex;
+    flex-direction: column;
 }
 
 .header__button {

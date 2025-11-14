@@ -16,7 +16,7 @@ p {
 }
 
 .box__row1-header {
-    margin-bottom: 35px;
+    margin: 35px 0;
 }
 .box__row2-header{
     display: flex;
@@ -136,10 +136,16 @@ p {
     padding-right: 10px;
 
 }
+.amount-origin{
+font-size: var(--text-base);
+font-weight: var(--fw-light);
+text-decoration: line-through;
 
-.items__price {
-    color: var(--blue);
-    font-weight: bold;
+}
+.amount-discounted{
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+    color: #3722D3;
 }
 
 .price-header {
@@ -166,4 +172,9 @@ p {
 }
 ul{
     padding: 0;
+}
+/*CSS cho phan receipt trong order-history co nut back ve*/
+.icon-return{
+    padding: 0;
+
 }
