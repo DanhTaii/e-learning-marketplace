@@ -1,15 +1,15 @@
 
 .style__sub-title {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     color: var(--dark-blue);
-    font-weight: 600;
+    font-weight: var(--fw-semibold);
 }
 .style__title {
-    font-size: var(--text-xl);
-    font-weight: 900;
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
     color: var(--dark-blue);
     line-height: 3.6rem;
-    margin-bottom: 1rem;
+    /*margin-bottom: 3rem;*/
 }
 
 .overall{
@@ -17,14 +17,13 @@
 }
 
 .profile-block {
-    /*2 số cuối trong mã màu là độ đậm 50%*/
-    /*border: solid 1px #00233380;*/
     padding: 3rem;
     border-radius: 4px;
     display: flex;
     align-items: center;
     flex-direction: column;
     background: var(--white-color);
+    border: solid 1px var(--light-grey);
 }
 .profile-block__title {
     font-size: var(--text-2xl);
@@ -64,35 +63,81 @@
 }
 /*profile menu*/
 .profile-menu {
-    /*2 số cuối trong mã màu là độ đậm 50%*/
-    border: solid 1px #00233380;
-    padding: 3rem;
-    border-radius: 4px;
+    /*padding: 2rem;*/
+    /*border-radius: 4px;*/
     margin-top: 3rem;
+    background: var(--white-color);
+    border: solid 1px var(--light-grey);
 }
 .profile-menu ul {
     padding-left: 0;
     /*margin-top: -2rem;*/
     /*margin-bottom: -2rem;*/
 }
-.profile-menu li {
-    padding-bottom: 4rem;
-    list-style-type: none;
-    font-weight: 500;
+a {
+    text-decoration: none;
+    color: var(--dark-blue);
 }
-.profile-menu__item:last-child {
-    padding-bottom: 0;
+.profile-menu li {
+    /*padding-bottom: 4rem;*/
+    list-style-type: none;
+    /*font-weight: 500;*/
+}
+.account__profile {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+}
+.profile-menu__item {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    padding: 1rem 3rem;
+    cursor: pointer;
+}
+.profile-menu__item:hover {
+    /*padding-bottom: 4rem;*/
+    list-style-type: none;
+    background: var(--dark-blue);
+    color: var(--white-color);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    padding:  1rem 3rem;
+}
+.profile-menu li:last-child {
+    /*padding-bottom: 0;*/
 }
 
 /*information*/
 .information__container {
     margin-top: 6rem;
 }
+.personal-detail__title {
+    /*background: var(--white-color);*/
+    text-align: center;
+    /*margin-bottom: -1rem;*/
+    border-radius: 0.3rem;
+    border-bottom: 1px solid var(--light-grey);
+    margin-right: -15rem;
+    margin-left: -15rem;
+    margin-top: -3rem;
+    margin-bottom: 3rem;
+}
+.text__title{
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
+    color: var(--dark-blue);
+    line-height: 3.6rem;
+    padding: 1rem;
+}
 .personal-detail__block {
     /*border: solid 1px var(--light-grey);*/
-    padding: 4rem;
+    border: solid 1px #AEABABFF;
+    /*AEABABFF*/
+    padding: 3rem 15rem;
     border-radius: 4px;
     background: var(--white-color);
+    width: 100%;
 }
 /*Hàng 1 của khối Personal detial*/
 .personal-detail__column-1 {
@@ -102,15 +147,18 @@
 .personal-detail__row-2 {
     margin-top: 2.5rem;
 }
-.personal-detail__email input {
-    width: 80rem;
+/*.personal-detail__email input {*/
+/*    width: 100%;*/
+/*}*/
+.personal-detail__column-items {
+
 }
 /*Tùy chỉnh toàn input*/
 .personal-detail__input{
     display: flex;
     align-items: center;
     margin-top: 10px;
-    width: 350px;
+    width: 100%;
     height: 4rem;
 }
 input {
@@ -120,15 +168,20 @@ input {
     height: 100%;
     padding-left: 1rem;
     font-size: var(--text-sm);
-    font-weight: 300;
+    font-weight: var(--fw-regular);
+}
+input:hover {
+    background: var(--bright-blue);
+    border-radius: 0.4rem;
 }
 /*Security*/
-.security__title {
-    margin-top: 3rem;
-}
 
 .choice {
-    margin-bottom: 2rem;
-    width: 200px;
+    margin: 2rem;
+    width: 100px;
     float: right;
+}
+hr {
+    margin-right: -15rem;
+    margin-left: -15rem;
 }
