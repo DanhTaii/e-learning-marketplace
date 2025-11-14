@@ -55,7 +55,8 @@ height: 710px;
 }
 
 .review-box__header {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
+
 }
 
 .user__avatar1 {
@@ -65,12 +66,12 @@ height: 710px;
     border: none;
 }
 
-.review-box__comment {
-    display: flex;
-    margin-top: 25px;
-    border-bottom: 1px solid var(--light-grey);
-    padding-bottom: 1rem;
-}
+/*.review-box__comment {*/
+/*    display: flex;*/
+/*    margin-top: 25px;*/
+/*    border-bottom: 1px solid var(--light-grey);*/
+/*    padding-bottom: 1rem;*/
+/*}*/
 
 .comment__user {
     margin-right: 3rem;
@@ -87,9 +88,14 @@ height: 710px;
     align-content: center;
 }
 
-.star {
+.star1 {
     margin-right: 0.5rem;
-    padding-top: 0.1rem;
+
+    display: flex;
+    align-items: center;
+}
+.star1__star-icon{
+    margin-left: 2px;
 }
 
 .box__like-dislike {
@@ -105,6 +111,13 @@ height: 710px;
 }
 
 .text-lg {
+    font-size: var(--text-lg);
+}
+.text-sm{
+    font-size: var(--text-sm);
+    font-weight: var(--fw-light);
+}
+.icon-star{
     font-size: var(--text-xl);
 }
 
@@ -132,6 +145,9 @@ height: 710px;
 .box__column1 {
     margin-right: 15px;
 }
+.column1__tick{
+    padding-top: 1rem;
+}
 
 .tick {
     transform: scale(1.2);
@@ -152,4 +168,61 @@ height: 710px;
 
 .column2__header {
     margin-bottom: 1rem;
+}
+.review-box__header span {
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-bold);
+}
+.user__avatar1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+}
+
+.review-box__comment {
+    display: flex;
+    margin-top: 25px;
+    border-top: 1px solid var(--light-grey);
+    padding-top: 3rem;
+}
+
+.comment__user {
+    margin-right: 3rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.box span{
+    font-size: var(--text-lg);
+
+}
+.box {
+    margin-bottom: 0.5rem;
+}
+.review-in4 {
+    display:  flex;
+    align-items: center;
+}
+.box .review__name {
+    font-weight: var(--fw-semibold);
+}
+.box .review__time {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-light);
+    text-align: center;
+    margin-left: 1rem;
+}
+.box__date {
+    display: flex;
+    align-content: center;
+}
+
+.star {
+    margin-right: 0.5rem;
+    padding-top: 0.1rem;
+}
+
+.box__comment {
+    margin-top: 1rem;
 }

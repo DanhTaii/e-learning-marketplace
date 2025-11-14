@@ -44,21 +44,11 @@
     border: 1px solid var(--light-grey);
     align-items: center;
 }
-
-.btn-receipt {
-    background-color: var(--bright-green);
-    padding: 5px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 40px;
-    border-radius: 5px;
-    color: var(--dark-blue);
+.receipt-box{
     width: 100%;
-    border: none;
+    height: 100%;
 }
 
-.receipt {
-    font-size: var(--text-lg);
-    font-weight: var(--fw-bold);
+.btn-receipt {
+    padding: 5px 4rem;
 }

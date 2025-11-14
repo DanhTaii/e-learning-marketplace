@@ -15,9 +15,11 @@
     <header class="web__header">
         <div class="grid">
             <div class="header__box">
-                <div class="header__logo">
-                    SKILL
-                </div>
+                <a href="./home.html" class="turn-page">
+                    <div class="header__logo">
+                        SKILL
+                    </div>
+                </a>
                 <div class="header__browse">
                     <div class="browse__text text-header">Browse</div>
                     <i class="browse__icon text-header fa-solid fa-angle-down"></i>
@@ -29,9 +31,11 @@
                                         <span class="category__title title">CLASSES BY CATEGORY</span>
                                     </div>
                                     <ul class="browse__box-category-list list">
-                                        <li class="browse__box-category-list-item text-list-item text-li">AI &
-                                            Innovation
-                                        </li>
+                                        <a href="result-search.html" class="turn-page">
+                                            <li class="browse__box-category-list-item text-list-item text-li">AI &
+                                                Innovation
+                                            </li>
+                                        </a>
                                         <li class="browse__box-category-list-item text-list-item text-li">Animation &
                                             3D
                                         </li>
@@ -112,7 +116,8 @@
                                         <li class="browse__container-box-2-list-item">
                                             <div class="item-box">
                                                 <a href="" class="text-list-item text-list-item-2 text-li">Live
-                                                    Sessions</a>
+                                                    Sessions
+                                                </a>
                                             </div>
                                         </li>
                                     </ul>
@@ -143,9 +148,11 @@
                                placeholder="Search classes, digital product, teachers,...">
                     </div>
                 </div>
-                <div class="header__class text-header">My Classes</div>
+                <div class="header__class text-header">My Courses</div>
                 <div class="header__cart">
-                    <i class="text-header fa-solid fa-cart-shopping"></i>
+                    <a href="./cart.html" class="turn-page">
+                        <i class="text-header fa-solid fa-cart-shopping"></i>
+                    </a>
                     <div class="cart__display">
                         <div class="header__cart-list header__cart-list--no-cart">
                             <img src="../assets/image/no_cart.png" alt="" class="header__cart-list-no-cart-img">
@@ -153,8 +160,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="header__notification">
-                    <i class="notification__icon fa-solid fa-bell text-header"></i>
+                <!-- Toggle checkbox ẩn -->
+                <div class="header__notification" tabindex="0">
+                    <div class="notification-wrapper">
+                        <i class="notification__icon fa-solid fa-bell text-header"></i>
+                    </div>
+                    <div class="notification__popup">
+                        <div class="text-header">Bạn chưa có thông báo!</div>
+                    </div>
                 </div>
                 <div class="header__user">
                     <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
@@ -163,7 +176,8 @@
                         <div class="user__container">
                             <div class="user__profile">
                                 <div class="user__profile-avatar">
-                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                         alt=""
                                          class="user__avatar-mini">
                                 </div>
                                 <div class="user__profile-name">
@@ -172,51 +186,41 @@
                                 <div class="user__profile-bio">
                                     <a href="" class="bio-text">Add bio</a>
                                 </div>
-                                <div class="user__profile-btn">
-                                    <button class="user-btn button__btn text-header">View Profile</button>
-                                </div>
+                                <a href="./profile.html" class="turn-page">
+                                    <div class="user__profile-btn">
+                                        <button class="user-btn button__btn text-header">View Profile</button>
+                                    </div>
+                                </a>
                             </div>
                             <div class="user__menu">
                                 <ul class="user__menu-list">
                                     <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            My Classes
-                                        </div>
+                                        <a href="./my-course.html" class="turn-page">
+                                            <div class="user__menu-list-item-box text-li">
+                                                My Courses
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            Account Settings
-                                        </div>
+                                        <a href="./my-wishlist.html" class="turn-page">
+                                            <div class="user__menu-list-item-box text-li">
+                                                My Wishlist
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            Language: English
-                                        </div>
+                                        <a href="./order-history.html" class="turn-page">
+                                            <div class="user__menu-list-item-box text-li">
+                                                Order history
+                                            </div>
+                                        </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            Team Plans
-                                        </div>
-                                    </li>
-                                    <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            Refer a Friends
-                                        </div>
-                                    </li>
-                                    <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            Redeem Perks
-                                        </div>
-                                    </li>
-                                    <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box text-li">
-                                            Help
-                                        </div>
-                                    </li>
-                                    <li class="user__menu-list-item">
-                                        <div class="user__menu-list-item-box sign-out text-li">
-                                            Sign out
-                                        </div>
+                                        <a href="./default.html" class="turn-page">
+                                            <div class="user__menu-list-item-box sign-out text-li">
+                                                Sign out
+                                            </div>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
