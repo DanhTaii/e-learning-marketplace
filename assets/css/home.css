@@ -218,10 +218,10 @@
     display: flex;
 }
 .rate__icon i{
-    font-weight: 500;
     margin-right: 3px;
     position: relative;
     top: 2px;
+    color: var(--yellow-color);
 }
 .rate__number{
     display: flex;
@@ -281,11 +281,12 @@
 }
 .price__new{
     font-size: var(--text-3xl);
+    color: var(--blue);
 }
 .price__old{
     font-size: 1.6rem;
     margin-left: 20px;
-    color: #696969;
+    color: red;
     text-decoration: line-through;
 }
 .quick-info__save{
