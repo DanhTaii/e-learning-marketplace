@@ -19,7 +19,7 @@ ul{
 }
 
 .box__row1-header {
-    margin: 35px 0;
+    margin-bottom: 3.5rem;
 }
 .box__row2-header{
     display: flex;

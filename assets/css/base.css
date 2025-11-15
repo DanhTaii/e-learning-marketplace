@@ -234,7 +234,7 @@ body {
 }
 .dark-button:hover{
     /*background: #01364E;*/
-    box-shadow: 0 0 5px 3px rgba(15, 122, 176, 1);
+    box-shadow: 0 0 5px 1px rgba(15, 122, 176, 1);
     /*border: 1px solid var(--dark-blue);*/
 }
 /*Thuộc thẻ div để bọc btn*/

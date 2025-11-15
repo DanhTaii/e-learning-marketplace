@@ -9,6 +9,9 @@
     background-color: var(--dark-blue);
     width: 100%;
     border-radius: 7px;
+    position: sticky;
+    top:0;
+    align-self: flex-start;
 }
 
 .info {
@@ -127,6 +130,7 @@
 .box__row0 {
     display: flex;
     justify-content: flex-end;
+    cursor: pointer;
 }
 
 .box__row2 {
