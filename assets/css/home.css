@@ -234,6 +234,7 @@
     position: relative;
     top: 2px;
     color: var(--yellow-color);
+    font-weight: 900;
 }
 .rate__number{
     display: flex;
@@ -294,6 +295,7 @@
 .price__new{
     font-size: var(--text-3xl);
     color: var(--blue);
+    font-weight: var(--fw-bold);
 }
 .price__old{
     font-size: 1.6rem;
