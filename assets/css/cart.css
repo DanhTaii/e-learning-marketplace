@@ -57,7 +57,7 @@
 .choose {
     margin-left: 1rem;
     font-weight: 700;
-    width: 70%;
+    width: 60%;
     cursor: pointer;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .remove {
-    width: 50%;
+    width: 30%;
     color: #CC0D0D;
     font-weight: 700;
     cursor: pointer;
@@ -89,10 +89,12 @@
 }
 
 .total_title {
+    padding-top: 10px;
     height: 100%;
-    width: 55%;
+    width: 50%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 
 }
 
@@ -231,6 +233,7 @@ p {
 .price-origin{
     font-size: var(--text-base);
     font-weight: var(--fw-light);
+    color: red;
     text-decoration: line-through;
 }
 
@@ -238,6 +241,7 @@ p {
 .total__label {
     margin-bottom: 0.7rem;
     display: flex;
+    align-items: center;
 }
 .label__name{
     margin-right: 1rem;
@@ -290,7 +294,7 @@ p {
 
 .scrollable-order-list {
     border-radius: 7px;
-    max-height: 425px;
+    max-height: 445px;
     overflow-y: auto;
     padding-right: 10px;
     padding-top: 10px;
@@ -335,6 +339,9 @@ p {
 
 .sub-title__action {
     margin-right: 3.4rem;
+}
+.sub-title__price{
+    margin-right: 1rem;
 }
 ul{
     padding: 0;

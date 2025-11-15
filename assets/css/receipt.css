@@ -1,15 +1,18 @@
 p {
     margin: 0;
 }
-
-.payment-succes-layout {
+ul{
+     padding: 0;
+ }
+/*Phan box chua tat ca*/
+.payment-success-layout {
     background-color: var(--white-color);
     border: 1px solid var(--light-grey);
     margin: 60px 0;
     padding: 40px 30px;
     border-radius: 7px;
 }
-
+/*Phan box chua cac header*/
 .header-box {
     border-bottom: 1px solid var(--light-grey);
     padding: 40px 30px;
@@ -31,7 +34,7 @@ p {
     font-size: var(--text-3xl);
     text-align: center;
 }
-
+/*phan box chua summary*/
 .summary-box {
     padding: 40px 30px;
     display: flex;
@@ -59,7 +62,7 @@ p {
     font-weight: 600;
     font-size: var(--text-2xl);
 }
-
+/*Nut home va nut my class*/
 .button-box {
     display: flex;
     justify-content: center;
@@ -78,7 +81,7 @@ p {
     width: 100%;
 
 }
-
+/*Phan sub title o khung order detail*/
 .title__2 {
     display: flex;
     justify-content: space-between;
@@ -96,7 +99,24 @@ p {
     font-size: 2rem;
     font-weight: 550;
 }
-
+.price-header {
+     display: block;
+     width: 150px;
+     flex-shrink: 0;
+     text-align: right;
+     padding-right: 4.5rem;
+ }
+/*Khung chua cac items*/
+.scrollable-order-list {
+    border-radius: 7px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color: var(--white-color);
+    margin-bottom: 30px;
+    border-top: 1px solid var(--light-grey);
+}
 .order-items {
     padding: 15px;
     display: flex;
@@ -140,6 +160,7 @@ p {
 font-size: var(--text-base);
 font-weight: var(--fw-light);
 text-decoration: line-through;
+    color: red;
 
 }
 .amount-discounted{
@@ -148,31 +169,12 @@ text-decoration: line-through;
     color: #3722D3;
 }
 
-.price-header {
-    display: block;
-    width: 150px;
-    flex-shrink: 0;
-    text-align: right;
-    padding-right: 4.5rem;
-}
-
 .content__name {
     max-width: 450px;
 }
 
-.scrollable-order-list {
-    border-radius: 7px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 10px;
-    padding-top: 10px;
-    background-color: var(--white-color);
-    margin-bottom: 30px;
-    border-top: 1px solid var(--light-grey);
-}
-ul{
-    padding: 0;
-}
+
+
 /*CSS cho phan receipt trong order-history co nut back ve*/
 .icon-return{
     padding: 0;
