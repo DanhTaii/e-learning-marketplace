@@ -1,6 +1,6 @@
 
 /* Lớp nền mờ (ẩn ban đầu) */
-.modal-backdrop {
+.modal__course-detail {
     display: none;
     /* Cố định không di chuyển theo scroll, tức là tạo ra 1 màn lớn nằm trên màn hiện tại*/
     position: fixed;
@@ -23,28 +23,47 @@
 }
 
 /* Nội dung của modal */
-.modal-content {
+.modal__course-content {
     background: white;
-    padding: 20px;
-    border-radius: 7px;
-    min-width: 40rem;
-    min-height: 40rem;
+    /*padding: 20px;*/
+    border-radius: 0.7rem;
+    min-width: 70rem;
+    min-height: 50rem;
     text-align: center;
     color: #333;
 }
+.course__header {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    width: 100%;
 
-.modal-close-btn {
-    /*display: inline-block;*/
-    background: #2C67A9; /* Màu dark-blue của bạn */
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 15px;
+    padding: 1rem;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+}
+.course__title {
+    font-size: var(--text-2xl);
+    line-height: 3rem;
+    font-weight: var(--fw-semibold);
+}
+.x__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fa-x {
+    /*font-weight: var(--fw-medium);*/
+    font-size: var(--text-2xl);
+}
+
+.course-body {
+    padding: 2rem;
 }
 
 /* PHẦN QUAN TRỌNG NHẤT */
 /* Khi modal này là :target (tức là URL là #my-modal) nó sẽ hiện ra */
-.modal-backdrop:target {
+.modal__course-detail:target {
     display: flex; /* Hiện ra */
 }
