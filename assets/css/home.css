@@ -47,7 +47,7 @@
     margin-left: 80px;
 }
 .text-icon{
-    font-size: 2.4rem;
+    font-size: var(--text-3xl);
 }
 .list-item__text{
     font-size: var(--text-2xl);
@@ -72,14 +72,26 @@
     display: flex;
 }
 .stats__box{
-    background-color: var(--bright-green);
+    background: var(--bright-green);
+    color: var(--dark-blue);
     padding: 20px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 40px;
     border-radius: 5px;
-    color: var(--dark-blue);
+}
+.stats__box-1{
+    background: #D1FAE5;
+    color: #065F46;
+}
+.stats__box-2{
+    background: #ADC2E2;
+    color: #2C67A9;
+}
+.stats__box-3{
+    background: #FFE1B2;
+    color: #8B4309;
 }
 .stats__number{
     font-weight: 700;

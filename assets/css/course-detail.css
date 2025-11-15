@@ -131,6 +131,9 @@
 .section-1__creator-title{
     color: var(--white-color);
 }
+.section-1__creator-name:hover{
+    text-decoration: underline;
+}
 .section-1__creator-name{
     color: var(--bright-green);
     font-weight: bold;

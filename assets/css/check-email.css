@@ -67,11 +67,11 @@
     cursor: default;
 }
 .form__span{
-    margin: 15px 0 55px;
+    margin: 2rem 0 4rem;
 }
 .form__input{
     width: 100%;
-    margin: 10px 0 25px;
+    margin: 10px 0 4rem;
     display: flex;
     justify-content: space-evenly;
 }
@@ -88,7 +88,7 @@
     justify-content: center;
     margin-top: 10px;
     padding-bottom: 30px;
-    border-bottom: solid 2px var(--dark-blue);
+    border-bottom: solid 1px var(--light-grey);
 }
 .support{
     width: 30%;
@@ -108,14 +108,18 @@
     margin-top: 25px;
     display: flex;
     justify-content: center;
-    padding-bottom: 42px;
+    padding-bottom: 35px;
 }
 .text__span{
     color: #808080;
     margin-right: 10px;
 }
+.resend{
+    color: var(--blue);
+    font-weight: var(--fw-semibold);
+}
 .resend:hover{
-    color: var(--bright-green);
+    text-decoration: underline;
 }
 .span__text{
     color: rgb(128, 128, 128);

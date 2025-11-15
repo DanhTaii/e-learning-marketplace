@@ -35,6 +35,7 @@
     border: solid 1px #1C232980;
     border-radius: 15px;
     margin-right: 20px;
+    background: var(--white-color);
 }
 
 .product__small-advertisement{
