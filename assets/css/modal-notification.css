@@ -13,12 +13,49 @@
     align-items: center;
     justify-content: center;
 }
+/*Modal header*/
+.modal-header{
+    display: flex;
+    /*justify-content: space-between;*/
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+.header-content{
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-semibold);
+}
 
+.body-title {
+    font-size: var(--text-3xl);
+    color: var(--bright-green);
+    font-weight: var(--fw-semibold);
+}
+.fa-check {
+    font-size: var(--text-5xl);
+    color: var(--bright-green);
+    margin-top: 2rem;
+}
+.body-content{
+    font-size: var(--text-lg);
+    margin-top: 2rem;
+}
+.body-selection {
+    display: flex;
+    margin-top: 2rem;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+}
+.body-selection__item {
+    width: 40%;
+    height: 100%;
+}
 /* Nội dung của modal */
 .modal-content {
     background: white;
     padding: 20px;
-    border-radius: 7px;
+    border-radius: 3px;
     min-width: 300px;
     text-align: center;
     color: #333;
