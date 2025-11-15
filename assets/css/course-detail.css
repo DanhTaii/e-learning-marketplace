@@ -293,12 +293,16 @@
 .section-6__content-bold{
     font-weight: 500;
 }
+.section-6__content {
+    line-height: 2.3rem;
+}
 
 /*Section 7 cho phần reviews*/
 .review-box__header span {
     font-size: var(--text-3xl);
     font-weight: var(--fw-bold);
 }
+
 .user__avatar1 {
     width: 50px;
     height: 50px;
@@ -310,7 +314,7 @@
     display: flex;
     margin-top: 25px;
     border-top: 1px solid var(--light-grey);
-    padding-top: 1rem;
+    padding-top: 3rem;
 }
 
 .comment__user {
@@ -319,46 +323,46 @@
     align-items: flex-start;
 }
 
-.box span{
+.box span {
     font-size: var(--text-lg);
 
 }
+
 .box {
     margin-bottom: 0.5rem;
 }
+
 .review-in4 {
-    display:  flex;
+    display: flex;
     align-items: center;
 }
+
 .box .review__name {
     font-weight: var(--fw-semibold);
 }
+
 .box .review__time {
     font-size: var(--text-sm);
     font-weight: var(--fw-light);
     text-align: center;
     margin-left: 1rem;
 }
+
 .box__date {
     display: flex;
     align-content: center;
 }
 
 .star {
+    display: flex;
+    align-items: center;
     margin-right: 0.5rem;
     padding-top: 0.1rem;
 }
-
-.box__comment {
-    margin-top: 1rem;
-}
-
-.box__like-dislike {
+.star-icon{
     display: flex;
-    flex-direction: row;
-
+    margin-left: 5px;
 }
-
 
 /*Container 2*/
 .container-2{
@@ -399,10 +403,11 @@ img{
 }
 .container-2__price{
     display: flex;
+    /*Sẽ cho nội dung xuống dưới nếu như không còn chỗ*/
     flex-wrap: wrap;
     align-items: center;
     padding: 2.4rem 0;
-    gap: 0.5rem;
+    gap: 2rem;
 }
 .container-2__original-price{
     text-decoration: line-through;
@@ -414,7 +419,7 @@ img{
 }
 .container-2__sold-price{
     font-size: 2.4rem;
-    color: var(--dark-blue);
+    color: var(--blue);
     font-weight: bold;
 }
 .container-2__option-group {
