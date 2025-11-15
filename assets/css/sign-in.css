@@ -116,7 +116,7 @@
     align-items: center;
     margin-top: 10px;
     padding-bottom: 24px;
-    border-bottom: solid 3px var(--hover-color);
+    border-bottom: solid 1px var(--hover-color);
 }
 .sign-in-option-1{
     display: flex;
@@ -143,8 +143,12 @@
 .help__no--account a{
     margin-left: 10px;
 }
+.text-fix:hover{
+    text-decoration: underline;
+}
 .text-fix{
-    color: var(--bright-green);
+    color: var(--blue);
+    font-weight: var(--fw-semibold);
 }
 .form__socials{
     display: flex;
