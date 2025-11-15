@@ -119,14 +119,14 @@
     margin-right: 16px;
     flex-shrink: 0;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(134, 134, 134, 0.5);
+
 }
 
 .image {
     border-radius: 0.5rem;
     width: 100%;
     height: 100%;
-    object-fit: inherit;
+    object-fit: cover;
     object-position: center;
 
 }
