@@ -43,6 +43,7 @@
     background: var(--dark-blue);
     padding: 20px;
     padding-left: 0;
+    padding: 0 2rem 2rem 0;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 }
@@ -71,32 +72,38 @@
     font-weight: bold;
 }
 .section-1__main-title{
-    padding-top: 38px;
+    padding-top: 3rem;
     color: var(--white-color);
     line-height: 4rem;
 }
 .section-1__sub-title{
     color: var(--white-color);
-    font-weight: 300;
-    padding-top: 30px;
+    font-weight: var(--fw-light);
+    padding-top: 2rem;
+    line-height: 3rem;
 }
 
 .section-1__rating{
     display: flex;
     margin-left: -8px;
     margin-right: -8px;
-    margin-top: 30px;
+    margin-top: 2rem;
     padding-left: -8px;
 }
 .section-1__rating-item{
     padding: 8px;
     margin:0 8px;
+
 }
 
 .section-1__rating-star{
     display: flex;
 }
+.section-1__rating-star-item i{
+    font-size: var(--text-base);
+}
 .section-1__rating-star-item{
+    font-size: var(--text-base);
     padding: 0 4px;
     color: #F8D706;
 }
@@ -118,7 +125,7 @@
     font-weight: bold;
 }
 .section-1__creator{
-    margin-top: 18px;
+    margin-top: 2rem;
     display: flex;
 }
 .section-1__creator-title{
@@ -131,7 +138,7 @@
 }
 .section-1__updated{
     margin-left: -8px;
-    margin-top: 14px;
+    margin-top: 2rem;
 }
 .section-1__updated-item .fa-calendar-days{
     font-size: 1.6rem;
@@ -160,6 +167,15 @@
 .section-2__list li{
     padding: 0.8rem 1.2rem; /* gọn hơn nhiều */
     list-style-type: none;
+}
+.li-skill__container {
+    font-size: var(--text-3xl);
+}
+.li-skill__container {
+    display: flex;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    gap: 1rem;
 }
 /*Section3*/
 .section-3__content{
@@ -457,6 +473,7 @@ img{
     display: flex;
     justify-content: center;
     padding: 28px 0;
+    font-size: var(--text-2xl);
 }
 .container-2__summary-information ul li{
     padding: 13px 0;

@@ -170,10 +170,10 @@ input {
     font-size: var(--text-base);
     font-weight: var(--fw-regular);
 }
-input:hover {
-    background: #E3E9EB;
-    border-radius: 0.4rem;
-}
+/*input:hover {*/
+/*    background: #E3E9EB;*/
+/*    border-radius: 0.4rem;*/
+/*}*/
 .choice {
     margin: 2rem;
     width: 100px;
