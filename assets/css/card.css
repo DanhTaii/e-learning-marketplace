@@ -141,3 +141,38 @@
 .quick-info__save:hover{
     color: red;
 }
+.home-product-item__favourite{
+    position: absolute;
+    top: 10px;
+    left: 0;
+    z-index: 100;
+    color: var(--blue);
+    background-color: currentColor;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    padding-right: 4px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.home-product-item__favourite::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    border-top: 3px solid currentColor;
+    border-left: 3px solid transparent;
+    filter: brightness(60%);
+}
+
+.home-product-item__favourite span{
+    color: var(--white-color);
+    font-size: var(--text-sm);
+}
+
+.home-product-item__favourite i {
+    color: var(--white-color);
+    font-size: 0.9rem;
+    margin: 0 2px 0 5px;
+}
