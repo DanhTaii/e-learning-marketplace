@@ -55,7 +55,7 @@
 
 .container__title-video {
     font-size: var(--text-5xl);
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     padding: 20px;
 }
 /*phan box chua rating,student,duration*/
@@ -196,7 +196,8 @@
 }
 
 .box__content:hover {
-    background: var(--light-grey);
+    background: var(--dark-blue);
+    color: var(--white-color);
 }
 
 .column2__header {
