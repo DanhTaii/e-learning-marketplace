@@ -30,11 +30,24 @@
     color: var(--bright-green);
     font-weight: var(--fw-semibold);
 }
+
+.body-title-black {
+    font-size: var(--text-3xl);
+    color: black;
+    font-weight: var(--fw-semibold);
+}
 .check-popup {
     font-size: var(--text-5xl);
     color: var(--bright-green);
     margin-top: 2rem;
 }
+
+.check-popup-black {
+    font-size: var(--text-5xl);
+    color: black;
+    margin-top: 2rem;
+}
+
 .body-content{
     font-size: var(--text-lg);
     margin-top: 2rem;
@@ -60,6 +73,7 @@
     min-height: 40%;
     text-align: center;
     color: #333;
+    align-content: center;
 }
 
 .modal-close-btn {

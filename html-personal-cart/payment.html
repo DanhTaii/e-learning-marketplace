@@ -18,6 +18,7 @@
 
 
     <link rel="stylesheet" href="./assets/fonts/static/." as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="../assets/css/modal-notification.css">
 </head>
 <body>
 <div class="web">
@@ -264,7 +265,7 @@
                                     <input type="text" class="input-style" name="name-card" placeholder="Nhập tên thẻ">
                                 </div>
                             </div>
-                            <a href="" class="turn-page">
+                            <a href="#popup__add-payment-method-success" class="turn-page">
                                 <div class="box__row4 header__button">
                                     <button type="submit" class="row4__btn button__btn">Thêm phương thức</button>
                                 </div>
@@ -393,7 +394,7 @@
 
 
                                 </div>
-                                <a href="./receipt.html" class="turn-page">
+                                <a href="#popup__add-payment-confirm-black" class="turn-page">
                                     <div class="invoice__pay-btn header__button index-btn">
                                         <button class="button__btn pay-btn"><i
                                                 class="fa-solid fa-bag-shopping shop-icon"
@@ -416,7 +417,56 @@
             </div>
 
         </div>
+        <div id="popup__add-payment-confirm-black" class="modal-backdrop">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content modal-title">THÔNG BÁO</div>
+                </div>
+                <div class="course-body">
+                    <div class="body-title-black">BẠN CÓ XÁC NHẬN THANH TOÁN?</div>
+                    <div class="body-icon"><i class="fa-solid fa-receipt check-popup-black"></i></div>
+                    <div class="body-content">Bạn có chắc chắn muốn thanh toán? Hành động này không thể hoàn tác </div>
+                    <div class="body-selection">
+                        <div class="body-selection__item x__icon">
+                            <a href="#" class="">
+                                <button class="dark-button">Hủy</button>
+                            </a>
+                        </div>
+                        <div class="body-selection__item x__icon">
+                            <a href="../html-personal-cart/receipt.html" class="">
+                                <button class="button__btn">Xác nhận</button>
+                            </a>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+        <div id="popup__add-payment-method-success" class="modal-backdrop">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content modal-title">THÔNG BÁO</div>
+                </div>
+                <div class="course-body">
+                    <div class="body-title">THAO TÁC HOÀN TẤT</div>
+                    <div class="body-icon"><i class="fa-solid fa-check check-popup"></i></div>
+                    <div class="body-content">Phương thức thanh toán đã thêm</div>
+                    <div class="body-selection">
+                        <div class="body-selection__item x__icon">
+                            <a href="#" class="">
+                                <button class="dark-button">Tiếp tục</button>
+                            </a>
+                        </div>
+<!--                        <div class="body-selection__item x__icon">-->
+<!--                            <a href="../html-personal-cart/cart.html" class="">-->
+<!--                                <button class="button__btn">Tới giỏ hàng</button>-->
+<!--                            </a>-->
+<!--                        </div>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <footer class="web__footer">
         <div class="grid">
