@@ -30,7 +30,7 @@
     color: var(--bright-green);
     font-weight: var(--fw-semibold);
 }
-.fa-check {
+.check-popup {
     font-size: var(--text-5xl);
     color: var(--bright-green);
     margin-top: 2rem;
@@ -56,7 +56,8 @@
     background: white;
     padding: 20px;
     border-radius: 3px;
-    min-width: 300px;
+    min-width: 40%;
+    min-height: 40%;
     text-align: center;
     color: #333;
 }

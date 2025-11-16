@@ -234,21 +234,27 @@
                         </div>
 
                         <div class="container-2__price">
-                            <span class="container-2__sold-price">đ399.000</span>
-                            <span class="container-2__original-price text-medium">đ1.399.000</span>
+                            <div class="container-2__price">
+                                <span class="container-2__sold-price">399.000đ</span>
+                                <span class="container-2__original-price">700.000đ</span>
+                            </div>
+                            <div>
+                                <span class="container-2__discount">Giảm 43%</span>
+                            </div>
                         </div>
 
                         <div class="container-2__option-group">
                             <div class="container-2__option">
-                                <div class="header__button add__button">
-                                    <button class="container-2__button-add button__btn">
-                                        Thêm vào giỏ hàng
-                                    </button>
-                                </div>
-                                <a href="#popup__success-notification" class="turn-page">
+                                <a href="#popup__add-cart-success" class="turn-page add-cart-a">
+                                    <div class="header__button add__button">
+                                        <button class="container-2__button-add button__btn">
+                                            Thêm vào giỏ hàng
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="#popup__add-to-wishlist-success" class="turn-page">
                                     <div class="header__button bookmark__button">
                                         <button class="dark-button">
-                                            <!--                                            <i class="fa-solid fa-bookmark "></i>-->
                                             <i class="fa-solid fa-heart container-2__icon"></i>
                                         </button>
                                     </div>
@@ -270,13 +276,23 @@
                                 Khóa học này gồm có:
                             </div>
                             <ul>
-                                <li class="text-li style__text style__text-var">
-                                    Thời lượng: 1 tiếng 30 phút
+                                <li class="text-li">
+                                    <span class="text-li style__text">
+                                        Thời lượng:
+                                    </span>
+                                    <span class="text-li style__text style__text-var">
+                                         1 tiếng 30 phút
+                                    </span>
                                 </li>
-                                <li class="text-li style__text style__text-var">
-                                    Giáo trình 15 bài giảng
+                                <li class="text-li">
+                                    <span class="text-li style__text">
+                                         Giáo trình:
+                                    </span>
+                                    <span class="text-li style__text style__text-var">
+                                         15 bài giảng
+                                    </span>
                                 </li>
-                                <li class="text-li  style__text style__text-var">
+                                <li class="text-li">
                                     Sở hữa khóa học trọn đời
                                 </li>
                             </ul>
@@ -288,16 +304,20 @@
                     <div class="section-1 section__space">
                         <div class="section-1__breadcrumb">
 
-                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
-                                Suy nghĩ
+                            <div class="">
+                                <a href="../html-partrial/home.html" class="section-1__breadcrumb-name section-1__breadcrumb-item">
+                                    Softskill
+                                </a>
                             </div>
 
                             <div class="section-1__breadcrumb-item text-li">
                                 <i class="fa-duotone fa-solid fa-angle-right"></i>
                             </div>
 
-                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
-                                Tư duy
+                            <div class="">
+                                <a href="../html-partrial/result-search.html" class="section-1__breadcrumb-name section-1__breadcrumb-item">
+                                    Tư duy & Sáng tạo
+                                </a>
                             </div>
 
                             <div class="section-1__breadcrumb-item text-li">
@@ -743,14 +763,14 @@
             </div>
         </div>
 
-        <div id="popup__success-notification" class="modal-backdrop">
+        <div id="popup__add-to-wishlist-success" class="modal-backdrop">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="header-content modal-title">THÔNG BÁO</div>
                 </div>
                 <div class="course-body">
-                    <div class="body-title">THÊM VÔ HOÀN TẤT</div>
-                    <div class="body-icon"><i class="fa-solid fa-check"></i></div>
+                    <div class="body-title">THAO TÁC HOÀN TẤT</div>
+                    <div class="body-icon"><i class="fa-solid fa-check check-popup"></i></div>
                     <div class="body-content">Bạn có thể kiểm tra trong danh sách yêu thích của bạn</div>
                     <div class="body-selection">
                         <div class="body-selection__item x__icon">
@@ -768,6 +788,33 @@
                 </div>
             </div>
         </div>
+
+        <div id="popup__add-cart-success" class="modal-backdrop">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content modal-title">THÔNG BÁO</div>
+                </div>
+                <div class="course-body">
+                    <div class="body-title">THAO TÁC HOÀN TẤT</div>
+                    <div class="body-icon"><i class="fa-solid fa-check check-popup"></i></div>
+                    <div class="body-content">Bạn có thể kiểm tra trong giỏ hàng của bạn</div>
+                    <div class="body-selection">
+                        <div class="body-selection__item x__icon">
+                            <a href="#" class="">
+                                <button class="dark-button">Tiếp tục</button>
+                            </a>
+                        </div>
+                        <div class="body-selection__item x__icon">
+                            <a href="../html-personal-cart/cart.html" class="">
+                                <button class="button__btn">Tới giỏ hàng</button>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer class="web__footer">

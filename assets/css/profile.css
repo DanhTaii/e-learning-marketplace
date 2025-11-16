@@ -28,7 +28,7 @@
 .profile-block__title {
     font-size: var(--text-2xl);
     font-weight: bold;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 .profile-block__avatar {
     display: flex;

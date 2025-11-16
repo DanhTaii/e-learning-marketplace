@@ -12,7 +12,6 @@
     border: solid 1px var(--light-grey);
     height: 0;
     margin: 2rem 0;
-    position: absolute;
     z-index: 1;
 }
 /*Title*/
@@ -66,8 +65,6 @@
     display: flex;
     width: 100%;
     align-items: center;
-    margin-top: 2rem;
-
 }
 .search_blank {
     width: 250%;
@@ -135,7 +132,6 @@ button{
 }
 .progress-display__percentage {
     position: absolute;
-    width: 36%;
     background: var(--bright-green);
     padding: 0.2rem;
     z-index: 10;
