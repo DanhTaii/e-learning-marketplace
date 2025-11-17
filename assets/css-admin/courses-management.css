@@ -1,4 +1,44 @@
 
+th, td {
+    padding: 16px;
+}
+th {
+    background: #f8f9fa;
+    font-weight: var(--fw-bold);
+    color: #333;
+    /*font-size: 0.9rem;*/
+}
+.course-row__level {
+    display: flex;
+    align-items: center;
+    color: var(--blue-level);
+}
+.level-dot {
+    border-radius: 50%;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--blue-level);
+    margin-right: 0.5rem ;
+}
+.course-row__status {
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    font-weight: var(--fw-semibold);
+    text-align: center;
+    margin-left: -1rem;
+}
+.course-row__status-public{
+    background: var(--light-green);
+    color: var(--green);
+}
+.course-row__status-private{
+    background: var(--privacy-light-grey);
+    color: var(--privacy-dark-charcoal);
+}
+.course-row__price {
+    color: red;
+    font-weight: var(--fw-semibold);
+}
 /* Lớp nền mờ (ẩn ban đầu) */
 .modal__course-detail {
     display: none;
