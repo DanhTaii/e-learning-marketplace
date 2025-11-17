@@ -3,7 +3,7 @@
     width: 100%;
 }
 .container__filter{
-    width: 72%;
+    width: 80%;
     display: flex;
     margin-bottom: 40px;
     align-items: center;
@@ -39,7 +39,7 @@
     color: var(--white-color);
 }
 .filter__price{
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: space-between;
     margin-left: 30px;

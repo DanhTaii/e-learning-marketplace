@@ -6,6 +6,10 @@
 .course-detail__container{
     margin-top: -35rem;
 }
+.section-3_li{
+    min-width: 30px;
+    cursor: pointer;
+}
 /*CHo chữ cần màu chứ k phải title*/
 .color__dark-blue {
     color: var(--dark-blue);

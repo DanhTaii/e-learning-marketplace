@@ -132,7 +132,7 @@ button{
 }
 .progress-display__percentage {
     position: absolute;
-    background: var(--bright-green);
+    background: var(--blue);
     padding: 0.2rem;
     z-index: 10;
 }
