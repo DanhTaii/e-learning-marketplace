@@ -241,7 +241,7 @@ select {
 .filter__selection-items {
     font-size: var(--text-2xl);
     padding-right: 2rem;
-    /*width: 30%;*/
+    /*width: 100%;*/
 }
 
 .filter__selection-input {
