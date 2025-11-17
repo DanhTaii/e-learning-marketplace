@@ -1,8 +1,46 @@
 
 :root {
+    /*Màu hover*/
     --bright-blue: #264457;
-}
 
+    /*Màu cho Công khai*/
+    /*Nền*/
+    --light-green: #e8f5e9;
+    /*Text*/
+    --green: #2e7d32;
+
+    /*Màu cho Riêng tư*/
+    /*Nền*/
+    --privacy-light-grey: #ECEFF1;
+    /*Text*/
+    --privacy-dark-charcoal: #263238;
+
+    /*Màu cho cấp độ*/
+    --blue-level : #0066cc
+}
+*{
+    box-sizing: inherit;
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: "Roboto", sans-serif;
+}
+.course-row__font-content {
+    font-size: var(--text-sm);
+}
+.role-admin {
+    /*Màu riêng cho admin*/
+    background-color: #e0e7ff;
+    color: #4338ca;
+    border-radius: 3rem;
+    text-align: center;
+    font-weight: var(--fw-semibold);
+    padding: 0.5rem;
+    margin-left: -1rem;
+}
+.role-user {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
 .container-1 {
     background: var(--dark-blue);
     width: 100%;
@@ -215,35 +253,56 @@ a {
     padding: 8px 15px;
     font-weight: var(--fw-regular);
 }
-
+/*Xử lý phần nhận dữ liệu để lọc*/
+/*Chỉnh chung*/
 input {
     width: 100%;
     border: 1px solid var(--light-grey);
     border-radius: 3px;
     color: var(--dark-blue);
     font-weight: var(--fw-regular);
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
 }
-
+/*Cài đặt chung cho các thẻ nhận CSS này sẽ có HEIGHT cố định kèm font*/
 .input__font {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
+    height: 3rem;
 }
-
+/*Xử lý input dạng select*/
+/*Chỉnh cỡ chữ chung cho toàn option của select*/
+select option{
+    font-size: var(--text-base);
+}
 select {
-    font-size: var(--text-sm);
     border: 1px solid var(--light-grey);
     border-radius: 3px;
     color: var(--dark-blue);
     font-weight: var(--fw-regular);
     padding: 0.5rem 1rem;
+    font-size: var(--text-base);
 }
-
+/*CSS chung cho toàn bộ thẻ div bọc lấy input */
 .filter__selection-items {
     font-size: var(--text-2xl);
     padding-right: 2rem;
+    width: 50%;
+    height: 100%;
+}
+/*Tên đi kèm với input đó*/
+.filter__selection-title{
+    font-weight: var(--fw-semibold);
+    font-size: var(--text-base);
+    margin-bottom: 0.5rem;
+}
+/*Do phần input của select quá ngắn nên phải css riêng*/
+.filter__selection-items-select {
+    font-size: var(--text-2xl);
+    padding-right: 2rem;
     /*width: 30%;*/
+    height: 100%;
 }
 
+/*CHỉnh nút tìm kiếm chung*/
 .filter__selection-input {
     display: flex;
     width: 90%;
@@ -252,8 +311,9 @@ select {
 .filter__button-search {
     display: flex;
     width: 10%;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: center;
+    /*align-items: flex-start;*/
 }
 
 .button {
@@ -284,8 +344,10 @@ table {
 
 /*Xử lý thằng đầu cho in đậm và có đường kẻ trên*/
 thead th {
-    font-weight: var(--fw-bold);
     border-top: 1px solid var(--light-grey);
+    background: #f8f9fa;
+    font-weight: var(--fw-bold);
+    color: #333;
 }
 
 /* Nhóm table, th, và td và áp dụng cho cả 3 */
@@ -295,20 +357,21 @@ table, th, td {
     font-weight: var(--fw-regular);
     padding: 1rem;
     border-bottom: 1px solid var(--light-grey);
-    text-align: center;
+    text-align: left;
 }
 td .action__button {
     display: flex;
 }
+
 .icon-action {
-    font-size: var(--text-2xl);
+    font-size: var(--text-lg);
     cursor: pointer;
     padding: 0 4px;
     padding-bottom: 0.4rem;
     color: var(--dark-blue);
 }
 td a span:hover {
-    font-size: var(--text-2xl);
+    font-size: var(--text-lg);
     background: var(--dark-blue);
     color: var(--white-color);
     border-radius: 3px;
@@ -322,4 +385,23 @@ td:first-child,th:first-child{
 /*Thêm đường kẻ cho các con ở bên phải*/
 td:last-child ,th:last-child{
     border-right: 1px solid var(--light-grey);
+}
+.log-out__container {
+    display: flex;
+    align-items: center;
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-semibold);
+    padding: 1rem;
+}
+.log-out__container:hover{
+    background: var(--bright-blue);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+.log-out {
+    float: right;
+    margin-top: 15rem;
+}
+.log-out__content {
+    margin-right: 0.5rem;
 }

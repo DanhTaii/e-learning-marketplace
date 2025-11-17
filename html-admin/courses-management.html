@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Course Management</title>
+    <title>Quản lý khóa học</title>
 
     <link rel="stylesheet" href="../assets/css-admin/admin.css">
     <!-- Normalize CSS -->
@@ -42,7 +42,7 @@
                                     <span class="container-1__menu-items">
 
                                         <i class="fa-solid fa-user"></i>
-                                        <span>Students</span>
+                                        <span>Người dùng</span>
 
                                     </span>
                                     </div>
@@ -50,10 +50,10 @@
                             </li>
                             <li>
                                 <a href="./courses-management.html">
-                                    <div class="menu-item__student student-list">
+                                    <div class="menu-item__student student-list student-list">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
-                                        <span>Courses</span>
+                                        <span>Khóa học</span>
                                     </span>
                                     </div>
                                 </a>
@@ -63,7 +63,7 @@
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
-                                        <span>Lesson</span>
+                                        <span>Bài học</span>
                                     </span>
                                     </div>
                                 </a>
@@ -74,7 +74,7 @@
                                     <span class="container-1__menu-items menu-item__course">
 
                                         <i class="fa-solid fa-tags"></i>
-                                        <span>Tag</span>
+                                        <span>Thẻ</span>
                                     </span>
                                     </div>
                                 </a>
@@ -85,12 +85,22 @@
                                     <span class="container-1__menu-items menu-item__order">
 
                                         <i class="fa-solid fa-receipt"></i>
-                                        <span>Orders</span>
+                                        <span>Đơn hàng</span>
                                     </span>
                                     </div>
                                 </a>
                             </li>
                         </ul>
+                        <div class="log-out">
+                            <a href="../html-authentication/sign-in.html">
+                                <div class="log-out__container">
+                                    <div class="log-out__content">
+                                        Thoát
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -98,11 +108,11 @@
                     <div class="container-2__header"></div>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Courses</div>
+                            <div class="header__title">Các khóa học</div>
                             <div class="admin-create__buttons">
                                 <button type="button">
-                                    <a href="./create-course.html">
-                                        <i class="fa-solid fa-plus"></i>New course
+                                    <a href="course-create.html">
+                                        <i class="fa-solid fa-plus"></i>Tạo mới
                                     </a>
                                 </button>
                             </div>
@@ -112,21 +122,20 @@
                             <div class="filter__selection">
                                 <div class="filter__selection-input">
                                     <div class="filter__selection-items filter__selection-name">
-                                        <div class="filter__item-name">Title:</div>
+                                        <div class="filter__selection-title  filter__item-label">Tên khóa học:</div>
                                         <input placeholder="" type="text" class="input__font">
                                     </div>
                                     <div class="filter__selection-items">
-                                        <div class="filter__item-phone">Level:</div>
-                                        <select name="Level" class="combobox input__font">
-                                            <option value="">Mode</option>
-                                            <option value="1">Easy</option>
-                                            <option value="2">Medium</option>
-                                            <option value="3">Hard</option>
-                                        </select>
+                                        <div class="filter__selection-title filter__item-phone">Từ ngày</div>
+                                        <input placeholder="" type="datetime-local" class="input__font">
                                     </div>
                                     <div class="filter__selection-items">
-                                        <div class="filter__item-phone">From date:</div>
-                                        <input placeholder="" type="datetime-local" class="input__font">
+                                        <div class="filter__selection-title filter__item-phone">Trạng thái:</div>
+                                        <select name="Level" class="combobox input__font">
+                                            <option value="">Tất cả</option>
+                                            <option value="1">Công khai</option>
+                                            <option value="2">Riêng tư</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -142,35 +151,57 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Title</th>
+                                    <th>Khóa học</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Thời lượng</th>
+                                    <th>Học viên</th>
+                                    <th>Giá</th>
                                     <th>Level</th>
-                                    <th>Price</th>
-                                    <th>Discount price</th>
-                                    <th>Rating</th>
-                                    <th>Student count</th>
-                                    <th>Is featured</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Khóa học A</th>
-                                    <th>Medium</th>
-                                    <th>$10</th>
-                                    <th>$4</th>
-                                    <th>4.5</th>
-                                    <th>500</th>
-                                    <th>Yes</th>
-                                    <th>11/02/2025</th>
+                                <tr class="course-row">
+                                    <td>
+                                        <div class="course-row__title title course-row__style-text">Tư duy phản biện
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                            PM
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__duration course-row__font-content">20h 10m</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__total__enrollment course-row__font-content">500</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__price course-row__font-content">150đ</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__level course-row__font-content">
+                                            <div class="level-dot"></div>
+                                            Dễ
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                            Công khai
+                                        </div>
+                                    </td>
                                     <td class="action__button">
                                         <a href="#course-detail">
                                             <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
                                         </a>
-                                        <a href="">
+                                        <a href="../html-admin/course-edit.html">
                                             <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                         </a>
                                         <a href="">
@@ -178,109 +209,187 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Khóa học A</th>
-                                    <th>Medium</th>
-                                    <th>$10</th>
-                                    <th>$4</th>
-                                    <th>4.5</th>
-                                    <th>500</th>
-                                    <th>Yes</th>
-                                    <th>11/02/2025</th>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
+                                <tr class="course-row">
+                                    <td>
+                                        <div class="course-row__title title course-row__style-text">Tư duy lập trình
+                                        </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Khóa học A</th>
-                                    <th>Medium</th>
-                                    <th>$10</th>
-                                    <th>$4</th>
-                                    <th>4.5</th>
-                                    <th>500</th>
-                                    <th>Yes</th>
-                                    <th>11/02/2025</th>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
+
+                                    <td>
+                                        <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                            PM
+                                        </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Khóa học A</th>
-                                    <th>Medium</th>
-                                    <th>$10</th>
-                                    <th>$4</th>
-                                    <th>4.5</th>
-                                    <th>500</th>
-                                    <th>Yes</th>
-                                    <th>11/02/2025</th>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
+
+                                    <td>
+                                        <div class="course-row__duration course-row__font-content">20h 10m</div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Khóa học A</th>
-                                    <th>Medium</th>
-                                    <th>$10</th>
-                                    <th>$4</th>
-                                    <th>4.5</th>
-                                    <th>500</th>
-                                    <th>Yes</th>
-                                    <th>11/02/2025</th>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
+
+                                    <td>
+                                        <div class="course-row__total__enrollment course-row__font-content">500</div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th>011</th>
-                                    <th>Khóa học A</th>
-                                    <th>Medium</th>
-                                    <th>$10</th>
-                                    <th>$4</th>
-                                    <th>4.5</th>
-                                    <th>500</th>
-                                    <th>Yes</th>
-                                    <th>11/02/2025</th>
+
+                                    <td>
+                                        <div class="course-row__price course-row__font-content">150đ</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__level course-row__font-content">
+                                            <div class="level-dot"></div>
+                                            Dễ
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="course-row__status course-row__font-content course-row__status-private">
+                                            Riêng tư
+                                        </div>
+                                    </td>
                                     <td class="action__button">
                                         <a href="#course-detail">
                                             <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
                                         </a>
+                                        <a href="../html-admin/course-edit.html">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
                                         <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="course-row">
+                                    <td>
+                                        <div class="course-row__title title course-row__style-text">Sáng tạo đổi mới
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                            PM
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__duration course-row__font-content">20h 10m</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__total__enrollment course-row__font-content">500</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__price course-row__font-content">150đ</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__level course-row__font-content">
+                                            <div class="level-dot"></div>
+                                            Dễ
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                            Công khai
+                                        </div>
+                                    </td>
+                                    <td class="action__button">
+                                        <a href="#course-detail">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="../html-admin/course-edit.html">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="course-row">
+                                    <td>
+                                        <div class="course-row__title title course-row__style-text">Chống burnout
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                            PM
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__duration course-row__font-content">20h 10m</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__total__enrollment course-row__font-content">500</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__price course-row__font-content">150đ</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__level course-row__font-content">
+                                            <div class="level-dot"></div>
+                                            Dễ
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                            Công khai
+                                        </div>
+                                    </td>
+                                    <td class="action__button">
+                                        <a href="#course-detail">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="../html-admin/course-edit.html">
+                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                        </a>
+                                        <a href="">
+                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="course-row">
+                                    <td>
+                                        <div class="course-row__title title course-row__style-text">Thuyết trình trước
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                            PM
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__duration course-row__font-content">20h 10m</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__total__enrollment course-row__font-content">500</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__price course-row__font-content">150đ</div>
+                                    </td>
+
+                                    <td>
+                                        <div class="course-row__level course-row__font-content">
+                                            <div class="level-dot"></div>
+                                            Dễ
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="course-row__status course-row__font-content course-row__status-private">
+                                            Riêng tư
+                                        </div>
+                                    </td>
+                                    <td class="action__button">
+                                        <a href="#course-detail">
+                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                        </a>
+                                        <a href="../html-admin/course-edit.html">
                                             <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                         </a>
                                         <a href="">
