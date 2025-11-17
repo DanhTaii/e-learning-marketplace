@@ -277,21 +277,18 @@ p {
     width: 100%;
 }
 
-.button__btn {
+.button__btn-2{
+    width: 110% !important;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     padding: 13px 15px;
-
-
 }
 
 .charge-note {
     color: #555555;
     font-size: 1.2rem;
-
-
 }
 
 /*.btn-coupon {*/
