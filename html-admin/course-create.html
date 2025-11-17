@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/dashboard.css">
+    <link rel="stylesheet" href="../assets/css-admin/course-edit.css">
 
 </head>
 <body>
@@ -103,13 +103,84 @@
                     <div class="container-2__header"></div>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">New Course</div>
+                            <div class="header__title">Tạo mới khóa học</div>
+                            <div class="admin-create__buttons">
+                                <button type="button">
+                                    <a href="./courses-management.html">
+                                        <i class="fa-solid fa-floppy-disk"></i>Lưu
+                                    </a>
+                                </button>
+                            </div>
                         </div>
 
-                        <form action="" class="container-2">
-                            <label>Tên khóa học:</label>
-                            <input>
-                        </form>
+                        <div class="container-2__form">
+                            <form action="" class="">
+                                <!--                                Phần Tiêu đề và tiêu đề phụ kèm với việc gắn ảnh-->
+                                <div class="course-create__section-1">
+                                    <div class="course-create__title">
+                                        <div class="course-create__block-input">
+                                            <div class="course-create__style">Tên khóa học</div>
+                                            <input placeholder="" type="text" class="input__font">
+                                        </div>
+                                        <div class="course-create__block-input">
+                                            <div class="course-create__style">Phụ đề</div>
+                                            <input placeholder="" type="text" class="input__font">
+                                        </div>
+                                    </div>
+                                    <div class="course-create__img">
+                                        <div class="course-create__style">Ảnh khóa học</div>
+                                        <input placeholder="" type="file" class="file__input">
+                                    </div>
+                                </div>
+
+                                <!--                                Phần Giá cả, mức độ-->
+                                <div class="course-create__section-2">
+                                    <div class="course-create__block-input-short">
+                                        <div class="course-create__style">Giá</div>
+                                        <input placeholder="" type="text" class="input__font">
+                                    </div>
+                                    <div class="course-create__block-input-short">
+                                        <div class="course-create__style">Giảm giá</div>
+                                        <input placeholder="" type="text" class="input__font">
+                                    </div>
+                                    <div class="course-create__block-input">
+                                        <div class="course-create__style">Mức độ</div>
+                                        <select name="Level" class="combobox input__font">
+                                            <option value="">Người mới</option>
+                                            <option value="1">Trung cấp</option>
+                                            <option value="2">Cao cấp</option>
+                                        </select>
+                                    </div>
+                                </div>
+<!--                                Phần lựa chọn-->
+                                <div class="course-create__section-3">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="is_public" checked/>
+                                        Công khai khóa học
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="is_featured"/>
+                                        Hiển thị nổi bật.
+                                    </label>
+                                </div>
+
+                                <!--                                Phần Mục tiêu của khóa học-->
+                                <div class="course-create__section-4">
+                                    <div>
+                                        <div class="course-create__style">Mục tiêu khóa học</div>
+                                        <textarea name="mota"></textarea>
+                                    </div>
+                                </div>
+
+                                <!--                                Phần mô tả của khóa học-->
+                                <div class="course-create__section-5">
+                                    <div>
+                                        <div class="course-create__style">Mô tả khóa học</div>
+                                        <textarea name="mota"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
