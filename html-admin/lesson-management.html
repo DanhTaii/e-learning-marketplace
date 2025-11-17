@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css-admin/lesson-management.css">
 </head>
 <body>
 <div class="web">
@@ -102,6 +103,30 @@
                         <div class="container-2__header">
                             <div class="header__title">Lesson</div>
                         </div>
+                        <div class="container-2__filter">
+                        <div class="filter__selection">
+                            <div class="filter__selection-input">
+                                <div class="filter__selection-items">
+                                    <div class="filter__item-name">Course:</div>
+                                    <select class="input__font">
+                                        <option class="text-medium" >--- Vui lòng chọn khóa học ---</option>
+                                        <option class="text-medium" selected>Khóa học A</option>
+                                        <option class="text-medium">Làm việc nhóm hiệu quả</option>
+                                        <option class="text-medium">Thuyết trình trước đám đông</option>
+                                    </select>
+                                </div>
+                                <div class="filter__selection-items">
+                                    <div class="filter__item-phone">From date:</div>
+                                    <input placeholder="" type="datetime-local" class="input__font">
+                                </div>
+                                <div class="filter__selection-items">
+                                    <div class="filter__item-phone">To date:</div>
+                                    <input placeholder="" type="datetime-local" class="input__font">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                         <div class="title__admin">New lesson</div>
                         <div class="container-2__create">
                             <div class="create__selection">
@@ -140,41 +165,16 @@
                             </div>
                         </div>
                         <div class="title__admin">All lesson</div>
-                        <div class="container-2__filter">
-                            <div class="filter__selection">
-                                <div class="filter__selection-input">
-                                    <div class="filter__selection-items filter__selection-name">
-                                        <div class="filter__item-name">Course:</div>
-                                        <input placeholder="" type="text" class="input__font">
-                                    </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">From date:</div>
-                                        <input placeholder="" type="datetime-local" class="input__font">
-                                    </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">To date:</div>
-                                        <input placeholder="" type="datetime-local" class="input__font">
-                                    </div>
-                                </div>
 
-                                <div class="filter__button-search">
-                                    <button class="button" type="submit">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                         <div class="container-2__list-student">
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Index</th>
-                                    <th>Course</th>
-                                    <th>Title</th>
+                                    <th>Course Title</th>
+                                    <th>Lesson Title</th>
                                     <th>Video URL</th>
                                     <th>Duration</th>
-                                    <th>Preview</th>
                                     <th>Created at</th>
                                     <th>Action</th>
                                 </tr>
@@ -182,18 +182,13 @@
 
                                 <tbody>
                                 <tr>
-                                    <td>1</td>
                                     <td>001</td>
                                     <td>Khóa học A</td>
                                     <td>Bài 1</td>
                                     <td>https://</td>
                                     <td>2min</td>
-                                    <td>Yes</td>
                                     <td>11/02/2025</td>
                                     <td class="action__button">
-                                        <a href="#user-detail">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
                                         <a href="">
                                             <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                         </a>
@@ -203,18 +198,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
                                     <td>002</td>
                                     <td>Khóa học A</td>
                                     <td>Bài 2</td>
                                     <td>https://</td>
                                     <td>2min</td>
-                                    <td>Yes</td>
                                     <td>11/02/2025</td>
                                     <td class="action__button">
-                                        <a href="#user-detail">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
                                         <a href="">
                                             <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                         </a>
@@ -224,18 +214,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>3</td>
                                     <td>003</td>
                                     <td>Khóa học A</td>
                                     <td>Bài 3</td>
                                     <td>https://</td>
                                     <td>2min</td>
-                                    <td>Yes</td>
                                     <td>11/02/2025</td>
                                     <td class="action__button">
-                                        <a href="#user-detail">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
                                         <a href="">
                                             <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                         </a>
@@ -245,18 +230,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>4</td>
                                     <td>004</td>
                                     <td>Khóa học A</td>
                                     <td>Bài 4</td>
                                     <td>https://</td>
                                     <td>2min</td>
-                                    <td>Yes</td>
                                     <td>11/02/2025</td>
                                     <td class="action__button">
-                                        <a href="#user-detail">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
                                         <a href="">
                                             <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                         </a>
