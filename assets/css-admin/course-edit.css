@@ -1,4 +1,82 @@
 
-.container-2 {
-    margin-top: 20rem;
+.container-2__form {
+    background: var(--white-color);
+    border-radius: 0.3rem;
+    border: 1px solid var(--light-grey);
+    width: 100%;
+    margin: 2rem;
+    /*height: 30rem;*/
+    padding: 3rem;
+    flex-wrap: wrap;
+}
+input {
+    width: 100%;
+    border: 1px solid var(--light-grey);
+}
+.course-create__style {
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 0.5rem;
+    width: 100% ;
+}
+.course-create__section-1 {
+    display: flex;
+    width: 100% ;
+    /*justify-content: space-between;*/
+}
+.course-create__img {
+    /*display: flex;*/
+    width: 30%;
+    margin-right: -5rem;
+}
+.course-create__img .file__input{
+    width: 80%;
+    height: 10.2rem;
+}
+.course-create__title {
+    width: 80%;
+}
+.course-create__block-input {
+    width: 95%;
+    /*height: 4rem;*/
+    margin-bottom: 2rem ;
+}
+.course-create__block-input-short {
+    width: 20%;
+    margin-bottom: 2rem ;
+}
+
+.course-create__section-2 {
+    /*margin-top: 2rem;*/
+    display: flex;
+    gap: 2rem;
+}
+textarea {
+    width: 73%;
+    height: 10rem;
+    box-sizing: border-box;
+}
+
+/*CHỉnh phần checkbox*/
+.course-create__section-3 {
+    display: flex;
+    gap: 5rem;
+    width: 100%;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+}
+/*Do bị ảnh hưởng từ input toàn cục của admin nên phải tự chỉnh tay*/
+.course-create__section-3 input{
+    width: 6%;
+}
+.course-create__section-3 .checkbox-label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    width: 50%;
+}
+.course-create__section-5 {
+    margin-top: 3rem;
 }
