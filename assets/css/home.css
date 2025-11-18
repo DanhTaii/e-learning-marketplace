@@ -227,12 +227,15 @@
     border-bottom-left-radius: 7px;
     height: 180px;
 }
+.content__top-2{
+    margin: 0 0 5px 0 !important;
+}
 .content__top{
     display: flex;
     justify-content: space-between;
     color: var(--dark-blue);
     align-items: center;
-    margin: 0 0 5px 0;
+    margin: 10px 0 5px 0;
 }
 .content__author-name{
     font-weight: 500;
@@ -304,10 +307,17 @@
     position: relative;
     top: -2px;
 }
+.content__price-2{
+    margin-top: 0 !important;
+}
 .content__price{
     display: flex;
     align-items: center;
-    margin-top: 0;
+    margin-top: 24px;
+    justify-content: space-between;
+}
+.content__price-3{
+    display: flex;
 }
 .price__new{
     font-size: var(--text-3xl);
@@ -337,7 +347,7 @@
     position: absolute;
     top: 10px;
     left: -3px;
-    z-index: 100;
+    z-index: 10;
     color: var(--blue);
     background-color: currentColor;
     font-size: 1.2rem;

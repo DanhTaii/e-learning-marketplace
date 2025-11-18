@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/modal-notification.css">
 
 </head>
 <body>
@@ -317,7 +318,7 @@
                                 <div class="big-advertisement__content">
                                     <div class="content__title">Tư duy phản biện</div>
                                     <div class="content__information">
-                                        <div class="content__top">
+                                        <div class="content__top content__top-2">
                                             <div class="content__author-name text-medium content__author-name-3">Quản trị viên</div>
                                             <div class="content__rate content__rate-3">
                                                 <div class="rate__icon"><i
@@ -342,7 +343,7 @@
                                                 <div class="time__text text text-medium">12h</div>
                                             </div>
                                         </div>
-                                        <div class="content__price">
+                                        <div class="content__price content__price-2">
                                             <div class="price__new">399.000đ</div>
                                             <div class="price__old">1.399.000đ</div>
                                             <div class="quick-info__save"><i
@@ -395,11 +396,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="content__price">
-                                                    <div class="price__new">799.000đ</div>
-                                                    <div class="price__old">1.199.000đ</div>
-                                                    <div class="quick-info__save"><i
-                                                            class="quick-info__save__icon fa-solid fa-heart"></i>
+                                                    <div class="content__price-3">
+                                                        <div class="price__new">799.000đ</div>
+                                                        <div class="price__old">1.199.000đ</div>
                                                     </div>
+                                                    <a href="#popup__add-to-wishlist-success" class="turn-page">
+                                                        <div class="quick-info__save"><i
+                                                                class="quick-info__save__icon fa-solid fa-heart"></i>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="home-product-item__favourite">
@@ -1113,6 +1118,30 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="popup__add-to-wishlist-success" class="modal-backdrop">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content modal-title">THÔNG BÁO</div>
+                </div>
+                <div class="course-body">
+                    <div class="body-title">THAO TÁC HOÀN TẤT</div>
+                    <div class="body-icon"><i class="fa-solid fa-circle-check check-popup"></i></div>
+                    <div class="body-content">Bạn có thể kiểm tra trong danh sách yêu thích của bạn</div>
+                    <div class="body-selection">
+                        <div class="body-selection__item x__icon">
+                            <a href="#" class="">
+                                <button class="dark-button">Tiếp tục</button>
+                            </a>
+                        </div>
+                        <div class="body-selection__item x__icon">
+                            <a href="../html-personal/my-wishlist.html" class="">
+                                <button class="button__btn">Tới danh sách</button>
+                            </a>
                         </div>
                     </div>
                 </div>
