@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/lesson-management.css">
 </head>
 <body>
 <div class="web">
@@ -101,160 +100,274 @@
                     <div class="container-2__header"></div>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Lesson</div>
+                            <div class="header__title">Bài học</div>
                         </div>
-                        <div class="container-2__filter">
-                        <div class="filter__selection">
-                            <div class="filter__selection-input">
-                                <div class="filter__selection-items">
-                                    <div class="filter__item-name">Course:</div>
-                                    <select class="input__font">
-                                        <option class="text-medium" >--- Vui lòng chọn khóa học ---</option>
-                                        <option class="text-medium" selected>Khóa học A</option>
-                                        <option class="text-medium">Làm việc nhóm hiệu quả</option>
-                                        <option class="text-medium">Thuyết trình trước đám đông</option>
-                                    </select>
+                        <div class="container-2__body">
+                            <div class="title__admin">Tạo bài học mới</div>
+                            <div class="container-2__create">
+                                <div class="create__selection">
+                                    <div class="create__selection-input">
+                                        <div class="create__selection-items">
+                                            <div class="filter__selection-title filter__item-name">Thứ tự bài học:
+                                            </div>
+                                            <input placeholder="" type="text" class="admin-input input-style">
+                                        </div>
+                                        <div class="create__selection-items--wide">
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Tên hoặc ID
+                                                    khóa
+                                                    học:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long">
+                                            </div>
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Tên bài
+                                                    học:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="create__selection-input">
+                                        <div class="create__selection-items">
+                                            <div class="filter__selection-title filter__item-name">Thời lượng:</div>
+                                            <input placeholder="" type="text" class="admin-input__long">
+                                        </div>
+                                        <div class="create__selection-items--wide">
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Video URL:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="create__btn-create">
+                                        <button type="submit" class="create-btn dark-button">Tạo mới</button>
+                                    </div>
                                 </div>
-                                <div class="filter__selection-items">
-                                    <div class="filter__item-phone">From date:</div>
-                                    <input placeholder="" type="datetime-local" class="input__font">
-                                </div>
-                                <div class="filter__selection-items">
-                                    <div class="filter__item-phone">To date:</div>
-                                    <input placeholder="" type="datetime-local" class="input__font">
+                            </div>
+                            <div class="title__admin">Tất cả bài học</div>
+                            <div class="container-2__filter">
+                                <div class="filter__selection">
+                                    <div class="filter__selection-input">
+                                        <div class="filter__selection-items">
+                                            <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
+                                            <input placeholder="" type="datetime-local" class="input__font admin-input__long">
+                                        </div>
+                                        <div class="filter__selection-items">
+                                            <div class="filter__selection-items-select">
+                                                <div class="filter__selection-title filter__item-phone">Tên khóa
+                                                    học:
+                                                </div>
+                                                <select name="Level" class="combobox admin-input__short ">
+                                                    <option class="text-medium">--- Vui lòng chọn khóa học ---
+                                                    </option>
+                                                    <option class="text-medium" selected>Khóa học A</option>
+                                                    <option class="text-medium">Làm việc nhóm hiệu quả</option>
+                                                    <option class="text-medium">Thuyết trình trước đám đông</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter__button-search">
+                                        <button class="button dark-button" type="submit">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                        <div class="title__admin">New lesson</div>
-                        <div class="container-2__create">
-                            <div class="create__selection">
-                                <div class="create__selection-input">
-                                    <div class="create__selection-items">
-                                        <div class="filter__item-name">Order index:</div>
-                                        <input placeholder="" type="text" class="input__create">
-                                    </div>
-                                    <div class="create__selection-items--wide">
-                                        <div class="create__selection-items">
-                                            <div class="filter__item-phone">Course ID:</div>
-                                            <input placeholder="" type="text" class="input__create">
-                                        </div>
-                                        <div class="create__selection-items">
-                                            <div class="filter__item-phone">Title:</div>
-                                            <input placeholder="" type="text" class="input__create">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="create__selection-input">
-                                    <div class="create__selection-items">
-                                        <div class="filter__item-name">Duration:</div>
-                                        <input placeholder="" type="text" class="input__create">
-                                    </div>
-                                    <div class="create__selection-items--wide">
-                                        <div class="create__selection-items">
-                                            <div class="filter__item-phone">Video URL:</div>
-                                            <input placeholder="" type="text" class="input__create">
-                                        </div>
-                                    </div>
+                            <div class="container-2__list-student">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Tên bài học</th>
+                                        <th>Số thứ tự</th>
+                                        <th>Tên khóa học</th>
+                                        <th>Video URL</th>
+                                        <th>Thời hạn</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
 
-                                </div>
-                                <div class="create__btn-create">
-                                        <button type="submit" class="create-btn text-medium">Create</button>
-                                </div>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Bài 1
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                001
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Khóa học A
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                2min
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022
+                                                – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Bài 2
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                002
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Khóa học A
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                4min
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022
+                                                – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Bài 3
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                003
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Khóa học A
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                3min
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022
+                                                – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Bài 4
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                004
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Khóa học A
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                2min
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022
+                                                – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                        <div class="title__admin">All lesson</div>
-
-                        <div class="container-2__list-student">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Index</th>
-                                    <th>Course Title</th>
-                                    <th>Lesson Title</th>
-                                    <th>Video URL</th>
-                                    <th>Duration</th>
-                                    <th>Created at</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>Khóa học A</td>
-                                    <td>Bài 1</td>
-                                    <td>https://</td>
-                                    <td>2min</td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Khóa học A</td>
-                                    <td>Bài 2</td>
-                                    <td>https://</td>
-                                    <td>2min</td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>Khóa học A</td>
-                                    <td>Bài 3</td>
-                                    <td>https://</td>
-                                    <td>2min</td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>004</td>
-                                    <td>Khóa học A</td>
-                                    <td>Bài 4</td>
-                                    <td>https://</td>
-                                    <td>2min</td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

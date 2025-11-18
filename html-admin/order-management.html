@@ -102,183 +102,270 @@
                     <div class="container-2__header"></div>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Order</div>
+                            <div class="header__title">Hóa đơn</div>
                         </div>
-
-                        <div class="container-2__filter">
-                            <div class="filter__selection">
-                                <div class="filter__selection-input">
-                                    <div class="filter__selection-items filter__selection-name">
-                                        <div class="filter__item-name">Order Code:</div>
-                                        <input placeholder="" type="text" class="input__font" >
-                                    </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">From date:</div>
-                                        <input placeholder="" type="datetime-local" class="input__font">
-                                    </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">To date:</div>
-                                        <input placeholder="" type="datetime-local" class="input__font">
-                                    </div>
-                                    <div class="filter__selection-items">
-                                        <div class="filter__item-phone">Status:</div>
-                                        <select class="input__font">
-                                            <option class="text-medium">--Vui lòng chọn trạng thái--</option>
-                                            <option class="text-medium">Paid</option>
-                                            <option class="text-medium">Failed</option>
-                                            <option class="text-medium">Pending</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="filter__button-search">
-                                    <button class="button" type="submit">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="container-2__list-student">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Order Code</th>
-                                    <th>User ID</th>
-                                    <th>User name</th>
-                                    <th>Final Amount</th>
-                                    <th>Status</th>
-                                    <th>Payment method</th>
-                                    <th>Created at</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr>
-                                    <td>ORD101</td>
-                                    <td>001</td>
-                                    <td>Danh Tai</td>
-                                    <td>400.000</td>
-                                    <td>paid</td>
-                                    <td>Momo</td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="#course-detail" class="button-de-mo">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                </tr>
-
-
-                                <tr>
-                                    <td>ORD102</td>
-                                    <td>001</td>
-                                    <td>Danh Tai</td>
-                                    <td>500.000</td>
-                                    <td>paid</td>
-                                    <td>Zalo Pay</td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                </tr>
-                                <tr>
-                                    <td>ORD103</td>
-                                    <td>001</td>
-                                    <td>Danh Tai</td>
-                                    <td>530.000</td>
-                                    <td>failed</td>
-                                    <td></td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                </tr>
-                                <tr>
-                                    <td>ORD104</td>
-                                    <td>001</td>
-                                    <td>Danh Tai</td>
-                                    <td>720.000</td>
-                                    <td>pending</td>
-                                    <td></td>
-                                    <td>11/02/2025</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                </tr>
-
-
-                                </tbody>
-
-                            </table>
-                            <div id="course-detail" class="modal__course-detail">
-                                <div class="modal__course-content">
-                                    <div class="course__header">
-                                        <div class="course__title">ORDER DETAIL</div>
-                                        <div class="x__icon">
-                                            <a href="#" class=""><i class="fa-solid fa-x"></i></a>
+                        <div class="container-2__body">
+                            <div class="container-2__filter">
+                                <div class="filter__selection">
+                                    <div class="filter__selection-input">
+                                        <div class="filter__selection-items filter__selection-name">
+                                            <div class="filter__selection-title filter__item-name">Mã:</div>
+                                            <input placeholder="" type="text" class="admin-input__long" >
+                                        </div>
+                                        <div class="filter__selection-items">
+                                            <div class="filter__selection-title filter__item-phone">Tên người dùng:</div>
+                                            <input placeholder="" type="text" class="admin-input__long">
+                                        </div>
+                                        <div class="filter__selection-items">
+                                            <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
+                                            <input placeholder="" type="datetime-local" class="admin-input__long">
+                                        </div>
+                                        <div class="filter__selection-items">
+                                            <div class="filter__selection-title filter__item-phone">Trạng thái đơn hàng:</div>
+                                            <select class="admin-input__short">
+                                                <option class="text-medium">--Vui lòng chọn trạng thái--</option>
+                                                <option class="text-medium">Paid</option>
+                                                <option class="text-medium">Failed</option>
+                                                <option class="text-medium">Pending</option>
+                                            </select>
                                         </div>
                                     </div>
 
-                                    <div class="course-body">
-                                        <table>
-                                            <thead>
-                                            <tr>
-                                                <th>Order Code</th>
-                                                <th>Title</th>
-                                                <th>Price</th>
-                                            </tr>
-                                            </thead>
+                                    <div class="filter__button-search">
+                                        <button class="button dark-button" type="submit">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
-                                            <tbody>
-                                            <tr>
-                                                <td>ORD101</td>
-                                                <td>Khóa học A</td>
-                                                <td>200.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>ORD101</td>
-                                                <td>Khóa học B</td>
-                                                <td>50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>ORD101</td>
-                                                <td>Khóa học C</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>ORD101</td>
-                                                <td>Khóa học D</td>
-                                                <td>150.00</td>
-                                            </tr>
-                                        </table>
+                            <div class="container-2__list-student">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Tên người dùng</th>
+                                        <th>Thành tiền</th>
+                                        <th>Kiểu thanh toán</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                ORD101
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Danh Tai
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                400.000đ
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Momo
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content course-row__status-public course-row__status">
+                                                Paid
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="#course-detail" class="button-de-mo">
+                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                ORD102
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Danh Tai
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                1.400.000đ
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                Momo
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__status-public course-row__font-content course-row__status">
+                                                Paid
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="#course-detail" class="button-de-mo">
+                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                ORD103
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                NgocMinh
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                600.000đ
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__status-pending course-row__font-content course-row__status">
+                                                Pending
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="#course-detail" class="button-de-mo">
+                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                ORD104
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                MinhLoc
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                400.000đ
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                <!--                                            Momo-->
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__status-failed course-row__font-content course-row__status">
+                                                Failed
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="#course-detail" class="button-de-mo">
+                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div id="course-detail" class="modal__course-detail">
+                                    <div class="modal__course-content">
+                                        <div class="course__header">
+                                            <div class="course__title">ORDER DETAIL</div>
+                                            <div class="x__icon">
+                                                <a href="#" class=""><i class="fa-solid fa-x"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="course-body">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th>Order Code</th>
+                                                    <th>Title</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                <tr>
+                                                    <td>ORD101</td>
+                                                    <td>Khóa học A</td>
+                                                    <td>200.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ORD101</td>
+                                                    <td>Khóa học B</td>
+                                                    <td>50.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ORD101</td>
+                                                    <td>Khóa học C</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ORD101</td>
+                                                    <td>Khóa học D</td>
+                                                    <td>150.00</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
