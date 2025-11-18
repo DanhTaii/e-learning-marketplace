@@ -74,6 +74,8 @@
     text-align: center;
     color: #333;
     align-content: center;
+    position: relative;
+    z-index: 10000;
 }
 
 .modal-close-btn {
