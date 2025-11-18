@@ -100,111 +100,153 @@
                     <div class="container-2__header"></div>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Tag</div>
+                            <div class="header__title">Thẻ</div>
                         </div>
-                        <div class="title__admin">New Tag</div>
-                        <div class="container-2__create">
-                            <div class="create__selection">
-                                <div class="create__selection-input">
-                                    <div class="create__selection-items">
-                                        <div class="filter__item-name">Name tag:</div>
-                                        <input placeholder="" type="text" class="input__create">
+                        <div class="container-2__body">
+                            <div class="title__admin">Tạo thẻ mới</div>
+                            <div class="container-2__create">
+                                <div class="create__selection">
+                                    <div class="create__selection-input">
+                                        <div class="create__selection-items">
+                                            <div class="filter__selection-title filter__item-name">Tên của thẻ:</div>
+                                            <input placeholder="" type="text" class="admin-input__long">
+                                        </div>
+                                        <div class="create__selection-items">
+                                            <div class="filter__selection-title filter__item-name">Slug:</div>
+                                            <input placeholder="" type="text" class="admin-input__long">
+                                        </div>
                                     </div>
-                                    <div class="create__selection-items">
-                                        <div class="filter__item-name">Slug:</div>
-                                        <input placeholder="" type="text" class="input__create">
+                                    <div class="create__btn-create">
+                                        <button type="submit" class="create-btn dark-button">Tạo mới</button>
                                     </div>
-
-
-                                </div>
-                                <div class="create__btn-create">
-                                    <button type="submit" class="create-btn text-medium">Create</button>
                                 </div>
                             </div>
+                            <div class="title__admin">Tất cả thẻ</div>
+                            <div class="container-2__filter">
+                                <div class="filter__selection">
+                                    <div class="filter__selection-input">
+                                        <div class="filter__selection-items filter__selection-name">
+                                            <div class="filter__selection-title filter__item-name">Tên thẻ:</div>
+                                            <input placeholder="" type="text" class="admin-input__long">
+                                        </div>
 
-                        </div>
-                        <div class="title__admin">All tag</div>
-                        <div class="container-2__filter">
-                            <div class="filter__selection">
-                                <div class="filter__selection-input">
-                                    <div class="filter__selection-items filter__selection-name">
-                                        <div class="filter__item-name">Name tag:</div>
-                                        <input placeholder="" type="text" class="input__font">
                                     </div>
-                                    <!--                                    <div class="filter__selection-items">-->
-                                    <!--                                        <div class="filter__item-phone">From date:</div>-->
-                                    <!--                                        <input placeholder="" type="datetime-local" class="input__font">-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="filter__selection-items">-->
-                                    <!--                                        <div class="filter__item-phone">To date:</div>-->
-                                    <!--                                        <input placeholder="" type="datetime-local" class="input__font">-->
-                                    <!--                                    </div>-->
-                                </div>
 
-                                <div class="filter__button-search">
-                                    <button class="button" type="submit">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
+                                    <div class="filter__button-search">
+                                        <button class="button dark-button" type="submit">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="container-2__list-student">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Name tag</th>
-                                    <th>Slug</th>
-                                    <th>Count</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
+                            <div class="container-2__list-student">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Tên thẻ</th>
+                                        <th>Slug</th>
+                                        <th>Số lượng dùng</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
 
-                                <tbody>
-                                <tr>
-                                    <td>Thuyết trình</td>
-                                    <td>https://</td>
-                                    <td>10</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Phản biện</td>
-                                    <td>https://</td>
-                                    <td>45</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Tư duy</td>
-                                    <td>https://</td>
-                                    <td>3</td>
-                                    <td class="action__button">
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                        </a>
-                                        <a href="">
-                                            <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Thuyết trình
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                10
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Tư duy
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                10
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="course-row__title title course-row__style-text">
+                                                Phản biện
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                https://
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__font-content">
+                                                45
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
+                                                PM
+                                            </div>
+                                        </td>
+                                        <td class="action__button">
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                            </a>
+                                            <a href="">
+                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

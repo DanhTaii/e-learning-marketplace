@@ -1,31 +1,52 @@
 
-:root {
-    /*Màu hover*/
-    --bright-blue: #264457;
-
-    /*Màu cho Công khai*/
-    /*Nền*/
-    --light-green: #e8f5e9;
-    /*Text*/
-    --green: #2e7d32;
-
-    /*Màu cho Riêng tư*/
-    /*Nền*/
-    --privacy-light-grey: #ECEFF1;
-    /*Text*/
-    --privacy-dark-charcoal: #263238;
-
-    /*Màu cho cấp độ*/
-    --blue-level : #0066cc
-}
-*{
-    box-sizing: inherit;
-    font-size: 62.5%;
-    line-height: 1.6rem;
-    font-family: "Roboto", sans-serif;
-}
 .course-row__font-content {
     font-size: var(--text-sm);
+}
+.course-row__level {
+    display: flex;
+    align-items: center;
+    color: var(--blue-level);
+}
+.level-dot {
+    border-radius: 50%;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--blue-level);
+    margin-right: 0.5rem ;
+}
+.course-row__status {
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    font-weight: var(--fw-semibold);
+    text-align: center;
+    margin-left: -1rem;
+}
+.course-row__status-payment {
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    font-weight: var(--fw-semibold);
+    text-align: center;
+    margin-left: -1rem;
+}
+.course-row__status-public{
+    background: var(--light-green);
+    color: var(--green);
+}
+.course-row__status-private{
+    background: var(--privacy-light-grey);
+    color: var(--privacy-dark-charcoal);
+}
+.course-row__price {
+    color: red;
+    font-weight: var(--fw-semibold);
+}
+.course-row__status-pending {
+    background: var(--pending-bg);
+    color: var(--pending-text);
+}
+.course-row__status-failed {
+    background: var(--failed-bg);
+    color: var(--failed-text);
 }
 .role-admin {
     /*Màu riêng cho admin*/
@@ -135,6 +156,11 @@ a {
     justify-content: space-between;
 }
 
+.container-2__body{
+    margin: 2rem 0;
+    width: 100%;
+}
+
 .admin-create__buttons button {
     background: var(--dark-blue);
     color: var(--white-color);
@@ -146,9 +172,9 @@ a {
 }
 
 .admin-create__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
 }
 
 .admin-create__buttons i {
@@ -164,27 +190,30 @@ a {
 }
 
 .title__admin {
-    margin-top: 2rem;
-    font-size: var(--text-xl);
+    /*margin-top: 2rem;*/
+    margin-bottom: 1rem;
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-semibold);
 }
 
 .container-2__list-student {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
     width: 100%;
 }
 
 /*Filter*/
 .container-2__filter {
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
     background: var(--white-color);
     /*height: 6rem;*/
     display: flex;
     padding: 2rem;
     align-items: center;
     width: 100%;
+    margin-bottom: 2rem;
 }
 
 .filter__selection {
@@ -195,16 +224,16 @@ a {
     align-items: center;
 }
 
-/*Create*/
+/*Phần tạo trong các trang Lesson, Tag bao gồm cả input*/
 .container-2__create {
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
+    margin-bottom: 2rem;
     background: var(--white-color);
     /*height: 6rem;*/
     display: flex;
     padding: 2rem;
     width: 100%;
-
-}
+    }
 
 .create__selection {
     display: flex;
@@ -221,12 +250,8 @@ a {
 }
 
 .create__selection-items {
-    font-size: var(--text-2xl);
+    font-size: var(--text-base);
     flex: 1;
-}
-
-.input__create {
-    width: 100%;
 }
 
 .create__selection-items--wide {
@@ -236,37 +261,41 @@ a {
     gap: 2rem;
 }
 
-.create__selection-items--wide .input__create {
-    width: 100%;
-}
-
 .create__btn-create {
-    width: 100%;
+    width: 130%;
     display: flex;
     justify-content: flex-end;
 }
 
 .create-btn {
-    border-radius: 4px;
+    /*border-radius: 3px;*/
     color: var(--white-color);
-    background-color: black;
+    background-color: var(--dark-blue);
     padding: 8px 15px;
     font-weight: var(--fw-regular);
 }
 /*Xử lý phần nhận dữ liệu để lọc*/
 /*Chỉnh chung*/
-input {
-    width: 100%;
-    border: 1px solid var(--light-grey);
-    border-radius: 3px;
-    color: var(--dark-blue);
-    font-weight: var(--fw-regular);
-    padding: 0.8rem 1rem;
-}
+/*input {*/
+/*    !*width: 100%;*!*/
+/*    border: 1px solid var(--light-grey);*/
+/*    border-radius: 3px;*/
+/*    color: var(--dark-blue);*/
+/*    font-weight: var(--fw-regular);*/
+/*    padding: 0.8rem 1rem;*/
+/*}*/
 /*Cài đặt chung cho các thẻ nhận CSS này sẽ có HEIGHT cố định kèm font*/
-.input__font {
+.admin-input__long {
+    width: 100%;
     font-size: var(--text-base);
-    height: 3rem;
+    height: 3.5rem;
+    padding: 0 1rem;
+}
+.admin-input__short {
+    /*width: 100%;*/
+    font-size: var(--text-base);
+    height: 3.5rem;
+    padding: 0 1rem;
 }
 /*Xử lý input dạng select*/
 /*Chỉnh cỡ chữ chung cho toàn option của select*/
@@ -306,6 +335,7 @@ select {
 /*CHỉnh nút tìm kiếm chung*/
 .filter__selection-input {
     display: flex;
+    /*Để nó không lấy hết phần còn lại của những thằng khác*/
     width: 90%;
 }
 
