@@ -224,19 +224,40 @@
 
 .box__input {
     width: 100%;
-
+    display: flex;
+    align-items: center;
 }
 
 .input-style {
     border: none;
     border-bottom: 1px solid var(--light-grey);
-    width: 100%;
+    width: 75%;
 }
 
 .input-style:focus {
     outline: none;
     border-bottom: 2px solid var(--light-grey);
 
+}
+.input__number{
+    margin-left: 15px;
+    width: 5%;
+    border: none;
+    border-bottom: 1px solid var(--light-grey);
+    font-size: var(--text-lg);
+    padding: 5px 0 11px;
+}
+.star{
+    display: flex;
+    align-items: center;
+}
+.button__add{
+    width: 10% !important;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-left: auto;
+    margin-right: 15px;
 }
 
 .user__avatar2 {
