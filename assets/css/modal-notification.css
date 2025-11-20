@@ -94,3 +94,7 @@
 .modal-backdrop:target {
     display: flex; /* Hiện ra */
 }
+
+.dark-button-2{
+    width: 100% !important;
+}
