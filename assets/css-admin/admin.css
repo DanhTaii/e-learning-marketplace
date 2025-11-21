@@ -15,6 +15,7 @@
     margin-right: 0.5rem ;
 }
 .course-row__status {
+    width: 87px;
     padding: 0.5rem;
     border-radius: 1.5rem;
     font-weight: var(--fw-semibold);
@@ -435,4 +436,23 @@ td:last-child ,th:last-child{
 }
 .log-out__content {
     margin-right: 0.5rem;
+}
+.admin-create__buttons1 button {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    padding: 0 2rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    margin:auto ;
+    font-size: var(--text-lg);
+    border: solid 1px var(--dark-blue);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.admin-create__buttons1 {
+    display: flex;
+    /*align-items: center;*/
+    /*justify-content: center;*/
 }
