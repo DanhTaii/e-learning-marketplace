@@ -1,0 +1,239 @@
+
+.style__sub-title {
+    font-size: var(--text-base);
+    color: var(--dark-blue);
+    font-weight: var(--fw-semibold);
+}
+
+.style__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
+    color: var(--dark-blue);
+    line-height: 3.6rem;
+    /*margin-bottom: 3rem;*/
+}
+
+.overall {
+    margin-top: 6rem;
+}
+
+.profile-block {
+    padding: 3rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: var(--white-color);
+    border: solid 1px var(--light-grey);
+}
+
+.profile-block__title {
+    font-size: var(--text-2xl);
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+.profile-block__avatar {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border-radius: 50%;
+    border: solid 1px #01FF85;
+    background: #1C2329;
+    font-weight: 400;
+    color: white;
+    width: 130px;
+    height: 130px;
+}
+
+/*.profile-block__name {*/
+/*    margin-top: 20px;*/
+/*}*/
+.profile-block__button {
+    margin-top: 20px;
+    /*font-size: 1.2rem;*/
+    border-radius: 4px;
+    background: white;
+    color: #3722D3;
+    border: solid 1px #3722D3;
+    width: 100%;
+    padding: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-block__button:hover {
+    background: #3722D320;
+}
+
+/*profile menu*/
+.profile-menu {
+    /*padding: 2rem;*/
+    /*border-radius: 4px;*/
+    margin-top: 3rem;
+    background: var(--white-color);
+    border: solid 1px var(--light-grey);
+}
+
+.profile-menu ul {
+    padding-left: 0;
+    /*margin-top: -2rem;*/
+    /*margin-bottom: -2rem;*/
+}
+
+a {
+    text-decoration: none;
+    color: var(--dark-blue);
+}
+
+.profile-menu li {
+    /*padding-bottom: 4rem;*/
+    list-style-type: none;
+    /*font-weight: 500;*/
+}
+
+.account__profile {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+}
+
+.profile-menu__item {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    padding: 1rem 3rem;
+    cursor: pointer;
+}
+
+.profile-menu__item:hover {
+    /*padding-bottom: 4rem;*/
+    list-style-type: none;
+    background: var(--dark-blue);
+    color: var(--white-color);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    padding: 1rem 3rem;
+}
+
+.profile-menu li:last-child {
+    /*padding-bottom: 0;*/
+}
+
+/*information*/
+.information__container {
+    margin-top: 6rem;
+}
+
+.personal-detail__title {
+    /*background: var(--white-color);*/
+    text-align: center;
+    /*margin-bottom: -1rem;*/
+    border-radius: 0.3rem;
+    border-bottom: 1px solid var(--light-grey);
+    margin-right: -15rem;
+    margin-left: -15rem;
+    margin-top: -3rem;
+    margin-bottom: 3rem;
+}
+
+.text__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
+    color: var(--dark-blue);
+    line-height: 3.6rem;
+    padding: 1rem;
+}
+
+.personal-detail__block {
+    /*border: solid 1px var(--light-grey);*/
+    border: solid 1px #AEABABFF;
+    /*AEABABFF*/
+    padding: 3rem 15rem;
+    border-radius: 4px;
+    background: var(--white-color);
+    width: 100%;
+}
+
+/*Hàng 1 của khối Personal detial*/
+.personal-detail__column-1 {
+    padding-right: 10rem;
+}
+
+/*Hàng 2 của khôí personal detail*/
+.personal-detail__row-2 {
+    margin-top: 2.5rem;
+}
+
+/*.personal-detail__email input {*/
+/*    width: 100%;*/
+/*}*/
+.personal-detail__column-items {
+
+}
+
+/*Tùy chỉnh toàn input*/
+.personal-detail__input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    height: 4rem;
+}
+
+input {
+    border: solid 1px var(--light-grey);
+    border-radius: 3px;
+    width: 100%;
+    height: 100%;
+    padding-left: 1rem;
+    font-size: var(--text-base);
+    font-weight: var(--fw-regular);
+}
+
+/*input:hover {*/
+/*    background: #E3E9EB;*/
+/*    border-radius: 0.4rem;*/
+/*}*/
+.choice {
+    margin: 2rem;
+    width: 100px;
+    float: right;
+}
+
+hr {
+    margin-right: -15rem;
+    margin-left: -15rem;
+}
+
+/*Instructor*/
+.instructor_title {
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+}
+
+.profile-block__sub-title {
+    font-size: var(--text-base);
+    margin-top: 1rem;
+}
+
+.instructor__total-course {
+    font-size: var(--text-base);
+    margin-top: 0.8rem;
+    font-weight: var(--fw-bold);
+}
+
+.box__rate {
+    margin-top: 1rem;
+}
+
+.fa-star {
+    color: #FFD43B;
+    font-size: var(--text-base);
+}
+
+.box__rate span {
+    font-size: var(--text-base);
+}

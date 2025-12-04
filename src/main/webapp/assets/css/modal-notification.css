@@ -1,0 +1,105 @@
+/* Lớp nền mờ (ẩn ban đầu) */
+.modal-backdrop {
+    display: none; /* Ẩn đi */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    z-index: 99;
+
+    align-items: center;
+    justify-content: center;
+}
+
+/*Modal header*/
+.modal-header {
+    display: flex;
+    /*justify-content: space-between;*/
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+.header-content {
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-semibold);
+}
+
+.body-title {
+    font-size: var(--text-3xl);
+    color: var(--bright-green);
+    font-weight: var(--fw-semibold);
+}
+
+.body-title-black {
+    font-size: var(--text-3xl);
+    color: black;
+    font-weight: var(--fw-semibold);
+}
+
+.check-popup {
+    font-size: var(--text-5xl);
+    color: var(--bright-green);
+    margin-top: 2rem;
+}
+
+.check-popup-black {
+    font-size: var(--text-5xl);
+    color: black;
+    margin-top: 2rem;
+}
+
+.body-content {
+    font-size: var(--text-lg);
+    margin-top: 2rem;
+}
+
+.body-selection {
+    display: flex;
+    margin-top: 2rem;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+}
+
+.body-selection__item {
+    width: 40%;
+    height: 100%;
+}
+
+/* Nội dung của modal */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 3px;
+    min-width: 40%;
+    min-height: 40%;
+    text-align: center;
+    color: #333;
+    align-content: center;
+    position: relative;
+    z-index: 10000;
+}
+
+.modal-close-btn {
+    display: inline-block;
+    background: #2C67A9; /* Màu dark-blue của bạn */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* PHẦN QUAN TRỌNG NHẤT */
+/* Khi modal này là :target (tức là URL là #my-modal)
+   nó sẽ hiện ra */
+.modal-backdrop:target {
+    display: flex; /* Hiện ra */
+}
+
+.dark-button-2 {
+    width: 100% !important;
+}
