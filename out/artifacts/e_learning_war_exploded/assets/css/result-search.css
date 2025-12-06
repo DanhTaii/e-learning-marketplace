@@ -1,0 +1,156 @@
+.container__title {
+    margin: 40px 0 60px;
+    color: var(--dark-blue);
+    width: 100%;
+}
+
+.container__filter {
+    margin-bottom: 30px;
+}
+
+.box__title {
+    font-weight: 700;
+    color: black;
+}
+
+.box__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+}
+
+.type__checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+.content__type {
+    display: flex;
+    color: var(--dark-blue);
+    align-items: center;
+}
+
+.type__text {
+    margin-left: 5px;
+    font-weight: 400;
+}
+
+.content__number {
+    padding: 5px 20px;
+    border: solid 1px #1C232980;
+    border-radius: 15px;
+    margin-right: 20px;
+    background: var(--white-color);
+}
+
+.product__small-advertisement {
+    transition: transform 0.2s ease;
+}
+
+.product__small-advertisement:hover {
+    transform: translateY(-5px);
+}
+
+.product__small-advertisement {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    margin-bottom: 40px;
+}
+
+.small-advertisement__image {
+    width: 100%;
+    height: 150px;
+}
+
+.img-2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.small-advertisement__content {
+    padding: 10px;
+    background-color: var(--white-color);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.content__top {
+    display: flex;
+    justify-content: space-between;
+    color: var(--dark-blue);
+    align-items: center;
+    margin: 5px 0;
+}
+
+.content__author-name {
+    font-weight: 500;
+}
+
+.content__rate {
+    display: flex;
+}
+
+.rate__icon i {
+    font-weight: 500;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+}
+
+.rate__number {
+    font-weight: 500;
+}
+
+.content__paragraph p {
+    color: var(--dark-blue);
+    margin: 15px 0;
+}
+
+.content__list {
+    display: flex;
+}
+
+.content__list-item {
+    font-size: 1rem;
+    background-color: var(--hover-color);
+    padding: 2px 9px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.content__quick-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.quick-info__level {
+    display: flex;
+    align-items: center;
+}
+
+.quick-info__users {
+    display: flex;
+    align-items: center;
+}
+
+.quick-info__time {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+    position: relative;
+    top: -2px;
+}
