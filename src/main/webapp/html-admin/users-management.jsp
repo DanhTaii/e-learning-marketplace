@@ -1,15 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>User Management</title>
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/users-management.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/users-management.css">
 
 </head>
 <body>
@@ -178,40 +183,52 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="title">Danh Tai</div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                abd@gmail.com
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">+84000099777</div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content role-admin">
-                                                Admin
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="#user-detail">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="user" items="${listUsers}">
+                                        <tr>
+                                            <td>
+                                                <div class="title">${user.username}</div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${user.email}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">${user.phone}</div>
+                                            </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${user.role == 'admin'}">
+                                                        <div class="course-row__status course-row__font-content role-admin">
+                                                                ${user.role}
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="course-row__status course-row__font-content course-row__status-private">
+                                                                ${user.role}
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </td>
+                                            <td>
+                                                <div class="course-row__created course-row__font-content">
+<%--                                                        ${user.created_at}--%>
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="#user-detail">
+                                                    <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -248,7 +265,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
