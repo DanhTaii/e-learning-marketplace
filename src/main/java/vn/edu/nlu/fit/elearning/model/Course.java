@@ -24,10 +24,10 @@ public class Course implements Serializable {
     private String level;
 
     // price DECIMAL(12,2) NOT NULL
-    private BigDecimal price;
+    private double price;
 
     // discount_price DECIMAL(12,2) DEFAULT 0.00
-    private BigDecimal discountPrice; // ĐÃ SỬA: từ discount_price thành discountPrice (camelCase)
+    private double discountPrice; // ĐÃ SỬA: từ discount_price thành discountPrice (camelCase)
 
     // student_count INT DEFAULT 0
     private int studentCount;
@@ -36,7 +36,7 @@ public class Course implements Serializable {
     private boolean isFeatured;
 
     // rating DECIMAL(3,2) DEFAULT 0.00
-    private BigDecimal rating;
+    private double rating;
 
     // thumbnail_url VARCHAR(500)
     private String thumbnailUrl; // ĐÃ SỬA: từ thumbnailURL thành thumbnailUrl (camelCase chuẩn hơn)
@@ -45,10 +45,12 @@ public class Course implements Serializable {
     private boolean isPublic;
 
     // category_id INT NULL (Foreign Key)
-    private Integer categoryId; // Vẫn là Integer vì NULL
+    private int categoryId; // Vẫn là Integer vì NULL
 
     // author_name VARCHAR(100) DEFAULT 'Admin'
     private String authorName; // ĐÃ SỬA: từ author_name thành authorName (camelCase)
+
+    private double durationHours;
 
     // created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     private LocalDateTime createdAt; // ĐÃ SỬA: từ created_at thành createdAt (camelCase)
@@ -56,7 +58,7 @@ public class Course implements Serializable {
     // updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     private LocalDateTime updatedAt; // ĐÃ SỬA: từ updated_at thành updatedAt (camelCase)
 
-    public Course(int id, String title, String subtitle, String description, String goals, String level, BigDecimal price, BigDecimal discountPrice, int studentCount, boolean isFeatured, BigDecimal rating, String thumbnailUrl, boolean isPublic, Integer categoryId, String authorName, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -72,6 +74,7 @@ public class Course implements Serializable {
         this.isPublic = isPublic;
         this.categoryId = categoryId;
         this.authorName = authorName;
+        this.durationHours = durationHours;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -127,19 +130,19 @@ public class Course implements Serializable {
         this.level = level;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public BigDecimal getDiscountPrice() {
+    public double getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(BigDecimal discountPrice) {
+    public void setDiscountPrice(double discountPrice) {
         this.discountPrice = discountPrice;
     }
 
@@ -159,11 +162,11 @@ public class Course implements Serializable {
         isFeatured = featured;
     }
 
-    public BigDecimal getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(BigDecimal rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -197,6 +200,14 @@ public class Course implements Serializable {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public double getDurationHours() {
+        return durationHours;
+    }
+
+    public void setDurationHours(double durationHours) {
+        this.durationHours = durationHours;
     }
 
     public LocalDateTime getCreatedAt() {
