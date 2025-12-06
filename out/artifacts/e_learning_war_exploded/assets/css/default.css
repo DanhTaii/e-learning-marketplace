@@ -1,0 +1,19 @@
+.header__button-box {
+    display: flex;
+    margin-left: auto;
+}
+
+.sign-in-box {
+    margin-right: 10px;
+    border: solid 2px var(--white-color);
+    border-radius: 5px;
+}
+
+.sign-in {
+    background-color: var(--dark-blue) !important;
+    color: var(--white-color) !important;
+}
+
+.header__search-2 {
+    margin-left: 30px;
+}
