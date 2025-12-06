@@ -1,0 +1,143 @@
+
+.list-card {
+    margin: 3rem 0;
+    display: flex;
+    width: 100%;
+}
+
+.list-card li {
+    list-style-type: none;
+    margin-right: 2rem;
+    width: 100%;
+}
+
+.list-card li:last-child {
+    list-style-type: none;
+    margin-right: 0;
+    width: 100%;
+}
+
+.list-card ul {
+    padding-left: 0;
+    display: flex;
+    width: 100%;
+}
+
+.card-information {
+    background: var(--white-color);
+    border-radius: 7px;
+    color: var(--dark-blue);
+    font-size: var(--text-5xl);
+    padding: 2rem;
+    transition: transform 0.2s ease;
+}
+.card-information:hover {
+    transform: translateY(-5px);
+}
+.card-content__number {
+    margin-top: 2rem;
+}
+
+.card-icon {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    border-radius: 3px;
+    padding: 0.5rem;
+    font-size: var(--text-4xl);
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--text-5xl);
+    font-weight: var(--fw-semibold);
+}
+
+.visualization {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.top-course {
+    /*border-radius: 7px;*/
+    border: 1px solid var(--light-grey);
+    background: var(--white-color);
+}
+
+.top-course__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
+    line-height: 4rem;
+    padding: 1rem 1rem;
+}
+.chart {
+    background: var(--white-color);
+    width: 63%;
+    height: 29rem;
+    display: flex;
+    flex-direction: column;
+}
+.chart__title {
+    font-size: var(--text-2xl);
+    line-height: 3rem;
+    font-weight: var(--fw-semibold);
+}
+.bar-chart {
+    position: relative;
+    flex: 1;
+    /*min-height: 0;*/
+    display: flex;
+    align-items: flex-end ;
+}
+.bar-chart__grid {
+    height: 100%;
+    position: absolute;
+    /*Vẫn chưa hiểu tại sao lại cần ?*/
+    top: 0; left: 0; right: 0; bottom: 0;
+   }
+.vertical-axis {
+    position: absolute;
+    height: 100%;
+    border: 1px solid var(--dark-blue);
+    width: 1px;
+}
+.horizontal-line {
+    position: absolute;
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    height: 1px;
+}
+
+/*Chinhr từng con của horizontal-line có độ cao nahast định*/
+.horizontal-line:nth-child(2) { top: 0% }
+.horizontal-line:nth-child(3) { top: 25% }
+.horizontal-line:nth-child(4) { top: 50% }
+.horizontal-line:nth-child(5) { top: 75% }
+.horizontal-line:nth-child(6) { top: 100% }
+
+/*VÙNG CHỨA và xử lys các cột*/
+/*Phạm vi và các quy ước chung của cột*/
+.bar-chart__bar {
+    /*Để VÙNG CHỨA nằm lên trên thk cha là bar-chart__grid */
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 0 2rem;
+}
+/*Quy ước chung của từng cột*/
+.column-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    color: var(--white-color);
+    width: 30px;
+    background: linear-gradient(to top, var(--dark-blue), var(--bright-blue));
+    border-radius: 3%;
+}
