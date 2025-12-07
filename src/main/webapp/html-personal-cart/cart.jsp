@@ -1,21 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">v
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/home.css">
-    <link rel="stylesheet" href="../assets/css/cart.css">
-    <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
-    <!--    <script src=""></script>-->
-
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/base.css">x
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
 
 </head>
 <body>
@@ -139,7 +141,7 @@
                     </a>
                 </div>
                 <div class="header__cart">
-                    <a href="../html-personal-cart/cart.jsp" class="turn-page text-header">
+                    <a href="${pageContext.request.contextPath}/cart" class="turn-page text-header">
                         <i class="text-header fa-solid fa-cart-shopping"></i>
                     </a>
                 </div>
@@ -220,7 +222,7 @@
                     <div class="shopping-cart">
                         <span class="shopping-cart__title text-big-title h1">Giỏ hàng</span>
                         <span class="shopping-cart__summary summary text-paragraph ">
-                        <span class="text-2xl">Giỏ hàng (5)</span>
+                        <span class="text-2xl">Giỏ hàng (${list.size()})</span>
                     </span>
 
                         <div class="shopping-cart__sub-title">
@@ -244,28 +246,28 @@
 
                         <div class="scrollable-order-list">
                             <ul>
+                                <c:forEach var="p" items="${list}">
                                 <li>
 
                                     <div class="shopping-cart__cart-items cart-items">
                                         <div class="cart-items__tick">
-                                            <input type="checkbox" class="tick" name="tick" value="checked" checked>
+                                            <input type="checkbox" class="tick" name="tick" data-id="${p.id}" data-price="${p.priceNew}" <c:if test="${p.selected}">checked</c:if>>
                                         </div>
                                         <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                             <div class="cart-items__detail">
-                                                <div class="detail__image-container">
-                                                    <img srcset="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_m_1690356655.jpg"
-                                                         alt="" class="image">
+                                                <div class="detail__image-container" style="aspect-ratio: 16 / 9;">
+                                                    <img src="${p.thumbnailUrl}" alt="${p.title}" class="image">
                                                 </div>
                                                 <div class="detail__info">
 
                                                     <div class="info__name-group">
                                         <span class="name__title text-paragraph">
-                                            <p>Tư duy phản biện</p>
+                                            <p>${p.title}</p>
                                         </span>
                                                     </div>
                                                     <div class="info__rating-group">
                                                         <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                        <span class="rating-group__rating rating text-mini">5.0
+                                                        <span class="rating-group__rating rating text-mini">${p.rating}
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
@@ -275,11 +277,11 @@
                                                         <span class="rating-group__rating-count ratings-count text-mini ">(113.485 rating)</span>
                                                     </div>
                                                     <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">1 tiếng 30 phút</span>
+                                                        <span class="stats__hours text-mini">${p.durationHours} tiếng</span>
 
                                                         <span class="stats__lecture text-mini ">• 15 Bài giảng</span>
 
-                                                        <span class="stats__level text-mini">• Người mới</span>
+                                                        <span class="stats__level text-mini">• ${p.level}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -287,14 +289,14 @@
                                         <div class="cart-items__action-price-group action-price-group">
                                             <div class="cart-items__action items-action">
                                                 <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                <a href="" class="action__link1">Xóa</a>
+                                                <a href="" class="action__link1" data-id="${p.id}" >Xóa</a>
                                             </div>
                                             <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                                 <div class="cart-items__price items-price">
-                                                    <div><span class="price-discounted">399.000đ <i
+                                                    <div><span class="price-discounted">${p.priceNewFormatted}đ <i
                                                             class="fa-solid fa-tag price-icon"
                                                             style="color: #3722d3;"></i> </span></div>
-                                                    <div><span class="price-origin">599.000đ </span></div>
+                                                    <div><span class="price-origin">${p.priceOldFormatted}đ </span></div>
 
 
                                                 </div>
@@ -305,249 +307,14 @@
                                     </div>
 
                                 </li>
-                                <li>
-
-                                    <div class="shopping-cart__cart-items cart-items">
-                                        <div class="cart-items__tick">
-                                            <input type="checkbox" class="tick" name="tick" value="checked" checked>
-                                        </div>
-                                            <div class="cart-items__detail">
-                                                <div class="detail__image-container">
-                                                    <img srcset="https://tse1.mm.bing.net/th/id/OIP.-qNL8MTdeRuVGRqoTYXzTAHaEJ?cb=ucfimg2ucfimg=1&w=2000&h=1121&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                                         alt="" class="image">
-                                                </div>
-                                                <div class="detail__info">
-
-                                                    <div class="info__name-group">
-                                        <span class="name__title text-paragraph">
-                                            <p>Lãnh Đạo Không Cần Chức Danh</p>
-                                        </span>
-                                                    </div>
-                                                    <div class="info__rating-group">
-                                                        <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                        <span class="rating-group__rating rating text-mini">4.9
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        </span>
-                                                        <span class="rating-group__rating-count ratings-count text-mini ">(53.270 rating)</span>
-                                                    </div>
-                                                    <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">2 tiếng</span>
-
-                                                        <span class="stats__lecture text-mini ">• 20 Bài giảng</span>
-
-                                                        <span class="stats__level text-mini">• Người mới</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="cart-items__action-price-group action-price-group">
-                                            <div class="cart-items__action items-action">
-                                                <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                <a href="" class="action__link1">Xóa</a>
-                                            </div>
-
-                                                <div class="cart-items__price items-price">
-                                                    <div><span class="price-discounted">599.000đ <i
-                                                            class="fa-solid fa-tag price-icon"
-                                                            style="color: #3722d3;"></i> </span></div>
-                                                    <div><span class="price-origin">899.000đ </span></div>
-
-
-                                                </div>
-                                        </div>
-
-                                    </div>
-
-                                </li>
-                                <li>
-
-                                    <div class="shopping-cart__cart-items cart-items">
-                                        <div class="cart-items__tick">
-                                            <input type="checkbox" class="tick" name="tick" value="checked" checked>
-                                        </div>
-
-                                            <div class="cart-items__detail">
-                                                <div class="detail__image-container">
-                                                    <img srcset="https://tse3.mm.bing.net/th/id/OIP.k5sDq201q3UKgMwrVdcyBQHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                                         alt="" class="image">
-                                                </div>
-                                                <div class="detail__info">
-
-                                                    <div class="info__name-group">
-                                        <span class="name__title text-paragraph">
-                                            <p>Kỹ năng giải quyết vấn đề cho hiệu quả</p>
-                                        </span>
-                                                    </div>
-                                                    <div class="info__rating-group">
-                                                        <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                        <span class="rating-group__rating rating text-mini">4.7
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        </span>
-                                                        <span class="rating-group__rating-count ratings-count text-mini ">(113.485 rating)</span>
-                                                    </div>
-                                                    <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">1 tiếng 30 phút</span>
-
-                                                        <span class="stats__lecture text-mini ">• 15 Bài giảng</span>
-
-                                                        <span class="stats__level text-mini">• Người mới</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="cart-items__action-price-group action-price-group">
-                                            <div class="cart-items__action items-action">
-                                                <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                <a href="" class="action__link1">Xóa</a>
-                                            </div>
-                                            <a href="../html-partrial/course-detail.jsp" class="turn-page">
-                                                <div class="cart-items__price items-price">
-                                                    <div><span class="price-discounted">399.000đ <i
-                                                            class="fa-solid fa-tag price-icon"
-                                                            style="color: #3722d3;"></i> </span></div>
-                                                    <div><span class="price-origin">599.000đ </span></div>
-
-
-                                                </div>
-                                            </a>
-                                        </div>
-
-                                    </div>
-
-                                </li>
-                                <li>
-
-                                    <div class="shopping-cart__cart-items cart-items">
-                                        <div class="cart-items__tick">
-                                            <input type="checkbox" class="tick" name="tick" value="checked" checked>
-                                        </div>
-                                            <div class="cart-items__detail">
-                                                <div class="detail__image-container">
-                                                    <img srcset="https://static.ybox.vn/2022/11/3/1669791323216-Thi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn%20(1).png"
-                                                         alt="" class="image">
-                                                </div>
-                                                <div class="detail__info">
-
-                                                    <div class="info__name-group">
-                                        <span class="name__title text-paragraph">
-                                            <p>Networking Chuyên Nghiệp</p>
-                                        </span>
-                                                    </div>
-                                                    <div class="info__rating-group">
-                                                        <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                        <span class="rating-group__rating rating text-mini">4.6
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        </span>
-                                                        <span class="rating-group__rating-count ratings-count text-mini ">(113.485 rating)</span>
-                                                    </div>
-                                                    <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">1 tiếng 30 phút</span>
-
-                                                        <span class="stats__lecture text-mini ">• 15 Bài giảng</span>
-
-                                                        <span class="stats__level text-mini">• Người mới</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="cart-items__action-price-group action-price-group">
-                                            <div class="cart-items__action items-action">
-                                                <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                <a href="" class="action__link1">Xóa</a>
-                                            </div>
-
-                                                <div class="cart-items__price items-price">
-                                                    <div><span class="price-discounted">399.000đ <i
-                                                            class="fa-solid fa-tag price-icon"
-                                                            style="color: #3722d3;"></i> </span></div>
-                                                    <div><span class="price-origin">699.000đ </span></div>
-
-
-                                                </div>
-
-
-                                        </div>
-
-                                    </div>
-
-                                </li>
-                                <li>
-
-                                    <div class="shopping-cart__cart-items cart-items">
-                                        <div class="cart-items__tick">
-                                            <input type="checkbox" class="tick" name="tick">
-                                        </div>
-                                        <a href="../html-partrial/course-detail.jsp" class="turn-page">
-                                            <div class="cart-items__detail">
-                                                <div class="detail__image-container">
-                                                    <img srcset="https://blog.atrivity.com/hs-fs/hubfs/Blog/Sales%20Enablement/1200x627-11.jpg?width=1866&name=1200x627-11.jpg"
-                                                         alt="" class="image">
-                                                </div>
-                                                <div class="detail__info">
-
-                                                    <div class="info__name-group">
-                                        <span class="name__title text-paragraph">
-                                            <p>Kỹ năng quản lý dự án cá nhân</p>
-                                        </span>
-                                                    </div>
-                                                    <div class="info__rating-group">
-                                                        <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                        <span class="rating-group__rating rating text-mini">4.5
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        </span>
-                                                        <span class="rating-group__rating-count ratings-count text-mini ">(113.485 rating)</span>
-                                                    </div>
-                                                    <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">1 tiếng 30 phút</span>
-
-                                                        <span class="stats__lecture text-mini ">• 15 Bài giảng</span>
-
-                                                        <span class="stats__level text-mini">• Người mới</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="cart-items__action-price-group action-price-group">
-                                            <div class="cart-items__action items-action">
-                                                <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                <a href="" class="action__link1">Xóa</a>
-                                            </div>
-                                            <a href="./course-detail.html" class="turn-page">
-                                                <div class="cart-items__price items-price">
-                                                    <div><span class="price-discounted">399.000đ <i
-                                                            class="fa-solid fa-tag price-icon"
-                                                            style="color: #3722d3;"></i> </span></div>
-                                                    <div><span class="price-origin">599.000đ </span></div>
-
-
-                                                </div>
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-
-                                </li>
-
+                                </c:forEach>
 
 
                             </ul>
-
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
@@ -559,7 +326,7 @@
                             <div class="tick">
                                 <input type="checkbox" class="tick" name="tick">
                             </div>
-                            <div class="text-medium choose">Chọn tất cả (5)</div>
+                            <div class="text-medium choose">Chọn tất cả  (${list.size()})</div>
                             <div class="text-medium remove">Xóa</div>
                             <div class="text-medium wishlisted">Thêm vào Yêu thích</div>
                         </div>
