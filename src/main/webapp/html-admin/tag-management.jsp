@@ -1,14 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Tag Management</title>
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
 <div class="web">
@@ -171,81 +175,37 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Thuyết trình
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                10
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Tư duy
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                10
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Phản biện
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                45
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="t" items="${listTags}">
+                                        <tr>
+                                            <td>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${t.name}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${t.courseCount}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__created course-row__font-content">
+                                                    <fmt:setLocale value="en_US" scope="page"/>
+
+                                                    <fmt:formatDate
+                                                            value="${t.createdAt}"
+                                                            pattern="MMMM d, yyyy – h:mm a"/>
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>c>
                                     </tbody>
                                 </table>
                             </div>

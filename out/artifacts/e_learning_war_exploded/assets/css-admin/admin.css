@@ -1,0 +1,458 @@
+
+.course-row__font-content {
+    font-size: var(--text-sm);
+}
+.course-row__level {
+    display: flex;
+    align-items: center;
+    color: var(--blue-level);
+}
+.level-dot {
+    border-radius: 50%;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--blue-level);
+    margin-right: 0.5rem ;
+}
+.course-row__status {
+    width: 87px;
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    font-weight: var(--fw-semibold);
+    text-align: center;
+    margin-left: -1rem;
+}
+.course-row__status-payment {
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    font-weight: var(--fw-semibold);
+    text-align: center;
+    margin-left: -1rem;
+}
+.course-row__status-public{
+    background: var(--light-green);
+    color: var(--green);
+}
+.course-row__status-private{
+    background: var(--privacy-light-grey);
+    color: var(--privacy-dark-charcoal);
+}
+.course-row__price {
+    color: red;
+    font-weight: var(--fw-semibold);
+}
+.course-row__status-pending {
+    background: var(--pending-bg);
+    color: var(--pending-text);
+}
+.course-row__status-failed {
+    background: var(--failed-bg);
+    color: var(--failed-text);
+}
+.role-admin {
+    /*Màu riêng cho admin*/
+    background-color: #e0e7ff;
+    color: #4338ca;
+    border-radius: 3rem;
+    text-align: center;
+    font-weight: var(--fw-semibold);
+    padding: 0.5rem;
+    margin-left: -1rem;
+}
+.role-user {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+.container-1 {
+    background: var(--dark-blue);
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.container-1__title {
+    color: var(--white-color);
+    font-size: var(--text-5xl);
+    font-weight: var(--fw-bold);
+    margin: 3rem 0;
+    /*margin-bottom: 6rem;*/
+}
+
+.container-1__menu li .fa-books {
+
+}
+
+.container-1__menu {
+    margin-top: 6rem;
+}
+
+.container-1__menu li i {
+    color: var(--white-color);
+    font-size: var(--text-3xl);
+    margin-right: 1rem;
+}
+
+.container-1__menu li {
+    margin: 2rem 0;
+    list-style-type: none;
+}
+
+.container-1__menu ul {
+    padding-left: 0;
+}
+
+.container-1__menu-items a span {
+    font-size: var(--text-xl);
+    font-weight: var(--fw-medium);
+}
+
+a {
+    font-size: var(--text-xl);
+    /*font-weight: var(--fw-medium);*/
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+.student-list:hover {
+    background: var(--bright-blue);
+}
+.student-list {
+    background: var(--bright-blue);
+}
+
+.menu-item__student span{
+    font-size: var(--text-xl);
+}
+.menu-item__student .fa-solid{
+    font-size: var(--text-xl);
+}
+.menu-item__student:hover {
+    background: var(--bright-blue);
+}
+.menu-item__student {
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    padding: 0.5rem;
+}
+
+/*Container 2*/
+.container-2 {
+    padding: 0 !important;
+}
+
+.container-2__grid {
+    padding: 0 1rem;
+    margin-top: -8rem;
+}
+
+.container-2__header {
+    background: var(--white-color);
+    height: 8rem;
+    width: 100%;
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-2__body{
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.admin-create__buttons button {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    font-size: var(--text-lg);
+    border: solid 1px var(--dark-blue);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.admin-create__buttons {
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}
+
+.admin-create__buttons i {
+    margin-right: 0.5rem;
+    font-size: var(--text-base);
+}
+
+.header__title {
+    color: var(--dark-blue);
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-semibold);
+    line-height: 5rem;
+}
+
+.title__admin {
+    /*margin-top: 2rem;*/
+    margin-bottom: 1rem;
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-semibold);
+}
+
+.container-2__list-student {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*margin-top: 2rem;*/
+    width: 100%;
+}
+
+/*Filter*/
+.container-2__filter {
+    /*margin-top: 2rem;*/
+    background: var(--white-color);
+    /*height: 6rem;*/
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.filter__selection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*Phần tạo trong các trang Lesson, Tag bao gồm cả input*/
+.container-2__create {
+    /*margin-top: 2rem;*/
+    margin-bottom: 2rem;
+    background: var(--white-color);
+    /*height: 6rem;*/
+    display: flex;
+    padding: 2rem;
+    width: 100%;
+    }
+
+.create__selection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.create__selection-input {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+
+}
+
+.create__selection-items {
+    font-size: var(--text-base);
+    flex: 1;
+}
+
+.create__selection-items--wide {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.create__btn-create {
+    width: 130%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.create-btn {
+    /*border-radius: 3px;*/
+    color: var(--white-color);
+    background-color: var(--dark-blue);
+    padding: 8px 15px;
+    font-weight: var(--fw-regular);
+}
+/*Xử lý phần nhận dữ liệu để lọc*/
+/*Chỉnh chung*/
+/*input {*/
+/*    !*width: 100%;*!*/
+/*    border: 1px solid var(--light-grey);*/
+/*    border-radius: 3px;*/
+/*    color: var(--dark-blue);*/
+/*    font-weight: var(--fw-regular);*/
+/*    padding: 0.8rem 1rem;*/
+/*}*/
+/*Cài đặt chung cho các thẻ nhận CSS này sẽ có HEIGHT cố định kèm font*/
+.admin-input__long {
+    width: 100%;
+    font-size: var(--text-base);
+    height: 3.5rem;
+    padding: 0 1rem;
+}
+.admin-input__short {
+    /*width: 100%;*/
+    font-size: var(--text-base);
+    height: 3.5rem;
+    padding: 0 1rem;
+}
+/*Xử lý input dạng select*/
+/*Chỉnh cỡ chữ chung cho toàn option của select*/
+select option{
+    font-size: var(--text-base);
+}
+select {
+    border: 1px solid var(--light-grey);
+    border-radius: 3px;
+    color: var(--dark-blue);
+    font-weight: var(--fw-regular);
+    padding: 0.5rem 1rem;
+    font-size: var(--text-base);
+}
+/*CSS chung cho toàn bộ thẻ div bọc lấy input */
+.filter__selection-items {
+    font-size: var(--text-2xl);
+    padding-right: 2rem;
+    /*width: 100%;*/
+    width: 50%;
+    height: 100%;
+}
+/*Tên đi kèm với input đó*/
+.filter__selection-title{
+    font-weight: var(--fw-semibold);
+    font-size: var(--text-base);
+    margin-bottom: 0.5rem;
+}
+/*Do phần input của select quá ngắn nên phải css riêng*/
+.filter__selection-items-select {
+    font-size: var(--text-2xl);
+    padding-right: 2rem;
+    /*width: 30%;*/
+    height: 100%;
+}
+
+/*CHỉnh nút tìm kiếm chung*/
+.filter__selection-input {
+    display: flex;
+    /*Để nó không lấy hết phần còn lại của những thằng khác*/
+    width: 90%;
+}
+
+.filter__button-search {
+    display: flex;
+    width: 10%;
+    /*align-items: center;*/
+    justify-content: center;
+    /*align-items: flex-start;*/
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem;
+    background: var(--dark-blue);
+    border: solid 1px var(--dark-blue);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.fa-magnifying-glass {
+    display: flex;
+    align-items: center;
+    font-size: var(--text-lg);
+    color: var(--white-color);
+}
+
+/*Danh sách các students*/
+table {
+    /* Gộp các đường viền lại */
+    border-collapse: collapse;
+    background: var(--white-color);
+    width: 100%;
+}
+
+/*Xử lý thằng đầu cho in đậm và có đường kẻ trên*/
+thead th {
+    border-top: 1px solid var(--light-grey);
+    background: #f8f9fa;
+    font-weight: var(--fw-bold);
+    color: #333;
+}
+
+/* Nhóm table, th, và td và áp dụng cho cả 3 */
+/*Giair quyết đường kẻ chung cho table*/
+table, th, td {
+    font-size: var(--text-base);
+    font-weight: var(--fw-regular);
+    padding: 1rem;
+    border-bottom: 1px solid var(--light-grey);
+    text-align: left;
+}
+td .action__button {
+    display: flex;
+}
+
+.icon-action {
+    font-size: var(--text-lg);
+    cursor: pointer;
+    padding: 0 4px;
+    padding-bottom: 0.4rem;
+    color: var(--dark-blue);
+}
+td a span:hover {
+    font-size: var(--text-lg);
+    background: var(--dark-blue);
+    color: var(--white-color);
+    border-radius: 3px;
+}
+
+/*Thêm đường kẻ cho các con ở bên trái*/
+td:first-child,th:first-child{
+    border-left: 1px solid var(--light-grey);
+}
+
+/*Thêm đường kẻ cho các con ở bên phải*/
+td:last-child ,th:last-child{
+    border-right: 1px solid var(--light-grey);
+}
+.log-out__container {
+    display: flex;
+    align-items: center;
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-semibold);
+    padding: 1rem;
+}
+.log-out__container:hover{
+    background: var(--bright-blue);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+.log-out {
+    float: right;
+    margin-top: 15rem;
+}
+.log-out__content {
+    margin-right: 0.5rem;
+}
+.admin-create__buttons1 button {
+    background: var(--dark-blue);
+    color: var(--white-color);
+    padding: 0 2rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    margin:auto ;
+    font-size: var(--text-lg);
+    border: solid 1px var(--dark-blue);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.admin-create__buttons1 {
+    display: flex;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}

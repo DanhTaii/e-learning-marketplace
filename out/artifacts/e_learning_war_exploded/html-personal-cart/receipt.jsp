@@ -1,0 +1,470 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Receipt</title>
+    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/receipt.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+</head>
+
+<body>
+<div class="web">
+    <header class="web__header">
+        <div class="grid">
+            <div class="header__box">
+                <a href="../html-partrial/home.jsp" class="turn-page">
+                    <div class="header__logo">
+                        SKILL
+                    </div>
+                </a>
+                <div class="header__browse">
+                    <div class="browse__text text-header">Danh mục</div>
+                    <i class="browse__icon text-header fa-solid fa-angle-down"></i>
+                    <div class="browse__display">
+                        <div class="browse__container">
+                            <div class="browse__container-box-1">
+                                <div class="browse__box-category">
+                                    <div class="box__title">
+                                        <span class="category__title title">Tìm bằng Danh mục</span>
+                                    </div>
+                                    <ul class="browse__box-category-list list">
+                                        <li class="browse__box-category-list-item text-list-item text-li">Giao tiếp
+                                            & Thuyết trình
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Lãnh đạo &
+                                            Quản lý
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Năng suất &
+                                            Quản lý thời gian
+                                        </li>
+                                        <a href="../html-partrial/result-search.jsp" class="turn-page">
+                                            <li class="browse__box-category-list-item text-list-item text-li">
+
+                                                Tư duy & Sáng tạo
+                                            </li>
+                                        </a>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Trí tuệ cảm
+                                            xúc (EQ)
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Đàm phán &
+                                            Thuyết phục
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Phát triển bản
+                                            thân
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Kỹ năng học
+                                            tập & Tự học
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Kỹ năng công
+                                            sở & Networking
+                                        </li>
+                                        <li class="browse__box-category-list-item text-list-item text-li">Sức khỏe tinh
+                                            thần & Chống Burnout
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="browse__container-box-2">
+                                <div class="browse__container-box-2-1 box-2">
+                                    <div class="box__title">
+                                        <span class="category__title title">Tìm bằng kiểu khóa học</span>
+                                    </div>
+                                    <ul class="browse__container-box-2-list list">
+                                        <li class="browse__container-box-2-list-item">
+                                            <a href="../html-partrial/all-course.jsp" class="turn-page"></a>
+                                            <div class="item-box">
+                                                <a href="../html-partrial/all-course.jsp"
+                                                   class="text-list-item text-list-item-2 text-li">Tất cả khóa học</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="browse__container-box-2-2 box-2">
+                                    <div class="box__title">
+                                        <span class="category__title title">Tags</span>
+                                    </div>
+                                    <ul class="browse__container-box-2-list list">
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="../html-partrial/result-search.jsp"
+                                                   class="text-list-item text-list-item-2 text-li turn-page">Yêu
+                                                    thích</a>
+                                            </div>
+                                        </li>
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">Nổi bật</a>
+                                            </div>
+                                        </li>
+                                        <li class="browse__container-box-2-list-item">
+                                            <div class="item-box">
+                                                <a href="" class="text-list-item text-list-item-2 text-li">Phổ biến</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__community text-header">Cộng đồng</div>
+                <div class="header__search">
+                    <div class="search__icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="search__input">
+                        <input type="text" class="input__text text-medium"
+                               placeholder="Tìm kiếm khóa học, kỹ năng,...">
+                    </div>
+                </div>
+                <div class="header__class">
+                    <a href="../html-personal/my-course.jsp" class="turn-page text-header">
+                        Khóa học của tôi
+                    </a>
+                </div>
+                <div class="header__wishlist">
+                    <a href="../html-personal/my-wishlist.jsp" class="turn-page text-header">
+                        <i class="notification__icon fa-solid fa-heart text-header"></i>
+                    </a>
+                </div>
+                <div class="header__cart">
+                    <a href="../html-personal-cart/cart.jsp" class="turn-page text-header">
+                        <i class="text-header fa-solid fa-cart-shopping"></i>
+                    </a>
+                </div>
+                <!-- Toggle checkbox ẩn -->
+                <div class="header__notification" tabindex="0">
+                    <div class="notification-wrapper text-header">
+                        <i class="notification__icon fa-solid fa-bell text-header"></i>
+                    </div>
+                    <div class="notification__popup">
+                        <div class="text-header">Bạn chưa có thông báo!</div>
+                    </div>
+                </div>
+                <div class="header__user">
+                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                         class="user__avatar">
+                    <div class="user__display">
+                        <div class="user__container">
+                            <div class="user__profile">
+                                <div class="user__profile-avatar">
+                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                         alt=""
+                                         class="user__avatar-mini">
+                                </div>
+                                <div class="user__profile-name">
+                                    <a href="" class="name-text text-header">Ngoc Minh</a>
+                                </div>
+                                <div class="user__profile-bio">
+                                    <a href="" class="bio-text">Thêm tiểu sử</a>
+                                </div>
+                                <a href="../html-personal/account-profile.jsp" class="turn-page">
+                                    <div class="user__profile-btn">
+                                        <button class="user-btn button__btn text-header">Xem thông tin</button>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="user__menu">
+                                <ul class="user__menu-list">
+                                    <li class="user__menu-list-item">
+                                        <a href="../html-personal/my-course.jsp" class="turn-page">
+                                            <div class="user__menu-list-item-box text-li">
+                                                Khóa học
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <a href="../html-personal/my-wishlist.jsp" class="turn-page">
+                                            <div class="user__menu-list-item-box text-li">
+                                                Yêu thích
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <a href="order-history.jsp" class="turn-page">
+                                            <div class="user__menu-list-item-box text-li">
+                                                Lịch sử giao dịch
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="user__menu-list-item">
+                                        <a href="../index.jsp" class="turn-page">
+                                            <div class="user__menu-list-item-box sign-out text-li">
+                                                Đăng xuất
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="web__container">
+        <div class="grid">
+            <div class="payment-success-layout">
+                <div class="header-box">
+                    <div class="box__row1-header">
+                        <span class="text-big-title">Biên lai</span></div>
+                    <div class="box__row2-header">
+                        <div><span class="text-small-title">Biên nhận cho Giỏ hàng - 11 tháng 11, 2025</span></div>
+                        <div>
+                            <span class="status text-small-title">
+                                <i class="fa-solid fa-circle-check icon-check" style="color: #018d4a;"></i>
+                                Thành công</span></div>
+
+                    </div>
+
+                </div>
+                <div class="grid summary-box1">
+                    <div class="grid summary-box">
+                        <div class="box__row1">
+                            <span class="row1__id text">Mã đơn hàng:</span>
+                            <span class="number">ORD101</span>
+                        </div>
+                        <div class="box__row2">
+                            <span class="row2__time text">Ngày:</span>
+                            <span class="number">11/11/2025</span>
+                        </div>
+                        <div class="box__row3">
+                            <span class="row3__total text">Giá gốc:</span>
+                            <span class="number">2.796.000đ</span>
+                        </div>
+                        <div class="box__row3">
+                            <span class="row3__total text">Số tiền giảm:</span>
+                            <span class="number">- 1.000.000đ</span>
+                        </div>
+                        <div class="box__row3">
+                            <span class="row3__total text">Tổng cộng:</span>
+                            <span class="number">1.796.000đ</span>
+                        </div>
+                        <div class="box__row4">
+                            <span class="row4__payment-method text">Phương thức thanh toán:</span>
+                            <span class="number">Momo</span>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="order-title">
+                    <div class="title__2">
+                        <div id="items">Hóa đơn chi tiết</div>
+                        <div class=" price-header">
+                            <span id="price">Giá</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="scrollable-order-list">
+                    <ul>
+                        <li> <div class="grid__row-2">
+                            <div class="order-items">
+                                <div class="items__content">
+                                    <div class="content__image">
+                                        <img srcset="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_m_1690356655.jpg"
+                                             alt="" class="image">
+                                    </div>
+                                    <div class="content__name text-paragraph">
+                                        <p class="items__name ">Tư duy phản biện</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="items__price">
+                                    <span class="amount-discounted ">399.000đ</span>
+                                    <div><span class="amount-origin ">599.000đ</span></div>
+                                </div>
+
+                            </div>
+                        </div></li>
+                        <li> <div class="grid__row-2">
+                            <div class="order-items">
+                                <div class="items__content">
+                                    <div class="content__image">
+                                        <img srcset="https://tse1.mm.bing.net/th/id/OIP.-qNL8MTdeRuVGRqoTYXzTAHaEJ?cb=ucfimg2ucfimg=1&w=2000&h=1121&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                             alt="" class="image">
+                                    </div>
+                                    <div class="content__name text-paragraph">
+                                        <p class="items__name ">Lãnh Đạo Không Cần Chức Danh</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="items__price">
+                                    <div><span class="amount-discounted ">559.000đ</span></div>
+                                    <div><span class="amount-origin ">899.000đ</span></div>
+
+                                </div>
+
+                            </div>
+                        </div></li>
+                        <li> <div class="grid__row-2">
+                            <div class="order-items">
+                                <div class="items__content">
+                                    <div class="content__image">
+                                        <img srcset="https://tse3.mm.bing.net/th/id/OIP.k5sDq201q3UKgMwrVdcyBQHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                             alt="" class="image">
+                                    </div>
+                                    <div class="content__name text-paragraph">
+                                        <p class="items__name ">Kỹ năng giải quyết vấn đề cho hiệu quả</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="items__price">
+                                    <div><span class="amount-discounted ">399.000đ</span></div>
+                                    <div><span class="amount-origin ">599.000đ</span></div>
+                                </div>
+
+                            </div>
+                        </div></li>
+                        <li> <div class="grid__row-2">
+                            <div class="order-items" style="border: none">
+                                <div class="items__content">
+                                    <div class="content__image">
+                                        <img srcset="https://static.ybox.vn/2022/11/3/1669791323216-Thi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn%20(1).png"
+                                             alt="" class="image">
+                                    </div>
+                                    <div class="content__name text-paragraph">
+                                        <p class="items__name ">Networking Chuyên Nghiệp</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="items__price">
+                                    <div><span class="amount-discounted ">399.000đ</span></div>
+                                    <div><span class="amount-origin ">699.000đ</span></div>
+                                </div>
+
+                            </div>
+                        </div></li>
+                    </ul>
+
+
+                </div>
+
+                <div class="button-box ">
+                    <a href="../html-partrial/home.jsp" class="turn-page">
+                        <div class="header__button button">
+                            <button type="button" class="home-btn dark-button">Trang chủ</button>
+                        </div>
+                    </a>
+                    <a href="../html-personal/my-course.jsp" class="turn-page">
+                        <div class="header__button button">
+                            <button type="button" class="home-btn button__btn">Khóa học của tôi</button>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <footer class="web__footer">
+        <div class="grid">
+            <div class="grid__row-1">
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading text-big">Cơ sở</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-big">Về chúng tôi
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Chăm sóc khách hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Báo chí</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading text-big">LÀM VIỆC VỚI CHÚNG TÔI</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Chương trình Affiliate</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Quan hệ hợp tác</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading text-big">DẠY HỌC CÙNG CHÚNG TÔI</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Trở thành giảng viên</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Trung tâm hỗ trợ giảng viên</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Quy định dành cho giảng viên</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading text-big">MUA HÀNG</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Quà tặng học viên</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Sản phẩm kỹ thuật số</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link text-medium">Buổi học trực tiếp</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading text-big">DI ĐỘNG</h3>
+                    <div class="footer__download">
+                        <div class="footer__download-apps">
+                            <a href="" class="footer__download-app-link">
+                                <img src="../assets/image/appstore.png" alt="App Store"
+                                     class="footer__download-app-img">
+                            </a>
+                            <a href="" class="footer__download-app-link">
+                                <img src="../assets/image/ggplay.png" alt="Google Play"
+                                     class="footer__download-app-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="grid">
+                <ul class="ul__text text-medium">© SOFTSKILL, Inc. 2025
+                    <li class="footer__text text-medium">Hỗ trợ</li>
+                    <li class="footer__text text-medium">Quyền riêng tư</li>
+                    <li class="footer__text text-medium">Điều khoản</li>
+                    <li class="footer__text text-medium">Lựa chọn quyền riêng tư của bạn</li>
+                </ul>
+            </div>
+            <div class="grid">
+                <p class="ul__text text-medium">Chịu trách nhiệm quản lý nội dung: Nhóm 20</p>
+            </div>
+            <div class="grid">
+                <p class="ul__text text-medium">© 2025 - Bản quyền thuộc về Nhóm 21</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+
+</body>
+</html>
