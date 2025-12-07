@@ -1,15 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Kiểu thanh toán </title>
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/course-edit.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css">
 </head>
 <body>
 <div class="web">
@@ -21,7 +24,7 @@
                     <div class="container-1__menu">
                         <ul>
                             <li>
-                                <a href="./dashboard.jsp">
+                                <a href="admin/dashboard">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
@@ -31,7 +34,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./users-management.jsp">
+                                <a href="admin/user-management">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -43,8 +46,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./courses-management.jsp">
-                                    <div class="menu-item__student">
+                                <a href="admin/courses">
+                                    <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
                                         <span>Khóa học</span>
@@ -53,7 +56,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./lesson-management.jsp">
+                                <a href="admin/lesson">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -63,7 +66,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./tag-management.jsp">
+                                <a href="admin/tag">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -74,7 +77,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./category-management.jsp">
+                                <a href="admin/category">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -85,7 +88,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./order-management.jsp">
+                                <a href="admin/order">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -95,17 +98,17 @@
                                     </div>
                                 </a>
                             </li>
-                                <li>
-                                    <a href="./payment-method-management.jsp">
-                                        <div class="menu-item__student student-list">
+                            <li>
+                                <a href="admin/payment-method">
+                                    <div class="menu-item__student student-list">
                                         <span class="container-1__menu-items menu-item__order">
 
                                             <i class="fa-solid fa-credit-card"></i>
                                             <span>Kiểu thanh toán</span>
                                         </span>
-                                        </div>
-                                    </a>
-                                </li>
+                                    </div>
+                                </a>
+                            </li>
                         </ul>
                         <div class="log-out">
                             <a href="../html-authentication/sign-in.jsp">

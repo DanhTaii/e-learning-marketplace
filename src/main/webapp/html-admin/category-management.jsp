@@ -1,15 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Danh mục</title>
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/course-edit.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css">
 </head>
 <body>
 <div class="web">
@@ -21,7 +24,7 @@
                     <div class="container-1__menu">
                         <ul>
                             <li>
-                                <a href="./dashboard.jsp">
+                                <a href="admin/dashboard">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
@@ -31,7 +34,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./users-management.jsp">
+                                <a href="admin/user-management">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -43,8 +46,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./courses-management.jsp">
-                                    <div class="menu-item__student">
+                                <a href="admin/courses">
+                                    <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
                                         <span>Khóa học</span>
@@ -53,7 +56,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./lesson-management.jsp">
+                                <a href="admin/lesson">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -63,7 +66,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./tag-management.jsp">
+                                <a href="admin/tag">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -74,8 +77,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./category-management.jsp">
-                                    <div class="menu-item__student student-list ">
+                                <a href="admin/category">
+                                    <div class="menu-item__student student-list">
                                     <span class="container-1__menu-items menu-item__course">
 
                                        <i class="fa-solid fa-list"></i>
@@ -85,7 +88,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./order-management.jsp">
+                                <a href="admin/order">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -96,7 +99,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./payment-method-management.jsp">
+                                <a href="admin/payment-method">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 
@@ -142,9 +145,9 @@
                                             <input placeholder="" type="text" class="admin-input__long">
                                         </div>
                                         <div class="create__selection-items">
-                                        <div class="filter__selection-title filter__item-name">Icon URL:</div>
-                                        <input placeholder="" type="text" class="admin-input__long">
-                                    </div>
+                                            <div class="filter__selection-title filter__item-name">Icon URL:</div>
+                                            <input placeholder="" type="text" class="admin-input__long">
+                                        </div>
                                     </div>
                                     <div class="create__btn-create">
                                         <button type="submit" class="create-btn dark-button">Tạo mới</button>
@@ -183,96 +186,99 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                1
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Tư duy & Sáng tạo
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
+                                    <c:forEach var="cate" items="${listCategories}">
+                                        <tr>
+                                            <td>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${cate.id}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${cate.name}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${cate.parentId}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${cate.iconUrl}
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
 
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                2
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Tư duy phản biện
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                1
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                3
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Tư duy sáng tạo
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                1
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <%--                                    <tr>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__title title course-row__style-text">--%>
+                                    <%--                                                2--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__font-content">--%>
+                                    <%--                                                Tư duy phản biện--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__font-content">--%>
+                                    <%--                                                1--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__font-content">--%>
+                                    <%--                                                https://--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td class="action__button">--%>
+                                    <%--                                            <a href="">--%>
+                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>--%>
+                                    <%--                                            </a>--%>
+                                    <%--                                            <a href="">--%>
+                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>--%>
+                                    <%--                                            </a>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                    </tr>--%>
+                                    <%--                                    <tr>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__title title course-row__style-text">--%>
+                                    <%--                                                3--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__font-content">--%>
+                                    <%--                                                Tư duy sáng tạo--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__font-content">--%>
+                                    <%--                                                1--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td>--%>
+                                    <%--                                            <div class="course-row__font-content">--%>
+                                    <%--                                                https://--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                        <td class="action__button">--%>
+                                    <%--                                            <a href="">--%>
+                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>--%>
+                                    <%--                                            </a>--%>
+                                    <%--                                            <a href="">--%>
+                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>--%>
+                                    <%--                                            </a>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                    </tr>--%>
 
                                     </tbody>
                                 </table>

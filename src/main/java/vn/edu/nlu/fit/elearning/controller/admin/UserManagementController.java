@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.services.UserService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserManagementController", value = "/user-management")
+@WebServlet(name = "UserManagementController", value = "/admin/user-management")
 public class UserManagementController extends HttpServlet {
     private UserService userService;
 

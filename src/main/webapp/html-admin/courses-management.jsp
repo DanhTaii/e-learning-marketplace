@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,14 +10,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quản lý khóa học</title>
-
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/dashboard.css">
-    <link rel="stylesheet" href="../assets/css-admin/courses-management.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/dashboard.css">
+    <link rel="stylesheet" href="assets/css-admin/courses-management.css">
 
 </head>
 <body>
@@ -28,7 +31,7 @@
                     <div class="container-1__menu">
                         <ul>
                             <li>
-                                <a href="./dashboard.jsp">
+                                <a href="admin/dashboard">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
@@ -38,7 +41,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./users-management.jsp">
+                                <a href="admin/user-management">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -50,8 +53,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./courses-management.jsp">
-                                    <div class="menu-item__student student-list student-list">
+                                <a href="admin/courses">
+                                    <div class="menu-item__student student-list">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
                                         <span>Khóa học</span>
@@ -60,7 +63,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./lesson-management.jsp">
+                                <a href="admin/lesson">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -70,7 +73,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./tag-management.jsp">
+                                <a href="admin/tag">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -81,7 +84,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./category-management.jsp">
+                                <a href="admin/category">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -92,7 +95,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./order-management.jsp">
+                                <a href="admin/order">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -103,7 +106,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./payment-method-management.jsp">
+                                <a href="admin/payment-method">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 
@@ -194,232 +197,66 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="course-row">
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">Tư duy phản biện
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__duration course-row__font-content">20h 10m</div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__total__enrollment course-row__font-content">500</div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__price course-row__font-content">150đ</div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__level course-row__font-content">
-                                                <div class="level-dot"></div>
-                                                Dễ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                Công khai
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="course-row">
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">Tư duy lập trình
-                                            </div>
-                                        </td>
+                                    <c:forEach var="course" items="${listCourses}">
+                                        <tr class="course-row">
+                                            <td>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${course.title}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__duration course-row__font-content">
+                                                        ${course.durationHours}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__price course-row__font-content">${course.price}</div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__level course-row__font-content">
+                                                    <div class="level-dot"></div>
+                                                        ${course.level}
+                                                </div>
+                                            </td>
+                                            <td>
+<%--                                                <c:choose>--%>
+<%--                                                    <c:when test="${course.public == true}">--%>
+<%--                                                        <div class="course-row__status course-row__font-content course-row__status-public">--%>
+<%--                                                            Công khai--%>
+<%--                                                        </div>--%>
+<%--                                                    </c:when>--%>
+<%--                                                    <c:otherwise>--%>
+<%--                                                        <div class="course-row__status course-row__font-content course-row__status-private">--%>
+<%--                                                            Riêng tư--%>
+<%--                                                        </div>--%>
+<%--                                                    </c:otherwise>--%>
+<%--                                                </c:choose>--%>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__created course-row__font-content">
+                                                    <fmt:setLocale value="en_US" scope="page"/>
 
-                                        <td>
-                                            <div class="course-row__duration course-row__font-content">20h 10m</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__total__enrollment course-row__font-content">500</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__price course-row__font-content">150đ</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__level course-row__font-content">
-                                                <div class="level-dot"></div>
-                                                Dễ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-private">
-                                                Riêng tư
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="course-row">
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">Sáng tạo đổi mới
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__duration course-row__font-content">20h 10m</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__total__enrollment course-row__font-content">500</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__price course-row__font-content">150đ</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__level course-row__font-content">
-                                                <div class="level-dot"></div>
-                                                Dễ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                Công khai
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="course-row">
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">Chống burnout
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__duration course-row__font-content">20h 10m</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__total__enrollment course-row__font-content">500</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__price course-row__font-content">150đ</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__level course-row__font-content">
-                                                <div class="level-dot"></div>
-                                                Dễ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                Công khai
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="course-row">
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">Thuyết trình trước
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__duration course-row__font-content">20h 10m</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__total__enrollment course-row__font-content">500</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__price course-row__font-content">150đ</div>
-                                        </td>
-
-                                        <td>
-                                            <div class="course-row__level course-row__font-content">
-                                                <div class="level-dot"></div>
-                                                Dễ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-private">
-                                                Riêng tư
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="./course-create.jsp">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                                    <fmt:formatDate
+                                                            value="${course.createdAt}"
+                                                            pattern="MMMM d, yyyy – h:mm a"/>
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="./course-create.jsp">
+                                                    <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                                </a>
+                                                <a href="./course-create.jsp">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

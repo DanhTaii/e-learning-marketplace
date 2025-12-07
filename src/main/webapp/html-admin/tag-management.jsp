@@ -24,8 +24,8 @@
                     <div class="container-1__menu">
                         <ul>
                             <li>
-                                <a href="./dashboard.jsp">
-                                    <div class="menu-item__student ">
+                                <a href="admin/dashboard">
+                                    <div class="menu-item__student">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
                                         <span>Dashboard</span>
@@ -34,7 +34,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./users-management.jsp">
+                                <a href="admin/user-management">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -46,7 +46,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./courses-management.jsp">
+                                <a href="admin/courses">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
@@ -56,7 +56,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./lesson-management.jsp">
+                                <a href="admin/lesson">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -66,7 +66,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./tag-management.jsp">
+                                <a href="admin/tag">
                                     <div class="menu-item__student student-list">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -77,7 +77,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./category-management.jsp">
+                                <a href="admin/category">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -88,7 +88,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./order-management.jsp">
+                                <a href="admin/order">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -99,7 +99,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./payment-method-management.jsp">
+                                <a href="admin/payment-method">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 

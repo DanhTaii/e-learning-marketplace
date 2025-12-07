@@ -18,8 +18,8 @@ public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
     @Override
     public List<Lesson> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT  l.title, l.order_index, c.title AS course_title, l.video_url, l.duration_minutes, l.created_at" +
-                    "FROM Lessons l JOIN Courses c ON l.course_id = c.id" +
+            return handle.createQuery("SELECT  l.title, l.order_index, c.title AS course_title, l.video_url, l.duration_minutes, l.created_at\n" +
+                    "FROM Lessons l JOIN Courses c ON l.course_id = c.id\n" +
                     "ORDER BY l.order_index ASC;").mapToBean(Lesson.class).list();
         });
     }
