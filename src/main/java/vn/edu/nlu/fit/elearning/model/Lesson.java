@@ -19,12 +19,12 @@ public class Lesson implements Serializable {
 
     private int orderIndex;
 
-    private LocalDateTime createdAt;
+    private java.sql.Timestamp createdAt;
 
     public Lesson() {
     }
 
-    public Lesson(int id, int courseId, String courseTitle, String title, String videoUrl, int durationMinutes, int orderIndex, LocalDateTime createdAt) {
+    public Lesson(int id, int courseId, String courseTitle, String title, String videoUrl, int durationMinutes, int orderIndex, java.sql.Timestamp createdAt) {
         this.id = id;
         this.courseId = courseId;
         this.courseTitle = courseTitle;
@@ -91,11 +91,11 @@ public class Lesson implements Serializable {
         this.orderIndex = orderIndex;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public java.sql.Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(java.sql.Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }

@@ -19,6 +19,7 @@ public class LessonService {
     }
 
     public List<Lesson> getAllLessons() {
+        System.out.println(lessonDao.findAll());
         return lessonDao.findAll();
     }
 

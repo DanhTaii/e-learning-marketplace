@@ -1,14 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Lesson Management</title>
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
 <div class="web">
@@ -20,7 +24,7 @@
                     <div class="container-1__menu">
                         <ul>
                             <li>
-                                <a href="./dashboard.jsp">
+                                <a href="admin/dashboard">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
@@ -30,7 +34,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./users-management.jsp">
+                                <a href="admin/user-management">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -42,7 +46,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./courses-management.jsp">
+                                <a href="admin/courses">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
@@ -52,7 +56,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./lesson-management.jsp">
+                                <a href="admin/lesson">
                                     <div class="menu-item__student student-list">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -62,7 +66,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./tag-management.jsp">
+                                <a href="admin/tag">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -73,7 +77,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./category-management.jsp">
+                                <a href="admin/category">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -84,7 +88,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./order-management.jsp">
+                                <a href="admin/order">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -95,11 +99,11 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./payment-method-management.jsp">
+                                <a href="admin/payment-method">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 
-                                           <i class="fa-solid fa-credit-card"></i>
+                                            <i class="fa-solid fa-credit-card"></i>
                                             <span>Kiểu thanh toán</span>
                                         </span>
                                     </div>
@@ -176,7 +180,8 @@
                                     <div class="filter__selection-input">
                                         <div class="filter__selection-items">
                                             <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
-                                            <input placeholder="" type="datetime-local" class="input__font admin-input__long">
+                                            <input placeholder="" type="datetime-local"
+                                                   class="input__font admin-input__long">
                                         </div>
                                         <div class="filter__selection-items">
                                             <div class="filter__selection-items-select">
@@ -217,172 +222,49 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Bài 1
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                001
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Khóa học A
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                2min
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022
-                                                – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Bài 2
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                002
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Khóa học A
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                4min
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022
-                                                – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Bài 3
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                003
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Khóa học A
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                3min
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022
-                                                – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Bài 4
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                004
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Khóa học A
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                2min
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022
-                                                – 4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-
+                                    <c:forEach var="lesson" items="${listLessons}">
+                                        <tr>
+                                            <td>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${lesson.title}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${lesson.orderIndex}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                    Khóa học A
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                    https://
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                    2min
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__created course-row__font-content">April 13, 2022
+                                                    – 4:24
+                                                    PM
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -392,5 +274,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

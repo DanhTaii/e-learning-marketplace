@@ -53,12 +53,12 @@ public class Course implements Serializable {
     private double durationHours;
 
     // created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    private LocalDateTime createdAt; // ĐÃ SỬA: từ created_at thành createdAt (camelCase)
+    private java.sql.Timestamp createdAt; // ĐÃ SỬA: từ created_at thành createdAt (camelCase)
 
     // updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    private LocalDateTime updatedAt; // ĐÃ SỬA: từ updated_at thành updatedAt (camelCase)
+    private java.sql.Timestamp updatedAt; // ĐÃ SỬA: từ updated_at thành updatedAt (camelCase)
 
-    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, java.sql.Timestamp createdAt, java.sql.Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -210,19 +210,19 @@ public class Course implements Serializable {
         this.durationHours = durationHours;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public java.sql.Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(java.sql.Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public java.sql.Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(java.sql.Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 
