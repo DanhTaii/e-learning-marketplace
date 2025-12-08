@@ -52,4 +52,15 @@ public class Wishlist implements Serializable {
     public void setAddedAt(Timestamp addedAt) {
         this.addedAt = addedAt;
     }
+
+
+    @Override
+    public String toString() {
+        return "Wishlist{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", courseId=" + courseId +
+                ", addedAt=" + addedAt +
+                '}';
+    }
 }

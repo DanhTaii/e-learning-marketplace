@@ -39,4 +39,9 @@ public class WishlistDao extends BaseDao implements BaseCrudDao<Wishlist, Intege
         // TODO: Implement delete logic
         return 0;
     }
+
+    public static void main(String[] args) {
+        WishlistDao dao = new WishlistDao();
+        System.out.println(dao.findAll().size());
+    }
 }
