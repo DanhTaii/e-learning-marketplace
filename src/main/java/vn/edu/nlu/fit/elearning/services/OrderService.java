@@ -23,9 +23,9 @@ public class OrderService {
         return od.findAll();
     }
 
-    public Order getOrderById(int id) {
-        // TODO: Implement getById logic
-        return null;
+    public Order getOrderById(int orderId) {
+        Order order = od.findById(orderId);
+        return order;
     }
 
     public void updateOrder(Order order) {
@@ -35,4 +35,6 @@ public class OrderService {
     public void deleteOrder(int id) {
         // TODO: Implement delete logic
     }
+
+
 }

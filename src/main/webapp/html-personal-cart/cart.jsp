@@ -351,7 +351,7 @@
                                 </div>
 
                             </div>
-                            <a href="payment.jsp" class="turn-page">
+                            <a href="payment" class="turn-page">
                                 <div class="checkout__checkout-button header__button">
                                     <button class="button__btn">Tiến hành thanh toán</button>
                                 </div>

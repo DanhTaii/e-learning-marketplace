@@ -12,10 +12,19 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
     }
 
     @Override
-    public Order findById(Integer id) {
-        // TODO: Implement findById logic
-        return null;
+    public Order findById(Integer orderId) {
+        String sql = "SELECT total_amount, discount_amount, final_amount \n" +
+                "FROM Orders \n" +
+                "WHERE id= ?;\n";
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind(0, orderId)
+                    .mapToBean(Order.class)
+                    .findFirst()
+                    .orElse(null);
+        });
     }
+
 
     @Override
     public List<Order> findAll() {

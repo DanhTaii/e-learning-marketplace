@@ -1,25 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <meta charset="UTF-8">
     <title>Payment</title>
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/payment.css">
-    <link rel="stylesheet" href="../assets/css/home.css">
-    <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
     <!--    <script src=""></script>-->
 
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 
-    <link rel="stylesheet" href="./assets/fonts/static/." as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="../assets/css/modal-notification.css">
+    <link rel="stylesheet" href="assets/fonts/static/." as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="assets/css/modal-notification.css">
 </head>
 <body>
 <div class="web">
@@ -278,87 +283,28 @@
                     </div>
                     <div class="scrollable-order-list">
                         <ul>
+                            <c:forEach var="o" items="${orderItems}">
                             <li> <div class="grid__row-2">
                                 <div class="order-items">
                                     <div class="items__content">
                                         <div class="content__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_m_1690356655.jpg"
+                                            <img srcset="${o.thumbnailUrl}"
                                                  alt="" class="image">
                                         </div>
                                         <div class="content__name text-paragraph">
-                                            <p class="items__name ">Tư duy phản biện</p>
+                                            <p class="items__name ">${o.title}</p>
                                         </div>
 
                                     </div>
 
                                     <div class="items__price">
-                                        <span class="amount-discounted ">399.000đ</span>
-                                        <div><span class="amount-origin ">599.000đ</span></div>
+                                        <span class="amount-discounted ">${o.priceAtPurchase}</span>
+<%--                                        <div><span class="amount-origin ">${o.}</span></div>--%>
                                     </div>
 
                                 </div>
-                            </div></li>
-                            <li> <div class="grid__row-2">
-                                <div class="order-items">
-                                    <div class="items__content">
-                                        <div class="content__image">
-                                            <img srcset="https://tse1.mm.bing.net/th/id/OIP.-qNL8MTdeRuVGRqoTYXzTAHaEJ?cb=ucfimg2ucfimg=1&w=2000&h=1121&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                                 alt="" class="image">
-                                        </div>
-                                        <div class="content__name text-paragraph">
-                                            <p class="items__name ">Lãnh Đạo Không Cần Chức Danh</p>
-                                        </div>
+                            </div></li></c:forEach>
 
-                                    </div>
-
-                                    <div class="items__price">
-                                        <div><span class="amount-discounted ">559.000đ</span></div>
-                                        <div><span class="amount-origin ">899.000đ</span></div>
-
-                                    </div>
-
-                                </div>
-                            </div></li>
-                            <li> <div class="grid__row-2">
-                                <div class="order-items">
-                                    <div class="items__content">
-                                        <div class="content__image">
-                                            <img srcset="https://tse3.mm.bing.net/th/id/OIP.k5sDq201q3UKgMwrVdcyBQHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                                 alt="" class="image">
-                                        </div>
-                                        <div class="content__name text-paragraph">
-                                            <p class="items__name ">Kỹ năng giải quyết vấn đề cho hiệu quả</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="items__price">
-                                        <div><span class="amount-discounted ">399.000đ</span></div>
-                                        <div><span class="amount-origin ">599.000đ</span></div>
-                                    </div>
-
-                                </div>
-                            </div></li>
-                            <li> <div class="grid__row-2">
-                                <div class="order-items" style="border: none">
-                                    <div class="items__content">
-                                        <div class="content__image">
-                                            <img srcset="https://static.ybox.vn/2022/11/3/1669791323216-Thi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn%20(1).png"
-                                                 alt="" class="image">
-                                        </div>
-                                        <div class="content__name text-paragraph">
-                                            <p class="items__name ">Networking Chuyên Nghiệp</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="items__price">
-                                        <div><span class="amount-discounted ">399.000đ</span></div>
-                                        <div><span class="amount-origin ">699.000đ</span></div>
-                                    </div>
-
-                                </div>
-                            </div></li>
                         </ul>
 
 
@@ -374,16 +320,16 @@
                                 <div class="detail__price">
                                     <div class="price__original">
                                         <span class="price__original text-medium original">Giá gốc: </span>
-                                        <span class="price__original text-medium amount">2.796.000đ</span>
+                                        <span class="price__original text-medium amount">${order.totalAmount}</span>
                                     </div>
                                     <div class="price__discount">
                                         <span class="price__discount text-medium discount">Số tiền giảm: </span>
-                                        <span class="price__discount text-medium amount">- 1.000.000đ</span>
+                                        <span class="price__discount text-medium amount">- ${order.discountAmount}</span>
 
                                     </div>
                                     <div class="price__total index">
                                         <span class="price__total ">Tổng cộng (4): </span>
-                                        <span class="price__total text-medium amount">1.796.000đ</span>
+                                        <span class="price__total text-medium amount">${order.finalAmount}</span>
                                     </div>
 
 
