@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -37,37 +38,39 @@
                                         <span class="category__title title">Tìm bằng Danh mục</span>
                                     </div>
                                     <ul class="browse__box-category-list list">
-                                        <a href="html-partrial/result-search.jsp" class="turn-page">
-                                            <li class="browse__box-category-list-item text-list-item text-li">Tư duy & Sáng tạo
+                                        <c:forEach var="c" items="${categories}" begin="1">
+<%--                                        <a href="html-partrial/result-search.jsp" class="turn-page">--%>
+                                            <li class="browse__box-category-list-item text-list-item text-li">${c.name}
                                             </li>
-                                        </a>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Lãnh đạo &
-                                            Quản lý
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Năng suất &
-                                            Quản lý thời gian
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Giao tiếp
-                                            & Thuyết trình
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Trí tuệ cảm
-                                            xúc (EQ)
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Đàm phán &
-                                            Thuyết phục
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Phát triển bản
-                                            thân
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Kỹ năng học
-                                            tập & Tự học
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Kỹ năng công
-                                            sở & Networking
-                                        </li>
-                                        <li class="browse__box-category-list-item text-list-item text-li">Sức khỏe tinh
-                                            thần & Chống Burnout
-                                        </li>
+<%--                                        </a>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Lãnh đạo &--%>
+<%--                                            Quản lý--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Năng suất &--%>
+<%--                                            Quản lý thời gian--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Giao tiếp--%>
+<%--                                            & Thuyết trình--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Trí tuệ cảm--%>
+<%--                                            xúc (EQ)--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Đàm phán &--%>
+<%--                                            Thuyết phục--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Phát triển bản--%>
+<%--                                            thân--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Kỹ năng học--%>
+<%--                                            tập & Tự học--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Kỹ năng công--%>
+<%--                                            sở & Networking--%>
+<%--                                        </li>--%>
+<%--                                        <li class="browse__box-category-list-item text-list-item text-li">Sức khỏe tinh--%>
+<%--                                            thần & Chống Burnout--%>
+<%--                                        </li>--%>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>
@@ -213,23 +216,24 @@
             <div class="grid__row-2">
                 <div class="grid__column-3">
                     <div class="container__category">
-                        <a href="html-partrial/all-course.jsp" class="turn-page">
+                        <a href="all-courses" class="turn-page">
                             <div class="container__category-title">Tất cả khóa học</div>
                         </a>
                         <ul class="container__category-list text-li">
-                            <a href="html-partrial/result-search.jsp" class="turn-page">
-                                <li class="container__category-list-item text-li">Tư duy & Sáng tạo</li>
-                            </a>
-                            <li class="container__category-list-item text-li">Lãnh đạo & Quản lý</li>
-                            <li class="container__category-list-item text-li">Năng suất & Quản lý thời gian</li>
-                            <li class="container__category-list-item text-li">Giao tiếp & Thuyết trình</li>
-                            <li class="container__category-list-item text-li">Trí tuệ cảm xúc (EQ)</li>
-                            <li class="container__category-list-item text-li">Đàm phán & Thuyết phục</li>
-                            <li class="container__category-list-item text-li">Phát triển bản thân</li>
-                            <li class="container__category-list-item text-li">Kỹ năng học tập & Tự học</li>
-                            <li class="container__category-list-item text-li">Kỹ năng công sở & Networking</li>
-                            <li class="container__category-list-item text-li">Sức khỏe tinh thần & Chống burnout</li>
+                            <c:forEach var="c" items="${categories}" begin="1">
+                            <li class="container__category-list-item text-li">${c.name}</li>
+<%--                            <li class="container__category-list-item text-li">Lãnh đạo & Quản lý</li>--%>
+<%--                            <li class="container__category-list-item text-li">Năng suất & Quản lý thời gian</li>--%>
+<%--                            <li class="container__category-list-item text-li">Giao tiếp & Thuyết trình</li>--%>
+<%--                            <li class="container__category-list-item text-li">Trí tuệ cảm xúc (EQ)</li>--%>
+<%--                            <li class="container__category-list-item text-li">Đàm phán & Thuyết phục</li>--%>
+<%--                            <li class="container__category-list-item text-li">Phát triển bản thân</li>--%>
+<%--                            <li class="container__category-list-item text-li">Kỹ năng học tập & Tự học</li>--%>
+<%--                            <li class="container__category-list-item text-li">Kỹ năng công sở & Networking</li>--%>
+<%--                            <li class="container__category-list-item text-li">Sức khỏe tinh thần & Chống burnout</li>--%>
+                            </c:forEach>
                         </ul>
+
                     </div>
                 </div>
                 <div class="grid__colum-9">
