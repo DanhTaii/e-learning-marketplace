@@ -13,6 +13,11 @@ public class OrderItemService {
         this.oid = new OrderItemDao();
     }
 
+    public List<OrderItem> getOrderItemList(int orderId){
+        List<OrderItem> orderItemList = oid.getOrderItemList(orderId);
+        return orderItemList;
+    }
+
     public int createOrderItem(OrderItem orderItem) {
         // TODO: Implement creation logic
         return 0;
