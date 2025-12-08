@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Review implements Serializable {
@@ -9,14 +10,14 @@ public class Review implements Serializable {
     private int courseId;
     private double rating;   // Map với DECIMAL(3,2)
     private String comment;
-    private LocalDateTime createdAt; // Map với DATETIME
+    private Timestamp createdAt; // Map với DATETIME
 
 
     public Review() {
     }
 
 
-    public Review(int id, int userId, int courseId, double rating, String comment, LocalDateTime createdAt) {
+    public Review(int id, int userId, int courseId, double rating, String comment, Timestamp createdAt) {
         this.id = id;
         this.userId = userId;
         this.courseId = courseId;
@@ -75,11 +76,11 @@ public class Review implements Serializable {
         this.comment = comment;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

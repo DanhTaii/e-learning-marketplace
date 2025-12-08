@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.CartItem;
-import vn.edu.nlu.fit.elearning.services.CartService;
+import vn.edu.nlu.fit.elearning.services.CartItemService;
 
 
 import java.io.IOException;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @WebServlet(name = "CartController", value = "/cart")
 public class CartController extends HttpServlet {
-    private CartService cartService;
+    private CartItemService cartService;
 
     public CartController() {
-        this.cartService = new CartService();
+        this.cartService = new CartItemService();
     }
 
     @Override
