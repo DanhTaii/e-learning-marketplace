@@ -2,63 +2,30 @@ package vn.edu.nlu.fit.elearning.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Course implements Serializable {
-    // id INT AUTO_INCREMENT PRIMARY KEY
     private int id;
-
-    // title VARCHAR(255) NOT NULL
     private String title;
-
-    // subtitle TEXT
     private String subtitle;
-
-    // description LONGTEXT
     private String description;
-
-    // goals LONGTEXT
     private String goals;
-
-    // level ENUM('beginner','intermediate','advanced')
     private String level;
-
-    // price DECIMAL(12,2) NOT NULL
     private double price;
-
-    // discount_price DECIMAL(12,2) DEFAULT 0.00
-    private double discountPrice; // ĐÃ SỬA: từ discount_price thành discountPrice (camelCase)
-
-    // student_count INT DEFAULT 0
+    private double discountPrice;
     private int studentCount;
-
-    // is_featured BOOLEAN DEFAULT FALSE
     private boolean isFeatured;
-
-    // rating DECIMAL(3,2) DEFAULT 0.00
     private double rating;
-
-    // thumbnail_url VARCHAR(500)
-    private String thumbnailUrl; // ĐÃ SỬA: từ thumbnailURL thành thumbnailUrl (camelCase chuẩn hơn)
-
-    // is_public BOOLEAN DEFAULT FALSE
+    private String thumbnailUrl;
     private boolean isPublic;
-
-    // category_id INT NULL (Foreign Key)
-    private int categoryId; // Vẫn là Integer vì NULL
-
-    // author_name VARCHAR(100) DEFAULT 'Admin'
-    private String authorName; // ĐÃ SỬA: từ author_name thành authorName (camelCase)
-
+    private int categoryId;
+    private String authorName;
     private double durationHours;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    // created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    private java.sql.Timestamp createdAt; // ĐÃ SỬA: từ created_at thành createdAt (camelCase)
-
-    // updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    private java.sql.Timestamp updatedAt; // ĐÃ SỬA: từ updated_at thành updatedAt (camelCase)
-
-    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, java.sql.Timestamp createdAt, java.sql.Timestamp updatedAt) {
+    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -210,19 +177,19 @@ public class Course implements Serializable {
         this.durationHours = durationHours;
     }
 
-    public java.sql.Timestamp getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(java.sql.Timestamp createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public java.sql.Timestamp getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(java.sql.Timestamp updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 

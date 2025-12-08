@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Lesson implements Serializable {
@@ -19,12 +20,12 @@ public class Lesson implements Serializable {
 
     private int orderIndex;
 
-    private java.sql.Timestamp createdAt;
+    private Timestamp createdAt;
 
     public Lesson() {
     }
 
-    public Lesson(int id, int courseId, String courseTitle, String title, String videoUrl, int durationMinutes, int orderIndex, java.sql.Timestamp createdAt) {
+    public Lesson(int id, int courseId, String courseTitle, String title, String videoUrl, int durationMinutes, int orderIndex, Timestamp createdAt) {
         this.id = id;
         this.courseId = courseId;
         this.courseTitle = courseTitle;
@@ -91,11 +92,11 @@ public class Lesson implements Serializable {
         this.orderIndex = orderIndex;
     }
 
-    public java.sql.Timestamp getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(java.sql.Timestamp createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }
