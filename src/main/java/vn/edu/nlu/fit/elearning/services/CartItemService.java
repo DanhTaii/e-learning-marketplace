@@ -1,15 +1,15 @@
 package vn.edu.nlu.fit.elearning.services;
 
-import vn.edu.nlu.fit.elearning.dao.CartDao;
+import vn.edu.nlu.fit.elearning.dao.CartItemDao;
 import vn.edu.nlu.fit.elearning.model.CartItem;
 
 import java.util.List;
 
-public class CartService {
-    private CartDao cartDao;
+public class CartItemService {
+    private CartItemDao cartDao;
 
-    public CartService() {
-        this.cartDao = new CartDao();
+    public CartItemService() {
+        this.cartDao = new CartItemDao();
     }
 
     public List<CartItem> getCartItems(int userId) {

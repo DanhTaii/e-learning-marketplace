@@ -5,11 +5,11 @@ import java.sql.Timestamp;
 
 public class Order implements Serializable {
     private int id;
-    private String orderCode;      // Map từ order_code
+    private String orderCode;
     private int userId;
-    private double totalAmount;    // Tổng tiền gốc
-    private double discountAmount; // Tiền giảm giá
-    private double finalAmount;    // Tiền phải trả cuối cùng
+    private double totalAmount;
+    private double discountAmount;
+    private double finalAmount;
     private String status;         // Map ENUM ('pending', 'paid'...) thành String
     private Timestamp paidAt;
     private Timestamp createdAt;

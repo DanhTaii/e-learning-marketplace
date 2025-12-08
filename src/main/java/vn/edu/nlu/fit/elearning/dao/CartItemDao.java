@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.elearning.model.CartItem;
 
 import java.util.List;
 
-public class CartDao extends BaseDao implements BaseCrudDao<CartItem, Integer> {
+public class CartItemDao extends BaseDao implements BaseCrudDao<CartItem, Integer> {
 
 
     public List<CartItem> getCartItemsByUserId(int userId) {

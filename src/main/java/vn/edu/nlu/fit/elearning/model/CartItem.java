@@ -5,17 +5,17 @@
     import java.util.Locale;
 
     public class CartItem implements Serializable {
-        private int id;                 // c.id (ID khóa học)
+        private int id;
         private int userId;
         private int courseId;
-        private String title;           // c.title
-        private String thumbnailUrl;    // c.thumbnail_url
-        private boolean isSelected;     // ci.is_selected (Trạng thái checkbox)
-        private double rating;          // c.rating (Dùng double hoặc float)
-        private long priceOld;          // c.price AS price_old
-        private long priceNew;          // (c.price - c.discount_price) AS price_new (Đây là giá khuyến mãi/giá bán)
-        private String level;           // c.level
-        private double durationHours;   // SUM(l.duration_minutes) / 60.0 AS duration_hours
+        private String title;
+        private String thumbnailUrl;
+        private boolean isSelected;
+        private double rating;
+        private long priceOld;
+        private long priceNew;
+        private String level;
+        private double durationHours;
 
         public CartItem(int id, String title, String thumbnailUrl, boolean isSelected, double rating, long priceOld, long priceNew, String level, double durationHours) {
             this.id = id;
