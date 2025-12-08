@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.elearning.model.CartItem;
 
 import java.util.List;
 
-public class CartDao  extends BaseDao implements BaseCrudDao{
+public class CartDao extends BaseDao implements BaseCrudDao<CartItem, Integer> {
 
 
     public List<CartItem> getCartItemsByUserId(int userId) {
@@ -26,12 +26,23 @@ public class CartDao  extends BaseDao implements BaseCrudDao{
     }
 
     @Override
-    public void create(Object entity) {
+    public void create(CartItem entity) {
+        String sql = "INSERT INTO Cart_Items (user_id, course_id, added_at )" +
+                "VALUES (?,?, CURRENT_TIMESTAMP) " +
+                "ON DUPLICATE KEY UPDATE added_at = CURRENT_TIMESTAMP";
+        getJdbi().useHandle(handle -> {
+            handle.createUpdate(sql)
+                    .bind(0, entity.getUserId())
+                    .bind(1, entity.getCourseId())
+                    .execute();
+
+        });
 
     }
 
+
     @Override
-    public Object findById(Object o) {
+    public CartItem findById(Integer integer) {
         return null;
     }
 
@@ -41,12 +52,20 @@ public class CartDao  extends BaseDao implements BaseCrudDao{
     }
 
     @Override
-    public int update(Object entity) {
+    public int update(CartItem entity) {
         return 0;
     }
 
-    @Override
-    public int delete(Object o) {
-        return 0;
-    }
+        @Override
+        public int delete(Integer id) {
+            String sql= "DELETE FROM Cart_Items "+
+                  "WHERE id = ? ";
+            getJdbi().useHandle(handle -> {
+                handle.createUpdate(sql)
+                        .bind(0,id)
+                        .execute();
+
+            });
+            return 0;
+        }
 }

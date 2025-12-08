@@ -6,6 +6,8 @@
 
     public class CartItem implements Serializable {
         private int id;                 // c.id (ID khóa học)
+        private int userId;
+        private int courseId;
         private String title;           // c.title
         private String thumbnailUrl;    // c.thumbnail_url
         private boolean isSelected;     // ci.is_selected (Trạng thái checkbox)
@@ -100,6 +102,22 @@
 
         public void setDurationHours(double durationHours) {
             this.durationHours = durationHours;
+        }
+
+        public int getCourseId() {
+            return courseId;
+        }
+
+        public void setCourseId(int courseId) {
+            this.courseId = courseId;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
         }
 
         public String getPriceNewFormatted() {

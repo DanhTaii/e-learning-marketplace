@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">v
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shopping Cart</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base.css">x
+    <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/cart.css">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
@@ -222,7 +222,7 @@
                     <div class="shopping-cart">
                         <span class="shopping-cart__title text-big-title h1">Giỏ hàng</span>
                         <span class="shopping-cart__summary summary text-paragraph ">
-                        <span class="text-2xl">Giỏ hàng (${list.size()})</span>
+                        <span class="text-2xl">Sản phẩm (${list.size()})</span>
                     </span>
 
                         <div class="shopping-cart__sub-title">
