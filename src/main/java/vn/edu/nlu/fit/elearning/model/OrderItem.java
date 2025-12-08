@@ -7,6 +7,8 @@ public class OrderItem implements Serializable {
     private int orderId;
     private int courseId;
     private double priceAtPurchase; // Giá tại thời điểm mua (quan trọng)
+    private String title;
+    private String thumbnailUrl;
 
     public OrderItem() {
     }
@@ -30,4 +32,20 @@ public class OrderItem implements Serializable {
 
     public double getPriceAtPurchase() { return priceAtPurchase; }
     public void setPriceAtPurchase(double priceAtPurchase) { this.priceAtPurchase = priceAtPurchase; }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
 }
