@@ -47,8 +47,8 @@ public class CartItemDao extends BaseDao implements BaseCrudDao<CartItem, Intege
     }
 
     @Override
-    public List findAll() {
-        return List.of();
+    public List<CartItem> findAll() {
+        return null;
     }
 
     @Override
