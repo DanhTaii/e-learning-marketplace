@@ -41,4 +41,17 @@ public class UserService {
 
         return null;
     }
+
+    public int totalUsers(){
+        int result = 0;
+
+        List<User> userList = userDao.findAll();
+        for (User u : userList){
+            if (u.getRole().equals("user")){
+                result++;
+            }
+        }
+        return result;
+    }
+
 }
