@@ -35,9 +35,10 @@
 //                System.out.println("DEBUG (Login): User ID " + canLogin.getId() + " Đã được lưu vào Session.");
 
                 if (canLogin.getRole().equalsIgnoreCase("admin")) {
-                    response.sendRedirect(request.getContextPath() + "/html-admin/dashboard.jsp");
+                    response.sendRedirect("admin/dashboard");
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/html-partrial/home.jsp");
+                    canLogin.setPassword("");
+                    response.sendRedirect("index");
                 }
             } else {
                 request.setAttribute("error", "Bạn nhập sai email hoặc mật khẩu!");

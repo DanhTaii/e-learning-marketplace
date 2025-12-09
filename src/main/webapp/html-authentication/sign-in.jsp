@@ -134,7 +134,7 @@
                             <button class="button__btn text-header sign-in">Đăng ký</button>
                         </div>
                     </a>
-                    <a href="../html-authentication/sign-in.html" class="turn-page">
+                    <a href="../html-authentication/sign-in.jsp" class="turn-page">
                         <div class="header__button sign-up-box">
                             <button class="button__btn text-header sign-up">Đăng nhập</button>
                         </div>
