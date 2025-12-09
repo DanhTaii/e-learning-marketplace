@@ -43,4 +43,55 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
+    // 3 khóa học được yêu thích nhiều nhất
+    public List<Course> getThreeCoursesWereLiked() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,c.student_count,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name,(c.price - c.discount_price) AS price_new,\n" +
+                    "c.price AS price_old,c.rating,COUNT(w.course_id) AS wishlist_count\n" +
+                    "FROM Wishlist w JOIN Courses c ON w.course_id = c.id\n" +
+                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "WHERE c.is_public = TRUE\n" +
+                    "GROUP BY c.id, c.title, c.thumbnail_url, c.level, c.student_count, c.author_name, c.price, c.discount_price, c.rating\n" +
+                    "ORDER BY wishlist_count DESC\n" +
+                    "LIMIT 3;").mapToBean(Course.class).list();
+        });
+    }
+
+    // 6 khóa học mới nhất
+    public List<Course> getSixCoursesMostPopular() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,c.student_count,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name,(c.price - c.discount_price) AS price_new,\n" +
+                    "c.price AS price_old,c.rating\n" +
+                    "FROM Courses c\n" +
+                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "WHERE c.is_public = TRUE\n" +
+                    "GROUP BY c.id, c.level\n" +
+                    "ORDER BY c.created_at DESC\n" +
+                    "LIMIT 6;").mapToBean(Course.class).list();
+        });
+    }
+    // 6 khóa học phổ biến nhất
+    public List<Course> getSixCoursesLast() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id,c.title, c.is_featured ,c.thumbnail_url,c.level,c.student_count,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name,(c.price - c.discount_price) AS price_new,c.price AS price_old,c.rating\n" +
+                    "FROM Courses c\n" +
+                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "WHERE c.is_featured = TRUE AND c.is_public = TRUE\n" +
+                    "GROUP BY c.id, c.level\n" +
+                    "ORDER BY c.created_at DESC\n" +
+                    "LIMIT 6").mapToBean(Course.class).list();
+        });
+    }
+
+    public List<Course> getAllCoursesAdmin() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.student_count, SUM(l.duration_minutes) / 60.0 AS duration_hours, c.author_name, (c.price - c.discount_price) AS price_new, c.price AS price_old, c.rating, c.created_at, c.is_public\n" +
+                    "FROM Courses c\n" +
+                    "LEFT JOIN Lessons l ON c.id = l.course_id\n" +
+                    "GROUP BY c.id, c.level\n" +
+                    "ORDER BY c.id DESC;").mapToBean(Course.class).list();
+        });
+    }
+
+
 }
