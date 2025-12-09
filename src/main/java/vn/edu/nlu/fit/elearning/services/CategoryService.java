@@ -13,6 +13,10 @@ public class CategoryService {
     }
 
     public int createCategory(Category category) {
+        if (category != null) {
+            categoryDao.create(category);
+            return 1;
+        }
         return 0;
     }
 
