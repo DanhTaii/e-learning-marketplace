@@ -131,29 +131,44 @@
                         </div>
                         <div class="container-2__body">
                             <div class="title__admin">Tạo danh mục</div>
-                            <div class="container-2__create">
-                                <div class="create__selection">
-                                    <div class="create__selection-input">
-                                        <div class="create__selection-items">
-                                            <div class="filter__selection-title filter__item-name">Tên danh mục:
+                            <form action="admin/category" class="form" method="post">
+                                <div class="container-2__create">
+                                    <div class="create__selection">
+                                        <c:if test="${not empty param.error}">
+                                            <span style="color: red; padding: 10px; background: #f8d7da;">
+                                                Lỗi: ${param.error}
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${not empty param.success}">
+                                            <span style="color: red; padding: 10px; background: #f8d7da;">
+                                                Thành công: ${param.success}
+                                            </span>
+                                        </c:if>
+                                        <div class="create__selection-input">
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-name">Tên danh mục:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="categoryName" value="${param.categoryName}">
                                             </div>
-                                            <input placeholder="" type="text" class="admin-input__long">
-                                        </div>
-                                        <div class="create__selection-items">
-                                            <div class="filter__selection-title filter__item-name">ID danh mục cha:
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-name">ID danh mục cha:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="categoryParentId">
                                             </div>
-                                            <input placeholder="" type="text" class="admin-input__long">
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-name">Slug:</div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="categorySlug">
+                                            </div>
                                         </div>
-                                        <div class="create__selection-items">
-                                            <div class="filter__selection-title filter__item-name">Icon URL:</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
+                                        <div class="create__btn-create">
+                                            <button type="submit" class="create-btn dark-button">Tạo mới</button>
                                         </div>
-                                    </div>
-                                    <div class="create__btn-create">
-                                        <button type="submit" class="create-btn dark-button">Tạo mới</button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                             <div class="title__admin">Tất cả danh mục</div>
                             <div class="container-2__filter">
                                 <div class="filter__selection">
