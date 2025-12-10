@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Course implements Serializable {
     private int id;
@@ -25,7 +26,16 @@ public class Course implements Serializable {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, Timestamp createdAt, Timestamp updatedAt) {
+    // này thêm để làm đủ cho trang course-detail
+    private List<String> tags;          // danh sách tag
+    private List<Lesson> lessons;       // danh sách bài học
+    private int lessonCount;            // số lượng bài học
+    private double totalDurationHours;  // tổng thời lượng
+    private List<Review> reviews;       // danh sách review
+    private String categoryName;        // tên category
+    private String parentCategoryName;  // tên category cha
+
+    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<String> tags, List<Lesson> lessons, int lessonCount, double totalDurationHours, List<Review> reviews, String categoryName, String parentCategoryName) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -44,6 +54,13 @@ public class Course implements Serializable {
         this.durationHours = durationHours;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.tags = tags;
+        this.lessons = lessons;
+        this.lessonCount = lessonCount;
+        this.totalDurationHours = totalDurationHours;
+        this.reviews = reviews;
+        this.categoryName = categoryName;
+        this.parentCategoryName = parentCategoryName;
     }
 
     public Course() {
@@ -193,6 +210,66 @@ public class Course implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    public int getLessonCount() {
+        return lessonCount;
+    }
+
+    public void setLessonCount(int lessonCount) {
+        this.lessonCount = lessonCount;
+    }
+
+    public double getTotalDurationHours() {
+        return totalDurationHours;
+    }
+
+    public void setTotalDurationHours(double totalDurationHours) {
+        this.totalDurationHours = totalDurationHours;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getParentCategoryName() {
+        return parentCategoryName;
+    }
+
+    public void setParentCategoryName(String parentCategoryName) {
+        this.parentCategoryName = parentCategoryName;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -211,8 +288,16 @@ public class Course implements Serializable {
                 ", isPublic=" + isPublic +
                 ", categoryId=" + categoryId +
                 ", authorName='" + authorName + '\'' +
+                ", durationHours=" + durationHours +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", tags=" + tags +
+                ", lessons=" + lessons +
+                ", lessonCount=" + lessonCount +
+                ", totalDurationHours=" + totalDurationHours +
+                ", reviews=" + reviews +
+                ", categoryName='" + categoryName + '\'' +
+                ", parentCategoryName='" + parentCategoryName + '\'' +
                 '}';
     }
 }
