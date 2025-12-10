@@ -222,18 +222,18 @@
                                                 </div>
                                             </td>
                                             <td>
-<%--                                                <c:choose>--%>
-<%--                                                    <c:when test="${course.public == true}">--%>
-<%--                                                        <div class="course-row__status course-row__font-content course-row__status-public">--%>
-<%--                                                            Công khai--%>
-<%--                                                        </div>--%>
-<%--                                                    </c:when>--%>
-<%--                                                    <c:otherwise>--%>
-<%--                                                        <div class="course-row__status course-row__font-content course-row__status-private">--%>
-<%--                                                            Riêng tư--%>
-<%--                                                        </div>--%>
-<%--                                                    </c:otherwise>--%>
-<%--                                                </c:choose>--%>
+                                                <c:choose>
+                                                    <c:when test="${course.isPublic()}">
+                                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                                            Công khai
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="course-row__status course-row__font-content course-row__status-private">
+                                                            Riêng tư
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </td>
                                             <td>
                                                 <div class="course-row__created course-row__font-content">

@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.statement.PreparedBatch;
 import vn.edu.nlu.fit.elearning.model.Category;
 
 import java.util.List;
@@ -7,7 +9,11 @@ import java.util.List;
 public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Integer> {
     @Override
     public void create(Category entity) {
-
+        getJdbi().useHandle(handle -> {
+            PreparedBatch pb = handle.prepareBatch("INSERT INTO categories(id, name, slug, icon_url )\n" +
+                    "VALUES ( :id,:name, :slug, :iconUrl )").bindBean(entity).add();
+            pb.execute();
+        });
     }
 
     @Override
