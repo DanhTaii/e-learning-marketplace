@@ -131,18 +131,20 @@
                         </div>
                         <div class="container-2__body">
                             <div class="title__admin">Tạo danh mục</div>
-                            <form action="admin/category" class="form" method="post">
+                            <form action="admin/categories" class="form" method="post">
                                 <div class="container-2__create">
                                     <div class="create__selection">
-                                        <c:if test="${not empty param.error}">
+                                        <c:if test="${not empty error}">
                                             <span style="color: red; padding: 10px; background: #f8d7da;">
-                                                Lỗi: ${param.error}
+                                                Lỗi: ${error}
                                             </span>
                                         </c:if>
-                                        <c:if test="${not empty param.success}">
-                                            <span style="color: red; padding: 10px; background: #f8d7da;">
-                                                Thành công: ${param.success}
+<%--                                        Nếu reload laij trang thif nó sẽ mất thông báo--%>
+                                        <c:if test="${not empty sessionScope.flashSuccess}">
+                                            <span style="color: green; padding: 2rem; background: #d4edda;">
+                                                Thành công: ${sessionScope.flashSuccess}
                                             </span>
+                                            <c:remove var="flashSuccess" scope="session"/>
                                         </c:if>
                                         <div class="create__selection-input">
                                             <div class="create__selection-items">
@@ -170,24 +172,28 @@
                                 </div>
                             </form>
                             <div class="title__admin">Tất cả danh mục</div>
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items filter__selection-name">
-                                            <div class="filter__selection-title filter__item-name">Tên danh mục:
+                            <form action="admin/categories/search" class="form" method="get">
+                                <div class="container-2__filter">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items filter__selection-name">
+                                                <div class="filter__selection-title filter__item-name">Tên danh mục:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="searchName" value="${param.searchName}">
                                             </div>
-                                            <input placeholder="" type="text" class="admin-input__long">
+
                                         </div>
 
-                                    </div>
-
-                                    <div class="filter__button-search">
-                                        <button class="button dark-button" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <div class="filter__button-search">
+                                            <button class="button dark-button" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+
                             <div class="container-2__list-student">
                                 <table>
                                     <thead>
