@@ -1,17 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Course detail</title>
+    <base href="${pageContext.request.contextPath}/">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
 
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/course-detail.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/modal-notification.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/course-detail.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/modal-notification.css">
 
 </head>
 <body>
@@ -218,14 +223,13 @@
                 <div class="container-2 grid__column-4-in-12">
                     <div class="container-2__information">
                         <div class="container-2__img">
-                            <img srcset="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_m_1690356655.jpg"
-                                 alt="" class="">
+                            <img src="${c.thumbnailUrl}" alt="${c.title}" class="">
                         </div>
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price">399.000đ</span>
-                                <span class="container-2__original-price">700.000đ</span>
+                                <span class="container-2__sold-price">${c.price - c.discountPrice}đ</span>
+                                <span class="container-2__original-price">${c.price}đ</span>
                             </div>
                         </div>
 
@@ -267,7 +271,7 @@
                                         Thời lượng:
                                     </span>
                                     <span class="text-li style__text style__text-var">
-                                         1 tiếng 30 phút
+                                         ${c.durationHours}h
                                     </span>
                                 </li>
                                 <li class="text-li">
@@ -275,7 +279,7 @@
                                          Giáo trình:
                                     </span>
                                     <span class="text-li style__text style__text-var">
-                                         15 bài giảng
+                                         ${c.lessonCount} bài giảng
                                     </span>
                                 </li>
                                 <li class="text-li">
@@ -291,7 +295,7 @@
                         <div class="section-1__breadcrumb">
 
                             <div class="">
-                                <a href="home.jsp" class="section-1__breadcrumb-name section-1__breadcrumb-item">
+                                <a href="home" class="section-1__breadcrumb-name section-1__breadcrumb-item">
                                     Softskill
                                 </a>
                             </div>
@@ -301,8 +305,8 @@
                             </div>
 
                             <div class="">
-                                <a href="result-search.jsp" class="section-1__breadcrumb-name section-1__breadcrumb-item">
-                                    Tư duy & Sáng tạo
+                                <a href="result-search" class="section-1__breadcrumb-name section-1__breadcrumb-item">
+                                    ${c.parentCategoryName}
                                 </a>
                             </div>
 
@@ -311,15 +315,13 @@
                             </div>
 
                             <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
-                                Tư duy phản biện
+                                ${c.categoryName}
                             </div>
                         </div>
 
-                        <div class="section-1__main-title text-big-title">Tư duy phản biện</div>
+                        <div class="section-1__main-title text-big-title">${c.title}</div>
 
-                        <div class="section-1__sub-title text-big">Hình thành tư duy phản biện để chắt lọc những thông
-                            tin có giá trị với bản thân, nhìn thấu bản chất của các vấn đề và xác định được phương pháp
-                            giải quyết.
+                        <div class="section-1__sub-title text-big">${c.subtitle}.
                         </div>
 
                         <div class="section-1__rating">
@@ -327,7 +329,7 @@
                             <!--                            <div class="section-1__rating-item section-1__high-rated text-mini">High Rated</div>-->
                             <div class="section-1__rating-item section-1__rating-star">
                                 <div class="section-1__number section-1__rating-star-item text-mini">
-                                    5.0
+                                    ${c.rating}
                                 </div>
                                 <div class="section-1__star section-1__rating-star-item text-mini">
                                     <i class="fa-duotone fa-solid fa-star"></i>
@@ -352,14 +354,14 @@
                         <div class="section-1__creator">
                             <span class="section-1__creator-title text-big font__sub-title">Giảng viên</span>
                             <a href="instructor-profile.jsp"
-                               class="section-1__creator-name text-big turn-page">Admin</a>
+                               class="section-1__creator-name text-big turn-page">${c.authorName}</a>
                         </div>
 
                         <div class="section-1__updated">
                         <span class="section-1__updated-item text-big"><i
                                 class="fa-duotone fa-solid fa-calendar-days"></i></span>
                             <span class="section-1__updated-title section-1__updated-item text-big font__sub-title">Cập nhật lần cuối: </span>
-                            <span class="section-1__updated-date section-1__updated-item text-big font__sub-title">8/2025</span>
+                            <span class="section-1__updated-date section-1__updated-item text-big font__sub-title">${c.updatedAt}</span>
                         </div>
                     </div>
 
@@ -411,19 +413,11 @@
                     <div class="section-6__description section__space">
                         <div class="section-6__title style__sub-title">Giới thiệu khóa học</div>
                         <div class="section-6__content text-big font__sub-title">
-                            Tư duy phản biện được đánh giá là một trong những kỹ năng quan trọng nhất trong bối cảnh
-                            kinh tế hiện đại ngày nay. Khi công nghệ và máy móc ngày càng phát triển thì kỹ năng này
-                            ngày càng được chú trọng vì nó không thể bị thay thế như một số kỹ năng khác. Tư duy phản
-                            biện là một quá trình tư duy nhằm chất vấn các giả định hay giả thiết. Đó là cách để khẳng
-                            định rằng một nhận định nào đó là đúng hay sai, đôi khi đúng, hay có phần đúng. Kỹ năng
-                            trong tư duy phản biện bao gồm những gì ?
+                            ${c.description}
                         </div>
                         <br>
                         <div class="section-6__content text-big font__sub-title">
-                            Khóa học Tư duy phản biện - Giải quyết tận gốc mọi vấn đề sẽ cung cấp cho bạn cách đánh giá,
-                            sàng lọc thông tin trong hàng tá thứ thông tin, từ trên Internet đến trực tiếp nghe từ người
-                            khá. Tư duy phản biện trong khóa học này sẽ giúp bạn ứng dụng vào học tập, công việc và cộng
-                            sống để tìm ra những giải pháp mới mẻ.
+                            ${c.goals}
                         </div>
                         <br>
                         <div class="section-6__content text-big font__sub-title">
@@ -437,9 +431,12 @@
                                 <div class="section-3__title style__sub-title">Tags</div>
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
-                                        <li class="section-3_li first">Tư duy</li>
-                                        <li class="section-3_li">Suy nghĩ</li>
-                                        <li class="section-3_li">Phát triển trí tuệ</li>
+                                        <%-- fn:split dùng để tách chuỗi thành mảng--%>
+                                        <c:forEach var="tag" items="${fn:split(c.tags, ',')}">
+                                            <c:if test="${loop.index < 3}">
+                                                <li class="section-3_li">${tag}</li>
+                                            </c:if>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>
@@ -652,7 +649,7 @@
 
                         <div class="review-box__comment">
                             <div class="comment__user header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
                                      class="user__avatar1">
                             </div>
                             <div class="comment__box">
@@ -682,7 +679,7 @@
                         </div>
                         <div class="review-box__comment">
                             <div class="comment__user header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
                                      class="user__avatar1">
                             </div>
                             <div class="comment__box">
@@ -712,7 +709,7 @@
                         </div>
                         <div class="review-box__comment">
                             <div class="comment__user header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
                                      class="user__avatar1">
                             </div>
                             <div class="comment__box">
@@ -725,8 +722,7 @@
                                 <div class="box__date box">
                                     <div class="star">
                                         <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star"
-                                                                  style="color: #FFD43B; font-size: 1rem"></i>
+                                        <div class="star-icon"><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>

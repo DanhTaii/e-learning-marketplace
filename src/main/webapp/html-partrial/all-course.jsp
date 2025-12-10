@@ -263,7 +263,7 @@
                         <div class="grid__row-2">
                             <c:forEach var="c" items="${list}">
                                 <div class="grid__column-3">
-                                    <a href="course-detail.jsp?id=1" class="turn-page">
+                                    <a href="course-detail?id=${c.id}" class="turn-page">
                                         <div class="product__small-advertisement">
                                             <div class="small-advertisement__image">
                                                 <img src="${c.thumbnailUrl}"
