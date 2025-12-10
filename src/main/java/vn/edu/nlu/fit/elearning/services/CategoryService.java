@@ -34,4 +34,8 @@ public class CategoryService {
 
     public void deleteCategory(int id) {
     }
+
+    public List<Category> getAllCategoriesByName(String name) {
+        return categoryDao.findByName(name);
+    }
 }

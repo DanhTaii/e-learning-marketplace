@@ -38,4 +38,13 @@ public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Intege
     public int delete(Integer integer) {
         return 0;
     }
+
+    public List<Category> findByName(String name) {
+        String nameSearch = "%" + name + "%";
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT ca.id, ca.name, ca.parent_id, ca.icon_url\n" +
+                    "FROM categories ca\n" +
+                    "WHERE ca.name LIKE :nameSearch").bind("nameSearch", nameSearch).mapToBean(Category.class).list();
+        });
+    }
 }
