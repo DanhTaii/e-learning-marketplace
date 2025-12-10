@@ -222,7 +222,9 @@
                         </a>
                         <ul class="container__category-list text-li">
                             <c:forEach var="c" items="${categories}" begin="1">
-                            <li class="container__category-list-item text-li">${c.name}</li>
+                                <a href="result-search?id=${c.id}" class="turn-page">
+                                    <li class="container__category-list-item text-li">${c.name}</li>
+                                </a>
 <%--                            <li class="container__category-list-item text-li">Lãnh đạo & Quản lý</li>--%>
 <%--                            <li class="container__category-list-item text-li">Năng suất & Quản lý thời gian</li>--%>
 <%--                            <li class="container__category-list-item text-li">Giao tiếp & Thuyết trình</li>--%>
