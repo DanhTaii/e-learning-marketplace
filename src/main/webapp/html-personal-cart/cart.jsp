@@ -274,12 +274,12 @@
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         </span>
-                                                        <span class="rating-group__rating-count ratings-count text-mini ">(113.485 rating)</span>
+                                                        <span class="rating-group__rating-count ratings-count text-mini ">(${p.studentCount} rating)</span>
                                                     </div>
                                                     <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">${p.durationHours} tiếng</span>
+                                                        <span class="stats__hours text-mini">${p.timeDuration}</span>
 
-                                                        <span class="stats__lecture text-mini ">• 15 Bài giảng</span>
+                                                        <span class="stats__lecture text-mini ">• ${p.totalLesson} Bài giảng</span>
 
                                                         <span class="stats__level text-mini">• ${p.level}</span>
                                                     </div>

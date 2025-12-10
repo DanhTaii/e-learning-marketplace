@@ -3,19 +3,19 @@ package vn.edu.nlu.fit.elearning.controller.cart;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.model.CartItem;
-import vn.edu.nlu.fit.elearning.services.CartItemService;
+import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
+import vn.edu.nlu.fit.elearning.services.OrderItemService;
 
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CartController", value = "/cart")
-public class CartController extends HttpServlet {
-    private CartItemService cartService;
+@WebServlet(name = "OrderItemController", value = "/cart")
+public class OrderItemController extends HttpServlet {
+    private OrderItemService orderItemService;
 
-    public CartController() {
-        this.cartService = new CartItemService();
+    public OrderItemController() {
+        this.orderItemService = new OrderItemService();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class CartController extends HttpServlet {
         Integer userIdObj = (Integer) session.getAttribute("userId");
 
         int userId = userIdObj;
-        List<CartItem> list = this.cartService.getCartItems(userId);
+        List<OrderItemDTO> list = this.orderItemService.getCartItems(userId);
 
         request.setAttribute("list", list);
         request.getRequestDispatcher("/html-personal-cart/cart.jsp").forward(request, response);
