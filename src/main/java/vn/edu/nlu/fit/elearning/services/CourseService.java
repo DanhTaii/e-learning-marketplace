@@ -49,4 +49,7 @@ public class CourseService {
         return cd.getSixCoursesLast();
     }
 
+    public Course getCourse(int id) {
+        return cd.getCourse(id);
+    }
 }
