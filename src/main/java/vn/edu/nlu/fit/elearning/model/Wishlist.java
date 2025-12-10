@@ -7,7 +7,8 @@ public class Wishlist implements Serializable {
     private int id;
     private int userId;
     private int courseId;
-    private Timestamp addedAt; // <--- Dùng Timestamp thay vì LocalDateTime
+    private Timestamp addedAt;
+    private Course course;
 
     public Wishlist() {
     }
@@ -53,14 +54,11 @@ public class Wishlist implements Serializable {
         this.addedAt = addedAt;
     }
 
+    public Course getCourse() {
+        return course;
+    }
 
-    @Override
-    public String toString() {
-        return "Wishlist{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", courseId=" + courseId +
-                ", addedAt=" + addedAt +
-                '}';
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

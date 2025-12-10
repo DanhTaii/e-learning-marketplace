@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.OrderItemDao;
+import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
 
 import java.util.List;
@@ -17,7 +18,10 @@ public class OrderItemService {
         List<OrderItem> orderItemList = oid.getOrderItemList(orderId);
         return orderItemList;
     }
-
+    public List<OrderItemDTO> getCartItems(int userId) {
+        List<OrderItemDTO> cartItems = oid.getCartItemsByUserId(userId);
+        return cartItems;
+    }
     public int createOrderItem(OrderItem orderItem) {
         // TODO: Implement creation logic
         return 0;
