@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     public Category getCategoryById(int id) {
-        return null;
+        return categoryDao.findById(id);
     }
 
     public void updateCategory(Category category) {
@@ -38,4 +38,6 @@ public class CategoryService {
     public List<Category> getAllCategoriesByName(String name) {
         return categoryDao.findByName(name);
     }
+
+
 }
