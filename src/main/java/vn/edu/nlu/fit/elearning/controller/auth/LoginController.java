@@ -36,7 +36,8 @@
 
                 if (canLogin.getRole().equalsIgnoreCase("admin")) {
                     response.sendRedirect("admin/dashboard");
-                } else {
+                }
+                else {
                     canLogin.setPassword("");
                     response.sendRedirect("index");
                 }

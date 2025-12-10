@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.dao;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.PreparedBatch;
 import vn.edu.nlu.fit.elearning.model.Category;
+import vn.edu.nlu.fit.elearning.model.Course;
 
 import java.util.List;
 
@@ -47,4 +48,13 @@ public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Intege
                     "WHERE ca.name LIKE :nameSearch").bind("nameSearch", nameSearch).mapToBean(Category.class).list();
         });
     }
+
+    public Category findById(int id) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT id, name, slug, parent_id, icon_url\n" +
+                    "FROM Categories\n" +
+                    "WHERE id = :id;").bind("id", id).mapToBean(Category.class).one();
+        });
+    }
+
 }
