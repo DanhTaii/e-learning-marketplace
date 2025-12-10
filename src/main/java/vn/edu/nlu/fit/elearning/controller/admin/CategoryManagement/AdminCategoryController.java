@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.services.CategoryService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminCategoryController", value = "/admin/category")
+@WebServlet(name = "AdminCategoryController", value = "/admin/categories")
 public class AdminCategoryController extends HttpServlet {
 
     private CategoryService categoryService;
@@ -39,11 +39,14 @@ public class AdminCategoryController extends HttpServlet {
         int checkCreate = categoryService.createCategory(newCategory);
 
         if (checkCreate == 1) {
-            request.setAttribute("success", "Tạo thành công !");
-            response.sendRedirect(request.getContextPath() + "/admin/category");
+//            request.setAttribute("success", "Tạo thành công !");
+//            request.getRequestDispatcher("admin/categories").forward(request, response);
+            request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
+            response.sendRedirect(request.getContextPath() + "/admin/categories");
         } else {
             request.setAttribute("error", "Vui lòng điền thông tin ! ");
-            request.getRequestDispatcher("admin/category").forward(request, response);
+            request.getRequestDispatcher("admin/categories").forward(request, response);
+//            doGet(request, response);
         }
     }
 }
