@@ -2,36 +2,25 @@ package vn.edu.nlu.fit.elearning.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order implements Serializable {
     private int id;
     private String orderCode;
     private int userId;
+    private Integer paymentMethodId;
     private double totalAmount;
     private double discountAmount;
     private double finalAmount;
-    private String status;         // Map ENUM ('pending', 'paid'...) thành String
+    private String status;
     private Timestamp paidAt;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private List<OrderItem> items = new ArrayList<>();
 
-    public Order() {
-    }
+    public Order() {}
 
-    public Order(int id, String orderCode, int userId, double totalAmount, double discountAmount, double finalAmount, String status, Timestamp paidAt, Timestamp createdAt, Timestamp updatedAt) {
-        this.id = id;
-        this.orderCode = orderCode;
-        this.userId = userId;
-        this.totalAmount = totalAmount;
-        this.discountAmount = discountAmount;
-        this.finalAmount = finalAmount;
-        this.status = status;
-        this.paidAt = paidAt;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    // --- GETTER & SETTER ---
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -40,6 +29,9 @@ public class Order implements Serializable {
 
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
+
+    public Integer getPaymentMethodId() { return paymentMethodId; }
+    public void setPaymentMethodId(Integer paymentMethodId) { this.paymentMethodId = paymentMethodId; }
 
     public double getTotalAmount() { return totalAmount; }
     public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
@@ -61,4 +53,7 @@ public class Order implements Serializable {
 
     public Timestamp getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Timestamp updatedAt) { this.updatedAt = updatedAt; }
+
+    public List<OrderItem> getItems() { return items; }
+    public void setItems(List<OrderItem> items) { this.items = items; }
 }
