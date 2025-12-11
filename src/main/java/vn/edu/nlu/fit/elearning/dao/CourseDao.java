@@ -115,23 +115,13 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         return course;
     }
 
-//    public List<Course> findByCourseByCategoryId(int idCategory) {
-//        return getJdbi().withHandle(handle -> {
-//            return handle.createQuery("SELECT \n" +
-//                    "    c.id AS course_id,\n" +
-//                    "    c.title AS course_title,\n" +
-//                    "    c.subtitle,\n" +
-//                    "    c.price,\n" +
-//                    "    c.discount_price,\n" +
-//                    "    c.rating,\n" +
-//                    "    c.student_count,\n" +
-//                    "    c.thumbnail_url,\n" +
-//                    "    cat.id AS category_id,\n" +
-//                    "    cat.name AS category_name\n" +
-//                    "FROM Courses c\n" +
-//                    "JOIN Categories cate ON c.category_id = cate.id\n" +
-//                    "WHERE cate.id = :id;").bind("id", idCategory).mapToBean(Category.class).list();
-//        });
-//    }
+    public List<Course> getCoursesByIdCategory(int idCategory) {
+        return getJdbi().withHandle(handle ->{
+            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name " +
+                    "FROM Courses c " +
+                    "JOIN Categories cate ON c.category_id = cate.id " +
+                    "WHERE cate.id = :id;").bind("id", idCategory).mapToBean(Course.class).list();
+        });
+    }
 
 }

@@ -52,4 +52,9 @@ public class CourseService {
     public Course getCourse(int id) {
         return cd.getCourse(id);
     }
+
+    public List<Course> getCoursesByIdCategory(int idCategory) {
+        return cd.getCoursesByIdCategory(idCategory);
+    }
+
 }
