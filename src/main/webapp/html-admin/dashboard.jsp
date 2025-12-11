@@ -7,7 +7,9 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <%--    Mỗi laanf cập nhật cái CSS đều phải thêm đuôi version đằng sau cho Tomcat nhận diện--%>
+    <%--    ?v=1.0.1--%>
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
@@ -113,7 +115,7 @@
                             </li>
                         </ul>
                         <div class="log-out">
-                            <a href="../html-authentication/sign-in.jsp">
+                            <a href="html-authentication/sign-in.jsp">
                                 <div class="log-out__container">
                                     <div class="log-out__content">
                                         Thoát
@@ -141,16 +143,16 @@
                                             <div class="card-icon"><i class="fa-solid fa-money-check-dollar"></i></i>
                                             </div>
                                         </div>
-                                        <div class="card-content__number">250+</div>
+                                        <div class="card-content__number">${revenueTotal}</div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="card-information">
                                         <div class="card-content">
                                             <div class="card-title">Đơn hàng</div>
-                                            <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></i></div>
+                                            <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                                         </div>
-                                        <div class="card-content__number">250+</div>
+                                        <div class="card-content__number">${orderCount}</div>
                                     </div>
                                 </li>
                                 <li>
@@ -159,7 +161,7 @@
                                             <div>Người dùng</div>
                                             <div class="card-icon"><i class="fa-solid fa-user"></i></div>
                                         </div>
-                                        <div class="card-content__number">250+</div>
+                                        <div class="card-content__number">${userCount}</div>
                                     </div>
                                 </li>
                                 <li>
@@ -168,7 +170,7 @@
                                             <div>Khóa học</div>
                                             <div class="card-icon"><i class="fa-solid fa-tags"></i></div>
                                         </div>
-                                        <div class="card-content__number">250+</div>
+                                        <div class="card-content__number">${courseCount}</div>
                                     </div>
                                 </li>
                             </ul>
@@ -188,60 +190,47 @@
                                     </div>
 
                                     <div class="bar-chart__bar">
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 70%"><span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 90%"><span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 60%"><span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 10%"><span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 30%"><span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 40%"><span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 80%"><span>3.6tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 70%">
+                                            <span>1.8tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 90%">
+                                            <span>1.8tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 60%">
+                                            <span>1.8tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 10%">
+                                            <span>1.8tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 30%">
+                                            <span>1.8tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 40%">
+                                            <span>1.8tr</span></div>
+                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 80%">
+                                            <span>3.6tr</span></div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="top-course">
-                                <div class="top-course__title">
-                                    <center>TOP 10 KHÓA HỌC BÁN CHẠY NHẤT</center>
-                                </div>
                                 <table>
                                     <thead>
                                     <tr>
+                                        <!-- Thay vì div riêng, đưa vào th với colspan -->
+                                        <th colspan="3" class="top-course__title">
+                                            TOP 6 KHÓA HỌC BÁN CHẠY NHẤT
+                                        </th>
+                                    </tr>
+                                    <tr>
                                         <th>STT</th>
                                         <th>Tên khóa học</th>
-                                        <th>Số lượng học viên</th>
+                                        <th>Học viên</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Kỹ năng giao tiếp</td>
-                                        <td>2100</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2.</td>
-                                        <td>Lãnh đạo bản thân</td>
-                                        <td>1800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3.</td>
-                                        <td>Quản lý thời gian</td>
-                                        <td>3600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4.</td>
-                                        <td>Khả năng thuyết trình</td>
-                                        <td>3600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5.</td>
-                                        <td>Làm việc nhóm</td>
-                                        <td>3600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6.</td>
-                                        <td>Vượt lên chính mình</td>
-                                        <td>3600</td>
-                                    </tr>
+                                    <c:forEach var="c" items="${popularCourses}" varStatus="loop">
+                                        <tr>
+                                            <td>${loop.index + 1}</td>
+                                            <td data-full-title="${c.title}">${c.title}</td>
+                                            <td>2100</td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

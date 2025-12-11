@@ -50,6 +50,13 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
         return 0;
     }
 
+    public double calculateRevenueTotal() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT SUM(o.final_amount) \n" +
+                    "FROM Orders o\n" +
+                    "WHERE o.status = 'paid' AND DATE(o.created_at) = CURDATE()").mapTo(Double.class).findFirst().orElse(0.0);
+        });
+    }
 
 
 }
