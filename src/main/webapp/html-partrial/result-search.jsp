@@ -362,515 +362,514 @@
                     </div>
                     <div class="grid__colum-9">
                         <div class="grid__row-2">
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=3" class="turn-page">
+                            <c:forEach var="c" items="${list}">
+                                <div class="grid__column-4">
+                                <a href="course-detail?id=${c.id}" class="turn-page">
                                     <div class="product__small-advertisement">
                                         <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_1690356655.jpg"
+                                            <img src="${c.thumbnailUrl}"
                                                  alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"
                                                  class="img-2">
                                         </div>
                                         <div class="small-advertisement__content">
                                             <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
+                                                <div class="content__author-name text-medium">${c.authorName}</div>
                                                 <div class="content__rate">
                                                     <div class="rate__icon"><i
                                                             class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">5.0</div>
+                                                    <div class="text-medium rate__number">${c.rating}</div>
                                                 </div>
                                             </div>
-                                            <div class="text-paragraph test-text"><p>Tư duy phản biện - Giải quyết tận gốc mọi vấn đề
+                                            <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                            <div class="content__quick-info">
+                                                <div class="quick-info__level">
+                                                    <div class="level__icon icon"><i
+                                                            class="text-medium fa-solid fa-signal"></i></div>
+                                                    <div class="level__text text-medium">${c.level}</div>
+                                                </div>
+                                                <div class="quick-info__users">
+                                                    <div class="users__icon icon"><i
+                                                            class="text-medium fa-solid fa-users"></i></div>
+                                                    <div class="users__text text-medium">${c.studentCount}</div>
+                                                </div>
+                                                <div class="quick-info__time">
+                                                    <div class="time__icon icon"><i
+                                                            class="text-medium fa-regular fa-clock"></i></div>
+                                                    <div class="time__text text-medium">${c.durationHours}h</div>
+                                                </div>
+                                            </div>
+                                            <div class="content__price">
+                                                <div class="price__new">${c.price - c.discountPrice}đ</div>
+                                                <div class="price__old">${c.price}đ</div>
+                                                <div class="quick-info__save"><i
+                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            </c:forEach>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=1" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2019/04/hoc-bi-quyet-sang-tao-quang-cao-viral-content_1555571699.jpg"--%>
+<%--                                                 alt="Bí quyết sáng tạo quảng cáo viral và livestream bán hàng"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.8</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Bí quyết sáng tạo quảng cáo viral và livestream bán hàng</p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Nguời mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">1.8k</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">6h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">99.000đ</div>--%>
+<%--                                                <div class="price__old">300.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=1" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2019/06/lam-chu-tu-duy-thay-doi-van-menh_1561370343.jpg"--%>
+<%--                                                 alt="Làm chủ tư duy - Thay đổi vận mệnh"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.8</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Làm chủ tư duy - Thay đổi vận mệnh--%>
+<%--                                            </p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Nguời mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">4.5k</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">6h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">299.000đ</div>--%>
+<%--                                                <div class="price__old">900.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=1" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2019/06/dot-pha-tu-duy-thay-doi-cuoc-doi_1561538471.jpg"--%>
+<%--                                                 alt="Đột phá tư duy - thay đổi cuộc đời"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.8</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Đột phá tư duy - thay đổi cuộc đời</p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Nguời mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">177</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">3h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">399.000đ</div>--%>
+<%--                                                <div class="price__old">800.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=1" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2019/09/T%C6%B0-duy-CEO--%20Nguy%E1%BB%85n-V%C4%83n-%C4%90%E1%BB%A9c%201_1568366611.jpg"--%>
+<%--                                                 alt="Tư duy CEO"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.6</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Tư duy CEO</p></div>--%>
+<%--                                            <br>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Nguời mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">1.86k</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">2h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">499.000đ</div>--%>
+<%--                                                <div class="price__old">900.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=1" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2024/06/t%C6%B0%20duy.jpg_m_1718174318.jpg"--%>
+<%--                                                 alt="Kỹ năng phát triển tư duy tích cực"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.5</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Kỹ năng phát triển tư duy tích cực--%>
 
-                                            </p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Người mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">21k5</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">1h30m</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">399.000đ</div>
-                                                <div class="price__old">700.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+<%--                                            </p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Nguời mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">4</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">3h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">299.000đ</div>--%>
+<%--                                                <div class="price__old">990.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
 
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=1" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2019/04/hoc-bi-quyet-sang-tao-quang-cao-viral-content_1555571699.jpg"
-                                                 alt="Bí quyết sáng tạo quảng cáo viral và livestream bán hàng"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.8</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Bí quyết sáng tạo quảng cáo viral và livestream bán hàng</p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Nguời mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">1.8k</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">6h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">99.000đ</div>
-                                                <div class="price__old">300.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=1" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2019/06/lam-chu-tu-duy-thay-doi-van-menh_1561370343.jpg"
-                                                 alt="Làm chủ tư duy - Thay đổi vận mệnh"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.8</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Làm chủ tư duy - Thay đổi vận mệnh
-                                            </p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Nguời mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">4.5k</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">6h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">299.000đ</div>
-                                                <div class="price__old">900.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=1" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2019/06/dot-pha-tu-duy-thay-doi-cuoc-doi_1561538471.jpg"
-                                                 alt="Đột phá tư duy - thay đổi cuộc đời"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.8</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Đột phá tư duy - thay đổi cuộc đời</p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Nguời mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">177</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">3h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">399.000đ</div>
-                                                <div class="price__old">800.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=1" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2019/09/T%C6%B0-duy-CEO--%20Nguy%E1%BB%85n-V%C4%83n-%C4%90%E1%BB%A9c%201_1568366611.jpg"
-                                                 alt="Tư duy CEO"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.6</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Tư duy CEO</p></div>
-                                            <br>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Nguời mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">1.86k</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">2h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">499.000đ</div>
-                                                <div class="price__old">900.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=1" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2024/06/t%C6%B0%20duy.jpg_m_1718174318.jpg"
-                                                 alt="Kỹ năng phát triển tư duy tích cực"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.5</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Kỹ năng phát triển tư duy tích cực
-
-                                            </p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Nguời mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">4</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">3h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">299.000đ</div>
-                                                <div class="price__old">990.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=2" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2019/06/sang-tao-hieu-ung-flash-fx_1561427770.jpg"
-                                                 alt="Sáng tạo hiệu ứng Flash Fx"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.9</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Sáng tạo hiệu ứng Flash Fx: Khói - Nước - Lửa -
-                                                Điện</p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Người mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">19</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">5h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">299.000đ</div>
-                                                <div class="price__old">500.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=3" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2022/03/hoang-mang%20l%E1%BB%91i%20%C4%91i%20t%C6%B0%C6%A1ng%20lai_m_1648546986.jpg"
-                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.7</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>"Ngưng bình thường" với kỹ năng tư duy sáng tạo</p>
-                                            </div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Người mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">52</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">3h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">429.000đ</div>
-                                                <div class="price__old">800.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=3" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2024/03/ai.png_1711357506.jpg"
-                                                 alt="Sáng tạo video AI kiếm tiền online
-"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.2</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Sáng tạo video AI kiếm tiền online
-                                            </p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Người mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">34</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">57m</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">429.000đ</div>
-                                                <div class="price__old">800.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=3" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2025/02/img_course_3620_m_1740018593.jpg"
-                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">5.0</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Content - Sáng Tạo Vô Hạn Nội Dung
-                                            </p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Người mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">525</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">5h</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">1.999.000đ</div>
-                                                <div class="price__old">3.000.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="grid__column-4">
-                                <a href="course-detail.jsp?id=3" class="turn-page">
-                                    <div class="product__small-advertisement">
-                                        <div class="small-advertisement__image">
-                                            <img srcset="https://static.unica.vn/upload/images/2024/09/img_course_3439_m_1725853359.jpg"
-                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"
-                                                 class="img-2">
-                                        </div>
-                                        <div class="small-advertisement__content">
-                                            <div class="content__top">
-                                                <div class="content__author-name text-medium">Quản trị viên</div>
-                                                <div class="content__rate">
-                                                    <div class="rate__icon"><i
-                                                            class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">4.6</div>
-                                                </div>
-                                            </div>
-                                            <div class="text-paragraph test-text"><p>Thiết kế và Sáng tạo hình ảnh bằng Canva và AI
-                                            </p></div>
-                                            <div class="content__quick-info">
-                                                <div class="quick-info__level">
-                                                    <div class="level__icon icon"><i
-                                                            class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">Người mới</div>
-                                                </div>
-                                                <div class="quick-info__users">
-                                                    <div class="users__icon icon"><i
-                                                            class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">715</div>
-                                                </div>
-                                                <div class="quick-info__time">
-                                                    <div class="time__icon icon"><i
-                                                            class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">5h23m</div>
-                                                </div>
-                                            </div>
-                                            <div class="content__price">
-                                                <div class="price__new">599.000đ</div>
-                                                <div class="price__old">999.000đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=2" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2019/06/sang-tao-hieu-ung-flash-fx_1561427770.jpg"--%>
+<%--                                                 alt="Sáng tạo hiệu ứng Flash Fx"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.9</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Sáng tạo hiệu ứng Flash Fx: Khói - Nước - Lửa ---%>
+<%--                                                Điện</p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Người mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">19</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">5h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">299.000đ</div>--%>
+<%--                                                <div class="price__old">500.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=3" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2022/03/hoang-mang%20l%E1%BB%91i%20%C4%91i%20t%C6%B0%C6%A1ng%20lai_m_1648546986.jpg"--%>
+<%--                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.7</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>"Ngưng bình thường" với kỹ năng tư duy sáng tạo</p>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Người mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">52</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">3h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">429.000đ</div>--%>
+<%--                                                <div class="price__old">800.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart" style="color: red"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=3" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2024/03/ai.png_1711357506.jpg"--%>
+<%--                                                 alt="Sáng tạo video AI kiếm tiền online--%>
+<%--"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.2</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Sáng tạo video AI kiếm tiền online--%>
+<%--                                            </p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Người mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">34</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">57m</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">429.000đ</div>--%>
+<%--                                                <div class="price__old">800.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=3" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2025/02/img_course_3620_m_1740018593.jpg"--%>
+<%--                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">5.0</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Content - Sáng Tạo Vô Hạn Nội Dung--%>
+<%--                                            </p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Người mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">525</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">5h</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">1.999.000đ</div>--%>
+<%--                                                <div class="price__old">3.000.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
+<%--                            <div class="grid__column-4">--%>
+<%--                                <a href="course-detail.jsp?id=3" class="turn-page">--%>
+<%--                                    <div class="product__small-advertisement">--%>
+<%--                                        <div class="small-advertisement__image">--%>
+<%--                                            <img srcset="https://static.unica.vn/upload/images/2024/09/img_course_3439_m_1725853359.jpg"--%>
+<%--                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"--%>
+<%--                                                 class="img-2">--%>
+<%--                                        </div>--%>
+<%--                                        <div class="small-advertisement__content">--%>
+<%--                                            <div class="content__top">--%>
+<%--                                                <div class="content__author-name text-medium">Quản trị viên</div>--%>
+<%--                                                <div class="content__rate">--%>
+<%--                                                    <div class="rate__icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-star"></i></div>--%>
+<%--                                                    <div class="text-medium rate__number">4.6</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="text-paragraph test-text"><p>Thiết kế và Sáng tạo hình ảnh bằng Canva và AI--%>
+<%--                                            </p></div>--%>
+<%--                                            <div class="content__quick-info">--%>
+<%--                                                <div class="quick-info__level">--%>
+<%--                                                    <div class="level__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-signal"></i></div>--%>
+<%--                                                    <div class="level__text text-medium">Người mới</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__users">--%>
+<%--                                                    <div class="users__icon icon"><i--%>
+<%--                                                            class="text-medium fa-solid fa-users"></i></div>--%>
+<%--                                                    <div class="users__text text-medium">715</div>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="quick-info__time">--%>
+<%--                                                    <div class="time__icon icon"><i--%>
+<%--                                                            class="text-medium fa-regular fa-clock"></i></div>--%>
+<%--                                                    <div class="time__text text-medium">5h23m</div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="content__price">--%>
+<%--                                                <div class="price__new">599.000đ</div>--%>
+<%--                                                <div class="price__old">999.000đ</div>--%>
+<%--                                                <div class="quick-info__save"><i--%>
+<%--                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
 
                         </div>
                     </div>
