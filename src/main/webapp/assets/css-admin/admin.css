@@ -432,7 +432,7 @@ td:last-child ,th:last-child{
 }
 .log-out {
     float: right;
-    margin-top: 15rem;
+    margin-top: 5rem;
 }
 .log-out__content {
     margin-right: 0.5rem;

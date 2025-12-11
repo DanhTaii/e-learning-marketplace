@@ -36,5 +36,9 @@ public class OrderService {
         // TODO: Implement delete logic
     }
 
+    public double getRevenueTotal() {
+        double result = od.calculateRevenueTotal();
+        return result;
+    }
 
 }
