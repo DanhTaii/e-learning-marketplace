@@ -14,7 +14,11 @@ public class TagService {
     }
 
     public int createTag(Tag tag) {
-        return 0;
+        if(tag != null){
+            tagDao.create(tag);
+        return 1;
+        }
+            return 0;
     }
 
     public List<Tag> getAllTags() {
