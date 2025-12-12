@@ -34,7 +34,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/user-management">
+                                <a href="admin/users">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -56,7 +56,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/lesson">
+                                <a href="admin/lessons">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -66,7 +66,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/tag">
+                                <a href="admin/tags">
                                     <div class="menu-item__student student-list">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -77,7 +77,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/category">
+                                <a href="admin/categories">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -88,7 +88,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/order">
+                                <a href="admin/orders">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -99,7 +99,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/payment-method">
+                                <a href="admin/payment-methods">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 
@@ -111,7 +111,7 @@
                             </li>
                         </ul>
                         <div class="log-out">
-                            <a href="../html-authentication/sign-in.jsp">
+                            <a href="html-authentication/sign-in.jsp">
                                 <div class="log-out__container">
                                     <div class="log-out__content">
                                         Thoát

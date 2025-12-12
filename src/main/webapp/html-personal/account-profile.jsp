@@ -1,15 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Profile user</title>
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/profile.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 </head>
 <body>
@@ -158,12 +161,12 @@
                                          class="user__avatar-mini">
                                 </div>
                                 <div class="user__profile-name">
-                                    <a href="" class="name-text text-header">Ngoc Minh</a>
+                                    <a href="" class="name-text text-header"></a>
                                 </div>
                                 <div class="user__profile-bio">
                                     <a href="" class="bio-text">Thêm tiểu sử</a>
                                 </div>
-                                <a href="../html-personal/account-profile.html" class="turn-page">
+                                <a href="account-profile" class="turn-page">
                                     <div class="user__profile-btn">
                                         <button class="user-btn button__btn text-header">Xem thông tin</button>
                                     </div>
@@ -215,18 +218,18 @@
             <div class="grid__column-3 overall">
                 <div class="profile-block">
                     <div class="profile-block__avatar text-big-title">NM</div>
-                    <div class="profile-block__title">NgocMinh</div>
-<!--                    <button class="profile-block__button text-medium">Chia sẻ</button>-->
+                    <div class="profile-block__title">${sessionScope.userSession.username}</div>
+                    <!--                    <button class="profile-block__button text-medium">Chia sẻ</button>-->
                 </div>
                 <div class="profile-menu">
                     <ul>
                         <li>
-                            <a href="./account-profile.html">
+                            <a href="account-profile">
                                 <div class="profile-menu__item account__profile">Thông tin</div>
                             </a>
                         </li>
                         <li>
-                            <a href="account-security.jsp">
+                            <a href="account-security">
                                 <div class="profile-menu__item account__security">Bảo mật</div>
                             </a>
                         </li>
@@ -237,6 +240,8 @@
 
             <div class="grid__colum-9">
                 <div class="information__container">
+                    <c:set var="user" value="${sessionScope.userSession}"/>
+
                     <div class="personal-detail">
                         <div class="personal-detail__block">
                             <div class="personal-detail__title style__title">
@@ -245,19 +250,19 @@
                             <div class="personal-detail__row-1 grid__row-2">
                                 <div class="personal-detail__sub-title style__sub-title">Họ</div>
                                 <div class="personal-detail__input">
-                                    <input type="text" placeholder="NGOC">
+                                    <input type="text" placeholder="${user.lastName}">
                                 </div>
                             </div>
                             <div class="personal-detail__row-2 grid__row-2">
                                 <div class="personal-detail__sub-title style__sub-title">Tên</div>
                                 <div class="personal-detail__input">
-                                    <input type="text" placeholder="MINH">
+                                    <input type="text" placeholder="${user.firstName}">
                                 </div>
                             </div>
                             <div class="personal-detail__row-2 grid__row-2">
                                 <div class="personal-detail__sub-title style__sub-title">Tên người dùng</div>
                                 <div class="personal-detail__input">
-                                    <input type="text" placeholder="NGOC MINH">
+                                    <input type="text" placeholder="${user.username}">
                                 </div>
                             </div>
                             <br>
@@ -266,13 +271,13 @@
                             <div class="personal-detail__row-2 grid__row-2">
                                 <div class="personal-detail__sub-title style__sub-title">Địa chỉ email</div>
                                 <div class="personal-detail__input">
-                                    <input type="text" placeholder="minh@gmail.com">
+                                    <input type="text" placeholder="${user.email}">
                                 </div>
                             </div>
                             <div class="personal-detail__row-2 grid__row-2">
                                 <div class="personal-detail__sub-title style__sub-title">Số điện thoại</div>
                                 <div class="personal-detail__input">
-                                    <input type="text" placeholder="0385990097">
+                                    <input type="text" placeholder="${user.phone}">
                                 </div>
                             </div>
                         </div>

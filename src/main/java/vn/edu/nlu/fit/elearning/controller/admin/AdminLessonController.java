@@ -11,7 +11,7 @@ import vn.edu.nlu.fit.elearning.services.LessonService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminLessonController", value = "/admin/lesson")
+@WebServlet(name = "AdminLessonController", value = "/admin/lessons")
 public class AdminLessonController extends HttpServlet {
 
     private LessonService lessonService;

@@ -32,6 +32,7 @@
                 HttpSession session = request.getSession();
 
                 session.setAttribute("userId", canLogin.getId());
+                session.setAttribute("userSession", canLogin);
 //                System.out.println("DEBUG (Login): User ID " + canLogin.getId() + " Đã được lưu vào Session.");
 
                 if (canLogin.getRole().equalsIgnoreCase("admin")) {
