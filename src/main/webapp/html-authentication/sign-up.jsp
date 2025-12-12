@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,14 +8,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đăng ký</title>
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/sign-up.css">
-    <link rel="stylesheet" href="../assets/css/home.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/sign-up.css">
+    <link rel="stylesheet" href="assets/css/home.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/default.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/default.css">
 </head>
 <body>
 <div class="web">
@@ -149,28 +151,34 @@
                 </div>
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2">
-                        <form action="" class="form">
+                        <%
+                            String error = (String) request.getAttribute("error");
+                            if (error == null) error = "";
+                            String email = (String) request.getParameter("email");
+                            if (email == null) email = "";
+
+                        %>
+                        <form action="sign-up" class="form" method="post">
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>
+                            <span style="color: red; font-size: var(--text-xl)"> <%= error%> </span>
                             <div class="form__input input-1">
-                                <input type="text" class="input-text text-big" placeholder="Nhập email của bạn">
+                                <input type="email" class="input-text text-big" placeholder="Nhập email của bạn" name="email">
                             </div>
                             <div class="form__input input-2">
-                                <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng">
+                                <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng" name="username">
                             </div>
                             <div class="form__input input-3">
-                                <input type="text" class="input-text text-big" placeholder="Nhập mật khẩu của bạn">
+                                <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn" name="password">
                             </div>
                             <div class="form__info text-medium">Mật khẩu phải có tối thiểu 8 ký tự gồm số và chữ cái, trong đó có ít nhất 1 chữ cái viết hoa!</div>
                             <div class="form__input input-4">
-                                <input type="text" class="input-text text-big" placeholder="Nhập lại mật khẩu của bạn">
+                                <input type="password" class="input-text text-big" placeholder="Nhập lại mật khẩu của bạn" name="confirmPassword">
                             </div>
-                            <a href="sign-in.jsp" class="turn-page">
                                 <div class="form__button">
-                                    <div class="button button__btn">
+                                    <button class="button button__btn">
                                         <span class="text-header">Đăng ký</span>
-                                    </div>
+                                    </button>
                                 </div>
-                            </a>
                         </form>
                     </div>
                 </div>

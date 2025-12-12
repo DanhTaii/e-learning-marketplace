@@ -1,18 +1,21 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import org.jdbi.v3.core.statement.PreparedBatch;
 import vn.edu.nlu.fit.elearning.model.User;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
 
 
     @Override
-    public void create(User entity) {
-        getJdbi().useHandle(h -> {
-            h.createUpdate("INSERT INTO Users (username, email, password)\n" +
-                    "VALUES ('ngminh', 'ngminh@gmail.com',  'Abc123456789');");
+    public void create(User user) {
+        getJdbi().useHandle(handle -> {
+            handle.createUpdate("INSERT INTO users (id, email, username, password) " +
+                            "VALUES (:id, :email, :username, :password)").bindBean(user).execute();
         });
+        return;
     }
 
     @Override
