@@ -2,8 +2,10 @@ package vn.edu.nlu.fit.elearning.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Order implements Serializable {
     private int id;
@@ -56,4 +58,20 @@ public class Order implements Serializable {
 
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
+
+    public String getTotalAmountFormatted() {
+        Locale vietnam = new Locale("vi", "VN");
+        NumberFormat f = NumberFormat.getCurrencyInstance(vietnam);
+        String formatted = f.format(this.totalAmount);
+        // Mặc định nó ra "300.000 đ", nếu muốn bỏ chữ "đ" đi để tự thêm sau thì:
+        return formatted.replace(" ₫", "").replace("₫", "").trim();
+    }
+
+    // Làm tương tự cho giá cũ
+    public String getFinalAmountFormatted() {
+        Locale vietnam = new Locale("vi", "VN");
+        NumberFormat f = NumberFormat.getCurrencyInstance(vietnam);
+        String formatted = f.format(this.finalAmount);
+        return formatted.replace(" ₫", "").replace("₫", "").trim();
+    }
 }
