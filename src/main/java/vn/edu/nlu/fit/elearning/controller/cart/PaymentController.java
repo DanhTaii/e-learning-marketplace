@@ -5,12 +5,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
 import vn.edu.nlu.fit.elearning.services.OrderItemService;
 import vn.edu.nlu.fit.elearning.services.OrderService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "PaymentController", value = "/payment")
@@ -20,26 +23,40 @@ public class PaymentController extends HttpServlet {
 
     public PaymentController() {
         this.orderService = new OrderService();
-        this.orderItemService= new OrderItemService();
+        this.orderItemService = new OrderItemService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String idOrder = request.getParameter("id");
-        int orderId = 5;
+        HttpSession session = request.getSession();
+        Integer userIdObj = (Integer) session.getAttribute("userId");
 
-        Order order = orderService.getOrderById(orderId);
-        List<OrderItem> orderItemList = orderItemService.getOrderItemList(orderId);
+        int userId = userIdObj;
+
+        Order order = orderService.findOrderPending(userId);
+        List<OrderItemDTO> orderItemsSelect = orderItemService.getOrderItemSelected(order.getId());
+
+        double totalAmount = 0;
+        double finalAmount = 0;
+        double discountAmount = 0;
+
+        for (OrderItemDTO items : orderItemsSelect) {
+            finalAmount += items.getPriceNew();
+            totalAmount += items.getPriceOld();
+            discountAmount += items.getPriceOld() - items.getPriceNew();
+        }
+        order.setTotalAmount(totalAmount);
+        order.setDiscountAmount(discountAmount);
+        order.setFinalAmount(finalAmount);
+
         request.setAttribute("order", order);
-        request.setAttribute("orderItems",orderItemList);
-
+        request.setAttribute("orderItems", orderItemsSelect);
         request.getRequestDispatcher("/html-personal-cart/payment.jsp").forward(request, response);
     }
 
 
-
-@Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
-}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Integer> {
 
 
-    public List<OrderItemDTO> getCartItemsByUserId(int userId) {
+    public List<OrderItemDTO> getCartItemsByUserId(Integer userId) {
         Jdbi jdbi = getJdbi();
         String sql = "SELECT oi.id AS id, c.id AS courseId, c.title, oi.is_selected AS selected, c.thumbnail_url, c.rating, c.level, c.price AS price_old, oi.price_at_purchase AS price_new, SUM(l.duration_minutes) AS durationHours , COUNT(l.id) AS total_lesson ,SUM(c.student_count) AS studentCount                   \n" +
                 "FROM order_items oi\n" +
@@ -27,22 +27,19 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
     }
 
 
-
-    public List<OrderItem> getOrderItemList(int orderId){
-        String sql = "SELECT C.thumbnail_url, C.title, OI.price_at_purchase \n" +
-                "FROM Order_Items AS OI \n" +
-                "JOIN Courses AS C ON OI.course_id = C.id\n" +
-                "WHERE OI.order_id = ?";
+    public List<OrderItemDTO> geOrderItemSelected(Integer orderId) {
+        String sql = "SELECT c.thumbnail_url, c.title, c.price AS price_old , oi.price_at_purchase AS price_new \n" +
+                "                FROM Order_Items AS oi  \n" +
+                "                JOIN Courses AS c ON oi.course_id = c.id\n" +
+                "                WHERE oi.order_id = ?  AND oi.is_selected = true";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, orderId)
-                    .mapToBean(OrderItem.class).list();
+                    .mapToBean(OrderItemDTO.class).list();
 
 
         });
     }
-
-
 
 
     @Override
@@ -51,7 +48,8 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
     }
 
     @Override
-    public OrderItem findById(Integer orderId) {return null;
+    public OrderItem findById(Integer orderId) {
+        return null;
     }
 
     @Override
