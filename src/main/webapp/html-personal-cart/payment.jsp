@@ -287,7 +287,7 @@
                             <li> <div class="grid__row-2">
                                 <div class="order-items">
                                     <div class="items__content">
-                                        <div class="content__image">
+                                        <div class="content__image" style="aspect-ratio: 16/9">
                                             <img srcset="${o.thumbnailUrl}"
                                                  alt="" class="image">
                                         </div>
@@ -298,8 +298,8 @@
                                     </div>
 
                                     <div class="items__price">
-                                        <span class="amount-discounted ">${o.priceAtPurchase}</span>
-<%--                                        <div><span class="amount-origin ">${o.}</span></div>--%>
+                                        <span class="amount-discounted ">${o.priceNew}</span>
+                                        <div><span class="amount-origin ">${o.priceOld}</span></div>
                                     </div>
 
                                 </div>
@@ -328,7 +328,7 @@
 
                                     </div>
                                     <div class="price__total index">
-                                        <span class="price__total ">Tổng cộng (4): </span>
+                                        <span class="price__total ">Tổng cộng (${orderItems.size()}): </span>
                                         <span class="price__total text-medium amount">${order.finalAmount}</span>
                                     </div>
 

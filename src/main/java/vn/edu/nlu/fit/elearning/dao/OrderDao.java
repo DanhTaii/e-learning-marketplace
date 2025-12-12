@@ -13,12 +13,23 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     @Override
     public Order findById(Integer orderId) {
-        String sql = "SELECT total_amount, discount_amount, final_amount \n" +
+        String sql = "SELECT * \n" +
                 "FROM Orders \n" +
                 "WHERE id= ?;\n";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, orderId)
+                    .mapToBean(Order.class)
+                    .findFirst()
+                    .orElse(null);
+        });
+    }
+
+    public Order findOrderPending(Integer userId){
+        String sql = "SELECT * FROM Orders WHERE user_id = ? AND status LIKE 'pending'";
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind(0,userId)
                     .mapToBean(Order.class)
                     .findFirst()
                     .orElse(null);
