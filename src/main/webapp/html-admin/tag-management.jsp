@@ -131,20 +131,38 @@
                         </div>
                         <div class="container-2__body">
                             <div class="title__admin">Tạo thẻ mới</div>
-                            <div class="container-2__create">
-                                <div class="create__selection">
-                                    <div class="create__selection-input">
-                                        <div class="create__selection-items">
-                                            <div class="filter__selection-title filter__item-name">Tên của thẻ:</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
-                                        </div>
+                            <form action="admin/tags" class="form" method="post">
+                                <div class="container-2__create">
+                                    <div class="create__selection">
+                                        <c:if test="${not empty error}">
+                                            <span style="color: red; padding: 10px; background: #f8d7da;">
+                                                Lỗi: ${error}
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${not empty sessionScope.flashSuccess}">
+                                            <span style="color: green; padding: 2rem; background: #d4edda;">
+                                                Thành công: ${sessionScope.flashSuccess}
+                                            </span>
+                                            <c:remove var="flashSuccess" scope="session"/>
+                                        </c:if>
+                                        <div class="create__selection-input">
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-name">Tên của thẻ:</div>
+                                                <input placeholder="" type="text" class="admin-input__long"name="nameTag">
+                                            </div>
+                                            <div class="create__selection-items">
+                                                <div class="filter__selection-title filter__item-name">Slug:</div>
+                                                <input placeholder="" type="text" class="admin-input__long" name="slugTag">
+                                            </div>
 
-                                    </div>
-                                    <div class="create__btn-create">
-                                        <button type="submit" class="create-btn dark-button">Tạo mới</button>
+                                        </div>
+                                        <div class="create__btn-create">
+                                            <button type="submit" class="create-btn dark-button">Tạo mới</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+
                             <div class="title__admin">Tất cả thẻ</div>
                             <div class="container-2__filter">
                                 <div class="filter__selection">

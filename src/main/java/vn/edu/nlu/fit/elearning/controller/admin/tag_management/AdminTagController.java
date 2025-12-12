@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.admin;
+package vn.edu.nlu.fit.elearning.controller.admin.tag_management;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -27,6 +27,23 @@ public class AdminTagController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nameTag = request.getParameter("nameTag");
+        String slugTag = request.getParameter("slugTag");
+
+        Tag newTag = new Tag();
+        newTag.setName(nameTag);
+        newTag.setSlug(slugTag);
+
+        int checkCreate = tagService.createTag(newTag);
+
+        if (checkCreate == 1) {
+            request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
+            response.sendRedirect(request.getContextPath() + "/admin/tags");
+        } else {
+            request.setAttribute("error", "Vui lòng điền thông tin ! ");
+            request.getRequestDispatcher("admin/tags").forward(request, response);
+        }
 
     }
+
 }

@@ -8,6 +8,13 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer>{
     @Override
     public void create(Tag entity) {
 
+        String sql = "INSERT INTO Tags (name,slug)\n" +
+                "VALUES (:name,:slug)";
+        getJdbi().useHandle(handle -> {
+            handle.prepareBatch(sql)
+                    .bindBean(entity).add()
+                    .execute();
+        });
     }
 
     @Override
