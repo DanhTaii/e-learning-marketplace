@@ -14,14 +14,16 @@ public class OrderItemService {
         this.oid = new OrderItemDao();
     }
 
-    public List<OrderItem> getOrderItemList(int orderId){
-        List<OrderItem> orderItemList = oid.getOrderItemList(orderId);
-        return orderItemList;
-    }
-    public List<OrderItemDTO> getCartItems(int userId) {
+    public List<OrderItemDTO> getCartItems(Integer userId) {
         List<OrderItemDTO> cartItems = oid.getCartItemsByUserId(userId);
         return cartItems;
     }
+
+    public List<OrderItemDTO> getOrderItemSelected(Integer userId){
+        List<OrderItemDTO> itemSelected = oid.geOrderItemSelected(userId);
+        return itemSelected;
+    }
+
     public int createOrderItem(OrderItem orderItem) {
         // TODO: Implement creation logic
         return 0;

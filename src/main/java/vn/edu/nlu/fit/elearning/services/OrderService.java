@@ -28,6 +28,11 @@ public class OrderService {
         return order;
     }
 
+    public Order findOrderPending(Integer userId){
+        Order orderPending = od.findOrderPending(userId);
+        return  orderPending;
+     }
+
     public void updateOrder(Order order) {
         // TODO: Implement update logic
     }
