@@ -173,7 +173,8 @@
                                 </div>
                                 <a href="../html-personal/account-profile.jsp" class="turn-page">
                                     <div class="user__profile-btn">
-                                        <button class="user-btn button__btn text-header .button__btn-2">Xem thông tin</button>
+                                        <button class="user-btn button__btn text-header .button__btn-2">Xem thông tin
+                                        </button>
                                     </div>
                                 </a>
                             </div>
@@ -245,72 +246,78 @@
                         </div>
 
                         <div class="scrollable-order-list">
+                            <form action="cart" id="cartForm" method="post">
+                                <input type="hidden" name="action" value="updateSelected">
                             <ul>
                                 <c:forEach var="p" items="${list}">
-                                <li>
+                                    <li>
 
-                                    <div class="shopping-cart__cart-items cart-items">
-                                        <div class="cart-items__tick">
-                                            <input type="checkbox" class="tick" name="tick" data-id="${p.id}" data-price="${p.priceNew}" <c:if test="${p.selected}">checked</c:if>>
-                                        </div>
-                                        <a href="../html-partrial/course-detail.jsp" class="turn-page">
-                                            <div class="cart-items__detail">
-                                                <div class="detail__image-container" style="aspect-ratio: 16 / 9;">
-                                                    <img src="${p.thumbnailUrl}" alt="${p.title}" class="image">
+                                        <div class="shopping-cart__cart-items cart-items">
+                                                <div class="cart-items__tick">
+                                                    <input type="checkbox" class="tick" name="itemSelected" value="${p.id}"
+                                                           <c:if test="${p.selected}">checked</c:if> onchange="submitCartForm()">>
                                                 </div>
-                                                <div class="detail__info">
 
-                                                    <div class="info__name-group">
+                                            <a href="../html-partrial/course-detail.jsp" class="turn-page">
+                                                <div class="cart-items__detail">
+                                                    <div class="detail__image-container" style="aspect-ratio: 16 / 9;">
+                                                        <img src="${p.thumbnailUrl}" alt="${p.title}" class="image">
+                                                    </div>
+                                                    <div class="detail__info">
+
+                                                        <div class="info__name-group">
                                         <span class="name__title text-paragraph">
                                             <p>${p.title}</p>
                                         </span>
-                                                    </div>
-                                                    <div class="info__rating-group">
-                                                        <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                        <span class="rating-group__rating rating text-mini">${p.rating}
+                                                        </div>
+                                                        <div class="info__rating-group">
+                                                            <span class="rating-group__tags tags text-mini">Bestseller</span>
+                                                            <span class="rating-group__rating rating text-mini">${p.rating}
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         </span>
-                                                        <span class="rating-group__rating-count ratings-count text-mini ">(${p.studentCount} rating)</span>
+                                                            <span class="rating-group__rating-count ratings-count text-mini ">(${p.studentCount} rating)</span>
+                                                        </div>
+                                                        <div class="info__stats course-stats ">
+                                                            <span class="stats__hours text-mini">${p.timeDuration}</span>
+
+                                                            <span class="stats__lecture text-mini ">• ${p.totalLesson} Bài giảng</span>
+
+                                                            <span class="stats__level text-mini">• ${p.level}</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="info__stats course-stats ">
-                                                        <span class="stats__hours text-mini">${p.timeDuration}</span>
-
-                                                        <span class="stats__lecture text-mini ">• ${p.totalLesson} Bài giảng</span>
-
-                                                        <span class="stats__level text-mini">• ${p.level}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="cart-items__action-price-group action-price-group">
-                                            <div class="cart-items__action items-action">
-                                                <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                <a href="" class="action__link1" data-id="${p.id}" >Xóa</a>
-                                            </div>
-                                            <a href="../html-partrial/course-detail.jsp" class="turn-page">
-                                                <div class="cart-items__price items-price">
-                                                    <div><span class="price-discounted">${p.priceNewFormatted}đ <i
-                                                            class="fa-solid fa-tag price-icon"
-                                                            style="color: #3722d3;"></i> </span></div>
-                                                    <div><span class="price-origin">${p.priceOldFormatted}đ </span></div>
-
-
                                                 </div>
                                             </a>
+                                            <div class="cart-items__action-price-group action-price-group">
+                                                <div class="cart-items__action items-action">
+                                                    <a href="" class="action__link">Thêm vào Yêu Thích</a>
+                                                    <a href="" class="action__link1" data-id="${p.id}">Xóa</a>
+                                                </div>
+                                                <a href="../html-partrial/course-detail.jsp" class="turn-page">
+                                                    <div class="cart-items__price items-price">
+                                                        <div><span class="price-discounted">${p.priceNewFormatted}đ <i
+                                                                class="fa-solid fa-tag price-icon"
+                                                                style="color: #3722d3;"></i> </span></div>
+                                                        <div><span class="price-origin">${p.priceOldFormatted}đ </span>
+                                                        </div>
+
+
+                                                    </div>
+                                                </a>
+
+                                            </div>
 
                                         </div>
 
-                                    </div>
-
-                                </li>
+                                    </li>
                                 </c:forEach>
 
 
                             </ul>
+                            </form>
                         </div>
 
                     </div>
@@ -326,7 +333,7 @@
                             <div class="tick">
                                 <input type="checkbox" class="tick" name="tick">
                             </div>
-                            <div class="text-medium choose">Chọn tất cả  (${list.size()})</div>
+                            <div class="text-medium choose">Chọn tất cả (${list.size()})</div>
                             <div class="text-medium remove">Xóa</div>
                             <div class="text-medium wishlisted">Thêm vào Yêu thích</div>
                         </div>
@@ -337,15 +344,15 @@
                                 <div class="total__label">
                                     <div class="label">
                                         <div class="label__name">
-                                            <span class="text-medium">Tổng cộng (4):</span>
+                                            <span class="text-medium">Tổng cộng (${orderItems.size()}):</span>
                                         </div>
                                         <div class="charge-note">Chưa tính phí</div>
                                     </div>
 
 
                                     <div class="total__price">
-                                        <span class="price-discounted1 ">1.796.000đ</span>
-                                        <span class=" price-origin">2.796.000đ</span>
+                                        <span class="price-discounted1 ">${order.finalAmountFormatted}đ</span>
+                                        <span class=" price-origin">${order.totalAmountFormatted}đ</span>
                                     </div>
 
                                 </div>
@@ -365,188 +372,191 @@
             </div>
             <div class="grid">
                 <div class="grid__row-2">
-                <div class="product__small-title text-small-title">Có thể bạn sẽ thích</div>
-                <div class="grid__column-3">
-                    <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
-                        <div class="product__small-advertisement">
-                            <div class="small-advertisement__image">
-                                <img srcset="https://static.unica.vn/media/imagesck/1664934097_thuong-hieu-ca-nhan-la-gi.png?v=1664934097"
-                                     alt="Xây Dựng Thương Hiệu Cá Nhân" class="img-2">
+                    <div class="product__small-title text-small-title">Có thể bạn sẽ thích</div>
+                    <div class="grid__column-3">
+                        <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
+                            <div class="product__small-advertisement">
+                                <div class="small-advertisement__image">
+                                    <img srcset="https://static.unica.vn/media/imagesck/1664934097_thuong-hieu-ca-nhan-la-gi.png?v=1664934097"
+                                         alt="Xây Dựng Thương Hiệu Cá Nhân" class="img-2">
+                                </div>
+                                <div class="small-advertisement__content">
+                                    <div class="content__top">
+                                        <div class="content__author-name text-medium">Quản trị viên</div>
+                                        <div class="content__rate">
+                                            <div class="rate__icon"><i
+                                                    class="text-medium fa-regular fa-star"></i></div>
+                                            <div class="text-medium rate__number">4.7</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-paragraph test-text"><p>Xây Dựng Thương Hiệu Cá Nhân Cho Bản
+                                        Thân </p></div>
+                                    <div class="content__quick-info">
+                                        <div class="quick-info__level">
+                                            <div class="level__icon icon"><i
+                                                    class="text-medium fa-solid fa-signal"></i></div>
+                                            <div class="level__text text-medium">Người mới</div>
+                                        </div>
+                                        <div class="quick-info__users">
+                                            <div class="users__icon icon"><i
+                                                    class="text-medium fa-solid fa-users"></i></div>
+                                            <div class="users__text text-medium">13.4k</div>
+                                        </div>
+                                        <div class="quick-info__time">
+                                            <div class="time__icon icon"><i
+                                                    class="text-medium fa-regular fa-clock"></i></div>
+                                            <div class="time__text text text-medium">12h</div>
+                                        </div>
+                                    </div>
+                                    <div class="content__price">
+                                        <div class="price__new">799.000đ</div>
+                                        <div class="price__old">1.199.000đ</div>
+                                        <div class="quick-info__save"><i
+                                                class="quick-info__save__icon fa-solid fa-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="small-advertisement__content">
-                                <div class="content__top">
-                                    <div class="content__author-name text-medium">Quản trị viên</div>
-                                    <div class="content__rate">
-                                        <div class="rate__icon"><i
-                                                class="text-medium fa-regular fa-star"></i></div>
-                                        <div class="text-medium rate__number">4.7</div>
-                                    </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-3">
+                        <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
+                            <div class="product__small-advertisement">
+                                <div class="small-advertisement__image">
+                                    <img srcset="https://img.freepik.com/premium-vector/faq-question-mark-with-people-flat-style_1366-316.jpg"
+                                         alt="Đặt Câu Hỏi Thông Minh" class="img-2">
                                 </div>
-                                <div class="text-paragraph test-text"><p>Xây Dựng Thương Hiệu Cá Nhân Cho Bản Thân </p></div>
-                                <div class="content__quick-info">
-                                    <div class="quick-info__level">
-                                        <div class="level__icon icon"><i
-                                                class="text-medium fa-solid fa-signal"></i></div>
-                                        <div class="level__text text-medium">Người mới</div>
+                                <div class="small-advertisement__content">
+                                    <div class="content__top">
+                                        <div class="content__author-name text-medium">Quản trị viên</div>
+                                        <div class="content__rate">
+                                            <div class="rate__icon"><i
+                                                    class="text-medium fa-regular fa-star"></i></div>
+                                            <div class="text-medium rate__number">4.5</div>
+                                        </div>
                                     </div>
-                                    <div class="quick-info__users">
-                                        <div class="users__icon icon"><i
-                                                class="text-medium fa-solid fa-users"></i></div>
-                                        <div class="users__text text-medium">13.4k</div>
+                                    <div class="text-paragraph test-text"><p>Kỹ Năng Đặt Câu Hỏi Thông Minh</p></div>
+                                    <div class="content__quick-info">
+                                        <div class="quick-info__level">
+                                            <div class="level__icon icon"><i
+                                                    class="text-medium fa-solid fa-signal"></i></div>
+                                            <div class="level__text text-medium">Người mới</div>
+                                        </div>
+                                        <div class="quick-info__users">
+                                            <div class="users__icon icon"><i
+                                                    class="text-medium fa-solid fa-users"></i></div>
+                                            <div class="users__text text-medium">5k6</div>
+                                        </div>
+                                        <div class="quick-info__time">
+                                            <div class="time__icon icon"><i
+                                                    class="text-medium fa-regular fa-clock"></i></div>
+                                            <div class="time__text text text-medium">12h</div>
+                                        </div>
                                     </div>
-                                    <div class="quick-info__time">
-                                        <div class="time__icon icon"><i
-                                                class="text-medium fa-regular fa-clock"></i></div>
-                                        <div class="time__text text text-medium">12h</div>
-                                    </div>
-                                </div>
-                                <div class="content__price">
-                                    <div class="price__new">799.000đ</div>
-                                    <div class="price__old">1.199.000đ</div>
-                                    <div class="quick-info__save"><i
-                                            class="quick-info__save__icon fa-solid fa-heart"></i>
+                                    <div class="content__price">
+                                        <div class="price__new">299.000đ</div>
+                                        <div class="price__old">499.000đ</div>
+                                        <div class="quick-info__save"><i
+                                                class="quick-info__save__icon fa-solid fa-heart"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    <div class="grid__column-3">
+                        <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
+                            <div class="product__small-advertisement">
+                                <div class="small-advertisement__image">
+                                    <img srcset="https://suckhoedoisong.qltns.mediacdn.vn/zoom/600_315/324455921873985536/2022/5/4/stress-nang-min-e1620809978914-1651628209648642071280-61-0-482-674-crop-16516282155721052156928.png"
+                                         alt="KChống Burnout & Quản Lý Stress" class="img-2">
+                                </div>
+                                <div class="small-advertisement__content">
+                                    <div class="content__top">
+                                        <div class="content__author-name text-medium">Quản trị viên</div>
+                                        <div class="content__rate">
+                                            <div class="rate__icon"><i
+                                                    class="text-medium fa-regular fa-star"></i></div>
+                                            <div class="text-medium rate__number">4.8</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-paragraph test-text"><p>Chống Burnout Và Quản Lý Stress</p></div>
+                                    <div class="content__quick-info">
+                                        <div class="quick-info__level">
+                                            <div class="level__icon icon"><i
+                                                    class="text-medium fa-solid fa-signal"></i></div>
+                                            <div class="level__text text-medium">Người mới</div>
+                                        </div>
+                                        <div class="quick-info__users">
+                                            <div class="users__icon icon"><i
+                                                    class="text-medium fa-solid fa-users"></i></div>
+                                            <div class="users__text text-medium">18.9k</div>
+                                        </div>
+                                        <div class="quick-info__time">
+                                            <div class="time__icon icon"><i
+                                                    class="text-medium fa-regular fa-clock"></i></div>
+                                            <div class="time__text text text-medium">12h</div>
+                                        </div>
+                                    </div>
+                                    <div class="content__price">
+                                        <div class="price__new">450.000đ</div>
+                                        <div class="price__old">690.000đ</div>
+                                        <div class="quick-info__save"><i
+                                                class="quick-info__save__icon fa-solid fa-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-3">
+                        <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
+                            <div class="product__small-advertisement">
+                                <div class="small-advertisement__image">
+                                    <img srcset="https://growupwork.com/uploads/blogs/img/Said-no-with-work.jpg"
+                                         alt="Từ Chối Mà Vẫn Được Yêu Quý" class="img-2">
+                                </div>
+                                <div class="small-advertisement__content">
+                                    <div class="content__top">
+                                        <div class="content__author-name text-medium">Quản trị viên</div>
+                                        <div class="content__rate">
+                                            <div class="rate__icon"><i
+                                                    class="text-medium fa-regular fa-star"></i></div>
+                                            <div class="text-medium rate__number">4.6</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-paragraph test-text"><p>Kỹ Năng Từ Chối Mà Vẫn Được Yêu Quý</p>
+                                    </div>
+                                    <div class="content__quick-info">
+                                        <div class="quick-info__level">
+                                            <div class="level__icon icon"><i
+                                                    class="text-medium fa-solid fa-signal"></i></div>
+                                            <div class="level__text text-medium">Người mới</div>
+                                        </div>
+                                        <div class="quick-info__users">
+                                            <div class="users__icon icon"><i
+                                                    class="text-medium fa-solid fa-users"></i></div>
+                                            <div class="users__text text-medium">8k3</div>
+                                        </div>
+                                        <div class="quick-info__time">
+                                            <div class="time__icon icon"><i
+                                                    class="text-medium fa-regular fa-clock"></i></div>
+                                            <div class="time__text text text-medium">12h</div>
+                                        </div>
+                                    </div>
+                                    <div class="content__price">
+                                        <div class="price__new">299.000đ</div>
+                                        <div class="price__old">449.000đ</div>
+                                        <div class="quick-info__save"><i
+                                                class="quick-info__save__icon fa-solid fa-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="grid__column-3">
-                    <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
-                        <div class="product__small-advertisement">
-                            <div class="small-advertisement__image">
-                                <img srcset="https://img.freepik.com/premium-vector/faq-question-mark-with-people-flat-style_1366-316.jpg"
-                                     alt="Đặt Câu Hỏi Thông Minh" class="img-2">
-                            </div>
-                            <div class="small-advertisement__content">
-                                <div class="content__top">
-                                    <div class="content__author-name text-medium">Quản trị viên</div>
-                                    <div class="content__rate">
-                                        <div class="rate__icon"><i
-                                                class="text-medium fa-regular fa-star"></i></div>
-                                        <div class="text-medium rate__number">4.5</div>
-                                    </div>
-                                </div>
-                                <div class="text-paragraph test-text"><p>Kỹ Năng Đặt Câu Hỏi Thông Minh</p></div>
-                                <div class="content__quick-info">
-                                    <div class="quick-info__level">
-                                        <div class="level__icon icon"><i
-                                                class="text-medium fa-solid fa-signal"></i></div>
-                                        <div class="level__text text-medium">Người mới</div>
-                                    </div>
-                                    <div class="quick-info__users">
-                                        <div class="users__icon icon"><i
-                                                class="text-medium fa-solid fa-users"></i></div>
-                                        <div class="users__text text-medium">5k6</div>
-                                    </div>
-                                    <div class="quick-info__time">
-                                        <div class="time__icon icon"><i
-                                                class="text-medium fa-regular fa-clock"></i></div>
-                                        <div class="time__text text text-medium">12h</div>
-                                    </div>
-                                </div>
-                                <div class="content__price">
-                                    <div class="price__new">299.000đ</div>
-                                    <div class="price__old">499.000đ</div>
-                                    <div class="quick-info__save"><i
-                                            class="quick-info__save__icon fa-solid fa-heart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid__column-3">
-                    <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
-                        <div class="product__small-advertisement">
-                            <div class="small-advertisement__image">
-                                <img srcset="https://suckhoedoisong.qltns.mediacdn.vn/zoom/600_315/324455921873985536/2022/5/4/stress-nang-min-e1620809978914-1651628209648642071280-61-0-482-674-crop-16516282155721052156928.png"
-                                     alt="KChống Burnout & Quản Lý Stress" class="img-2">
-                            </div>
-                            <div class="small-advertisement__content">
-                                <div class="content__top">
-                                    <div class="content__author-name text-medium">Quản trị viên</div>
-                                    <div class="content__rate">
-                                        <div class="rate__icon"><i
-                                                class="text-medium fa-regular fa-star"></i></div>
-                                        <div class="text-medium rate__number">4.8</div>
-                                    </div>
-                                </div>
-                                <div class="text-paragraph test-text"><p>Chống Burnout Và Quản Lý Stress</p></div>
-                                <div class="content__quick-info">
-                                    <div class="quick-info__level">
-                                        <div class="level__icon icon"><i
-                                                class="text-medium fa-solid fa-signal"></i></div>
-                                        <div class="level__text text-medium">Người mới</div>
-                                    </div>
-                                    <div class="quick-info__users">
-                                        <div class="users__icon icon"><i
-                                                class="text-medium fa-solid fa-users"></i></div>
-                                        <div class="users__text text-medium">18.9k</div>
-                                    </div>
-                                    <div class="quick-info__time">
-                                        <div class="time__icon icon"><i
-                                                class="text-medium fa-regular fa-clock"></i></div>
-                                        <div class="time__text text text-medium">12h</div>
-                                    </div>
-                                </div>
-                                <div class="content__price">
-                                    <div class="price__new">450.000đ</div>
-                                    <div class="price__old">690.000đ</div>
-                                    <div class="quick-info__save"><i
-                                            class="quick-info__save__icon fa-solid fa-heart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid__column-3">
-                    <a href="../html-partrial/course-detail.jsp?id=1" class="turn-page">
-                        <div class="product__small-advertisement">
-                            <div class="small-advertisement__image">
-                                <img srcset="https://growupwork.com/uploads/blogs/img/Said-no-with-work.jpg"
-                                     alt="Từ Chối Mà Vẫn Được Yêu Quý" class="img-2">
-                            </div>
-                            <div class="small-advertisement__content">
-                                <div class="content__top">
-                                    <div class="content__author-name text-medium">Quản trị viên</div>
-                                    <div class="content__rate">
-                                        <div class="rate__icon"><i
-                                                class="text-medium fa-regular fa-star"></i></div>
-                                        <div class="text-medium rate__number">4.6</div>
-                                    </div>
-                                </div>
-                                <div class="text-paragraph test-text"><p>Kỹ Năng Từ Chối Mà Vẫn Được Yêu Quý</p></div>
-                                <div class="content__quick-info">
-                                    <div class="quick-info__level">
-                                        <div class="level__icon icon"><i
-                                                class="text-medium fa-solid fa-signal"></i></div>
-                                        <div class="level__text text-medium">Người mới</div>
-                                    </div>
-                                    <div class="quick-info__users">
-                                        <div class="users__icon icon"><i
-                                                class="text-medium fa-solid fa-users"></i></div>
-                                        <div class="users__text text-medium">8k3</div>
-                                    </div>
-                                    <div class="quick-info__time">
-                                        <div class="time__icon icon"><i
-                                                class="text-medium fa-regular fa-clock"></i></div>
-                                        <div class="time__text text text-medium">12h</div>
-                                    </div>
-                                </div>
-                                <div class="content__price">
-                                    <div class="price__new">299.000đ</div>
-                                    <div class="price__old">449.000đ</div>
-                                    <div class="quick-info__save"><i
-                                            class="quick-info__save__icon fa-solid fa-heart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div></div>
+            </div>
 
         </div>
 
@@ -647,6 +657,10 @@
     </footer>
 </div>
 
-
+<script>
+    function submitCartForm() {
+        document.getElementById('cartForm').submit();
+    }
+</script>
 </body>
 </html>
