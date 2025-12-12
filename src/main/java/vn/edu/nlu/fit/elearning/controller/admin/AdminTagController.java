@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.services.TagService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminTagController", value = "/admin/tag")
+@WebServlet(name = "AdminTagController", value = "/admin/tags")
 public class AdminTagController extends HttpServlet {
 
     private TagService tagService;

@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.admin;
+package vn.edu.nlu.fit.elearning.controller.admin.user_management;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.services.UserService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserManagementController", value = "/admin/user-management")
+@WebServlet(name = "UserManagementController", value = "/admin/users")
 public class UserManagementController extends HttpServlet {
     private UserService userService;
 

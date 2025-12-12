@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.admin.CategoryManagement;
+package vn.edu.nlu.fit.elearning.controller.admin.category_management;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

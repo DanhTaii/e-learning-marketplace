@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html lang="en">
@@ -34,7 +35,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/user-management">
+                                <a href="admin/users">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -56,7 +57,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/lesson">
+                                <a href="admin/lessons">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -66,7 +67,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/tag">
+                                <a href="admin/tags">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -77,7 +78,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/category">
+                                <a href="admin/categories">
                                     <div class="menu-item__student student-list">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -88,7 +89,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/order">
+                                <a href="admin/orders">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -99,7 +100,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/payment-method">
+                                <a href="admin/payment-methods">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 
@@ -111,7 +112,7 @@
                             </li>
                         </ul>
                         <div class="log-out">
-                            <a href="../html-authentication/sign-in.jsp">
+                            <a href="html-authentication/sign-in.jsp">
                                 <div class="log-out__container">
                                     <div class="log-out__content">
                                         Thoát
@@ -139,7 +140,7 @@
                                                 Lỗi: ${error}
                                             </span>
                                         </c:if>
-<%--                                        Nếu reload laij trang thif nó sẽ mất thông báo--%>
+                                        <%--                                        Nếu reload laij trang thif nó sẽ mất thông báo--%>
                                         <c:if test="${not empty sessionScope.flashSuccess}">
                                             <span style="color: green; padding: 2rem; background: #d4edda;">
                                                 Thành công: ${sessionScope.flashSuccess}
@@ -201,7 +202,7 @@
                                         <th>ID</th>
                                         <th>Tên danh mục</th>
                                         <th>ID danh mục cha</th>
-                                        <th>Icon URL</th>
+                                        <th>Ngày tạo</th>
                                         <th>Hành động</th>
                                     </tr>
                                     </thead>
@@ -226,7 +227,9 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                        ${cate.iconUrl}
+<%--                                                    <fmt:setLocale value="en_US" scope="page"/>--%>
+<%--                                                    <fmt:formatDate value="${cate.createdAt}"--%>
+<%--                                                                    pattern="MMMM d, yyyy - h:mm a"/>--%>
                                                 </div>
                                             </td>
                                             <td class="action__button">
@@ -239,68 +242,6 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
-
-                                    <%--                                    <tr>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__title title course-row__style-text">--%>
-                                    <%--                                                2--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__font-content">--%>
-                                    <%--                                                Tư duy phản biện--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__font-content">--%>
-                                    <%--                                                1--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__font-content">--%>
-                                    <%--                                                https://--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td class="action__button">--%>
-                                    <%--                                            <a href="">--%>
-                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>--%>
-                                    <%--                                            </a>--%>
-                                    <%--                                            <a href="">--%>
-                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>--%>
-                                    <%--                                            </a>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                    </tr>--%>
-                                    <%--                                    <tr>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__title title course-row__style-text">--%>
-                                    <%--                                                3--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__font-content">--%>
-                                    <%--                                                Tư duy sáng tạo--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__font-content">--%>
-                                    <%--                                                1--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td>--%>
-                                    <%--                                            <div class="course-row__font-content">--%>
-                                    <%--                                                https://--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                        <td class="action__button">--%>
-                                    <%--                                            <a href="">--%>
-                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>--%>
-                                    <%--                                            </a>--%>
-                                    <%--                                            <a href="">--%>
-                                    <%--                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>--%>
-                                    <%--                                            </a>--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                    </tr>--%>
-
                                     </tbody>
                                 </table>
                             </div>
