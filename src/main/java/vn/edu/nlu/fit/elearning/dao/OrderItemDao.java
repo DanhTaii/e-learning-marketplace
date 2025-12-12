@@ -9,19 +9,19 @@ import java.util.List;
 public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Integer> {
 
 
-    public List<OrderItemDTO> getCartItemsByUserId(Integer userId) {
+    public List<OrderItemDTO> getCartItemsByUserId(Integer orderId) {
         Jdbi jdbi = getJdbi();
         String sql = "SELECT oi.id AS id, c.id AS courseId, c.title, oi.is_selected AS selected, c.thumbnail_url, c.rating, c.level, c.price AS price_old, oi.price_at_purchase AS price_new, SUM(l.duration_minutes) AS durationHours , COUNT(l.id) AS total_lesson ,SUM(c.student_count) AS studentCount                   \n" +
                 "FROM order_items oi\n" +
                 "JOIN Orders o ON oi.order_id = o.id\n" +
                 "JOIN Courses c ON oi.course_id = c.id\n" +
                 "LEFT JOIN Lessons l ON c.id = l.course_id\n" +
-                "WHERE o.user_id = ? AND o.status = 'pending'\n" +
+                "WHERE oi.order_id = ?\n" +
                 "GROUP BY oi.id, c.id, o.user_id, c.title, oi.is_selected, c.thumbnail_url,c.rating, c.level, c.price,oi.price_at_purchase\n";
 
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
-                    .bind(0, userId)
+                    .bind(0, orderId)
                     .mapToBean(OrderItemDTO.class).list();
         });
     }
@@ -60,6 +60,26 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
                     "JOIN Orders o ON oi.order_id = o.id\n" +
                     "JOIN Courses c ON oi.course_id = c.id\n" +
                     "ORDER BY oi.order_id;\n").mapToBean(OrderItem.class).list();
+        });
+    }
+
+    public void updateSelection(Integer orderItemId, boolean status) {
+        String sql = "UPDATE order_items SET is_selected = ? WHERE id = ?";
+        getJdbi().useHandle(handle -> {
+            handle.createUpdate(sql)
+                    .bind(0, status)
+                    .bind(1, orderItemId)
+                    .execute();
+
+        });
+    }
+
+    public void unselectAll(Integer orderId) {
+        String sql = "UPDATE order_items SET is_selected = false WHERE order_id = ?";
+        getJdbi().useHandle(handle -> {
+            handle.createUpdate(sql)
+                    .bind(0, orderId)
+                    .execute();
         });
     }
 
