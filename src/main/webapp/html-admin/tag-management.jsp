@@ -147,12 +147,15 @@
                                         </c:if>
                                         <div class="create__selection-input">
                                             <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Tên của thẻ:</div>
-                                                <input placeholder="" type="text" class="admin-input__long"name="nameTag">
+                                                <div class="filter__selection-title filter__item-name">Tên của thẻ:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="nameTag" value="${param.nameTag}" >
                                             </div>
                                             <div class="create__selection-items">
                                                 <div class="filter__selection-title filter__item-name">Slug:</div>
-                                                <input placeholder="" type="text" class="admin-input__long" name="slugTag">
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="slugTag">
                                             </div>
 
                                         </div>
@@ -164,23 +167,26 @@
                             </form>
 
                             <div class="title__admin">Tất cả thẻ</div>
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items filter__selection-name">
-                                            <div class="filter__selection-title filter__item-name">Tên thẻ:</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
+                            <form action="admin/tags/search" class="form" method="get">
+                                <div class="container-2__filter">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items filter__selection-name">
+                                                <div class="filter__selection-title filter__item-name">Tên thẻ:</div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="searchName" value="${param.searchName}"  >
+                                            </div>
+
                                         </div>
 
-                                    </div>
-
-                                    <div class="filter__button-search">
-                                        <button class="button dark-button" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <div class="filter__button-search">
+                                            <button class="button dark-button" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                             <div class="container-2__list-student">
                                 <table>
                                     <thead>
