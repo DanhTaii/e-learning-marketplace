@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.TagDao;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Tag;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class TagService {
 
     public void deleteTag(int id) {
     }
-
+    public List<Tag> getAllTagsByName(String name) {
+        return tagDao.findByName(name);
+    }
 
 }
