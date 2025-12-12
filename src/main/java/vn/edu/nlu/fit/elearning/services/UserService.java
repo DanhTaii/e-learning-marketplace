@@ -54,4 +54,12 @@ public class UserService {
         return result;
     }
 
+    public boolean createUser(User user) {
+        if (userDao.findUserByEmail(user.getEmail()) != null) {
+            return false;
+        }
+        userDao.create(user);
+        return true;
+    }
+
 }
