@@ -36,7 +36,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/user-management">
+                                <a href="admin/users">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items">
 
@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/lesson">
+                                <a href="admin/lessons">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
@@ -68,7 +68,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/tag">
+                                <a href="admin/tags">
                                     <div class="menu-item__student ">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -79,7 +79,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/category">
+                                <a href="admin/categories">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__course">
 
@@ -90,7 +90,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/order">
+                                <a href="admin/orders">
                                     <div class="menu-item__student">
                                     <span class="container-1__menu-items menu-item__order">
 
@@ -101,7 +101,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="admin/payment-method">
+                                <a href="admin/payment-methods">
                                     <div class="menu-item__student">
                                         <span class="container-1__menu-items menu-item__order">
 
@@ -113,7 +113,7 @@
                             </li>
                         </ul>
                         <div class="log-out">
-                            <a href="../html-authentication/sign-in.jsp">
+                            <a href="html-authentication/sign-in.jsp">
                                 <div class="log-out__container">
                                     <div class="log-out__content">
                                         Thoát
@@ -207,27 +207,27 @@
                                 </div>
 
                                 <div class="course-create__section-8-box">
-                                <div class="course-create__title-style">Liên kết khóa học với thẻ</div>
-                                <div class="course-create__section-8">
+                                    <div class="course-create__title-style">Liên kết khóa học với thẻ</div>
+                                    <div class="course-create__section-8">
 
-                                    <div class="tag-course">
+                                        <div class="tag-course">
 
-                                        <div class="course-create__block-input-short">
-                                            <div class="course-create__title-style">ID thẻ</div>
-                                            <input placeholder="" type="text" class="admin-input__short">
+                                            <div class="course-create__block-input-short">
+                                                <div class="course-create__title-style">ID thẻ</div>
+                                                <input placeholder="" type="text" class="admin-input__short">
+                                            </div>
+                                            <div class="course-create__block-input-short">
+                                                <div class="course-create__title-style">ID khóa học</div>
+                                                <input placeholder="" type="text" class="admin-input__short">
+                                            </div>
+                                            <div class="admin-create__buttons1">
+                                                <button type="button" class="dark-button">
+                                                    Liên kết
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="course-create__block-input-short">
-                                            <div class="course-create__title-style">ID khóa học</div>
-                                            <input placeholder="" type="text" class="admin-input__short">
-                                        </div>
-                                        <div class="admin-create__buttons1">
-                                            <button type="button" class="dark-button">
-                                                Liên kết
-                                            </button>
-                                        </div>
+
                                     </div>
-
-                                </div>
                                 </div>
                                 <div class="course-create__section-8-box">
                                     <div class="course-create__title-style">Liên kết khóa học với danh mục</div>
