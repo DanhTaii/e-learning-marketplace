@@ -135,39 +135,41 @@
                         </div>
 
                         <div class="container-2__body">
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items filter__selection-name">
-                                            <div class="filter__selection-title filter__item-name">Tên người dùng:</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
-                                        </div>
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-title filter__item-phone">Số điện thoại:</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
-                                        </div>
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
-                                            <input placeholder="" type="datetime-local" class="admin-input__long">
-                                        </div>
-                                        <div class="filter__selection-items-select">
-                                            <div class="filter__selection-title filter__item-phone">Vai trò:</div>
-                                            <select name="Level" class="combobox admin-input__short">
-                                                <option value="">Tất cả</option>
-                                                <option value="1">Người dùng</option>
-                                                <option value="2">Quản trị viên</option>
-                                            </select>
+                            <form action="admin/users/search" method="get">
+                                <div class="container-2__filter">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items filter__selection-name">
+                                                <div class="filter__selection-title filter__item-name">Tên người dùng:</div>
+                                                <input placeholder="" type="text" class="admin-input__long" name="usernameSearch" value="${param.usernameSearch}">
+                                            </div>
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Số điện thoại:</div>
+                                                <input placeholder="" type="text" class="admin-input__long" name="phoneSearch" value="${param.phoneSearch}">
+                                            </div>
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
+                                                <input placeholder="" type="date" class="admin-input__long" name="dateFrom" value="${param.dateFrom}">
+                                            </div>
+                                            <div class="filter__selection-items-select">
+                                                <div class="filter__selection-title filter__item-phone">Vai trò:</div>
+                                                <select name="roleSearch" class="combobox admin-input__short">
+                                                    <option value="" ${empty param.roleSearch ? 'selected' : ''}>Tất cả</option>
+                                                    <option value="user" ${param.roleSearch == 'user' ? 'selected' : ''}>Người dùng</option>
+                                                    <option value="admin" ${param.roleSearch == 'admin' ? 'selected' : ''}>Quản trị viên</option>
+                                                </select>
+                                            </div>
+
                                         </div>
 
-                                    </div>
-
-                                    <div class="filter__button-search">
-                                        <button class="button dark-button" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <div class="filter__button-search">
+                                            <button class="button dark-button" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
                             <div class="container-2__list-student">
                                 <table>
@@ -216,7 +218,7 @@
                                                     <fmt:setLocale value="en_US" scope="page"/>
 
                                                     <fmt:formatDate value="${user.createdAt}"
-                                                                    pattern="MMMM d, yyyy – h:mm a"/>
+                                                                    pattern="MMMM d, yyyy"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">

@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.services;
 import vn.edu.nlu.fit.elearning.dao.UserDao;
 import vn.edu.nlu.fit.elearning.model.User;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class UserService {
@@ -42,12 +43,12 @@ public class UserService {
         return null;
     }
 
-    public int totalUsers(){
+    public int totalUsers() {
         int result = 0;
 
         List<User> userList = userDao.findAll();
-        for (User u : userList){
-            if (u.getRole().equals("user")){
+        for (User u : userList) {
+            if (u.getRole().equals("user")) {
                 result++;
             }
         }
@@ -62,4 +63,7 @@ public class UserService {
         return true;
     }
 
+    public List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role) {
+        return userDao.findUsersByFilter(username, phone, createdAt, role);
+    }
 }

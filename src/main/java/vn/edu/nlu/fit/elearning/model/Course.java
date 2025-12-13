@@ -162,11 +162,11 @@ public class Course implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public boolean isPublic() {
+    public boolean getIsPublic() {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
+    public void setIsPublic(boolean aPublic) {
         isPublic = aPublic;
     }
 

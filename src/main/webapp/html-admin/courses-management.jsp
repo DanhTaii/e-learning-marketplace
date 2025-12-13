@@ -223,7 +223,7 @@
                                             </td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${course.isPublic()}">
+                                                    <c:when test="${course.isPublic}">
                                                         <div class="course-row__status course-row__font-content course-row__status-public">
                                                             Công khai
                                                         </div>
@@ -241,7 +241,7 @@
 
                                                     <fmt:formatDate
                                                             value="${course.createdAt}"
-                                                            pattern="MMMM d, yyyy – h:mm a"/>
+                                                            pattern="MMMM d, yyyy"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
