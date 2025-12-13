@@ -237,42 +237,63 @@
         </div>
 
         <div class="grid__colum-9">
-            <div class="information__container">
-                <c:set var="user" value="${sessionScope.userSession}"/>
-                <div class="personal-detail">
-                    <div class="personal-detail__block">
-                        <div class="personal-detail__title style__title">
-                            <div class="text__title">Bảo mật</div>
-                        </div>
-                        <div class="personal-detail__row-1 grid__row-2">
-                            <div class="personal-detail__sub-title style__sub-title">Địa chỉ email</div>
-                            <div class="personal-detail__input">
-                                <input type="text" placeholder="${userSession.email}">
+            <form action="reset-password" method="post">
+                <div class="information__container">
+                    <c:set var="user" value="${sessionScope.userSession}"/>
+                    <div class="personal-detail">
+                        <div class="personal-detail__block">
+                            <div class="personal-detail__title style__title">
+                                <div class="text__title">Bảo mật</div>
                             </div>
-                        </div>
-                        <br></br>
-                        <hr>
-                        <div class="personal-detail__row-2 grid__row-2">
-                            <div class="personal-detail__sub-title style__sub-title">Nhập mật khẩu mới</div>
-                            <div class="personal-detail__input">
-                                <input type="text" placeholder="Nhập mật khẩu" name="newPassword">
+                            <div class="personal-detail__row-1 grid__row-2">
+                                <div class="personal-detail__sub-title style__sub-title">Địa chỉ email</div>
+                                <div class="personal-detail__input">
+                                    <input type="text" placeholder="${userSession.email}" value="" name="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="personal-detail__row-2 grid__row-2">
-                            <div class="personal-detail__sub-title style__sub-title">Nhập lại mật khẩu mới</div>
-                            <div class="personal-detail__input">
-                                <input type="text" placeholder="Nhập lại mật khẩu mới" name="newPasswordRetype">
+                            <br></br>
+                            <hr style="margin-bottom: 2rem;">
+                            <c:if test="${not empty error}">
+                                <span style="color: red; background: #f8d7da; font-size: 2rem">
+                                        ${error}
+                                </span>
+                            </c:if>
+                            <c:if test="${not empty success}">
+                                <span style="color: green; background: #d4edda; font-size: 2rem">
+                                    Thành công: ${sessionScope.success}
+                                </span>
+                            </c:if>
+                            <div class="personal-detail__row-2 grid__row-2">
+                                <div class="personal-detail__sub-title style__sub-title">Nhập mật khẩu cũ</div>
+                                <div class="personal-detail__input">
+                                    <input type="password" placeholder="Nhập mật khẩu cũ" name="oldPassword"
+                                           value="${param.oldPassword}">
+                                </div>
+                            </div>
+                            <div class="personal-detail__row-2 grid__row-2">
+                                <div class="personal-detail__sub-title style__sub-title">Nhập mật khẩu mới</div>
+                                <div class="personal-detail__input">
+                                    <input type="password" placeholder="Nhập mật khẩu mới" name="newPassword"
+                                           value="${param.newPassword}">
+                                </div>
+                            </div>
+                            <div class="personal-detail__row-2 grid__row-2">
+                                <div class="personal-detail__sub-title style__sub-title">Nhập lại mật khẩu mới</div>
+                                <div class="personal-detail__input">
+                                    <input type="password" placeholder="Nhập lại mật khẩu mới" name="newPasswordRetype"
+                                           value="${param.newPasswordRetype}">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="choice">
-                    <div class="header__button">
-                        <button class="button__btn text-medium">Lưu</button>
+                    <div class="choice">
+                        <div class="header__button">
+                            <button class="button__btn text-medium">Lưu</button>
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
