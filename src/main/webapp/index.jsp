@@ -127,18 +127,117 @@
                                placeholder="Tìm kiếm khóa học, kỹ năng,...">
                     </div>
                 </div>
-                <div class="header__button-box">
-                    <a href="html-authentication/sign-up.jsp" class="turn-page">
-                        <div class="header__button sign-in-box">
-                            <button class="button__btn text-header sign-in">Đăng ký</button>
+                <c:set var="loginSession" value="${not empty sessionScope.userSession}"/>
+                <c:if test="${loginSession}">
+                    <div class="header__class">
+                        <a href="html-personal/my-course.jsp" class="turn-page text-header">
+                            Khóa học của tôi
+                        </a>
+                    </div>
+                    <div class="header__wishlist">
+                        <a href="html-personal/my-wishlist.jsp" class="turn-page text-header">
+                            <i class="notification__icon fa-solid fa-heart text-header"></i>
+                        </a>
+                    </div>
+                    <div class="header__cart">
+                        <a href="cart" class="turn-page text-header">
+                            <i class="text-header fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+                    <!-- Toggle checkbox ẩn -->
+                    <div class="header__notification" tabindex="0">
+                        <div class="notification-wrapper text-header">
+                            <i class="notification__icon fa-solid fa-bell text-header"></i>
                         </div>
-                    </a>
-                    <a href="html-authentication/sign-in.jsp" class="turn-page">
-                        <div class="header__button sign-up-box">
-                            <button class="button__btn text-header sign-up">Đăng nhập</button>
+                        <div class="notification__popup">
+                            <div class="text-header">Bạn chưa có thông báo!</div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                    <div class="header__user">
+                        <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                             class="user__avatar">
+                        <div class="user__display">
+                            <div class="user__container">
+                                <div class="user__profile">
+                                    <div class="user__profile-avatar">
+                                        <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                             alt=""
+                                             class="user__avatar-mini">
+                                    </div>
+                                    <div class="user__profile-name">
+                                        <a href="" class="name-text text-header">Ngoc Minh</a>
+                                    </div>
+                                    <div class="user__profile-bio">
+                                        <a href="" class="bio-text">Thêm tiểu sử</a>
+                                    </div>
+                                    <a href="account-profile" class="turn-page">
+                                        <div class="user__profile-btn">
+                                            <button class="user-btn button__btn text-header">Xem thông tin</button>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="user__menu">
+                                    <ul class="user__menu-list">
+                                        <li class="user__menu-list-item">
+                                            <a href="html-personal/my-course.jsp" class="turn-page">
+                                                <div class="user__menu-list-item-box text-li">
+                                                    Khóa học
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="user__menu-list-item">
+                                            <a href="html-personal/my-wishlist.jsp" class="turn-page">
+                                                <div class="user__menu-list-item-box text-li">
+                                                    Yêu thích
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="user__menu-list-item">
+                                            <a href="html-personal-cart/order-history.jsp" class="turn-page">
+                                                <div class="user__menu-list-item-box text-li">
+                                                    Lịch sử giao dịch
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="user__menu-list-item">
+                                            <a href="logout" class="turn-page">
+                                                <div class="user__menu-list-item-box sign-out text-li">
+                                                    Đăng xuất
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+                <c:if test="${not loginSession}">
+                    <div class="header__button-box">
+                        <a href="html-authentication/sign-up.jsp" class="turn-page">
+                            <div class="header__button sign-in-box">
+                                <button class="button__btn text-header sign-in">Đăng ký</button>
+                            </div>
+                        </a>
+                        <a href="html-authentication/sign-in.jsp" class="turn-page">
+                            <div class="header__button sign-up-box">
+                                <button class="button__btn text-header sign-up">Đăng nhập</button>
+                            </div>
+                        </a>
+                    </div>
+                </c:if>
+<%--                <div class="header__button-box">--%>
+<%--                    <a href="html-authentication/sign-up.jsp" class="turn-page">--%>
+<%--                        <div class="header__button sign-in-box">--%>
+<%--                            <button class="button__btn text-header sign-in">Đăng ký</button>--%>
+<%--                        </div>--%>
+<%--                    </a>--%>
+<%--                    <a href="html-authentication/sign-in.jsp" class="turn-page">--%>
+<%--                        <div class="header__button sign-up-box">--%>
+<%--                            <button class="button__btn text-header sign-up">Đăng nhập</button>--%>
+<%--                        </div>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
             </div>
         </div>
     </header>
