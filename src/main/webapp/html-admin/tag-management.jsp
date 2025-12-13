@@ -220,13 +220,17 @@
                                                             pattern="MMMM d, yyyy – h:mm a"/>
                                                 </div>
                                             </td>
-                                            <td class="action__button">
-                                                <a href="">
+                                            <td class="action__button" style="display: flex;gap: 0.5rem">
+                                                <button type="submit" class="btn-icon-action">
                                                     <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                                </a>
-                                                <a href="">
+                                                </button>
+                                                <form action="admin/tags/delete" method="POST"  class="form">
+
+                                                    <input type="hidden" name="id" value="${t.id}">
+                                                <button type="submit" class="btn-icon-action">
                                                     <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </a>
+                                                </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>c>
