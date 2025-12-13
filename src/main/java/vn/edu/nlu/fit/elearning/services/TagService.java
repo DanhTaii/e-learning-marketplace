@@ -15,7 +15,7 @@ public class TagService {
     }
 
     public int createTag(Tag tag) {
-        if(tag != null){
+        if (tag != null) {
             tagDao.create(tag);
             return 1;
         }
@@ -34,10 +34,16 @@ public class TagService {
 
     }
 
-    public void deleteTag(int id) {
+    public void deleteTag(int tagId) {
+
     }
+
     public List<Tag> getAllTagsByName(String name) {
         return tagDao.findByName(name);
     }
 
+    public boolean deleteTags(int tagId) {
+        int status = tagDao.delete(tagId);
+        return status > 0;
+    }
 }
