@@ -66,4 +66,27 @@ public class UserService {
     public List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role) {
         return userDao.findUsersByFilter(username, phone, createdAt, role);
     }
+
+    public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
+        if (this.getUserByEmail(userMail) == null) {
+            throw new IllegalArgumentException("Email không tồn tại !!!");
+        } else {
+            User user = this.getUserByEmail(userMail);
+            if (!user.getPassword().equals(oldPassword)) {
+                throw new IllegalArgumentException("Mật khẩu cũ không đúng !");
+            }
+            if (!newPassword.equals(retypeNewPassword)) {
+                throw new IllegalArgumentException("Mật khẩu mới không khớp !");
+            }
+            if (userDao.resetPassword(newPassword, userMail) == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public User getUserByEmail(String email) {
+        return userDao.findUserByEmail(email);
+    }
+
 }

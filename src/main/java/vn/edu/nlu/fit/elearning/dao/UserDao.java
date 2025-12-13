@@ -97,4 +97,17 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
             return query.mapToBean(User.class).list();
         });
     }
+
+    public int resetPassword(String newPassword, String userMail) {
+//        Do là với withHandle thì nó sẽ trả về kiểu dữ liệu và có đủ CRUD nene có thể return về chính nó luôn
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(
+                    "UPDATE Users\n" +
+                    "SET password =  :newPassword, updated_at = CURRENT_TIMESTAMP\n" +
+                    "WHERE email = :userMail")
+                    .bind("userMail", userMail)
+                    .bind("newPassword", newPassword)
+                    .execute();
+        });
+    }
 }
