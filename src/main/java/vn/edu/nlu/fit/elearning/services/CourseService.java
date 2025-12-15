@@ -57,4 +57,8 @@ public class CourseService {
         return cd.getCoursesByIdCategory(idCategory);
     }
 
+    public List<Course> getCoursesByTitle(String search) {
+        return cd.getCoursesByTitle(search);
+    }
+
 }

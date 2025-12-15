@@ -216,7 +216,19 @@
         <div class="web__container">
             <div class="grid">
                 <div class="grid__row-2">
-                    <div class="container__title text-big-title">${cate.name}</div>
+                    <div class="container__title text-big-title">
+                        <div class="container__title text-big-title">
+                            <c:if test="${not empty cate}">
+                                ${cate.name}
+                            </c:if>
+                            <c:if test="${empty cate and not empty search}">
+                                Kết quả cho từ khóa: "${search}"
+                            </c:if>
+                            <c:if test="${empty cate and empty search}">
+                                Tất cả khóa học
+                            </c:if>
+                        </div>
+                    </div>
                     <div class="grid__column-3">
                         <div class="container__filter">
                             <div class="filter__box">
