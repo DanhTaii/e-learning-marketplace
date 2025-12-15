@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.partrial;
+package vn.edu.nlu.fit.elearning.controller.partrial.resultSearch;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -11,21 +11,20 @@ import vn.edu.nlu.fit.elearning.services.CourseService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ResultSearchController", value = "/result-search")
-public class ResultSearchController extends HttpServlet {
+@WebServlet(name = "ResultSearchByTitleController", value = "/result-search-by-title")
+public class ResultSearchByTitleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // làm cho hiện đúng category được chọn ở trang result-search
-        int idCategory = Integer.parseInt(request.getParameter("id"));
-        CategoryService cs = new CategoryService();
-        Category cate = cs.getCategoryById(idCategory);
-        request.setAttribute("cate", cate);
+        // lấy từ khóa search từ thanh header
+        String search = request.getParameter("title");
 
-        // làm để các khóa học hiển thị ở result-search đúng với category
         CourseService courseService = new CourseService();
-        List<Course> listCourse = courseService.getCoursesByIdCategory(idCategory);
+        List<Course> listCourse = null;
+        if (search != null && !search.trim().isEmpty()) {
+            listCourse = courseService.getCoursesByTitle(search.trim());
+        }
         request.setAttribute("list", listCourse);
-
+        request.setAttribute("search", search);
         request.getRequestDispatcher("/html-partrial/result-search.jsp").forward(request, response);
     }
 

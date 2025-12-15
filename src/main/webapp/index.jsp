@@ -122,10 +122,12 @@
                     <div class="search__icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
+                    <form action="result-search-by-title" method="get">
                     <div class="search__input">
-                        <input type="text" class="input__text text-medium"
+                        <input type="text" class="input__text text-medium" name="title"
                                placeholder="Tìm kiếm khóa học, kỹ năng,...">
                     </div>
+                    </form>
                 </div>
                 <c:set var="loginSession" value="${not empty sessionScope.userSession}"/>
                 <c:if test="${loginSession}">
@@ -321,7 +323,7 @@
                         </a>
                         <ul class="container__category-list text-li">
                             <c:forEach var="c" items="${categories}" begin="1">
-                                <a href="result-search?id=${c.id}" class="turn-page">
+                                <a href="result-search-by-categories?id=${c.id}" class="turn-page">
                                     <li class="container__category-list-item text-li">${c.name}</li>
                                 </a>
 <%--                            <li class="container__category-list-item text-li">Lãnh đạo & Quản lý</li>--%>

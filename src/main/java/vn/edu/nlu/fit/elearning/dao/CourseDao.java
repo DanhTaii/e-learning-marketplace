@@ -124,4 +124,14 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
+    public List<Course> getCoursesByTitle(String search) {
+        String title = "%" + search + "%";
+        return getJdbi().withHandle(handle -> {
+           return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name \n" +
+                   "FROM Courses c\n" +
+                   "JOIN Categories cate ON c.category_id = cate.id\n" +
+                   "WHERE title LIKE :title").bind("title", title).mapToBean(Course.class).list();
+        });
+    }
+
 }
