@@ -134,4 +134,76 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
+    // làm cho phần bộ lọc
+    // làm cách này thì tích 1 hay nhiều cái thì vẫn đều lọc bình thường
+    public List<Course> filterCourses(Integer categoryId, String title,
+                                      String sortPrice, String level,
+                                      String priceRange, String rating,
+                                      String duration, String popular) {
+        return getJdbi().withHandle(handle -> {
+            StringBuilder sql = new StringBuilder(
+                    "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, " +
+                            "c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
+                            "SUM(l.duration_minutes)/60.0 AS duration_hours " +
+                            "FROM Courses c " +
+                            "JOIN Categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN Lessons l ON c.id = l.course_id " +
+                            "WHERE c.is_public = TRUE "
+            );
+            // lọc theo category
+            if (categoryId != null) {
+                sql.append(" AND cate.id = :idCategory");
+            }
+            // lọc theo title
+            if (title != null && !title.isEmpty()) {
+                sql.append(" AND c.title LIKE :title");
+            }
+            // lọc theo level
+            if (level != null) {
+                sql.append(" AND c.level = :level");
+            }
+            // lọc theo priceRange
+            if ("under500".equals(priceRange)) {
+                sql.append(" AND (c.price - c.discount_price) < 500000");
+            } else if ("under1500".equals(priceRange)) {
+                sql.append(" AND (c.price - c.discount_price) < 1500000");
+            } else if ("over1500".equals(priceRange)) {
+                sql.append(" AND (c.price - c.discount_price) >= 1500000");
+            }
+            // lọc theo rating
+            if ("low".equals(rating)) {
+                sql.append(" AND c.rating < 3");
+            } else if ("high".equals(rating)) {
+                sql.append(" AND c.rating >= 3");
+            }
+            // lọc theo phổ biến
+            if ("true".equals(popular)) {
+                sql.append(" AND c.is_featured = TRUE");
+            }
+            // group by để tính duration_hours
+            sql.append(" GROUP BY c.id, cate.id");
+            // lọc theo duration (HAVING phải sau GROUP BY)
+            if ("short".equals(duration)) {
+                sql.append(" HAVING duration_hours < 5");
+            } else if ("medium".equals(duration)) {
+                sql.append(" HAVING duration_hours BETWEEN 5 AND 10");
+            } else if ("long".equals(duration)) {
+                sql.append(" HAVING duration_hours > 10");
+            }
+            // sort theo giá
+            if ("asc".equals(sortPrice)) {
+                sql.append(" ORDER BY (c.price - c.discount_price) ASC");
+            } else if ("desc".equals(sortPrice)) {
+                sql.append(" ORDER BY (c.price - c.discount_price) DESC");
+            }
+            var query = handle.createQuery(sql.toString());
+            if (categoryId != null) query.bind("idCategory", categoryId);
+            if (title != null && !title.isEmpty()) query.bind("title", "%" + title + "%");
+            if (level != null) query.bind("level", level);
+            return query.mapToBean(Course.class).list();
+        });
+    }
+
+
+
 }
