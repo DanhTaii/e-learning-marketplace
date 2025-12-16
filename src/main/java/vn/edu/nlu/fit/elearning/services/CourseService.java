@@ -61,4 +61,26 @@ public class CourseService {
         return cd.getCoursesByTitle(search);
     }
 
+    // gọi lại phương thức filterCourses trong DAO cho trường hợp lọc theo category
+    public List<Course> filterCoursesByCategory(int idCategory,
+                                                String sortPrice,
+                                                String level,
+                                                String priceRange,
+                                                String rating,
+                                                String duration,
+                                                String popular) {
+        return cd.filterCourses(idCategory, null, sortPrice, level, priceRange, rating, duration, popular);
+    }
+    // gọi lại phương thức filterCourses trong DAO cho trường hợp search theo title
+    public List<Course> filterCoursesByTitle(String search,
+                                             String sortPrice,
+                                             String level,
+                                             String priceRange,
+                                             String rating,
+                                             String duration,
+                                             String popular) {
+        return cd.filterCourses(null, search, sortPrice, level, priceRange, rating, duration, popular);
+    }
+
+
 }

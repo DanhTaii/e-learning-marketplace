@@ -11,7 +11,7 @@ import vn.edu.nlu.fit.elearning.services.CourseService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ResultSearchController", value = "/result-search-by-categories")
+@WebServlet(name = "ResultSearchController", value = "/result-search/by-category")
 public class ResultSearchByCategoriesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,6 +25,27 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         CourseService courseService = new CourseService();
         List<Course> listCourse = courseService.getCoursesByIdCategory(idCategory);
         request.setAttribute("list", listCourse);
+
+        // dòng này xem là đang là search theo cái gì title hay category
+        request.setAttribute("mode", "category");
+
+        String sortPrice = request.getParameter("sortPrice");
+        String level = request.getParameter("level");
+        String priceRange = request.getParameter("priceRange");
+        String rating = request.getParameter("rating");
+        String duration = request.getParameter("duration");
+        String popular = request.getParameter("popular");
+
+        if (sortPrice == null && level == null && priceRange == null &&
+                rating == null && duration == null && popular == null) {
+            listCourse = courseService.getCoursesByIdCategory(idCategory);
+        } else {
+            listCourse = courseService.filterCoursesByCategory(
+                    idCategory, sortPrice, level, priceRange, rating, duration, popular
+            );
+        }
+        request.setAttribute("list", listCourse);
+
 
         request.getRequestDispatcher("/html-partrial/result-search.jsp").forward(request, response);
     }
