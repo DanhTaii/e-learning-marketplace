@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.dao;
 
 import vn.edu.nlu.fit.elearning.model.Lesson;
+import vn.edu.nlu.fit.elearning.model.Tag;
 
 import java.util.List;
 
@@ -8,10 +9,10 @@ public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
     @Override
     public void create(Lesson entity) {
         String sql = "INSERT INTO Lessons (course_id , title, video_url, duration_minutes, order_index) \n" +
-                "VALUES (:courseId, :title , :videoUrl , :durationMinutes, "+
+                "VALUES (:courseId, :title , :videoUrl , :durationMinutes, " +
                 "(SELECT COALESCE(MAX(order_index), 0) + 1 FROM Lessons l WHERE l.course_id = :courseId))";
         getJdbi().useHandle(handle -> {
-             handle.prepareBatch(sql)
+            handle.prepareBatch(sql)
                     .bindBean(entity).add()
                     .execute();
         });
@@ -40,4 +41,17 @@ public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
     public int delete(Integer integer) {
         return 0;
     }
-}
+
+    public List<Lesson> findByName(String name) {
+        String nameSearch = "%" + name + "%";
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT l.title, l.order_index, l.duration_minutes, l.created_at " +
+                            "FROM Lessons l " +
+                            "WHERE l.title LIKE :nameSearch " +
+                            "GROUP BY l.id")
+                    .bind("nameSearch", nameSearch).mapToBean(Lesson.class).list();
+        });
+    }
+
+    }
+

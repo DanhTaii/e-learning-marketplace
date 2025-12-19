@@ -39,4 +39,7 @@ public class LessonService {
     public void deleteLesson(int id) {
     }
 
+    public List<Lesson> getAllTagsByName(String name) {
+        return lessonDao.findByName(name);
+    }
 }

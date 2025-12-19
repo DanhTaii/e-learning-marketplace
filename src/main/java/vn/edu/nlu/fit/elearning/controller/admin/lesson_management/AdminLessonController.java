@@ -53,7 +53,7 @@ public class AdminLessonController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/lessons");
         } else {
             request.setAttribute("error", "Vui lòng nhập lại");
-            request.getRequestDispatcher("/admin/lesson").forward(request, response);
+            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
         }
 
     }
