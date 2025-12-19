@@ -7,7 +7,14 @@ import java.util.List;
 public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
     @Override
     public void create(Lesson entity) {
-
+        String sql = "INSERT INTO Lessons (course_id , title, video_url, duration_minutes, order_index) \n" +
+                "VALUES (:courseId, :title , :videoUrl , :durationMinutes, "+
+                "(SELECT COALESCE(MAX(order_index), 0) + 1 FROM Lessons l WHERE l.course_id = :courseId))";
+        getJdbi().useHandle(handle -> {
+             handle.prepareBatch(sql)
+                    .bindBean(entity).add()
+                    .execute();
+        });
     }
 
     @Override
