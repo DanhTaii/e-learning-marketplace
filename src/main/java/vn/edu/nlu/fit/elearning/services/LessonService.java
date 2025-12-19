@@ -15,6 +15,11 @@ public class LessonService {
     }
 
     public int createLesson(Lesson lesson) {
+        if (lesson != null) {
+            lessonDao.create(lesson);
+            return 1;
+        };
+
         return 0;
     }
 
