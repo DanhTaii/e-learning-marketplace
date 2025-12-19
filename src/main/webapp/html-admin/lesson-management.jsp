@@ -195,13 +195,14 @@
                                 </div>
                             </form>
                             <div class="title__admin">Tất cả bài học</div>
+                            <form method="get" class="form" action="admin/lesson/search">
                             <div class="container-2__filter">
                                 <div class="filter__selection">
                                     <div class="filter__selection-input">
                                         <div class="filter__selection-items">
-                                            <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
-                                            <input placeholder="" type="datetime-local"
-                                                   class="input__font admin-input__long">
+                                            <div class="filter__selection-title filter__item-phone">Tên bài học:</div>
+                                            <input placeholder="" type="text"
+                                                   class="input__font admin-input__long" name="searchName" value="${param.searchName}">
                                         </div>
                                         <div class="filter__selection-items">
                                             <div class="filter__selection-items-select">
@@ -211,9 +212,9 @@
                                                 <select name="Level" class="combobox admin-input__short ">
                                                     <option class="text-medium">--- Vui lòng chọn khóa học ---
                                                     </option>
-                                                    <option class="text-medium" selected>Khóa học A</option>
-                                                    <option class="text-medium">Làm việc nhóm hiệu quả</option>
-                                                    <option class="text-medium">Thuyết trình trước đám đông</option>
+                                                    <c:forEach var="c" items="${listCourse}">
+                                                        <option class="text-medium" value="${c.id}">${c.title}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
@@ -226,7 +227,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            </form>
                             <div class="container-2__list-student">
                                 <table>
                                     <thead>

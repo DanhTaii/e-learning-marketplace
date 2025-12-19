@@ -41,7 +41,7 @@ public class AdminTagController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/tags");
         } else {
             request.setAttribute("error", "Vui lòng điền thông tin ! ");
-            request.getRequestDispatcher("admin/tags").forward(request, response);
+            request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
         }
 
     }
