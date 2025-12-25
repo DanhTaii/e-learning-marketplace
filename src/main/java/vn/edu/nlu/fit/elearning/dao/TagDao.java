@@ -7,13 +7,12 @@ import java.util.List;
 
 public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     @Override
-    public void create(Tag entity) {
-
+    public int create(Tag entity) {
         String sql = "INSERT INTO Tags (name,slug)\n" +
                 "VALUES (:name,:slug)";
-        getJdbi().useHandle(handle -> {
-            handle.prepareBatch(sql)
-                    .bindBean(entity).add()
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bindBean(entity)
                     .execute();
         });
     }
@@ -52,7 +51,7 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     @Override
     public int delete(Integer tagId) {
         String sql = "DELETE FROM Tags WHERE id = :id ";
-      return   getJdbi().withHandle(handle -> {
+        return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind("id", tagId)
                     .execute();

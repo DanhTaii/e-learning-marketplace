@@ -7,8 +7,9 @@ import java.util.List;
 public class ReviewDao extends BaseDao implements BaseCrudDao<Review, Integer> {
 
     @Override
-    public void create(Review entity) {
+    public int create(Review entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override

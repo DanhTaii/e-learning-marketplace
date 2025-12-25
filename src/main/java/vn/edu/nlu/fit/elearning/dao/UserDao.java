@@ -11,12 +11,11 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
 
 
     @Override
-    public void create(User user) {
-        getJdbi().useHandle(handle -> {
-            handle.createUpdate("INSERT INTO users (id, email, username, password) " +
+    public int create(User user) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO users (id, email, username, password) " +
                     "VALUES (:id, :email, :username, :password)").bindBean(user).execute();
         });
-        return;
     }
 
     @Override
@@ -102,9 +101,9 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
 //        Do là với withHandle thì nó sẽ trả về kiểu dữ liệu và có đủ CRUD nene có thể return về chính nó luôn
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(
-                    "UPDATE Users\n" +
-                    "SET password =  :newPassword, updated_at = CURRENT_TIMESTAMP\n" +
-                    "WHERE email = :userMail")
+                            "UPDATE Users\n" +
+                                    "SET password =  :newPassword, updated_at = CURRENT_TIMESTAMP\n" +
+                                    "WHERE email = :userMail")
                     .bind("userMail", userMail)
                     .bind("newPassword", newPassword)
                     .execute();

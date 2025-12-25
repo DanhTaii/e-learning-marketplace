@@ -9,11 +9,10 @@ import java.util.List;
 
 public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Integer> {
     @Override
-    public void create(Category entity) {
-        getJdbi().useHandle(handle -> {
-            PreparedBatch pb = handle.prepareBatch("INSERT INTO categories(id, name, slug, icon_url )\n" +
-                    "VALUES ( :id,:name, :slug, :iconUrl )").bindBean(entity).add();
-            pb.execute();
+    public int create(Category entity) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO categories(id, name, slug, icon_url )\n" +
+                    "VALUES ( :id,:name, :slug, :iconUrl )").bindBean(entity).execute();
         });
     }
 

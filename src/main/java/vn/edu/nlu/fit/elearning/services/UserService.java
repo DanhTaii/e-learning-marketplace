@@ -2,12 +2,14 @@ package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.UserDao;
 import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.utils.PasswordUtils;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 public class UserService {
     private UserDao userDao;
+    private static final String SALT = "SECRET";
 
     public UserService() {
         this.userDao = new UserDao();
@@ -27,10 +29,37 @@ public class UserService {
             return null;
         }
 
-        if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
+        String hash = PasswordUtils.hashpassword(password + SALT);
+        if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
             return user;
         }
         return null;
+    }
+
+    public boolean register(String email, String username, String password) {
+
+        if (password.length() < 8) {
+            throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự");
+        }
+
+        if (!password.matches(".*[A-Za-z].*")) {
+            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ cái");
+        }
+
+        if (!password.matches(".*[0-9].*")) {
+            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ số");
+        }
+
+        if (!password.matches(".*[^A-Za-z0-9].*")) {
+            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt");
+        }
+
+        User user = new User();
+        String hashPass = PasswordUtils.hashpassword(password + SALT);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(hashPass);
+        return createUser(user) > 0;
     }
 
     public List<User> getAllUsers() {
@@ -55,12 +84,8 @@ public class UserService {
         return result;
     }
 
-    public boolean createUser(User user) {
-        if (userDao.findUserByEmail(user.getEmail()) != null) {
-            return false;
-        }
-        userDao.create(user);
-        return true;
+    public int createUser(User user) {
+        return userDao.create(user);
     }
 
     public List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role) {

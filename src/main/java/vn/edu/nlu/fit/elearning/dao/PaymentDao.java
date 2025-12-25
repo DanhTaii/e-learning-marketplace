@@ -7,8 +7,9 @@ import java.util.List;
 public class PaymentDao extends BaseDao implements BaseCrudDao<Payment, Integer> {
 
     @Override
-    public void create(Payment entity) {
+    public int create(Payment entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override

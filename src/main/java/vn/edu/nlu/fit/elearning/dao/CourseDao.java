@@ -9,8 +9,9 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
 
     @Override
-    public void create(Course entity) {
+    public int create(Course entity) {
 
+        return 0;
     }
 
     @Override

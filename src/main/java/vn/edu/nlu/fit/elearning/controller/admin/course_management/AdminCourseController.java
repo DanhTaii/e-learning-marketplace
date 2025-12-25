@@ -1,12 +1,10 @@
-package vn.edu.nlu.fit.elearning.controller.admin;
+package vn.edu.nlu.fit.elearning.controller.admin.course_management;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CourseService;
-import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
 import java.util.List;

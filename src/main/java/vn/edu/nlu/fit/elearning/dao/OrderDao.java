@@ -7,8 +7,9 @@ import java.util.List;
 public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     @Override
-    public void create(Order entity) {
+    public int create(Order entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override
