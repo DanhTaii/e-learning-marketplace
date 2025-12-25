@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BaseCrudDao<T, ID> {
 
-    public void create(T entity);
+    public int create(T entity);
 
     public T findById(ID id);
 

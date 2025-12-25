@@ -43,8 +43,9 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
 
 
     @Override
-    public void create(OrderItem entity) {
+    public int create(OrderItem entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override

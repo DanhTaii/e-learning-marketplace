@@ -40,7 +40,8 @@
                                     </div>
                                     <ul class="browse__box-category-list list">
                                         <a href="../html-partrial/result-search.jsp" class="turn-page">
-                                            <li class="browse__box-category-list-item text-list-item text-li">Tư duy & Sáng tạo
+                                            <li class="browse__box-category-list-item text-list-item text-li">Tư duy &
+                                                Sáng tạo
                                             </li>
                                         </a>
                                         <li class="browse__box-category-list-item text-list-item text-li">Lãnh đạo &
@@ -151,34 +152,35 @@
                 </div>
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2">
-                        <%
-                            String error = (String) request.getAttribute("error");
-                            if (error == null) error = "";
-                            String email = (String) request.getParameter("email");
-                            if (email == null) email = "";
 
-                        %>
                         <form action="sign-up" class="form" method="post">
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>
-                            <span style="color: red; font-size: var(--text-xl)"> <%= error%> </span>
+                            <span style="color: red; font-size: var(--text-xl)"> ${requestScope.error} </span>
                             <div class="form__input input-1">
-                                <input type="email" class="input-text text-big" placeholder="Nhập email của bạn" name="email">
+                                <input type="email" class="input-text text-big" placeholder="Nhập email của bạn"
+                                       name="email" value="${param.email}">
                             </div>
                             <div class="form__input input-2">
-                                <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng" name="username">
+                                <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng"
+                                       name="username" value="${param.username}">
                             </div>
                             <div class="form__input input-3">
-                                <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn" name="password">
+                                <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
+                                       name="password" value="${param.password}">
                             </div>
-                            <div class="form__info text-medium">Mật khẩu phải có tối thiểu 8 ký tự gồm số và chữ cái, trong đó có ít nhất 1 chữ cái viết hoa!</div>
+                            <div class="form__info text-medium">Mật khẩu phải có tối thiểu 8 ký tự gồm số và chữ cái,
+                                trong đó có ít nhất 1 chữ cái viết hoa!
+                            </div>
                             <div class="form__input input-4">
-                                <input type="password" class="input-text text-big" placeholder="Nhập lại mật khẩu của bạn" name="confirmPassword">
+                                <input type="password" class="input-text text-big"
+                                       placeholder="Nhập lại mật khẩu của bạn" name="confirmPassword"
+                                       value="${param.confirmPassword}">
                             </div>
-                                <div class="form__button">
-                                    <button class="button button__btn">
-                                        <span class="text-header">Đăng ký</span>
-                                    </button>
-                                </div>
+                            <div class="form__button">
+                                <button class="button button__btn">
+                                    <span class="text-header">Đăng ký</span>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

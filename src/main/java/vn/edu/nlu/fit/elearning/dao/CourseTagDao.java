@@ -8,8 +8,9 @@ import java.util.List;
 public class CourseTagDao extends BaseDao implements BaseCrudDao<CourseTag, Integer> {
 
     @Override
-    public void create(CourseTag entity) {
+    public int create(CourseTag entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override

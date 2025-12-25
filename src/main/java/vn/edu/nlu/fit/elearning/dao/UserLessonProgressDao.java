@@ -7,8 +7,9 @@ import java.util.List;
 public class UserLessonProgressDao extends BaseDao implements BaseCrudDao<UserLessonProgress, Integer> {
 
     @Override
-    public void create(UserLessonProgress entity) {
+    public int create(UserLessonProgress entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override

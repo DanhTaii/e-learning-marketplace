@@ -7,8 +7,9 @@ import java.util.List;
 public class EnrollmentDao extends BaseDao implements BaseCrudDao<Enrollment, Integer> {
 
     @Override
-    public void create(Enrollment entity) {
+    public int create(Enrollment entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override
@@ -39,6 +40,5 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<Enrollment, In
         // TODO: Implement delete logic
         return 0;
     }
-
 
 }

@@ -7,8 +7,9 @@ import java.util.List;
 public class WishlistDao extends BaseDao implements BaseCrudDao<Wishlist, Integer> {
 
     @Override
-    public void create(Wishlist entity) {
+    public int create(Wishlist entity) {
         // TODO: Implement create logic
+        return 0;
     }
 
     @Override
