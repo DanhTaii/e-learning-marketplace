@@ -35,6 +35,10 @@ public class IndexController extends HttpServlet {
         double avgRating = (double) courseService.avgRating();
         request.setAttribute("avgRating", avgRating);
 
+        // 1 khóa học đc gợi ý
+        Course courseMostPopular = courseService.getCoursesMostPopular();
+        request.setAttribute("courseMostPopular", courseMostPopular);
+
         // 3 khóa học yêu thích nhất
         ArrayList<Course> coursesLiked = (ArrayList<Course>) courseService.getThreeCoursesWereLiked();
         request.setAttribute("coursesLiked", coursesLiked);

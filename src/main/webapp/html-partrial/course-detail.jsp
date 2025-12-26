@@ -347,7 +347,7 @@
                                     <i class="fa-duotone fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(113.485 rating)
+                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${c.reviewCount} rating)
                             </div>
                         </div>
 
@@ -432,11 +432,11 @@
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
-                                        <c:forEach var="tag" items="${fn:split(c.tags, ',')}">
-                                            <c:if test="${loop.index < 3}">
-                                                <li class="section-3_li">${tag}</li>
-                                            </c:if>
-                                        </c:forEach>
+                                            <c:forEach var="tag" items="${c.tags}" varStatus="loop">
+                                                <c:if test="${loop.index < 3}">
+                                                    <li class="section-3_li">${tag}</li>
+                                                </c:if>
+                                            </c:forEach>
                                     </ul>
                                 </div>
                             </div>
@@ -451,193 +451,25 @@
                         <div class="section-4__sub-duration">
                             <ul class="">
                                 <li class=" text-big first font__sub-title">
-                                   15 bài giảng
+                                    ${c.lessonCount} bài giảng
                                 </li>
                                 <li class="text-big font__sub-title">
-                                    1 tiếng 30 phút
+                                    ${c.durationHours}h
                                 </li>
                             </ul>
                         </div>
 
                         <div class="section-4__list-video">
-                            <ul class="">
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
+                            <ul>
+                                <c:forEach var="lesson" items="${c.lessons}">
+                                    <li>
+                                        <div class="section-4__lesson-information">
+                                            <div class="section-4__lesson-icon text-medium"><i class="fa-solid fa-play"></i></div>
+                                            <div class="section-4__lesson-title text-medium">Bài ${lesson.orderIndex} : ${lesson.title}</div>
+                                            <div class="section-4__lesson-time text-medium">${lesson.durationMinutes} phút</div>
                                         </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 1 : Đây là một khoá học hết
-                                            sức đặc biệt!
-                                        </div>
-                                        <div class="section-4__lesson-time course-detail__context text-medium">00:03:06
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 2 : Tư duy có phải là suy
-                                            nghĩ?
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:06:19</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 3 : Hãy tiếp tục bóc tách
-                                            tư duy phản biện!
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:04:35</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 4 : Sử dụng tư duy phản
-                                            biện để giải quyết vấn đề
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:06:16</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 5 : Phản biện: Nguyên lý
-                                            giải quyết vấn đề
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:05:45</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 6 : Mổ xẻ cách thức giải
-                                            quyết mọi vấn đề
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:06:59
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 7 : Ví dụ: Giải quyết vấn
-                                            đề tại cuộc thi nấu ăn Masterchef
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:09:43
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 8 : Đi sâu vào cách thức
-                                            chi tiết giải quyết mọi vấn đề
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:07:36
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 9 : Có bao nhiêu hình thức
-                                            phản biện và khi nào thì cần dùng?
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:04:25
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 10 : Đi qua 4 cấp độ tư duy
-                                            phản biện khi tìm kiếm và chọn lựa giải pháp
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:06:50
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 11 : Ví dụ: Sử dụng tư duy
-                                            phản biện để tìm ra giải pháp mới
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:03:57
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 12 : Quy trình 6 bước phản
-                                            biện toàn diện
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:05:18
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 13 : Bỏ túi 6 câu hỏi Có -
-                                            Không cần phải trả lời mỗi khi phản biện (PHẦN 1)
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:09:08
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 14 : Bỏ túi 6 câu hỏi Có -
-                                            Không cần phải trả lời mỗi khi phản biện (PHẦN 2)
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:06:52
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="section-4__lesson-information">
-                                        <div class="section-4__lesson-icon text-medium">
-                                            <i class="fa-solid fa-play"></i>
-                                        </div>
-                                        <div class="section-4__lesson-title text-medium">Bài 15 : Tất tật về tư duy phản
-                                            biện trong 4 phút
-                                        </div>
-                                        <div class="section-4__lesson-time text-medium">00:03:47
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </c:forEach> </ul>
                         </div>
                     </div>
 
@@ -647,95 +479,96 @@
                             <span class="">Đánh giá</span>
                         </div>
 
-                        <div class="review-box__comment">
-                            <div class="comment__user header__user">
-                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                     class="user__avatar1">
-                            </div>
-                            <div class="comment__box">
-                                <div class="box__name box">
-                                    <div class="review-in4">
-                                        <span class="review__name">Hoang Danh Tai</span>
-                                        <span class="review__time">5 tháng trước</span>
-                                    </div>
+                        <c:forEach var="review" items="${c.reviews}">
+                            <div class="review-box__comment">
+                                <div class="comment__user header__user">
+                                    <img src="${review.avatarUrl}" alt="" class="user__avatar1">
                                 </div>
-                                <div class="box__date box">
-                                    <div class="star">
-                                        <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star"
-                                                                  style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                <div class="comment__box">
+                                    <div class="box__name box">
+                                        <div class="review-in4">
+                                            <span class="review__name">${review.firstName} ${review.lastName}</span>
+                                            <span class="review__time">${review.createdAt}</span>
                                         </div>
-
                                     </div>
-                                </div>
-                                <div class="box__comment box">
-                                    <span class="">Mong thầy ra thêm nhiều video ạ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-box__comment">
-                            <div class="comment__user header__user">
-                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                     class="user__avatar1">
-                            </div>
-                            <div class="comment__box">
-                                <div class="box__name box">
-                                    <div class="review-in4">
-                                        <span class="review__name">Hoang Danh Tai</span>
-                                        <span class="review__time">5 tháng trước</span>
-                                    </div>
-                                </div>
-                                <div class="box__date box">
-                                    <div class="star">
-                                        <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star"
-                                                                  style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                    <div class="box__date box">
+                                        <div class="star">
+                                            <div class="text-medium regular">${review.rating}</div>
+                                            <div class="star-icon">
+                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="box__comment box">
+                                        <span>${review.comment}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
 
-                                    </div>
-                                </div>
-                                <div class="box__comment box">
-                                    <span class="">Bài học bổ ích quá, e cảm ơn Thầy</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-box__comment">
-                            <div class="comment__user header__user">
-                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                     class="user__avatar1">
-                            </div>
-                            <div class="comment__box">
-                                <div class="box__name box">
-                                    <div class="review-in4">
-                                        <span class="review__name">Hoang Danh Tai</span>
-                                        <span class="review__time">5 tháng trước</span>
-                                    </div>
-                                </div>
-                                <div class="box__date box">
-                                    <div class="star">
-                                        <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        </div>
+                    <%--                        <div class="review-box__comment">--%>
+<%--                            <div class="comment__user header__user">--%>
+<%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
+<%--                                     class="user__avatar1">--%>
+<%--                            </div>--%>
+<%--                            <div class="comment__box">--%>
+<%--                                <div class="box__name box">--%>
+<%--                                    <div class="review-in4">--%>
+<%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
+<%--                                        <span class="review__time">5 tháng trước</span>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="box__date box">--%>
+<%--                                    <div class="star">--%>
+<%--                                        <div class="text-medium regular">4.6</div>--%>
+<%--                                        <div class="star-icon"><i class="fa-solid fa-star"--%>
+<%--                                                                  style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                        </div>--%>
 
-                                    </div>
-                                </div>
-                                <div class="box__comment box">
-                                    <span class="">Tôi cảm thấy hứng thú và động viên hơn để tiếp tục học hỏi sau khi hoàn thành khoá học này.</span>
-                                </div>
-                            </div>
-                        </div>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="box__comment box">--%>
+<%--                                    <span class="">Bài học bổ ích quá, e cảm ơn Thầy</span>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="review-box__comment">--%>
+<%--                            <div class="comment__user header__user">--%>
+<%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
+<%--                                     class="user__avatar1">--%>
+<%--                            </div>--%>
+<%--                            <div class="comment__box">--%>
+<%--                                <div class="box__name box">--%>
+<%--                                    <div class="review-in4">--%>
+<%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
+<%--                                        <span class="review__time">5 tháng trước</span>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="box__date box">--%>
+<%--                                    <div class="star">--%>
+<%--                                        <div class="text-medium regular">4.6</div>--%>
+<%--                                        <div class="star-icon"><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+<%--                                        </div>--%>
+
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="box__comment box">--%>
+<%--                                    <span class="">Tôi cảm thấy hứng thú và động viên hơn để tiếp tục học hỏi sau khi hoàn thành khoá học này.</span>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
                     </div>
                 </div>
