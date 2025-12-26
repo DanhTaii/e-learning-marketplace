@@ -1,3 +1,4 @@
+<%@ page import="vn.edu.nlu.fit.elearning.controller.auth.GoogleConstants" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -199,12 +200,12 @@
                                 </div>
                             </div>
                             <div class="form__socials">
-                                <a href="https://www.facebook.com" class="turn-page">
+                                <a href="" class="turn-page">
                                     <div class="socials__box">
                                         <img class="image" src="assets/image/facebook.png"></img>
                                     </div>
                                 </a>
-                                <a href="../html-admin/dashboard.jsp" class="turn-page">
+                                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=<%=GoogleConstants.GOOGLE_REDIRECT_URI%>&response_type=code&client_id=<%=GoogleConstants.GOOGLE_CLIENT_ID%>&approval_prompt=force" class="turn-page">
                                     <div class="socials__box google">
                                         <img class="image" src="assets/image/search.png"></img>
                                     </div>

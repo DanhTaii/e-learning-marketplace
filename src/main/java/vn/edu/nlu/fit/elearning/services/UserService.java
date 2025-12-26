@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.UserDao;
+import vn.edu.nlu.fit.elearning.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.utils.PasswordUtils;
 
@@ -34,6 +35,28 @@ public class UserService {
             return user;
         }
         return null;
+    }
+
+    public User processSocialLogin(GoogleUser googleUser) {
+        User user = userDao.findUserByEmail(googleUser.getEmail());
+
+        if (user == null) {
+            user = new User();
+            user.setEmail(googleUser.getEmail());
+            user.setFirstName(googleUser.getGivenName());
+            user.setLastName(googleUser.getFamilyName());
+//            user.setAvatar_url(googleUser.getPicture());
+            user.setRole("user"); // Mặc định là khách hàng
+            user.setPassword(""); // Đăng nhập qua Google nên không cần mật khẩu local
+
+            // Lưu vào database và lấy lại ID vừa tạo
+            createUser(user);
+        } else {
+            // 3. Nếu ĐÃ CÓ: Cập nhật lại ảnh đại diện hoặc tên nếu Google có thay đổi
+            user.setAvatarUrl(googleUser.getPicture());
+        }
+
+        return user;
     }
 
     public boolean register(String email, String username, String password) {
