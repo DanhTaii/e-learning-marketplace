@@ -3,8 +3,8 @@ package vn.edu.nlu.fit.elearning.controller.cart;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.model.Order;
+import vn.edu.nlu.fit.elearning.model.OrderItem;
 import vn.edu.nlu.fit.elearning.services.OrderItemService;
 import vn.edu.nlu.fit.elearning.services.OrderService;
 
@@ -30,14 +30,14 @@ public class CartController extends HttpServlet {
 
 
         Order order = this.orderService.findOrderPending(userId);
-        List<OrderItemDTO> list = this.orderItemService.getCartItems(order.getId());
+        List<OrderItem> list = this.orderItemService.getCartItems(order.getId());
 
-        List<OrderItemDTO> itemSelected = this.orderItemService.getOrderItemSelected(order.getId());
+        List<OrderItem> itemSelected = this.orderItemService.getOrderItemSelected(order.getId());
         double totalAmonut = 0;
         double finalAmount = 0;
-        for (OrderItemDTO items : itemSelected) {
-            finalAmount += items.getPriceNew();
-            totalAmonut += items.getPriceOld();
+        for (OrderItem items : itemSelected) {
+//            finalAmount += items.getPriceNew();
+//            totalAmonut += items.getPriceOld();
         }
 
         order.setTotalAmount(totalAmonut);

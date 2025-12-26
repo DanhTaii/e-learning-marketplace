@@ -1,7 +1,6 @@
 package vn.edu.nlu.fit.elearning.dao;
 
 import org.jdbi.v3.core.Jdbi;
-import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Integer> {
 
 
-    public List<OrderItemDTO> getCartItemsByUserId(Integer orderId) {
+    public List<OrderItem> getCartItemsByUserId(Integer orderId) {
         Jdbi jdbi = getJdbi();
         String sql = "SELECT oi.id AS id, c.id AS courseId, c.title, oi.is_selected AS selected, c.thumbnail_url, c.rating, c.level, c.price AS price_old, oi.price_at_purchase AS price_new, SUM(l.duration_minutes) AS durationHours , COUNT(l.id) AS total_lesson ,SUM(c.student_count) AS studentCount                   \n" +
                 "FROM order_items oi\n" +
@@ -22,12 +21,12 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, orderId)
-                    .mapToBean(OrderItemDTO.class).list();
+                    .mapToBean(OrderItem.class).list();
         });
     }
 
 
-    public List<OrderItemDTO> geOrderItemSelected(Integer orderId) {
+    public List<OrderItem> geOrderItemSelected(Integer orderId) {
         String sql = "SELECT c.thumbnail_url, c.title, c.price AS price_old , oi.price_at_purchase AS price_new \n" +
                 "                FROM Order_Items AS oi  \n" +
                 "                JOIN Courses AS c ON oi.course_id = c.id\n" +
@@ -35,7 +34,7 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(sql)
                     .bind(0, orderId)
-                    .mapToBean(OrderItemDTO.class).list();
+                    .mapToBean(OrderItem.class).list();
 
 
         });

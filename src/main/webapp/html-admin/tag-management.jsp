@@ -9,10 +9,12 @@
     <title>Tag Management</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+
 </head>
 <body>
 <div class="web">
@@ -132,30 +134,20 @@
                         <div class="container-2__body">
                             <div class="title__admin">Tạo thẻ mới</div>
                             <form action="admin/tags" class="form" method="post">
+
                                 <div class="container-2__create">
                                     <div class="create__selection">
-                                        <c:if test="${not empty error}">
-                                            <span style="color: red; padding: 10px; background: #f8d7da;">
-                                                Lỗi: ${error}
-                                            </span>
-                                        </c:if>
-                                        <c:if test="${not empty sessionScope.flashSuccess}">
-                                            <span style="color: green; padding: 2rem; background: #d4edda;">
-                                                Thành công: ${sessionScope.flashSuccess}
-                                            </span>
-                                            <c:remove var="flashSuccess" scope="session"/>
-                                        </c:if>
                                         <div class="create__selection-input">
                                             <div class="create__selection-items">
                                                 <div class="filter__selection-title filter__item-name">Tên của thẻ:
                                                 </div>
                                                 <input placeholder="" type="text" class="admin-input__long"
-                                                       name="nameTag" value="${param.nameTag}" >
+                                                       name="nameTag" value="${oldName}" >
                                             </div>
                                             <div class="create__selection-items">
                                                 <div class="filter__selection-title filter__item-name">Slug:</div>
                                                 <input placeholder="" type="text" class="admin-input__long"
-                                                       name="slugTag">
+                                                       name="slugTag" value="${oldSlug}">
                                             </div>
 
                                         </div>
@@ -233,7 +225,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    </c:forEach>c>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -244,6 +236,66 @@
         </div>
     </div>
 </div>
-</div>
 </body>
+<div id="toast"></div>
+<script>
+    function toast({ title = '', message = '', type = 'info', duration = 3000 }) {
+        console.log("Toast Type:", type);
+        const main = document.getElementById('toast');
+        if (main) {
+            const toast = document.createElement('div');
+
+            const autoRemoveId = setTimeout(function () {
+                main.removeChild(toast);
+            }, duration + 1000);
+
+            toast.onclick = function (e) {
+                if (e.target.closest('.toast__close')) {
+                    main.removeChild(toast);
+                    clearTimeout(autoRemoveId);
+                }
+            };
+            const delay = (duration / 1000).toFixed(2);
+
+            toast.classList.add('toast');
+            toast.classList.add('toast--' + type);
+            toast.style.animation = `slideInLeft ease 0.3s, fadeOut linear 1s ${delay}s forwards`;
+
+            toast.innerHTML = `
+                <div class="toast__icon"><i class="${icon}"></i></div>
+                <div class="toast__body">
+                    <h3 class="toast__title">` + title + `</h3>
+                    <p class="toast__msg">` + message + `</p>
+                </div>
+                <div class="toast__close"><i class="fa-solid fa-xmark"></i></div>
+            `;
+            main.appendChild(toast);
+        }
+    }
+
+    window.addEventListener('load', function() {
+        // Sử dụng cách lấy giá trị an toàn hơn
+        const errorMsg = `<c:out value="${error}"/>`.trim();
+        const successMsg = `<c:out value="${sessionScope.flashSuccess}"/>`.trim();
+
+        if (errorMsg !== "") {
+            toast({
+                title: 'Thất bại!',
+                message: errorMsg,
+                type: 'error',
+                duration: 5000
+            });
+        }
+
+        if (successMsg !== "") {
+            toast({
+                title: 'Thành công!',
+                message: successMsg,
+                type: 'success',
+                duration: 5000
+            });
+        }
+    });
+</script>
+<c:remove var="flashSuccess" scope="session"/>
 </html>

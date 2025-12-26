@@ -7,12 +7,14 @@ import vn.edu.nlu.fit.elearning.model.Tag;
 import vn.edu.nlu.fit.elearning.services.TagService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "AdminTagController", value = "/admin/tags")
 public class AdminTagController extends HttpServlet {
 
     private TagService tagService;
+
 
     public AdminTagController() {
         this.tagService = new TagService();
@@ -30,17 +32,27 @@ public class AdminTagController extends HttpServlet {
         String nameTag = request.getParameter("nameTag");
         String slugTag = request.getParameter("slugTag");
 
-        Tag newTag = new Tag();
-        newTag.setName(nameTag);
-        newTag.setSlug(slugTag);
+        if (nameTag.isEmpty() || slugTag.isEmpty()) {
+            request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin!");
+            request.setAttribute("listTags", tagService.getAllTags());
+            request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
+            return;
+        }
+        try {
+            Tag newTag = new Tag();
+            newTag.setName(nameTag);
+            newTag.setSlug(slugTag);
+            int checkCreate = tagService.createTag(newTag);
+            if (checkCreate == 1) {
+                request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
+                response.sendRedirect(request.getContextPath() + "/admin/tags");
 
-        int checkCreate = tagService.createTag(newTag);
-
-        if (checkCreate == 1) {
-            request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
-            response.sendRedirect(request.getContextPath() + "/admin/tags");
-        } else {
-            request.setAttribute("error", "Vui lòng điền thông tin ! ");
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", "Tên hoặc Slug đã tồn tại trong hệ thống!");
+            request.setAttribute("oldName", nameTag);
+            request.setAttribute("oldSlug", slugTag);
+            request.setAttribute("listTags", tagService.getAllTags());
             request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
         }
 
