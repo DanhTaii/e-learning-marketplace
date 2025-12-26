@@ -239,63 +239,14 @@
 </body>
 <div id="toast"></div>
 <script>
-    function toast({ title = '', message = '', type = 'info', duration = 3000 }) {
-        console.log("Toast Type:", type);
-        const main = document.getElementById('toast');
-        if (main) {
-            const toast = document.createElement('div');
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
 
-            const autoRemoveId = setTimeout(function () {
-                main.removeChild(toast);
-            }, duration + 1000);
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
 
-            toast.onclick = function (e) {
-                if (e.target.closest('.toast__close')) {
-                    main.removeChild(toast);
-                    clearTimeout(autoRemoveId);
-                }
-            };
-            const delay = (duration / 1000).toFixed(2);
-
-            toast.classList.add('toast');
-            toast.classList.add('toast--' + type);
-            toast.style.animation = `slideInLeft ease 0.3s, fadeOut linear 1s ${delay}s forwards`;
-
-            toast.innerHTML = `
-                <div class="toast__icon"><i class="${icon}"></i></div>
-                <div class="toast__body">
-                    <h3 class="toast__title">` + title + `</h3>
-                    <p class="toast__msg">` + message + `</p>
-                </div>
-                <div class="toast__close"><i class="fa-solid fa-xmark"></i></div>
-            `;
-            main.appendChild(toast);
-        }
-    }
-
-    window.addEventListener('load', function() {
-        // Sử dụng cách lấy giá trị an toàn hơn
-        const errorMsg = `<c:out value="${error}"/>`.trim();
-        const successMsg = `<c:out value="${sessionScope.flashSuccess}"/>`.trim();
-
-        if (errorMsg !== "") {
-            toast({
-                title: 'Thất bại!',
-                message: errorMsg,
-                type: 'error',
-                duration: 5000
-            });
-        }
-
-        if (successMsg !== "") {
-            toast({
-                title: 'Thành công!',
-                message: successMsg,
-                type: 'success',
-                duration: 5000
-            });
-        }
-    });
 </script>
-<c:remove var="flashSuccess" scope="session"/>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

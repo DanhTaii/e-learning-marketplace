@@ -33,7 +33,7 @@ public class AdminTagController extends HttpServlet {
         String slugTag = request.getParameter("slugTag");
 
         if (nameTag.isEmpty() || slugTag.isEmpty()) {
-            request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin!");
+            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
             request.setAttribute("listTags", tagService.getAllTags());
             request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
             return;
@@ -49,7 +49,7 @@ public class AdminTagController extends HttpServlet {
 
             }
         } catch (Exception e) {
-            request.setAttribute("error", "Tên hoặc Slug đã tồn tại trong hệ thống!");
+            request.getSession().setAttribute("flashError", "Tên hoặc Slug đã tồn tại trong hệ thống!");
             request.setAttribute("oldName", nameTag);
             request.setAttribute("oldSlug", slugTag);
             request.setAttribute("listTags", tagService.getAllTags());
