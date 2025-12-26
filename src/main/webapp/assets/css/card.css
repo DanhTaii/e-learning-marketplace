@@ -24,7 +24,7 @@
 .product__small-advertisement {
     cursor: pointer;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 7px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
     margin-bottom: 40px;
 }
