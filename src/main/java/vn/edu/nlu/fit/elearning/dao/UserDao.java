@@ -40,8 +40,16 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
 
     @Override
     public int update(User entity) {
-
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE Users\n" +
+                            "SET phone = :phone, username = :username, role = :role, updated_at = CURRENT_TIMESTAMP\n" +
+                            "WHERE id = :id")
+                    .bind("phone", entity.getPhone())
+                    .bind("username", entity.getUsername())
+                    .bind("role", entity.getRole())
+                    .bind("id",entity.getId())
+                    .execute();
+        });
     }
 
     @Override

@@ -9,7 +9,7 @@
     <title>User Management</title>
 
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.2">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
@@ -234,18 +234,11 @@
                                             </td>
                                             <td class="action__button">
                                                 <button type="button" onclick="showUserDetail(${user.id})"
-                                                        class="icon-action"
-                                                        style="border:none; background:none; cursor:pointer;">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-
-                                                <button class="icon-action"
-                                                        style="border:none; background:none; cursor:pointer;">
+                                                        class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
 
-                                                <button class="icon-action"
-                                                        style="border:none; background:none; cursor:pointer;">
+                                                <button class="icon-action-btn">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </td>
@@ -260,46 +253,61 @@
 
                 <div id="user-detail" class="modal__course-detail">
                     <div class="modal__course-content">
-                        <div class="course__header">
-                            <div class="course__title">
-                                <i class="fa-solid fa-address-card"></i>
-                                <span id="modal-title"></span>
-                            </div>
-                            <div class="x__icon" onclick="closeModal()">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                        </div>
+                        <form action="admin/user/update" method="post">
 
-                        <div class="course-body">
-                            <div class="user-info-grid">
-                                <div class="info-group">
-                                    <label><i class="fa-solid fa-user"></i> Tên người dùng</label>
-                                    <input id="detail-username" type="text" class="input__create">
+                            <div class="course__header">
+                                <div class="course__title">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <span id="modal-title"></span>
                                 </div>
-                                <div class="info-group">
-                                    <label><i class="fa-solid fa-envelope"></i> Email</label>
-                                    <input id="detail-email" type="text" class="input__create">
-                                </div>
-
-                                <div class="info-group">
-                                    <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
-                                    <input id="detail-phone" type="text" class="input__create">
-                                </div>
-                                <div class="info-group">
-                                    <label><i class="fa-solid fa-shield-halved"></i> Vai trò</label>
-                                    <input id="detail-role" type="text" class="input__create role-badge">
-                                </div>
-
-                                <div class="info-group full-width">
-                                    <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
-                                    <input id="detail-created" type="text" class="input__create">
+                                <div class="x__icon" onclick="closeModal()">
+                                    <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </div>
+                            <div class="course-body">
+                                <div class="user-info-grid">
+                                    <%--                                    Tạm lưu id của user để update--%>
+                                    <input id="detail-id" type="text" class="input__create" name="id"
+                                           style=" display: none ">
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-user"></i> Tên người dùng</label>
+                                        <input id="detail-username" type="text" class="input__create" name="username">
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-envelope"></i> Email</label>
+                                        <input id="detail-email" type="text" class="input__create" name="email">
+                                    </div>
 
-                            <div class="modal-footer">
-                                <button class="button dark-button" onclick="closeModal()">Đóng cửa sổ</button>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
+                                        <input id="detail-phone" type="text" class="input__create" name="phone">
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-shield-halved"></i> Vai trò</label>
+                                        <input id="detail-role" type="text" class="input__create role-badge"
+                                               name="role">
+                                    </div>
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
+                                        <input id="detail-created" type="text" class="input__create" name="">
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
+                                        <input id="detail-updated" type="text" class="input__create" name="">
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="button btn-cancel" onclick="closeModal()"
+                                            style="margin-right: 1rem;">Hủy
+                                    </button>
+                                    <button type="submit" class="button dark-button">Lưu thay
+                                        đổi
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -308,51 +316,8 @@
 </div>
 
 </body>
-<script>
-    function showUserDetail(id) {
-        // 1. Gọi đến Servlet để lấy thông tin
-        const contextPath = '${pageContext.request.contextPath}';
-        fetch(contextPath + '/admin/user/detail?id=' + id)
-            .then(response => {
-                if (!response.ok) throw new Error('Mạng có vấn đề');
-                return response.json();
-            })
-            .then(user => {
-                // 2. Điền dữ liệu vào các thẻ input trong Modal
-                //Thằng này là span (text thuần) nên điền innerText
-                document.getElementById('modal-title').innerText = "THÔNG TIN: " + user.username.toUpperCase();
-                //Những thằng dưới này là input nên điền value
-                document.getElementById('detail-username').value = user.username;
-                document.getElementById('detail-email').value = user.email;
-                document.getElementById('detail-phone').value = user.phone || 'Chưa cập nhật';
-                document.getElementById('detail-role').value = user.role;
-
-                // Định dạng ngày tháng (user.createdAt thường là timestamp)
-                if (user.createdAt) {
-                    let date = new Date(user.createdAt);
-                    document.getElementById('detail-created').value = date.toLocaleDateString('vi-VN');
-                }
-
-                // 3. Hiển thị modal
-                document.getElementById('user-detail').style.display = 'flex';
-            })
-            .catch(error => {
-                console.error('Lỗi fetch:', error);
-                alert('Không thể lấy thông tin người dùng!');
-            });
-    }
-
-    // Hàm đóng modal
-    function closeModal() {
-        document.getElementById('user-detail').style.display = 'none';
-    }
-
-    // Đóng khi click ra ngoài vùng modal
-    window.onclick = function (event) {
-        let modal = document.getElementById('user-detail');
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-</script>
+<%--<script>--%>
+<%--    const ctx = '${pageContext.request.contextPath}';--%>
+<%--</script>--%>
+<script src="assets/javascript/js-admin/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

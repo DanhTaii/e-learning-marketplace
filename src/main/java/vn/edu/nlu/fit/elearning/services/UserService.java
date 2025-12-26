@@ -135,4 +135,8 @@ public class UserService {
         return userDao.findUserByEmail(email);
     }
 
+    public int updateUser(User user) {
+        return userDao.update(user);
+    }
+
 }

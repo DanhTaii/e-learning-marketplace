@@ -402,6 +402,31 @@ td .action__button {
     padding-bottom: 0.4rem;
     color: var(--dark-blue);
 }
+
+.icon-action-btn {
+    font-size: var(--text-lg);
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--dark-blue);
+
+    /* Xóa bỏ style mặc định của button */
+    border: none;
+    background: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Hiệu ứng chuyển động mượt */
+    transition: all 0.2s ease;
+    border-radius: 0.4rem;
+}
+
+/* Hiệu ứng Hover chung */
+.icon-action-btn:hover {
+    background-color: var(--hover-color); /* Sử dụng biến lightgrey của bạn */
+    transform: translateY(-2px); /* Nhảy nhẹ lên trên */
+}
+
 td a span:hover {
     font-size: var(--text-lg);
     background: var(--dark-blue);
