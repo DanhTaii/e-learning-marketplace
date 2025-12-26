@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.2">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
@@ -237,10 +238,12 @@
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-
-                                                <button class="icon-action-btn">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
+                                                <form action="admin/user/delete" method="post" class="form">
+                                                    <input type="hidden" name="id" value="${user.id}">
+                                                    <button type="submit" class="icon-action-btn">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -253,7 +256,7 @@
 
                 <div id="user-detail" class="modal__course-detail">
                     <div class="modal__course-content">
-                        <form action="admin/user/update" method="post">
+                        <form action="admin/user/detail" method="post">
 
                             <div class="course__header">
                                 <div class="course__title">
@@ -266,38 +269,39 @@
                             </div>
                             <div class="course-body">
                                 <div class="user-info-grid">
-                                    <%--                                    Tạm lưu id của user để update--%>
-                                    <input id="detail-id" type="text" class="input__create" name="id"
-                                           style=" display: none ">
+                                    <input type="hidden" id="detail-id" name="id">
+
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-user"></i> Tên người dùng</label>
-                                        <input id="detail-username" type="text" class="input__create" name="username">
+                                        <input id="detail-username" name="username" type="text" class="input__create">
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-envelope"></i> Email</label>
-                                        <input id="detail-email" type="text" class="input__create" name="email">
+                                        <input id="detail-email" name="email" type="text" class="input__create">
                                     </div>
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
-                                        <input id="detail-phone" type="text" class="input__create" name="phone">
+                                        <input id="detail-phone" name="phone" type="text" class="input__create">
                                     </div>
+
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-shield-halved"></i> Vai trò</label>
-                                        <input id="detail-role" type="text" class="input__create role-badge"
-                                               name="role">
+                                        <select id="detail-role" name="role" class="input__create role-badge">
+                                            <option value="user">Người dùng</option>
+                                            <option value="admin">Quản trị viên</option>
+                                        </select>
                                     </div>
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
-                                        <input id="detail-created" type="text" class="input__create" name="">
+                                        <input id="detail-created" type="text" class="input__create" readonly>
                                     </div>
                                     <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
-                                        <input id="detail-updated" type="text" class="input__create" name="">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
+                                        <input id="detail-updated" type="text" class="input__create" readonly>
                                     </div>
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="button" class="button btn-cancel" onclick="closeModal()"
                                             style="margin-right: 1rem;">Hủy
@@ -315,9 +319,30 @@
     </div>
 </div>
 
+<div id="notification-modal" class="modal"
+     style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div class="modal-content"
+         style="background: white; padding: 20px; border-radius: 8px; width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <h2 id="noti-title" style="margin-top: 0;">Thông báo</h2>
+        <hr>
+        <p id="noti-message" style="font-size: 16px; margin: 20px 0;"></p>
+        <button onclick="closeNotiModal()" class="dark-button" style="padding: 8px 25px; cursor: pointer;">Đóng</button>
+    </div>
+</div>
+
 </body>
-<%--<script>--%>
-<%--    const ctx = '${pageContext.request.contextPath}';--%>
-<%--</script>--%>
+<div id="toast"></div>
+<script>
+    // Ép kiểu về chuỗi để đảm bảo JS không bị lỗi cú pháp nếu giá trị null
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/js-admin/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

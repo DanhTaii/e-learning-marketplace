@@ -47,15 +47,17 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
                     .bind("phone", entity.getPhone())
                     .bind("username", entity.getUsername())
                     .bind("role", entity.getRole())
-                    .bind("id",entity.getId())
+                    .bind("id", entity.getId())
                     .execute();
         });
     }
 
     @Override
     public int delete(Integer integer) {
-
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM users\n" +
+                    "WHERE id = :id").bind("id", integer).execute();
+        });
     }
 
     public User findUserByEmail(String email) {

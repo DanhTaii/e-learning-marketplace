@@ -139,4 +139,8 @@ public class UserService {
         return userDao.update(user);
     }
 
+    public int deleteUser(int id){
+        return userDao.delete(id);
+    }
+
 }
