@@ -42,62 +42,57 @@ function toast({title = '', message = '', type = 'info', duration = 3000}) {
     }
 }
 
-function showNotificationModal(title, message, isSuccess) {
-    const titleElem = document.getElementById('noti-title');
-    const msgElem = document.getElementById('noti-message');
-
-    titleElem.innerText = title;
-    // Đổi màu tiêu đề tùy theo là lỗi hay thành công
-    titleElem.style.color = isSuccess ? '#28a745' : '#dc3545';
-    msgElem.innerText = message;
-
-    document.getElementById('notification-modal').style.display = 'flex';
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'flex';
 }
 
-// Hàm đóng modal thông báo
-function closeNotiModal() {
-    document.getElementById('notification-modal').style.display = 'none';
+// Hàm đóng bất kỳ modal nào bằng ID
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
+}
+
+// Xử lý riêng cho chức năng XÓA (Cần lưu lại ID)
+let currentDeleteId = null;
+function openConfirmModal(id, modalId = 'confirm-delete-modal') {
+    currentDeleteId = id;
+    openModal(modalId);
+}
+
+// Lắng nghe sự kiện click toàn trang
+window.onclick = function (event) {
+    // 1. Tự động đóng nếu click vào vùng nền mờ (vùng có class 'modal')
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        // Reset ID xóa nếu đó là modal xác nhận
+        if (event.target.id === 'confirm-delete-modal') currentDeleteId = null;
+    }
+};
+
+// Gắn sự kiện cho nút "Xác nhận xóa" trong modal (Dùng chung)
+const btnConfirmDelete = document.getElementById('btn-confirm-delete');
+if (btnConfirmDelete) {
+    btnConfirmDelete.onclick = function() {
+        if (currentDeleteId) {
+            const form = document.getElementById('delete-form-' + currentDeleteId);
+            if (form) form.submit();
+        }
+    };
 }
 
 window.addEventListener('load', function () {
-    // 1. Lấy giá trị an toàn từ window (đã được JSP đổ vào)
-    const errorMsg = (window.flashError || "").trim();
-    const successMsg = (window.flashSuccess || "").trim();
+    // Ép kiểu về chuỗi và trim, đồng thời kiểm tra nếu là chữ "null" thì coi như rỗng
+    const errorMsg = String(window.flashError || "").trim();
+    const successMsg = String(window.flashSuccess || "").trim();
 
-    // 2. Ưu tiên hiển thị Toast cho các hành động thành công
-    if (successMsg !== "") {
-        toast({
-            title: 'Thành công!',
-            message: successMsg,
-            type: 'success',
-            duration: 4000
-        });
+    console.log("Success message received:", successMsg); // Dòng này để debug
+
+    if (successMsg !== "" && successMsg !== "null") {
+        toast({ title: 'Thành công!', message: successMsg, type: 'success', duration: 4000 });
     }
 
-    // 3. Nếu là lỗi, bạn có thể chọn hiện Toast hoặc Modal tùy ý
-    if (errorMsg !== "") {
-        // Ví dụ: Lỗi thường thì hiện Toast
-        toast({
-            title: 'Thất bại!',
-            message: errorMsg,
-            type: 'error',
-            duration: 6000
-        });
-
-        // Hoặc nếu lỗi quá nặng thì hiện Modal (bỏ comment nếu muốn dùng)
-        // showNotificationModal("LỖI HỆ THỐNG", errorMsg, false);
+    if (errorMsg !== "" && errorMsg !== "null") {
+        toast({ title: 'Thất bại!', message: errorMsg, type: 'error', duration: 6000 });
     }
 });
-
-// Cập nhật hàm onclick dùng chung để không bị ghi đè
-window.onclick = function (event) {
-    const notiModal = document.getElementById('notification-modal');
-    const userDetailModal = document.getElementById('user-detail');
-
-    if (notiModal && event.target == notiModal) {
-        closeNotiModal();
-    }
-    if (userDetailModal && event.target == userDetailModal) {
-        closeModal();
-    }
-}
