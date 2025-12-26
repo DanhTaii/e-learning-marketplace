@@ -13,8 +13,8 @@ public class Course implements Serializable {
     private String description;
     private String goals;
     private String level;
-    private double price;
-    private double discountPrice;
+    private int price;
+    private int discountPrice;
     private int studentCount;
     private boolean isFeatured;
     private double rating;
@@ -35,7 +35,7 @@ public class Course implements Serializable {
     private String categoryName;        // tên category
     private String parentCategoryName;  // tên category cha
 
-    public Course(int id, String title, String subtitle, String description, String goals, String level, double price, double discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<String> tags, List<Lesson> lessons, int lessonCount, double totalDurationHours, List<Review> reviews, String categoryName, String parentCategoryName) {
+    public Course(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<String> tags, List<Lesson> lessons, int lessonCount, double totalDurationHours, List<Review> reviews, String categoryName, String parentCategoryName) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -114,19 +114,19 @@ public class Course implements Serializable {
         this.level = level;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getDiscountPrice() {
+    public int getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(double discountPrice) {
+    public void setDiscountPrice(int discountPrice) {
         this.discountPrice = discountPrice;
     }
 

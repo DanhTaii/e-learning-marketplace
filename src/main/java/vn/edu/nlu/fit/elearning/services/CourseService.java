@@ -45,6 +45,10 @@ public class CourseService {
         return cd.getSixCoursesMostPopular();
     }
 
+    public Course getCoursesMostPopular() {
+        return cd.getCoursesMostPopular();
+    }
+
     public List<Course> getSixCoursesLast() {
         return cd.getSixCoursesLast();
     }

@@ -343,43 +343,43 @@
                 <div class="grid__colum-9">
                     <div class="container__product">
                         <div class="product__big-title text-big-title">Gợi ý cho bạn</div>
-                        <a href="html-partrial/result-search.jsp" class="turn-page">
+                        <a href="course-detail?id=${courseMostPopular.id}" class="turn-page">
                             <div class="product__big-advertisement">
                                 <div class="big-advertisement__image">
-                                    <img src="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_m_1690356655.jpg"
+                                    <img src="${courseMostPopular.thumbnailUrl}"
                                          alt="" class="img-1">
                                 </div>
                                 <div class="big-advertisement__content">
-                                    <div class="content__title">Tư duy phản biện</div>
+                                    <div class="content__title">${courseMostPopular.title}</div>
                                     <div class="content__information">
                                         <div class="content__top content__top-2">
-                                            <div class="content__author-name text-medium content__author-name-3">Quản trị viên</div>
+                                            <div class="content__author-name text-medium content__author-name-3">${courseMostPopular.authorName}</div>
                                             <div class="content__rate content__rate-3">
                                                 <div class="rate__icon"><i
                                                         class="text-medium fa-regular fa-star"></i></div>
-                                                <div class="text-medium rate__number">4.7</div>
+                                                <div class="text-medium rate__number">${courseMostPopular.rating}</div>
                                             </div>
                                         </div>
                                         <div class="content__quick-info for-fix">
                                             <div class="quick-info__level">
                                                 <div class="level__icon icon"><i
                                                         class="text-medium fa-solid fa-signal"></i></div>
-                                                <div class="level__text text-medium">Người mới</div>
+                                                <div class="level__text text-medium">${courseMostPopular.level}</div>
                                             </div>
                                             <div class="quick-info__users">
                                                 <div class="users__icon icon"><i
                                                         class="text-medium fa-solid fa-users"></i></div>
-                                                <div class="users__text text-medium">13.4k</div>
+                                                <div class="users__text text-medium">${courseMostPopular.studentCount}</div>
                                             </div>
                                             <div class="quick-info__time">
                                                 <div class="time__icon icon"><i
                                                         class="text-medium fa-regular fa-clock"></i></div>
-                                                <div class="time__text text text-medium">12h</div>
+                                                <div class="time__text text text-medium">${courseMostPopular.durationHours}h</div>
                                             </div>
                                         </div>
                                         <div class="content__price content__price-2">
-                                            <div class="price__new">399.000đ</div>
-                                            <div class="price__old">1.399.000đ</div>
+                                            <div class="price__new">${c.price - c.discountPrice}đ</div>
+                                            <div class="price__old">${c.price}đ</div>
                                             <div class="quick-info__save"><i
                                                     class="quick-info__save__icon fa-solid fa-heart"></i>
                                             </div>
@@ -395,7 +395,7 @@
                                 <div class="product__small-title text-small-title">Yêu thích</div>
                                 <c:forEach var="c" items="${coursesLiked}">
                                 <div class="grid__column-4">
-                                    <a href="html-partrial/course-detail.jsp?id=1" class="turn-page">
+                                    <a href="course-detail?id=${c.id}" class="turn-page">
                                         <div class="product__small-advertisement">
                                             <div class="small-advertisement__image">
                                                 <img src="${c.thumbnailUrl}"
