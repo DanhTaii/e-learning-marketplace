@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.dao;
 
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Tag;
+import vn.edu.nlu.fit.elearning.model.User;
 
 import java.util.List;
 
@@ -19,8 +20,15 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
 
     @Override
     public Tag findById(Integer integer) {
-        return null;
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("select * from tags t where t.id = :id")
+                    .bind("id", integer)
+                    .mapToBean(Tag.class)
+                    .findFirst()
+                    .orElse(null);
+        });
     }
+
 
     public List<Tag> findByName(String name) {
         String nameSearch = "%" + name + "%";
@@ -45,7 +53,17 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
 
     @Override
     public int update(Tag entity) {
-        return 0;
+        String sql = "UPDATE Tags \n" +
+                "SET name= :name , slug = :slug \n" +
+                "WHERE id = :id";
+      return  getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind("name",entity.getName())
+                    .bind("slug",entity.getSlug())
+                    .bind("id",entity.getId())
+                    .execute();
+
+        });
     }
 
     @Override
