@@ -142,7 +142,7 @@
                                                 <div class="filter__selection-title filter__item-name">Tên của thẻ:
                                                 </div>
                                                 <input placeholder="" type="text" class="admin-input__long"
-                                                       name="nameTag" value="${oldName}" >
+                                                       name="nameTag" value="${oldName}">
                                             </div>
                                             <div class="create__selection-items">
                                                 <div class="filter__selection-title filter__item-name">Slug:</div>
@@ -166,7 +166,7 @@
                                             <div class="filter__selection-items filter__selection-name">
                                                 <div class="filter__selection-title filter__item-name">Tên thẻ:</div>
                                                 <input placeholder="" type="text" class="admin-input__long"
-                                                       name="searchName" value="${param.searchName}"  >
+                                                       name="searchName" value="${param.searchName}">
                                             </div>
 
                                         </div>
@@ -217,12 +217,13 @@
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-                                                <form action="admin/tags/delete" method="POST"  class="form">
+                                                <form id="delete-form-${t.id}" action="admin/tags/delete" method="POST" class="form">
 
                                                     <input type="hidden" name="id" value="${t.id}">
-                                                <button type="submit" class="btn-icon-action">
-                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </button>
+                                                    <button type="button" class="btn-icon-action" onclick="openConfirmModal(${t.id})">
+                                                        <span class="icon-action"><i
+                                                                class="fa-solid fa-trash"></i></span>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -234,7 +235,7 @@
 
                     </div>
                 </div>
-                <div id="tag-detail" class="modal__course-detail">
+                <div id="tag-detail" class="modal modal__course-detail">
                     <div class="modal__course-content">
                         <form action="admin/tag/update" method="post">
 
@@ -243,7 +244,7 @@
                                     <i class="fa-solid fa-address-card"></i>
                                     <span id="modal-title"></span>
                                 </div>
-                                <div class="x__icon" onclick="closeModal()">
+                                <div class="x__icon" onclick="closeModal('tag-detail')">
                                     <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </div>
@@ -273,7 +274,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="button btn-cancel" onclick="closeModal()"
+                                    <button type="button" class="button btn-cancel" onclick="closeModal('tag-detail')"
                                             style="margin-right: 1rem;">Hủy
                                     </button>
                                     <button type="submit" class="button dark-button">Lưu thay
@@ -289,8 +290,19 @@
         </div>
     </div>
 </div>
-</body>
+<div id="confirm-delete-modal" class="modal"
+     style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div class="modal-content" style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
+        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa thẻ này không?</p>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">Hủy</button>
+            <button id="btn-confirm-delete" class="button dark-button" style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay</button>
+        </div>
+    </div>
+</div>
 <div id="toast"></div>
+</body>
+
 <script>
     window.flashError = '${sessionScope.flashError}';
     window.flashSuccess = '${sessionScope.flashSuccess}';

@@ -30,6 +30,11 @@ public class TagDeleteController extends HttpServlet {
         if(tagId != null){
             int idTag= Integer.parseInt(tagId);
             boolean success = tagService.deleteTags(idTag);
+            if (success) {
+                request.getSession().setAttribute("flashSuccess", "Xóa thẻ thành công!");
+            } else {
+                request.getSession().setAttribute("flashError", "Xóa thẻ thất bại. Vui lòng thử lại!");
+            }
             response.sendRedirect(request.getContextPath() + "/admin/tags");
 
         }
