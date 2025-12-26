@@ -1162,11 +1162,11 @@
                     <div class="footer__download">
                         <div class="footer__download-apps">
                             <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/appstore.png" alt="App Store"
+                                <img src="assets/image/appstore.png" alt="App Store"
                                      class="footer__download-app-img">
                             </a>
                             <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/ggplay.png" alt="Google Play"
+                                <img src="assets/image/ggplay.png" alt="Google Play"
                                      class="footer__download-app-img">
                             </a>
                         </div>

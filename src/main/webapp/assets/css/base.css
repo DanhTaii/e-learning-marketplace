@@ -254,6 +254,7 @@ body {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    white-space: normal; word-break: break-word; overflow-wrap: break-word;
 }
 
 /*chuyen giua cac trang*/
@@ -944,5 +945,27 @@ img {
     line-height: var(--height);
     border-radius: 2px;
 }
+
+/* Laptop nhỏ (≤ 1366px) */
+@media (max-width: 1366px) {
+    .text-big-title { font-size: var(--text-4xl); }
+    .header__search { width: 50%; }
+}
+
+/* PC/Laptop vừa (768px → 1199px) */
+@media (max-width: 1200px) and (min-width: 768px) {
+    .grid { width: 95%; }
+    .header__box { flex-wrap: wrap; }
+    .header__search { width: 60%; margin: 10px 0; }
+}
+
+/* Mobile nhỏ (< 768px) */
+@media (max-width: 767px) {
+    .grid { width: 100%; padding: 0 10px; }
+    .header__logo { font-size: 2rem; }
+    .header__box { flex-direction: column; align-items: flex-start; }
+}
+
+
 
 
