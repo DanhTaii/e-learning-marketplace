@@ -1,72 +1,148 @@
-
-.space__section {
-    margin-top: 2rem;
-}
-/* Lớp nền mờ (ẩn ban đầu) */
+/* --- Cấu trúc nền Modal --- */
 .modal__course-detail {
     display: none;
-    /* Cố định không di chuyển theo scroll, tức là tạo ra 1 màn lớn nằm trên màn hiện tại*/
     position: fixed;
-    /*Gíup modal bao phủ toàn trang*/
-    /*Nếu không có thì nó sẽ mặc định ở dưới cái nút bấm*/
-    top: 0;
-    left: 0;
-    /*Chiếm toàn bộ màn hình tính từ cái bg*/
-    width: 100%;
-    height: 100%;
-    /*Màu nền khi hiển thị hộp thoại*/
-    background: rgba(0, 0, 0, 0.5);
-    /*Đè lên trên các nội dung của trang đó để k bị vướng thao tác*/
-    z-index: 99;
-
-    /*Canh theo chiều dọc cuar flex-box*/
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
     align-items: center;
-    /*Canh theo chiều ngang của flex-box*/
     justify-content: center;
+    backdrop-filter: blur(4px);
 }
 
-/* Nội dung của modal */
+/* --- Nội dung Modal --- */
 .modal__course-content {
-    background: white;
-    /*padding: 20px;*/
-    border-radius: 0.7rem;
-    min-width: 70rem;
-    min-height: 50rem;
-    text-align: center;
-    color: #333;
+    background: var(--white-color);
+    border-radius: 1.2rem;
+    width: 90%;
+    max-width: 65rem; /* Tăng nhẹ chiều rộng để chữ to không bị chật */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    animation: slideDown 0.3s ease-out;
 }
+
+@keyframes slideDown {
+    from { transform: translateY(-5rem); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Header --- */
 .course__header {
     background: var(--dark-blue);
     color: var(--white-color);
-    width: 100%;
-
-    padding: 1rem;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
-}
-.course__title {
-    font-size: var(--text-2xl);
-    line-height: 3rem;
-    font-weight: var(--fw-semibold);
-}
-.x__icon {
-    display: flex;
     align-items: center;
-    justify-content: center;
-}
-.fa-x {
-    /*font-weight: var(--fw-medium);*/
-    font-size: var(--text-2xl);
 }
 
+.course__title {
+    font-size: var(--text-3xl); /* Tăng lên 2.4rem cho nổi bật */
+    font-weight: var(--fw-semibold);
+    line-height: 1.5;
+}
+
+.x__icon {
+    font-size: var(--text-3xl);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.x__icon:hover {
+    color: var(--failed-text);
+    transform: scale(1.1);
+}
+
+/* --- Body & Layout --- */
 .course-body {
-    padding: 2rem;
+    padding: 2.5rem;
+    text-align: left;
 }
 
-/* PHẦN QUAN TRỌNG NHẤT */
-/* Khi modal này là :target (tức là URL là #my-modal) nó sẽ hiện ra */
-.modal__course-detail:target {
-    display: flex; /* Hiện ra */
+.user-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+
+.info-group.full-width {
+    grid-column: span 2;
+}
+
+/* --- Nhãn và Input --- */
+.info-group label {
+    display: block;
+    font-weight: var(--fw-semibold);
+    color: var(--bright-blue);
+    margin-bottom: 0.8rem;
+    font-size: var(--text-lg); /* Tăng lên 1.6rem cho nhãn */
+}
+
+.info-group label i {
+    margin-right: 0.8rem;
+    color: var(--blue);
+}
+
+.input__create {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--light-grey);
+    border-radius: 0.8rem;
+    background-color: var(--privacy-light-grey);
+    font-size: var(--text-base); /* Sử dụng 1.4rem như bạn yêu cầu */
+    color: var(--text-color);
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input__create:focus {
+    border-color: var(--blue);
+    background-color: var(--white-color);
+    box-shadow: 0 0 0 3px rgba(55, 34, 211, 0.1);
+}
+
+/* --- Footer & Buttons --- */
+.modal-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--privacy-light-grey);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+/* Nút bấm dùng chung biến màu của bạn */
+.button {
+    padding: 1rem 2rem;
+    border-radius: 0.6rem;
+    font-size: var(--text-base);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    border: none;
+}
+
+.dark-button {
+    background: var(--dark-blue);
+    color: var(--white-color);
+}
+
+.dark-button:hover {
+    background: var(--bright-blue);
+}
+
+.btn-cancel {
+    background: var(--privacy-light-grey);
+    color: var(--privacy-dark-charcoal);
+}
+
+.btn-cancel:hover {
+    background: var(--hover-color);
+}
+
+/* Badge Vai trò */
+.role-badge {
+    color: var(--pending-text) !important;
+    font-weight: var(--fw-bold);
+    background-color: var(--pending-bg);
 }
