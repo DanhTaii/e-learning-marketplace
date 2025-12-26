@@ -90,9 +90,7 @@ public class UserService {
     }
 
     public User getUserById(int id) {
-        // Gọi DAO (CRUD: READ ONE)
-
-        return null;
+        return userDao.findById(id);
     }
 
     public int totalUsers() {

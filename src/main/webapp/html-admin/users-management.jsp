@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/users-management.css">
+    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
 
 </head>
 <body>
@@ -140,23 +140,34 @@
                                     <div class="filter__selection">
                                         <div class="filter__selection-input">
                                             <div class="filter__selection-items filter__selection-name">
-                                                <div class="filter__selection-title filter__item-name">Tên người dùng:</div>
-                                                <input placeholder="" type="text" class="admin-input__long" name="usernameSearch" value="${param.usernameSearch}">
+                                                <div class="filter__selection-title filter__item-name">Tên người dùng:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="usernameSearch" value="${param.usernameSearch}">
                                             </div>
                                             <div class="filter__selection-items">
-                                                <div class="filter__selection-title filter__item-phone">Số điện thoại:</div>
-                                                <input placeholder="" type="text" class="admin-input__long" name="phoneSearch" value="${param.phoneSearch}">
+                                                <div class="filter__selection-title filter__item-phone">Số điện thoại:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="phoneSearch" value="${param.phoneSearch}">
                                             </div>
                                             <div class="filter__selection-items">
                                                 <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
-                                                <input placeholder="" type="date" class="admin-input__long" name="dateFrom" value="${param.dateFrom}">
+                                                <input placeholder="" type="date" class="admin-input__long"
+                                                       name="dateFrom" value="${param.dateFrom}">
                                             </div>
                                             <div class="filter__selection-items-select">
                                                 <div class="filter__selection-title filter__item-phone">Vai trò:</div>
                                                 <select name="roleSearch" class="combobox admin-input__short">
-                                                    <option value="" ${empty param.roleSearch ? 'selected' : ''}>Tất cả</option>
-                                                    <option value="user" ${param.roleSearch == 'user' ? 'selected' : ''}>Người dùng</option>
-                                                    <option value="admin" ${param.roleSearch == 'admin' ? 'selected' : ''}>Quản trị viên</option>
+                                                    <option value="" ${empty param.roleSearch ? 'selected' : ''}>Tất
+                                                        cả
+                                                    </option>
+                                                    <option value="user" ${param.roleSearch == 'user' ? 'selected' : ''}>
+                                                        Người dùng
+                                                    </option>
+                                                    <option value="admin" ${param.roleSearch == 'admin' ? 'selected' : ''}>
+                                                        Quản trị viên
+                                                    </option>
                                                 </select>
                                             </div>
 
@@ -222,15 +233,21 @@
                                                 </div>
                                             </td>
                                             <td class="action__button">
-                                                <a href="#user-detail">
-                                                    <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                                </a>
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                                </a>
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </a>
+                                                <button type="button" onclick="showUserDetail(${user.id})"
+                                                        class="icon-action"
+                                                        style="border:none; background:none; cursor:pointer;">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </button>
+
+                                                <button class="icon-action"
+                                                        style="border:none; background:none; cursor:pointer;">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+
+                                                <button class="icon-action"
+                                                        style="border:none; background:none; cursor:pointer;">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -244,28 +261,43 @@
                 <div id="user-detail" class="modal__course-detail">
                     <div class="modal__course-content">
                         <div class="course__header">
-                            <div class="course__title">USER DETAIL</div>
-                            <div class="x__icon">
-                                <a href="#" class=""><i class="fa-solid fa-x"></i></a>
+                            <div class="course__title">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span id="modal-title"></span>
+                            </div>
+                            <div class="x__icon" onclick="closeModal()">
+                                <i class="fa-solid fa-xmark"></i>
                             </div>
                         </div>
 
                         <div class="course-body">
-                            <div class="create__selection-input">
-                                <div class="create__selection-items">
-                                    <div class="filter__item-name">Order index:</div>
-                                    <input placeholder="" type="text" class="input__create">
+                            <div class="user-info-grid">
+                                <div class="info-group">
+                                    <label><i class="fa-solid fa-user"></i> Tên người dùng</label>
+                                    <input id="detail-username" type="text" class="input__create">
                                 </div>
-                                <div class="create__selection-items--wide">
-                                    <div class="create__selection-items">
-                                        <div class="filter__item-phone">Course ID:</div>
-                                        <input placeholder="" type="text" class="input__create">
-                                    </div>
-                                    <div class="create__selection-items">
-                                        <div class="filter__item-phone">Title:</div>
-                                        <input placeholder="" type="text" class="input__create">
-                                    </div>
+                                <div class="info-group">
+                                    <label><i class="fa-solid fa-envelope"></i> Email</label>
+                                    <input id="detail-email" type="text" class="input__create">
                                 </div>
+
+                                <div class="info-group">
+                                    <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
+                                    <input id="detail-phone" type="text" class="input__create">
+                                </div>
+                                <div class="info-group">
+                                    <label><i class="fa-solid fa-shield-halved"></i> Vai trò</label>
+                                    <input id="detail-role" type="text" class="input__create role-badge">
+                                </div>
+
+                                <div class="info-group full-width">
+                                    <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
+                                    <input id="detail-created" type="text" class="input__create">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="button dark-button" onclick="closeModal()">Đóng cửa sổ</button>
                             </div>
                         </div>
                     </div>
@@ -276,4 +308,51 @@
 </div>
 
 </body>
+<script>
+    function showUserDetail(id) {
+        // 1. Gọi đến Servlet để lấy thông tin
+        const contextPath = '${pageContext.request.contextPath}';
+        fetch(contextPath + '/admin/user/detail?id=' + id)
+            .then(response => {
+                if (!response.ok) throw new Error('Mạng có vấn đề');
+                return response.json();
+            })
+            .then(user => {
+                // 2. Điền dữ liệu vào các thẻ input trong Modal
+                //Thằng này là span (text thuần) nên điền innerText
+                document.getElementById('modal-title').innerText = "THÔNG TIN: " + user.username.toUpperCase();
+                //Những thằng dưới này là input nên điền value
+                document.getElementById('detail-username').value = user.username;
+                document.getElementById('detail-email').value = user.email;
+                document.getElementById('detail-phone').value = user.phone || 'Chưa cập nhật';
+                document.getElementById('detail-role').value = user.role;
+
+                // Định dạng ngày tháng (user.createdAt thường là timestamp)
+                if (user.createdAt) {
+                    let date = new Date(user.createdAt);
+                    document.getElementById('detail-created').value = date.toLocaleDateString('vi-VN');
+                }
+
+                // 3. Hiển thị modal
+                document.getElementById('user-detail').style.display = 'flex';
+            })
+            .catch(error => {
+                console.error('Lỗi fetch:', error);
+                alert('Không thể lấy thông tin người dùng!');
+            });
+    }
+
+    // Hàm đóng modal
+    function closeModal() {
+        document.getElementById('user-detail').style.display = 'none';
+    }
+
+    // Đóng khi click ra ngoài vùng modal
+    window.onclick = function (event) {
+        let modal = document.getElementById('user-detail');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
 </html>
