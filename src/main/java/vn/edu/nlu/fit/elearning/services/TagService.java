@@ -27,10 +27,11 @@ public class TagService {
     }
 
     public Tag getTagById(int id) {
-        return null;
+        return tagDao.findById(id);
     }
 
-    public void updateTag(Tag tag) {
+    public int updateTag(Tag tag) {
+     return tagDao.update(tag);
 
     }
 

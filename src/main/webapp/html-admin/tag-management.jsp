@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-
+    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
 </head>
 <body>
 <div class="web">
@@ -213,8 +213,9 @@
                                                 </div>
                                             </td>
                                             <td class="action__button" style="display: flex;gap: 0.5rem">
-                                                <button type="submit" class="btn-icon-action">
-                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                <button type="button" onclick="showTagDetail(${t.id})"
+                                                        class="icon-action-btn">
+                                                    <i class="fa-solid fa-pen"></i>
                                                 </button>
                                                 <form action="admin/tags/delete" method="POST"  class="form">
 
@@ -230,9 +231,61 @@
                                 </table>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+                <div id="tag-detail" class="modal__course-detail">
+                    <div class="modal__course-content">
+                        <form action="admin/tag/update" method="post">
+
+                            <div class="course__header">
+                                <div class="course__title">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <span id="modal-title"></span>
+                                </div>
+                                <div class="x__icon" onclick="closeModal()">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="course-body">
+                                <div class="user-info-grid">
+                                    <%--                                    Tạm lưu id của user để update--%>
+                                    <input id="detail-id" type="text" class="input__create" name="id"
+                                           style=" display: none ">
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-user"></i> Tên thẻ</label>
+                                        <input id="detail-nameTag" type="text" class="input__create" name="nameTag">
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-envelope"></i>Tên slug</label>
+                                        <input id="detail-slugTag" type="text" class="input__create" name="slugTag">
+                                    </div>
+
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo thẻ</label>
+                                        <input id="detail-created" type="text" class="input__create" name="">
+                                    </div>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
+                                        <input id="detail-updated" type="text" class="input__create" name="">
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="button btn-cancel" onclick="closeModal()"
+                                            style="margin-right: 1rem;">Hủy
+                                    </button>
+                                    <button type="submit" class="button dark-button">Lưu thay
+                                        đổi
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -248,5 +301,6 @@
     %>
 
 </script>
+<script src="assets/javascript/js-admin/admin-tag-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
