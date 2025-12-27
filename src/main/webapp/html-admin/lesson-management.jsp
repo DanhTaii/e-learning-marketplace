@@ -145,7 +145,7 @@
                                                         học:
                                                     </div>
                                                     <select class="admin-input__long" name="idCourse">
-                                                        <option class="text-medium">--- Vui lòng chọn khóa học ---
+                                                        <option class="text-medium" value="0">--- Vui lòng chọn khóa học ---
                                                         </option>
                                                         <c:forEach var="c" items="${listCourse}">
                                                             <option class="text-medium"
