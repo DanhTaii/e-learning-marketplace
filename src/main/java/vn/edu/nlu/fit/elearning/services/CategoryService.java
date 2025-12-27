@@ -32,7 +32,8 @@ public class CategoryService {
 
     }
 
-    public void deleteCategory(int id) {
+    public int deleteCategory(int id) {
+        return categoryDao.delete(id);
     }
 
     public List<Category> getAllCategoriesByName(String name) {
