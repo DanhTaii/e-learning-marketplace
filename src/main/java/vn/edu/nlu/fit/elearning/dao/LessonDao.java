@@ -58,6 +58,18 @@ public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
                     .bind("nameSearch", nameSearch).mapToBean(Lesson.class).list();
         });
     }
+public boolean checkExists(String title , int courseId){
+        String sql = "SELECT count(*) FROM lessons WHERE title = :title AND course_id = :courseId";
+       return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind("title", title)
+                    .bind("courseId",courseId)
+                    .mapTo(Integer.class)
+                    .one() >0;
 
+
+
+        });
+}
 }
 

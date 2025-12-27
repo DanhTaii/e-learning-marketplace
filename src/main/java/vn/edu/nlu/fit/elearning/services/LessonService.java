@@ -43,4 +43,8 @@ public class LessonService {
     public List<Lesson> getAllTagsByName(String name) {
         return lessonDao.findByName(name);
     }
+
+    public boolean checkLessonName(String title, int courseId) {
+        return lessonDao.checkExists(title, courseId);
+    }
 }

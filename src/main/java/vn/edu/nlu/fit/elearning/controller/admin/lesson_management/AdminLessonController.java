@@ -38,8 +38,36 @@ public class AdminLessonController extends HttpServlet {
 
         String nameLesson = request.getParameter("nameLesson");
         String urlVideo = request.getParameter("urlVideo");
-        int idCourse = Integer.parseInt(request.getParameter("idCourse"));
-        int duration_minutesLesson = Integer.parseInt(request.getParameter("duration_minutesLesson"));
+        String idCourseStr = request.getParameter("idCourse");
+        String durationStr = request.getParameter("duration_minutesLesson");
+
+        if (nameLesson.isEmpty() || urlVideo.isEmpty() || idCourseStr.isEmpty() || durationStr.isEmpty()) {
+
+            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
+            request.setAttribute("listLessons", lessonService.getAllLessons());
+            request.setAttribute("listCourse", courseService.getAllCourses());
+            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+            return;
+        }
+        int idCourse = Integer.parseInt(idCourseStr);
+        int duration_minutesLesson = Integer.parseInt(durationStr);
+        if (idCourse <= 0) {
+            request.getSession().setAttribute("flashError", "Vui lòng chọn một khóa học cụ thể!");
+            request.setAttribute("listLessons", lessonService.getAllLessons());
+            request.setAttribute("listCourse", courseService.getAllCourses());
+            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+            return;
+        }
+
+        boolean duplicate = lessonService.checkLessonName(nameLesson,idCourse);
+        if(duplicate){
+            request.getSession().setAttribute("flashError", "Bài học bị trùng trong hệ thống");
+            request.setAttribute("listLessons", lessonService.getAllLessons());
+            request.setAttribute("listCourse", courseService.getAllCourses());
+            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+            return;
+        }
+
         Lesson newLesson = new Lesson();
         newLesson.setCourseId(idCourse);
         newLesson.setTitle(nameLesson);
@@ -51,9 +79,6 @@ public class AdminLessonController extends HttpServlet {
         if (checkCreate == 1) {
             request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công");
             response.sendRedirect(request.getContextPath() + "/admin/lessons");
-        } else {
-            request.setAttribute("error", "Vui lòng nhập lại");
-            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
         }
 
     }
