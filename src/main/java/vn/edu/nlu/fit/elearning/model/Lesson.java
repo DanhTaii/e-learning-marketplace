@@ -21,7 +21,7 @@ public class Lesson implements Serializable {
     private int orderIndex;
 
     private Timestamp createdAt;
-
+    private Timestamp updatedAt;
     public Lesson() {
     }
 
@@ -98,5 +98,13 @@ public class Lesson implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

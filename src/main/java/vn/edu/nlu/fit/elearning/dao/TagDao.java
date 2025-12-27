@@ -33,7 +33,7 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     public List<Tag> findByName(String name) {
         String nameSearch = "%" + name + "%";
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
+            return handle.createQuery("SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
                             "FROM Tags t " +
                             "LEFT JOIN Course_Tags ct ON t.id = ct.tag_id " +
                             "WHERE t.name LIKE :nameSearch " +
