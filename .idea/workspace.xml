@@ -9,31 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf49dd7-9384-4cec-89fb-278303068d0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/category_management/CategoryDeleteController.java" afterDir="false" />
+    <list default="true" id="a7463197-9a0b-445e-af1d-dedde350b1b2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/category_management/AdminCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/category_management/AdminCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-admin/category-management.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-admin/category-management.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/AdminPaymentMethodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/admin_payment_method/AdminPaymentMethodController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/PaymentMethodDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/PaymentMethodDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/PaymentMethodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/PaymentMethodService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-admin/payment-method-management.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-admin/payment-method-management.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dao" />
-        <option value="Service" />
-        <option value="Jsp File" />
-        <option value="Filter" />
-        <option value="JavaScript File" />
-        <option value="Class" />
         <option value="Servlet" />
       </list>
     </option>
@@ -41,22 +32,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;DanhTaii&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/DanhTaii/e-learning-marketplace.git&quot;,
-    &quot;accountId&quot;: &quot;2cfbe1a7-2a66-4ccc-a257-be897ad7a84b&quot;
-  }
-}</component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -74,105 +49,56 @@
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="36NZadD2Db04mJgGqmaI8wzXJvZ" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="37QVXRhFmib6IwJffHOSi63uM0p" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.BaseDao.executor&quot;: &quot;Run&quot;,
-    &quot;Application.CourseTagDao.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.e-learning [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.e-learning [install].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 10.1.48.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.Tomcat 10.1.44.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/JAVA/WEB_EX/e-learning&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/JAVA/WEB_EX/e-learning/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15364583&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2315951&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\JAVA\WEB_EX\e-learning\src\main\webapp\assets\javascript\js-admin" />
-      <recent name="D:\JAVA\WEB_EX\e-learning\src\main\webapp" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="vn.edu.nlu.fit.elearning.controller.admin.lesson_management" />
-    </key>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+          <value>
+            <map>
+              <entry key="Tomcat 10.1.44" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.48">
-    <configuration name="BaseDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="vn.edu.nlu.fit.elearning.dao.BaseDao" />
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
       <module name="e-learning" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="vn.edu.nlu.fit.elearning.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BaseDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="vn.edu.nlu.fit.elearning.dao.BaseDao" />
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="e-learning" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="vn.edu.nlu.fit.elearning.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <option name="filePath" />
+      <method v="2" />
     </configuration>
-    <configuration name="CourseTagDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="vn.edu.nlu.fit.elearning.dao.CourseTagDao" />
-      <module name="e-learning" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="vn.edu.nlu.fit.elearning.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CourseTagDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="vn.edu.nlu.fit.elearning.dao.CourseTagDao" />
-      <module name="e-learning" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="vn.edu.nlu.fit.elearning.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tomcat 10.1.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.48" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="23">
+    <configuration name="Tomcat 10.1.44" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.44" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/e_learning_war_exploded/index" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -183,7 +109,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="5a9507c1-88f8-4203-8335-bbecc46126a4" />
+        <option name="BASE_DIRECTORY_NAME" value="a7edbd71-692e-4c8d-998f-4d33071dba28" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -191,93 +117,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="61013" />
-      </RunnerSettings>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tomcat 10.1.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.48" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/e_learning_war_exploded/index" />
-      <option name="UPDATING_POLICY" value="restart-server" />
-      <deployment>
-        <artifact name="e-learning:war exploded">
-          <settings>
-            <option name="CONTEXT_PATH" value="/e_learning_war_exploded" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="5a9507c1-88f8-4203-8335-bbecc46126a4" />
-      </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="61013" />
+        <option name="DEBUG_PORT" value="53957" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -346,17 +186,6 @@
         </option>
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.CourseTagDao" />
-      <item itemvalue="Application.BaseDao" />
-      <item itemvalue="Tomcat Server.Tomcat 10.1.48" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.CourseTagDao" />
-        <item itemvalue="Application.BaseDao" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -366,108 +195,18 @@
       </set>
     </attachedChunks>
   </component>
-  <component name="StructureViewState">
-    <option name="selectedTab" value="JSP" />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2bf49dd7-9384-4cec-89fb-278303068d0f" name="Changes" comment="" />
-      <created>1764849053823</created>
+      <changelist id="a7463197-9a0b-445e-af1d-dedde350b1b2" name="Changes" comment="" />
+      <created>1766835322840</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1764849053823</updated>
-      <workItem from="1764849054813" duration="1343000" />
-      <workItem from="1764850499161" duration="945000" />
-      <workItem from="1764862196688" duration="1329000" />
-      <workItem from="1764899646577" duration="2907000" />
-      <workItem from="1764908667103" duration="309000" />
-      <workItem from="1764914121919" duration="14925000" />
-      <workItem from="1764935741402" duration="33000" />
-      <workItem from="1764935830864" duration="32000" />
-      <workItem from="1764936038002" duration="357000" />
-      <workItem from="1764948440950" duration="1199000" />
-      <workItem from="1764954032376" duration="1378000" />
-      <workItem from="1764987087666" duration="1337000" />
-      <workItem from="1764991155797" duration="79000" />
-      <workItem from="1765005367059" duration="4342000" />
-      <workItem from="1765021242720" duration="213000" />
-      <workItem from="1765025350384" duration="25084000" />
-      <workItem from="1765072859142" duration="1956000" />
-      <workItem from="1765075089946" duration="10300000" />
-      <workItem from="1765087563832" duration="1370000" />
-      <workItem from="1765100880241" duration="1779000" />
-      <workItem from="1765103381637" duration="4099000" />
-      <workItem from="1765116814592" duration="405000" />
-      <workItem from="1765121617251" duration="6179000" />
-      <workItem from="1765128817209" duration="383000" />
-      <workItem from="1765155660975" duration="3527000" />
-      <workItem from="1765183191389" duration="647000" />
-      <workItem from="1765184213543" duration="642000" />
-      <workItem from="1765200374406" duration="886000" />
-      <workItem from="1765266854317" duration="1157000" />
-      <workItem from="1765268052074" duration="2954000" />
-      <workItem from="1765271413335" duration="171000" />
-      <workItem from="1765274106210" duration="10451000" />
-      <workItem from="1765286749878" duration="1460000" />
-      <workItem from="1765341408926" duration="150000" />
-      <workItem from="1765341786179" duration="1655000" />
-      <workItem from="1765350158834" duration="12201000" />
-      <workItem from="1765372934004" duration="2107000" />
-      <workItem from="1765375172221" duration="3475000" />
-      <workItem from="1765378745815" duration="971000" />
-      <workItem from="1765422691166" duration="12062000" />
-      <workItem from="1765439277193" duration="436000" />
-      <workItem from="1765501151061" duration="16132000" />
-      <workItem from="1765530797919" duration="132000" />
-      <workItem from="1765535481934" duration="2533000" />
-      <workItem from="1765546003751" duration="11866000" />
-      <workItem from="1765579381753" duration="13881000" />
-      <workItem from="1765600292290" duration="815000" />
-      <workItem from="1765610866286" duration="1762000" />
-      <workItem from="1765632719017" duration="911000" />
-      <workItem from="1765634170105" duration="3459000" />
-      <workItem from="1765645447495" duration="1126000" />
-      <workItem from="1765646704362" duration="8881000" />
-      <workItem from="1765692103379" duration="6865000" />
-      <workItem from="1765772731278" duration="1322000" />
-      <workItem from="1765799684646" duration="152000" />
-      <workItem from="1765876587058" duration="718000" />
-      <workItem from="1765924866415" duration="318000" />
-      <workItem from="1766044889107" duration="2409000" />
-      <workItem from="1766051638130" duration="2058000" />
-      <workItem from="1766112602062" duration="670000" />
-      <workItem from="1766116455452" duration="1078000" />
-      <workItem from="1766130978610" duration="130000" />
-      <workItem from="1766137966292" duration="950000" />
-      <workItem from="1766139993957" duration="930000" />
-      <workItem from="1766363425985" duration="9711000" />
-      <workItem from="1766452086936" duration="3938000" />
-      <workItem from="1766477635910" duration="2234000" />
-      <workItem from="1766660589807" duration="1609000" />
-      <workItem from="1766662231295" duration="10841000" />
-      <workItem from="1766673182992" duration="4989000" />
-      <workItem from="1766712041519" duration="22975000" />
-      <workItem from="1766745137410" duration="12625000" />
-      <workItem from="1766757885904" duration="15931000" />
-      <workItem from="1766809215632" duration="10069000" />
-      <workItem from="1766822619407" duration="1016000" />
-      <workItem from="1766826429824" duration="1864000" />
-      <workItem from="1766829455216" duration="3391000" />
+      <updated>1766835322840</updated>
+      <workItem from="1766835324203" duration="2098000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/webapp/html-admin/lesson-management.jsp</url>
-          <line>188</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

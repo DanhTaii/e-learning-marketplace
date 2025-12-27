@@ -184,111 +184,40 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                Momo
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                Yes
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                December 7, 2025 – 10:36 PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                VNPay
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                Yes
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                GooglePay
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                Yes
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                ZaloPay
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                https://
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status course-row__font-content course-row__status-failed">
-                                                No
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach items="${listPaymentMethods}" var="pm">
+                                        <tr>
+                                            <td>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${pm.name}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${pm.iconUrl}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__status course-row__font-content
+                                                     ${pm.active ? 'course-row__status-public' : 'course-row__status-failed'}">
+                                                        ${pm.active ? 'Yes' : 'No'}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                    <!-- Hiện tại model chưa có ngày tạo, tạm để tĩnh hoặc bỏ nếu không cần -->
+                                                    December 7, 2025 – 10:36 PM
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
