@@ -8,34 +8,80 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
 
     @Override
     public int create(PaymentMethod entity) {
-        // TODO: Implement create logic
-        return 0;
+        String sql = "INSERT INTO Payment_Methods (name, code, icon_url, is_active) \n" +
+                "VALUES (:name, :code, :iconUrl, :active)";
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bindBean(entity)
+                    .execute();
+        });
     }
 
     @Override
     public PaymentMethod findById(Integer id) {
-        // TODO: Implement findById logic
-        return null;
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(
+                            "SELECT id, name, code, icon_url, is_active " +
+                                    "FROM Payment_Methods WHERE id = :id")
+                    .bind("id", id)
+                    .mapToBean(PaymentMethod.class)
+                    .findFirst()
+                    .orElse(null);
+        });
+    }
+
+    // giống findByName của TagDao
+    public List<PaymentMethod> findByName(String name) {
+        String nameSearch = "%" + name + "%";
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(
+                            "SELECT id, name, code, icon_url, is_active " +
+                                    "FROM Payment_Methods " +
+                                    "WHERE name LIKE :nameSearch")
+                    .bind("nameSearch", nameSearch)
+                    .mapToBean(PaymentMethod.class)
+                    .list();
+        });
     }
 
     @Override
     public List<PaymentMethod> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT id, name, code, icon_url, is_active\n" +
-                    "FROM Payment_Methods\n" +
-                    "ORDER BY id;\n").mapToBean(PaymentMethod.class).list();
+            return handle.createQuery(
+                            "SELECT id, name, code, icon_url, is_active " +
+                                    "FROM Payment_Methods " +
+                                    "ORDER BY id")
+                    .mapToBean(PaymentMethod.class)
+                    .list();
         });
     }
 
     @Override
     public int update(PaymentMethod entity) {
-        // TODO: Implement update logic
-        return 0;
+        String sql = "UPDATE Payment_Methods \n" +
+                "SET name = :name, \n" +
+                "    code = :code, \n" +
+                "    icon_url = :iconUrl, \n" +
+                "    is_active = :active \n" +
+                "WHERE id = :id";
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind("name", entity.getName())
+                    .bind("code", entity.getCode())
+                    .bind("iconUrl", entity.getIconUrl())
+                    .bind("active", entity.isActive())
+                    .bind("id", entity.getId())
+                    .execute();
+        });
     }
 
     @Override
     public int delete(Integer id) {
-        // TODO: Implement delete logic
-        return 0;
+        String sql = "DELETE FROM Payment_Methods WHERE id = :id";
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind("id", id)
+                    .execute();
+        });
     }
 }

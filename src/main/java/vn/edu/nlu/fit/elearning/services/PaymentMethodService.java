@@ -14,25 +14,31 @@ public class PaymentMethodService {
     }
 
     public int createPaymentMethod(PaymentMethod paymentMethod) {
-        // TODO: Implement creation logic
+        if (paymentMethod != null) {
+            pmd.create(paymentMethod);
+            return 1;
+        }
         return 0;
     }
 
     public List<PaymentMethod> getAllPaymentMethods() {
-        // TODO: Implement getAll logic
         return pmd.findAll();
     }
 
     public PaymentMethod getPaymentMethodById(int id) {
-        // TODO: Implement getById logic
-        return null;
+        return pmd.findById(id);
     }
 
-    public void updatePaymentMethod(PaymentMethod paymentMethod) {
-        // TODO: Implement update logic
+    public int updatePaymentMethod(PaymentMethod paymentMethod) {
+        return pmd.update(paymentMethod);
     }
 
-    public void deletePaymentMethod(int id) {
-        // TODO: Implement delete logic
+    public boolean deletePaymentMethod(int id) {
+        int status = pmd.delete(id);
+        return status > 0;
+    }
+
+    public List<PaymentMethod> getAllPaymentMethodsByName(String name) {
+        return pmd.findByName(name);
     }
 }
