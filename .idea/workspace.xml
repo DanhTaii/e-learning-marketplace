@@ -10,12 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf49dd7-9384-4cec-89fb-278303068d0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/lesson_management/LessonDeleteController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/personal/MyWishlistController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/LessonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/LessonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/javascript/notification.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/javascript/notification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-admin/lesson-management.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-admin/lesson-management.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/CourseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/CourseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/WishlistDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/WishlistDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/model/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/CourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/WishlistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/WishlistService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/my-course.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/my-course.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-partrial/result-search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-partrial/result-search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-personal/my-wishlist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-personal/my-wishlist.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,19 +121,6 @@
       <recent name="vn.edu.nlu.fit.elearning.controller.admin.lesson_management" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
-          <value>
-            <map>
-              <entry key="Tomcat 10.1.48" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.48">
     <configuration name="BaseDao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vn.edu.nlu.fit.elearning.dao.BaseDao" />
@@ -179,7 +174,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tomcat 10.1.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.49" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="23">
+    <configuration name="Tomcat 10.1.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.44" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="23">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/e_learning_war_exploded/index" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -370,8 +365,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
       </set>
     </attachedChunks>
   </component>
@@ -461,6 +456,7 @@
       <workItem from="1766809215632" duration="10069000" />
       <workItem from="1766822619407" duration="1016000" />
       <workItem from="1766824586742" duration="4772000" />
+      <workItem from="1766829768113" duration="19000" />
     </task>
     <servers />
   </component>

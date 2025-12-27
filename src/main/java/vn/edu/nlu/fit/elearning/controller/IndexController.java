@@ -5,54 +5,89 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
+import vn.edu.nlu.fit.elearning.model.Wishlist;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 import vn.edu.nlu.fit.elearning.services.UserService;
+import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@WebServlet(name = "IndexController", value = "/index")
+@WebServlet(name = "IndexController", value = {"/index"})
 public class IndexController extends HttpServlet {
+
+    private CourseService courseService;
+    private WishlistService wishlistService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        courseService = new CourseService();
+        // do làm session
+        // Khởi tạo 1 lần duy nhất
+        wishlistService = new WishlistService();
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // này làm cho phần catrgory
-        CategoryService cs = new CategoryService();
-        ArrayList<Category> categories = (ArrayList<Category>) cs.getAllCategories();
+
+        // 1. Category
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
         request.setAttribute("categories", categories);
 
-        // làm cho phần banner
-        // tổng số học viên
-        UserService us = new UserService();
-        int total = (int) us.totalUsers();
-        request.setAttribute("totalUsers", total);
-        // tổng số khóa học
-        CourseService courseService = new CourseService();
-        int totalCourses = (int) courseService.totalCourses();
-        request.setAttribute("totalCourses", totalCourses);
-        // trung bình đánh giá
-        double avgRating = (double) courseService.avgRating();
-        request.setAttribute("avgRating", avgRating);
+        // 2. Banner stats
+        UserService userService = new UserService();
+        request.setAttribute("totalUsers", userService.totalUsers());
+        request.setAttribute("totalCourses", courseService.totalCourses());
+        request.setAttribute("avgRating", courseService.avgRating());
 
-        // 1 khóa học đc gợi ý
+        // 4 Các danh sách khóa học
         Course courseMostPopular = courseService.getCoursesMostPopular();
+        List<Course> coursesLiked = courseService.getThreeCoursesWereLiked();
+        List<Course> coursesLastest = courseService.getSixCoursesLast();
+        List<Course> coursesFeature = courseService.getSixCoursesMostPopular();
+
         request.setAttribute("courseMostPopular", courseMostPopular);
-
-        // 3 khóa học yêu thích nhất
-        ArrayList<Course> coursesLiked = (ArrayList<Course>) courseService.getThreeCoursesWereLiked();
         request.setAttribute("coursesLiked", coursesLiked);
-
-        // 6 khóa học mới nhất
-        ArrayList<Course> coursesLastest = (ArrayList<Course>) courseService.getSixCoursesLast();
         request.setAttribute("coursesLastest", coursesLastest);
-
-        // 6 khóa học phổ biến
-        ArrayList<Course> coursesFeature = (ArrayList<Course>) courseService.getSixCoursesLast();
         request.setAttribute("coursesFeature", coursesFeature);
 
-        // dòng này chỉ gọi 1 lần (nó sẽ tính lần đầu tiên mà nó đc gọi nếu có > 1 dòng)
+        // xử lý cho phần wishlist
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("userId") != null) {
+            int userId = (Integer) session.getAttribute("userId");
+
+            List<Course> wishlistCourses = wishlistService.getWishlistCourses(userId);
+            Set<Integer> wishlistCourseIds = new HashSet<>();
+            if (wishlistCourses != null) {
+                for (Course c : wishlistCourses) {
+                    wishlistCourseIds.add(c.getId()); // courseId
+                }
+            }
+
+
+            // Đánh dấu trạng thái wishlist cho tất cả course hiển thị
+            markWishlistStatus(coursesLiked, wishlistCourseIds);
+            markWishlistStatus(coursesLastest, wishlistCourseIds);
+            markWishlistStatus(coursesFeature, wishlistCourseIds);
+        }
+
         request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    private void markWishlistStatus(List<Course> courses, Set<Integer> wishlistCourseIds) {
+        if (courses != null) {
+            for (Course course : courses) {
+                if (course != null) {
+                    course.setInWishlist(wishlistCourseIds.contains(course.getId()));
+                }
+            }
+        }
     }
 
     @Override

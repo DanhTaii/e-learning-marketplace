@@ -583,7 +583,8 @@
                                                 <div class="price__new">${c.price - c.discountPrice}đ</div>
                                                 <div class="price__old">${c.price}đ</div>
                                                 <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i></div>
+                                                        class="quick-info__save__icon fa-solid fa-heart"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
