@@ -35,6 +35,10 @@ public class Course implements Serializable {
     private String categoryName;        // tên category
     private String parentCategoryName;  // tên category cha
 
+    // này làm riêng cho wishlist
+    public boolean inWishlist = false;
+    private int wishlistId;
+
     public Course(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<String> tags, List<Lesson> lessons, int lessonCount, double totalDurationHours, List<Review> reviews, String categoryName, String parentCategoryName) {
         this.id = id;
         this.title = title;
@@ -268,6 +272,22 @@ public class Course implements Serializable {
 
     public void setParentCategoryName(String parentCategoryName) {
         this.parentCategoryName = parentCategoryName;
+    }
+
+    // này làm cho wishlist
+    public boolean isInWishlist() {
+        return inWishlist;
+    }
+
+    public void setInWishlist(boolean inWishlist) {
+        this.inWishlist = inWishlist;
+    }
+
+    public int getWishlistId() {
+        return wishlistId;
+    }
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
     }
 
     @Override

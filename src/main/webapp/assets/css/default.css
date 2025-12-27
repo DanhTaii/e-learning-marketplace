@@ -192,3 +192,9 @@
         padding: 0.6rem 0;
     }
 }
+
+.turn-page-2{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
