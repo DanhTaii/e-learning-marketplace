@@ -79,12 +79,33 @@
     /*margin-bottom: 6rem;*/
 }
 
+/* Logo phần đầu sidebar */
+.container-1__logo {
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.container-1__logo i {
+    font-size: 2.4rem;
+    color: #4cc9f0;
+}
+
+.container-1__logo span {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
 .container-1__menu li .fa-books {
 
 }
 
 .container-1__menu {
-    margin-top: 6rem;
+    margin-top: 2rem;
 }
 
 .container-1__menu li i {
@@ -485,4 +506,144 @@ td:last-child ,th:last-child{
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+
+:root {
+    --primary-color: #0e6285; /* Màu xanh đậm giống ảnh */
+    --bg-light: #f4f7f6;
+    --text-dark: #333;
+    --border-color: #e0e0e0;
+}
+
+/* Container chính */
+.user-form-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin: 20px;
+}
+
+/* Header hiện đại */
+.container-2__header-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.header__title-modern {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Nút bấm */
+.btn-back {
+    text-decoration: none;
+    background: #fff;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.btn-submit-modern {
+    background: var(--primary-color);
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(14, 98, 133, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-submit-modern:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Layout Form */
+.form-row {
+    display: flex;
+    gap: 25px;
+}
+
+.form-column-8 { flex: 2; }
+.form-column-4 { flex: 1; }
+.flex-1 { flex: 1; }
+.mt-4 { margin-top: 25px; }
+.mt-5 { margin-top: 40px; }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.label-style {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Input & Select */
+.input-modern {
+    padding: 12px 16px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-modern:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(14, 98, 133, 0.1);
+}
+
+/* Avatar Upload Box */
+.upload-wrapper {
+    height: 120px;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #888;
+    position: relative;
+    transition: 0.3s;
+}
+
+.upload-wrapper:hover {
+    border-color: var(--primary-color);
+    background: #f9f9f9;
+}
+
+.upload-wrapper i { font-size: 30px; margin-bottom: 10px; }
+.file-hidden {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
 }

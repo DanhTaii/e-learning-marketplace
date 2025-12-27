@@ -11,6 +11,7 @@ public class AdminOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setAttribute("currentPage", "orders");
         request.getRequestDispatcher("/html-admin/order-management.jsp").forward(request, response);
     }
 

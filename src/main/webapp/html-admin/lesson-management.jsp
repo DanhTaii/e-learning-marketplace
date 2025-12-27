@@ -22,12 +22,15 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
-                    <div class="container-1__title">Softskill</div>
+                    <div class="container-1__logo">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Softskill</span>
+                    </div>
                     <div class="container-1__menu">
                         <ul>
                             <li>
                                 <a href="admin/dashboard">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student  ${currentPage == 'dashboard' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
                                         <span>Dashboard</span>
@@ -37,7 +40,7 @@
                             </li>
                             <li>
                                 <a href="admin/users">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student ${currentPage == 'users' ? 'student-list' : ''} ">
                                     <span class="container-1__menu-items">
 
                                         <i class="fa-solid fa-user"></i>
@@ -49,7 +52,7 @@
                             </li>
                             <li>
                                 <a href="admin/courses">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student ${currentPage == 'courses' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
                                         <span>Khóa học</span>
@@ -59,7 +62,7 @@
                             </li>
                             <li>
                                 <a href="admin/lessons">
-                                    <div class="menu-item__student student-list">
+                                    <div class="menu-item__student ${currentPage == 'lessons' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
                                         <span>Bài học</span>
@@ -69,7 +72,7 @@
                             </li>
                             <li>
                                 <a href="admin/tags">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student ${currentPage == 'tags' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
 
                                         <i class="fa-solid fa-tags"></i>
@@ -80,7 +83,7 @@
                             </li>
                             <li>
                                 <a href="admin/categories">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'categories' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
 
                                        <i class="fa-solid fa-list"></i>
@@ -91,7 +94,7 @@
                             </li>
                             <li>
                                 <a href="admin/orders">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'orders' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__order">
 
                                         <i class="fa-solid fa-receipt"></i>
@@ -102,7 +105,7 @@
                             </li>
                             <li>
                                 <a href="admin/payment-methods">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'payment-methods' ? 'student-list' : ''}">
                                         <span class="container-1__menu-items menu-item__order">
 
                                             <i class="fa-solid fa-credit-card"></i>
@@ -145,7 +148,8 @@
                                                         học:
                                                     </div>
                                                     <select class="admin-input__long" name="idCourse">
-                                                        <option class="text-medium" value="0">--- Vui lòng chọn khóa học ---
+                                                        <option class="text-medium" value="0">--- Vui lòng chọn khóa học
+                                                            ---
                                                         </option>
                                                         <c:forEach var="c" items="${listCourse}">
                                                             <option class="text-medium"
@@ -187,37 +191,41 @@
                             </form>
                             <div class="title__admin">Tất cả bài học</div>
                             <form method="get" class="form" action="admin/lesson/search">
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-title filter__item-phone">Tên bài học:</div>
-                                            <input placeholder="" type="text"
-                                                   class="input__font admin-input__long" name="searchName" value="${param.searchName}">
-                                        </div>
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-items-select">
-                                                <div class="filter__selection-title filter__item-phone">Tên khóa
-                                                    học:
+                                <div class="container-2__filter">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Tên bài học:
                                                 </div>
-                                                <select name="courseId" class="combobox admin-input__short ">
-                                                    <option class="text-medium" value="">--- Vui lòng chọn khóa học ---
-                                                    </option>
-                                                    <c:forEach var="c" items="${listCourse}">
-                                                        <option class="text-medium" value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
-                                                        ${c.title}</option>
-                                                    </c:forEach>
-                                                </select>
+                                                <input placeholder="" type="text"
+                                                       class="input__font admin-input__long" name="searchName"
+                                                       value="${param.searchName}">
+                                            </div>
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-items-select">
+                                                    <div class="filter__selection-title filter__item-phone">Tên khóa
+                                                        học:
+                                                    </div>
+                                                    <select name="courseId" class="combobox admin-input__short ">
+                                                        <option class="text-medium" value="">--- Vui lòng chọn khóa học
+                                                            ---
+                                                        </option>
+                                                        <c:forEach var="c" items="${listCourse}">
+                                                            <option class="text-medium"
+                                                                    value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
+                                                                    ${c.title}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="filter__button-search">
-                                        <button class="button dark-button" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <div class="filter__button-search">
+                                            <button class="button dark-button" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </form>
                             <div class="container-2__list-student">
                                 <table>
@@ -246,7 +254,7 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                    ${lesson.durationMinutes} min
+                                                        ${lesson.durationMinutes} min
                                                 </div>
                                             </td>
                                             <td>
@@ -262,14 +270,15 @@
                                                 <a href="">
                                                     <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                                 </a>
-                                                <form id="delete-form-${lesson.id}" action="admin/lesson/delete" method="POST"
+                                                <form id="delete-form-${lesson.id}" action="admin/lesson/delete"
+                                                      method="POST"
                                                       class="form">
-                                                <input type="hidden" name="id" value="${lesson.id}">
-                                                <button type="button" class="icon-action-btn"
-                                                        onclick="openConfirmModal(${lesson.id})">
-                                                    <i
-                                                            class="fa-solid fa-trash"></i>
-                                                </button>
+                                                    <input type="hidden" name="id" value="${lesson.id}">
+                                                    <button type="button" class="icon-action-btn"
+                                                            onclick="openConfirmModal(${lesson.id})">
+                                                        <i
+                                                                class="fa-solid fa-trash"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>

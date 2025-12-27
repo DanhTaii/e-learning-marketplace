@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <title>Tạo mới khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="../assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css-admin/course-edit.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css">
 
 </head>
 <body>
@@ -22,7 +22,10 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
-                    <div class="container-1__title">Softskill</div>
+                    <div class="container-1__logo">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Softskill</span>
+                    </div>
                     <div class="container-1__menu">
                         <ul>
                             <li>
