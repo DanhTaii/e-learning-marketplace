@@ -30,6 +30,7 @@ public class AdminLessonController extends HttpServlet {
         request.setAttribute("listLessons", listLessons);
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
+        request.setAttribute("currentPage", "lessons");
         request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
     }
 

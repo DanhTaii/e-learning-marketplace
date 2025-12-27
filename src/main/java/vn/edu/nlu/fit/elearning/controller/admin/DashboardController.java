@@ -39,6 +39,7 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("revenueTotal", revenueSum);
         request.setAttribute("popularCourses", popularCourses);
 
+        request.setAttribute("currentPage", "dashboard");
         request.getRequestDispatcher("/html-admin/dashboard.jsp").forward(request, response);
     }
 

@@ -25,12 +25,15 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
-                    <div class="container-1__title">Softskill</div>
+                    <div class="container-1__logo">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Softskill</span>
+                    </div>
                     <div class="container-1__menu">
                         <ul>
                             <li>
                                 <a href="admin/dashboard">
-                                    <div class="menu-item__student student-list">
+                                    <div class="menu-item__student  ${currentPage == 'dashboard' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items ">
                                         <i class="fa-solid fa-table-columns"></i>
                                         <span>Dashboard</span>
@@ -40,7 +43,7 @@
                             </li>
                             <li>
                                 <a href="admin/users">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student ${currentPage == 'users' ? 'student-list' : ''} ">
                                     <span class="container-1__menu-items">
 
                                         <i class="fa-solid fa-user"></i>
@@ -52,7 +55,7 @@
                             </li>
                             <li>
                                 <a href="admin/courses">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student ${currentPage == 'courses' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-users-between-lines"></i>
                                         <span>Khóa học</span>
@@ -62,7 +65,7 @@
                             </li>
                             <li>
                                 <a href="admin/lessons">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'lessons' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
                                         <i class="fa-solid fa-book"></i>
                                         <span>Bài học</span>
@@ -72,7 +75,7 @@
                             </li>
                             <li>
                                 <a href="admin/tags">
-                                    <div class="menu-item__student ">
+                                    <div class="menu-item__student ${currentPage == 'tags' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
 
                                         <i class="fa-solid fa-tags"></i>
@@ -83,7 +86,7 @@
                             </li>
                             <li>
                                 <a href="admin/categories">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'categories' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">
 
                                        <i class="fa-solid fa-list"></i>
@@ -94,7 +97,7 @@
                             </li>
                             <li>
                                 <a href="admin/orders">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'orders' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__order">
 
                                         <i class="fa-solid fa-receipt"></i>
@@ -105,7 +108,7 @@
                             </li>
                             <li>
                                 <a href="admin/payment-methods">
-                                    <div class="menu-item__student">
+                                    <div class="menu-item__student ${currentPage == 'payment-methods' ? 'student-list' : ''}">
                                         <span class="container-1__menu-items menu-item__order">
 
                                             <i class="fa-solid fa-credit-card"></i>

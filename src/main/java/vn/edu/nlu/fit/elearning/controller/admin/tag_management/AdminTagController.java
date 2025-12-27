@@ -24,6 +24,7 @@ public class AdminTagController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Tag> listTags = tagService.getAllTags();
         request.setAttribute("listTags", listTags);
+        request.setAttribute("currentPage", "tags");
         request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
     }
 

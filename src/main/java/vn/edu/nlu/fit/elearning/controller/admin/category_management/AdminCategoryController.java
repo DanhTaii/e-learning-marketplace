@@ -22,6 +22,7 @@ public class AdminCategoryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Category> listCategories = categoryService.getAllCategories();
         request.setAttribute("listCategories", listCategories);
+        request.setAttribute("currentPage", "categories");
         request.getRequestDispatcher("/html-admin/category-management.jsp").forward(request, response);
     }
 

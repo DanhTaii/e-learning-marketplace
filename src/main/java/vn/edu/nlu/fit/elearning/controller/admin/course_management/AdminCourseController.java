@@ -21,6 +21,7 @@ public class AdminCourseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourses",listCourses);
+        request.setAttribute("currentPage", "courses");
         request.getRequestDispatcher("/html-admin/courses-management.jsp").forward(request, response);
     }
 

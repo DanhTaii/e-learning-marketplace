@@ -24,6 +24,7 @@ public class AdminPaymentMethodController extends HttpServlet {
 
         List<PaymentMethod> listPaymentMethods = paymentMethodService.getAllPaymentMethods();
         request.setAttribute("listPaymentMethods", listPaymentMethods);
+        request.setAttribute("currentPage", "payment-methods");
         request.getRequestDispatcher("/html-admin/payment-method-management.jsp")
                 .forward(request, response);
     }
