@@ -31,22 +31,24 @@ public class AdminCategoryController extends HttpServlet {
         int categoryParentId = Integer.parseInt(request.getParameter("categoryParentId"));
         String categorySlug = request.getParameter("categorySlug");
 
-        Category newCategory = new Category();
-        newCategory.setName(categoryName);
-        newCategory.setParentId(categoryParentId);
-        newCategory.setSlug(categorySlug);
-
-        int checkCreate = categoryService.createCategory(newCategory);
-
-        if (checkCreate == 1) {
-//            request.setAttribute("success", "Tạo thành công !");
-//            request.getRequestDispatcher("admin/categories").forward(request, response);
-            request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
-            response.sendRedirect(request.getContextPath() + "/admin/categories");
-        } else {
-            request.setAttribute("error", "Vui lòng điền thông tin ! ");
+        if (categoryName.isEmpty() || categoryParentId == 0 || categorySlug.isEmpty()) {
+            request.setAttribute("flashError", "Vui lòng điền thông tin ! ");
             request.getRequestDispatcher("admin/categories").forward(request, response);
-//            doGet(request, response);
+        }
+        try {
+            Category newCategory = new Category();
+            newCategory.setName(categoryName);
+            newCategory.setParentId(categoryParentId);
+            newCategory.setSlug(categorySlug);
+            int checkCreate = categoryService.createCategory(newCategory);
+            if (checkCreate == 1) {
+                request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
+                response.sendRedirect(request.getContextPath() + "/admin/categories");
+            }
+        } catch (Exception e) {
+            request.getSession().setAttribute("flashError", "Tên hoặc Slug đã tồn tại trong hệ thống!");
+            request.setAttribute("listTags", categoryService.getAllCategories());
+            request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
         }
     }
 }

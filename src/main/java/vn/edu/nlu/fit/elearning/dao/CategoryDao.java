@@ -42,7 +42,9 @@ public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Intege
 
     @Override
     public int delete(Integer integer) {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM categories WHERE id = :id").bind("id", integer).execute();
+        });
     }
 
     public List<Category> findByName(String name) {

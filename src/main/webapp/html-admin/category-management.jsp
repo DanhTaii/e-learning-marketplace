@@ -138,18 +138,6 @@
                             <form action="admin/categories" class="form" method="post">
                                 <div class="container-2__create">
                                     <div class="create__selection">
-                                        <c:if test="${not empty error}">
-                                            <span style="color: red; padding: 10px; background: #f8d7da;">
-                                                Lỗi: ${error}
-                                            </span>
-                                        </c:if>
-                                        <%--                                        Nếu reload laij trang thif nó sẽ mất thông báo--%>
-                                        <c:if test="${not empty sessionScope.flashSuccess}">
-                                            <span style="color: green; padding: 2rem; background: #d4edda;">
-                                                Thành công: ${sessionScope.flashSuccess}
-                                            </span>
-                                            <c:remove var="flashSuccess" scope="session"/>
-                                        </c:if>
                                         <div class="create__selection-input">
                                             <div class="create__selection-items">
                                                 <div class="filter__selection-title filter__item-name">Tên danh mục:
@@ -160,7 +148,7 @@
                                             <div class="create__selection-items">
                                                 <div class="filter__selection-title filter__item-name">ID danh mục cha:
                                                 </div>
-                                                <input placeholder="" type="text" class="admin-input__long"
+                                                <input placeholder="" type="number" class="admin-input__long"
                                                        name="categoryParentId">
                                             </div>
                                             <div class="create__selection-items">
@@ -240,12 +228,12 @@
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-<%--                                                <form action="admin/user/delete" method="post" class="form">--%>
+                                                <form action="admin/category/delete" method="post" class="form">
                                                     <input type="hidden" name="id" value="${cate.id}">
                                                     <button type="submit" class="icon-action-btn">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
-<%--                                                </form>--%>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -318,6 +306,18 @@
         </div>
     </div>
 </div>
+<div id="toast"></div>
 </body>
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/js-admin/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
