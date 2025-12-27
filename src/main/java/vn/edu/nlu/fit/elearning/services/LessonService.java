@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.LessonDao;
 import vn.edu.nlu.fit.elearning.model.Lesson;
+import vn.edu.nlu.fit.elearning.model.User;
 
 import java.util.List;
 
@@ -47,4 +48,9 @@ public class LessonService {
     public boolean checkLessonName(String title, int courseId) {
         return lessonDao.checkExists(title, courseId);
     }
+
+    public List<Lesson> getSearchLessons(String lessonName, String courseId) {
+        return lessonDao.findLessonsByFilter(lessonName,courseId );
+    }
+
 }

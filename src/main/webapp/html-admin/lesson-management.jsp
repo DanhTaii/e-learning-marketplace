@@ -200,17 +200,17 @@
                                                 <div class="filter__selection-title filter__item-phone">Tên khóa
                                                     học:
                                                 </div>
-                                                <select name="Level" class="combobox admin-input__short ">
-                                                    <option class="text-medium">--- Vui lòng chọn khóa học ---
+                                                <select name="courseId" class="combobox admin-input__short ">
+                                                    <option class="text-medium" value="">--- Vui lòng chọn khóa học ---
                                                     </option>
                                                     <c:forEach var="c" items="${listCourse}">
-                                                        <option class="text-medium" value="${c.id}">${c.title}</option>
+                                                        <option class="text-medium" value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
+                                                        ${c.title}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="filter__button-search">
                                         <button class="button dark-button" type="submit">
                                             <i class="fa-solid fa-magnifying-glass"></i>

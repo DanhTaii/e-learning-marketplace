@@ -30,7 +30,8 @@ public class LessonSearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameSearch = request.getParameter("searchName");
-        List<Lesson> listLesson = lessonService.getAllTagsByName(nameSearch);
+        String courseIdStr = request.getParameter("courseId");
+        List<Lesson> listLesson = lessonService.getSearchLessons(nameSearch, courseIdStr);
         request.setAttribute("listLessons", listLesson);
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
