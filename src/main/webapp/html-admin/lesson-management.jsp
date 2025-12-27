@@ -8,11 +8,13 @@
     <meta charset="UTF-8">
     <title>Lesson Management</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.3">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
 </head>
 <body>
 <div class="web">
@@ -134,17 +136,6 @@
                             <form action="admin/lessons" method="post" class="form">
                                 <div class="container-2__create">
                                     <div class="create__selection">
-                                        <c:if test="${not empty error}">
-                                            <span style="color: red; padding: 10px; background: #f8d7da;">
-                                                Lỗi: ${error}
-                                            </span>
-                                        </c:if>
-                                        <c:if test="${not empty sessionScope.flashSuccess}">
-                                            <span style="color: green; padding: 2rem; background: #d4edda;">
-                                                Thành công: ${sessionScope.flashSuccess}
-                                            </span>
-                                            <c:remove var="flashSuccess" scope="session"/>
-                                        </c:if>
                                         <div class="create__selection-input">
 
                                             <div class="create__selection-items--wide">
@@ -234,7 +225,7 @@
                                     <tr>
                                         <th>Tên bài học</th>
                                         <th>Số thứ tự</th>
-                                        <th>Thời hạn</th>
+                                        <th>Thời lượng</th>
                                         <th>Ngày tạo</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -255,22 +246,31 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                    2min
+                                                    ${lesson.durationMinutes} min
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="course-row__created course-row__font-content">April 13, 2022
-                                                    – 4:24
-                                                    PM
+                                                <div class="course-row__created course-row__font-content">
+                                                    <fmt:setLocale value="en_US" scope="page"/>
+
+                                                    <fmt:formatDate
+                                                            value="${lesson.createdAt}"
+                                                            pattern="MMMM d, yyyy – h:mm a"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
                                                 <a href="">
                                                     <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                                 </a>
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </a>
+                                                <form id="delete-form-${lesson.id}" action="admin/lesson/delete" method="POST"
+                                                      class="form">
+                                                <input type="hidden" name="id" value="${lesson.id}">
+                                                <button type="button" class="icon-action-btn"
+                                                        onclick="openConfirmModal(${lesson.id})">
+                                                    <i
+                                                            class="fa-solid fa-trash"></i>
+                                                </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -284,5 +284,35 @@
         </div>
     </div>
 </div>
+<div id="confirm-delete-modal" class="modal"
+     style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div class="modal-content"
+         style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
+        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
+        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa bài học này không?</p>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">
+                Hủy
+            </button>
+            <button id="btn-confirm-delete" class="button dark-button"
+                    style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay
+            </button>
+        </div>
+    </div>
+</div>
+<div id="toast"></div>
+
 </body>
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script src="assets/javascript/js-admin/admin-tag-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

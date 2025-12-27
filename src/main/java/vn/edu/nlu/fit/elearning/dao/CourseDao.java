@@ -36,7 +36,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         return 0;
     }
 
-    public List<Course> getAllCourses() {
+    public List<Course> findAllCourses() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.student_count, SUM(l.duration_minutes) / 60.0 AS duration_hours, c.author_name, (c.price - c.discount_price) AS price_new, c.price AS price_old, c.rating, c.created_at, c.is_public\n" +
                     "FROM Courses c\n" +
@@ -48,7 +48,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
     // 3 khóa học được yêu thích nhiều nhất
-    public List<Course> getThreeCoursesWereLiked() {
+    public List<Course> findThreeCoursesWereLiked() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,c.student_count,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name,(c.price - c.discount_price) AS price_new,\n" +
                     "c.price AS price_old,c.rating,COUNT(w.course_id) AS wishlist_count\n" +
@@ -62,7 +62,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
     // 6 khóa học mới nhất
-    public List<Course> getSixCoursesLast() {
+    public List<Course> findSixCoursesLast() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,c.student_count,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name,(c.price - c.discount_price) AS price_new,\n" +
                     "c.price AS price_old,c.rating\n" +
@@ -75,7 +75,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
     // 6 khóa học phổ biến nhất
-    public List<Course> getSixCoursesMostPopular() {
+    public List<Course> findSixCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.thumbnail_url, c.level, c.student_count, c.rating, c.price, c.discount_price, (c.price - c.discount_price) AS price_new, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
@@ -88,7 +88,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
     // 1 khóa học phổ biến nhất
-    public Course getCoursesMostPopular(){
+    public Course findCoursesMostPopular(){
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.thumbnail_url, c.level, c.student_count, c.rating, c.price, c.discount_price, (c.price - c.discount_price) AS price_new, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
@@ -101,7 +101,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
 
-    public List<Course> getAllCoursesAdmin() {
+    public List<Course> findAllCoursesAdmin() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.student_count, SUM(l.duration_minutes) / 60.0 AS duration_hours, c.author_name, (c.price - c.discount_price) AS price_new, c.price AS price_old, c.rating, c.created_at, c.is_public\n" +
                     "FROM Courses c\n" +
@@ -111,7 +111,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
-    public Course getCourse(int id) {
+    public Course findCourseById(int id) {
         Course course = getJdbi().withHandle(handle ->
                 handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, (c.price - c.discount_price) AS price_new, c.rating, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating), c.rating) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
                         "FROM Courses c\n" +
@@ -143,7 +143,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         return course;
     }
 
-    public List<Course> getCoursesByIdCategory(int idCategory) {
+    public List<Course> findCoursesByIdCategory(int idCategory) {
         return getJdbi().withHandle(handle ->{
             return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name " +
                     "FROM Courses c " +
@@ -152,7 +152,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
-    public List<Course> getCoursesByTitle(String search) {
+    public List<Course> findCoursesByTitle(String search) {
         String title = "%" + search + "%";
         return getJdbi().withHandle(handle -> {
            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name \n" +

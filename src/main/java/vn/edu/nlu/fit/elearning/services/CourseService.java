@@ -11,12 +11,12 @@ public class CourseService {
     CourseDao cd = new CourseDao();
 
     public List<Course> getAllCourses() {
-        return cd.getAllCourses();
+        return cd.findAllCourses();
     }
 
     public int totalCourses() {
         int result = 0;
-        List<Course> courseList = cd.getAllCourses();
+        List<Course> courseList = cd.findAllCourses();
         for (Course c : courseList){
             result++;
         }
@@ -27,7 +27,7 @@ public class CourseService {
         double result = 0.0;
         int count = 0;
         double sum = 0.0;
-        List<Course> courseList = cd.getAllCourses();
+        List<Course> courseList = cd.findAllCourses();
         for (Course c : courseList){
             sum += c.getRating();
             count++;
@@ -38,31 +38,31 @@ public class CourseService {
     }
 
     public List<Course> getThreeCoursesWereLiked() {
-        return cd.getThreeCoursesWereLiked();
+        return cd.findThreeCoursesWereLiked();
     }
 
     public List<Course> getSixCoursesMostPopular() {
-        return cd.getSixCoursesMostPopular();
+        return cd.findSixCoursesMostPopular();
     }
 
     public Course getCoursesMostPopular() {
-        return cd.getCoursesMostPopular();
+        return cd.findCoursesMostPopular();
     }
 
     public List<Course> getSixCoursesLast() {
-        return cd.getSixCoursesLast();
+        return cd.findSixCoursesLast();
     }
 
     public Course getCourse(int id) {
-        return cd.getCourse(id);
+        return cd.findCourseById(id);
     }
 
     public List<Course> getCoursesByIdCategory(int idCategory) {
-        return cd.getCoursesByIdCategory(idCategory);
+        return cd.findCoursesByIdCategory(idCategory);
     }
 
     public List<Course> getCoursesByTitle(String search) {
-        return cd.getCoursesByTitle(search);
+        return cd.findCoursesByTitle(search);
     }
 
     // gọi lại phương thức filterCourses trong DAO cho trường hợp lọc theo category
