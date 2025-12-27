@@ -30,11 +30,11 @@ public class LessonService {
     }
 
     public Lesson getLessonById(int id) {
-        return null;
+        return lessonDao.findById(id);
     }
 
-    public void updateLesson(Lesson lesson) {
-
+    public int updateLesson(Lesson lesson) {
+return  lessonDao.update(lesson);
     }
 
     public int deleteLesson(int id) {
@@ -52,5 +52,8 @@ public class LessonService {
     public List<Lesson> getSearchLessons(String lessonName, String courseId) {
         return lessonDao.findLessonsByFilter(lessonName,courseId );
     }
+    public boolean updateLessonWithOrdering(Lesson lesson, int oldOrderIndex, int oldCourseId) {
 
+        return lessonDao.updateWithReorder(lesson, oldOrderIndex,oldCourseId) > 0;
+    }
 }

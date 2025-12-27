@@ -20,7 +20,13 @@ public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
 
     @Override
     public Lesson findById(Integer integer) {
-        return null;
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("select * from lessons l where l.id = :id")
+                    .bind("id", integer)
+                    .mapToBean(Lesson.class)
+                    .findFirst()
+                    .orElse(null);
+        });
     }
 
     @Override
@@ -34,7 +40,18 @@ public class LessonDao extends BaseDao implements BaseCrudDao<Lesson, Integer> {
 
     @Override
     public int update(Lesson entity) {
-        return 0;
+        String sql = "UPDATE Lessons \n" +
+                "SET course_id=:courseId ,title= :title , video_url = :videoUrl, duration_minutes = :durationMinutes \n" +
+                "WHERE id = :id";
+        return  getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bind("courseId",entity.getCourseId())
+                    .bind("title",entity.getTitle())
+                    .bind("videoURL",entity.getVideoUrl())
+                    .bind("durationMinutes",entity.getDurationMinutes())
+                    .execute();
+
+        });
     }
 
     @Override
@@ -73,7 +90,7 @@ public boolean checkExists(String title , int courseId){
 }
     public List<Lesson> findLessonsByFilter(String lessonName, String courseId) {
         // 1. Khởi tạo câu SQL cơ bản
-        StringBuilder sql = new StringBuilder("SELECT l.title, l.order_index, l.duration_minutes, l.created_at FROM lessons l WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT l.id, l.title, l.order_index, l.duration_minutes, l.created_at FROM lessons l WHERE 1=1");
 
         // 2. Kiểm tra và nối chuỗi điều kiện tìm kiếm theo tên bài học
         if (lessonName != null && !lessonName.trim().isEmpty()) {
@@ -101,6 +118,55 @@ public boolean checkExists(String title , int courseId){
 
             // 6. Map kết quả trả về list Lesson object
             return query.mapToBean(Lesson.class).list();
+        });
+    }
+
+    public int updateWithReorder(Lesson lesson, int oldOrderIndex, int oldCourseId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.inTransaction(h -> {
+                int newCourseId = lesson.getCourseId();
+                int currentId = lesson.getId();
+                int finalOrder;
+
+                if (newCourseId == oldCourseId) {
+                    // --- KỊCH BẢN 1: CÙNG KHÓA HỌC (Giữ nguyên logic cũ) ---
+                    finalOrder = lesson.getOrderIndex(); // Lấy số người dùng nhập
+                    if (finalOrder < oldOrderIndex) {
+                        h.createUpdate("UPDATE lessons SET order_index = order_index + 1 WHERE course_id = :courseId AND order_index >= :newOrder AND order_index < :oldOrder AND id != :id")
+                                .bind("courseId", newCourseId).bind("newOrder", finalOrder).bind("oldOrder", oldOrderIndex).bind("id", currentId).execute();
+                    } else if (finalOrder > oldOrderIndex) {
+                        h.createUpdate("UPDATE lessons SET order_index = order_index - 1 WHERE course_id = :courseId AND order_index > :oldOrder AND order_index <= :newOrder AND id != :id")
+                                .bind("courseId", newCourseId).bind("oldOrder", oldOrderIndex).bind("newOrder", finalOrder).bind("id", currentId).execute();
+                    }
+                } else {
+                    // --- KỊCH BẢN 2: CHUYỂN KHÓA HỌC (Logic "Xếp cuối hàng") ---
+
+                    // Bước 1: Tại khóa cũ (A) - Lấp lỗ hổng
+                    h.createUpdate("UPDATE lessons SET order_index = order_index - 1 WHERE course_id = :oldCourseId AND order_index > :oldOrder")
+                            .bind("oldCourseId", oldCourseId)
+                            .bind("oldOrder", oldOrderIndex)
+                            .execute();
+
+                    // Bước 2: Tại khóa mới (B) - Tìm số thứ tự lớn nhất hiện tại
+                    Integer maxOrder = h.createQuery("SELECT MAX(order_index) FROM lessons WHERE course_id = :newCourseId")
+                            .bind("newCourseId", newCourseId)
+                            .mapTo(Integer.class)
+                            .findOne()
+                            .orElse(0); // Nếu khóa mới chưa có bài nào thì bắt đầu từ 0
+
+                    finalOrder = maxOrder + 1; // Bài học mới sẽ có số thứ tự là MAX + 1
+                }
+
+                // Bước 3: Cập nhật thông tin bài học với finalOrder đã tính toán
+                return h.createUpdate("UPDATE lessons SET course_id = :courseId, title = :title, video_url = :videoUrl, duration_minutes = :durationMinutes, order_index = :orderIndex WHERE id = :id")
+                        .bind("courseId", newCourseId)
+                        .bind("title", lesson.getTitle())
+                        .bind("videoUrl", lesson.getVideoUrl())
+                        .bind("durationMinutes", lesson.getDurationMinutes())
+                        .bind("orderIndex", finalOrder) // Sử dụng số thứ tự cuối cùng nếu đổi khóa
+                        .bind("id", currentId)
+                        .execute();
+            });
         });
     }
 }
