@@ -71,5 +71,37 @@ public boolean checkExists(String title , int courseId){
 
         });
 }
+    public List<Lesson> findLessonsByFilter(String lessonName, String courseId) {
+        // 1. Khởi tạo câu SQL cơ bản
+        StringBuilder sql = new StringBuilder("SELECT l.title, l.order_index, l.duration_minutes, l.created_at FROM lessons l WHERE 1=1");
+
+        // 2. Kiểm tra và nối chuỗi điều kiện tìm kiếm theo tên bài học
+        if (lessonName != null && !lessonName.trim().isEmpty()) {
+            sql.append(" AND title LIKE :nameSearch");
+        }
+
+        // 3. Kiểm tra và nối chuỗi điều kiện tìm kiếm theo ID khóa học (từ select)
+        // Lưu ý: Kiểm tra thêm trường hợp value="0" hoặc chuỗi rỗng nếu đó là option mặc định
+        if (courseId != null && !courseId.trim().isEmpty() && !courseId.equals("0")) {
+            sql.append(" AND course_id = :courseIdSearch");
+        }
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            // 4. Bind giá trị cho tên bài học (sử dụng % để tìm kiếm LIKE)
+            if (lessonName != null && !lessonName.trim().isEmpty()) {
+                query.bind("nameSearch", "%" + lessonName.trim() + "%");
+            }
+
+            // 5. Bind giá trị cho ID khóa học
+            if (courseId != null && !courseId.trim().isEmpty() && !courseId.equals("0")) {
+                query.bind("courseIdSearch", Integer.parseInt(courseId));
+            }
+
+            // 6. Map kết quả trả về list Lesson object
+            return query.mapToBean(Lesson.class).list();
+        });
+    }
 }
 
