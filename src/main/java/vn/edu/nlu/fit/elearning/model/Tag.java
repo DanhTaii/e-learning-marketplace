@@ -14,6 +14,7 @@ public class Tag implements Serializable {
     private String slug;
 
     private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Tag() {
     }
@@ -64,5 +65,13 @@ public class Tag implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

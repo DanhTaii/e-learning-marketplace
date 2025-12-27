@@ -10,6 +10,7 @@ import vn.edu.nlu.fit.elearning.model.Tag;
 import vn.edu.nlu.fit.elearning.services.TagService;
 
 import java.io.IOException;
+import java.nio.channels.ScatteringByteChannel;
 
 @WebServlet(name = "TagUpdateController", value = "/admin/tag/update")
 public class TagUpdateController extends HttpServlet {
@@ -32,14 +33,33 @@ public class TagUpdateController extends HttpServlet {
         String slugTag = request.getParameter("slugTag");
 
 
-        Tag tag = new Tag();
-        tag.setId(id);
-        tag.setName(nameTag);
-        tag.setSlug(slugTag);
-
-        if (tagService.updateTag(tag) > 0) {
+        if (nameTag.isEmpty() || slugTag.isEmpty()) {
+            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
             response.sendRedirect(request.getContextPath() + "/admin/tags");
+            return;
         }
+        try {
+            Tag tag = new Tag();
+            tag.setId(id);
+            tag.setName(nameTag);
+            tag.setSlug(slugTag);
+            int result = tagService.updateTag(tag);
 
+
+            if (result > 0) {
+                request.getSession().setAttribute("flashSuccess", "Cập nhật thông tin thẻ thành công!");
+            } else {
+                request.getSession().setAttribute("flashError", "Cập nhật thông tin thẻ thất bại. Vui lòng thử lại!");
+            }
+        }   catch(Exception e){
+                request.getSession().setAttribute("flashError", "Tên thẻ hoặc Slug đã tồn tại trong hệ thống!");
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/tags");
+
+
+        }
     }
-}
+
+
+
+
