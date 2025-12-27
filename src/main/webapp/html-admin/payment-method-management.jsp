@@ -137,8 +137,7 @@
                                 <div class="create__selection">
                                     <div class="create__selection-input">
                                         <div class="create__selection-items">
-                                            <div class="filter__selection-title filter__item-name">Tên phương
-                                                thức:
+                                            <div class="filter__selection-title filter__item-name">Tên phương thức:
                                             </div>
                                             <input placeholder="" type="text" class="admin-input__long">
                                         </div>
@@ -152,6 +151,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="title__admin">Tất cả phương thức thanh toán</div>
                             <div class="container-2__filter">
                                 <div class="filter__selection">
@@ -171,6 +171,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="container-2__list-student">
                                 <table>
                                     <thead>
@@ -193,18 +194,17 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                        ${pm.iconUrl}
+                                                    <img src="${pm.iconUrl}" alt="${pm.name}" style="width: 60px; height: 60px; object-fit: contain; border-radius: 6px;">
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="course-row__status course-row__font-content
-                                                     ${pm.active ? 'course-row__status-public' : 'course-row__status-failed'}">
+                                     ${pm.active ? 'course-row__status-public' : 'course-row__status-failed'}">
                                                         ${pm.active ? 'Yes' : 'No'}
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                    <!-- Hiện tại model chưa có ngày tạo, tạm để tĩnh hoặc bỏ nếu không cần -->
                                                     December 7, 2025 – 10:36 PM
                                                 </div>
                                             </td>
@@ -212,9 +212,12 @@
                                                 <a href="">
                                                     <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                                 </a>
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </a>
+                                                <form action="${pageContext.request.contextPath}/admin/payment-methods/delete" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id" value="${pm.id}">
+                                                    <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+                                                        <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>
