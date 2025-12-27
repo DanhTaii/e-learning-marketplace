@@ -36,7 +36,8 @@ public class LessonService {
 
     }
 
-    public void deleteLesson(int id) {
+    public int deleteLesson(int id) {
+    return lessonDao.delete(id);
     }
 
     public List<Lesson> getAllTagsByName(String name) {
