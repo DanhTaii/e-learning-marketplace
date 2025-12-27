@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Tag Management</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.3">
     <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -158,7 +158,7 @@
                                 </div>
                             </form>
 
-                            <div class="title__admin">Tất cả thẻ</div>
+                            <div class="title__admin">Tất cả thẻ (${listTags.size()})</div>
                             <form action="admin/tags/search" class="form" method="get">
                                 <div class="container-2__filter">
                                     <div class="filter__selection">
@@ -212,17 +212,19 @@
                                                             pattern="MMMM d, yyyy – h:mm a"/>
                                                 </div>
                                             </td>
-                                            <td class="action__button" style="display: flex;gap: 0.5rem">
+                                            <td class="action__button">
                                                 <button type="button" onclick="showTagDetail(${t.id})"
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-                                                <form id="delete-form-${t.id}" action="admin/tags/delete" method="POST" class="form">
+                                                <form id="delete-form-${t.id}" action="admin/tags/delete" method="POST"
+                                                      class="form">
 
                                                     <input type="hidden" name="id" value="${t.id}">
-                                                    <button type="button" class="btn-icon-action" onclick="openConfirmModal(${t.id})">
-                                                        <span class="icon-action"><i
-                                                                class="fa-solid fa-trash"></i></span>
+                                                    <button type="button" class="icon-action-btn"
+                                                            onclick="openConfirmModal(${t.id})">
+                                                        <i
+                                                            class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </form>
                                             </td>
@@ -292,11 +294,17 @@
 </div>
 <div id="confirm-delete-modal" class="modal"
      style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
-    <div class="modal-content" style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
-        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa thẻ này không?</p>
+    <div class="modal-content"
+         style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
+        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
+        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa thẻ này không?</p>
         <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">Hủy</button>
-            <button id="btn-confirm-delete" class="button dark-button" style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay</button>
+            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">
+                Hủy
+            </button>
+            <button id="btn-confirm-delete" class="button dark-button"
+                    style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay
+            </button>
         </div>
     </div>
 </div>

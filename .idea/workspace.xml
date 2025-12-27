@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf49dd7-9384-4cec-89fb-278303068d0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/tag_management/TagUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/tag_management/TagUpdateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/model/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/model/Tag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css-admin/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css-admin/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-admin/tag-management.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-admin/tag-management.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +46,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/DanhTaii/e-learning-marketplace.git&quot;,
-    &quot;accountId&quot;: &quot;2cfbe1a7-2a66-4ccc-a257-be897ad7a84b&quot;
+    &quot;accountId&quot;: &quot;d1010141-ee73-4eeb-848e-09c2aee4e3ba&quot;
   }
 }</component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -68,6 +71,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="36NZadD2Db04mJgGqmaI8wzXJvZ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -90,7 +96,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Facets",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2315951",
     "settings.editor.selected.configurable": "fileTemplates",
@@ -169,7 +175,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tomcat 10.1.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.48" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="24">
+    <configuration name="Tomcat 10.1.48" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.49" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="23">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/e_learning_war_exploded/index" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -365,6 +371,9 @@
       </set>
     </attachedChunks>
   </component>
+  <component name="StructureViewState">
+    <option name="selectedTab" value="JSP" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2bf49dd7-9384-4cec-89fb-278303068d0f" name="Changes" comment="" />
@@ -446,6 +455,7 @@
       <workItem from="1766745137410" duration="12625000" />
       <workItem from="1766757885904" duration="15931000" />
       <workItem from="1766809215632" duration="10069000" />
+      <workItem from="1766822619407" duration="1016000" />
     </task>
     <servers />
   </component>
