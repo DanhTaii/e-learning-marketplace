@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/course-edit.css">
+    <link rel="stylesheet" href="assets/css-admin/notification.css">
+    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
+
 </head>
 <body>
 <div class="web">
@@ -233,12 +236,16 @@
                                                 </div>
                                             </td>
                                             <td class="action__button">
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                                </a>
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </a>
+                                                <button type="button" onclick="showCategoryDetail(${cate.id})"
+                                                        class="icon-action-btn">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+<%--                                                <form action="admin/user/delete" method="post" class="form">--%>
+                                                    <input type="hidden" name="id" value="${cate.id}">
+                                                    <button type="submit" class="icon-action-btn">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+<%--                                                </form>--%>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -248,9 +255,69 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="category-detail" class="modal__course-detail">
+                    <div class="modal__course-content">
+                        <form action="admin/category/update" method="post">
+
+                            <div class="course__header">
+                                <div class="course__title">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <span id="modal-title"></span>
+                                </div>
+                                <div class="x__icon" onclick="closeModal()">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="course-body">
+                                <div class="user-info-grid">
+                                    <input type="hidden" id="detail-id" name="id">
+
+<%--                                    <div class="info-group">--%>
+<%--                                        <label><i class="fa-solid fa-user"></i> Tên danh mục</label>--%>
+<%--                                        <input id="detail-name" name="name" type="text" class="input__create">--%>
+<%--                                    </div>--%>
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-envelope"></i> Slug</label>
+                                        <input id="detail-slug" name="slug" type="text" class="input__create">
+                                    </div>
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-phone"></i> Parent Id</label>
+                                        <input id="detail-parentId" name="parentId" type="text" class="input__create">
+                                    </div>
+
+                                    <div class="info-group full-width">
+                                        <label><i class="fa-solid fa-phone"></i> Icon</label>
+                                        <input id="detail-icon" name="icon" type="text" class="input__create">
+                                    </div>
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo</label>
+                                        <input id="detail-created" type="text" class="input__create" readonly>
+                                    </div>
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
+                                        <input id="detail-updated" type="text" class="input__create" readonly>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="button btn-cancel" onclick="closeModal()"
+                                            style="margin-right: 1rem;">Hủy
+                                    </button>
+                                    <button type="submit" class="button dark-button">Lưu thay
+                                        đổi
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </body>
+<script src="assets/javascript/js-admin/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

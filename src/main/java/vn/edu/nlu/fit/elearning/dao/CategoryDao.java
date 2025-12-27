@@ -18,7 +18,13 @@ public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Intege
 
     @Override
     public Category findById(Integer integer) {
-        return null;
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT 1 FROM categories WHERE id = :id")
+                    .bind("id", integer)
+                    .mapToBean(Category.class)
+                    .findFirst()
+                    .orElse(null);
+        });
     }
 
     @Override
