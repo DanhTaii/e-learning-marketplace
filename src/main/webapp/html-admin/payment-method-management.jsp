@@ -154,22 +154,27 @@
 
                             <div class="title__admin">Tất cả phương thức thanh toán</div>
                             <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items filter__selection-name">
-                                            <div class="filter__selection-title filter__item-name">Tên phương thức:
+                                <form action="${pageContext.request.contextPath}/admin/payment-methods/search" method="get" style="width: 100%;">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items filter__selection-name">
+                                                <div class="filter__selection-title filter__item-name">Tên phương thức:</div>
+                                                <input
+                                                        placeholder=""
+                                                        type="text"
+                                                        name="searchName"
+                                                        class="admin-input__long"
+                                                        value="${param.searchName != null ? param.searchName : ''}">
                                             </div>
-                                            <input placeholder="" type="text" class="admin-input__long">
                                         </div>
 
+                                        <div class="filter__button-search">
+                                            <button class="button dark-button" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
-
-                                    <div class="filter__button-search">
-                                        <button class="button dark-button" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
 
                             <div class="container-2__list-student">
