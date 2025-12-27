@@ -56,6 +56,8 @@ function closeModal(modalId) {
 // Xử lý riêng cho chức năng XÓA (Cần lưu lại ID)
 let currentDeleteId = null;
 function openConfirmModal(id, modalId = 'confirm-delete-modal') {
+    console.log("--- BƯỚC 1: MỞ MODAL ---");
+    console.log("ID nhận được từ nút bấm:", id);
     currentDeleteId = id;
     openModal(modalId);
 }

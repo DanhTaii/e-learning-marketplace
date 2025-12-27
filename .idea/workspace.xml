@@ -10,11 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf49dd7-9384-4cec-89fb-278303068d0f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/lesson_management/LessonDeleteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/tag_management/TagUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/controller/admin/tag_management/TagUpdateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/model/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/model/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css-admin/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css-admin/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-admin/tag-management.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-admin/tag-management.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/dao/LessonDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/nlu/fit/elearning/services/LessonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/javascript/notification.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/javascript/notification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html-admin/lesson-management.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html-admin/lesson-management.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,35 +79,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.BaseDao.executor": "Run",
-    "Application.CourseTagDao.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Tomcat Server.Tomcat 10.1.48.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JAVA/WEB_EX/e-learning",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2315951",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BaseDao.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CourseTagDao.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 10.1.48.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JAVA/WEB_EX/e-learning&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2315951&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\JAVA\WEB_EX\e-learning\src\main\webapp\assets\javascript\js-admin" />
       <recent name="D:\JAVA\WEB_EX\e-learning\src\main\webapp" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="vn.edu.nlu.fit.elearning.controller.admin.lesson_management" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -456,10 +460,22 @@
       <workItem from="1766757885904" duration="15931000" />
       <workItem from="1766809215632" duration="10069000" />
       <workItem from="1766822619407" duration="1016000" />
+      <workItem from="1766824586742" duration="4772000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/html-admin/lesson-management.jsp</url>
+          <line>188</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
