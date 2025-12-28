@@ -34,44 +34,39 @@ public class AdminPaymentMethodController extends HttpServlet {
             throws ServletException, IOException {
 
         String name = request.getParameter("name");
-        String code = request.getParameter("code");
         String iconUrl = request.getParameter("iconUrl");
-        String activeParam = request.getParameter("active");
 
-        if (name == null || name.isEmpty() || code == null || code.isEmpty()) {
-            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
-            request.setAttribute("listPaymentMethods",
-                    paymentMethodService.getAllPaymentMethods());
-            request.getRequestDispatcher("/html-admin/payment-method-management.jsp")
-                    .forward(request, response);
+        if (name == null || name.trim().isEmpty()) {
+            request.getSession().setAttribute("flashError", "Vui lòng nhập tên phương thức!");
+            response.sendRedirect(request.getContextPath() + "/admin/payment-methods");
             return;
         }
 
         try {
-            PaymentMethod pm = new PaymentMethod();
-            pm.setName(name);
-            pm.setCode(code);
-            pm.setIconUrl(iconUrl);
-            pm.setActive(activeParam != null); // checkbox
+            String code = name.trim()
+                    .toUpperCase()
+                    .replaceAll("\\s+", "_")
+                    .replaceAll("[^A-Z0-9_]", "");
 
-            int checkCreate = paymentMethodService.createPaymentMethod(pm);
-
-            if (checkCreate == 1) {
-                request.getSession().setAttribute("flashSuccess",
-                        "Tạo phương thức thanh toán thành công!");
-                response.sendRedirect(request.getContextPath() + "/admin/payment-methods");
+            if (code.isEmpty()) {
+                code = "METHOD_" + System.currentTimeMillis();
             }
 
+            PaymentMethod pm = new PaymentMethod();
+            pm.setName(name.trim());
+            pm.setCode(code);
+            pm.setIconUrl(iconUrl != null ? iconUrl.trim() : "");
+            pm.setStatus("ACTIVE");
+
+            paymentMethodService.createPaymentMethod(pm);
+
+            request.getSession().setAttribute("flashSuccess", "Tạo phương thức thanh toán thành công!");
+
         } catch (Exception e) {
-            request.getSession().setAttribute("flashError",
-                    "Tên hoặc mã phương thức đã tồn tại!");
-            request.setAttribute("oldName", name);
-            request.setAttribute("oldCode", code);
-            request.setAttribute("oldIconUrl", iconUrl);
-            request.setAttribute("listPaymentMethods",
-                    paymentMethodService.getAllPaymentMethods());
-            request.getRequestDispatcher("/html-admin/payment-method-management.jsp")
-                    .forward(request, response);
+            e.printStackTrace();
+            request.getSession().setAttribute("flashError", "Lỗi: Có thể tên hoặc mã đã tồn tại!");
         }
+
+        response.sendRedirect(request.getContextPath() + "/admin/payment-methods");
     }
 }
