@@ -41,7 +41,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
     @Override
     public List<Order> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT o.id AS order_id, o.order_code, o.user_id, u.first_name, u.last_name, u.email, oi.course_id, c.title AS course_title, c.price AS price_old, (c.price - c.discount_price) AS price_new, o.total_amount, o.discount_amount, o.final_amount, o.status, o.paid_at, o.created_at\n" +
+            return handle.createQuery("SELECT o.id AS order_id, o.order_code, o.user_id, u.email, oi.course_id, c.title AS course_title, c.price AS price_old, (c.price - c.discount_price) AS price_new, o.total_amount, o.discount_amount, o.final_amount, o.status, o.paid_at, o.created_at\n" +
                     "FROM Orders o\n" +
                     "JOIN Users u ON o.user_id = u.id\n" +
                     "JOIN Order_Items oi ON o.id = oi.order_id\n" +

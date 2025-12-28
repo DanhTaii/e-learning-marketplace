@@ -1,239 +1,209 @@
-
-.style__sub-title {
-    font-size: var(--text-base);
-    color: var(--dark-blue);
-    font-weight: var(--fw-semibold);
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-body: #f1f5f9;
+    --white: #ffffff;
+    --text-main: #0f172a;
+    --text-sub: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
+}
+/*Layout*/
+.user-profile__container {
+    max-width: 1200px;
+    padding: 40px 0;
+    background-color: var(--bg-body);
 }
 
-.style__title {
-    font-size: var(--text-4xl);
-    font-weight: var(--fw-semibold);
-    color: var(--dark-blue);
-    line-height: 3.6rem;
-    /*margin-bottom: 3rem;*/
+.profile-sidebar {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 20px;
+    overflow: hidden;
 }
-
-.overall {
-    margin-top: 6rem;
-}
-
+/*Khối ảnh đại diện bên menu*/
 .profile-block {
-    padding: 3rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background: var(--white-color);
-    border: solid 1px var(--light-grey);
-}
-
-.profile-block__title {
-    font-size: var(--text-2xl);
-    font-weight: bold;
-    margin-top: 2rem;
+    padding: 32px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
 }
 
 .profile-block__avatar {
-    cursor: pointer;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--dark-blue);
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 auto 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    border-radius: 50%;
-    border: solid 1px #01FF85;
-    background: #1C2329;
-    font-weight: 400;
-    color: white;
-    width: 130px;
-    height: 130px;
 }
 
-/*.profile-block__name {*/
-/*    margin-top: 20px;*/
-/*}*/
-.profile-block__button {
-    margin-top: 20px;
-    /*font-size: 1.2rem;*/
-    border-radius: 4px;
-    background: white;
-    color: #3722D3;
-    border: solid 1px #3722D3;
-    width: 100%;
-    padding: 1.4rem;
-    font-weight: bold;
-    cursor: pointer;
+.profile-block__title {
+    font-size: var(--text-xl);
+    font-weight: var(--fw-semibold);
+    color: var(--text-main);
 }
 
-.profile-block__button:hover {
-    background: #3722D320;
-}
-
-/*profile menu*/
-.profile-menu {
-    /*padding: 2rem;*/
-    /*border-radius: 4px;*/
-    margin-top: 3rem;
-    background: var(--white-color);
-    border: solid 1px var(--light-grey);
+.profile-block__email {
+    font-size: var(--text-sm);
+    color: var(--text-sub);
 }
 
 .profile-menu ul {
-    padding-left: 0;
-    /*margin-top: -2rem;*/
-    /*margin-bottom: -2rem;*/
+    list-style: none;
+    padding: 12px;
+    margin: 0;
+}
+/*Menu*/
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--text-sub);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+    transition: .2s;
 }
 
-a {
-    text-decoration: none;
+.menu-link span {
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+}
+
+.menu-link:hover {
+    background: #f8fafc;
     color: var(--dark-blue);
 }
 
-.profile-menu li {
-    /*padding-bottom: 4rem;*/
-    list-style-type: none;
-    /*font-weight: 500;*/
+.menu-link.active {
+    background: #eff6ff;
+    color: var(--dark-blue);
+}
+/*Nội dung chính*/
+.information-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    /*flex: 1;*/
+}
+/*Tiêu đề 1 của nội dung*/
+.card-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 32px;
 }
 
-.account__profile {
+/*Tiêu đề 2 nội dung*/
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.section-indicator {
+    width: 6px;
+    height: 28px;
     background: var(--dark-blue);
-    color: var(--white-color);
-    font-size: var(--text-lg);
+    border-radius: 4px;
+}
+
+.section-title {
+    font-size: var(--text-2xl);
     font-weight: var(--fw-semibold);
+    color: var(--dark-blue);
 }
 
-.profile-menu__item {
-    font-size: var(--text-lg);
-    font-weight: var(--fw-semibold);
-    padding: 1rem 3rem;
-    cursor: pointer;
-}
-
-.profile-menu__item:hover {
-    /*padding-bottom: 4rem;*/
-    list-style-type: none;
-    background: var(--dark-blue);
-    color: var(--white-color);
-    font-size: var(--text-lg);
-    font-weight: var(--fw-semibold);
-    padding: 1rem 3rem;
-}
-
-.profile-menu li:last-child {
-    /*padding-bottom: 0;*/
-}
-
-/*information*/
-.information__container {
-    margin-top: 6rem;
-}
-
-.personal-detail__title {
-    /*background: var(--white-color);*/
-    text-align: center;
-    /*margin-bottom: -1rem;*/
-    border-radius: 0.3rem;
-    border-bottom: 1px solid var(--light-grey);
-    margin-right: -15rem;
-    margin-left: -15rem;
-    margin-top: -3rem;
-    margin-bottom: 3rem;
-}
-
+/*Kiểu chữ*/
 .text__title {
     font-size: var(--text-4xl);
     font-weight: var(--fw-semibold);
-    color: var(--dark-blue);
-    line-height: 3.6rem;
-    padding: 1rem;
+    color: var(--text-main);
 }
 
-.personal-detail__block {
-    /*border: solid 1px var(--light-grey);*/
-    border: solid 1px #AEABABFF;
-    /*AEABABFF*/
-    padding: 3rem 15rem;
-    border-radius: 4px;
-    background: var(--white-color);
+.text__subtitle {
+    font-size: var(--text-base);
+    color: var(--text-sub);
+}
+
+/*Xử lý form*/
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-medium);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input {
     width: 100%;
-}
-
-/*Hàng 1 của khối Personal detial*/
-.personal-detail__column-1 {
-    padding-right: 10rem;
-}
-
-/*Hàng 2 của khôí personal detail*/
-.personal-detail__row-2 {
-    margin-top: 2.5rem;
-}
-
-/*.personal-detail__email input {*/
-/*    width: 100%;*/
-/*}*/
-.personal-detail__column-items {
-
-}
-
-/*Tùy chỉnh toàn input*/
-.personal-detail__input {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    width: 100%;
-    height: 4rem;
-}
-
-input {
-    border: solid 1px var(--light-grey);
-    border-radius: 3px;
-    width: 100%;
-    height: 100%;
-    padding-left: 1rem;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
     font-size: var(--text-base);
     font-weight: var(--fw-regular);
 }
 
-/*input:hover {*/
-/*    background: #E3E9EB;*/
-/*    border-radius: 0.4rem;*/
-/*}*/
-.choice {
-    margin: 2rem;
-    width: 100px;
-    float: right;
+.form-group input:focus {
+    outline: none;
+    border-color: var(--dark-blue);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .1);
 }
 
-hr {
-    margin-right: -15rem;
-    margin-left: -15rem;
+.input-readonly {
+    background: #f8fafc;
+    cursor: not-allowed;
 }
 
-/*Instructor*/
-.instructor_title {
-    margin-bottom: 2rem;
-    margin-left: 1rem;
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
 }
 
-.profile-block__sub-title {
-    font-size: var(--text-base);
-    margin-top: 1rem;
+/*Button*/
+.btn-primary {
+    background: var(--dark-blue);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
 }
 
-.instructor__total-course {
-    font-size: var(--text-base);
-    margin-top: 0.8rem;
-    font-weight: var(--fw-bold);
+.btn-primary:hover {
+    background: var(--text-sub);
 }
 
-.box__rate {
-    margin-top: 1rem;
-}
-
-.fa-star {
-    color: #FFD43B;
-    font-size: var(--text-base);
-}
-
-.box__rate span {
-    font-size: var(--text-base);
+.btn-secondary {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
 }

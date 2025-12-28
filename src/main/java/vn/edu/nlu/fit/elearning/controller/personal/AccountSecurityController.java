@@ -19,7 +19,7 @@ public class AccountSecurityController extends HttpServlet {
         if (session != null) {
             userSession = (User) session.getAttribute("userSession");
         }
-
+        request.setAttribute("currentPage", "security");
         request.getRequestDispatcher("html-personal/account-security.jsp").forward(request, response);
     }
 

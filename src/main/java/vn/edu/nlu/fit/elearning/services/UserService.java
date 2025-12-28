@@ -61,6 +61,41 @@ public class UserService {
 
     public boolean register(String email, String username, String password) {
 
+        validatePassword(password);
+
+        User user = new User();
+        String hashPass = PasswordUtils.hashpassword(password + SALT);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(hashPass);
+        return createUser(user) > 0;
+    }
+
+    public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
+        String oldHash = PasswordUtils.hashpassword(oldPassword + SALT);
+        String newHashPassword = PasswordUtils.hashpassword(newPassword + SALT);
+
+        if (this.getUserByEmail(userMail) == null) {
+            throw new IllegalArgumentException("Email không tồn tại !!!");
+        } else {
+            User user = this.getUserByEmail(userMail);
+            if (!user.getPassword().equals(oldHash)) {
+                throw new IllegalArgumentException("Mật khẩu cũ không đúng !");
+            }
+            if (!newPassword.equals(retypeNewPassword)) {
+                throw new IllegalArgumentException("Mật khẩu mới không khớp !");
+            }
+
+            validatePassword(newPassword);
+
+            if (userDao.resetPassword(newHashPassword, userMail) == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void validatePassword(String password) {
         if (password.length() < 8) {
             throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự");
         }
@@ -76,13 +111,6 @@ public class UserService {
         if (!password.matches(".*[^A-Za-z0-9].*")) {
             throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt");
         }
-
-        User user = new User();
-        String hashPass = PasswordUtils.hashpassword(password + SALT);
-        user.setEmail(email);
-        user.setUsername(username);
-        user.setPassword(hashPass);
-        return createUser(user) > 0;
     }
 
     public List<User> getAllUsers() {
@@ -113,24 +141,6 @@ public class UserService {
         return userDao.findUsersByFilter(username, phone, createdAt, role);
     }
 
-    public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
-        if (this.getUserByEmail(userMail) == null) {
-            throw new IllegalArgumentException("Email không tồn tại !!!");
-        } else {
-            User user = this.getUserByEmail(userMail);
-            if (!user.getPassword().equals(oldPassword)) {
-                throw new IllegalArgumentException("Mật khẩu cũ không đúng !");
-            }
-            if (!newPassword.equals(retypeNewPassword)) {
-                throw new IllegalArgumentException("Mật khẩu mới không khớp !");
-            }
-            if (userDao.resetPassword(newPassword, userMail) == 1) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public User getUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
@@ -139,7 +149,7 @@ public class UserService {
         return userDao.update(user);
     }
 
-    public int deleteUser(int id){
+    public int deleteUser(int id) {
         return userDao.delete(id);
     }
 

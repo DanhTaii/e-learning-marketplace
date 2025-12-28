@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="assets/css/profile.css?v=1.0.2">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
@@ -212,88 +212,104 @@
 <div class="user-profile__container grid">
 
     <div class="grid__row-2">
-
-        <div class="grid__column-3 overall">
-            <div class="profile-block">
-                <div class="profile-block__avatar text-big-title">NM</div>
-                <div class="profile-block__title">${sessionScope.userSession.username}</div>
-                <!--                <button class="profile-block__button text-medium">Chia sẻ</button>-->
-            </div>
-            <div class="profile-menu">
-                <ul>
-                    <li>
-                        <a href="account-profile">
-                            <div class="profile-menu__item">Thông tin</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="account-security">
-                            <div class="profile-menu__item account__profile">Bảo mật</div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="grid__colum-9">
-            <form action="reset-password" method="post">
-                <div class="information__container">
-                    <c:set var="user" value="${sessionScope.userSession}"/>
-                    <div class="personal-detail">
-                        <div class="personal-detail__block">
-                            <div class="personal-detail__title style__title">
-                                <div class="text__title">Bảo mật</div>
-                            </div>
-                            <div class="personal-detail__row-1 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Địa chỉ email</div>
-                                <div class="personal-detail__input">
-                                    <input type="text" placeholder="${userSession.email}" value="" name="">
-                                </div>
-                            </div>
-                            <br></br>
-                            <hr style="margin-bottom: 2rem;">
-                            <c:if test="${not empty error}">
-                                <span style="color: red; background: #f8d7da; font-size: 2rem">
-                                        ${error}
-                                </span>
-                            </c:if>
-                            <c:if test="${not empty success}">
-                                <span style="color: green; background: #d4edda; font-size: 2rem">
-                                    Thành công: ${sessionScope.success}
-                                </span>
-                            </c:if>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Nhập mật khẩu cũ</div>
-                                <div class="personal-detail__input">
-                                    <input type="password" placeholder="Nhập mật khẩu cũ" name="oldPassword"
-                                           value="${param.oldPassword}">
-                                </div>
-                            </div>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Nhập mật khẩu mới</div>
-                                <div class="personal-detail__input">
-                                    <input type="password" placeholder="Nhập mật khẩu mới" name="newPassword"
-                                           value="${param.newPassword}">
-                                </div>
-                            </div>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Nhập lại mật khẩu mới</div>
-                                <div class="personal-detail__input">
-                                    <input type="password" placeholder="Nhập lại mật khẩu mới" name="newPasswordRetype"
-                                           value="${param.newPasswordRetype}">
-                                </div>
-                            </div>
-                        </div>
+        <c:set var="user" value="${sessionScope.userSession}"/>
+        <div class="grid__column-3 overall-card">
+            <div class="profile-sidebar">
+                <div class="profile-block">
+                    <div class="profile-block__avatar">
+                        <c:out value="${user.username}"/>
                     </div>
-                    <div class="choice">
-                        <div class="header__button">
-                            <button class="button__btn text-medium">Lưu</button>
-
-                        </div>
+                    <div class="profile-block__info">
+                        <h2 class="profile-block__title">${user.username}</h2>
+                        <p class="profile-block__email">${user.email}</p>
                     </div>
                 </div>
-            </form>
+
+                <nav class="profile-menu">
+                    <ul>
+                        <li>
+                            <a href="account-profile"
+                               class="menu-link ${param.currentPage == 'profile' ? 'active' : ''}">
+                                <i class="fa-regular fa-user"></i>
+                                <span>Thông tin cá nhân</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="account-security"
+                               class="menu-link ${param.currentPage == 'security' ? 'active' : ''}">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>Bảo mật tài khoản</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="my-course.jsp" class="menu-link">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <span>Khóa học của tôi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="order-history.jsp" class="menu-link">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <span>Lịch sử giao dịch</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="grid__colum-9">
+            <div class="information-card">
+                <div class="card-header">
+                    <h2 class="text__title">Bảo mật</h2>
+                </div>
+
+                <form action="reset-password" method="post">
+                    <c:set var="user" value="${sessionScope.userSession}"/>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-indicator"></span>
+                            <h2 class="section-title">Địa chỉ email</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="style__sub-title">Email</label>
+                            <input type="text" placeholder="${userSession.email}" value="" name="">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-indicator"></span>
+                            <h2 class="section-title">Đổi mật khẩu</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="style__sub-title">Nhập mật khẩu cũ: </label>
+                            <input type="password" placeholder="Nhập mật khẩu cũ" name="oldPassword"
+                                   value="${param.oldPassword}">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="style__sub-title">Nhập mật khẩu mới: </label>
+                            <input type="password" placeholder="Nhập mật khẩu mới" name="newPassword"
+                                   value="${param.newPassword}">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="style__sub-title">Nhập lại mật khẩu mới: </label>
+                            <input type="password" placeholder="Nhập lại mật khẩu mới" name="newPasswordRetype"
+                                   value="${param.newPasswordRetype}">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn-secondary">Hủy bỏ</button>
+                        <button type="submit" class="btn-primary">Lưu thay đổi</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>
