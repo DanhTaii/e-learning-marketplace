@@ -17,6 +17,7 @@ public class AccountProfileController extends HttpServlet {
         if (session != null) {
             userSession = (User) session.getAttribute("userSession");
         }
+        request.setAttribute("currentPage", "profile");
         request.getRequestDispatcher("html-personal/account-profile.jsp").forward(request, response);
     }
 

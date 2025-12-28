@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="assets/css/profile.css?v=1.0.2">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 </head>
@@ -210,84 +210,94 @@
             </div>
         </div>
     </header>
-
+    <c:set var="user" value="${sessionScope.userSession}"/>
     <div class="user-profile__container grid">
-
         <div class="grid__row-2">
+            <div class="grid__column-3 overall-card">
+                <div class="profile-sidebar">
+                    <div class="profile-block">
+                        <div class="profile-block__avatar">
+                            <c:out value="${user.username}"/>
+                        </div>
+                        <div class="profile-block__info">
+                            <h2 class="profile-block__title">${user.username}</h2>
+                            <p class="profile-block__email">${user.email}</p>
+                        </div>
+                    </div>
 
-            <div class="grid__column-3 overall">
-                <div class="profile-block">
-                    <div class="profile-block__avatar text-big-title">NM</div>
-                    <div class="profile-block__title">${sessionScope.userSession.username}</div>
-                    <!--                    <button class="profile-block__button text-medium">Chia sẻ</button>-->
+                    <nav class="profile-menu">
+                        <ul>
+                            <li>
+                                <a href="account-profile"
+                                   class="menu-link ${param.currentPage == 'profile' ? 'active' : ''}">
+                                    <i class="fa-regular fa-user"></i>
+                                    <span>Thông tin cá nhân</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="account-security"
+                                   class="menu-link ${param.currentPage == 'security' ? 'active' : ''}">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span>Bảo mật tài khoản</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="my-course.jsp" class="menu-link">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                    <span>Khóa học của tôi</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="order-history.jsp" class="menu-link">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                    <span>Lịch sử giao dịch</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="profile-menu">
-                    <ul>
-                        <li>
-                            <a href="account-profile">
-                                <div class="profile-menu__item account__profile">Thông tin</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="account-security">
-                                <div class="profile-menu__item account__security">Bảo mật</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
             </div>
 
             <div class="grid__colum-9">
-                <div class="information__container">
-                    <c:set var="user" value="${sessionScope.userSession}"/>
-
-                    <div class="personal-detail">
-                        <div class="personal-detail__block">
-                            <div class="personal-detail__title style__title">
-                                <div class="text__title">Thông tin</div>
-                            </div>
-                            <div class="personal-detail__row-1 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Họ</div>
-                                <div class="personal-detail__input">
-                                    <input type="text" placeholder="${user.lastName}">
-                                </div>
-                            </div>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Tên</div>
-                                <div class="personal-detail__input">
-                                    <input type="text" placeholder="${user.firstName}">
-                                </div>
-                            </div>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Tên người dùng</div>
-                                <div class="personal-detail__input">
-                                    <input type="text" placeholder="${user.username}">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <hr>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Địa chỉ email</div>
-                                <div class="personal-detail__input">
-                                    <input type="text" placeholder="${user.email}">
-                                </div>
-                            </div>
-                            <div class="personal-detail__row-2 grid__row-2">
-                                <div class="personal-detail__sub-title style__sub-title">Số điện thoại</div>
-                                <div class="personal-detail__input">
-                                    <input type="text" placeholder="${user.phone}">
-                                </div>
-                            </div>
-                        </div>
+                <div class="information-card">
+                    <div class="card-header">
+                        <h2 class="text__title">Cài đặt tài khoản</h2>
                     </div>
 
-                    <div class="choice">
-                        <div class="header__button">
-                            <button class="button__btn text-medium">Lưu</button>
+                    <form action="account-profile" method="POST" class="personal-detail-form">
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-indicator"></span>
+                                <h2 class="section-title">Thông tin cơ bản</h2>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="style__sub-title">Tên người dùng</label>
+                                <input type="text" name="username" value="${user.username}">
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-indicator"></span>
+                                <h2 class="section-title">Thông tin liên lạc</h2>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="style__sub-title">Địa chỉ Email</label>
+                                <input type="email" name="email" value="${user.email}" placeholder="example@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="style__sub-title">Số điện thoại</label>
+                                <input type="text" name="phone" value="${user.phone}" placeholder="090x xxx xxx">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="reset" class="btn-secondary ">Hủy bỏ</button>
+                            <button type="submit" class="btn-primary">Lưu thay đổi</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

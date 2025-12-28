@@ -217,7 +217,7 @@
                                             </td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${user.role == 'admin'}">
+                                                    <c:when test="${user.role == 'ADMIN'}">
                                                         <div class="course-row__status course-row__font-content role-admin">
                                                                 ${user.role}
                                                         </div>
