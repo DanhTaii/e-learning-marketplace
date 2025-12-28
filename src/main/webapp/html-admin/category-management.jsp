@@ -221,9 +221,9 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                        <%--                                                    <fmt:setLocale value="en_US" scope="page"/>--%>
-                                                        <%--                                                    <fmt:formatDate value="${cate.createdAt}"--%>
-                                                        <%--                                                                    pattern="MMMM d, yyyy - h:mm a"/>--%>
+                                                    <fmt:setLocale value="en_US" scope="page"/>
+                                                    <fmt:formatDate value="${cate.createdAt}"
+                                                                    pattern="MMMM d, yyyy - h:mm a"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
@@ -262,12 +262,13 @@
                             </div>
                             <div class="course-body">
                                 <div class="user-info-grid">
-                                    <input type="hidden" id="detail-id" name="id">
+                                    <input type="hidden" id="detail-id" name="id" >
 
-                                    <%--                                    <div class="info-group">--%>
-                                    <%--                                        <label><i class="fa-solid fa-user"></i> Tên danh mục</label>--%>
-                                    <%--                                        <input id="detail-name" name="name" type="text" class="input__create">--%>
-                                    <%--                                    </div>--%>
+                                    <div class="info-group ">
+                                        <label><i class="fa-solid fa-phone"></i> Tên</label>
+                                        <input id="detail-name" name="name" type="text" class="input__create">
+                                    </div>
+
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-envelope"></i> Slug</label>
                                         <input id="detail-slug" name="slug" type="text" class="input__create">
@@ -276,6 +277,14 @@
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-phone"></i> Parent Id</label>
                                         <input id="detail-parentId" name="parentId" type="text" class="input__create">
+                                    </div>
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-shield-halved"></i> Trạng thái</label>
+                                        <select id="detail-status" name="status" class="input__create role-badge">
+                                            <option value="ACTIVE">ACTIVE</option>
+                                            <option value="INACTIVE">INACTIVE</option>
+                                        </select>
                                     </div>
 
                                     <div class="info-group full-width">

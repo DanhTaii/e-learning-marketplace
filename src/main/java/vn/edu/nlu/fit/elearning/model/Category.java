@@ -2,8 +2,10 @@ package vn.edu.nlu.fit.elearning.model;
 
 import vn.edu.nlu.fit.elearning.dao.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.dao.BaseDao;
+import vn.edu.nlu.fit.elearning.enums.BasicStatus;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Category implements Serializable {
 
@@ -16,6 +18,12 @@ public class Category implements Serializable {
     private int parentId; // Vẫn phải dùng Integer vì NULL
 
     private String iconUrl;
+
+    private BasicStatus status;
+
+    private Timestamp createdAt;
+
+    private Timestamp updatedAt;
 
     // --- Constructors ---
     public Category() {
@@ -59,5 +67,29 @@ public class Category implements Serializable {
 
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
+    }
+
+    public BasicStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BasicStatus status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

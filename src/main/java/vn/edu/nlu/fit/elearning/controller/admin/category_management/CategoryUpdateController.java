@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
 
@@ -40,6 +41,25 @@ public class CategoryUpdateController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String slug = request.getParameter("slug");
+        int parentId = Integer.parseInt(request.getParameter("parentId"));
+        String icon = request.getParameter("icon");
+        BasicStatus statusEnum = BasicStatus.valueOf(request.getParameter("status"));
+
+        Category cate = new Category();
+        cate.setId(id);
+        cate.setName(name);
+        cate.setSlug(slug);
+        cate.setParentId(parentId);
+        cate.setIconUrl(icon);
+        cate.setStatus(statusEnum);
+
+        if (categoryService.updateCategory(cate) > 0) {
+            request.getSession().setAttribute("flashSuccess", "Cập nhật thành công danh mục !");
+            response.sendRedirect(request.getContextPath() + "/admin/categories");
+        }
 
     }
 }
