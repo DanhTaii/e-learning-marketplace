@@ -4,8 +4,11 @@ import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
 import vn.edu.nlu.fit.elearning.model.Review;
+import vn.edu.nlu.fit.elearning.utils.CourseFilter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
@@ -74,6 +77,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     "LIMIT 6;").mapToBean(Course.class).list();
         });
     }
+
     // 6 khóa học phổ biến nhất
     public List<Course> findSixCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
@@ -88,7 +92,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
     // 1 khóa học phổ biến nhất
-    public Course findCoursesMostPopular(){
+    public Course findCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.thumbnail_url, c.level, c.student_count, c.rating, c.price, c.discount_price, (c.price - c.discount_price) AS price_new, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
@@ -97,17 +101,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     "GROUP BY c.id " +
                     "ORDER BY c.student_count DESC, c.rating DESC " +
                     "LIMIT 1;").mapToBean(Course.class).one();
-        });
-    }
-
-
-    public List<Course> findAllCoursesAdmin() {
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.student_count, SUM(l.duration_minutes) / 60.0 AS duration_hours, c.author_name, (c.price - c.discount_price) AS price_new, c.price AS price_old, c.rating, c.created_at, c.is_public\n" +
-                    "FROM Courses c\n" +
-                    "LEFT JOIN Lessons l ON c.id = l.course_id\n" +
-                    "GROUP BY c.id, c.level\n" +
-                    "ORDER BY c.id DESC;").mapToBean(Course.class).list();
         });
     }
 
@@ -135,16 +128,16 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         course.setLessons(lessons);
         //
         List<Review> reviews = getJdbi().withHandle(handle -> handle.createQuery("SELECT r.id, r.rating, r.comment, r.created_at, " +
-                        "u.first_name, u.last_name, u.avatar_url " +
-                        "FROM Reviews r JOIN Users u ON r.user_id = u.id " +
-                        "WHERE r.course_id = :id ORDER BY r.created_at DESC").bind("id", id).mapToBean(Review.class).list());
+                "u.first_name, u.last_name, u.avatar_url " +
+                "FROM Reviews r JOIN Users u ON r.user_id = u.id " +
+                "WHERE r.course_id = :id ORDER BY r.created_at DESC").bind("id", id).mapToBean(Review.class).list());
         course.setReviews(reviews);
 
         return course;
     }
 
     public List<Course> findCoursesByIdCategory(int idCategory) {
-        return getJdbi().withHandle(handle ->{
+        return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name " +
                     "FROM Courses c " +
                     "JOIN Categories cate ON c.category_id = cate.id " +
@@ -155,10 +148,10 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<Course> findCoursesByTitle(String search) {
         String title = "%" + search + "%";
         return getJdbi().withHandle(handle -> {
-           return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name \n" +
-                   "FROM Courses c\n" +
-                   "JOIN Categories cate ON c.category_id = cate.id\n" +
-                   "WHERE title LIKE :title").bind("title", title).mapToBean(Course.class).list();
+            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name \n" +
+                    "FROM Courses c\n" +
+                    "JOIN Categories cate ON c.category_id = cate.id\n" +
+                    "WHERE title LIKE :title").bind("title", title).mapToBean(Course.class).list();
         });
     }
 
@@ -233,5 +226,71 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
 
+    public List<Course> filterAllCourses(CourseFilter filter) {
+        return getJdbi().withHandle(handle -> {
+            StringBuilder sql = new StringBuilder(
+                    "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.is_public, c.created_at, " +
+                            "c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
+                            "SUM(l.duration_minutes)/60.0 AS duration_hours " +
+                            "FROM Courses c " +
+                            "JOIN Categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN Lessons l ON c.id = l.course_id " +
+                            "WHERE 1=1"
+            );
+
+            Map<String, Object> params = new HashMap<>();
+
+            //(Public hay All)
+            if (filter.getIsPublic() != null) {
+                sql.append(" AND c.is_public = :isPublic");
+                params.put("isPublic", filter.getIsPublic());
+            }
+
+            // Danh mục
+            if (filter.getCategoryId() != null) {
+                sql.append(" AND c.category_id = :catId");
+                params.put("catId", filter.getCategoryId());
+            }
+
+            // Tìm kiếm theo tên
+            if (filter.getTitle() != null && !filter.getTitle().isEmpty()) {
+                sql.append(" AND c.title LIKE :title");
+                params.put("title", "%" + filter.getTitle() + "%");
+            }
+
+            // Khoảng giá (Sử dụng cột tính toán giá sau giảm)
+            if ("under500".equals(filter.getPriceRange())) {
+                sql.append(" AND (c.price - COALESCE(c.discount_price, 0)) < 500000");
+            }
+
+            // Kiếm theo cấp độ
+            if (filter.getLevel() != null && !filter.getLevel().isEmpty()) {
+                sql.append(" AND c.level = :level");
+                params.put("level", filter.getLevel());
+            }
+
+            if (filter.getCreatedAt() != null &&!filter.getCreatedAt().isEmpty() ) {
+                sql.append(" AND c.created_at >= :dateFrom");
+                params.put("dateFrom", filter.getCreatedAt());
+            }
+
+            sql.append(" GROUP BY c.id");
+
+            // Thời lượng (Sử dụng HAVING vì duration_hours là hàm tổng hợp)
+            if ("short".equals(filter.getDuration())) {
+                sql.append(" HAVING duration_hours < 5");
+            }
+
+            // Sắp xếp
+            if ("desc".equals(filter.getSortPrice())) {
+                sql.append(" ORDER BY (c.price - c.discount_price) DESC");
+            }
+
+            var query = handle.createQuery(sql.toString());
+            params.forEach(query::bind);
+
+            return query.mapToBean(Course.class).list();
+        });
+    }
 
 }

@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.utils.CourseFilter;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,8 @@ public class AdminCourseController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Course> listCourses = courseService.getAllCourses();
+        List<Course> listCourses = courseService.getAllCourses(new CourseFilter());
+        System.out.println(listCourses);
         request.setAttribute("listCourses",listCourses);
         request.setAttribute("currentPage", "courses");
         request.getRequestDispatcher("/html-admin/courses-management.jsp").forward(request, response);
