@@ -7,11 +7,11 @@
     <meta charset="UTF-8">
     <title>Tạo mới người dùng</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.3">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/base.css?v=1.0.3">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/course-edit.css">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=1.0.3">
 </head>
 <body>
 <div class="web">
@@ -135,7 +135,7 @@
                     </div>
 
                     <div class="user-form-container">
-                        <form action="admin/users/create" method="post" enctype="multipart/form-data">
+                        <form action="admin/user/create" method="post" >
 
                             <div class="form-row">
                                 <div class="form-column-8">
@@ -196,7 +196,7 @@
                                     <label class="label-style">Trạng thái</label>
                                     <select name="status" class="input-modern select-custom">
                                         <option value="ACTIVE">Hoạt động</option>
-                                        <option value="BANNED">Bị khóa</option>
+                                        <option value="INACTIVE">Bị khóa</option>
                                     </select>
                                 </div>
                             </div>

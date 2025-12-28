@@ -510,9 +510,6 @@ td:last-child ,th:last-child{
 
 
 :root {
-    --primary-color: #0e6285; /* Màu xanh đậm giống ảnh */
-    --bg-light: #f4f7f6;
-    --text-dark: #333;
     --border-color: #e0e0e0;
 }
 
@@ -537,27 +534,27 @@ td:last-child ,th:last-child{
 .header__title-modern {
     font-size: 24px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--dark-blue);
 }
 
 /* Nút bấm */
 .btn-back {
     text-decoration: none;
     background: #fff;
-    color: var(--primary-color);
+    color: var(--dark-blue);
     padding: 10px 20px;
     border-radius: 8px;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--dark-blue);
     transition: all 0.3s;
 }
 
 .btn-back:hover {
-    background: var(--primary-color);
+    background: var(--dark-blue);
     color: #fff;
 }
 
 .btn-submit-modern {
-    background: var(--primary-color);
+    background: var(--dark-blue);
     color: white;
     padding: 15px 35px;
     border: none;
@@ -610,7 +607,7 @@ td:last-child ,th:last-child{
 }
 
 .input-modern:focus {
-    border-color: var(--primary-color);
+    border-color: var(--dark-blue);
     box-shadow: 0 0 0 3px rgba(14, 98, 133, 0.1);
 }
 
@@ -630,7 +627,7 @@ td:last-child ,th:last-child{
 }
 
 .upload-wrapper:hover {
-    border-color: var(--primary-color);
+    border-color: var(--dark-blue);
     background: #f9f9f9;
 }
 
