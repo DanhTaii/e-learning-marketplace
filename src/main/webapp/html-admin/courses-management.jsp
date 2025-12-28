@@ -146,44 +146,63 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="container-2__body">
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items filter__selection-name">
-                                            <div class="filter__selection-title  filter__item-label">Tên khóa học:</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
-                                        </div>
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-title">Từ ngày</div>
-                                            <input placeholder="" type="datetime-local" class="admin-input__long">
-                                        </div>
-                                        <div class="filter__selection-items-select">
-                                            <div class="filter__selection-title">Trạng thái:</div>
-                                            <select name="Level" class="combobox admin-input__short">
-                                                <option value="">Tất cả</option>
-                                                <option value="1">Công khai</option>
-                                                <option value="2">Riêng tư</option>
-                                            </select>
-                                        </div>
-                                        <div class="filter__selection-items-select">
-                                            <div class="filter__selection-title">Cấp độ:</div>
-                                            <select name="Level" class="combobox admin-input__short">
-                                                <option value="">Tất cả</option>
-                                                <option value="1">Người mới</option>
-                                                <option value="2">Trung cấp</option>
-                                                <option value="2">Nâng cao</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
-                                    <div class="filter__button-search">
-                                        <button class="button dark-button" type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                        <div class="container-2__body">
+                            <form action="admin/course/search" method="GET">
+                                <div class="container-2__filter">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items filter__selection-name">
+                                                <div class="filter__selection-title  filter__item-label">Tên khóa học:
+                                                </div>
+                                                <input placeholder="" type="text" class="admin-input__long"
+                                                       name="courseTitle" value="${param.courseTitle}">
+                                            </div>
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-title">Từ ngày</div>
+                                                <input placeholder="" type="date" class="admin-input__long"
+                                                       name="dateFrom" value="${param.dateFrom}">
+                                            </div>
+                                            <div class="filter__selection-items-select">
+                                                <div class="filter__selection-title">Trạng thái:</div>
+                                                <select name="isPublic" class="combobox admin-input__short">
+                                                    <option value="" ${empty param.isPublic ? 'selected' : ''}>Tất cả
+                                                    </option>
+                                                    <option value="public" ${param.isPublic == 'public' ? 'selected' : ''}>
+                                                        Công khai
+                                                    </option>
+                                                    <option value="private" ${param.isPublic == 'private' ? 'selected' : ''}>
+                                                        Riêng tư
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="filter__selection-items-select">
+                                                <div class="filter__selection-title">Cấp độ:</div>
+                                                <select name="level" class="combobox admin-input__short">
+                                                    <option value="" ${empty param.level ? 'selected' : ''}>Tất cả
+                                                    </option>
+                                                    <option value="beginner" ${param.level == 'beginner' ? 'selected' : ''}>
+                                                        Người mới
+                                                    </option>
+                                                    <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>
+                                                        Trung cấp
+                                                    </option>
+                                                    <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>
+                                                        Nâng cao
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="filter__button-search">
+                                            <button class="button dark-button" type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
                             <div class="container-2__list-student">
                                 <table>

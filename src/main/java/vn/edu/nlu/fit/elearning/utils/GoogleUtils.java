@@ -32,6 +32,8 @@ public class GoogleUtils {
         String link = GoogleConstants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
 
+        System.out.println(response);
+
         return new Gson().fromJson(response, GoogleUser.class);
     }
 }
