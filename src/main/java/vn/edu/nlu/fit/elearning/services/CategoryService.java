@@ -28,8 +28,8 @@ public class CategoryService {
         return categoryDao.findById(id);
     }
 
-    public void updateCategory(Category category) {
-
+    public int updateCategory(Category category) {
+        return categoryDao.update(category);
     }
 
     public int deleteCategory(int id) {

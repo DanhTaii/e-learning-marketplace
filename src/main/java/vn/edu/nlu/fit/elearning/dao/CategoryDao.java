@@ -37,7 +37,17 @@ public class CategoryDao extends BaseDao implements BaseCrudDao<Category, Intege
 
     @Override
     public int update(Category entity) {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE categories\n" +
+                            "SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon \n" +
+                            "WHERE id = :id")
+                    .bind("name", entity.getName())
+                    .bind("slug", entity.getSlug())
+                    .bind("parentId", entity.getParentId())
+                    .bind("icon", entity.getIconUrl())
+                    .bind("id", entity.getId())
+                    .execute();
+        });
     }
 
     @Override

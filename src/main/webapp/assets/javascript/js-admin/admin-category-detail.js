@@ -9,9 +9,11 @@ function showCategoryDetail(id) {
             document.getElementById('modal-title').innerText = 'THÔNG TIN: ' + (cate.name || "");
 
             document.getElementById('detail-id').value = cate.id;
+            document.getElementById("detail-name").value = cate.name;
             document.getElementById('detail-slug').value = cate.slug || "";
             document.getElementById('detail-parentId').value = cate.parentId || "";
             document.getElementById('detail-icon').value = cate.icon || "";
+            document.getElementById('detail-status').value = cate.status;
 
             if (cate.createdAt) {
                 document.getElementById('detail-created').value = new Date(cate.createdAt).toLocaleDateString("vi-VN");
