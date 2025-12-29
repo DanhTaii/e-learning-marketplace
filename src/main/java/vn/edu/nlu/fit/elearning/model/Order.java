@@ -12,9 +12,9 @@ public class Order implements Serializable {
     private String orderCode;
     private int userId;
     private Integer paymentMethodId;
-    private double totalAmount;
-    private double discountAmount;
-    private double finalAmount;
+    private int totalAmount;
+    private int discountAmount;
+    private int finalAmount;
     private String status;
     private Timestamp paidAt;
     private Timestamp createdAt;
@@ -35,14 +35,14 @@ public class Order implements Serializable {
     public Integer getPaymentMethodId() { return paymentMethodId; }
     public void setPaymentMethodId(Integer paymentMethodId) { this.paymentMethodId = paymentMethodId; }
 
-    public double getTotalAmount() { return totalAmount; }
-    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
+    public int getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(int totalAmount) { this.totalAmount = totalAmount; }
 
-    public double getDiscountAmount() { return discountAmount; }
-    public void setDiscountAmount(double discountAmount) { this.discountAmount = discountAmount; }
+    public int getDiscountAmount() { return discountAmount; }
+    public void setDiscountAmount(int discountAmount) { this.discountAmount = discountAmount; }
 
-    public double getFinalAmount() { return finalAmount; }
-    public void setFinalAmount(double finalAmount) { this.finalAmount = finalAmount; }
+    public int getFinalAmount() { return finalAmount; }
+    public void setFinalAmount(int finalAmount) { this.finalAmount = finalAmount; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }

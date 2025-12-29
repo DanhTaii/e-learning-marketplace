@@ -2,65 +2,47 @@ package vn.edu.nlu.fit.elearning.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class OrderItem implements Serializable {
     private int id;
     private int orderId;
     private int courseId;
-    private double priceAtPurchase;
-    private boolean isSelected;
-    private Timestamp addedAt;
+    private int priceAtPurchase;    // Đổi từ double → int (theo DB: INT NOT NULL)
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+    // Field tạm để chọn trong giao diện (nếu cần)
+    private boolean selected;
 
+    public OrderItem() {}
 
-    public OrderItem() {
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
+    public int getOrderId() { return orderId; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
 
-    public int getId() {
-        return id;
-    }
+    public int getCourseId() { return courseId; }
+    public void setCourseId(int courseId) { this.courseId = courseId; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getPriceAtPurchase() { return priceAtPurchase; }
+    public void setPriceAtPurchase(int priceAtPurchase) { this.priceAtPurchase = priceAtPurchase; }
 
-    public int getOrderId() {
-        return orderId;
-    }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    public Timestamp getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Timestamp updatedAt) { this.updatedAt = updatedAt; }
 
-    public int getCourseId() {
-        return courseId;
-    }
+    public boolean isSelected() { return selected; }
+    public void setSelected(boolean selected) { this.selected = selected; }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
-
-    public double getPriceAtPurchase() {
-        return priceAtPurchase;
-    }
-
-    public void setPriceAtPurchase(double priceAtPurchase) {
-        this.priceAtPurchase = priceAtPurchase;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    public Timestamp getAddedAt() {
-        return addedAt;
-    }
-
-    public void setAddedAt(Timestamp addedAt) {
-        this.addedAt = addedAt;
+    // Format giá khóa học tại thời điểm mua
+    public String getPriceAtPurchaseFormatted() {
+        Locale vietnam = new Locale("vi", "VN");
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(vietnam);
+        String formatted = formatter.format(priceAtPurchase);
+        return formatted.replace(" ₫", "").replace("₫", "").trim();
     }
 }

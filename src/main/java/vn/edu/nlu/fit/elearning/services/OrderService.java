@@ -7,43 +7,49 @@ import java.util.List;
 
 public class OrderService {
 
-    private OrderDao od;
+    private OrderDao orderDao;
 
     public OrderService() {
-        this.od = new OrderDao();
+        this.orderDao = new OrderDao();
     }
 
     public int createOrder(Order order) {
-        // TODO: Implement creation logic
+        if (order != null) {
+            orderDao.create(order);
+            return 1;
+        }
         return 0;
     }
 
     public List<Order> getAllOrders() {
-        // TODO: Implement getAll logic
-        return od.findAll();
+        return orderDao.findAll();
     }
 
     public Order getOrderById(int orderId) {
-        Order order = od.findById(orderId);
-        return order;
+        return orderDao.findById(orderId);
     }
 
-    public Order findOrderPending(Integer userId){
-        Order orderPending = od.findOrderPending(userId);
-        return  orderPending;
-     }
-
-    public void updateOrder(Order order) {
-        // TODO: Implement update logic
+    public Order findOrderPending(Integer userId) {
+        if (userId == null) {
+            return null;
+        }
+        return orderDao.findOrderPending(userId);
     }
 
-    public void deleteOrder(int id) {
-        // TODO: Implement delete logic
+    public int updateOrder(Order order) {
+        if (order != null) {
+            return orderDao.update(order);
+        }
+        return 0;
+    }
+
+
+    public boolean deleteOrder(int orderId) {
+        int status = orderDao.delete(orderId);
+        return status > 0;
     }
 
     public double getRevenueTotal() {
-        double result = od.calculateRevenueTotal();
-        return result;
+        return orderDao.calculateRevenueTotal();
     }
-
 }
