@@ -8,20 +8,24 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
 
     @Override
     public int create(PaymentMethod entity) {
-        String sql = "INSERT INTO Payment_Methods (name, code, icon_url, is_active) \n" +
-                "VALUES (:name, :code, :iconUrl, :active)";
-        return getJdbi().withHandle(handle -> {
-            return handle.createUpdate(sql)
-                    .bindBean(entity)
-                    .execute();
-        });
+        String sql = "INSERT INTO Payment_Methods (name, code, icon_url, status) " +
+                "VALUES (:name, :code, :iconUrl, :status)";
+
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("name", entity.getName())
+                        .bind("code", entity.getCode())
+                        .bind("iconUrl", entity.getIconUrl())
+                        .bind("status", entity.getStatus())  // Bind thủ công chỉ 4 field cần thiết
+                        .execute()
+        );
     }
 
     @Override
     public PaymentMethod findById(Integer id) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, is_active " +
+                            "SELECT id, name, code, icon_url, status, created_at, updated_at " +
                                     "FROM Payment_Methods WHERE id = :id")
                     .bind("id", id)
                     .mapToBean(PaymentMethod.class)
@@ -30,12 +34,11 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
         });
     }
 
-    // giống findByName của TagDao
     public List<PaymentMethod> findByName(String name) {
         String nameSearch = "%" + name + "%";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, is_active " +
+                            "SELECT id, name, code, icon_url, status, created_at, updated_at " +
                                     "FROM Payment_Methods " +
                                     "WHERE name LIKE :nameSearch")
                     .bind("nameSearch", nameSearch)
@@ -48,7 +51,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
     public List<PaymentMethod> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, is_active " +
+                            "SELECT id, name, code, icon_url, status, created_at, updated_at " +
                                     "FROM Payment_Methods " +
                                     "ORDER BY id")
                     .mapToBean(PaymentMethod.class)
@@ -62,14 +65,14 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
                 "SET name = :name, \n" +
                 "    code = :code, \n" +
                 "    icon_url = :iconUrl, \n" +
-                "    is_active = :active \n" +
+                "    status = :status \n" +
                 "WHERE id = :id";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind("name", entity.getName())
                     .bind("code", entity.getCode())
                     .bind("iconUrl", entity.getIconUrl())
-                    .bind("active", entity.isActive())
+                    .bind("status", entity.getStatus())
                     .bind("id", entity.getId())
                     .execute();
         });
