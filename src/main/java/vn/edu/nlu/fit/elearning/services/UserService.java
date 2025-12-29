@@ -10,7 +10,6 @@ import java.util.List;
 
 public class UserService {
     private UserDao userDao;
-    private static final String SALT = "SECRET";
 
     public UserService() {
         this.userDao = new UserDao();
@@ -30,7 +29,7 @@ public class UserService {
             return null;
         }
 
-        String hash = PasswordUtils.hashpassword(password + SALT);
+        String hash = PasswordUtils.hashpassword(password);
         if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
             return user;
         }
@@ -64,7 +63,7 @@ public class UserService {
         validatePassword(password);
 
         User user = new User();
-        String hashPass = PasswordUtils.hashpassword(password + SALT);
+        String hashPass = PasswordUtils.hashpassword(password );
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(hashPass);
@@ -72,8 +71,8 @@ public class UserService {
     }
 
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
-        String oldHash = PasswordUtils.hashpassword(oldPassword + SALT);
-        String newHashPassword = PasswordUtils.hashpassword(newPassword + SALT);
+        String oldHash = PasswordUtils.hashpassword(oldPassword );
+        String newHashPassword = PasswordUtils.hashpassword(newPassword );
 
         if (this.getUserByEmail(userMail) == null) {
             throw new IllegalArgumentException("Email không tồn tại !!!");

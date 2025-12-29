@@ -15,8 +15,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     @Override
     public int create(Course entity) {
-
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO Courses( id, title, subtitle, level, goals, description, price, discount_price, thumbnail_url)\n" +
+                            "VALUES (:id, :title,  :subtitle,  :level,  :goals ,  :description, :price, :discountPrice, :thumbnailUrl)")
+                    .bindBean(entity)
+                    .execute();
+        });
     }
 
     @Override
@@ -269,7 +273,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                 params.put("level", filter.getLevel());
             }
 
-            if (filter.getCreatedAt() != null &&!filter.getCreatedAt().isEmpty() ) {
+            if (filter.getCreatedAt() != null && !filter.getCreatedAt().isEmpty()) {
                 sql.append(" AND c.created_at >= :dateFrom");
                 params.put("dateFrom", filter.getCreatedAt());
             }
