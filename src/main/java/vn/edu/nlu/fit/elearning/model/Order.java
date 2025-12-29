@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.model;
 
+import vn.edu.nlu.fit.elearning.enums.OrderStatus;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
@@ -15,7 +17,7 @@ public class Order implements Serializable {
     private int totalAmount;
     private int discountAmount;
     private int finalAmount;
-    private String status;
+    private OrderStatus status;
     private Timestamp paidAt;
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -44,8 +46,13 @@ public class Order implements Serializable {
     public int getFinalAmount() { return finalAmount; }
     public void setFinalAmount(int finalAmount) { this.finalAmount = finalAmount; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
 
     public Timestamp getPaidAt() { return paidAt; }
     public void setPaidAt(Timestamp paidAt) { this.paidAt = paidAt; }
