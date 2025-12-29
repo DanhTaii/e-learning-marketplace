@@ -36,9 +36,9 @@ public class PaymentController extends HttpServlet {
         Order order = orderService.findOrderPending(userId);
         List<OrderItem> orderItemsSelect = orderItemService.getOrderItemSelected(order.getId());
 
-        double totalAmount = 0;
-        double finalAmount = 0;
-        double discountAmount = 0;
+        int totalAmount = 0;
+        int finalAmount = 0;
+        int discountAmount = 0;
 
         for (OrderItem items : orderItemsSelect) {
 //            finalAmount += items.getPriceNew();

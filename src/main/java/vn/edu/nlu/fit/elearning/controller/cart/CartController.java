@@ -33,8 +33,8 @@ public class CartController extends HttpServlet {
         List<OrderItem> list = this.orderItemService.getCartItems(order.getId());
 
         List<OrderItem> itemSelected = this.orderItemService.getOrderItemSelected(order.getId());
-        double totalAmonut = 0;
-        double finalAmount = 0;
+        int totalAmonut = 0;
+        int finalAmount = 0;
         for (OrderItem items : itemSelected) {
 //            finalAmount += items.getPriceNew();
 //            totalAmonut += items.getPriceOld();

@@ -187,177 +187,73 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                ORD101
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Danh Tai
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                400.000đ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Momo
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content course-row__status-public course-row__status">
-                                                Paid
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 –
-                                                4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="#course-detail" class="button-de-mo">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                ORD102
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Danh Tai
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                1.400.000đ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                Momo
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status-public course-row__font-content course-row__status">
-                                                Paid
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 –
-                                                4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="#course-detail" class="button-de-mo">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                ORD103
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                NgocMinh
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                600.000đ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status-pending course-row__font-content course-row__status">
-                                                Pending
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 –
-                                                4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="#course-detail" class="button-de-mo">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="course-row__title title course-row__style-text">
-                                                ORD104
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                MinhLoc
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                400.000đ
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__font-content">
-                                                <!--                                            Momo-->
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__status-failed course-row__font-content course-row__status">
-                                                Failed
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="course-row__created course-row__font-content">April 13, 2022 –
-                                                4:24
-                                                PM
-                                            </div>
-                                        </td>
-                                        <td class="action__button">
-                                            <a href="#course-detail" class="button-de-mo">
-                                                <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                            </a>
-                                            <a href="">
-                                                <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                            </a>
-                                    </tr>
+                                    <c:forEach var="order" items="${listOrders}">
+                                        <tr>
+                                            <td>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${order.orderCode}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                    User ID: ${order.userId} <!-- Tạm thời hiển thị ID, sau này JOIN tên -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                        ${order.finalAmount}đ <!-- Dùng trực tiếp finalAmount, tạm chưa format -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content">
+                                                    <c:choose>
+                                                        <c:when test="${order.paymentMethodId == 1}">Momo</c:when>
+                                                        <c:when test="${order.paymentMethodId == 2}">VNPAY</c:when>
+                                                        <c:when test="${order.paymentMethodId == 3}">ZaloPay</c:when>
+                                                        <c:otherwise>Chưa chọn</c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__font-content course-row__status
+                    <c:choose>
+                        <c:when test="${order.status == 'PAID'}">course-row__status-public</c:when>
+                        <c:when test="${order.status == 'PENDING'}">course-row__status-pending</c:when>
+                        <c:when test="${order.status == 'FAILED'}">course-row__status-failed</c:when>
+                        <c:otherwise></c:otherwise>
+                    </c:choose>
+                    ">
+                                                        ${order.status}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-row__created course-row__font-content">
+                                                    <fmt:formatDate value="${order.createdAt}" pattern="dd/MM/yyyy HH:mm"/>
+                                                </div>
+                                            </td>
+                                            <td class="action__button">
+                                                <a href="#course-detail" class="button-de-mo" onclick="showOrderDetail(${order.id})">
+                                                    <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                </a>
+                                                <a href="${pageContext.request.contextPath}/admin/orders?action=delete&id=${order.id}"
+                                                   onclick="return confirm('Bạn có chắc muốn xóa đơn hàng này?')">
+                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+
+                                    <!-- Nếu không có đơn hàng nào -->
+                                    <c:if test="${empty listOrders}">
+                                        <tr>
+                                            <td colspan="7" style="text-align: center; padding: 20px;">
+                                                Chưa có đơn hàng nào
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                     </tbody>
 
                                 </table>
