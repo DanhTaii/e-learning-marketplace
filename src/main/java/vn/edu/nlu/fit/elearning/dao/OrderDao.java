@@ -1,9 +1,13 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import vn.edu.nlu.fit.elearning.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
@@ -20,19 +24,35 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     @Override
     public Order findById(Integer orderId) {
-        String sql = "SELECT o.*, pm.name AS payment_method_name, u.first_name, u.last_name, u.email AS user_email\n" +
-                "FROM Orders o\n" +
-                "LEFT JOIN Payment_Methods pm ON o.payment_method_id = pm.id\n" +
-                "LEFT JOIN Users u ON o.user_id = u.id\n" +
+        String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
+                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.paid_at, o.created_at, o.updated_at " +
+                "FROM Orders o " +
                 "WHERE o.id = :id";
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery(sql)
-                    .bind("id", orderId)
-                    .mapToBean(Order.class)
-                    .findFirst()
-                    .orElse(null);
-        });
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("id", orderId)
+                        .map((rs, ctx) -> {
+                            Order order = new Order();
+                            order.setId(rs.getInt("id"));
+                            order.setOrderCode(rs.getString("order_code"));
+                            order.setUserId(rs.getInt("user_id"));
+                            order.setPaymentMethodId(rs.getInt("payment_method_id"));
+                            order.setTotalAmount(rs.getInt("total_amount"));
+                            order.setDiscountAmount(rs.getInt("discount_amount"));
+                            order.setFinalAmount(rs.getInt("final_amount"));
+                            order.setStatus(OrderStatus.valueOf(rs.getString("status")));
+                            order.setPaidAt(rs.getTimestamp("paid_at"));
+                            order.setCreatedAt(rs.getTimestamp("created_at"));
+                            order.setUpdatedAt(rs.getTimestamp("updated_at"));
+                            return order;
+                        })
+                        .findFirst()
+                        .orElse(null)
+        );
     }
+
 
     public Order findOrderPending(Integer userId) {
         String sql = "SELECT o.*, pm.name AS payment_method_name, u.first_name, u.last_name, u.email AS user_email\n" +
@@ -62,14 +82,16 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
                 "o.status, " +
                 "o.paid_at AS paidAt, " +
                 "o.created_at AS createdAt, " +
-                "o.updated_at AS updatedAt " +
+                "o.updated_at AS updatedAt, " +
+                "u.username AS username " +  // <-- Thêm cột username từ Users
                 "FROM Orders o " +
+                "LEFT JOIN Users u ON o.user_id = u.id " +
                 "ORDER BY o.created_at DESC";
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery(sql)
-                    .mapToBean(Order.class)
-                    .list();
-        });
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapToBean(Order.class)
+                        .list()
+        );
     }
 
 
@@ -113,4 +135,136 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
                     .orElse(0.0);
         });
     }
+
+    public List<Order> getOrderBySearch(String orderCode, String userName, String fromDate, String status) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT o.id, o.order_code AS orderCode, ")
+                .append("o.user_id AS userId, ")
+                .append("o.payment_method_id AS paymentMethodId, ")
+                .append("o.total_amount AS totalAmount, ")
+                .append("o.discount_amount AS discountAmount, ")
+                .append("o.final_amount AS finalAmount, ")
+                .append("o.status, ")
+                .append("o.paid_at AS paidAt, ")
+                .append("o.created_at AS createdAt, ")
+                .append("o.updated_at AS updatedAt, ")
+                .append("u.username AS username ")  // Lấy username để hiển thị
+                .append("FROM Orders o ")
+                .append("LEFT JOIN Users u ON o.user_id = u.id ")
+                .append("WHERE 1=1 ");
+
+        if (orderCode != null && !orderCode.trim().isEmpty()) {
+            sql.append("AND o.order_code LIKE :orderCode ");
+        }
+        if (userName != null && !userName.trim().isEmpty()) {
+            sql.append("AND u.username LIKE :userName ");
+        }
+        if (fromDate != null && !fromDate.trim().isEmpty()) {
+            sql.append("AND DATE(o.created_at) >= :fromDate ");
+        }
+        if (status != null && !status.trim().isEmpty()) {
+            sql.append("AND o.status = :status ");
+        }
+
+        sql.append("ORDER BY o.created_at DESC");
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            if (orderCode != null && !orderCode.trim().isEmpty()) {
+                query.bind("orderCode", "%" + orderCode.trim() + "%");
+            }
+            if (userName != null && !userName.trim().isEmpty()) {
+                query.bind("userName", "%" + userName.trim() + "%");
+            }
+            if (fromDate != null && !fromDate.trim().isEmpty()) {
+                query.bind("fromDate", fromDate);
+            }
+            if (status != null && !status.trim().isEmpty()) {
+                query.bind("status", status);
+            }
+
+            return query.mapToBean(Order.class).list();
+        });
+    }
+
+    public List<Map<String, Object>> findAllWithUserName() {
+        String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
+                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.paid_at, o.created_at, o.updated_at, u.username AS userName " +
+                "FROM Orders o " +
+                "LEFT JOIN Users u ON o.user_id = u.id " +
+                "ORDER BY o.created_at DESC";
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> {
+                            Map<String, Object> row = new HashMap<>();
+                            Order order = new Order();
+                            order.setId(rs.getInt("id"));
+                            order.setOrderCode(rs.getString("order_code"));
+                            order.setUserId(rs.getInt("user_id"));
+                            order.setPaymentMethodId(rs.getInt("payment_method_id"));
+                            order.setTotalAmount(rs.getInt("total_amount"));
+                            order.setDiscountAmount(rs.getInt("discount_amount"));
+                            order.setFinalAmount(rs.getInt("final_amount"));
+                            order.setStatus(OrderStatus.valueOf(rs.getString("status")));
+                            order.setPaidAt(rs.getTimestamp("paid_at"));
+                            order.setCreatedAt(rs.getTimestamp("created_at"));
+                            order.setUpdatedAt(rs.getTimestamp("updated_at"));
+
+                            row.put("order", order);
+                            row.put("userName", rs.getString("userName"));
+                            return row;
+                        })
+                        .list()
+        );
+    }
+
+    public List<Map<String, Object>> searchWithUserAndPayment(String orderCode, String userName, Timestamp fromDate, String status) {
+        String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
+                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.paid_at, o.created_at, o.updated_at, " +
+                "u.username AS userName, pm.name AS paymentName " +
+                "FROM Orders o " +
+                "LEFT JOIN Users u ON o.user_id = u.id " +
+                "LEFT JOIN Payment_Methods pm ON o.payment_method_id = pm.id " +
+                "WHERE 1=1 " +
+                (orderCode != null && !orderCode.isEmpty() ? " AND o.order_code LIKE :orderCode " : "") +
+                (userName != null && !userName.isEmpty() ? " AND u.username LIKE :userName " : "") +
+                (fromDate != null ? " AND o.created_at >= :fromDate " : "") +
+                (status != null && !status.isEmpty() ? " AND o.status = :status " : "") +
+                "ORDER BY o.created_at DESC";
+
+        return getJdbi().withHandle(h -> {
+            var q = h.createQuery(sql);
+            if (orderCode != null && !orderCode.isEmpty()) q.bind("orderCode", "%" + orderCode + "%");
+            if (userName != null && !userName.isEmpty()) q.bind("userName", "%" + userName + "%");
+            if (fromDate != null) q.bind("fromDate", fromDate);
+            if (status != null && !status.isEmpty()) q.bind("status", status);
+
+            return q.map((rs, ctx) -> {
+                Map<String, Object> row = new HashMap<>();
+                Order order = new Order();
+                order.setId(rs.getInt("id"));
+                order.setOrderCode(rs.getString("order_code"));
+                order.setUserId(rs.getInt("user_id"));
+                order.setPaymentMethodId(rs.getInt("payment_method_id"));
+                order.setTotalAmount(rs.getInt("total_amount"));
+                order.setDiscountAmount(rs.getInt("discount_amount"));
+                order.setFinalAmount(rs.getInt("final_amount"));
+                order.setStatus(OrderStatus.valueOf(rs.getString("status")));
+                order.setPaidAt(rs.getTimestamp("paid_at"));
+                order.setCreatedAt(rs.getTimestamp("created_at"));
+                order.setUpdatedAt(rs.getTimestamp("updated_at"));
+                row.put("order", order);
+                row.put("userName", rs.getString("userName"));
+                row.put("paymentName", rs.getString("paymentName"));
+                return row;
+            }).list();
+        });
+    }
+
+
+
 }
