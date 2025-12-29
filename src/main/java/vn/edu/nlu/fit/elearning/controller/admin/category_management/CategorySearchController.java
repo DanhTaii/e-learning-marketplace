@@ -13,7 +13,9 @@ import java.util.List;
 public class CategorySearchController extends HttpServlet {
     private CategoryService categoryService;
 
-    public CategorySearchController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.categoryService = new CategoryService();
     }
 

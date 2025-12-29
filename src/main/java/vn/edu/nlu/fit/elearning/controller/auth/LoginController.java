@@ -5,6 +5,7 @@
     import jakarta.servlet.annotation.*;
     import vn.edu.nlu.fit.elearning.dao.UserDao;
     import vn.edu.nlu.fit.elearning.model.User;
+    import vn.edu.nlu.fit.elearning.services.CategoryService;
     import vn.edu.nlu.fit.elearning.services.UserService;
 
     import java.io.IOException;
@@ -14,7 +15,9 @@
 
         private UserService userService;
 
-        public LoginController() {
+        @Override
+        public void init() throws ServletException {
+            super.init();
             this.userService = new UserService();
         }
 
@@ -33,7 +36,6 @@
 
                 session.setAttribute("userId", canLogin.getId());
                 session.setAttribute("userSession", canLogin);
-//                System.out.println("DEBUG (Login): User ID " + canLogin.getId() + " Đã được lưu vào Session.");
 
                 if (canLogin.getRole().equalsIgnoreCase("admin")) {
                     response.sendRedirect("admin/dashboard");

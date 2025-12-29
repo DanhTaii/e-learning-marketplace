@@ -8,6 +8,7 @@
     import jakarta.servlet.http.HttpServletResponse;
     import vn.edu.nlu.fit.elearning.model.Lesson;
     import vn.edu.nlu.fit.elearning.model.Tag;
+    import vn.edu.nlu.fit.elearning.services.CourseService;
     import vn.edu.nlu.fit.elearning.services.LessonService;
     import vn.edu.nlu.fit.elearning.services.TagService;
 
@@ -17,8 +18,9 @@
     public class LessonDetailController extends HttpServlet {
         private LessonService lessonService;
 
-        public LessonDetailController() {
-            // Khởi tạo TagService
+        @Override
+        public void init() throws ServletException {
+            super.init();
             this.lessonService = new LessonService();
         }
     

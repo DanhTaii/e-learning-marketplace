@@ -16,7 +16,9 @@ import java.nio.charset.StandardCharsets;
 public class UserDetailController extends HttpServlet {
     private UserService userService;
 
-    public UserDetailController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
 

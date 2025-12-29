@@ -15,10 +15,11 @@ public class PaymentMethodSearch extends HttpServlet {
 
     private PaymentMethodService paymentMethodService;
 
-    public PaymentMethodSearch() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.paymentMethodService = new PaymentMethodService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameSearch = request.getParameter("searchName");
@@ -40,6 +41,6 @@ public class PaymentMethodSearch extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Nếu bạn muốn hỗ trợ tìm kiếm bằng POST thì để đây, hiện tại để trống theo mẫu
+
     }
 }

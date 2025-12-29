@@ -15,10 +15,11 @@ public class PaymentMethodUpdateController extends HttpServlet {
 
     private PaymentMethodService paymentMethodService;
 
-    public PaymentMethodUpdateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.paymentMethodService = new PaymentMethodService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect(request.getContextPath() + "/admin/payment-methods");

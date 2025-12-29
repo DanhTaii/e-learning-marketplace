@@ -13,14 +13,15 @@ import java.util.List;
 public class UserManagementController extends HttpServlet {
     private UserService userService;
 
-    public UserManagementController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> listUsers = userService.getAllUsers();
-        System.out.println(listUsers);
         request.setAttribute("listUsers", listUsers);
         request.setAttribute("currentPage", "users");
         request.getRequestDispatcher("/html-admin/users-management.jsp").forward(request, response);

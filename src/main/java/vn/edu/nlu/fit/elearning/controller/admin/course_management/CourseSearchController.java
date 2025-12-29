@@ -16,7 +16,9 @@ public class CourseSearchController extends HttpServlet {
     private CourseService courseService;
 
 
-    public CourseSearchController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.courseService = new CourseService();
     }
 
@@ -38,7 +40,6 @@ public class CourseSearchController extends HttpServlet {
 
         List<Course> listCourses = courseService.getAllCourses(courseFilter);
 
-        System.out.println(listCourses);
         request.setAttribute("listCourses", listCourses);
         request.setAttribute("currentPage", "courses");
         request.getRequestDispatcher("/html-admin/courses-management.jsp").forward(request, response);

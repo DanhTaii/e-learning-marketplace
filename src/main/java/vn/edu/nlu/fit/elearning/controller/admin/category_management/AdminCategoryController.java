@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
+import vn.edu.nlu.fit.elearning.services.CourseService;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,7 +15,9 @@ public class AdminCategoryController extends HttpServlet {
 
     private CategoryService categoryService;
 
-    public AdminCategoryController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.categoryService = new CategoryService();
     }
 

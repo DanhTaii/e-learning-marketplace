@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 import vn.edu.nlu.fit.elearning.services.OrderService;
 import vn.edu.nlu.fit.elearning.services.UserService;
@@ -19,7 +20,9 @@ public class DashboardController extends HttpServlet {
     private OrderService orderService;
     private CourseService courseService;
 
-    public DashboardController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
         this.orderService = new OrderService();
         this.courseService = new CourseService();

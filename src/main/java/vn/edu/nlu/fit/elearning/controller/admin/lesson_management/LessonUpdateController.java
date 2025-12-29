@@ -17,13 +17,12 @@ import java.io.IOException;
 public class LessonUpdateController extends HttpServlet {
 
     private LessonService lessonService;
-    private CourseService courseService;
 
-    public LessonUpdateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.lessonService = new LessonService();
-        this.courseService = new CourseService();
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +37,6 @@ public class LessonUpdateController extends HttpServlet {
             String nameLesson = request.getParameter("nameLesson");
             String videoURL = request.getParameter("videoURL");
             int durationMinutes = Integer.parseInt(request.getParameter("durationMinutes"));
-
 
             int orderIndex = Integer.parseInt(request.getParameter("orderIndex"));
             int oldOrderIndex = Integer.parseInt(request.getParameter("oldOrderIndex"));

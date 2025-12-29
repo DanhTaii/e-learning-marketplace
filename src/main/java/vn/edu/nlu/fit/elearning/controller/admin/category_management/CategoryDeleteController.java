@@ -11,7 +11,9 @@ import java.io.IOException;
 public class CategoryDeleteController extends HttpServlet {
     private CategoryService categoryService;
 
-    public CategoryDeleteController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.categoryService = new CategoryService();
     }
 

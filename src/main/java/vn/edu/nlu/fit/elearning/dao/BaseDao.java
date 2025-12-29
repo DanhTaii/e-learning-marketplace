@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.dao;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.nlu.fit.elearning.model.Course;
 
@@ -8,14 +10,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class BaseDao {
-    private Jdbi jdbi;
+    //Phải dùng static do mỗi khi lớp con của BaseDao được khởi tạo nó sẽ tạo 1 Connection Pool mới
+    //=> 100 request thì 100 cái pool
+    private static Jdbi jdbi;
 
     public Jdbi getJdbi() {
+        //Kiểm tra lúc vào cửa
         if (jdbi == null) makeConnect();
         return jdbi;
     }
 
-    private void makeConnect() {
+    // Thêm synchronized để an toàn khi nhiều người truy cập cùng lúc ?
+    //Hieeur synchronized như 1 chốt khóa khi 1 request được gửi đến thì sẽ chỉ có mình nó dùng
+    private synchronized void makeConnect() {
+        //Kiểm tra lần 2
+        //Do là nếu có 10 request cùng lúc thì nó sẽ vào cửa đợi thì thằng đầu null nhưng sau khi thằng đầu xong
+        // là nó đã tạo ra được 1 cái thì lúc này đã có CP thì những thằng sau không cần tạo nữa
+        if (jdbi != null) return;
+        //Tạo kết nối đến DB dựa theo kiểu DB đang xài (MySQL Database)
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setURL("jdbc:mysql://" + DBProperties.getDbHost() + ":" + DBProperties.getDbPort() + "/"
                 + DBProperties.getDbName());
@@ -29,17 +41,22 @@ public abstract class BaseDao {
             throwables.printStackTrace();
             throw new RuntimeException(throwables);
         }
-        jdbi = Jdbi.create(dataSource);
+
+        //Khởi tạo cấu hình của Hikari
+        HikariConfig hikariConfig = new HikariConfig();
+
+        //Lấy datasource của MySQL
+        hikariConfig.setDataSource(dataSource);
+
+        //Cấu hình tham số cho Hikari
+        hikariConfig.setMaximumPoolSize(10);
+        hikariConfig.setMinimumIdle(5);
+        hikariConfig.setConnectionTimeout(30000);
+        hikariConfig.setIdleTimeout(600000);
+
+        //Tạo ra Connection Pool dựa trên cấu hình đã có
+        HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
+        jdbi = Jdbi.create(hikariDataSource);
     }
 
-//    public static void main(String[] args) {
-//        BaseDao baseDao = new BaseDao();
-//        Jdbi jdbi = baseDao.getJdbi();
-//        //useHandle: KHông trả về gì hết (void) => update, delete, insert
-//        //withHandle: Trả về dữ liệu
-//        List<Course> courses = jdbi.withHandle(h -> {
-//            return h.createQuery("select * from courses").mapToBean(Course.class).list();
-//        });
-//        System.out.println(courses);
-//    }
 }

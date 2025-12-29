@@ -16,7 +16,9 @@ public class CategoryUpdateController extends HttpServlet {
 
     private CategoryService categoryService;
 
-    public CategoryUpdateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.categoryService = new CategoryService();
     }
 
@@ -32,7 +34,6 @@ public class CategoryUpdateController extends HttpServlet {
         if (cate != null) {
             String cateJson = new Gson().toJson(cate);
             response.getWriter().write(cateJson);
-            System.out.println(cateJson);
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().write("{\"message\": \"Không tìm thấy category\"}");

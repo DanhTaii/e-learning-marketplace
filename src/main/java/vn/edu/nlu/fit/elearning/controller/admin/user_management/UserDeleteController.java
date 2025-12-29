@@ -11,10 +11,11 @@ import java.io.IOException;
 public class UserDeleteController extends HttpServlet {
     private UserService userService;
 
-    public UserDeleteController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,7 +27,6 @@ public class UserDeleteController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             int checkDelete = userService.deleteUser(id);
             if (checkDelete > 0) {
-                System.out.println(checkDelete);
                 request.getSession().setAttribute("flashSuccess", "Xóa người dùng thành công !");
                 response.sendRedirect(request.getContextPath() + "/admin/users");
             } else {

@@ -13,10 +13,11 @@ public class UserUpdateController extends HttpServlet {
 
     private UserService userService;
 
-    public UserUpdateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -4,6 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.OrderService;
 import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
@@ -12,10 +14,11 @@ import java.io.IOException;
 public class ResetPasswordController extends HttpServlet {
     private UserService userService;
 
-    public ResetPasswordController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

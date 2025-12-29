@@ -5,6 +5,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Wishlist;
+import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.OrderService;
+import vn.edu.nlu.fit.elearning.services.UserService;
 import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
@@ -14,6 +17,12 @@ import java.util.List;
 public class MyWishlistController extends HttpServlet {
 
     private WishlistService ws;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.ws = new WishlistService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
