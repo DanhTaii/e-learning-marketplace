@@ -18,10 +18,11 @@ public class OrderSearchController extends HttpServlet {
 
     private OrderService orderService;
 
-    public OrderSearchController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.orderService = new OrderService();
     }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String orderCode = req.getParameter("orderCode");

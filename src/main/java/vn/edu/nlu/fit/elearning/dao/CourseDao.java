@@ -237,7 +237,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "c.rating, c.student_count, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
                             "SUM(l.duration_minutes)/60.0 AS duration_hours " +
                             "FROM Courses c " +
-                            "JOIN Categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN Categories cate ON c.category_id = cate.id " +
                             "LEFT JOIN Lessons l ON c.id = l.course_id " +
                             "WHERE 1=1"
             );
@@ -281,14 +281,16 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             sql.append(" GROUP BY c.id");
 
             // Thời lượng (Sử dụng HAVING vì duration_hours là hàm tổng hợp)
-            if ("short".equals(filter.getDuration())) {
-                sql.append(" HAVING duration_hours < 5");
+            if (filter.getDuration() != null && !filter.getDuration().isEmpty()) {
+                if ("short".equals(filter.getDuration())) {
+                    sql.append(" HAVING duration_hours < 5");
+                }
             }
 
-            // Sắp xếp
-            if ("desc".equals(filter.getSortPrice())) {
-                sql.append(" ORDER BY (c.price - c.discount_price) DESC");
-            }
+//            // Sắp xếp
+//            if ("desc".equals(filter.getSortPrice())) {
+//                sql.append(" ORDER BY (c.price - c.discount_price) DESC");
+//            }
 
             var query = handle.createQuery(sql.toString());
             params.forEach(query::bind);

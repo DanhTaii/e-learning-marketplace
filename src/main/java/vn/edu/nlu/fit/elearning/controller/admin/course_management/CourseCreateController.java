@@ -13,10 +13,11 @@ public class CourseCreateController extends HttpServlet {
 
     private CourseService courseService;
 
-    public CourseCreateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.courseService = new CourseService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -47,11 +48,7 @@ public class CourseCreateController extends HttpServlet {
 
         course.setThumbnailUrl(request.getParameter("thumbnail"));
 
-        System.out.println(course);
-
         int checkCreate = courseService.createCourse(course);
-
-        System.out.println(checkCreate);
 
         if (checkCreate > 0) {
             request.setAttribute("flashSucces", "Tạo khóa học thành công !");

@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Tag;
 import vn.edu.nlu.fit.elearning.services.TagService;
+import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class AdminTagController extends HttpServlet {
 
     private TagService tagService;
 
-
-    public AdminTagController() {
+    @Override
+    public void init() {
         this.tagService = new TagService();
     }
 

@@ -17,10 +17,11 @@ public class TagUpdateController extends HttpServlet {
 
     private TagService tagService;
 
-    public TagUpdateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.tagService = new TagService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

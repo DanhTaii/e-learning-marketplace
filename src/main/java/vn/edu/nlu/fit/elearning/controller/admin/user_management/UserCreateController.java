@@ -17,10 +17,11 @@ public class UserCreateController extends HttpServlet {
 
     private UserService userService;
 
-    public UserCreateController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

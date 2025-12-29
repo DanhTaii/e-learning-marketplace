@@ -14,15 +14,17 @@ import java.util.List;
 public class AdminCourseController extends HttpServlet {
     private CourseService courseService;
 
-    public AdminCourseController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.courseService = new CourseService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Course> listCourses = courseService.getAllCourses(new CourseFilter());
-        System.out.println(listCourses);
-        request.setAttribute("listCourses",listCourses);
+        CourseFilter filter = new CourseFilter();
+        List<Course> listCourses = courseService.getAllCourses(filter);
+        request.setAttribute("listCourses", listCourses);
         request.setAttribute("currentPage", "courses");
         request.getRequestDispatcher("/html-admin/courses-management.jsp").forward(request, response);
     }

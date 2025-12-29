@@ -15,10 +15,11 @@ import java.io.IOException;
 public class PaymentMethodDetailController extends HttpServlet {
     private PaymentMethodService paymentMethodService;
 
-    public PaymentMethodDetailController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.paymentMethodService = new PaymentMethodService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");

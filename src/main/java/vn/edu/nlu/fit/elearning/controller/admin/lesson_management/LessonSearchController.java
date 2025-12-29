@@ -19,13 +19,12 @@ public class LessonSearchController extends HttpServlet {
     private LessonService lessonService;
     private CourseService courseService;
 
-    public LessonSearchController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.lessonService = new LessonService();
         this.courseService = new CourseService();
     }
-
-
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

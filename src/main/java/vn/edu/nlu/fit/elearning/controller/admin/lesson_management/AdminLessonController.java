@@ -9,6 +9,7 @@ import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 import vn.edu.nlu.fit.elearning.services.LessonService;
+import vn.edu.nlu.fit.elearning.services.OrderService;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,9 @@ public class AdminLessonController extends HttpServlet {
     private LessonService lessonService;
     private CourseService courseService;
 
-    public AdminLessonController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.lessonService = new LessonService();
         this.courseService = new CourseService();
     }

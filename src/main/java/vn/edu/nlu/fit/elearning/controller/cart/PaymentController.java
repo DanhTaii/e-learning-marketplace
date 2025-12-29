@@ -21,7 +21,9 @@ public class PaymentController extends HttpServlet {
     private OrderService orderService;
     private OrderItemService orderItemService;
 
-    public PaymentController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.orderService = new OrderService();
         this.orderItemService = new OrderItemService();
     }

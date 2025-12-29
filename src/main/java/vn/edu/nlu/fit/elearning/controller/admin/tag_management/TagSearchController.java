@@ -17,10 +17,10 @@ import java.util.List;
 public class TagSearchController extends HttpServlet {
     private TagService tagService;
 
-    public TagSearchController() {
+    @Override
+    public void init() {
         this.tagService = new TagService();
     }
-
 
 
     @Override

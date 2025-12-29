@@ -267,15 +267,16 @@
                                                 </div>
                                             </td>
                                             <td class="action__button">
-                                                <a href="./course-create.jsp">
-                                                    <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                                </a>
-                                                <a href="./course-create.jsp">
-                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
-                                                </a>
-                                                <a href="">
-                                                    <span class="icon-action"><i class="fa-solid fa-trash"></i></span>
-                                                </a>
+                                                <button type="button" onclick="showCategoryDetail(${cate.id})"
+                                                        class="icon-action-btn">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+                                                <form action="admin/category/delete" method="post" class="form">
+                                                    <input type="hidden" name="id" value="${cate.id}">
+                                                    <button type="submit" class="icon-action-btn">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>

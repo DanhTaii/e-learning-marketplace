@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
+import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.OrderItemService;
 import vn.edu.nlu.fit.elearning.services.OrderService;
 
@@ -17,7 +18,9 @@ public class CartController extends HttpServlet {
     private OrderItemService orderItemService;
     private OrderService orderService;
 
-    public CartController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.orderItemService = new OrderItemService();
         this.orderService = new OrderService();
     }

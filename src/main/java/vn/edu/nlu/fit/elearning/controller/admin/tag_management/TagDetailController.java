@@ -14,9 +14,9 @@
     @WebServlet(name = "TagDetailController", value = "/admin/tag/detail")
     public class TagDetailController extends HttpServlet {
         private TagService tagService;
-    
-        public TagDetailController() {
-            // Khởi tạo TagService
+
+        @Override
+        public void init() {
             this.tagService = new TagService();
         }
     

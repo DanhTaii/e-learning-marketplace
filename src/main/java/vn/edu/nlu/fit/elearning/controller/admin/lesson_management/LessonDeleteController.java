@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.services.CourseService;
 import vn.edu.nlu.fit.elearning.services.LessonService;
 import vn.edu.nlu.fit.elearning.services.TagService;
 
@@ -14,10 +15,11 @@ import java.io.IOException;
 public class LessonDeleteController extends HttpServlet {
     private LessonService lessonService;
 
-    public LessonDeleteController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.lessonService = new LessonService();
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

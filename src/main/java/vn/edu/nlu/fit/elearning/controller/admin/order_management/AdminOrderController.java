@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.services.OrderService;
+import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,10 +18,11 @@ public class AdminOrderController extends HttpServlet {
 
     private OrderService orderService;
 
-    public AdminOrderController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.orderService = new OrderService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

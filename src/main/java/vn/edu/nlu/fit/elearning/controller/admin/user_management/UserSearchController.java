@@ -13,10 +13,11 @@ import java.util.List;
 public class UserSearchController extends HttpServlet {
     private UserService userService;
 
-    public UserSearchController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.userService = new UserService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("usernameSearch");

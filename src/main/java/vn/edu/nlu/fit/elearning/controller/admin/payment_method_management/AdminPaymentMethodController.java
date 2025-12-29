@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
+import vn.edu.nlu.fit.elearning.services.TagService;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,10 +15,11 @@ public class AdminPaymentMethodController extends HttpServlet {
 
     private PaymentMethodService paymentMethodService;
 
-    public AdminPaymentMethodController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.paymentMethodService = new PaymentMethodService();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
