@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.personal;
+package vn.edu.nlu.fit.elearning.controller.personal.setting;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

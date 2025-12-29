@@ -27,8 +27,6 @@ public class MyWishlistController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ws =new WishlistService();
-
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
             response.sendRedirect(request.getContextPath() + "/sign-in");

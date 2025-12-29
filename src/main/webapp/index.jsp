@@ -104,7 +104,7 @@
                 <c:set var="loginSession" value="${not empty sessionScope.userSession}"/>
                 <c:if test="${loginSession}">
                     <div class="header__class">
-                        <a href="html-personal/my-course.jsp" class="turn-page text-header">
+                        <a href="my-courses" class="turn-page text-header">
                             Khóa học của tôi
                         </a>
                     </div>

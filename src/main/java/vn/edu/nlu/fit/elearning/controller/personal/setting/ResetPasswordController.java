@@ -1,11 +1,9 @@
-package vn.edu.nlu.fit.elearning.controller.personal;
+package vn.edu.nlu.fit.elearning.controller.personal.setting;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.User;
-import vn.edu.nlu.fit.elearning.services.CourseService;
-import vn.edu.nlu.fit.elearning.services.OrderService;
 import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
