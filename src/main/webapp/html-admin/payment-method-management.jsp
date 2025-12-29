@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/course-edit.css">
-
+    <link rel="stylesheet" href="assets/css-admin/notification.css">
     <style>
         /* CSS modal Payment Method - giống hệt modal Tag */
         .modal {
@@ -424,7 +424,10 @@
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-power-off"></i> Trạng thái</label>
-                                        <input id="detail-status" type="text" class="input__create" disabled>
+                                        <select id="detail-status" class="input__create" name="status">
+                                            <option value="ACTIVE">Hoạt động</option>
+                                            <option value="INACTIVE">Không hoạt động</option>
+                                        </select>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-calendar-plus"></i> Ngày tạo</label>
@@ -453,34 +456,14 @@
 <div id="toast"></div>
 </body>
 <script>
-    // Lấy flash message từ session
-    const successMsg = "${sessionScope.flashSuccess != null ? sessionScope.flashSuccess : ''}".trim();
-    const errorMsg = "${sessionScope.flashError != null ? sessionScope.flashError : ''}".trim();
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
 
-    // Gọi thủ công toast nếu có message (vì window.load đã chạy trước)
-    if (successMsg !== '') {
-        toast({
-            title: 'Thành công!',
-            message: successMsg,
-            type: 'success',
-            duration: 4000
-        });
-    }
-
-    if (errorMsg !== '') {
-        toast({
-            title: 'Thất bại!',
-            message: errorMsg,
-            type: 'error',
-            duration: 6000
-        });
-    }
-
-    // Xóa flash khỏi session
     <%
-        session.removeAttribute("flashSuccess");
         session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
     %>
+
 </script>
 <script src="assets/javascript/js-admin/admin-payment-method-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>

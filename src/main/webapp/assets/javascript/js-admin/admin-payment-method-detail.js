@@ -17,7 +17,12 @@ function showPaymentMethodDetail(id) {
             document.getElementById('detail-code').value = pm.code || "";
             document.getElementById('detail-iconUrl').value = pm.iconUrl || "";
 
-            document.getElementById('detail-status').value = pm.status === 'ACTIVE' ? 'Hoạt động' : 'Không hoạt động';
+            const statusSelect = document.getElementById('detail-status');
+            if (pm.status === 'ACTIVE') {
+                statusSelect.value = 'ACTIVE';
+            } else {
+                statusSelect.value = 'INACTIVE';
+            }
 
             if (pm.createdAt) {
                 document.getElementById('detail-created').value = new Date(pm.createdAt).toLocaleString('vi-VN');

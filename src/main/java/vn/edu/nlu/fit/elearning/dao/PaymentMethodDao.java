@@ -16,7 +16,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
                         .bind("name", entity.getName())
                         .bind("code", entity.getCode())
                         .bind("iconUrl", entity.getIconUrl())
-                        .bind("status", entity.getStatus())  // Bind thủ công chỉ 4 field cần thiết
+                        .bind("status", entity.getStatus())
                         .execute()
         );
     }
