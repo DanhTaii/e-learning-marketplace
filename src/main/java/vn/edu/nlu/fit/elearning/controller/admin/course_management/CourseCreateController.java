@@ -1,0 +1,62 @@
+package vn.edu.nlu.fit.elearning.controller.admin.course_management;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.model.Course;
+import vn.edu.nlu.fit.elearning.services.CourseService;
+
+import java.io.IOException;
+
+@WebServlet(name = "CourseCreateController", value = "/admin/course/create")
+public class CourseCreateController extends HttpServlet {
+
+    private CourseService courseService;
+
+    public CourseCreateController() {
+        this.courseService = new CourseService();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String title = request.getParameter("title");
+        String subtitle = request.getParameter("subtitle");
+        String level = request.getParameter("level");
+        String goals = request.getParameter("goals");
+        String description = request.getParameter("description");
+        String priceStr = request.getParameter("price");
+        String discountStr = request.getParameter("discount_price");
+
+        Course course = new Course();
+        course.setTitle(title);
+        course.setSubtitle(subtitle);
+        course.setLevel(level);
+        course.setGoals(goals);
+        course.setDescription(description);
+
+        int price = Integer.parseInt(priceStr);
+        course.setPrice(price);
+
+        int discountPrice = Integer.parseInt(discountStr);
+        course.setDiscountPrice(discountPrice); // wrapper Integer
+
+        course.setThumbnailUrl(request.getParameter("thumbnail"));
+
+        System.out.println(course);
+
+        int checkCreate = courseService.createCourse(course);
+
+        System.out.println(checkCreate);
+
+        if (checkCreate > 0) {
+            request.setAttribute("flashSucces", "Tạo khóa học thành công !");
+            response.sendRedirect(request.getContextPath() + "/admin/courses");
+        }
+
+    }
+}

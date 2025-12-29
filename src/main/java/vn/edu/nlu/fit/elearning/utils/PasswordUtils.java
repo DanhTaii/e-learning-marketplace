@@ -6,12 +6,15 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtils {
 
+    private static final String SALT = "SECRET";
+
     public static String hashpassword(String password) {
         try {
+            String saltPassword = password + SALT;
             //Tạo đối tượng MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
             //Đổi chuỗi sang byte cho máy dễ hiểu hơn
-            byte[] bytesOfMessage = password.getBytes(StandardCharsets.UTF_8);
+            byte[] bytesOfMessage = saltPassword.getBytes(StandardCharsets.UTF_8);
 
             //Thực hiện băm chuỗi đầu vào
             //Trả về 1 mảng 16 byte (128 bit)

@@ -13,7 +13,13 @@ function showCategoryDetail(id) {
             document.getElementById('detail-slug').value = cate.slug || "";
             document.getElementById('detail-parentId').value = cate.parentId || "";
             document.getElementById('detail-icon').value = cate.icon || "";
-            document.getElementById('detail-status').value = cate.status;
+            // document.getElementById('detail-status').value = cate.status;
+
+            // XỬ LÝ STATUS: Đây là chỗ bạn đang thắc mắc
+            // cate.status trả về "ACTIVE" hoặc "INACTIVE" từ Java Enum
+            if (cate.status) {
+                document.getElementById('detail-status').value = cate.status;
+            }
 
             if (cate.createdAt) {
                 document.getElementById('detail-created').value = new Date(cate.createdAt).toLocaleDateString("vi-VN");

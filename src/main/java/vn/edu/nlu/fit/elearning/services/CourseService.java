@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.CourseDao;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.utils.CourseFilter;
@@ -9,7 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseService {
-    CourseDao cd = new CourseDao();
+    private CourseDao cd;
+
+    public CourseService() {
+        this.cd = new CourseDao();
+    }
+
+    public int createCourse(Course course) {
+        return cd.create(course);
+    }
 
     public List<Course> getAllCourses() {
         return cd.findAllCourses();

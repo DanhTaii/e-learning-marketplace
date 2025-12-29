@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <title>Tạo mới khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/base.css?v=1.0.1">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/course-edit.css">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=1.0.1">
 
 </head>
 <body>
@@ -129,161 +129,99 @@
                 </div>
 
                 <div class="grid__column-10 container-2">
-                    <div class="container-2__header"></div>
-                    <div class="grid__row-2 container-2__grid">
-                        <div class="container-2__header">
-                            <div class="header__title">Tạo mới khóa học</div>
-                            <a href="./courses-management.jsp">
-                                <div class="admin-create__buttons dark-button">
-                                    <button type="button" class="dark-button">
-                                        <i class="fa-solid fa-backward-step"></i>Trở về
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="container-2__header-modern">
+                        <h2 class="header__title-modern">Tạo mới khóa học</h2>
+                        <a href="admin/courses" class="btn-back">
+                            <i class="fa-solid fa-backward-step"></i> Trở về
+                        </a>
+                    </div>
 
-                        <div class="container-2__form">
-                            <form action="" class="">
-                                <!--                                Phần Tiêu đề và tiêu đề phụ kèm với việc gắn ảnh-->
-                                <div class="course-create__section-1">
-                                    <div class="course-create__title">
-                                        <div class="course-create__block-input">
-                                            <div class="course-create__title-style">Tên khóa học</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
+                    <div class="user-form-container">
+                        <form action="admin/course/create" method="post" >
+<%--                              enctype="multipart/form-data">--%>
+
+                            <div class="form-row">
+                                <div class="form-column-8">
+                                    <div class="form-group">
+                                        <label class="course-create__title-style">Tên khóa học</label>
+                                        <input name="title" type="text" class="input-modern"
+                                               placeholder="Nhập tên khóa học..." value="${param.title}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="course-create__title-style">Phụ đề</label>
+                                        <input name="subtitle" type="text" class="input-modern"
+                                               placeholder="Tóm tắt ngắn gọn nội dung..." value="${param.subtitle}">
+                                    </div>
+                                </div>
+                                <div class="form-column-4">
+                                    <div class="avatar-upload-box">
+                                        <label class="course-create__title-style">Ảnh khóa học</label>
+                                        <div class="upload-wrapper" style="height: 145px;">
+                                            <i class="fa-solid fa-image"></i>
+                                            <span>Tải ảnh lên</span>
+                                            <input name="thumbnail" type="file" class="file-hidden" value="${param.thumbnail}">
                                         </div>
-                                        <div class="course-create__block-input">
-                                            <div class="course-create__title-style">Phụ đề</div>
-                                            <input placeholder="" type="text" class="admin-input__long">
-                                        </div>
-                                    </div>
-                                    <div class="course-create__img">
-                                        <div class="course-create__title-style">Ảnh khóa học</div>
-                                        <input placeholder="" type="file" class="file__input ">
                                     </div>
                                 </div>
+                            </div>
 
-                                <!--                                Phần Giá cả, mức độ-->
-                                <div class="course-create__section-2">
-                                    <div class="course-create__block-input-short">
-                                        <div class="course-create__title-style">Giá</div>
-                                        <input placeholder="" type="text" class="admin-input__short">
-                                    </div>
-                                    <div class="course-create__block-input-short">
-                                        <div class="course-create__title-style">Giảm giá</div>
-                                        <input placeholder="" type="text" class="admin-input__short">
-                                    </div>
-                                    <div class="course-create__block-input">
-                                        <div class="course-create__title-style">Mức độ</div>
-                                        <select name="Level" class="combobox admin-input__short">
-                                            <option value="">Người mới</option>
-                                            <option value="1">Trung cấp</option>
-                                            <option value="2">Cao cấp</option>
-                                        </select>
-                                    </div>
+                            <div class="form-row mt-4">
+                                <div class="form-group flex-1">
+                                    <label class="course-create__title-style">Giá bán </label>
+                                    <input name="price" type="number" class="input-modern" placeholder="Ví dụ: 500000"
+                                           value="${param.price}"
+                                           required>
                                 </div>
-                                <!--                                Phần lựa chọn-->
-                                <div class="course-create__section-3">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="is_public" class="checkbox__item"/>
-                                        Công khai khóa học
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="is_featured " class="checkbox__item"/>
-                                        Hiển thị nổi bật.
-                                    </label>
+                                <div class="form-group flex-1">
+                                    <label class="course-create__title-style">Giá giảm (VNĐ)</label>
+                                    <input name="discount_price" type="number" class="input-modern"
+                                           placeholder="Để trống nếu không giảm">
                                 </div>
-
-                                <!--                                Phần Mục tiêu của khóa học-->
-                                <div class="course-create__section-4">
-                                    <div>
-                                        <div class="course-create__title-style">Mục tiêu khóa học</div>
-                                        <textarea name="mota" class="course-create__textarea"></textarea>
-                                    </div>
+                                <div class="form-group flex-1">
+                                    <label class="course-create__title-style">Mức độ</label>
+                                    <select name="level" class="input-modern select-custom">
+                                        <option value="beginner">Người mới (Beginner)</option>
+                                        <option value="intermediate">Trung cấp (Intermediate)</option>
+                                        <option value="advanced">Cao cấp (Advanced)</option>
+                                    </select>
                                 </div>
+                            </div>
 
-                                <!--                                Phần mô tả của khóa học-->
-                                <div class="course-create__section-5 space__section">
-                                    <div>
-                                        <div class="course-create__title-style">Mô tả khóa học</div>
-                                        <textarea name="mota" class="course-create__textarea"></textarea>
-                                    </div>
+                            <div class="course-create__section-3 mt-4">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="is_public" class="checkbox__item"/>
+                                    Công khai khóa học
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="is_featured" class="checkbox__item"/>
+                                    Hiển thị nổi bật
+                                </label>
+                            </div>
+
+                            <div class="form-row mt-4">
+                                <div class="form-group style-full-width">
+                                    <label class="course-create__title-style">Mục tiêu khóa học</label>
+                                    <textarea name="goals" class="input-modern"
+                                              style="height: 100px; padding: 10px;"
+                                              placeholder="Học viên sẽ đạt được gì sau khóa học?"></textarea>
                                 </div>
+                            </div>
 
-                                <div class="course-create__section-8-box">
-                                    <div class="course-create__title-style">Liên kết khóa học với thẻ</div>
-                                    <div class="course-create__section-8">
-
-                                        <div class="tag-course">
-
-                                            <div class="course-create__block-input-short">
-                                                <div class="course-create__title-style">ID thẻ</div>
-                                                <input placeholder="" type="text" class="admin-input__short">
-                                            </div>
-                                            <div class="course-create__block-input-short">
-                                                <div class="course-create__title-style">ID khóa học</div>
-                                                <input placeholder="" type="text" class="admin-input__short">
-                                            </div>
-                                            <div class="admin-create__buttons1">
-                                                <button type="button" class="dark-button">
-                                                    Liên kết
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                            <div class="form-row mt-4">
+                                <div class="form-group style-full-width">
+                                    <label class="course-create__title-style">Mô tả chi tiết</label>
+                                    <textarea name="description" class="input-modern"
+                                              style="height: 150px; padding: 10px;"
+                                              placeholder="Viết mô tả đầy đủ về khóa học tại đây..."></textarea>
                                 </div>
-                                <div class="course-create__section-8-box">
-                                    <div class="course-create__title-style">Liên kết khóa học với danh mục</div>
-                                    <div class="course-create__section-8">
+                            </div>
 
-                                        <div class="tag-course">
-
-                                            <div class="course-create__block-input-short">
-                                                <div class="course-create__title-style">ID khóa học</div>
-                                                <input placeholder="" type="text" class="admin-input__short">
-                                            </div>
-                                            <div class="course-create__block-input-short">
-                                                <div class="course-create__title-style">ID danh mục</div>
-                                                <input placeholder="" type="text" class="admin-input__short">
-                                            </div>
-                                            <div class="admin-create__buttons1">
-                                                <button type="button" class="dark-button">
-                                                    Liên kết
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="section6-box">
-                                    <div class="course-create__section-6 space__section">
-                                        <div class="course-create__title-style">Bài học:</div>
-
-                                        <div class="course-create__section-6-content">
-                                            <div class="course-create__content-style">Tổng số bài học:</div>
-                                            <div class="course-create__content-style">12</div>
-                                        </div>
-
-                                        <a href="lesson-management.jsp" class="turn-page">
-                                            <div class="admin-create__buttons">
-                                                <button type="button" class="dark-button">
-                                                    Quản lý bài học
-                                                </button>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="course-create__section-7 space__section">
-                                    <div class="admin-create__buttons">
-                                        <button type="submit" class="dark-button">
-                                            <i class="fa-solid fa-floppy-disk"></i>Lưu
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="form-actions mt-5">
+                                <button type="submit" class="btn-submit-modern">
+                                    <i class="fa-solid fa-floppy-disk"></i> Lưu khóa học
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
