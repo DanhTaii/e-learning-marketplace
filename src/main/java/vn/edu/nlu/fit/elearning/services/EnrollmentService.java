@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.EnrollmentDao;
+import vn.edu.nlu.fit.elearning.dto.EnrollmentDTO;
 import vn.edu.nlu.fit.elearning.model.Enrollment;
 
 import java.util.List;
@@ -18,9 +19,9 @@ public class EnrollmentService {
         return 0;
     }
 
-    public List<Enrollment> getAllEnrollments() {
+    public List<EnrollmentDTO> getAllEnrollments(int userId) {
         // TODO: Implement getAll logic
-        return ed.findAll();
+        return ed.findAllCoursesCard(userId);
     }
 
     public Enrollment getEnrollmentById(int id) {
