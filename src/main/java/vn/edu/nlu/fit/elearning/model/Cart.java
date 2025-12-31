@@ -1,10 +1,6 @@
 package vn.edu.nlu.fit.elearning.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Cart {
@@ -25,7 +21,27 @@ public class Cart {
             data.put(c.getId(),new CartItem(c,c.getPrice(),true));
         }
     }
+public CartItem deleteCourse(int id){
+        return data.remove(id);
+}
 
+public List<CartItem> removeSelected(){
+    List<CartItem> removedItems = new ArrayList<>();
+    Iterator<Map.Entry<Integer, CartItem>> iterator = data.entrySet().iterator();
+
+    while (iterator.hasNext()) {
+        Map.Entry<Integer, CartItem> entry = iterator.next();
+        CartItem item = entry.getValue();
+
+
+        if (item.isSelected()) {
+            removedItems.add(item);
+            iterator.remove();
+        }
+    }
+
+    return removedItems;
+}
     public int getTotalQuantity(){
         return data.size();
     }
