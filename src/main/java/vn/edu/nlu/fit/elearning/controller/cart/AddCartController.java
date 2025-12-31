@@ -42,7 +42,7 @@ public class AddCartController extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
 
-        // Trả về số lượng mới để JavaScript nhận được ở biến 'newCount'
+
         response.getWriter().write(String.valueOf(c.getTotalQuantity()));
 
     }

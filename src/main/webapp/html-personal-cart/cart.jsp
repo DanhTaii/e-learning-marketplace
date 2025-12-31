@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -223,7 +225,7 @@
                     <div class="shopping-cart">
                         <span class="shopping-cart__title text-big-title h1">Giỏ hàng</span>
                         <span class="shopping-cart__summary summary text-paragraph ">
-                        <span class="text-2xl">Sản phẩm (${list.size()})</span>
+                        <span class="text-2xl">Sản phẩm (${sessionScope.cart.totalQuantity})</span>
                     </span>
 
                         <div class="shopping-cart__sub-title">
@@ -246,47 +248,46 @@
                         </div>
 
                         <div class="scrollable-order-list">
-                            <form action="cart" id="cartForm" method="post">
-                                <input type="hidden" name="action" value="updateSelected">
+                            <form action="update-select" id="cartForm" method="post">
                             <ul>
-                                <c:forEach var="p" items="${list}">
+                                <c:forEach var="p" items="${sessionScope.cart.list}">
                                     <li>
-
                                         <div class="shopping-cart__cart-items cart-items">
                                                 <div class="cart-items__tick">
-                                                    <input type="checkbox" class="tick" name="itemSelected" value="${p.id}"
-                                                           <c:if test="${p.selected}">checked</c:if> onchange="submitCartForm()">>
+                                                    <input type="checkbox" class="tick" name="itemSelected" value="${p.course.id}"
+                                                           <c:if test="${p.selected}">checked</c:if>
+                                                           onchange="this.form.submit()">
                                                 </div>
 
                                             <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                                 <div class="cart-items__detail">
                                                     <div class="detail__image-container" style="aspect-ratio: 16 / 9;">
-                                                        <img src="${p.thumbnailUrl}" alt="${p.title}" class="image">
+                                                        <img src="${p.course.thumbnailUrl}" alt="${p.course.title}" class="image">
                                                     </div>
                                                     <div class="detail__info">
 
                                                         <div class="info__name-group">
                                         <span class="name__title text-paragraph">
-                                            <p>${p.title}</p>
+                                            <p>${p.course.title}</p>
                                         </span>
                                                         </div>
                                                         <div class="info__rating-group">
                                                             <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                            <span class="rating-group__rating rating text-mini">${p.rating}
+                                                            <span class="rating-group__rating rating text-mini">${p.course.rating}
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         </span>
-                                                            <span class="rating-group__rating-count ratings-count text-mini ">(${p.studentCount} rating)</span>
+                                                            <span class="rating-group__rating-count ratings-count text-mini ">(${p.course.studentCount} rating)</span>
                                                         </div>
                                                         <div class="info__stats course-stats ">
-                                                            <span class="stats__hours text-mini">${p.timeDuration}</span>
+                                                            <span class="stats__hours text-mini">${p.course.durationHours}</span>
 
-                                                            <span class="stats__lecture text-mini ">• ${p.totalLesson} Bài giảng</span>
+                                                            <span class="stats__lecture text-mini ">• ${p.course.lessonCount} Bài giảng</span>
 
-                                                            <span class="stats__level text-mini">• ${p.level}</span>
+                                                            <span class="stats__level text-mini">• ${p.course.level}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -294,14 +295,14 @@
                                             <div class="cart-items__action-price-group action-price-group">
                                                 <div class="cart-items__action items-action">
                                                     <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                    <a href="" class="action__link1" data-id="${p.id}">Xóa</a>
+                                                    <a href="" class="action__link1" data-id="${p.course.id}">Xóa</a>
                                                 </div>
                                                 <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                                     <div class="cart-items__price items-price">
-                                                        <div><span class="price-discounted">${p.priceNewFormatted}đ <i
+                                                        <div><span class="price-discounted"><fmt:formatNumber value="${p.price - p.course.discountPrice}" type="number" pattern="###,###" /> đ <i
                                                                 class="fa-solid fa-tag price-icon"
                                                                 style="color: #3722d3;"></i> </span></div>
-                                                        <div><span class="price-origin">${p.priceOldFormatted}đ </span>
+                                                        <div><span class="price-origin"><fmt:formatNumber value="${p.price}" type="number" pattern="###,###" /> đ </span>
                                                         </div>
 
 
@@ -333,7 +334,7 @@
                             <div class="tick">
                                 <input type="checkbox" class="tick" name="tick">
                             </div>
-                            <div class="text-medium choose">Chọn tất cả (${list.size()})</div>
+                            <div class="text-medium choose">Chọn tất cả (${sessionScope.cart.totalQuantity})</div>
                             <div class="text-medium remove">Xóa</div>
                             <div class="text-medium wishlisted">Thêm vào Yêu thích</div>
                         </div>
@@ -344,15 +345,15 @@
                                 <div class="total__label">
                                     <div class="label">
                                         <div class="label__name">
-                                            <span class="text-medium">Tổng cộng (${orderItems.size()}):</span>
+                                            <span class="text-medium">Tổng cộng (${sessionScope.cart.selectedQuantity}):</span>
                                         </div>
                                         <div class="charge-note">Chưa tính phí</div>
                                     </div>
 
 
                                     <div class="total__price">
-                                        <span class="price-discounted1 ">${order.finalAmountFormatted}đ</span>
-                                        <span class=" price-origin">${order.totalAmountFormatted}đ</span>
+                                        <span class="price-discounted1 "><fmt:formatNumber value="${sessionScope.cart.discountPrice}" type="number" pattern="###,###" /> đ</span>
+                                        <span class=" price-origin"><fmt:formatNumber value="${sessionScope.cart.total}" type="number" pattern="###,###" /> đ</span>
                                     </div>
 
                                 </div>
