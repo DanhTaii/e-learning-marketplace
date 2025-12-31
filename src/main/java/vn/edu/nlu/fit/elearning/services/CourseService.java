@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.CourseDao;
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.User;
@@ -64,7 +65,11 @@ public class CourseService {
     }
 
     public Course getCourse(int id) {
-        return cd.findCourseById(id);
+        return cd.findCourseByIdForDetail(id);
+    }
+
+    public List<CourseCardDto> getCourseCards() {
+        return cd.findAllCoursesCard();
     }
 
     public List<Course> getCoursesByIdCategory(int idCategory) {
