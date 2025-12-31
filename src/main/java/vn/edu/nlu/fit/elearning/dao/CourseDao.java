@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
@@ -108,9 +109,21 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
-    public Course findCourseById(int id) {
+    public List<CourseCardDto> findAllCoursesCard(){
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id,(c.price - c.discount_price) AS price_new,c.thumbnail_url, c.level, COALESCE(AVG(r.rating), rating) AS avgRating, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+                    "FROM Courses c\n" +
+                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                    "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
+                    "WHERE c.is_public = TRUE AND c.id = 1\n" +
+                    "GROUP BY c.id").mapToBean(CourseCardDto.class).list();
+        });
+    }
+
+    public Course findCourseByIdForDetail(int id) {
         Course course = getJdbi().withHandle(handle ->
-                handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, (c.price - c.discount_price) AS price_new, c.rating, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating), c.rating) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
+                handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, (c.price - c.discount_price) AS price_new, c.rating, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating), c.rating) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
                         "FROM Courses c\n" +
                         "LEFT JOIN Categories cat ON c.category_id = cat.id\n" +
                         "LEFT JOIN Categories parent ON cat.parent_id = parent.id\n" +

@@ -4,10 +4,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Course;
-import vn.edu.nlu.fit.elearning.model.Wishlist;
-import vn.edu.nlu.fit.elearning.services.CourseService;
-import vn.edu.nlu.fit.elearning.services.OrderService;
-import vn.edu.nlu.fit.elearning.services.UserService;
 import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
