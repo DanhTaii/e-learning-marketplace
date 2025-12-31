@@ -205,3 +205,87 @@
     font-size: 0.9rem;
     margin: 0 2px 0 5px;
 }
+/* Container bọc toàn bộ cột để làm gốc tọa độ */
+.product-card-container {
+    position: relative;
+    /* Không dùng overflow: hidden ở đây vì sẽ làm mất bảng hover */
+}
+
+/* Bảng thông tin chi tiết khi hover */
+.product-hover-info {
+    position: absolute;
+    z-index: 999;
+    top: -10px;        /* Đẩy lên trên một chút so với đầu card cho cân đối */
+    left: calc(100% - 10px); /* Sát mép card (trừ đi 10px để hơi chớm nhẹ lên card tạo cảm giác liên kết) */
+    width: 330px;      /* Bự hơn một chút để chứa nội dung thoải mái */
+    background-color: var(--white-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    display: none;     /* Mặc định ẩn */
+    pointer-events: auto;
+}
+
+/* Khi di chuột vào container thì hiện bảng */
+.product-card-container:hover .product-hover-info {
+    display: block;
+    animation: fadeIn 0.3s ease; /* Thêm hiệu ứng hiện hình cho mượt */
+}
+
+/* Các thành phần bên trong bảng hover */
+.hover-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+}
+
+.hover-goals {
+    font-size: 1.4rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.hover-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-add-cart {
+    flex: 1;
+    background-color: var(--dark-blue);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-add-cart:hover {
+    background-color: var(--blue);
+}
+
+.btn-wishlist {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--dark-blue);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--dark-blue);
+}
+
+/* Hiệu ứng mượt mà */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}

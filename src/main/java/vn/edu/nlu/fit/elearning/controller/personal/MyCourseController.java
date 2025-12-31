@@ -3,7 +3,7 @@ package vn.edu.nlu.fit.elearning.controller.personal;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.dto.EnrollmentDTO;
+import vn.edu.nlu.fit.elearning.dto.EnrollmentCardDTO;
 import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.services.EnrollmentService;
 
@@ -27,7 +27,7 @@ public class MyCourseController extends HttpServlet {
 
         int userId = user.getId();
 
-        List<EnrollmentDTO> enrollmentList = enrollmentService.getAllEnrollments(userId);
+        List<EnrollmentCardDTO> enrollmentList = enrollmentService.getAllEnrollments(userId);
 
         request.setAttribute("listEnrollments", enrollmentList);
         request.getRequestDispatcher("html-personal/my-course.jsp").forward(request, response);
