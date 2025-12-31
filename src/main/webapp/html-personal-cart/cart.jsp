@@ -13,7 +13,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/cart.css">
+    <link rel="stylesheet" href="assets/css/cart.css?v=1.0.1">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -295,7 +295,7 @@
                                             <div class="cart-items__action-price-group action-price-group">
                                                 <div class="cart-items__action items-action">
                                                     <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                    <a href="" class="action__link1" data-id="${p.course.id}">Xóa</a>
+                                                    <a href="del-cart?action=delete&id=${p.course.id}" class="action__link1">Xóa</a>
                                                 </div>
                                                 <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                                     <div class="cart-items__price items-price">
@@ -335,7 +335,8 @@
                                 <input type="checkbox" class="tick" name="tick">
                             </div>
                             <div class="text-medium choose">Chọn tất cả (${sessionScope.cart.totalQuantity})</div>
-                            <div class="text-medium remove">Xóa</div>
+                            <a href="del-cart?action=removeSelected" class="text-medium remove" >Xóa</a>
+
                             <div class="text-medium wishlisted">Thêm vào Yêu thích</div>
                         </div>
                     </div>

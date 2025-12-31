@@ -73,10 +73,11 @@
 }
 
 .remove {
-    width: 30%;
+    margin-right: 1.1rem;
     color: red;
     font-weight: 700;
     cursor: pointer;
+    text-decoration: none;
 
 }
 
@@ -235,7 +236,10 @@ p {
     background-color: rgba(180, 23, 23, 0.17);
     border-radius: 2px;
 }
-
+.remove:hover{
+    background-color: rgba(180, 23, 23, 0.17);
+    border-radius: 2px;
+}
 .items-price {
     min-width: 120px;
 }
