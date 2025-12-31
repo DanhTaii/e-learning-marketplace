@@ -11,7 +11,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.0.2">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -358,48 +358,27 @@
                             <div class="grid__row-2">
                                 <div class="product__small-title text-small-title">Yêu thích</div>
                                 <c:forEach var="c" items="${coursesLiked}">
-                                    <div class="grid__column-4">
+                                    <div class="grid__column-4 product-card-container">
+
                                         <a href="course-detail?id=${c.id}" class="turn-page">
                                             <div class="product__small-advertisement">
                                                 <div class="small-advertisement__image">
-                                                    <img src="${c.thumbnailUrl}"
-                                                         alt="Xây Dựng Thương Hiệu Cá Nhân" class="img-2">
+                                                    <img src="${c.thumbnailUrl}" alt="${c.title}" class="img-2">
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
-                                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
-                                                        <div class="content__rate content__rate-2">
-                                                            <div class="rate__icon"><i
-                                                                    class="text-medium fa-regular fa-star"></i></div>
-                                                            <div class="text-medium rate__number">${c.rating}</div>
+                                                        <div class="content__author-name text-medium">${c.authorName}</div>
+                                                        <div class="content__rate">
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <span class="rate__number">${c.rating}</span>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
                                                     <div class="content__quick-info">
-                                                        <div class="quick-info__level">
-                                                            <div class="level__icon icon"><i
-                                                                    class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level}</div>
-                                                        </div>
-                                                        <div class="quick-info__users">
-                                                            <div class="users__icon icon"><i
-                                                                    class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">${c.studentCount}</div>
-                                                        </div>
-                                                        <div class="quick-info__time">
-                                                            <div class="time__icon icon"><i
-                                                                    class="text-medium fa-regular fa-clock"></i></div>
-                                                            <div class="time__text text text-medium">${c.durationHours}h</div>
-                                                        </div>
                                                     </div>
                                                     <div class="content__price">
                                                         <div class="price__new">${c.price - c.discountPrice}đ</div>
                                                         <div class="price__old">${c.price}đ</div>
-                                                        <div class="quick-info__save">
-                                                            <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                                                <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
-                                                            </a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
@@ -408,6 +387,20 @@
                                                 </div>
                                             </div>
                                         </a>
+
+                                        <div class="product-hover-info">
+                                            <h4 class="hover-title">${c.title}</h4>
+                                            <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
+                                            <div class="hover-actions">
+                                                <form action="cart-add" method="POST">
+                                                    <input type="hidden" name="courseId" value="${c.id}">
+                                                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
+                                                </form>
+                                                <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </c:forEach>
 
@@ -465,6 +458,19 @@
                                                 </div>
                                             </div>
                                         </a>
+                                        <div class="product-hover-info">
+                                            <h4 class="hover-title">${c.title}</h4>
+                                            <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
+                                            <div class="hover-actions">
+                                                <form action="cart-add" method="POST">
+                                                    <input type="hidden" name="courseId" value="${c.id}">
+                                                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
+                                                </form>
+                                                <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </c:forEach>
 
@@ -522,6 +528,19 @@
                                                 </div>
                                             </div>
                                         </a>
+                                        <div class="product-hover-info">
+                                            <h4 class="hover-title">${c.title}</h4>
+                                            <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
+                                            <div class="hover-actions">
+                                                <form action="cart-add" method="POST">
+                                                    <input type="hidden" name="courseId" value="${c.id}">
+                                                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
+                                                </form>
+                                                <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </c:forEach>
 
