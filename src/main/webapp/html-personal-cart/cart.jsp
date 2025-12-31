@@ -143,8 +143,9 @@
                     </a>
                 </div>
                 <div class="header__cart">
-                    <a href="${pageContext.request.contextPath}/cart" class="turn-page text-header">
+                    <a href="cart" class="turn-page text-header">
                         <i class="text-header fa-solid fa-cart-shopping"></i>
+                        (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
                     </a>
                 </div>
                 <!-- Toggle checkbox ẩn -->
@@ -295,7 +296,7 @@
                                             <div class="cart-items__action-price-group action-price-group">
                                                 <div class="cart-items__action items-action">
                                                     <a href="" class="action__link">Thêm vào Yêu Thích</a>
-                                                    <a href="del-cart?action=delete&id=${p.course.id}" class="action__link1">Xóa</a>
+                                                     <a href="cart-manager?action=delete&id=${p.course.id}" class="action__link1">Xóa</a>
                                                 </div>
                                                 <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                                     <div class="cart-items__price items-price">
@@ -332,12 +333,18 @@
                     <div class="grid__column-4">
                         <div class="row2__column1">
                             <div class="tick">
-                                <input type="checkbox" class="tick" name="tick">
+                                <input type="checkbox" id="checkAll"
+                                       <c:if test="${sessionScope.cart.selectedQuantity == sessionScope.cart.totalQuantity && sessionScope.cart.totalQuantity > 0}">checked</c:if>
+                                       onchange="handleSelectAll(this)">
                             </div>
-                            <div class="text-medium choose">Chọn tất cả (${sessionScope.cart.totalQuantity})</div>
-                            <a href="del-cart?action=removeSelected" class="text-medium remove" >Xóa</a>
 
-                            <div class="text-medium wishlisted">Thêm vào Yêu thích</div>
+                            <label for="checkAll" class="choose text-medium">
+                                Chọn tất cả (${sessionScope.cart.totalQuantity})
+                            </label>
+
+                            <a href="cart-manager?action=removeSelected" class="text-medium remove">Xóa</a>
+
+                            <div class="text-medium wishlisted" style="margin-left: 7px">Thêm vào Yêu thích</div>
                         </div>
                     </div>
                     <div class="grid__column-5">
@@ -663,6 +670,12 @@
     function submitCartForm() {
         document.getElementById('cartForm').submit();
     }
+    function handleSelectAll(checkbox) {
+        const isChecked = checkbox.checked;
+        // Gửi yêu cầu đến Servlet bạn đã viết
+        window.location.href = "cart-manager?action=selectAll&status=" + isChecked;
+    }
 </script>
+
 </body>
 </html>

@@ -42,6 +42,12 @@ public List<CartItem> removeSelected(){
 
     return removedItems;
 }
+    public void selectAll(boolean isSelected) {
+
+        data.values().forEach(item -> item.setSelected(isSelected));
+    }
+
+
     public int getTotalQuantity(){
         return data.size();
     }
