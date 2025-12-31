@@ -7,15 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.model.Cart;
-import vn.edu.nlu.fit.elearning.model.CartItem;
-import vn.edu.nlu.fit.elearning.model.Course;
-import vn.edu.nlu.fit.elearning.services.CourseService;
 
 import java.io.IOException;
 
-@WebServlet(name = "DelCartItemController", value = "/del-cart")
+@WebServlet(name = "CartManagerController", value = "/cart-manager")
 
-public class DelCartItemController extends HttpServlet {
+public class CartManagerController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,12 +29,15 @@ public class DelCartItemController extends HttpServlet {
                     break;
 
                 case "removeSelected":
-
                     cart.removeSelected();
                     break;
+
+                case "selectAll":
+                    boolean status = Boolean.parseBoolean(request.getParameter("status"));
+                    cart.selectAll(status);
             }
         }
-response.sendRedirect(request.getContextPath() + "/cart");
+        response.sendRedirect(request.getContextPath() + "/cart");
     }
 
     @Override
