@@ -116,6 +116,7 @@
                     <div class="header__cart">
                         <a href="cart" class="turn-page text-header">
                             <i class="text-header fa-solid fa-cart-shopping"></i>
+                            (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
                         </a>
                     </div>
                     <!-- Toggle checkbox ẩn -->
@@ -415,7 +416,7 @@
                                 <div class="product__small-title text-small-title">Mới nhất</div>
                                 <c:forEach var="c" items="${coursesLastest}">
                                     <div class="grid__column-4">
-                                        <a href="html-partrial/course-detail.jsp?id=1" class="turn-page">
+                                        <a href="course-detail?id=${c.id}" class="turn-page">
                                             <div class="product__small-advertisement">
                                                 <div class="small-advertisement__image">
                                                     <img src="${c.thumbnailUrl}"
@@ -472,7 +473,7 @@
                                 <div class="product__small-title text-small-title">Phổ biến</div>
                                 <c:forEach var="c" items="${coursesFeature}">
                                     <div class="grid__column-4">
-                                        <a href="html-partrial/course-detail.jsp?id=1" class="turn-page">
+                                        <a href="course-detail?id=${c.id}" class="turn-page">
                                             <div class="product__small-advertisement">
                                                 <div class="small-advertisement__image">
                                                     <img src="${c.thumbnailUrl}"
@@ -626,4 +627,13 @@
     </footer>
 </div>
 </body>
+<script>
+    // ép load tại trang khi bấm back
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted
+        if ( historyTraversal ) {
+            window.location.reload();
+        }
+    });
+</script>
 </html>

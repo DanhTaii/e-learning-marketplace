@@ -143,6 +143,7 @@
                 <div class="header__cart">
                     <a href="../html-personal-cart/cart.jsp" class="turn-page text-header">
                         <i class="text-header fa-solid fa-cart-shopping"></i>
+                        (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
                     </a>
                 </div>
                 <!-- Toggle checkbox ẩn -->
@@ -219,6 +220,7 @@
 
     <div class="web__container">
         <div class="course-detail__container grid">
+
             <div class="grid__row-2">
                 <div class="container-2 grid__column-4-in-12">
                     <div class="container-2__information">
@@ -235,13 +237,14 @@
 
                         <div class="container-2__option-group">
                             <div class="container-2__option">
-                                <a href="#popup__add-cart-success" class="turn-page add-cart-a">
+
                                     <div class="header__button add__button">
-                                        <button class="container-2__button-add button__btn">
+                                        <button type="button" class="container-2__button-add button__btn"
+                                                onclick="addToCart(${c.id})">
                                             Thêm vào giỏ hàng
                                         </button>
                                     </div>
-                                </a>
+
                                 <a href="#popup__add-to-wishlist-success" class="turn-page">
                                     <div class="header__button bookmark__button">
                                         <button class="dark-button">
@@ -347,7 +350,7 @@
                                     <i class="fa-duotone fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${c.reviewCount} rating)
+                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${c.studentCount} rating)
                             </div>
                         </div>
 
@@ -722,8 +725,36 @@
                 <p class="ul__text text-medium">© 2025 - Bản quyền thuộc về Nhóm 21</p>
             </div>
         </div>
+
     </footer>
 
 </div>
+
 </body>
+<script>
+    function addToCart(courseId) {
+        // 1. Gửi yêu cầu ngầm đến Servlet bằng Fetch API (AJAX hiện đại)
+        fetch('add-cart?id=' + courseId)
+            .then(response => {
+                if (response.ok) {
+                    return response.text(); // Đọc con số tổng mà Servlet trả về
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(newCount => {
+                // 2. Tìm thẻ số trên header và cập nhật con số mới
+                const cartElement = document.getElementById('cart-count');
+                if (cartElement) {
+                    cartElement.innerText = newCount;
+                }
+
+                // 3. Hiệu ứng nhỏ cho người dùng biết đã thành công
+                alert("Đã thêm khóa học vào giỏ hàng!");
+            })
+            .catch(error => {
+                console.error('Lỗi AJAX:', error);
+                alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
+            });
+    }
+</script>
 </html>
