@@ -9,25 +9,18 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.model.Cart;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "ListProduct", value = "/list-product")
+@WebServlet(name = "ShowCartController", value = "/cart")
 
-public class ListProduct extends HttpServlet {
+public class ShowCartController extends HttpServlet {
 
-    private CourseService courseService;
-
-    public ListProduct() {
-        this.courseService = new CourseService();
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Course> list = courseService.getAllCourses();
-    request.setAttribute("list",list);
-//    request.getRequestDispatcher()
+        request.getRequestDispatcher("/html-personal-cart/cart.jsp").forward(request, response);
     }
 
     @Override

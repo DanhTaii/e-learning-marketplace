@@ -3,12 +3,12 @@ package vn.edu.nlu.fit.elearning.model;
 public class CartItem {
     private Course course;
     private int price;
-    private boolean isSelected;
+    private boolean selected;
 
-    public CartItem(Course course, int price, boolean isSelected) {
+    public CartItem(Course course, int price, boolean selected) {
         this.course = course;
         this.price = price;
-        this.isSelected = isSelected;
+        this.selected = selected;
     }
 
     public Course getCourse() {
@@ -28,10 +28,10 @@ public class CartItem {
     }
 
     public boolean isSelected() {
-        return isSelected;
+        return selected;
     }
 
     public void setSelected(boolean selected) {
-        isSelected = selected;
+        this.selected = selected;
     }
 }
