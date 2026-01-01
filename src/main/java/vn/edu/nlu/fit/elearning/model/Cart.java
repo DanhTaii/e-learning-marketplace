@@ -4,56 +4,56 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Cart {
-     Map<Integer,CartItem> data;
+    Map<Integer, CartItem> data;
 
     public Cart() {
         data = new HashMap<>();
-        }
+    }
 
 
     public void addCourse(Course c) {
-        if(data.containsKey(c.getId())){
+        if (data.containsKey(c.getId())) {
             CartItem ci = data.get(c.getId());
-            if( !ci.isSelected()){
+            if (!ci.isSelected()) {
                 ci.setSelected(true);
             }
-        }else {
-            data.put(c.getId(),new CartItem(c,c.getPrice(),true));
+        } else {
+            data.put(c.getId(), new CartItem(c, c.getPrice(), true));
         }
     }
-public CartItem deleteCourse(int id){
+
+    public CartItem deleteCourse(int id) {
         return data.remove(id);
-}
-
-public List<CartItem> removeSelected(){
-    List<CartItem> removedItems = new ArrayList<>();
-    Iterator<Map.Entry<Integer, CartItem>> iterator = data.entrySet().iterator();
-
-    while (iterator.hasNext()) {
-        Map.Entry<Integer, CartItem> entry = iterator.next();
-        CartItem item = entry.getValue();
-
-
-        if (item.isSelected()) {
-            removedItems.add(item);
-            iterator.remove();
-        }
     }
 
-    return removedItems;
-}
+    public void removeSelected() {
+        data.entrySet().removeIf(entry -> entry.getValue().isSelected());
+    }
+
+    public List<CartItem> getSelectedItems() {
+        List<CartItem> selected = new ArrayList<>();
+        for (CartItem item : data.values()) {
+            if (item.isSelected()) {
+                selected.add(item);
+            }
+        }
+        return selected;
+    }
+
     public void selectAll(boolean isSelected) {
 
         data.values().forEach(item -> item.setSelected(isSelected));
     }
 
 
-    public int getTotalQuantity(){
+    public int getTotalQuantity() {
         return data.size();
     }
-    public List<CartItem> getList(){
+
+    public List<CartItem> getList() {
         return new ArrayList<>(data.values());
     }
+
     public double getTotal() {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
@@ -66,7 +66,6 @@ public List<CartItem> removeSelected(){
     }
 
 
-
     public double getDiscountPrice() {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
@@ -77,10 +76,10 @@ public List<CartItem> removeSelected(){
         return total.get();
     }
 
-    public int getSelectedQuantity(){
+    public int getSelectedQuantity() {
         int count = 0;
-        for (CartItem c : data.values()){
-            if(c.isSelected()){
+        for (CartItem c : data.values()) {
+            if (c.isSelected()) {
                 count++;
             }
         }

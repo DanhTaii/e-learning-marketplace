@@ -136,7 +136,7 @@
                     </a>
                 </div>
                 <div class="header__wishlist">
-                    <a href="../html-personal/my-wishlist.jsp" class="turn-page text-header">
+                    <a href="my-wishlist" class="turn-page text-header">
                         <i class="notification__icon fa-solid fa-heart text-header"></i>
                     </a>
                 </div>
