@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.CategoryDao;
+import vn.edu.nlu.fit.elearning.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 
 import java.util.List;
@@ -38,6 +39,10 @@ public class CategoryService {
 
     public List<Category> getAllCategoriesByName(String name) {
         return categoryDao.findByName(name);
+    }
+
+    public CategoryDto getCategoryByCourseId(int courseId) {
+        return categoryDao.getCategoryByCourseId(courseId);
     }
 
 

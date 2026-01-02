@@ -300,7 +300,7 @@
 
                             <div class="">
                                 <a href="result-search" class="section-1__breadcrumb-name section-1__breadcrumb-item">
-                                    ${c.parentCategoryName}
+                                    ${category.name}
                                 </a>
                             </div>
 
@@ -309,7 +309,7 @@
                             </div>
 
                             <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
-                                ${c.categoryName}
+                                ${category2.name}
                             </div>
                         </div>
 
@@ -426,9 +426,9 @@
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
-                                            <c:forEach var="tag" items="${c.tags}" varStatus="loop">
+                                            <c:forEach var="tag" items="${tags}" varStatus="loop">
                                                 <c:if test="${loop.index < 3}">
-                                                    <li class="section-3_li">${tag}</li>
+                                                    <li class="section-3_li">${tag.name}</li>
                                                 </c:if>
                                             </c:forEach>
                                     </ul>

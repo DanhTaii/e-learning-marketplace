@@ -1,12 +1,14 @@
 package vn.edu.nlu.fit.elearning.dto;
 
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Lesson;
-import vn.edu.nlu.fit.elearning.model.Review;
+import vn.edu.nlu.fit.elearning.model.Tag;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class CourseDetailDto {
+public class CourseDetailDto implements Serializable {
     private int id;
     private String title;
     private String subtitle;
@@ -25,14 +27,22 @@ public class CourseDetailDto {
     private double durationHours;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private List<Lesson> lessons;
-    private List<ReviewDto> reviews;
+
+    // này thêm để làm đủ cho trang course-detail
+    private List<Tag> tags;          // danh sách tag
+    private List<Lesson> lessons;       // danh sách bài học
+    private int lessonCount;            // số lượng bài học
+    private List<ReviewDto> reviews;       // danh sách review
+    private Category category;        // tên category
+    private Category parentCategory;  // category cha
+
+    // này làm riêng cho wishlist
     private int wishlistId;
 
     public CourseDetailDto() {
     }
 
-    public CourseDetailDto(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<Lesson> lessons, List<ReviewDto> reviews, int wishlistId) {
+    public CourseDetailDto(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<Tag> tags, List<Lesson> lessons, int lessonCount, List<ReviewDto> reviews, Category category, Category parentCategory, int wishlistId) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -51,8 +61,12 @@ public class CourseDetailDto {
         this.durationHours = durationHours;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.tags = tags;
         this.lessons = lessons;
+        this.lessonCount = lessonCount;
         this.reviews = reviews;
+        this.category = category;
+        this.parentCategory = parentCategory;
         this.wishlistId = wishlistId;
     }
 
@@ -200,12 +214,28 @@ public class CourseDetailDto {
         this.updatedAt = updatedAt;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
     public List<Lesson> getLessons() {
         return lessons;
     }
 
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    public int getLessonCount() {
+        return lessonCount;
+    }
+
+    public void setLessonCount(int lessonCount) {
+        this.lessonCount = lessonCount;
     }
 
     public List<ReviewDto> getReviews() {
@@ -216,11 +246,58 @@ public class CourseDetailDto {
         this.reviews = reviews;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
+    }
+
     public int getWishlistId() {
         return wishlistId;
     }
 
     public void setWishlistId(int wishlistId) {
         this.wishlistId = wishlistId;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseDetailDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", description='" + description + '\'' +
+                ", goals='" + goals + '\'' +
+                ", level='" + level + '\'' +
+                ", price=" + price +
+                ", discountPrice=" + discountPrice +
+                ", studentCount=" + studentCount +
+                ", isFeatured=" + isFeatured +
+                ", rating=" + rating +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", isPublic=" + isPublic +
+                ", categoryId=" + categoryId +
+                ", authorName='" + authorName + '\'' +
+                ", durationHours=" + durationHours +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", tags=" + tags +
+                ", lessons=" + lessons +
+                ", lessonCount=" + lessonCount +
+                ", reviews=" + reviews +
+                ", category=" + category +
+                ", parentCategory=" + parentCategory +
+                ", wishlistId=" + wishlistId +
+                '}';
     }
 }
