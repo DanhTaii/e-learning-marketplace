@@ -332,7 +332,7 @@
                             <!--                            <div class="section-1__rating-item section-1__high-rated text-mini">High Rated</div>-->
                             <div class="section-1__rating-item section-1__rating-star">
                                 <div class="section-1__number section-1__rating-star-item text-mini">
-                                    ${c.rating}
+                                    5
                                 </div>
                                 <div class="section-1__star section-1__rating-star-item text-mini">
                                     <i class="fa-duotone fa-solid fa-star"></i>
