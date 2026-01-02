@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.cart;
+package vn.edu.nlu.fit.elearning.controller.cart.cart_management;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,11 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.model.Cart;
-import vn.edu.nlu.fit.elearning.model.CartItem;
 import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "CartManagerController", value = "/cart-manager")
 

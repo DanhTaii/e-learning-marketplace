@@ -51,7 +51,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
     public List<PaymentMethod> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, status, created_at, updated_at " +
+                            "SELECT id, name, code, icon_url, created_at, updated_at " +
                                     "FROM Payment_Methods " +
                                     "ORDER BY id")
                     .mapToBean(PaymentMethod.class)
