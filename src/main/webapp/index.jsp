@@ -321,7 +321,7 @@
                                             <div class="content__rate content__rate-3">
                                                 <div class="rate__icon"><i
                                                         class="text-medium fa-regular fa-star"></i></div>
-                                                <div class="text-medium rate__number">${courseMostPopular.rating}</div>
+                                                <div class="text-medium rate__number">5</div>
                                             </div>
                                         </div>
                                         <div class="content__quick-info for-fix">
@@ -333,7 +333,7 @@
                                             <div class="quick-info__users">
                                                 <div class="users__icon icon"><i
                                                         class="text-medium fa-solid fa-users"></i></div>
-                                                <div class="users__text text-medium">${courseMostPopular.studentCount}</div>
+                                                <div class="users__text text-medium">Số lượng học viên</div>
                                             </div>
                                             <div class="quick-info__time">
                                                 <div class="time__icon icon"><i
@@ -342,8 +342,8 @@
                                             </div>
                                         </div>
                                         <div class="content__price content__price-2">
-                                            <div class="price__new">${c.price - c.discountPrice}đ</div>
-                                            <div class="price__old">${c.price}đ</div>
+                                            <div class="price__new">${courseMostPopular.price - courseMostPopular.discountPrice}đ</div>
+                                            <div class="price__old">${courseMostPopular.price}đ</div>
                                             <div class="quick-info__save"><i
                                                     class="quick-info__save__icon fa-solid fa-heart"></i>
                                             </div>
@@ -370,7 +370,7 @@
                                                         <div class="content__author-name text-medium">${c.authorName}</div>
                                                         <div class="content__rate">
                                                             <i class="fa-regular fa-star"></i>
-                                                            <span class="rate__number">${c.rating}</span>
+                                                            <span class="rate__number">5</span>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -421,7 +421,7 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <div class="text-medium rate__number">${c.rating}</div>
+                                                            <div class="text-medium rate__number">5</div>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -434,7 +434,7 @@
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">${c.studentCount}</div>
+                                                            <div class="users__text text-medium">Số lượng học viên</div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
@@ -491,7 +491,7 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <div class="text-medium rate__number">${c.rating}</div>
+                                                            <div class="text-medium rate__number">5</div>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -504,7 +504,7 @@
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">${c.studentCount}</div>
+                                                            <div class="users__text text-medium">Số lượng học viên</div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
