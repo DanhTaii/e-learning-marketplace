@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.ReviewDto;
+import vn.edu.nlu.fit.elearning.dto.TagDto;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
 import vn.edu.nlu.fit.elearning.model.Tag;
@@ -21,22 +22,21 @@ public class CourseDetailController extends HttpServlet {
     private CourseService cs;
     private ReviewService reviewService;
     private LessonService lessonService;
-    private TagService ts;
+    private TagService tagService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.cs = new CourseService();
-        this.ts = new TagService();
         this.lessonService = new LessonService();
         this.reviewService = new ReviewService();
+        this.tagService = new TagService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Course c = cs.getCourse(id);
-        List<Tag> tags = ts.getAllTags();
 
         // này làm cho reviews
         List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(id);
@@ -46,8 +46,11 @@ public class CourseDetailController extends HttpServlet {
         List<Lesson> lessons = lessonService.getLessonsByCourseId(id);
         request.setAttribute("lessons",lessons);
 
+        // này làm cho tags
+        List<TagDto> tags = tagService.getTagsByCourseId(id);
         request.setAttribute("tags", tags);
-//        c.setReviews(reviewDtos);
+
+        //c.setReviews(reviewDtos);
         request.setAttribute("c", c);
         request.getRequestDispatcher("/html-partrial/course-detail.jsp").forward(request, response);
     }
