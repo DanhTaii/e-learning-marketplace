@@ -138,7 +138,7 @@
                     </a>
                 </div>
                 <div class="header__wishlist">
-                    <a href="../html-personal/my-wishlist.jsp" class="turn-page text-header">
+                    <a href="my-wishlist" class="turn-page text-header">
                         <i class="notification__icon fa-solid fa-heart text-header"></i>
                     </a>
                 </div>
@@ -295,7 +295,7 @@
                                             </a>
                                             <div class="cart-items__action-price-group action-price-group">
                                                 <div class="cart-items__action items-action">
-                                                    <a href="" class="action__link">Thêm vào Yêu Thích</a>
+                                                    <a href="cart-manager?action=moveToWishlist&id=${p.course.id}" class="action__link">Thêm vào Yêu Thích</a>
                                                      <a href="cart-manager?action=delete&id=${p.course.id}" class="action__link1">Xóa</a>
                                                 </div>
                                                 <a href="../html-partrial/course-detail.jsp" class="turn-page">
@@ -344,7 +344,7 @@
 
                             <a href="cart-manager?action=removeSelected" class="text-medium remove">Xóa</a>
 
-                            <div class="text-medium wishlisted" style="margin-left: 7px">Thêm vào Yêu thích</div>
+                            <a href="cart-manager?action=moveSelectedToWishlist" class="text-medium wishlisted" style="margin-left: 7px">Thêm vào Yêu thích</a>
                         </div>
                     </div>
                     <div class="grid__column-5">

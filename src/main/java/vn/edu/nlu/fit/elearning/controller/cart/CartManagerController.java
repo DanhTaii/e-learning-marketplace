@@ -7,18 +7,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.model.Cart;
+import vn.edu.nlu.fit.elearning.model.CartItem;
+import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "CartManagerController", value = "/cart-manager")
 
 public class CartManagerController extends HttpServlet {
+    private WishlistService ws;
 
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.ws = new WishlistService();
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-
+        Integer userId = (Integer) session.getAttribute("userId");
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (cart != null && action != null) {
@@ -26,6 +35,19 @@ public class CartManagerController extends HttpServlet {
                 case "delete":
                     int id = Integer.parseInt(request.getParameter("id"));
                     cart.deleteCourse(id);
+                    break;
+
+                case "moveToWishlist":
+                    int courseId = Integer.parseInt(request.getParameter("id"));
+                    ws.addCourseToWishlist(userId, courseId); // Gọi 1 dòng duy nhất, cực sạch!
+                    cart.deleteCourse(courseId);
+                    break;
+
+                case "moveSelectedToWishlist":
+                    cart.getSelectedItems().forEach(item -> {
+                        ws.addCourseToWishlist(userId, item.getCourse().getId());
+                    });
+                    cart.removeSelected();
                     break;
 
                 case "removeSelected":
