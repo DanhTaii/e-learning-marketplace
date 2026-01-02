@@ -464,7 +464,7 @@
 
                         <div class="section-4__list-video">
                             <ul>
-                                <c:forEach var="lesson" items="${c.lessons}">
+                                <c:forEach var="lesson" items="${lessons}">
                                     <li>
                                         <div class="section-4__lesson-information">
                                             <div class="section-4__lesson-icon text-medium"><i class="fa-solid fa-play"></i></div>
