@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.ReviewDao;
+import vn.edu.nlu.fit.elearning.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.model.Review;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ReviewService {
         return 0;
     }
 
-    public List<Review> getAllReviews() {
+    public List<ReviewDto> getAllReviews() {
         // TODO: Implement getAll logic
         return rd.findAll();
     }
@@ -35,4 +36,9 @@ public class ReviewService {
     public void deleteReview(int id) {
         // TODO: Implement delete logic
     }
+
+    public List<ReviewDto> getReviewsByCourseId(int courseId) {
+        return rd.findByCourseId(courseId);
+    }
+
 }

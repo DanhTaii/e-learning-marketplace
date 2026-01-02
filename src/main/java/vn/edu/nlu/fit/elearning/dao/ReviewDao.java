@@ -1,36 +1,37 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import vn.edu.nlu.fit.elearning.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.model.Review;
 
 import java.util.List;
 
-public class ReviewDao extends BaseDao implements BaseCrudDao<Review, Integer> {
+public class ReviewDao extends BaseDao implements BaseCrudDao<ReviewDto, Integer> {
 
     @Override
-    public int create(Review entity) {
+    public int create(ReviewDto entity) {
         // TODO: Implement create logic
         return 0;
     }
 
     @Override
-    public Review findById(Integer id) {
+    public ReviewDto findById(Integer id) {
         // TODO: Implement findById logic
         return null;
     }
 
     @Override
-    public List<Review> findAll() {
+    public List<ReviewDto> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT r.id AS review_id, r.user_id, u.first_name, u.last_name, u.email, r.course_id, c.title AS course_title, r.rating, r.comment, r.created_at\n" +
                     "FROM Reviews r\n" +
                     "JOIN Users u ON r.user_id = u.id\n" +
                     "JOIN Courses c ON r.course_id = c.id\n" +
-                    "ORDER BY r.created_at DESC;\n").mapToBean(Review.class).list();
+                    "ORDER BY r.created_at DESC;\n").mapToBean(ReviewDto.class).list();
         });
     }
 
     @Override
-    public int update(Review entity) {
+    public int update(ReviewDto entity) {
         // TODO: Implement update logic
         return 0;
     }
@@ -40,4 +41,17 @@ public class ReviewDao extends BaseDao implements BaseCrudDao<Review, Integer> {
         // TODO: Implement delete logic
         return 0;
     }
+
+    public List<ReviewDto> findByCourseId(int courseId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT r.id, r.user_id, r.course_id, r.rating,\n" +
+                    "r.comment,r.created_at,\n" +
+                    "u.username AS user_name, u.avatar_url AS thumbnail_url\n" +
+                    "FROM Reviews r\n" +
+                    "JOIN Users u ON r.user_id = u.id\n" +
+                    "WHERE r.course_id = :course_id\n" +
+                    "ORDER BY r.created_at DESC;").bind("course_id",courseId).mapToBean(ReviewDto.class).list();
+        });
+    }
+
 }

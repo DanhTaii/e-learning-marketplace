@@ -482,15 +482,15 @@
                             <span class="">Đánh giá</span>
                         </div>
 
-                        <c:forEach var="review" items="${c.reviews}">
+                        <c:forEach var="review" items="${reviewDtos}">
                             <div class="review-box__comment">
                                 <div class="comment__user header__user">
-                                    <img src="${review.avatarUrl}" alt="" class="user__avatar1">
+                                    <img src="${review.thumbnailUrl}" alt="" class="user__avatar1">
                                 </div>
                                 <div class="comment__box">
                                     <div class="box__name box">
                                         <div class="review-in4">
-                                            <span class="review__name">${review.firstName} ${review.lastName}</span>
+                                            <span class="review__name">${review.userName}</span>
                                             <span class="review__time">${review.createdAt}</span>
                                         </div>
                                     </div>

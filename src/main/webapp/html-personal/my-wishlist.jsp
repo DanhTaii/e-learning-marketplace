@@ -266,7 +266,7 @@
                                         <div class="price__old">${course.price}đ</div>
                                         <div class="quick-info__save">
                                             <a href="my-wishlist?id=${course.wishlistId}&courseId=${course.id}" class="turn-page">
-                                                <i class="fa-solid fa-heart" style="color:red;"></i>
+                                                <i class="quick-info__save__icon fa-solid fa-heart" style="color:red;"></i>
                                             </a>
                                         </div>
                                     </div>
