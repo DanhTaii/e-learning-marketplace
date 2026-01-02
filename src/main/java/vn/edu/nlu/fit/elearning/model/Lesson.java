@@ -10,8 +10,6 @@ public class Lesson implements Serializable {
 
     private int courseId;
 
-    private String courseTitle;
-
     private String title;
 
     private String videoUrl;
@@ -25,10 +23,9 @@ public class Lesson implements Serializable {
     public Lesson() {
     }
 
-    public Lesson(int id, int courseId, String courseTitle, String title, String videoUrl, int durationMinutes, int orderIndex, Timestamp createdAt) {
+    public Lesson(int id, int courseId, String title, String videoUrl, int durationMinutes, int orderIndex, Timestamp createdAt) {
         this.id = id;
         this.courseId = courseId;
-        this.courseTitle = courseTitle;
         this.title = title;
         this.videoUrl = videoUrl;
         this.durationMinutes = durationMinutes;
@@ -50,14 +47,6 @@ public class Lesson implements Serializable {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
-    }
-
-    public String getCourseTitle() {
-        return courseTitle;
-    }
-
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
     }
 
     public String getTitle() {

@@ -169,5 +169,15 @@ public boolean checkExists(String title , int courseId){
             });
         });
     }
+
+    public List<Lesson> findByCourseId(int courseId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT l.id, l.course_id, l.title, l.video_url, l.duration_minutes, l.order_index\n" +
+                    "FROM lessons l\n" +
+                    "WHERE l.course_id = :courseId\n" +
+                    "ORDER BY l.order_index ASC").bind("courseId", courseId).mapToBean(Lesson.class).list();
+        });
+    }
+
 }
 

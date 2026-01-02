@@ -56,4 +56,9 @@ return  lessonDao.update(lesson);
 
         return lessonDao.updateWithReorder(lesson, oldOrderIndex,oldCourseId) > 0;
     }
+
+    public List<Lesson> getLessonsByCourseId(int courseId) {
+        return lessonDao.findByCourseId(courseId);
+    }
+
 }
