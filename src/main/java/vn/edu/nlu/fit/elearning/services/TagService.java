@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.TagDao;
+import vn.edu.nlu.fit.elearning.dto.TagDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Tag;
 
@@ -47,4 +48,9 @@ public class TagService {
         int status = tagDao.delete(tagId);
         return status > 0;
     }
+
+    public List<TagDto> getTagsByCourseId(int courseId) {
+        return tagDao.findTagsByCourseId(courseId);
+    }
+
 }

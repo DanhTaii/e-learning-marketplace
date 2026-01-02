@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import vn.edu.nlu.fit.elearning.dto.TagDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Tag;
 import vn.edu.nlu.fit.elearning.model.User;
@@ -75,4 +76,14 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
                     .execute();
         });
     }
+
+    public List<TagDto> findTagsByCourseId(int courseId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT t.id, t.name, t.slug, t.status, ct.course_id\n" +
+                    "FROM Course_Tags ct\n" +
+                    "JOIN Tags t ON ct.tag_id = t.id\n" +
+                    "WHERE t.status = 'ACTIVE' AND ct.course_id = :courseId;").bind("courseId",courseId).mapToBean(TagDto.class).list();
+        });
+    }
+
 }
