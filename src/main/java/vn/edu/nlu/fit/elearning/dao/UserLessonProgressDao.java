@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import vn.edu.nlu.fit.elearning.dto.LessonProgressDTO;
 import vn.edu.nlu.fit.elearning.model.UserLessonProgress;
 
 import java.util.List;
@@ -21,11 +22,10 @@ public class UserLessonProgressDao extends BaseDao implements BaseCrudDao<UserLe
     @Override
     public List<UserLessonProgress> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT ulp.id AS progress_id, ulp.user_id, u.first_name, u.last_name, u.email, ulp.lesson_id, l.title AS lesson_title, l.course_id, ulp.is_completed, ulp.completed_at\n" +
-                    "FROM user_lesson_progress ulp\n" +
-                    "JOIN Users u ON ulp.user_id = u.id\n" +
-                    "JOIN Lessons l ON ulp.lesson_id = l.id\n" +
-                    "ORDER BY ulp.completed_at DESC;\n").mapToBean(UserLessonProgress.class).list();
+            return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, L.order_index, usp.is_completed, l.duration_minutes \n" +
+                    "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id\n" +
+                    "where l.course_id = 1 AND usp.user_id = 7\n" +
+                    "ORDER BY l.order_index ASC").mapToBean(UserLessonProgress.class).list();
         });
     }
 
@@ -39,5 +39,18 @@ public class UserLessonProgressDao extends BaseDao implements BaseCrudDao<UserLe
     public int delete(Integer id) {
         // TODO: Implement delete logic
         return 0;
+    }
+
+    public  List<LessonProgressDTO> findAllLessonProgress(int userId, int courseId){
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, " +
+                            "l.order_index, usp.is_completed, l.duration_minutes \n" +
+                    "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id\n" +
+                    "where l.course_id = :courseId AND usp.user_id = :userId\n" +
+                    "ORDER BY l.order_index ASC")
+                    .bind("userId", userId)
+                    .bind("courseId", courseId)
+                    .mapToBean(LessonProgressDTO.class).list();
+        });
     }
 }

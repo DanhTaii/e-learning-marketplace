@@ -1,20 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Course Content</title>
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/course-content.css">
-    <script src="../assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
-    <!--    <script src=""></script>-->
-
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/course-content.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+<%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
 
 </head>
 <body>
@@ -22,7 +20,7 @@
     <header class="web__header">
         <div class="grid">
             <div class="header__box">
-                <a href="../html-partrial/home.jsp" class="turn-page">
+                <a href="index" class="turn-page">
                     <div class="header__logo">
                         SKILL
                     </div>
@@ -128,12 +126,12 @@
                     </div>
                 </div>
                 <div class="header__class">
-                    <a href="my-course.jsp" class="turn-page text-header">
+                    <a href="my-courses" class="turn-page text-header">
                         Khóa học của tôi
                     </a>
                 </div>
                 <div class="header__wishlist">
-                    <a href="my-wishlist.jsp" class="turn-page text-header">
+                    <a href="my-wishlist" class="turn-page text-header">
                         <i class="notification__icon fa-solid fa-heart text-header"></i>
                     </a>
                 </div>
@@ -168,7 +166,7 @@
                                 <div class="user__profile-bio">
                                     <a href="" class="bio-text">Thêm tiểu sử</a>
                                 </div>
-                                <a href="account-profile.jsp" class="turn-page">
+                                <a href="account-profile" class="turn-page">
                                     <div class="user__profile-btn">
                                         <button class="user-btn button__btn text-header">Xem thông tin</button>
                                     </div>
@@ -177,14 +175,14 @@
                             <div class="user__menu">
                                 <ul class="user__menu-list">
                                     <li class="user__menu-list-item">
-                                        <a href="my-course.jsp" class="turn-page">
+                                        <a href="my-courses" class="turn-page">
                                             <div class="user__menu-list-item-box text-li">
                                                 Khóa học
                                             </div>
                                         </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <a href="my-wishlist.jsp" class="turn-page">
+                                        <a href="my-wishlist" class="turn-page">
                                             <div class="user__menu-list-item-box text-li">
                                                 Yêu thích
                                             </div>
@@ -198,7 +196,7 @@
                                         </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <a href="../index.jsp" class="turn-page">
+                                        <a href="index" class="turn-page">
                                             <div class="user__menu-list-item-box sign-out text-li">
                                                 Đăng xuất
                                             </div>
@@ -261,14 +259,14 @@
                             <span class="">2,473 đánh giá</span>
                         </div>
                         <div class="comment-input-box">
-                                <div class="comment__user2 header__user">
-                                    <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                         class="user__avatar2">
-                                </div>
+                            <div class="comment__user2 header__user">
+                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                     class="user__avatar2">
+                            </div>
 
                             <div class="box__input ">
                                 <input type="text" name="comment" class="input-style"
-                                                            placeholder="Viết bình luận...">
+                                       placeholder="Viết bình luận...">
                                 <input type="number" class="input__number" placeholder="">
                                 <div class="star">
                                     <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
@@ -380,23 +378,24 @@
                         <span class="text-4xl bold">Danh sách bài học</span>
                     </div>
                     <div class="content__box">
+                        <c:forEach var="l" items="${listLessons}">
+                            <div class="box__content" style="background: var(--dark-blue)">
+                                <div class="box__column1">
+                                    <div class="column1__tick">
+                                        <input type="checkbox" class="tick" name="tick">
+                                    </div>
+                                </div>
+                                <div class="box__column2">
+                                    <div class="column2__header">
+                                        <span class="text-lg regular" style="color: var(--white-color)">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
 
-                        <div class="box__content" style="background: var(--dark-blue)">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
+                                    </div>
+                                    <div class="column2__duration">
+                                        <span class="text-lg light" style="color: var(--white-color)">3 phút 6 giây</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular" style="color: var(--white-color)">Bài 1 : Đây là một khoá học hết sức đặc biệt!</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light" style="color: var(--white-color)">3 phút 6 giây</span>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                         <div class="box__content">
                             <div class="box__column1">
                                 <div class="column1__tick">
@@ -413,231 +412,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 3 : Hãy tiếp tục bóc tách tư duy phản biện!</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">4 phút 35 giây </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 4 : Sử dụng tư duy phản biện để giải quyết vấn đề</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">6 phút 16 giây</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 5 : Phản biện: Nguyên lý giải quyết vấn đề</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">5 phút 45 giây</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 6 : Mổ xẻ cách thức giải quyết mọi vấn đề</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">6 phút 59 giây</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 7 : Ví dụ: Giải quyết vấn đề tại cuộc thi nấu ăn Masterchef</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">9 phút 43 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">
-Bài 8 : Đi sâu vào cách thức chi tiết giải quyết mọi vấn đề</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">7 phút 36 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 9 : Có bao nhiêu hình thức phản biện và khi nào thì cần dùng?</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">4 phút 25 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 10 : Đi qua 4 cấp độ tư duy phản biện khi tìm kiếm và chọn lựa giải pháp</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">6 phút 50 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 11 : Ví dụ: Sử dụng tư duy phản biện để tìm ra giải pháp mới</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">3 phút 57 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">
-Bài 12 : Quy trình 6 bước phản biện toàn diện</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">5 phút 18 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 13 : Bỏ túi 6 câu hỏi Có - Không cần phải trả lời mỗi khi phản biện (PHẦN 1)</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">9 phút 08 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 14 : Bỏ túi 6 câu hỏi Có - Không cần phải trả lời mỗi khi phản biện (PHẦN 2)</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">6 phút 52 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">
-Bài 15 : Tất tật về tư duy phản biện trong 4 phút</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">3 phút 47 giây</span>
-                                </div>
-
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
 

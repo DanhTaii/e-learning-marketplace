@@ -20,7 +20,6 @@ public class EnrollmentService {
     }
 
     public List<EnrollmentCardDTO> getAllEnrollments(int userId) {
-        // TODO: Implement getAll logic
         return ed.findAllCoursesCard(userId);
     }
 

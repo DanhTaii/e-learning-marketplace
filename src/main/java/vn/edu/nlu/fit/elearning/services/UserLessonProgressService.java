@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.UserLessonProgressDao;
+import vn.edu.nlu.fit.elearning.dto.LessonProgressDTO;
 import vn.edu.nlu.fit.elearning.model.UserLessonProgress;
 
 import java.util.List;
@@ -18,9 +19,8 @@ public class UserLessonProgressService {
         return 0;
     }
 
-    public List<UserLessonProgress> getAllUserLessonProgresss() {
-        // TODO: Implement getAll logic
-        return ulpd.findAll();
+    public List<LessonProgressDTO> getAllUserLessonProgresss(int userId, int courseId) {
+        return ulpd.findAllLessonProgress(userId, courseId);
     }
 
     public UserLessonProgress getUserLessonProgressById(int id) {
@@ -35,4 +35,10 @@ public class UserLessonProgressService {
     public void deleteUserLessonProgress(int id) {
         // TODO: Implement delete logic
     }
+
+    public void main(String[] args) {
+//        List<LessonProgressDTO> result = this.getAllUserLessonProgresss(7,7);
+        System.out.println(this.getAllUserLessonProgresss(3, 1));
+    }
+
 }
