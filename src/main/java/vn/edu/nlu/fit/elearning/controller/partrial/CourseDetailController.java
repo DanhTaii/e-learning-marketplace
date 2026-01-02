@@ -3,15 +3,14 @@ package vn.edu.nlu.fit.elearning.controller.partrial;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.dto.TagDto;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
 import vn.edu.nlu.fit.elearning.model.Tag;
-import vn.edu.nlu.fit.elearning.services.CourseService;
-import vn.edu.nlu.fit.elearning.services.LessonService;
-import vn.edu.nlu.fit.elearning.services.ReviewService;
-import vn.edu.nlu.fit.elearning.services.TagService;
+import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +22,7 @@ public class CourseDetailController extends HttpServlet {
     private ReviewService reviewService;
     private LessonService lessonService;
     private TagService tagService;
+    private CategoryService categoryService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -31,6 +31,7 @@ public class CourseDetailController extends HttpServlet {
         this.lessonService = new LessonService();
         this.reviewService = new ReviewService();
         this.tagService = new TagService();
+        this.categoryService = new CategoryService();
     }
 
     @Override
@@ -50,7 +51,12 @@ public class CourseDetailController extends HttpServlet {
         List<TagDto> tags = tagService.getTagsByCourseId(id);
         request.setAttribute("tags", tags);
 
-        //c.setReviews(reviewDtos);
+        // này làm cho category
+        Category category = categoryService.getCategoryById(id);
+        request.setAttribute("category",category);
+        CategoryDto category2 = categoryService.getCategoryByCourseId(id);
+        request.setAttribute("category2",category2);
+
         request.setAttribute("c", c);
         request.getRequestDispatcher("/html-partrial/course-detail.jsp").forward(request, response);
     }

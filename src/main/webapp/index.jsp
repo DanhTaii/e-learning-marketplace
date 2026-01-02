@@ -295,7 +295,7 @@
                             <div class="container__category-title">Tất cả khóa học</div>
                         </a>
                         <ul class="container__category-list text-li">
-                            <c:forEach var="c" items="${categories}" begin="1">
+                            <c:forEach var="c" items="${categories}">
                                 <a href="result-search/by-category?id=${c.id}" class="turn-page">
                                     <li class="container__category-list-item text-li">${c.name}</li>
                                 </a>

@@ -59,7 +59,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<Course> findThreeCoursesWereLiked() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price,\n" +
-                    "c.price AS price_old,COUNT(w.course_id) AS wishlist_count\n" +
+                    "COUNT(w.course_id) AS wishlist_count\n" +
                     "FROM Wishlist w JOIN Courses c ON w.course_id = c.id\n" +
                     "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
@@ -72,8 +72,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     // 6 khóa học mới nhất
     public List<Course> findSixCoursesLast() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price,\n" +
-                    "c.price AS price_old\n" +
+            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price\n" +
                     "FROM Courses c\n" +
                     "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
@@ -86,7 +85,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     // 6 khóa học phổ biến nhất
     public List<Course> findSixCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
                     "LEFT JOIN Lessons l ON l.course_id = c.id " +
                     "WHERE c.is_public = TRUE " +
@@ -98,7 +97,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     // 1 khóa học phổ biến nhất
     public Course findCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
                     "LEFT JOIN Lessons l ON l.course_id = c.id " +
                     "WHERE c.is_public = TRUE " +
@@ -130,23 +129,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                         "WHERE c.is_public = TRUE AND c.id = :id " +
                         "GROUP BY c.id, cat.id, parent.id").bind("id", id).mapToBean(Course.class).one()
         );
-        // lấy tags riêng
-        List<String> tags = getJdbi().withHandle(handle ->
-                handle.createQuery("SELECT t.name FROM Tags t " +
-                        "JOIN Course_Tags ct ON t.id = ct.tag_id " +
-                        "WHERE ct.course_id = :id").bind("id", id).mapTo(String.class).list()
-        );
-        course.setTags(tags); // thêm vào đối tượng Course
-        //
-        List<Lesson> lessons = getJdbi().withHandle(handle -> handle.createQuery("SELECT id, title, video_url, duration_minutes, order_index " +
-                "FROM Lessons WHERE course_id = :id ORDER BY order_index").bind("id", id).mapToBean(Lesson.class).list());
-        course.setLessons(lessons);
-        //
-        List<Review> reviews = getJdbi().withHandle(handle -> handle.createQuery("SELECT r.id, r.rating, r.comment, r.created_at, " +
-                "u.first_name, u.last_name, u.avatar_url " +
-                "FROM Reviews r JOIN Users u ON r.user_id = u.id " +
-                "WHERE r.course_id = :id ORDER BY r.created_at DESC").bind("id", id).mapToBean(Review.class).list());
-        course.setReviews(reviews);
 
         return course;
     }
