@@ -300,10 +300,10 @@
                                                 </div>
                                                 <a href="../html-partrial/course-detail.jsp" class="turn-page">
                                                     <div class="cart-items__price items-price">
-                                                        <div><span class="price-discounted"><fmt:formatNumber value="${p.price - p.course.discountPrice}" type="number" pattern="###,###" /> đ <i
+                                                        <div><span class="price-discounted"><fmt:formatNumber value="${p.course.price - p.course.discountPrice}" type="number" pattern="###,###" /> đ <i
                                                                 class="fa-solid fa-tag price-icon"
                                                                 style="color: #3722d3;"></i> </span></div>
-                                                        <div><span class="price-origin"><fmt:formatNumber value="${p.price}" type="number" pattern="###,###" /> đ </span>
+                                                        <div><span class="price-origin"><fmt:formatNumber value="${p.course.price}" type="number" pattern="###,###" /> đ </span>
                                                         </div>
 
 

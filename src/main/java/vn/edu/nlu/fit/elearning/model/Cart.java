@@ -58,7 +58,7 @@ public class Cart {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
             if (p.isSelected()) {
-                total.updateAndGet(v -> (v + p.getPrice()));
+                total.updateAndGet(v -> (v + p.getCourse().getPrice()));
             }
 
         });
@@ -70,7 +70,7 @@ public class Cart {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
             if (p.isSelected()) {
-                total.updateAndGet(v -> (v + p.getPrice() - p.getCourse().getDiscountPrice()));
+                total.updateAndGet(v -> (v + p.getPrice()));
             }
         });
         return total.get();

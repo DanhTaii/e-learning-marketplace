@@ -7,7 +7,7 @@ public class CartItem {
 
     public CartItem(Course course, int price, boolean selected) {
         this.course = course;
-        this.price = price;
+        this.price = course.getPrice() - course.getDiscountPrice();
         this.selected = selected;
     }
 

@@ -16,11 +16,8 @@ public class OrderService {
     }
 
     public int createOrder(Order order) {
-        if (order != null) {
-            orderDao.create(order);
-            return 1;
-        }
-        return 0;
+       return  orderDao.create(order);
+
     }
 
     public List<Order> getAllOrders() {

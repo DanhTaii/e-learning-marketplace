@@ -224,7 +224,9 @@
         </div>
     </header>
     <div class="web__container">
+        <form action="confirm-payment" method="post" class="payment-layout">
         <div class="grid">
+
             <div class="payment-layout">
 
                 <div class="grid__column-8">
@@ -284,7 +286,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="order-item__price">
-                                                    <span class="amount-discounted"><fmt:formatNumber value="${p.price - p.course.discountPrice}" type="number" pattern="###,###" /> đ <i
+                                                    <span class="amount-discounted"><fmt:formatNumber value="${p.price}" type="number" pattern="###,###" /> đ <i
                                                             class="fa-solid fa-tag price-icon"
                                                             style="color: #3722d3;"></i></span>
 
@@ -320,14 +322,15 @@
 
 
                                 </div>
-                                <a href="#popup__add-payment-confirm-black" class="turn-page">
+
+
                                     <div class="invoice__pay-btn header__button index-btn">
-                                        <button class="button__btn pay-btn"><i
+                                        <button type="submit" class="button__btn pay-btn"><i
                                                 class="fa-solid fa-bag-shopping shop-icon"
                                                 style="color: #000000;"></i> Thanh toán
                                         </button>
                                     </div>
-                                </a>
+
                                 <div class="detail__policy">
                                     <span class="text-big main-text">Đảm bảo hoàn tiền trong 30 ngày</span>
                                     <span class="text-medium sub-text">Không hài lòng? Nhận lại đủ tiền trong vòng 30 ngày. Đơn giản và dễ dàng!</span>
@@ -339,10 +342,13 @@
 
                     </div>
 
-                </div>
+
+            </div>
+
             </div>
 
         </div>
+        </form>
         <div id="popup__add-payment-confirm-black" class="modal-backdrop">
             <div class="modal-content">
                 <div class="modal-header">

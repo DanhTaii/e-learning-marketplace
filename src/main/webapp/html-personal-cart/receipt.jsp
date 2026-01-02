@@ -1,9 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Receipt</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../assets/css/base.css">
@@ -283,67 +290,7 @@
 
                             </div>
                         </div></li>
-                        <li> <div class="grid__row-2">
-                            <div class="order-items">
-                                <div class="items__content">
-                                    <div class="content__image">
-                                        <img srcset="https://tse1.mm.bing.net/th/id/OIP.-qNL8MTdeRuVGRqoTYXzTAHaEJ?cb=ucfimg2ucfimg=1&w=2000&h=1121&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                             alt="" class="image">
-                                    </div>
-                                    <div class="content__name text-paragraph">
-                                        <p class="items__name ">Lãnh Đạo Không Cần Chức Danh</p>
-                                    </div>
 
-                                </div>
-
-                                <div class="items__price">
-                                    <div><span class="amount-discounted ">559.000đ</span></div>
-                                    <div><span class="amount-origin ">899.000đ</span></div>
-
-                                </div>
-
-                            </div>
-                        </div></li>
-                        <li> <div class="grid__row-2">
-                            <div class="order-items">
-                                <div class="items__content">
-                                    <div class="content__image">
-                                        <img srcset="https://tse3.mm.bing.net/th/id/OIP.k5sDq201q3UKgMwrVdcyBQHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                             alt="" class="image">
-                                    </div>
-                                    <div class="content__name text-paragraph">
-                                        <p class="items__name ">Kỹ năng giải quyết vấn đề cho hiệu quả</p>
-                                    </div>
-
-                                </div>
-
-                                <div class="items__price">
-                                    <div><span class="amount-discounted ">399.000đ</span></div>
-                                    <div><span class="amount-origin ">599.000đ</span></div>
-                                </div>
-
-                            </div>
-                        </div></li>
-                        <li> <div class="grid__row-2">
-                            <div class="order-items" style="border: none">
-                                <div class="items__content">
-                                    <div class="content__image">
-                                        <img srcset="https://static.ybox.vn/2022/11/3/1669791323216-Thi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn%20(1).png"
-                                             alt="" class="image">
-                                    </div>
-                                    <div class="content__name text-paragraph">
-                                        <p class="items__name ">Networking Chuyên Nghiệp</p>
-                                    </div>
-
-                                </div>
-
-                                <div class="items__price">
-                                    <div><span class="amount-discounted ">399.000đ</span></div>
-                                    <div><span class="amount-origin ">699.000đ</span></div>
-                                </div>
-
-                            </div>
-                        </div></li>
                     </ul>
 
 
