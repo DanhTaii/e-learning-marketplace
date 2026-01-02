@@ -177,12 +177,13 @@
 }
 
 #items, #price {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 550;
 }
 
 .items__name {
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.2rem;
 }
 
 .order-items {
@@ -204,9 +205,8 @@
 }
 
 .content__image {
-    width: 175px;
-    margin-right: 20px;
-    height: 100px;
+    width: 120px;
+    height: 70px;
 
 }
 
@@ -242,7 +242,7 @@
 }
 
 .price-header {
-    padding-right: 6.9rem;
+    padding-right: 4rem;
 }
 
 .content__name {
@@ -263,3 +263,141 @@ ul {
     background-color: var(--white-color);
     margin-bottom: 30px;
 }
+
+/* Khung trắng tổng thể bên trái */
+.main-payment-wrapper {
+    margin:7.5rem 0 2rem 0;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Grid hiển thị phương thức thanh toán */
+.payment-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Ẩn radio button mặc định */
+.payment-item input[type="radio"] {
+    display: none;
+}
+
+/* Style cho từng ô thanh toán */
+.payment-item__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-item__content img {
+    height: 40px;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.payment-item__content span {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+/* Hiệu ứng khi được chọn */
+.payment-item input[type="radio"]:checked + .payment-item__content {
+    border-color: #3722D3;
+    background-color: #f8f7ff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(55, 34, 211, 0.1);
+}
+
+/* Divider ngăn cách */
+.divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 30px 0;
+}
+
+.order-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.order-item__info {
+    margin-left: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.order-item__price {
+    text-align: right;
+}
+
+    .payment-options-grid {
+        display: grid;
+        /* Tự động tính toán số cột: mỗi cột tối thiểu 140px, tối đa chiếm hết chỗ trống */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .payment-item__content {
+        position: relative; /* Để làm dấu tích chọn */
+        height: 100px; /* Cố định chiều cao để các ô đều nhau */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #fafafa;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .payment-item__content img {
+        height: 35px; /* Giới hạn chiều cao logo */
+        max-width: 90%;
+        object-fit: contain;
+        margin-bottom: 8px;
+    }
+
+    .payment-item__content span {
+        font-size: 1.3rem;
+        font-weight: 500;
+        text-align: center;
+        color: #555;
+    }
+
+    /* Hiệu ứng khi được chọn (Radio Checked) */
+    .payment-item input:checked + .payment-item__content {
+        border-color: #3722D3;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(55, 34, 211, 0.15);
+    }
+
+    .payment-item input:checked + .payment-item__content span {
+        color: #3722D3;
+        font-weight: bold;
+    }

@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
+<!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <title>Payment</title>
@@ -10,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/payment.css">
+    <link rel="stylesheet" href="assets/css/payment.css?v=1.0.1">
     <link rel="stylesheet" href="assets/css/home.css">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
@@ -226,89 +228,73 @@
             <div class="payment-layout">
 
                 <div class="grid__column-8">
-                    <div class="payment-method">
-                        <div class="payment-method__title">
-                            <span class="text-big-title">Phương thức thanh toán</span>
-                        </div>
-                        <div class="payment-method__box">
-                            <div class="box__row0">
-                                <img src="../assets/image/image 10.png" height="37" width="242"/>
-                            </div>
-                            <div class="box__row1">
-                                <div class="row1__card-number">
-                                    <label class="text-big">Số tài khoản/   Số điện thoại</label>
-                                    <input type="number" class="input-style" name="card-number"
-                                           placeholder="Nhập số tài khoản/ số điện thoại ">
-                                </div>
-                            </div>
-                            <div class="box__row2">
-                                <div class="row2__new-password">
-                                    <label class="text-big">Mật khẩu</label>
-                                    <input type="password" class="input-style" name="new-password"
-                                           placeholder="Nhập mật khẩu">
-                                </div>
-                                <div class="row2__new-password">
-                                    <label class="text-big">Nhập lại mật khẩu</label>
-                                    <input type="password" class="input-style" name="renew-password"
-                                           placeholder="Nhập lại mật khẩu">
-                                </div>
-                            </div>
-                            <div class="box__row3">
-                                <div class="row3__name-card">
-                                    <label class="text-big">Chọn phương thức thanh toán </label>
-                                    <select class="input-style">
-                                        <option class="input-style">--Vui lòng chọn phương thức thanh toán--  </option>
-                                        <option class="input-style" selected >Momo</option>
-                                        <option class="input-style">VNPay</option>
-                                        <option class="input-style">GooglePay</option>
-                                    </select>
-                                </div>
-                            </div>
-<!--                            <a href="#popup__add-payment-method-success" class="turn-page">-->
-<!--                                <div class="box__row4 header__button">-->
-<!--                                    <button type="submit" class="row4__btn button__btn">Thêm phương thức</button>-->
-<!--                                </div>-->
-<!--                            </a>-->
-                        </div>
-                    </div>
+                    <div class="main-payment-wrapper">
 
-                    <div class="order-title">
-                        <span class="title__1 text-big-title">Hóa đơn chi tiết</span>
-                        <div class="title__2">
-                            <div id="items">Sản phẩm</div>
-                            <div class=" price-header">
-                                <span id="price">Giá</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="scrollable-order-list">
-                        <ul>
-                            <c:forEach var="o" items="${orderItems}">
-                            <li> <div class="grid__row-2">
-                                <div class="order-items">
-                                    <div class="items__content">
-                                        <div class="content__image" style="aspect-ratio: 16/9">
-                                            <img srcset="${o.thumbnailUrl}"
-                                                 alt="" class="image">
+                        <div class="payment-section">
+                            <h2 class="section-title">Chọn phương thức thanh toán</h2>
+                            <div class="payment-options-grid">
+
+                                <c:forEach var="method" items="${paymentMethod}">
+                                    <label class="payment-item">
+                                        <input type="radio" name="payment-method-id" value="${method.id}">
+
+                                        <div class="payment-item__content">
+                                            <img src="${method.iconUrl}" alt="${method.name}">
+                                            <span>${method.name}</span>
+
+                                            <div class="select-badge"><i class="fa-solid fa-circle-check"></i></div>
                                         </div>
-                                        <div class="content__name text-paragraph">
-                                            <p class="items__name ">${o.title}</p>
-                                        </div>
+                                    </label>
+                                </c:forEach>
 
-                                    </div>
+                            </div>
+                        </div>
 
-                                    <div class="items__price">
-                                        <span class="amount-discounted ">${o.priceNew}</span>
-                                        <div><span class="amount-origin ">${o.priceOld}</span></div>
-                                    </div>
+                        <hr class="divider">
+
+                        <div class="order-section">
+                            <h2 class="section-title">Hóa đơn chi tiết</h2>
+                            <div class="title__2">
+
+                                <div id="items">Sản phẩm</div>
+
+                                <div class=" price-header">
+
+                                    <span id="price">Giá</span>
 
                                 </div>
-                            </div></li></c:forEach>
+                            </div>
+                            <div class="scrollable-order-list">
+                                <ul>
+                                    <c:forEach var="p" items="${sessionScope.cart.selectedItems}">
+                                        <li>
+                                            <div class="order-item-row">
+                                                <div class="order-item__info">
+                                                    <div class="content__image" style="aspect-ratio: 16/9">
 
-                        </ul>
+                                                        <img srcset="${p.course.thumbnailUrl}"
 
+                                                             alt="" class="image">
 
+                                                    </div>
+                                                    <div class="content__name">
 
+                                                        <p class="items__name ">${p.course.title}</p>
+
+                                                    </div>
+                                                </div>
+                                                <div class="order-item__price">
+                                                    <span class="amount-discounted"><fmt:formatNumber value="${p.price - p.course.discountPrice}" type="number" pattern="###,###" /> đ <i
+                                                            class="fa-solid fa-tag price-icon"
+                                                            style="color: #3722d3;"></i></span>
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -320,16 +306,16 @@
                                 <div class="detail__price">
                                     <div class="price__original">
                                         <span class="price__original text-medium original">Giá gốc: </span>
-                                        <span class="price__original text-medium amount">${order.totalAmount}</span>
+                                        <span class="price__original text-medium amount"><fmt:formatNumber value="${sessionScope.cart.total}" type="number" pattern="###,###" /> đ</span>
                                     </div>
                                     <div class="price__discount">
                                         <span class="price__discount text-medium discount">Số tiền giảm: </span>
-                                        <span class="price__discount text-medium amount">- ${order.discountAmount}</span>
+                                        <span class="price__discount text-medium amount">- <fmt:formatNumber value="${sessionScope.cart.discountPriceTotal}" type="number" pattern="###,###" /> đ</span>
 
                                     </div>
                                     <div class="price__total index">
-                                        <span class="price__total ">Tổng cộng (${orderItems.size()}): </span>
-                                        <span class="price__total text-medium amount">${order.finalAmount}</span>
+                                        <span class="price__total ">Tổng cộng (${sessionScope.cart.selectedQuantity}): </span>
+                                        <span class="price__total text-medium amount"><fmt:formatNumber value="${sessionScope.cart.finalPriceTotal}" type="number" pattern="###,###" /> đ</span>
                                     </div>
 
 

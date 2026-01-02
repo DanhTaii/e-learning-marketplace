@@ -344,7 +344,7 @@
 
                             <a href="cart-manager?action=removeSelected" class="text-medium remove">Xóa</a>
 
-                            <a href="cart-manager?action=moveSelectedToWishlist" class="text-medium wishlisted" style="margin-left: 7px">Thêm vào Yêu thích</a>
+                            <a href="cart-manager?action=moveSelectedToWishlist" class="text-medium wishlisted " style="margin-left: 7px;text-decoration: none">Thêm vào Yêu thích</a>
                         </div>
                     </div>
                     <div class="grid__column-5">
@@ -360,14 +360,14 @@
 
 
                                     <div class="total__price">
-                                        <span class="price-discounted1 "><fmt:formatNumber value="${sessionScope.cart.discountPrice}" type="number" pattern="###,###" /> đ</span>
+                                        <span class="price-discounted1 "><fmt:formatNumber value="${sessionScope.cart.finalPriceTotal}" type="number" pattern="###,###" /> đ</span>
                                         <span class=" price-origin"><fmt:formatNumber value="${sessionScope.cart.total}" type="number" pattern="###,###" /> đ</span>
                                     </div>
 
                                 </div>
 
                             </div>
-                            <a href="payment" class="turn-page">
+                            <a href="show-payment" class="turn-page">
                                 <div class="checkout__checkout-button header__button">
                                     <button class="button__btn">Tiến hành thanh toán</button>
                                 </div>
