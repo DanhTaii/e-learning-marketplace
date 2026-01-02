@@ -11,11 +11,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/receipt.css">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/receipt.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 
 <body>
@@ -129,18 +129,19 @@
                     </div>
                 </div>
                 <div class="header__class">
-                    <a href="../html-personal/my-course.jsp" class="turn-page text-header">
+                    <a href="my-courses" class="turn-page text-header">
                         Khóa học của tôi
                     </a>
                 </div>
                 <div class="header__wishlist">
-                    <a href="../html-personal/my-wishlist.jsp" class="turn-page text-header">
+                    <a href="my-wishlist" class="turn-page text-header">
                         <i class="notification__icon fa-solid fa-heart text-header"></i>
                     </a>
                 </div>
                 <div class="header__cart">
-                    <a href="../html-personal-cart/cart.jsp" class="turn-page text-header">
+                    <a href="cart" class="turn-page text-header">
                         <i class="text-header fa-solid fa-cart-shopping"></i>
+                        (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
                     </a>
                 </div>
                 <!-- Toggle checkbox ẩn -->
@@ -220,7 +221,7 @@
                     <div class="box__row1-header">
                         <span class="text-big-title">Biên lai</span></div>
                     <div class="box__row2-header">
-                        <div><span class="text-small-title">Biên nhận cho Giỏ hàng - 11 tháng 11, 2025</span></div>
+                        <div><span class="text-small-title">Biên nhận cho Giỏ hàng - <fmt:formatDate value="${order.createdAt}" pattern="dd 'tháng' MM, yyyy" /> </span></div>
                         <div>
                             <span class="status text-small-title">
                                 <i class="fa-solid fa-circle-check icon-check" style="color: #018d4a;"></i>
@@ -233,27 +234,27 @@
                     <div class="grid summary-box">
                         <div class="box__row1">
                             <span class="row1__id text">Mã đơn hàng:</span>
-                            <span class="number">ORD101</span>
+                            <span class="number">${order.orderCode}</span>
                         </div>
                         <div class="box__row2">
                             <span class="row2__time text">Ngày:</span>
-                            <span class="number">11/11/2025</span>
+                            <span class="number">${order.createdAt}</span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Giá gốc:</span>
-                            <span class="number">2.796.000đ</span>
+                            <span class="number"><fmt:formatNumber value="${order.totalAmount}" type="number" pattern="###,###" /> đ</span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Số tiền giảm:</span>
-                            <span class="number">- 1.000.000đ</span>
+                            <span class="number">-<fmt:formatNumber value="${order.discountAmount}" type="number" pattern="###,###" /> đ</span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Tổng cộng:</span>
-                            <span class="number">1.796.000đ</span>
+                            <span class="number"><fmt:formatNumber value="${order.finalAmount}" type="number" pattern="###,###" /> đ</span>
                         </div>
                         <div class="box__row4">
                             <span class="row4__payment-method text">Phương thức thanh toán:</span>
-                            <span class="number">Momo</span>
+                            <span class="number">${paymentMethod.name}</span>
                         </div>
 
 
@@ -270,39 +271,41 @@
                 </div>
                 <div class="scrollable-order-list">
                     <ul>
-                        <li> <div class="grid__row-2">
+                        <c:forEach var="item" items="${orderItemList}">
+                        <li>
+                            <div class="grid__row-2">
                             <div class="order-items">
                                 <div class="items__content">
                                     <div class="content__image">
-                                        <img srcset="https://static.unica.vn/upload/images/2023/07/Screenshot%20(45).png_m_1690356655.jpg"
-                                             alt="" class="image">
+                                        <img src=${item.thumbnailUrl}""
+                                             alt="${item.courseTitle}" class="image">
                                     </div>
                                     <div class="content__name text-paragraph">
-                                        <p class="items__name ">Tư duy phản biện</p>
+                                        <p class="items__name ">${item.courseTitle}</p>
                                     </div>
 
                                 </div>
 
                                 <div class="items__price">
-                                    <span class="amount-discounted ">399.000đ</span>
-                                    <div><span class="amount-origin ">599.000đ</span></div>
+                                    <span class="amount-discounted "><fmt:formatNumber value="${item.priceAtPurchase}" type="number" pattern="###,###" /> đ </span>
                                 </div>
 
                             </div>
-                        </div></li>
-
+                        </div>
+                        </li>
+                        </c:forEach>
                     </ul>
 
 
                 </div>
 
                 <div class="button-box ">
-                    <a href="../html-partrial/home.jsp" class="turn-page">
+                    <a href="index" class="turn-page">
                         <div class="header__button button">
                             <button type="button" class="home-btn dark-button">Trang chủ</button>
                         </div>
                     </a>
-                    <a href="../html-personal/my-course.jsp" class="turn-page">
+                    <a href="my-courses" class="turn-page">
                         <div class="header__button button">
                             <button type="button" class="home-btn button__btn">Khóa học của tôi</button>
                         </div>

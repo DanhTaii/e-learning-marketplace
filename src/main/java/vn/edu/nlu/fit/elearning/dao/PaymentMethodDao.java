@@ -25,7 +25,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
     public PaymentMethod findById(Integer id) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, status, created_at, updated_at " +
+                            "SELECT id, name, code, icon_url, created_at, updated_at " +
                                     "FROM Payment_Methods WHERE id = :id")
                     .bind("id", id)
                     .mapToBean(PaymentMethod.class)

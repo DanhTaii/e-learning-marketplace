@@ -14,11 +14,9 @@ public class PaymentMethodService {
     }
 
     public int createPaymentMethod(PaymentMethod paymentMethod) {
-        if (paymentMethod != null) {
-            pmd.create(paymentMethod);
-            return 1;
-        }
-        return 0;
+          return   pmd.create(paymentMethod);
+
+
     }
 
     public List<PaymentMethod> getAllPaymentMethods() {

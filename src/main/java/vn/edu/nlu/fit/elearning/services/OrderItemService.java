@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.OrderItemDao;
+import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
 
 import java.util.List;
@@ -57,5 +58,9 @@ public class OrderItemService {
 
     public void deleteOrderItem(int id) {
         // TODO: Implement delete logic
+    }
+    public List<OrderItemDTO> getReceiptByOrderId(int orderId){
+       List<OrderItemDTO> receipt = oid.getReceiptItems(orderId);
+       return  receipt;
     }
 }
