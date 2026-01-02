@@ -37,7 +37,7 @@ public class CartManagerController extends HttpServlet {
 
                 case "moveToWishlist":
                     int courseId = Integer.parseInt(request.getParameter("id"));
-                    ws.addCourseToWishlist(userId, courseId); // Gọi 1 dòng duy nhất, cực sạch!
+                    ws.addCourseToWishlist(userId, courseId);
                     cart.deleteCourse(courseId);
                     break;
 

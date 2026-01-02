@@ -43,8 +43,13 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
 
     @Override
     public int create(OrderItem entity) {
-        // TODO: Implement create logic
-        return 0;
+        String sql = "INSERT INTO Order_Items (order_id, course_id, price_at_purchase) " +
+                "VALUES (:orderId, :courseId, :priceAtPurchase)";
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bindBean(entity)
+                        .execute()
+        );
     }
 
     @Override

@@ -38,8 +38,7 @@ public class OrderItemService {
     }
 
     public int createOrderItem(OrderItem orderItem) {
-        // TODO: Implement creation logic
-        return 0;
+        return oid.create(orderItem);
     }
 
     public List<OrderItem> getAllOrderItems() {

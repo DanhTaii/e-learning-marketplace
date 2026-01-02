@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.cart.paymet;
+package vn.edu.nlu.fit.elearning.controller.cart.payment_management;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
