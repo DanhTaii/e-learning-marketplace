@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.OrderDao;
+import vn.edu.nlu.fit.elearning.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.model.Order;
 
 import java.util.List;
@@ -59,5 +60,9 @@ public class OrderService {
 
     public double getRevenueTotal() {
         return orderDao.calculateRevenueTotal();
+    }
+    public List<OrderDTO> getOrderHistoryByUserId(int userId){
+        List<OrderDTO> list = orderDao.getOrderHistoryByUserId(userId);
+        return list;
     }
 }
