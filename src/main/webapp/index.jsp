@@ -23,7 +23,7 @@
     <header class="web__header">
         <div class="grid">
             <div class="header__box">
-                <a href="./index.jsp" class="turn-page">
+                <a href="index" class="turn-page">
                     <div class="header__logo">
                         SKILL
                     </div>
@@ -168,7 +168,7 @@
                                             </a>
                                         </li>
                                         <li class="user__menu-list-item">
-                                            <a href="html-personal-cart/order-history.jsp" class="turn-page">
+                                            <a href="order-history" class="turn-page">
                                                 <div class="user__menu-list-item-box text-li">
                                                     Lịch sử giao dịch
                                                 </div>
