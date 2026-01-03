@@ -24,26 +24,6 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
         });
     }
 
-//    public Order createOrder(Order entity) {
-//        // 1. Thêm paid_at vào SQL để đồng bộ với dữ liệu bạn set ở Controller
-//        String sql = "INSERT INTO Orders (order_code, user_id, payment_method_id, total_amount, discount_amount, final_amount, status, paid_at)\n" +
-//                "VALUES (:orderCode, :userId, :paymentMethodId, :totalAmount, :discountAmount, :finalAmount, :status, :paidAt)";
-//
-//        return getJdbi().withHandle(handle -> {
-//            // 2. Thực thi và lấy ID tự sinh
-//            int generatedId = handle.createUpdate(sql)
-//                    .bindBean(entity)
-//                    .executeAndReturnGeneratedKeys()
-//                    .mapTo(Integer.class)
-//                    .one();
-//
-//            // 3. Gán ID vừa lấy được vào đối tượng entity
-//            entity.setId(generatedId);
-//
-//            // 4. Trả về đối tượng Order đã có đầy đủ thông tin (bao gồm ID)
-//            return entity;
-//        });
-//    }
     @Override
     public Order findById(Integer orderId) {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +

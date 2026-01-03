@@ -14,7 +14,6 @@ public class OrderItem implements Serializable {
     private Timestamp updatedAt;
     // Field tạm để chọn trong giao diện (nếu cần)
     private boolean selected;
-
     public OrderItem() {}
 
     public int getId() { return id; }
@@ -37,12 +36,4 @@ public class OrderItem implements Serializable {
 
     public boolean isSelected() { return selected; }
     public void setSelected(boolean selected) { this.selected = selected; }
-
-    // Format giá khóa học tại thời điểm mua
-    public String getPriceAtPurchaseFormatted() {
-        Locale vietnam = new Locale("vi", "VN");
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(vietnam);
-        String formatted = formatter.format(priceAtPurchase);
-        return formatted.replace(" ₫", "").replace("₫", "").trim();
-    }
 }

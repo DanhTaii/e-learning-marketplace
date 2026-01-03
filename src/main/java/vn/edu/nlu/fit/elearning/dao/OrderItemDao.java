@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.dao;
 
 import org.jdbi.v3.core.Jdbi;
+import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
 
 import java.util.List;
@@ -10,13 +11,13 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
 
     public List<OrderItem> getCartItemsByUserId(Integer orderId) {
         Jdbi jdbi = getJdbi();
-        String sql = "SELECT oi.id AS id, c.id AS courseId, c.title, oi.is_selected AS selected, c.thumbnail_url, c.rating, c.level, c.price AS price_old, oi.price_at_purchase AS price_new, SUM(l.duration_minutes) AS durationHours , COUNT(l.id) AS total_lesson ,SUM(c.student_count) AS studentCount                   \n" +
+        String sql = "SELECT oi.id AS id, c.id AS courseId, c.title, c.thumbnail_url, c.level, c.price AS price_old, oi.price_at_purchase AS price_new, SUM(l.duration_minutes) AS durationHours , COUNT(l.id) AS total_lesson                  \n" +
                 "FROM order_items oi\n" +
                 "JOIN Orders o ON oi.order_id = o.id\n" +
                 "JOIN Courses c ON oi.course_id = c.id\n" +
                 "LEFT JOIN Lessons l ON c.id = l.course_id\n" +
                 "WHERE oi.order_id = ?\n" +
-                "GROUP BY oi.id, c.id, o.user_id, c.title, oi.is_selected, c.thumbnail_url,c.rating, c.level, c.price,oi.price_at_purchase\n";
+                "GROUP BY oi.id, c.id, o.user_id, c.title,  c.thumbnail_url, c.level, c.price,oi.price_at_purchase\n";
 
         return jdbi.withHandle(handle -> {
             return handle.createQuery(sql)
@@ -87,7 +88,20 @@ public class OrderItemDao extends BaseDao implements BaseCrudDao<OrderItem, Inte
                     .execute();
         });
     }
+    public  List<OrderItemDTO> getReceiptItems(int orderId) {
+        String sql = "SELECT oi.id, oi.order_id, oi.course_id, oi.price_at_purchase, " +
+                "c.title AS courseTitle, c.thumbnail_url AS thumbnailUrl " +
+                "FROM order_items oi " +
+                "JOIN Courses c ON oi.course_id = c.id " +
+                "WHERE oi.order_id = ?";
 
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, orderId)
+                        .mapToBean(OrderItemDTO.class)
+                        .list()
+        );
+    }
     @Override
     public int update(OrderItem entity) {
         // TODO: Implement update logic
