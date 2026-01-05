@@ -14,9 +14,8 @@ public class UserLessonProgressService {
         this.ulpd = new UserLessonProgressDao();
     }
 
-    public int createUserLessonProgress(UserLessonProgress userLessonProgress) {
-        // TODO: Implement creation logic
-        return 0;
+    public int createUserLessonProgress(List<UserLessonProgress> userLessonProgress) {
+       return ulpd.createUserLessonProgress(userLessonProgress);
     }
 
     public List<LessonProgressDTO> getAllUserLessonProgresss(int userId, int courseId) {
