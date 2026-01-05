@@ -20,7 +20,7 @@
     <header class="web__header">
         <div class="grid">
             <div class="header__box">
-                <a href="../html-partrial/home.jsp" class="turn-page">
+                <a href="index" class="turn-page">
                     <div class="header__logo">
                         SKILL
                     </div>
@@ -81,7 +81,7 @@
                                         <li class="browse__container-box-2-list-item">
                                             <a href="../html-partrial/all-course.jsp" class="turn-page"></a>
                                             <div class="item-box">
-                                                <a href="../html-partrial/all-course.jsp"
+                                                <a href="all-courses"
                                                    class="text-list-item text-list-item-2 text-li">Tất cả khóa học</a>
                                             </div>
                                         </li>
@@ -126,17 +126,17 @@
                     </div>
                 </div>
                 <div class="header__class">
-                    <a href="../html-personal/my-course.html" class="turn-page text-header">
+                    <a href="my-courses" class="turn-page text-header">
                         Khóa học của tôi
                     </a>
                 </div>
                 <div class="header__wishlist">
-                    <a href="my-wishlist.jsp" class="turn-page text-header">
+                    <a href="my-wishlist" class="turn-page text-header">
                         <i class="notification__icon fa-solid fa-heart text-header"></i>
                     </a>
                 </div>
                 <div class="header__cart">
-                    <a href="../html-personal-cart/cart.jsp" class="turn-page text-header">
+                    <a href="cart" class="turn-page text-header">
                         <i class="text-header fa-solid fa-cart-shopping"></i>
                     </a>
                 </div>
@@ -166,7 +166,7 @@
                                 <div class="user__profile-bio">
                                     <a href="" class="bio-text">Thêm tiểu sử</a>
                                 </div>
-                                <a href="account-profile.jsp" class="turn-page">
+                                <a href="account-profile" class="turn-page">
                                     <div class="user__profile-btn">
                                         <button class="user-btn button__btn text-header">Xem thông tin</button>
                                     </div>
@@ -175,28 +175,28 @@
                             <div class="user__menu">
                                 <ul class="user__menu-list">
                                     <li class="user__menu-list-item">
-                                        <a href="../html-personal/my-course.html" class="turn-page">
+                                        <a href="my-courses" class="turn-page">
                                             <div class="user__menu-list-item-box text-li">
                                                 Khóa học
                                             </div>
                                         </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <a href="my-wishlist.jsp" class="turn-page">
+                                        <a href="my-wishlist" class="turn-page">
                                             <div class="user__menu-list-item-box text-li">
                                                 Yêu thích
                                             </div>
                                         </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <a href="../html-personal-cart/order-history.jsp" class="turn-page">
+                                        <a href="order-history" class="turn-page">
                                             <div class="user__menu-list-item-box text-li">
                                                 Lịch sử giao dịch
                                             </div>
                                         </a>
                                     </li>
                                     <li class="user__menu-list-item">
-                                        <a href="../index.jsp" class="turn-page">
+                                        <a href="logout" class="turn-page">
                                             <div class="user__menu-list-item-box sign-out text-li">
                                                 Đăng xuất
                                             </div>

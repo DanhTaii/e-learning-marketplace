@@ -5,21 +5,8 @@ import vn.edu.nlu.fit.elearning.model.UserLessonProgress;
 
 import java.util.List;
 
-public class UserLessonProgressDao extends BaseDao implements BaseCrudDao<UserLessonProgress, Integer> {
+public class UserLessonProgressDao extends BaseDao{
 
-    @Override
-    public int create(UserLessonProgress entity) {
-        // TODO: Implement create logic
-        return 0;
-    }
-
-    @Override
-    public UserLessonProgress findById(Integer id) {
-        // TODO: Implement findById logic
-        return null;
-    }
-
-    @Override
     public List<UserLessonProgress> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, L.order_index, usp.is_completed, l.duration_minutes \n" +
@@ -29,22 +16,10 @@ public class UserLessonProgressDao extends BaseDao implements BaseCrudDao<UserLe
         });
     }
 
-    @Override
-    public int update(UserLessonProgress entity) {
-        // TODO: Implement update logic
-        return 0;
-    }
-
-    @Override
-    public int delete(Integer id) {
-        // TODO: Implement delete logic
-        return 0;
-    }
-
     public List<LessonProgressDTO> findAllLessonProgress(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, " +
-                            "l.order_index, usp.is_completed, l.duration_minutes \n" +
+                            "l.order_index, usp.is_completed, l.duration_minutes, l.video_url \n" +
                             "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id\n" +
                             "where l.course_id = :courseId AND usp.user_id = :userId\n" +
                             "ORDER BY l.order_index ASC")

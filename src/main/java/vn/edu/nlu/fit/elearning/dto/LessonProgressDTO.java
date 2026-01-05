@@ -9,6 +9,7 @@ public class LessonProgressDTO {
     private String lessonTitle;
     private boolean isCompleted;
     private int durationMinutes;
+    private String videoUrl;
 
     public int getId() {
         return id;
@@ -64,6 +65,14 @@ public class LessonProgressDTO {
 
     public void setDurationMinutes(int durationMinutes) {
         this.durationMinutes = durationMinutes;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     @Override

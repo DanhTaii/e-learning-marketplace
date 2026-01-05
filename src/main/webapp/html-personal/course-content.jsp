@@ -82,7 +82,7 @@
                                         <li class="browse__container-box-2-list-item">
                                             <a href="../html-partrial/all-course.jsp" class="turn-page"></a>
                                             <div class="item-box">
-                                                <a href="../html-partrial/all-course.jsp"
+                                                <a href="all-courses"
                                                    class="text-list-item text-list-item-2 text-li">Tất cả khóa học</a>
                                             </div>
                                         </li>
@@ -137,7 +137,7 @@
                     </a>
                 </div>
                 <div class="header__cart">
-                    <a href="../html-personal-cart/cart.jsp" class="turn-page text-header">
+                    <a href="cart" class="turn-page text-header">
                         <i class="text-header fa-solid fa-cart-shopping"></i>
                     </a>
                 </div>
@@ -215,7 +215,7 @@
         <div class="grid layout">
             <div class="grid__column-8 column1">
                 <div class="image-container">
-                    <iframe width="100%" height="500"
+                    <iframe id="mainVideoPlayer" width="100%" height="500"
                             src="https://www.youtube.com/embed/sGTkYMrWX6U?si=R75SMusg5_-meU-e"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -224,8 +224,9 @@
 
                 <div class="content-container">
                     <div class="container__title-video">
-                        <div class="title-video"><span
-                                class="text-3xl regular">Đây là một khoá học hết sức đặc biệt!</span>
+                        <div class="title-video">
+                            <span id="mainLessonTitle"
+                                  class="text-3xl regular">${enrollmentDetail.listLesson[0].lessonTitle}</span>
                         </div>
                     </div>
                     <div class="container__sub-header">
@@ -318,21 +319,26 @@
                     </div>
                     <div class="content__box">
                         <c:forEach var="l" items="${enrollmentDetail.listLesson}">
-                            <div class="box__content" style="background: var(--dark-blue)">
+                            <div class="box__content lesson-item"
+                                 style="background: var(--dark-blue); cursor: pointer;"
+                                 data-video-url="${l.videoUrl}"
+                                 data-title="Bài ${l.orderIndex}: ${l.lessonTitle}">
+
                                 <div class="box__column1">
                                     <div class="column1__tick">
-                                        <input type="checkbox" class="tick" name="tick">
+                                        <input type="checkbox" class="tick lesson-checkbox" name="tick"
+                                               data-lesson-id="${l.id}"
+                                               ${l.completed ? 'checked' : ''}>
                                     </div>
                                 </div>
                                 <div class="box__column2">
                                     <div class="column2__header">
                                         <span class="text-lg regular"
                                               style="color: var(--white-color)">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
-
                                     </div>
                                     <div class="column2__duration">
                                         <span class="text-lg light"
-                                              style="color: var(--white-color)">3 phút 6 giây</span>
+                                              style="color: var(--white-color)">${l.durationMinutes}</span>
                                     </div>
                                 </div>
                             </div>
@@ -442,4 +448,5 @@
 
 
 </body>
+<script src="assets/javascript/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
