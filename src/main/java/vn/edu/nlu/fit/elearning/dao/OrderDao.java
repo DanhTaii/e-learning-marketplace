@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.dao;
 
+import vn.edu.nlu.fit.elearning.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.OrderItem;
@@ -266,6 +267,20 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
             }).list();
         });
     }
+    public List<OrderDTO> getOrderHistoryByUserId(int userId) {
+        String sql = "SELECT o.id, o.order_code, o.total_amount, o.discount_amount, o.final_amount, " +
+                "o.status, o.created_at, pm.name AS paymentMethodName " +
+                "FROM Orders o " +
+                "JOIN payment_methods pm ON o.payment_method_id = pm.id " +
+                "WHERE o.user_id = :userId " +
+                "ORDER BY o.created_at DESC";
 
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("userId", userId)
+                        .mapToBean(OrderDTO.class)
+                        .list()
+        );
+    }
 
 }
