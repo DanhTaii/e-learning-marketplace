@@ -244,7 +244,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <a href="../html-personal-cart/payment.jsp">
+                            <a href="buy-now?id=${c.id}">
                                 <button class="container-2__button-buy dark-button">
                                     Mua ngay
                                 </button>
@@ -724,7 +724,7 @@
 </body>
 <script>
     function addToCart(courseId) {
-        // 1. Gửi yêu cầu ngầm đến Servlet bằng Fetch API (AJAX hiện đại)
+
         fetch('add-cart?id=' + courseId)
             .then(response => {
                 if (response.ok) {
@@ -733,13 +733,11 @@
                 throw new Error('Network response was not ok.');
             })
             .then(newCount => {
-                // 2. Tìm thẻ số trên header và cập nhật con số mới
                 const cartElement = document.getElementById('cart-count');
                 if (cartElement) {
                     cartElement.innerText = newCount;
                 }
 
-                // 3. Hiệu ứng nhỏ cho người dùng biết đã thành công
                 alert("Đã thêm khóa học vào giỏ hàng!");
             })
             .catch(error => {
