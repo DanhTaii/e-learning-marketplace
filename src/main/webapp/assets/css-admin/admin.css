@@ -502,11 +502,11 @@ td:last-child ,th:last-child{
     /*align-items: center;*/
     /*justify-content: center;*/
 }
-.action__button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/*.action__button {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
 
 
 :root {
@@ -643,4 +643,47 @@ td:last-child ,th:last-child{
 .form-actions {
     display: flex;
     justify-content: flex-end;
+}
+/* Container bọc nút */
+.filter__button-search {
+    display: flex;
+    /* Ép container của nút nhảy xuống đáy để thẳng hàng với input (vì input có label ở trên) */
+    align-self: flex-end;
+    margin-bottom: 2px; /* Căn chỉnh khít với đường kẻ đáy của input */
+    padding-left: 15px;
+}
+
+/* Style chính cho nút tìm kiếm */
+.admin-search-btn {
+    background-color: #001529; /* Màu xanh đen sang trọng */
+    color: #ffffff;
+    border: none;
+    width: 50px; /* Độ rộng vừa vặn cho 1 icon */
+    height: 3.5rem; /* Bằng chính xác chiều cao .admin-input__long */
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hiệu ứng khi di chuột vào (Hover) */
+.admin-search-btn:hover {
+    background-color: #003a8c; /* Sáng hơn một chút */
+    transform: translateY(-2px); /* Nhích nhẹ lên tạo cảm giác nổi */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hiệu ứng khi nhấn giữ (Active) */
+.admin-search-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho icon kính lúp bên trong */
+.admin-search-btn i {
+    font-size: 1.2rem;
+    color: white !important;
 }

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,10 +26,12 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
+                    <a href="index">
                     <div class="container-1__logo">
                         <i class="fa-solid fa-graduation-cap"></i>
                         <span>Softskill</span>
                     </div>
+                    </a>
                     <div class="container-1__menu">
                         <ul>
                             <li>
@@ -147,7 +150,7 @@
                                             <div class="card-icon"><i class="fa-solid fa-money-check-dollar"></i></i>
                                             </div>
                                         </div>
-                                        <div class="card-content__number">${revenueTotal}</div>
+                                        <div class="card-content__number"><fmt:formatNumber value="${revenueTotal}" type="number" pattern="###,###"> </fmt:formatNumber> đ</div>
                                     </div>
                                 </li>
                                 <li>

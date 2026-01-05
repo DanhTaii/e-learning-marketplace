@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quản lý khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
@@ -27,10 +27,12 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
-                    <div class="container-1__logo">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <span>Softskill</span>
-                    </div>
+                    <a href="index">
+                        <div class="container-1__logo">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Softskill</span>
+                        </div>
+                    </a>
                     <div class="container-1__menu">
                         <ul>
                             <li>
@@ -193,18 +195,58 @@
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div class="filter__button-search">
-                                            <button class="button dark-button" type="submit">
+                                            <button type="submit" class="admin-search-btn">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>
                                         </div>
+
+
 
                                     </div>
                                 </div>
                             </form>
 
                             <div class="container-2__list-student">
+                                <style>
+                                    .action-wrapper {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-start;
+                                        gap: 8px;
+                                        height: 100%;
+                                    }
+
+                                    .icon-action-btn {
+                                        width: 32px;
+                                        height: 32px;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        padding: 0;
+                                        border: none;
+                                        background: transparent;
+                                        cursor: pointer;
+                                        border-radius: 4px;
+                                        color: var(--dark-blue);
+                                        transition: all 0.2s;
+                                    }
+
+                                    .icon-action-btn:hover {
+                                        background-color: #f0f0f0;
+                                        transform: translateY(-1px);
+                                    }
+
+
+                                    table {
+                                        border-collapse: collapse !important;
+                                    }
+
+                                    table td {
+                                        border-bottom: 1px solid var(--light-grey);
+                                        height: 55px;
+                                    }
+                                </style>
                                 <table>
                                     <thead>
                                     <tr>
@@ -267,6 +309,7 @@
                                                 </div>
                                             </td>
                                             <td class="action__button">
+                                                <div class="action-wrapper">
                                                 <button type="button" onclick="showCategoryDetail(${cate.id})"
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
@@ -277,6 +320,7 @@
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     </c:forEach>

@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
 <!doctype html>
 <html lang="en">
 <head>
@@ -342,8 +344,8 @@
                                             </div>
                                         </div>
                                         <div class="content__price content__price-2">
-                                            <div class="price__new">${courseMostPopular.price - courseMostPopular.discountPrice}đ</div>
-                                            <div class="price__old">${courseMostPopular.price}đ</div>
+                                            <div class="price__new"><fmt:formatNumber value="${courseMostPopular.price - courseMostPopular.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber > đ</div>
+                                            <div class="price__old"><fmt:formatNumber value="${courseMostPopular.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                             <div class="quick-info__save"><i
                                                     class="quick-info__save__icon fa-solid fa-heart"></i>
                                             </div>
@@ -377,8 +379,8 @@
                                                     <div class="content__quick-info">
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new">${c.price - c.discountPrice}đ</div>
-                                                        <div class="price__old">${c.price}đ</div>
+                                                        <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
+                                                        <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                                     </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
@@ -443,8 +445,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new">${c.price - c.discountPrice}đ</div>
-                                                        <div class="price__old">${c.price}đ</div>
+                                                        <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
+                                                        <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                                     </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
