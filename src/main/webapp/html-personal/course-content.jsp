@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!DOCTYPE html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-<%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
+    <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
 
 </head>
 <body>
@@ -263,16 +264,20 @@
                                 <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
                                      class="user__avatar2">
                             </div>
-
-                            <div class="box__input ">
-                                <input type="text" name="comment" class="input-style"
-                                       placeholder="Viết bình luận...">
-                                <input type="number" class="input__number" placeholder="">
-                                <div class="star">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
+                            <form action="my-course/review/create" method="post">
+                                <div class="box__input ">
+                                    <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
+                                    <input type="text" name="comment" class="input-style"
+                                           placeholder="Viết bình luận...">
+                                    <input type="number" class="input__number" placeholder="" name="rating">
+                                    <div class="star">
+                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
+                                    </div>
+                                    <button class="dark-button button__add" type="submit">
+                                        Gửi
+                                    </button>
                                 </div>
-                                <div class="dark-button button__add">Gửi</div>
-                            </div>
+                            </form>
                         </div>
 
                         <c:forEach var="review" items="${enrollmentDetail.listReviews}">
@@ -304,11 +309,7 @@
                             </div>
                         </c:forEach>
                     </div>
-
-
                 </div>
-
-
             </div>
             <div class="grid__column-4 column2">
                 <div class="course-content">
@@ -325,11 +326,13 @@
                                 </div>
                                 <div class="box__column2">
                                     <div class="column2__header">
-                                        <span class="text-lg regular" style="color: var(--white-color)">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
+                                        <span class="text-lg regular"
+                                              style="color: var(--white-color)">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
 
                                     </div>
                                     <div class="column2__duration">
-                                        <span class="text-lg light" style="color: var(--white-color)">3 phút 6 giây</span>
+                                        <span class="text-lg light"
+                                              style="color: var(--white-color)">3 phút 6 giây</span>
                                     </div>
                                 </div>
                             </div>

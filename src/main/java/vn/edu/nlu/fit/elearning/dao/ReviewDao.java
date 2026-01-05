@@ -5,21 +5,9 @@ import vn.edu.nlu.fit.elearning.model.Review;
 
 import java.util.List;
 
-public class ReviewDao extends BaseDao implements BaseCrudDao<ReviewDto, Integer> {
+public class ReviewDao extends BaseDao{
 
-    @Override
-    public int create(ReviewDto entity) {
-        // TODO: Implement create logic
-        return 0;
-    }
-
-    @Override
-    public ReviewDto findById(Integer id) {
-        // TODO: Implement findById logic
-        return null;
-    }
-
-    @Override
+//    @Override
     public List<ReviewDto> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT r.id AS review_id, r.user_id, u.first_name, u.last_name, u.email, r.course_id, c.title AS course_title, r.rating, r.comment, r.created_at\n" +
@@ -30,16 +18,13 @@ public class ReviewDao extends BaseDao implements BaseCrudDao<ReviewDto, Integer
         });
     }
 
-    @Override
-    public int update(ReviewDto entity) {
-        // TODO: Implement update logic
-        return 0;
-    }
-
-    @Override
-    public int delete(Integer id) {
-        // TODO: Implement delete logic
-        return 0;
+    public int create(ReviewDto entity){
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("INSERT INTO reviews(user_id, course_id, rating, comment)\n" +
+                    "VALUES (:userId, :courseId, :rating, :comment)")
+                    .bindBean(entity)
+                    .execute();
+        });
     }
 
     public List<ReviewDto> findByCourseId(int courseId) {
