@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.EnrollmentDao;
 import vn.edu.nlu.fit.elearning.dto.EnrollmentCardDTO;
+import vn.edu.nlu.fit.elearning.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.model.Enrollment;
 
 import java.util.List;
@@ -34,5 +35,9 @@ public class EnrollmentService {
 
     public void deleteEnrollment(int id) {
         // TODO: Implement delete logic
+    }
+
+    public EnrollmentDetailDto getEnrollmentDetail(int userId){
+        return ed.getEnrollmentDetail(userId);
     }
 }

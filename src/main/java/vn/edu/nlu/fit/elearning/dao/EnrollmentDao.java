@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.dao;
 
 import vn.edu.nlu.fit.elearning.dto.EnrollmentCardDTO;
+import vn.edu.nlu.fit.elearning.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.model.Enrollment;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
 
     @Override
     public int create(EnrollmentCardDTO entity) {
-       return 0;
+        return 0;
     }
 
     @Override
@@ -65,5 +66,20 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
                         .bindBean(entity)
                         .execute()
         );
+    }
+
+    public EnrollmentDetailDto getEnrollmentDetail(int userId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT e.id AS id, c.id AS courseId, c.title AS title, c.author_name AS authorName,\n" +
+                            "    (SELECT IFNULL(AVG(r.rating), 0) FROM Reviews r WHERE r.course_id = c.id) AS rating,\n" +
+                            "    (SELECT IFNULL(SUM(l.duration_minutes), 0) / 60 FROM Lessons l WHERE l.course_id = c.id) AS durationHours,\n" +
+                            "    (SELECT COUNT(*) FROM Enrollments e2 WHERE e2.course_id = c.id) AS studentCount,\n" +
+                            "    (SELECT COUNT(*) FROM Reviews r WHERE r.course_id = c.id) AS reviewCount\n" +
+                            "FROM Enrollments e\n" +
+                            "JOIN Courses c ON e.course_id = c.id\n" +
+                            "WHERE e.user_id = :userId")
+                    .bind("userId", userId)
+                    .mapToBean(EnrollmentDetailDto.class).findFirst().orElse(null);
+        });
     }
 }

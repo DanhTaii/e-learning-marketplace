@@ -231,23 +231,23 @@
                         <div class="sub-header__rating-star sub__header">
                             <div class="star1">
                                 <div class="star1__number">
-                                    <span class="text-xl">4.6</span></div>
+                                    <span class="text-xl">${enrollmentDetail.rating}</span></div>
                                 <div class="star1__star-icon"><i class="fa-solid fa-star icon-star"
                                                                  style="color: #FFD43B; font-size: var(--text-sm)"></i>
                                 </div>
                             </div>
                             <div class="number-rating">
-                                <span class="text-sm light">2,473 đánh giá</span></div>
+                                <span class="text-sm light">${enrollmentDetail.reviewCount} đánh giá</span></div>
                         </div>
 
                         <div class="sub-header__student-count sub__header">
-                            <div class="count"><span class="text-xl">19500</span></div>
+                            <div class="count"><span class="text-xl">${enrollmentDetail.studentCount}</span></div>
 
                             <div class="student"><span class="text-sm light">Học viên</span></div>
 
                         </div>
                         <div class="sub-header__duration sub__header">
-                            <div class="time"><span class="text-xl">6 Tiếng</span></div>
+                            <div class="time"><span class="text-xl">${enrollmentDetail.durationHours}</span></div>
 
                             <div class="total"><span class="text-sm light">Tổng cộng</span></div>
 
@@ -256,7 +256,7 @@
 
                     <div class="section-7__review section__space">
                         <div class="review-box__header style__sub-title">
-                            <span class="">2,473 đánh giá</span>
+                            <span class="">${enrollmentDetail.reviewCount} đánh giá</span>
                         </div>
                         <div class="comment-input-box">
                             <div class="comment__user2 header__user">
@@ -274,97 +274,35 @@
                                 <div class="dark-button button__add">Gửi</div>
                             </div>
                         </div>
-                        <div class="review-box__comment">
-                            <div class="comment__user header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                     class="user__avatar1">
-                            </div>
-                            <div class="comment__box">
-                                <div class="box__name box">
-                                    <div class="review-in4">
-                                        <span class="review__name">Danh Tai</span>
-                                        <span class="review__time">2 tuần trước</span>
-                                    </div>
+
+                        <c:forEach var="review" items="${enrollmentDetail.listReviews}">
+                            <div class="review-box__comment">
+                                <div class="comment__user header__user">
+                                    <img src="${review.thumbnailUrl}" alt=""
+                                         class="user__avatar1">
                                 </div>
-                                <div class="box__date box">
-                                    <div class="star">
-                                        <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star"
-                                                                  style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                <div class="comment__box">
+                                    <div class="box__name box">
+                                        <div class="review-in4">
+                                            <span class="review__name">${review.userName}</span>
+                                            <span class="review__time">${review.createdAt}</span>
                                         </div>
+                                    </div>
+                                    <div class="box__date box">
+                                        <div class="star">
+                                            <div class="text-medium regular">${review.rating}</div>
+                                            <div class="star-icon">
+                                                <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                            </div>
 
-                                    </div>
-                                </div>
-                                <div class="box__comment box">
-                                    <span class="">Bài học bổ ích, cảm ơn Thầy</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-box__comment">
-                            <div class="comment__user header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                     class="user__avatar1">
-                            </div>
-                            <div class="comment__box">
-                                <div class="box__name box">
-                                    <div class="review-in4">
-                                        <span class="review__name">NgocMinh</span>
-                                        <span class="review__time">5 tháng trước</span>
-                                    </div>
-                                </div>
-                                <div class="box__date box">
-                                    <div class="star">
-                                        <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star"
-                                                                  style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
                                         </div>
-
+                                    </div>
+                                    <div class="box__comment box">
+                                        <span class="">${review.comment}</span>
                                     </div>
                                 </div>
-                                <div class="box__comment box">
-                                    <span class="">Tôi cảm thấy hứng thú và động viên hơn để tiếp tục học hỏi sau khi hoàn thành khoá học này.</span>
-                                </div>
                             </div>
-                        </div>
-                        <div class="review-box__comment">
-                            <div class="comment__user header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
-                                     class="user__avatar1">
-                            </div>
-                            <div class="comment__box">
-                                <div class="box__name box">
-                                    <div class="review-in4">
-                                        <span class="review__name">MinhLoc</span>
-                                        <span class="review__time">10 năm trước</span>
-                                    </div>
-                                </div>
-                                <div class="box__date box">
-                                    <div class="star">
-                                        <div class="text-medium regular">4.6</div>
-                                        <div class="star-icon"><i class="fa-solid fa-star"
-                                                                  style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="box__comment box">
-                                    <span class="">Mong thầy ra thêm nhiều video ạ.</span>
-                                </div>
-                            </div>
-                        </div>
-
+                        </c:forEach>
                     </div>
 
 
@@ -378,7 +316,7 @@
                         <span class="text-4xl bold">Danh sách bài học</span>
                     </div>
                     <div class="content__box">
-                        <c:forEach var="l" items="${listLessons}">
+                        <c:forEach var="l" items="${enrollmentDetail.listLesson}">
                             <div class="box__content" style="background: var(--dark-blue)">
                                 <div class="box__column1">
                                     <div class="column1__tick">
@@ -396,22 +334,6 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="box__content">
-                            <div class="box__column1">
-                                <div class="column1__tick">
-                                    <input type="checkbox" class="tick" name="tick">
-                                </div>
-                            </div>
-                            <div class="box__column2">
-                                <div class="column2__header">
-                                    <span class="text-lg regular">Bài 2 : Tư duy có phải là suy nghĩ?</span>
-
-                                </div>
-                                <div class="column2__duration">
-                                    <span class="text-lg light">6 phút 19 giây</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
