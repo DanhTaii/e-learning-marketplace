@@ -45,6 +45,16 @@ public class Cart {
         data.values().forEach(item -> item.setSelected(isSelected));
     }
 
+    public void selectOnly(int courseId) {
+        data.values().forEach(item -> {
+            if (item.getCourse().getId() == courseId) {
+                item.setSelected(true);
+            } else {
+                item.setSelected(false);
+            }
+        });
+    }
+
 
     public int getTotalQuantity() {
         return data.size();

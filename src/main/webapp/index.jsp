@@ -392,10 +392,9 @@
                                             <h4 class="hover-title">${c.title}</h4>
                                             <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
-                                                <form action="cart-add" method="POST">
-                                                    <input type="hidden" name="courseId" value="${c.id}">
-                                                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
-                                                </form>
+
+                                                    <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
+
                                                 <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
                                                     <i class="fa-regular fa-heart"></i>
                                                 </button>
@@ -408,7 +407,8 @@
                             <div class="grid__row-2">
                                 <div class="product__small-title text-small-title">Mới nhất</div>
                                 <c:forEach var="c" items="${coursesLastest}">
-                                    <div class="grid__column-4">
+                                    <div class="grid__column-4 product-card-container">
+
                                         <a href="course-detail?id=${c.id}" class="turn-page">
                                             <div class="product__small-advertisement">
                                                 <div class="small-advertisement__image">
@@ -445,11 +445,6 @@
                                                     <div class="content__price">
                                                         <div class="price__new">${c.price - c.discountPrice}đ</div>
                                                         <div class="price__old">${c.price}đ</div>
-                                                        <div class="quick-info__save">
-                                                            <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                                                <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
-                                                            </a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
@@ -458,14 +453,14 @@
                                                 </div>
                                             </div>
                                         </a>
+
                                         <div class="product-hover-info">
                                             <h4 class="hover-title">${c.title}</h4>
                                             <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
-                                                <form action="cart-add" method="POST">
-                                                    <input type="hidden" name="courseId" value="${c.id}">
-                                                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
-                                                </form>
+
+                                                <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
+
                                                 <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
                                                     <i class="fa-regular fa-heart"></i>
                                                 </button>
@@ -478,7 +473,7 @@
                             <div class="grid__row-2">
                                 <div class="product__small-title text-small-title">Phổ biến</div>
                                 <c:forEach var="c" items="${coursesFeature}">
-                                    <div class="grid__column-4">
+                                    <div class="grid__column-4 product-card-container">
                                         <a href="course-detail?id=${c.id}" class="turn-page">
                                             <div class="product__small-advertisement">
                                                 <div class="small-advertisement__image">
@@ -515,11 +510,6 @@
                                                     <div class="content__price">
                                                         <div class="price__new">${c.price - c.discountPrice}đ</div>
                                                         <div class="price__old">${c.price}đ</div>
-                                                        <div class="quick-info__save">
-                                                            <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                                                <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
-                                                            </a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
@@ -532,10 +522,9 @@
                                             <h4 class="hover-title">${c.title}</h4>
                                             <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
-                                                <form action="cart-add" method="POST">
-                                                    <input type="hidden" name="courseId" value="${c.id}">
-                                                    <button type="submit" class="btn-add-cart">Thêm vào giỏ</button>
-                                                </form>
+
+                                                <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
+
                                                 <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
                                                     <i class="fa-regular fa-heart"></i>
                                                 </button>
@@ -647,6 +636,29 @@
 </div>
 </body>
 <script>
+
+    function addToCart(courseId) {
+
+        fetch('add-cart?id=' + courseId)
+            .then(response => {
+                if (response.ok) {
+                    return response.text(); // Đọc con số tổng mà Servlet trả về
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(newCount => {
+                const cartElement = document.getElementById('cart-count');
+                if (cartElement) {
+                    cartElement.innerText = newCount;
+                }
+
+                alert("Đã thêm khóa học vào giỏ hàng!");
+            })
+            .catch(error => {
+                console.error('Lỗi AJAX:', error);
+                alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
+            });
+    }
     // ép load tại trang khi bấm back
     window.addEventListener( "pageshow", function ( event ) {
         var historyTraversal = event.persisted
