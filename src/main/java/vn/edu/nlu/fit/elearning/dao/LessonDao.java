@@ -1,7 +1,6 @@
 package vn.edu.nlu.fit.elearning.dao;
 
 import vn.edu.nlu.fit.elearning.model.Lesson;
-import vn.edu.nlu.fit.elearning.model.Tag;
 
 import java.util.List;
 
