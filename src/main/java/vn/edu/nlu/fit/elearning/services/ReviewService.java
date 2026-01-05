@@ -14,27 +14,9 @@ public class ReviewService {
         this.rd = new ReviewDao();
     }
 
-    public int createReview(Review review) {
+    public int createReview(ReviewDto review) {
         // TODO: Implement creation logic
-        return 0;
-    }
-
-    public List<ReviewDto> getAllReviews() {
-        // TODO: Implement getAll logic
-        return rd.findAll();
-    }
-
-    public Review getReviewById(int id) {
-        // TODO: Implement getById logic
-        return null;
-    }
-
-    public void updateReview(Review review) {
-        // TODO: Implement update logic
-    }
-
-    public void deleteReview(int id) {
-        // TODO: Implement delete logic
+        return rd.create(review);
     }
 
     public List<ReviewDto> getReviewsByCourseId(int courseId) {
