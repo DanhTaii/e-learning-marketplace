@@ -16,7 +16,7 @@ public class EnrollmentService {
 
     public int createEnrollment(Enrollment enrollment) {
         // TODO: Implement creation logic
-        return 0;
+        return ed.createEnrollment(enrollment);
     }
 
     public List<EnrollmentCardDTO> getAllEnrollments(int userId) {

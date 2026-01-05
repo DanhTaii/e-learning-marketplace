@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.dao.OrderItemDao;
 import vn.edu.nlu.fit.elearning.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.model.*;
+import vn.edu.nlu.fit.elearning.services.EnrollmentService;
 import vn.edu.nlu.fit.elearning.services.OrderItemService;
 import vn.edu.nlu.fit.elearning.services.OrderService;
 import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
@@ -20,12 +21,13 @@ import java.util.List;
 public class ConfirmController extends HttpServlet {
     OrderService orderService;
     OrderItemService orderItemService;
-
+EnrollmentService enrollmentService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.orderService = new OrderService();
         this.orderItemService = new OrderItemService();
+        this.enrollmentService = new EnrollmentService();
     }
 
     @Override
@@ -61,8 +63,16 @@ public class ConfirmController extends HttpServlet {
             oi.setPriceAtPurchase(item.getPrice());
 
             orderItemService.createOrderItem(oi);
+
+            Enrollment enrollment =new Enrollment();
+            enrollment.setUserId(userId);
+            enrollment.setCourseId(item.getCourse().getId());
+            enrollment.setOrderId(orderId);
+            enrollmentService.createEnrollment(enrollment);
         }
         cart.removeSelected();
+
+
         session.setAttribute("cart", cart);
         response.sendRedirect(request.getContextPath()+"/show-receipt?orderId=" + orderId);
     }
