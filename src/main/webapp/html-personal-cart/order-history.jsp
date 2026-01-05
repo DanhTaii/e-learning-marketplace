@@ -220,7 +220,7 @@
                 </div>
                 <div class="history-box">
                     <ul>
-                        <li><div class="box__content">
+             pul           <li><div class="box__content">
                             <div class="box__row1">
                                 <span class="time">20:03:45, 11/11/2025</span>
                             </div>
