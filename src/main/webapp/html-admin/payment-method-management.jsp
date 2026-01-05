@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <title>Kiểu thanh toán </title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
@@ -152,11 +152,7 @@
             background: #e9ecef !important;
         }
 
-        .dark-button {
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
+
     </style>
 
 </head>
@@ -166,10 +162,12 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
-                    <div class="container-1__logo">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <span>Softskill</span>
-                    </div>
+                    <a href="index">
+                        <div class="container-1__logo">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Softskill</span>
+                        </div>
+                    </a>
                     <div class="container-1__menu">
                         <ul>
                             <li>
@@ -303,7 +301,7 @@
                                 </form>
                             </div>
 
-                            <div class="title__admin">Tất cả phương thức thanh toán</div>
+                            <div class="title__admin">Tất cả phương thức thanh toán (${listPaymentMethods.size()})</div>
                             <div class="container-2__filter">
                                 <form action="${pageContext.request.contextPath}/admin/payment-methods/search"
                                       method="get" style="width: 100%;">
@@ -323,7 +321,7 @@
                                         </div>
 
                                         <div class="filter__button-search">
-                                            <button class="button dark-button" type="submit">
+                                            <button type="submit" class="admin-search-btn">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>
                                         </div>
@@ -336,8 +334,6 @@
                                     <thead>
                                     <tr>
                                         <th>Tên phương thức</th>
-                                        <th>Icon URL</th>
-                                        <th>Hoạt động</th>
                                         <th>Ngày tạo</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -353,18 +349,10 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                    <img src="${pm.iconUrl}" alt="${pm.name}"
-                                                         style="width: 60px; height: 60px; object-fit: contain; border-radius: 6px;">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__status course-row__font-content">
-                                                        ${pm.status}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                        ${pm.createdAt}
+                                                    <fmt:setLocale value="en_US" scope="page"/>
+
+                                                    <fmt:formatDate value="${pm.createdAt}"
+                                                                    pattern="MMMM d, yyyy"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">

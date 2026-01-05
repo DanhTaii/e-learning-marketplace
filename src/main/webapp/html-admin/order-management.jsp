@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Order Management</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
@@ -22,10 +22,12 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="grid__column-2 container-1">
-                    <div class="container-1__logo">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <span>Softskill</span>
-                    </div>
+                    <a href="index">
+                        <div class="container-1__logo">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Softskill</span>
+                        </div>
+                    </a>
                     <div class="container-1__menu">
                         <ul>
                             <li>
@@ -135,9 +137,10 @@
                             <div class="header__title">Đơn hàng</div>
                         </div>
                         <div class="container-2__body">
+                            <form action="${pageContext.request.contextPath}/admin/orders/search" method="get">
                             <div class="container-2__filter">
                                 <div class="filter__selection">
-                                    <form action="${pageContext.request.contextPath}/admin/orders/search" method="get">
+
                                         <div class="filter__selection-input">
                                             <div class="filter__selection-items filter__selection-name">
                                                 <div class="filter__selection-title filter__item-name">Mã:</div>
@@ -151,25 +154,18 @@
                                                 <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
                                                 <input name="fromDate" placeholder="" type="datetime-local" class="admin-input__long">
                                             </div>
-                                            <div class="filter__selection-items">
-                                                <div class="filter__selection-title filter__item-phone">Trạng thái đơn hàng:</div>
-                                                <select name="status" class="admin-input__short">
-                                                    <option class="text-medium" value="">--Vui lòng chọn trạng thái--</option>
-                                                    <option class="text-medium" value="PAID">Paid</option>
-                                                    <option class="text-medium" value="PENDING">Pending</option>
-                                                </select>
-                                            </div>
+
                                         </div>
 
                                         <div class="filter__button-search">
-                                            <button class="button dark-button" type="submit">
+                                            <button type="submit" class="admin-search-btn">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>
                                         </div>
-                                    </form>
+
                                 </div>
                             </div>
-
+                    </form>
                             <div class="container-2__list-student">
                                 <table>
                                     <thead>
@@ -213,13 +209,16 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="course-row__font-content course-row__status">
+                                                <div class="course-row__font-content course-row__status "style="color: #018d4a">
                                                         ${order.status}
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="course-row__created course-row__font-content">
-                                                        ${order.createdAt}
+                                                        <fmt:setLocale value="en_US" scope="page"/>
+
+                                                    <fmt:formatDate value="${order.createdAt}"
+                                                                    pattern="MMMM d, yyyy"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
