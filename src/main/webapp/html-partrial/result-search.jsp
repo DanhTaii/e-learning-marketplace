@@ -1105,8 +1105,7 @@
                     <h3 class="footer__heading text-big">Cơ sở</h3>
                     <ul class="footer-list">
                         <li class="footer-item">
-                            <a href="" class="footer-item__link text-big">Về chúng tôi
-                            </a>
+                            <a href="" class="footer-item__link text-big">Về chúng tôi</a>
                         </li>
                         <li class="footer-item">
                             <a href="" class="footer-item__link text-medium">Chăm sóc khách hàng</a>

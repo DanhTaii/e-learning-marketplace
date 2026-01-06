@@ -366,15 +366,14 @@
             </c:if>
         </ul>
     </div>
-        <footer class="web__footer">
+    <footer class="web__footer">
         <div class="grid">
             <div class="grid__row-1">
                 <div class="grid__column-2-4">
                     <h3 class="footer__heading text-big">Cơ sở</h3>
                     <ul class="footer-list">
                         <li class="footer-item">
-                            <a href="" class="footer-item__link text-big">Về chúng tôi
-                            </a>
+                            <a href="" class="footer-item__link text-big">Về chúng tôi</a>
                         </li>
                         <li class="footer-item">
                             <a href="" class="footer-item__link text-medium">Chăm sóc khách hàng</a>
@@ -431,11 +430,11 @@
                     <div class="footer__download">
                         <div class="footer__download-apps">
                             <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/appstore.png" alt="App Store"
+                                <img src="assets/image/appstore.png" alt="App Store"
                                      class="footer__download-app-img">
                             </a>
                             <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/ggplay.png" alt="Google Play"
+                                <img src="assets/image/ggplay.png" alt="Google Play"
                                      class="footer__download-app-img">
                             </a>
                         </div>
