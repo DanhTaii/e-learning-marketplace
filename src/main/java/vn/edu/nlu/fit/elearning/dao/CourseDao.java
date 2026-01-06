@@ -133,28 +133,69 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         return course;
     }
 
-    public List<Course> findCoursesByIdCategory(int idCategory) {
+    // Lấy khóa học theo category
+    public List<CourseCardDto> findCoursesByIdCategory(int idCategory) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name " +
-                    "FROM Courses c " +
-                    "JOIN Categories cate ON c.category_id = cate.id " +
-                    "WHERE cate.id = :id;").bind("id", idCategory).mapToBean(Course.class).list();
+            return handle.createQuery(
+                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n" +
+                            "       COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
+                            "       COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+                            "FROM Courses c\n" +
+                            "JOIN Categories cate ON c.category_id = cate.id\n" +
+                            "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
+                            "WHERE c.is_public = TRUE AND cate.id = :id\n" +
+                            "GROUP BY c.id\n" +
+                            "ORDER BY c.created_at DESC"
+            ).bind("id", idCategory).mapToBean(CourseCardDto.class).list();
         });
     }
 
-    public List<Course> findCoursesByTitle(String search) {
-        String title = "%" + search + "%";
+    // Lấy khóa học theo tag
+    public List<CourseCardDto> findCoursesByIdTag(int idTag) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.price, c.discount_price, c.thumbnail_url, cate.id AS category_id, cate.name AS category_name \n" +
-                    "FROM Courses c\n" +
-                    "JOIN Categories cate ON c.category_id = cate.id\n" +
-                    "WHERE title LIKE :title").bind("title", title).mapToBean(Course.class).list();
+            return handle.createQuery(
+                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n " +
+                            "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
+                            "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
+                            "FROM Courses c\n " +
+                            "JOIN Course_Tags ct ON c.id = ct.course_id\n " +
+                            "JOIN Tags t ON ct.tag_id = t.id\n " +
+                            "LEFT JOIN Lessons l ON l.course_id = c.id\n " +
+                            "LEFT JOIN Reviews r ON r.course_id = c.id\n " +
+                            "LEFT JOIN Wishlist w ON w.course_id = c.id\n " +
+                            "WHERE c.is_public = TRUE AND t.id = :id\n " +
+                            "GROUP BY c.id\n " +
+                            "ORDER BY c.created_at DESC"
+            ).bind("id", idTag).mapToBean(CourseCardDto.class).list();
         });
     }
+
+    // Lấy khóa học theo title (search)
+    public List<CourseCardDto> findCoursesByTitle(String search) {
+        String title = "%" + search + "%";
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(
+                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n" +
+                            "       COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
+                            "       COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+                            "FROM Courses c\n" +
+                            "JOIN Categories cate ON c.category_id = cate.id\n" +
+                            "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
+                            "WHERE c.is_public = TRUE AND c.title LIKE :title\n" +
+                            "GROUP BY c.id\n" +
+                            "ORDER BY c.created_at DESC"
+            ).bind("title", title).mapToBean(CourseCardDto.class).list();
+        });
+    }
+
 
     // làm cho phần bộ lọc
     // làm cách này thì tích 1 hay nhiều cái thì vẫn đều lọc bình thường
-    public List<Course> filterCourses(Integer categoryId, String title,
+    public List<CourseCardDto> filterCourses(Integer categoryId, Integer tagId, String title,
                                       String sortPrice, String level,
                                       String priceRange, String rating,
                                       String duration, String popular) {
@@ -165,12 +206,17 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "SUM(l.duration_minutes)/60.0 AS duration_hours " +
                             "FROM Courses c " +
                             "JOIN Categories cate ON c.category_id = cate.id " +
+                            "JOIN Course_Tags ct ON c.id = ct.course_id\n " +
+                            "JOIN Tags t ON ct.tag_id = t.id\n " +
                             "LEFT JOIN Lessons l ON c.id = l.course_id " +
                             "WHERE c.is_public = TRUE "
             );
             // lọc theo category
             if (categoryId != null) {
                 sql.append(" AND cate.id = :idCategory");
+            }
+            if (tagId != null) {
+                sql.append(" AND t.id = :idTag");
             }
             // lọc theo title
             if (title != null && !title.isEmpty()) {
@@ -211,9 +257,10 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             }
             var query = handle.createQuery(sql.toString());
             if (categoryId != null) query.bind("idCategory", categoryId);
+            if (tagId != null) query.bind("idTag", tagId);
             if (title != null && !title.isEmpty()) query.bind("title", "%" + title + "%");
             if (level != null) query.bind("level", level);
-            return query.mapToBean(Course.class).list();
+            return query.mapToBean(CourseCardDto.class).list();
         });
     }
 
@@ -300,7 +347,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                         .mapToBean(CourseCardDto.class).list()
         );
     }
-
 
 
 }

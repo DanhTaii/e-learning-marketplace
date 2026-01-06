@@ -5,10 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
-import vn.edu.nlu.fit.elearning.services.CategoryService;
-import vn.edu.nlu.fit.elearning.services.CourseService;
-import vn.edu.nlu.fit.elearning.services.UserService;
-import vn.edu.nlu.fit.elearning.services.WishlistService;
+import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -43,6 +40,10 @@ public class IndexController extends HttpServlet {
         request.setAttribute("totalUsers", userService.totalUsers());
         request.setAttribute("totalCourses", courseService.totalCourses());
         request.setAttribute("avgRating", courseService.avgRating());
+
+        // 3.Tag
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học
         Course courseMostPopular = courseService.getCoursesMostPopular();

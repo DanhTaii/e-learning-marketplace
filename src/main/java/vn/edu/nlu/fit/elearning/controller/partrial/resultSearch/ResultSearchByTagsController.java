@@ -6,29 +6,31 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
+import vn.edu.nlu.fit.elearning.model.Tag;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.TagService;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ResultSearchController", value = "/result-search/by-category")
-public class ResultSearchByCategoriesController extends HttpServlet {
+@WebServlet(name = "ResultSearchByTagsController", value = "/result-search/by-tag")
+public class ResultSearchByTagsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // làm cho hiện đúng category được chọn ở trang result-search
-        int idCategory = Integer.parseInt(request.getParameter("id"));
-        CategoryService cs = new CategoryService();
-        Category cate = cs.getCategoryById(idCategory);
-        request.setAttribute("cate", cate);
+        int idTag = Integer.parseInt(request.getParameter("id"));
+        TagService cs = new TagService();
+        Tag tag = cs.getTagById(idTag);
+        request.setAttribute("tag", tag);
 
         // làm để các khóa học hiển thị ở result-search đúng với category
         CourseService courseService = new CourseService();
-        List<CourseCardDto> listCourse = courseService.getCoursesByIdCategory(idCategory);
+        List<CourseCardDto> listCourse = courseService.getCoursesByIdTag(idTag);
         request.setAttribute("list", listCourse);
 
         // dòng này xem là đang là search theo cái gì title hay category
-        request.setAttribute("mode", "category");
+        request.setAttribute("mode", "tag");
 
         String sortPrice = request.getParameter("sortPrice");
         String level = request.getParameter("level");
@@ -39,12 +41,13 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 
         if (sortPrice == null && level == null && priceRange == null &&
                 rating == null && duration == null && popular == null) {
-            listCourse = courseService.getCoursesByIdCategory(idCategory);
+            listCourse = courseService.getCoursesByIdTag(idTag);
         } else {
-            listCourse = courseService.filterCoursesByCategory(
-                    idCategory, sortPrice, level, priceRange, rating, duration, popular
+            listCourse = courseService.filterCoursesByTag(
+                    idTag, sortPrice, level, priceRange, rating, duration, popular
             );
         }
+
         request.setAttribute("list", listCourse);
 
 

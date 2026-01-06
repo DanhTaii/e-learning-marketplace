@@ -72,34 +72,38 @@ public class CourseService {
         return cd.findAllCoursesCard();
     }
 
-    public List<Course> getCoursesByIdCategory(int idCategory) {
+    public List<CourseCardDto> getCoursesByIdCategory(int idCategory) {
         return cd.findCoursesByIdCategory(idCategory);
     }
 
-    public List<Course> getCoursesByTitle(String search) {
+    public List<CourseCardDto> getCoursesByIdTag(int idTag) {
+        return cd.findCoursesByIdTag(idTag);
+    }
+
+    public List<CourseCardDto> getCoursesByTitle(String search) {
         return cd.findCoursesByTitle(search);
     }
 
     // gọi lại phương thức filterCourses trong DAO cho trường hợp lọc theo category
-    public List<Course> filterCoursesByCategory(int idCategory,
+    public List<CourseCardDto> filterCoursesByCategory(int idCategory,
                                                 String sortPrice,
                                                 String level,
                                                 String priceRange,
                                                 String rating,
                                                 String duration,
                                                 String popular) {
-        return cd.filterCourses(idCategory, null, sortPrice, level, priceRange, rating, duration, popular);
+        return cd.filterCourses(idCategory, null,null, sortPrice, level, priceRange, rating, duration, popular);
     }
 
     // gọi lại phương thức filterCourses trong DAO cho trường hợp search theo title
-    public List<Course> filterCoursesByTitle(String search,
+    public List<CourseCardDto> filterCoursesByTitle(String search,
                                              String sortPrice,
                                              String level,
                                              String priceRange,
                                              String rating,
                                              String duration,
                                              String popular) {
-        return cd.filterCourses(null, search, sortPrice, level, priceRange, rating, duration, popular);
+        return cd.filterCourses(null, null, search, sortPrice, level, priceRange, rating, duration, popular);
     }
 
     public List<Course> getAllCourses(CourseFilter filter) {
@@ -111,4 +115,13 @@ public class CourseService {
     }
 
 
+    public List<CourseCardDto> filterCoursesByTag(int idTag,
+                                                  String sortPrice,
+                                                  String level,
+                                                  String priceRange,
+                                                  String rating,
+                                                  String duration,
+                                                  String popular) {
+        return cd.filterCourses(null, idTag, null, sortPrice, level, priceRange, rating, duration, popular);
+    }
 }
