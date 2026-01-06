@@ -106,5 +106,9 @@ public class CourseService {
         return cd.filterAllCourses(filter);
     }
 
+    public List<CourseCardDto> getCourseCardsByPage(int page, int pageSize) {
+        return cd.findCoursesCardByPage(page, pageSize);
+    }
+
 
 }

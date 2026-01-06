@@ -56,7 +56,7 @@
                                     </div>
                                     <ul class="browse__container-box-2-list list">
                                         <li class="browse__container-box-2-list-item">
-                                            <a href="html-partrial/all-course.jsp" class="turn-page">
+                                            <a href="all-courses" class="turn-page">
                                                 <div class="item-box">
                                                     <span class="text-list-item text-list-item-2 text-li">Tất cả khóa học</span>
                                                 </div>
@@ -293,7 +293,7 @@
             <div class="grid__row-2">
                 <div class="grid__column-3">
                     <div class="container__category">
-                        <a href="all-courses" class="turn-page">
+                        <a href="pagination-all-courses?page=1" class="turn-page">
                             <div class="container__category-title">Tất cả khóa học</div>
                         </a>
                         <ul class="container__category-list text-li">
@@ -397,9 +397,9 @@
 
                                                     <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
-                                                <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </button>
+                                                <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
+                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

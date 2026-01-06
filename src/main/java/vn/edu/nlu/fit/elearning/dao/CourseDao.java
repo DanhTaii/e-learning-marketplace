@@ -113,7 +113,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
                     "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
                     "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE AND c.id = 1\n" +
+                    "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id").mapToBean(CourseCardDto.class).list();
         });
     }
@@ -282,5 +282,25 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             return query.mapToBean(Course.class).list();
         });
     }
+
+    public List<CourseCardDto> findCoursesCardByPage(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n " +
+                                "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
+                                "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
+                                "FROM Courses c\n " +
+                                "LEFT JOIN Lessons l ON l.course_id = c.id\n " +
+                                "LEFT JOIN Reviews r ON r.course_id = c.id\n " +
+                                "LEFT JOIN Wishlist w ON w.course_id = c.id\n " +
+                                "WHERE c.is_public = TRUE\n " +
+                                "GROUP BY c.id\n " +
+                                "ORDER BY c.created_at DESC\n " +
+                                "LIMIT :limit OFFSET :offset;\n").bind("limit", pageSize).bind("offset", offset)
+                        .mapToBean(CourseCardDto.class).list()
+        );
+    }
+
+
 
 }

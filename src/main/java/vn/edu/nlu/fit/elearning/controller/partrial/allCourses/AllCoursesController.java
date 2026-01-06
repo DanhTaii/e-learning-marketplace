@@ -17,7 +17,7 @@ public class AllCoursesController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CourseService cs = new CourseService();
         List<CourseCardDto> allCourses = cs.getCourseCards();
-        request.setAttribute("list", allCourses);
+        request.setAttribute("listCourse", allCourses);
         request.getRequestDispatcher("/html-partrial/all-course.jsp").forward(request, response);
     }
 
