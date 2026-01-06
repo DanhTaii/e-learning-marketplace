@@ -193,10 +193,10 @@
                             <div class="form__helps">
                                 <div class="help__no--account">
                                     <span class="span text-big">Chưa có tài khoản?</span>
-                                    <a href="sign-up.jsp" class="text-big turn-page text-fix">Đăng ký</a>
+                                    <a href="html-authentication/sign-up.jsp" class="text-big turn-page text-fix">Đăng ký</a>
                                 </div>
                                 <div class="helps__lost-password">
-                                    <a href="forgot-password.jsp" class="turn-page text-big text-fix">Quên mật khẩu?</a>
+                                    <a href="html-authentication/forgot-password.jsp" class="turn-page text-big text-fix">Quên mật khẩu?</a>
                                 </div>
                             </div>
                             <div class="form__socials">

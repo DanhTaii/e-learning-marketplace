@@ -7,12 +7,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Check your email</title>
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/check-email.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/check-email.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
 <div class="web">
@@ -141,7 +142,7 @@
             <div class="grid__row-2">
                 <div class="grid__column-4-in-12 fix-padding-1">
                     <div class="box-1">
-                        <img src="../assets/image/Vector2.png" alt="" class="img">
+                        <img src="assets/image/Vector2.png" alt="" class="img">
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
@@ -154,17 +155,17 @@
                                 </span>
                             </div>
                             <div class="form__input">
-                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" >
-                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" >
-                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" >
-                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" >
-                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" >
+                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" required>
+                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" required>
+                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" required>
+                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" required>
+                                <input class="input__number text-small-title" type="text" name="digit" pattern="[0-9]" maxlength="1" required>
                             </div>
                             <div class="form__button">
                                 <a href="reset-password.jsp" class="turn-page support">
-                                    <div class="box-btn button__btn">
+                                    <button class="box-btn button__btn">
                                             <span class="text-header">Xác minh</span>
-                                    </div>
+                                    </button>
                                 </a>
                             </div>
                             <div class="form__turn-back">
