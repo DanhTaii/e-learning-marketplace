@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.controller.partrial.resultSearch;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
@@ -19,7 +20,7 @@ public class ResultSearchByTitleController extends HttpServlet {
         String search = request.getParameter("title");
 
         CourseService courseService = new CourseService();
-        List<Course> listCourse = null;
+        List<CourseCardDto> listCourse = null;
         if (search != null && !search.trim().isEmpty()) {
             listCourse = courseService.getCoursesByTitle(search.trim());
         }

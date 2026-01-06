@@ -224,12 +224,171 @@
                         <c:if test="${empty cate and not empty search}">
                             Kết quả cho từ khóa: "${search}"
                         </c:if>
-                        <c:if test="${empty cate and empty search}">
+                        <c:if test="${empty cate and empty search and not empty tag}">
+                            Tag: ${tag.name}
+                        </c:if>
+                        <c:if test="${empty cate and empty search and empty tag}">
                             Tất cả khóa học
                         </c:if>
+
                     </div>
                 </div>
                 <div class="grid__column-3">
+                    <c:if test="${mode == 'tag'}">
+                        <form action="result-search/by-tag" method="get">
+                                <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo tag trước đó
+                                      nếu không thì nó sẽ reset và tự lọc lại chỉ theo cái phần lọc vừa được chọn--%>
+                            <input type="hidden" name="id" value="${cate.id}">
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Giá cả</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="radio" class="type__checkbox text-big" name="sortPrice" value="desc">
+                                            <div class="type__text text-big">Cao đến thấp</div>
+                                        </div>
+                                        <div class="content__number text-big">30</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="radio" class="type__checkbox text-big" name="sortPrice" value="asc">
+                                            <div class="type__text text-big">Thấp đến cao</div>
+                                        </div>
+                                        <div class="content__number text-big">12</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Mức độ</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
+                                            <div class="type__text text-big">Người mới</div>
+                                        </div>
+                                        <div class="content__number text-big">18</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="level" value="intermediate">
+                                            <div class="type__text text-big">Trung cấp</div>
+                                        </div>
+                                        <div class="content__number text-big">25</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="level" value="advanced">
+                                            <div class="type__text text-big">Nâng cao</div>
+                                        </div>
+                                        <div class="content__number text-big">10</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Mức giá</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under500">
+                                            <div class="type__text text-big">Dưới 500.000đ</div>
+                                        </div>
+                                        <div class="content__number text-big">11</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under1500">
+                                            <div class="type__text text-big">Dưới 1.500.000đ</div>
+                                        </div>
+                                        <div class="content__number text-big">28</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="over1500">
+                                            <div class="type__text text-big">Trên 1.500.000đ</div>
+                                        </div>
+                                        <div class="content__number text-big">22</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Đánh giá</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="rating" value="low">
+                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
+                                                                                      style="color: var(--yellow-color)"></i>
+                                            </div>
+                                        </div>
+                                        <div class="content__number text-big">15</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="rating" value="high">
+                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
+                                                                                      style="color: var(--yellow-color)"></i>
+                                            </div>
+                                        </div>
+                                        <div class="content__number text-big">28</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Thời lượng</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="duration" value="short">
+                                            <div class="type__text text-big">Dưới 5 giờ</div>
+                                        </div>
+                                        <div class="content__number text-big">15</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="duration" value="medium">
+                                            <div class="type__text text-big">5 - 10 giờ</div>
+                                        </div>
+                                        <div class="content__number text-big">28</div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="duration" value="long">
+                                            <div class="type__text text-big">Trên 10 giờ</div>
+                                        </div>
+                                        <div class="content__number text-big">22</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Phổ biến</div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" class="type__checkbox text-big" name="popular" value="true">
+                                            <div class="type__text text-big">Phổ biến</div>
+                                        </div>
+                                        <div class="content__number text-big">10</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="user__profile-btn button__btn text-header"
+                                    type="submit" style="justify-content: center">Lọc
+                            </button>
+                        </form>
+                    </c:if>
                     <c:if test="${mode == 'category'}">
                         <form action="result-search/by-category" method="get">
                                 <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo category trước đó
@@ -558,7 +717,7 @@
                                                 <div class="content__rate">
                                                     <div class="rate__icon"><i
                                                             class="text-medium fa-regular fa-star"></i></div>
-                                                    <div class="text-medium rate__number">${c.rating}</div>
+                                                    <div class="text-medium rate__number">${c.avgRating}</div>
                                                 </div>
                                             </div>
                                             <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -571,7 +730,7 @@
                                                 <div class="quick-info__users">
                                                     <div class="users__icon icon"><i
                                                             class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">${c.studentCount}</div>
+                                                    <div class="users__text text-medium">Số học viên</div>
                                                 </div>
                                                 <div class="quick-info__time">
                                                     <div class="time__icon icon"><i

@@ -69,23 +69,14 @@
                                         <span class="category__title title">Tags</span>
                                     </div>
                                     <ul class="browse__container-box-2-list list">
+                                        <c:forEach var="t" items="${tags}" begin="0" end="2">
                                         <li class="browse__container-box-2-list-item">
                                             <div class="item-box">
-                                                <a href="html-partrial/result-search.jsp"
-                                                   class="text-list-item text-list-item-2 text-li turn-page">Yêu
-                                                    thích</a>
+                                                <a href="result-search/by-tag?id=${t.id}"
+                                                   class="text-list-item text-list-item-2 text-li turn-page">${t.name}</a>
                                             </div>
                                         </li>
-                                        <li class="browse__container-box-2-list-item">
-                                            <div class="item-box">
-                                                <a href="" class="text-list-item text-list-item-2 text-li">Mới nhất</a>
-                                            </div>
-                                        </li>
-                                        <li class="browse__container-box-2-list-item">
-                                            <div class="item-box">
-                                                <a href="" class="text-list-item text-list-item-2 text-li">Phổ biến</a>
-                                            </div>
-                                        </li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>
