@@ -7,12 +7,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reset password</title>
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/reset-password.css">
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/reset-password.css">
     <!-- Normalize CSS -->
-    <link rel="stylesheet" href="../assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
 <div class="web">
@@ -181,8 +182,7 @@
                     <h3 class="footer__heading text-big">Cơ sở</h3>
                     <ul class="footer-list">
                         <li class="footer-item">
-                            <a href="" class="footer-item__link text-big">Về chúng tôi
-                            </a>
+                            <a href="" class="footer-item__link text-big">Về chúng tôi</a>
                         </li>
                         <li class="footer-item">
                             <a href="" class="footer-item__link text-medium">Chăm sóc khách hàng</a>
@@ -239,11 +239,11 @@
                     <div class="footer__download">
                         <div class="footer__download-apps">
                             <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/appstore.png" alt="App Store"
+                                <img src="assets/image/appstore.png" alt="App Store"
                                      class="footer__download-app-img">
                             </a>
                             <a href="" class="footer__download-app-link">
-                                <img src="../assets/image/ggplay.png" alt="Google Play"
+                                <img src="assets/image/ggplay.png" alt="Google Play"
                                      class="footer__download-app-img">
                             </a>
                         </div>

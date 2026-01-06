@@ -41,10 +41,10 @@
                                         <span class="category__title title">Tìm bằng Danh mục</span>
                                     </div>
                                     <ul class="browse__box-category-list list">
-                                        <c:forEach var="c" items="${categories}" begin="1">
-                                            <%--                                        <a href="html-partrial/result-search.jsp" class="turn-page">--%>
-                                            <li class="browse__box-category-list-item text-list-item text-li">${c.name}
-                                            </li>
+                                        <c:forEach var="c" items="${categories}">
+                                            <a href="result-search/by-category?id=${c.id}" class="turn-page">
+                                            <li class="browse__box-category-list-item text-list-item text-li">${c.name}</li>
+                                            </a>
                                         </c:forEach>
                                     </ul>
                                 </div>
@@ -56,7 +56,7 @@
                                     </div>
                                     <ul class="browse__container-box-2-list list">
                                         <li class="browse__container-box-2-list-item">
-                                            <a href="all-courses" class="turn-page">
+                                            <a href="pagination-all-courses?page=1" class="turn-page">
                                                 <div class="item-box">
                                                     <span class="text-list-item text-list-item-2 text-li">Tất cả khóa học</span>
                                                 </div>
@@ -203,18 +203,6 @@
                         </a>
                     </div>
                 </c:if>
-                <%--                <div class="header__button-box">--%>
-                <%--                    <a href="html-authentication/sign-up.jsp" class="turn-page">--%>
-                <%--                        <div class="header__button sign-in-box">--%>
-                <%--                            <button class="button__btn text-header sign-in">Đăng ký</button>--%>
-                <%--                        </div>--%>
-                <%--                    </a>--%>
-                <%--                    <a href="html-authentication/sign-in.jsp" class="turn-page">--%>
-                <%--                        <div class="header__button sign-up-box">--%>
-                <%--                            <button class="button__btn text-header sign-up">Đăng nhập</button>--%>
-                <%--                        </div>--%>
-                <%--                    </a>--%>
-                <%--                </div>--%>
             </div>
         </div>
     </header>
@@ -606,11 +594,11 @@
                     <div class="footer__download">
                         <div class="footer__download-apps">
                             <a href="" class="footer__download-app-link">
-                                <img src="./assets/image/appstore.png" alt="App Store"
+                                <img src="assets/image/appstore.png" alt="App Store"
                                      class="footer__download-app-img">
                             </a>
                             <a href="" class="footer__download-app-link">
-                                <img src="./assets/image/ggplay.png" alt="Google Play"
+                                <img src="assets/image/ggplay.png" alt="Google Play"
                                      class="footer__download-app-img">
                             </a>
                         </div>
