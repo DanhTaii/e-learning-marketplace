@@ -21,6 +21,10 @@ public class CourseService {
         return cd.create(course);
     }
 
+    public Course getCourseById(int id) {
+        return cd.findById(id);
+    }
+
     public List<Course> getAllCourses() {
         return cd.findAllCourses();
     }

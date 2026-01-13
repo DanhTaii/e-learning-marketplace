@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css?v=1.0.1">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=1.0.2">
 
 </head>
 <body>
@@ -136,30 +136,51 @@
                         </a>
                     </div>
 
+
                     <div class="user-form-container">
-                        <form action="admin/course/create" method="post" >
-<%--                              enctype="multipart/form-data">--%>
+                        <form action="admin/course/create" method="post">
+                            <%--                              enctype="multipart/form-data">--%>
 
                             <div class="form-row">
                                 <div class="form-column-8">
                                     <div class="form-group">
                                         <label class="course-create__title-style">Tên khóa học</label>
                                         <input name="title" type="text" class="input-modern"
-                                               placeholder="Nhập tên khóa học..." value="${param.title}" required>
+                                               placeholder="Nhập tên khóa học..."
+                                               value="${ course != null ? course.title : param.title}" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="course-create__title-style">Phụ đề</label>
                                         <input name="subtitle" type="text" class="input-modern"
-                                               placeholder="Tóm tắt ngắn gọn nội dung..." value="${param.subtitle}">
+                                               placeholder="Tóm tắt ngắn gọn nội dung..."
+                                               value="${ course != null ? course.subtitle : param.subtitle}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="course-create__title-style">Thời gian tạo</label>
+                                        <input name="created_at" type="datetime-local" class="input-modern"
+                                               value="${course != null ? course.createdAt : param.created_at}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="course-create__title-style">Thời gian cập nhật gần nhất</label>
+                                        <input name="updated_at" type="datetime-local" class="input-modern"
+                                               value="${course != null ? course.updatedAt : param.updated_at}"
+                                               readonly>
                                     </div>
                                 </div>
                                 <div class="form-column-4">
-                                    <div class="avatar-upload-box">
-                                        <label class="course-create__title-style">Ảnh khóa học</label>
-                                        <div class="upload-wrapper" style="height: 145px;">
-                                            <i class="fa-solid fa-image"></i>
-                                            <span>Tải ảnh lên</span>
-                                            <input name="thumbnail" type="file" class="file-hidden" value="${param.thumbnail}">
+                                    <div class="form-group">
+                                        <label class="course-create__title-style">Link ảnh khóa học</label>
+                                        <input name="thumbnail" type="text" id="thumbnail-input" class="input-modern"
+                                               placeholder="Dán link ảnh (https://...)"
+                                               value="${course != null ? course.thumbnailUrl : param.thumbnail}">
+
+                                        <div class="image-preview-container mt-3">
+                                            <img id="image-preview"
+                                                 src="${course != null ? course.thumbnailUrl : (param.thumbnail != null ? param.thumbnail : 'assets/img/no-image.png')}"
+                                                 alt="Preview"
+                                                 style="width: 100%; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
                                         </div>
                                     </div>
                                 </div>
@@ -169,12 +190,13 @@
                                 <div class="form-group flex-1">
                                     <label class="course-create__title-style">Giá bán </label>
                                     <input name="price" type="number" class="input-modern" placeholder="Ví dụ: 500000"
-                                           value="${param.price}"
+                                           value="${course != null ? course.price : param.price}"
                                            required>
                                 </div>
                                 <div class="form-group flex-1">
                                     <label class="course-create__title-style">Giá giảm (VNĐ)</label>
                                     <input name="discount_price" type="number" class="input-modern"
+                                           value="${course != null ? course.discountPrice : param.discount_price}"
                                            placeholder="Để trống nếu không giảm">
                                 </div>
                                 <div class="form-group flex-1">
@@ -201,18 +223,19 @@
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
                                     <label class="course-create__title-style">Mục tiêu khóa học</label>
-                                    <textarea name="goals" class="input-modern"
+                                    <textarea name="goals" class="input-modern textarea-modern"
                                               style="height: 100px; padding: 10px;"
-                                              placeholder="Học viên sẽ đạt được gì sau khóa học?"></textarea>
+                                              placeholder="Học viên sẽ đạt được gì sau khóa học?"
+                                    >${course != null ? course.goals : param.goals}</textarea>
                                 </div>
                             </div>
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
                                     <label class="course-create__title-style">Mô tả chi tiết</label>
-                                    <textarea name="description" class="input-modern"
+                                    <textarea name="description" class="input-modern textarea-modern"
                                               style="height: 150px; padding: 10px;"
-                                              placeholder="Viết mô tả đầy đủ về khóa học tại đây..."></textarea>
+                                              placeholder="Viết mô tả đầy đủ về khóa học tại đây...">${course != null ? course.description : param.description}</textarea>
                                 </div>
                             </div>
 

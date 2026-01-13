@@ -26,7 +26,16 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     @Override
     public Course findById(Integer integer) {
-        return null;
+        return getJdbi().withHandle(handle -> {
+                    return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at\n" +
+                                    "FROM courses c\n" +
+                                    "WHERE c.id = :id ")
+                            .bind("id", integer)
+                            .mapToBean(Course.class)
+                            .findFirst()
+                            .orElse(null);
+                }
+        );
     }
 
     @Override
@@ -225,12 +234,15 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             if (tagId != null) {
                 sql.append(" AND t.id = :idTag");
             }
+            // lọc theo title
             if (title != null && !title.isEmpty()) {
                 sql.append(" AND c.title LIKE :title");
             }
+            // lọc theo level
             if (level != null) {
                 sql.append(" AND c.level = :level");
             }
+            // lọc theo priceRange
             if ("under500".equals(priceRange)) {
                 sql.append(" AND (c.price - c.discount_price) < 500000");
             } else if ("under1500".equals(priceRange)) {
@@ -238,6 +250,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             } else if ("over1500".equals(priceRange)) {
                 sql.append(" AND (c.price - c.discount_price) >= 1500000");
             }
+
+            // lọc theo phổ biến
             if ("true".equals(popular)) {
                 sql.append(" AND c.is_featured = TRUE");
             }
