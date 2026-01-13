@@ -84,28 +84,6 @@ public class CourseService {
         return cd.findCoursesByTitle(search);
     }
 
-    // gọi lại phương thức filterCourses trong DAO cho trường hợp lọc theo category
-    public List<CourseCardDto> filterCoursesByCategory(int idCategory,
-                                                String sortPrice,
-                                                String level,
-                                                String priceRange,
-                                                String rating,
-                                                String duration,
-                                                String popular) {
-        return cd.filterCourses(idCategory, null,null, sortPrice, level, priceRange, rating, duration, popular);
-    }
-
-    // gọi lại phương thức filterCourses trong DAO cho trường hợp search theo title
-    public List<CourseCardDto> filterCoursesByTitle(String search,
-                                             String sortPrice,
-                                             String level,
-                                             String priceRange,
-                                             String rating,
-                                             String duration,
-                                             String popular) {
-        return cd.filterCourses(null, null, search, sortPrice, level, priceRange, rating, duration, popular);
-    }
-
     public List<Course> getAllCourses(CourseFilter filter) {
         return cd.filterAllCourses(filter);
     }
@@ -114,14 +92,154 @@ public class CourseService {
         return cd.findCoursesCardByPage(page, pageSize);
     }
 
+    // Filter theo category + phân trang
+    public List<CourseCardDto> filterCoursesByCategoryWithPagination(
+            int idCategory,
+            String sortPrice,
+            String level,
+            String priceRange,
+            String rating,
+            String duration,
+            String popular,
+            int page,
+            int pageSize) {
 
-    public List<CourseCardDto> filterCoursesByTag(int idTag,
-                                                  String sortPrice,
-                                                  String level,
-                                                  String priceRange,
-                                                  String rating,
-                                                  String duration,
-                                                  String popular) {
-        return cd.filterCourses(null, idTag, null, sortPrice, level, priceRange, rating, duration, popular);
+        int offset = (page - 1) * pageSize;
+        return cd.filterCoursesWithPagination(
+                idCategory,   // categoryId
+                null,         // tagId
+                null,         // title
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular,
+                pageSize,     // limit
+                offset        // offset
+        );
+    }
+
+    // Đếm tổng số khóa học sau lọc theo category
+    public int countFilteredCoursesByCategory(
+            int idCategory,
+            String sortPrice,
+            String level,
+            String priceRange,
+            String rating,
+            String duration,
+            String popular) {
+
+        return cd.countFilteredCourses(
+                idCategory,
+                null,
+                null,
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular
+        );
+    }
+
+    // Tương tự cho search theo title (nếu bạn có controller by-title)
+    public List<CourseCardDto> filterCoursesByTitleWithPagination(
+            String search,
+            String sortPrice,
+            String level,
+            String priceRange,
+            String rating,
+            String duration,
+            String popular,
+            int page,
+            int pageSize) {
+
+        int offset = (page - 1) * pageSize;
+        return cd.filterCoursesWithPagination(
+                null,
+                null,
+                search,
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular,
+                pageSize,
+                offset
+        );
+    }
+
+    public int countFilteredCoursesByTitle(
+            String search,
+            String sortPrice,
+            String level,
+            String priceRange,
+            String rating,
+            String duration,
+            String popular) {
+
+        return cd.countFilteredCourses(
+                null,
+                null,
+                search,
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular
+        );
+    }
+
+    // Tương tự cho tag (nếu cần)
+    public List<CourseCardDto> filterCoursesByTagWithPagination(
+            int idTag,
+            String sortPrice,
+            String level,
+            String priceRange,
+            String rating,
+            String duration,
+            String popular,
+            int page,
+            int pageSize) {
+
+        int offset = (page - 1) * pageSize;
+        return cd.filterCoursesWithPagination(
+                null,
+                idTag,
+                null,
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular,
+                pageSize,
+                offset
+        );
+    }
+
+    public int countFilteredCoursesByTag(
+            int idTag,
+            String sortPrice,
+            String level,
+            String priceRange,
+            String rating,
+            String duration,
+            String popular) {
+
+        return cd.countFilteredCourses(
+                null,
+                idTag,
+                null,
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular
+        );
     }
 }

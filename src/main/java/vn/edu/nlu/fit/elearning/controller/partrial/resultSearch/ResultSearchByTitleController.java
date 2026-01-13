@@ -4,33 +4,38 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.model.Category;
-import vn.edu.nlu.fit.elearning.model.Course;
-import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet(name = "ResultSearchByTitleController", value = "/result-search/by-title")
 public class ResultSearchByTitleController extends HttpServlet {
+
+    private static final int PAGE_SIZE = 12;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // lấy từ khóa search từ thanh header
+        // Lấy từ khóa search
         String search = request.getParameter("title");
+        if (search == null) search = "";
+        search = search.trim();
 
-        CourseService courseService = new CourseService();
-        List<CourseCardDto> listCourse = null;
-        if (search != null && !search.trim().isEmpty()) {
-            listCourse = courseService.getCoursesByTitle(search.trim());
+        // Lấy page
+        int page = 1;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageParam);
+                if (page < 1) page = 1;
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
         }
-        request.setAttribute("list", listCourse);
-        request.setAttribute("search", search);
 
-        // dòng này xem là đang là search theo cái gì title hay category
-        request.setAttribute("mode", "title");
-
-        // lấy tham số lọc
+        // Lấy filter params
         String sortPrice = request.getParameter("sortPrice");
         String level = request.getParameter("level");
         String priceRange = request.getParameter("priceRange");
@@ -38,22 +43,49 @@ public class ResultSearchByTitleController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        if (sortPrice == null && level == null && priceRange == null &&
-                rating == null && duration == null && popular == null) {
-            listCourse = courseService.getCoursesByTitle(search);
-        } else {
-            listCourse = courseService.filterCoursesByTitle(
-                    search, sortPrice, level, priceRange, rating, duration, popular
-            );
-        }
-        request.setAttribute("list", listCourse);
+        CourseService courseService = new CourseService();
 
+        // Lấy list + phân trang
+        List<CourseCardDto> listCourse = courseService.filterCoursesByTitleWithPagination(
+                search, sortPrice, level, priceRange, rating, duration, popular,
+                page, PAGE_SIZE
+        );
+
+        // Đếm tổng
+        int totalCourses = courseService.countFilteredCoursesByTitle(
+                search, sortPrice, level, priceRange, rating, duration, popular
+        );
+
+        int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
+
+        // Set attributes
+        request.setAttribute("listCourse", listCourse);
+        request.setAttribute("search", search);
+        request.setAttribute("mode", "title");
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
+        // Set base URL cho phân trang (encode title nếu có dấu tiếng Việt)
+        StringBuilder paginationUrl = new StringBuilder(request.getContextPath());
+        paginationUrl.append(request.getServletPath());  // /result-search/by-title
+
+        if (!search.isEmpty()) {
+            paginationUrl.append("?title=").append(java.net.URLEncoder.encode(search, "UTF-8"));
+        }
+
+        if (sortPrice != null) paginationUrl.append("&sortPrice=").append(sortPrice);
+        if (level != null) paginationUrl.append("&level=").append(level);
+        if (priceRange != null) paginationUrl.append("&priceRange=").append(priceRange);
+        if (rating != null) paginationUrl.append("&rating=").append(rating);
+        if (duration != null) paginationUrl.append("&duration=").append(duration);
+        if (popular != null) paginationUrl.append("&popular=").append(popular);
+
+        request.setAttribute("paginationUrl", paginationUrl.toString());
 
         request.getRequestDispatcher("/html-partrial/result-search.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

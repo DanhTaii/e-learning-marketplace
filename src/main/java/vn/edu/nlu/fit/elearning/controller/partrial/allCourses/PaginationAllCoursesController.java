@@ -11,7 +11,15 @@ import java.util.List;
 
 @WebServlet(name = "PaginationAllCoursesController", value = "/pagination-all-courses")
 public class PaginationAllCoursesController extends HttpServlet {
-    private static final int PAGE_SIZE = 6; // số khóa học mỗi trang
+    private static final int PAGE_SIZE = 16; // số khóa học mỗi trang
+
+    CourseService courseService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        this.courseService =  new CourseService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,11 +33,10 @@ public class PaginationAllCoursesController extends HttpServlet {
             }
         }
 
-        CourseService cs = new CourseService();
-        int totalCourses = cs.totalCourses();
+        int totalCourses = courseService.totalCourses();
         int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 
-        List<CourseCardDto> listCourse = cs.getCourseCardsByPage(page, PAGE_SIZE);
+        List<CourseCardDto> listCourse = courseService.getCourseCardsByPage(page, PAGE_SIZE);
 
         request.setAttribute("listCourse", listCourse);
         request.setAttribute("currentPage", page);

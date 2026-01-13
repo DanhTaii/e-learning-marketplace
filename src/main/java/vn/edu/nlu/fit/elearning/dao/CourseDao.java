@@ -195,38 +195,42 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     // làm cho phần bộ lọc
     // làm cách này thì tích 1 hay nhiều cái thì vẫn đều lọc bình thường
-    public List<CourseCardDto> filterCourses(Integer categoryId, Integer tagId, String title,
-                                      String sortPrice, String level,
-                                      String priceRange, String rating,
-                                      String duration, String popular) {
+    // Phiên bản có phân trang của filterCourses
+    public List<CourseCardDto> filterCoursesWithPagination(
+            Integer categoryId, Integer tagId, String title,
+            String sortPrice, String level,
+            String priceRange, String rating,
+            String duration, String popular,
+            int limit, int offset) {
+
         return getJdbi().withHandle(handle -> {
             StringBuilder sql = new StringBuilder(
                     "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, " +
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
-                            "SUM(l.duration_minutes)/60.0 AS duration_hours " +
+                            "COALESCE(AVG(r.rating), 0) AS avgRating, " +
+                            "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
                             "FROM Courses c " +
                             "JOIN Categories cate ON c.category_id = cate.id " +
-                            "JOIN Course_Tags ct ON c.id = ct.course_id\n " +
-                            "JOIN Tags t ON ct.tag_id = t.id\n " +
+                            "LEFT JOIN Course_Tags ct ON c.id = ct.course_id " +
+                            "LEFT JOIN Tags t ON ct.tag_id = t.id " +
                             "LEFT JOIN Lessons l ON c.id = l.course_id " +
+                            "LEFT JOIN Reviews r ON r.course_id = c.id " +
                             "WHERE c.is_public = TRUE "
             );
-            // lọc theo category
+
+            // Copy toàn bộ điều kiện lọc từ method filterCourses cũ của bạn
             if (categoryId != null) {
                 sql.append(" AND cate.id = :idCategory");
             }
             if (tagId != null) {
                 sql.append(" AND t.id = :idTag");
             }
-            // lọc theo title
             if (title != null && !title.isEmpty()) {
                 sql.append(" AND c.title LIKE :title");
             }
-            // lọc theo level
             if (level != null) {
                 sql.append(" AND c.level = :level");
             }
-            // lọc theo priceRange
             if ("under500".equals(priceRange)) {
                 sql.append(" AND (c.price - c.discount_price) < 500000");
             } else if ("under1500".equals(priceRange)) {
@@ -234,33 +238,123 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             } else if ("over1500".equals(priceRange)) {
                 sql.append(" AND (c.price - c.discount_price) >= 1500000");
             }
-
-            // lọc theo phổ biến
             if ("true".equals(popular)) {
                 sql.append(" AND c.is_featured = TRUE");
             }
-            // group by để tính duration_hours
+
             sql.append(" GROUP BY c.id, cate.id");
-            // lọc theo duration (HAVING phải sau GROUP BY)
+
+            // Duration dùng HAVING
             if ("short".equals(duration)) {
-                sql.append(" HAVING duration_hours < 5");
+                sql.append(" HAVING durationHours < 5");
             } else if ("medium".equals(duration)) {
-                sql.append(" HAVING duration_hours BETWEEN 5 AND 10");
+                sql.append(" HAVING durationHours BETWEEN 5 AND 10");
             } else if ("long".equals(duration)) {
-                sql.append(" HAVING duration_hours > 10");
+                sql.append(" HAVING durationHours > 10");
             }
-            // sort theo giá
+
+            // Rating cũng HAVING (thêm vào vì bạn có filter rating)
+            if ("low".equals(rating)) {
+                sql.append(" HAVING COALESCE(AVG(r.rating), 0) < 3");
+            } else if ("high".equals(rating)) {
+                sql.append(" HAVING COALESCE(AVG(r.rating), 0) >= 3");
+            }
+
+            // Sort
             if ("asc".equals(sortPrice)) {
                 sql.append(" ORDER BY (c.price - c.discount_price) ASC");
             } else if ("desc".equals(sortPrice)) {
                 sql.append(" ORDER BY (c.price - c.discount_price) DESC");
+            } else {
+                sql.append(" ORDER BY c.created_at DESC");
             }
+
+            // Phân trang
+            sql.append(" LIMIT :limit OFFSET :offset");
+
             var query = handle.createQuery(sql.toString());
+
+            // Bind
             if (categoryId != null) query.bind("idCategory", categoryId);
             if (tagId != null) query.bind("idTag", tagId);
             if (title != null && !title.isEmpty()) query.bind("title", "%" + title + "%");
             if (level != null) query.bind("level", level);
+            query.bind("limit", limit);
+            query.bind("offset", offset);
+
             return query.mapToBean(CourseCardDto.class).list();
+        });
+    }
+
+    // Đếm tổng số sau lọc
+    public int countFilteredCourses(
+            Integer categoryId, Integer tagId, String title,
+            String sortPrice, String level,
+            String priceRange, String rating,
+            String duration, String popular) {
+
+        return getJdbi().withHandle(handle -> {
+            StringBuilder sql = new StringBuilder(
+                    "SELECT COUNT(*) FROM ( " +
+                            "SELECT c.id " +
+                            "FROM Courses c " +
+                            "JOIN Categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN Course_Tags ct ON c.id = ct.course_id " +
+                            "LEFT JOIN Tags t ON ct.tag_id = t.id " +
+                            "LEFT JOIN Lessons l ON c.id = l.course_id " +
+                            "LEFT JOIN Reviews r ON r.course_id = c.id " +
+                            "WHERE c.is_public = TRUE "
+            );
+
+            // Copy điều kiện lọc giống trên
+            if (categoryId != null) {
+                sql.append(" AND cate.id = :idCategory");
+            }
+            if (tagId != null) {
+                sql.append(" AND t.id = :idTag");
+            }
+            if (title != null && !title.isEmpty()) {
+                sql.append(" AND c.title LIKE :title");
+            }
+            if (level != null) {
+                sql.append(" AND c.level = :level");
+            }
+            if ("under500".equals(priceRange)) {
+                sql.append(" AND (c.price - c.discount_price) < 500000");
+            } else if ("under1500".equals(priceRange)) {
+                sql.append(" AND (c.price - c.discount_price) < 1500000");
+            } else if ("over1500".equals(priceRange)) {
+                sql.append(" AND (c.price - c.discount_price) >= 1500000");
+            }
+            if ("true".equals(popular)) {
+                sql.append(" AND c.is_featured = TRUE");
+            }
+
+            sql.append(" GROUP BY c.id ");
+
+            // HAVING cho duration và rating
+            String having = "";
+            if ("short".equals(duration) || "medium".equals(duration) || "long".equals(duration) ||
+                    "low".equals(rating) || "high".equals(rating)) {
+                having = "HAVING 1=1 ";
+                if ("short".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 < 5";
+                if ("medium".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 BETWEEN 5 AND 10";
+                if ("long".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 > 10";
+                if ("low".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) < 3";
+                if ("high".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) >= 3";
+            }
+
+            sql.append(having).append(") AS count_table");
+
+            var query = handle.createQuery(sql.toString());
+
+            // Bind giống trên
+            if (categoryId != null) query.bind("idCategory", categoryId);
+            if (tagId != null) query.bind("idTag", tagId);
+            if (title != null && !title.isEmpty()) query.bind("title", "%" + title + "%");
+            if (level != null) query.bind("level", level);
+
+            return query.mapTo(Integer.class).one();
         });
     }
 
