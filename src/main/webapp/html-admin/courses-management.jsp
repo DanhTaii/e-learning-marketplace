@@ -202,7 +202,6 @@
                                         </div>
 
 
-
                                     </div>
                                 </div>
                             </form>
@@ -310,16 +309,19 @@
                                             </td>
                                             <td class="action__button">
                                                 <div class="action-wrapper">
-                                                <button type="button" onclick="showCategoryDetail(${cate.id})"
-                                                        class="icon-action-btn">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-                                                <form action="admin/category/delete" method="post" class="form">
-                                                    <input type="hidden" name="id" value="${cate.id}">
-                                                    <button type="submit" class="icon-action-btn">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                                    <a href="admin/course/detail?id=${course.id}">
+                                                        <button type="button"
+                                                                class="icon-action-btn">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </button>
+                                                    </a>
+
+                                                    <form action="admin/course/delete" method="post" class="form">
+                                                        <input type="hidden" name="id" value="${course.id}">
+                                                        <button type="submit" class="icon-action-btn">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

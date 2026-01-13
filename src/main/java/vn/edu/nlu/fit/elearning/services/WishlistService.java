@@ -28,6 +28,7 @@ public class WishlistService {
 
     public List<Course> getWishlistCourses(int userId) {
         return wd.findWishlistCoursesByUser(userId);
+//        return null;
     }
 
     public boolean exists(int userId, int courseId) {
