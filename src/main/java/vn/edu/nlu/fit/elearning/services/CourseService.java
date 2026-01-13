@@ -25,6 +25,10 @@ public class CourseService {
         return cd.findById(id);
     }
 
+    public int updateCourse(Course entity) {
+        return this.cd.update(entity);
+    }
+
     public List<Course> getAllCourses() {
         return cd.findAllCourses();
     }
