@@ -45,7 +45,21 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     @Override
     public int update(Course entity) {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE courses\n" +
+                            "SET\n" +
+                            "    title = :title,\n" +
+                            "    subtitle = :subtitle,\n" +
+                            "    level = :level,\n" +
+                            "    goals = :goals,\n" +
+                            "    description = :description,\n" +
+                            "    price = :price,\n" +
+                            "    discount_price = :discountPrice,\n" +
+                            "    thumbnail_url = :thumbnailUrl\n" +
+                            "WHERE id = :id")
+                    .bindBean(entity)
+                    .execute();
+        });
     }
 
     @Override
@@ -115,7 +129,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
-    public List<CourseCardDto> findAllCoursesCard(){
+    public List<CourseCardDto> findAllCoursesCard() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level, COALESCE(AVG(r.rating), rating) AS avgRating, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
                     "FROM Courses c\n" +
@@ -352,7 +366,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     "low".equals(rating) || "high".equals(rating)) {
                 having = "HAVING 1=1 ";
                 if ("short".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 < 5";
-                if ("medium".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 BETWEEN 5 AND 10";
+                if ("medium".equals(duration))
+                    having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 BETWEEN 5 AND 10";
                 if ("long".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 > 10";
                 if ("low".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) < 3";
                 if ("high".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) >= 3";

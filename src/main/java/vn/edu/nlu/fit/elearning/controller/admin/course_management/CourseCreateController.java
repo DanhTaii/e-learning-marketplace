@@ -18,6 +18,7 @@ public class CourseCreateController extends HttpServlet {
         super.init();
         this.courseService = new CourseService();
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,6 +26,7 @@ public class CourseCreateController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String courseId = request.getParameter("courseId");
         String title = request.getParameter("title");
         String subtitle = request.getParameter("subtitle");
         String level = request.getParameter("level");
@@ -48,11 +50,27 @@ public class CourseCreateController extends HttpServlet {
 
         course.setThumbnailUrl(request.getParameter("thumbnail"));
 
-        int checkCreate = courseService.createCourse(course);
+        int checkCreate = 0;
+        boolean isUpdate = (courseId != null && !courseId.isEmpty());
 
-        if (checkCreate > 0) {
-            request.setAttribute("flashSucces", "Tạo khóa học thành công !");
-            response.sendRedirect(request.getContextPath() + "/admin/courses");
+        if (isUpdate) {
+            int courseIdInt = Integer.parseInt(courseId);
+            course.setId(courseIdInt);
+            checkCreate = courseService.updateCourse(course);
+
+            if (checkCreate > 0) {
+                request.getSession().setAttribute("flashSuccess", "Cập nhật khóa học thành công !");
+                response.sendRedirect(request.getContextPath() + "/admin/course/detail?id=" + courseIdInt);
+            }
+
+        } else if (!isUpdate) {
+            checkCreate = courseService.createCourse(course);
+            if (checkCreate > 0) {
+                request.getSession().setAttribute("flashSuccess", "Tạo khóa học thành công !");
+                response.sendRedirect(request.getContextPath() + "/admin/courses");
+            }
+        } else {
+
         }
 
     }

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/base.css?v=1.0.1">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
 
 </head>
 <body>
@@ -138,7 +139,7 @@
 
 
                     <div class="user-form-container">
-                        <form action="admin/course/create" method="post">
+                        <form action="admin/course/create?courseId=${course.id}" method="post">
                             <%--                              enctype="multipart/form-data">--%>
 
                             <div class="form-row">
@@ -253,4 +254,16 @@
 </div>
 
 </body>
+
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
