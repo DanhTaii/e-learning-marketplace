@@ -3,15 +3,13 @@ package vn.edu.nlu.fit.elearning.controller.auth;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.dao.TokenForgetPasswordDao;
-import vn.edu.nlu.fit.elearning.model.TokenForgetPassword;
+import vn.edu.nlu.fit.elearning.dao.AccessTokenDao;
+import vn.edu.nlu.fit.elearning.model.AccessToken;
 import vn.edu.nlu.fit.elearning.model.User;
-import vn.edu.nlu.fit.elearning.services.TokenForgetPasswordService;
+import vn.edu.nlu.fit.elearning.services.AccessTokenService;
 import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @WebServlet(name = "ForgetPasswordController", value = "/forget-password")
 public class ForgetPasswordController extends HttpServlet {
@@ -41,23 +39,24 @@ public class ForgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
         }
 
-        TokenForgetPasswordService tokenForgetPasswordService = new TokenForgetPasswordService();
-        String token = tokenForgetPasswordService.generateToken();
+        AccessTokenService accessTokenService = new AccessTokenService();
+        String token = accessTokenService.generateToken();
         System.out.println("Token được tạo: " + token);
 
-        String linkReset = "http://localhost:8080/e_learning_war_exploded/check-mail" + token;
-        System.out.println("Link reset password: " + linkReset);
 
-        TokenForgetPassword tokenForgetPassword = null;
+//        String tokenReset = "http://localhost:8080/e_learning_war_exploded/check-mail" + token;
+        System.out.println("Link reset password: " + token);
+
+        AccessToken accessToken = null;
         if(user != null){
-            tokenForgetPassword = new TokenForgetPassword(user.getId(), token, tokenForgetPasswordService.expireDateTime(), false);
+            accessToken = new AccessToken(user.getId(), token, accessTokenService.expireDateTime(), false);
 
         }
 
-        TokenForgetPasswordDao tokenDao = new TokenForgetPasswordDao();
+        AccessTokenDao tokenDao = new AccessTokenDao();
         boolean isCreate = false;
-        if ( tokenForgetPassword != null){
-            isCreate = tokenDao.createToken(tokenForgetPassword);
+        if ( accessToken != null){
+            isCreate = tokenDao.createToken(accessToken);
         }
         if (!isCreate) {
             request.setAttribute("error", "Lỗi server");
@@ -65,7 +64,7 @@ public class ForgetPasswordController extends HttpServlet {
             return;
         }
 
-        boolean isSend = tokenForgetPasswordService.sendEmail(email, linkReset, user.getUsername());
+        boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername(), false);
         if(!isSend){
             request.setAttribute("error", "Gửi không thành công!");
             request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
@@ -73,6 +72,6 @@ public class ForgetPasswordController extends HttpServlet {
         }
 
         request.setAttribute("success", "Gửi thành công!");
-        response.sendRedirect(request.getContextPath() + "/check-mail");
+        response.sendRedirect(request.getContextPath() + "/html-authentication/check-email.jsp");
     }
 }

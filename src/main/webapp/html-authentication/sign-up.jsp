@@ -169,7 +169,7 @@
                                        name="password" value="${param.password}">
                             </div>
                             <div class="form__info text-medium">Mật khẩu phải có tối thiểu 8 ký tự gồm số và chữ cái,
-                                trong đó có ít nhất 1 chữ cái viết hoa!
+                                trong đó có ít nhất 1 chữ cái viết hoa và ký tự đặc biệt!
                             </div>
                             <div class="form__input input-4">
                                 <input type="password" class="input-text text-big"
