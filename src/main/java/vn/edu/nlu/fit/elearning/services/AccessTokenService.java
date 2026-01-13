@@ -11,14 +11,27 @@ import jakarta.mail.internet.MimeMessage;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import java.util.Random;
 import java.util.UUID;
 
-public class TokenForgetPasswordService {
+public class AccessTokenService {
     private final int LIMIT_MINUTE = 1;
     String emailFrom = "minh6112005@gmail.com";
     String password = "xpfwkobwmpoqascz";
 
     public String generateToken() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder token = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 5; i++) {
+            token.append(chars.charAt(random.nextInt(chars.length())));
+        }
+
+        return token.toString();
+    }
+
+    public String generateTokenForVerify() {
         return UUID.randomUUID().toString();
     }
 
@@ -27,23 +40,16 @@ public class TokenForgetPasswordService {
     }
 
     public boolean isExpireTime(Timestamp expireTime){
-//        return LocalDateTime.now().isAfter(expireTime.toLocalDateTime());
         return LocalDateTime.now().isAfter(expireTime.toLocalDateTime().plusMinutes(LIMIT_MINUTE));
     }
 
-    public boolean sendEmail(String email, String link, String name){
-//        String emailFrom = ConfigLoader.getProperty("mail.user");
-//        String password = ConfigLoader.getProperty("mail.pass");
+    public boolean sendEmail(String email, String code, String name, boolean isLinkMode){
 
         Properties prop = new Properties();
         prop.setProperty("mail.smtp.host", "smtp.gmail.com");
         prop.setProperty("mail.smtp.port", "587");
         prop.setProperty("mail.smtp.auth", "true");
         prop.setProperty("mail.smtp.starttls.enable", "true");
-        //        prop.put("mail.smtp.host", ConfigLoader.getProperty("mail.smtp.host"));
-//        prop.put("mail.smtp.port", ConfigLoader.getProperty("mail.smtp.port"));
-//        prop.put("mail.smtp.auth", ConfigLoader.getProperty("mail.smtp.auth"));
-//        prop.put("mail.smtp.starttls.enable", ConfigLoader.getProperty("mail.smtp.starttls.enable"));
 
 
         Authenticator auth = new Authenticator() {
@@ -60,11 +66,20 @@ public class TokenForgetPasswordService {
             msg.addHeader("Content-Type", "text/html; charset=UTF-8");
             msg.setFrom(new InternetAddress(emailFrom));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
-            msg.setSubject("Tạo lại mật khẩu", "UTF-8");
+            if (isLinkMode) {
+                msg.setSubject("Xác nhận email", "UTF-8");
+            } else {
+                msg.setSubject("Tạo lại mật khẩu", "UTF-8");
+            }
 
-            String content = "<h1>Hello " + name + "</h1>"
-                    + "<p>Click the link to reset your password: "
-                    + "<a href='" + link + "'>Click here</a></p>";
+            String content;
+            if (isLinkMode) { // gửi link xác nhận
+                String link = "http://localhost:8080/e_learning_war_exploded/html-authentication/sign-in.jsp";
+                content = "<h1>Hello " + name + "</h1>" + "<p>Click the link to verify your email: "
+                        + "<a href='" + link + "'>Click here</a></p>";
+            } else { // gửi mã reset
+                content = "<h1>Hello " + name + "</h1>" + "<p>Your password reset verification code is: " + code + "</p>";
+            }
 
             msg.setContent(content, "text/html; charset=UTF-8");
             Transport.send(msg);

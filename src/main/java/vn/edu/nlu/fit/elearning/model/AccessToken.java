@@ -2,24 +2,24 @@ package vn.edu.nlu.fit.elearning.model;
 
 import java.sql.Timestamp;
 
-public class TokenForgetPassword {
+public class AccessToken {
     private int id;
     private int userId;
     private String token;
     private Timestamp expiriTime;
     private boolean isUsed;
 
-    public TokenForgetPassword() {
+    public AccessToken() {
     }
 
-    public TokenForgetPassword(int id, int userId, String token, Timestamp expiriTime, boolean isUsed) {
+    public AccessToken(int id, int userId, String token, Timestamp expiriTime, boolean isUsed) {
         this.id = id;
         this.userId = userId;
         this.token = token;
         this.expiriTime = expiriTime;
         this.isUsed = isUsed;
     }
-    public TokenForgetPassword(int userId, String token, Timestamp expiriTime, boolean isUsed) {
+    public AccessToken(int userId, String token, Timestamp expiriTime, boolean isUsed) {
         this.userId = userId;
         this.token = token;
         this.expiriTime = expiriTime;
