@@ -36,3 +36,39 @@ document.addEventListener('DOMContentLoaded', function() {
         lessonItems[0].click();
     }
 });
+
+//Tránh việc khi bấm vào checkbox mà nó cũng chuyển sang video đó
+const checkboxes = document.querySelectorAll('.lesson-checkbox');
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', function(event) {
+        // NGĂN chặn sự kiện lan truyền lên thẻ div cha (.lesson-item)
+        event.stopPropagation();
+
+        //Như làm việc với bên Servlet
+        const lessonId = this.getAttribute('data-lesson-id');
+        const isCompleted = this.checked;
+
+        // Gọi hàm xử lý AJAX ở đây
+        updateProgress(lessonId, isCompleted);
+    });
+});
+
+function updateProgress(lessonId, isCompleted) {
+    fetch('my-course/detail', {
+        // Gỉa lập 1 cái form để gửi nó xuống
+        method: 'POST',
+        headers: {
+            //Dùng để nói với Server cái dữ liệu gửi trong Body có định dạng giống hệt như một cái Form HTML truyền thống
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `lessonId=${lessonId}&completed=${isCompleted}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                console.log('Cập nhật tiến độ thành công!');
+            }
+        })
+        .catch(error => console.error('Lỗi:', error));
+}
