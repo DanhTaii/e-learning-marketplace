@@ -55,7 +55,9 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "    description = :description,\n" +
                             "    price = :price,\n" +
                             "    discount_price = :discountPrice,\n" +
-                            "    thumbnail_url = :thumbnailUrl\n" +
+                            "    thumbnail_url = :thumbnailUrl,\n" +
+                            "    is_public = :isPublic,\n" +
+                            "    category_id = :categoryId\n" +
                             "WHERE id = :id")
                     .bindBean(entity)
                     .execute();

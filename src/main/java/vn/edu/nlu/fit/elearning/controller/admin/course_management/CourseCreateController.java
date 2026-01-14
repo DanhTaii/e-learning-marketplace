@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.CourseTagService;
 
 import java.io.IOException;
 
@@ -12,11 +13,13 @@ import java.io.IOException;
 public class CourseCreateController extends HttpServlet {
 
     private CourseService courseService;
+    private CourseTagService courseTagService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.courseService = new CourseService();
+        this.courseTagService = new CourseTagService();
     }
 
     @Override
@@ -34,6 +37,9 @@ public class CourseCreateController extends HttpServlet {
         String description = request.getParameter("description");
         String priceStr = request.getParameter("price");
         String discountStr = request.getParameter("discount_price");
+        String statusStr = request.getParameter("status");
+        String categoryIdStr = request.getParameter("category_id");
+        String[] tagIdsStr = request.getParameterValues("tags");
 
         Course course = new Course();
         course.setTitle(title);
@@ -48,24 +54,34 @@ public class CourseCreateController extends HttpServlet {
         int discountPrice = Integer.parseInt(discountStr);
         course.setDiscountPrice(discountPrice); // wrapper Integer
 
+        boolean status = Boolean.parseBoolean(statusStr);
+        course.setIsPublic(status);
+
+        int categoryId = Integer.parseInt(categoryIdStr);
+        course.setCategoryId(categoryId);
+
         course.setThumbnailUrl(request.getParameter("thumbnail"));
 
-        int checkCreate = 0;
+        int checkCourseCreate = 0;
         boolean isUpdate = (courseId != null && !courseId.isEmpty());
 
         if (isUpdate) {
             int courseIdInt = Integer.parseInt(courseId);
             course.setId(courseIdInt);
-            checkCreate = courseService.updateCourse(course);
+//          Cập nhật tag mới
+            courseTagService.deleteCourseTag(courseIdInt);
+            courseTagService.createCourseTag(courseIdInt, tagIdsStr);
+//          Cập nhật khóa học
+            checkCourseCreate = courseService.updateCourse(course);
 
-            if (checkCreate > 0) {
+            if (checkCourseCreate > 0) {
                 request.getSession().setAttribute("flashSuccess", "Cập nhật khóa học thành công !");
                 response.sendRedirect(request.getContextPath() + "/admin/course/detail?id=" + courseIdInt);
             }
 
         } else if (!isUpdate) {
-            checkCreate = courseService.createCourse(course);
-            if (checkCreate > 0) {
+            checkCourseCreate = courseService.createCourse(course);
+            if (checkCourseCreate > 0) {
                 request.getSession().setAttribute("flashSuccess", "Tạo khóa học thành công !");
                 response.sendRedirect(request.getContextPath() + "/admin/courses");
             }

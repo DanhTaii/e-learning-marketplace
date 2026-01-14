@@ -139,9 +139,11 @@
 
 
                     <div class="user-form-container">
-                        <form action="admin/course/create?courseId=${course.id}" method="post">
+                        <form action="admin/course/create" method="post">
                             <%--                              enctype="multipart/form-data">--%>
-
+                                <c:if test="${course != null}">
+                                    <input type="hidden" name="courseId" value="${course.id}" />
+                                </c:if>
                             <div class="form-row">
                                 <div class="form-column-8">
                                     <div class="form-group">
@@ -158,13 +160,13 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="course-create__title-style">Thời gian tạo</label>
+                                        <label class="course-create__title-style">Ngày tạo: </label>
                                         <input name="created_at" type="datetime-local" class="input-modern"
                                                value="${course != null ? course.createdAt : param.created_at}">
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="course-create__title-style">Thời gian cập nhật gần nhất</label>
+                                        <label class="course-create__title-style">Ngày cập nhật: </label>
                                         <input name="updated_at" type="datetime-local" class="input-modern"
                                                value="${course != null ? course.updatedAt : param.updated_at}"
                                                readonly>
@@ -181,7 +183,7 @@
                                             <img id="image-preview"
                                                  src="${course != null ? course.thumbnailUrl : (param.thumbnail != null ? param.thumbnail : 'assets/img/no-image.png')}"
                                                  alt="Preview"
-                                                 style="width: 100%; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
+                                                 style="width: 100%; height: 230px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
                                         </div>
                                     </div>
                                 </div>
@@ -203,59 +205,92 @@
                                 <div class="form-group flex-1">
                                     <label class="course-create__title-style">Mức độ</label>
                                     <select name="level" class="input-modern select-custom">
-                                        <option value="beginner">Người mới (Beginner)</option>
-                                        <option value="intermediate">Trung cấp (Intermediate)</option>
-                                        <option value="advanced">Cao cấp (Advanced)</option>
+                                        <option value="">-- Chọn mức độ --</option>
+
+                                        <option value="beginner"
+                                                <c:if test="${course != null && course.level == 'beginner'}">
+                                                    selected
+                                                </c:if>>
+                                            Người mới
+                                        </option>
+
+                                        <option value="intermediate"
+                                                <c:if test="${course != null && course.level == 'intermediate'}">
+                                                    selected
+                                                </c:if>>
+                                            Trung cấp
+                                        </option>
+
+                                        <option value="advanced"
+                                                <c:if test="${course != null && course.level == 'advanced'}">
+                                                    selected
+                                                </c:if>>
+                                            Cao cấp
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-group flex-1">
-                                <label class="course-create__title-style">Danh mục khóa học</label>
-                                <select name="category_id" class="input-modern select-custom" required>
-                                    <option value="">-- Chọn danh mục --</option>
-
-                                    <c:forEach items="${categories}" var="cat">
-                                        <option value="${cat.id}"
-                                            ${course != null && course.categoryId == cat.id ? "selected" : ""}>
-                                                ${cat.name}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
                             <div class="form-row mt-4">
-                                <div class="form-group style-full-width">
-                                    <label class="course-create__title-style">Tag khóa học</label>
+                                <div class="form-group flex-1">
+                                    <label class="course-create__title-style">Danh mục khóa học</label>
+                                    <select name="category_id" class="input-modern select-custom" required>
+                                        <option value="">-- Chọn danh mục --</option>
 
-                                    <div class="tag-container">
-                                        <c:forEach items="${tags}" var="tag">
-                                            <label class="tag-item">
-                                                <input type="checkbox"
-                                                       name="tags"
-                                                       value="${tag.id}"
-                                                       class="checkbox__item"
-                                                        <c:if test="${course != null && courseTagIdList.contains(tag.id)}">
-                                                            checked
-                                                        </c:if>/>
-                                                    ${tag.name}
-                                            </label>
+                                        <c:forEach items="${categories}" var="cat">
+                                            <option value="${cat.id}"
+                                                ${course != null && course.categoryId == cat.id ? "selected" : ""}>
+                                                    ${cat.name}
+                                            </option>
                                         </c:forEach>
-                                    </div>
+                                    </select>
+                                </div>
+
+                                <div class="form-group flex-1">
+                                    <label class="course-create__title-style">Trạng thái</label>
+                                    <select name="status" class="input-modern select-custom">
+                                        <option value="">-- Chọn trạng thái --</option>
+
+                                        <option value="true"
+                                                <c:if test="${course != null && course.isPublic}">
+                                                    selected
+                                                </c:if>>
+                                            Hoạt động
+                                        </option>
+
+                                        <option value="false"
+                                                <c:if test="${course != null && !course.isPublic}">
+                                                    selected
+                                                </c:if>>
+                                            Bị khóa
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
 
+<%--                                CHỉ khi cập nhật mơới có thể thêm tag vô thôi--%>
+                            <c:if test="${course != null && course.id != null}">
+                                <div class="form-row mt-4">
+                                    <div class="form-group style-full-width">
+                                        <label class="course-create__title-style">Tag khóa học</label>
 
-                            <div class="course-create__section-3 mt-4">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="is_public" class="checkbox__item"/>
-                                    Công khai khóa học
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="is_featured" class="checkbox__item"/>
-                                    Hiển thị nổi bật
-                                </label>
-                            </div>
+                                        <div class="tag-container">
+                                            <c:forEach items="${tags}" var="tag">
+                                                <label class="tag-item">
+                                                    <input type="checkbox"
+                                                           name="tags"
+                                                           value="${tag.id}"
+                                                           class="checkbox__item"
+                                                            <c:if test="${course != null && courseTagIdList.contains(tag.id)}">
+                                                                checked
+                                                            </c:if>/>
+                                                        ${tag.name}
+                                                </label>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
