@@ -64,7 +64,11 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     @Override
     public int delete(Integer integer) {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM courses WHERE id = :id")
+                    .bind("id", integer)
+                    .execute();
+        });
     }
 
     public List<Course> findAllCourses() {

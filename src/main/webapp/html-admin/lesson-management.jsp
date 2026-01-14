@@ -150,7 +150,8 @@
                                                         học:
                                                     </div>
                                                     <select class="admin-input__long" name="idCourse">
-                                                        <option class="text-medium" value="0">--- Vui lòng chọn khóa học ---
+                                                        <option class="text-medium" value="0">--- Vui lòng chọn khóa học
+                                                            ---
                                                         </option>
                                                         <c:forEach var="c" items="${listCourse}">
                                                             <option class="text-medium"
@@ -192,37 +193,41 @@
                             </form>
                             <div class="title__admin">Tất cả bài học (${listLessons.size()})</div>
                             <form method="get" class="form" action="admin/lesson/search">
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-                                    <div class="filter__selection-input">
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-title filter__item-phone">Tên bài học:</div>
-                                            <input placeholder="" type="text"
-                                                   class="input__font admin-input__long" name="searchName" value="${param.searchName}">
-                                        </div>
-                                        <div class="filter__selection-items">
-                                            <div class="filter__selection-items-select">
-                                                <div class="filter__selection-title filter__item-phone">Tên khóa
-                                                    học:
+                                <div class="container-2__filter">
+                                    <div class="filter__selection">
+                                        <div class="filter__selection-input">
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-title filter__item-phone">Tên bài học:
                                                 </div>
-                                                <select name="courseId" class="combobox admin-input__short ">
-                                                    <option class="text-medium" value="">--- Vui lòng chọn khóa học ---
-                                                    </option>
-                                                    <c:forEach var="c" items="${listCourse}">
-                                                        <option class="text-medium" value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
-                                                        ${c.title}</option>
-                                                    </c:forEach>
-                                                </select>
+                                                <input placeholder="" type="text"
+                                                       class="input__font admin-input__long" name="searchName"
+                                                       value="${param.searchName}">
+                                            </div>
+                                            <div class="filter__selection-items">
+                                                <div class="filter__selection-items-select">
+                                                    <div class="filter__selection-title filter__item-phone">Tên khóa
+                                                        học:
+                                                    </div>
+                                                    <select name="courseId" class="combobox admin-input__short ">
+                                                        <option class="text-medium" value="">--- Vui lòng chọn khóa học
+                                                            ---
+                                                        </option>
+                                                        <c:forEach var="c" items="${listCourse}">
+                                                            <option class="text-medium"
+                                                                    value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
+                                                                    ${c.title}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="filter__button-search">
-                                        <button type="submit" class="admin-search-btn">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <div class="filter__button-search">
+                                            <button type="submit" class="admin-search-btn">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </form>
                             <div class="container-2__list-student">
                                 <style>
@@ -290,7 +295,7 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                    ${lesson.durationMinutes} min
+                                                        ${lesson.durationMinutes} min
                                                 </div>
                                             </td>
                                             <td>
@@ -304,19 +309,14 @@
                                             </td>
                                             <td class="action__button">
                                                 <div class="action-wrapper">
-                                                <button type="button" onclick="showLessonDetail(${lesson.id})"
-                                                        class="icon-action-btn">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-                                                <form id="delete-form-${lesson.id}" action="admin/lesson/delete" method="POST"
-                                                      class="form">
-                                                <input type="hidden" name="id" value="${lesson.id}">
-                                                <button type="button" class="icon-action-btn"
-                                                        onclick="openConfirmModal(${lesson.id})">
-                                                    <i
-                                                            class="fa-solid fa-trash"></i>
-                                                </button>
-                                                </form>
+                                                    <button type="button" onclick="showLessonDetail(${lesson.id})"
+                                                            class="icon-action-btn">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </button>
+                                                    <button type="button" class="icon-action-btn"
+                                                            onclick="openConfirmModal(${lesson.id})">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -327,80 +327,86 @@
                         </div>
                     </div>
                 </div>
-                <div id="lesson-detail" class="modal modal__course-detail">
-                    <div class="modal__course-content">
-                        <form action="admin/lesson/update" method="post">
-
-                            <div class="course__header">
-                                <div class="course__title">
-                                    <i class="fa-solid fa-address-card"></i>
-                                    <span id="modal-title"></span>
-                                </div>
-                                <div class="x__icon" onclick="closeModal('lesson-detail')">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </div>
-                            <div class="course-body">
-                                <div class="user-info-grid">
-                                    <%--                                    Tạm lưu id của user để update--%>
-                                    <input id="detail-id" type="text" class="input__create" name="id"
-                                           style=" display: none ">
-                                        <div class="info-group">
-                                            <label><i class="fa-solid fa-user"></i> Tên khóa học</label>
-                                            <select id="detail-courseId"  class="input__create" name="courseId">
-                                                <c:forEach var="c" items="${listCourse}">
-                                                    <option class="text-medium"
-                                                            value="${c.id}">${c.title}</option>
-
-                                                </c:forEach>
-                                                <input type="hidden" name="oldCourseId" id="old-courseId">
-                                            </select>
-                                        </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-user"></i> Tên bài học</label>
-                                        <input id="detail-nameLesson" type="text" class="input__create" name="nameLesson">
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-envelope"></i>Video URL</label>
-                                        <input id="detail-videoURL" type="text" class="input__create" name="videoURL">
-                                    </div>
-                                        <div class="info-group">
-                                            <label><i class="fa-solid fa-envelope"></i>Thời lượng</label>
-                                            <input id="detail-durationMinutes" type="number" class="input__create" name="durationMinutes">
-                                        </div>
-                                        <div class="info-group">
-                                            <label><i class="fa-solid fa-sort-numeric-down"></i> Số thứ tự</label>
-                                            <input id="detail-orderIndex" type="number" min="1" class="input__create" name="orderIndex" required>
-                                            <input id="old-orderIndex" type="hidden" name="oldOrderIndex">
-                                        </div>
-                                        <input type="hidden" name="currentSearchName" value="${param.searchName}">
-                                        <input type="hidden" name="currentCourseId" value="${param.courseId}">
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo bài học</label>
-                                        <input id="detail-created" type="text" class="input__create" name="">
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
-                                        <input id="detail-updated" type="text" class="input__create" name="">
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="button btn-cancel" onclick="closeModal('lesson-detail')"
-                                            style="margin-right: 1rem;">Hủy
-                                    </button>
-                                    <button type="submit" class="button dark-button">Lưu thay
-                                        đổi
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+<%--SHOW DETAIL INFORMATION--%>
+<div id="lesson-detail" class="modal modal__course-detail">
+    <div class="modal__course-content">
+        <form action="admin/lesson/update" method="post">
+
+            <div class="course__header">
+                <div class="course__title">
+                    <i class="fa-solid fa-address-card"></i>
+                    <span id="modal-title"></span>
+                </div>
+                <div class="x__icon" onclick="closeModal('lesson-detail')">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div class="course-body">
+                <div class="user-info-grid">
+                    <%--                                    Tạm lưu id của user để update--%>
+                    <input id="detail-id" type="text" class="input__create" name="id"
+                           style=" display: none ">
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-user"></i> Tên khóa học</label>
+                        <select id="detail-courseId" class="input__create" name="courseId">
+                            <c:forEach var="c" items="${listCourse}">
+                                <option class="text-medium"
+                                        value="${c.id}">${c.title}</option>
+
+                            </c:forEach>
+                            <input type="hidden" name="oldCourseId" id="old-courseId">
+                        </select>
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-user"></i> Tên bài học</label>
+                        <input id="detail-nameLesson" type="text" class="input__create"
+                               name="nameLesson">
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-envelope"></i>Video URL</label>
+                        <input id="detail-videoURL" type="text" class="input__create" name="videoURL">
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-envelope"></i>Thời lượng</label>
+                        <input id="detail-durationMinutes" type="number" class="input__create"
+                               name="durationMinutes">
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-sort-numeric-down"></i> Số thứ tự</label>
+                        <input id="detail-orderIndex" type="number" min="1" class="input__create"
+                               name="orderIndex" required>
+                        <input id="old-orderIndex" type="hidden" name="oldOrderIndex">
+                    </div>
+                    <input type="hidden" name="currentSearchName" value="${param.searchName}">
+                    <input type="hidden" name="currentCourseId" value="${param.courseId}">
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo bài học</label>
+                        <input id="detail-created" type="text" class="input__create" name="">
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
+                        <input id="detail-updated" type="text" class="input__create" name="">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="button btn-cancel"
+                            onclick="closeModal('lesson-detail')"
+                            style="margin-right: 1rem;">Hủy
+                    </button>
+                    <button type="submit" class="button dark-button">Lưu thay
+                        đổi
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%--COMPONENT CONFIRM FOR DELETE--%>
 <div id="confirm-delete-modal" class="modal"
      style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
     <div class="modal-content"
@@ -417,8 +423,15 @@
         </div>
     </div>
 </div>
+<%--DELETE ACTION--%>
+<form id="delete-form-id" action="admin/lesson/delete"
+      method="POST"
+      class="form"
+      style="display: none">
+    <input id="input-delete-id" type="hidden" name="id">
+</form>
+<%--NOTIFICATION ACTION--%>
 <div id="toast"></div>
-
 </body>
 <script>
     window.flashError = '${sessionScope.flashError}';

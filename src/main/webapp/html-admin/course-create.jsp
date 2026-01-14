@@ -252,6 +252,7 @@
         </div>
     </div>
 </div>
+<div id="toast"></div>
 
 </body>
 
@@ -266,4 +267,5 @@
 
 </script>
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>

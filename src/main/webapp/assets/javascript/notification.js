@@ -41,25 +41,17 @@ function toast({title = '', message = '', type = 'info', duration = 3000}) {
         main.appendChild(toast);
     }
 }
-
+// ==================== CLOSE - OPEN - ACTION ====================
+// Hàm mở bất kỳ modal nào bằng ID => Phụ trợ cho currentDeleteId
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) modal.style.display = 'flex';
 }
 
-// Hàm đóng bất kỳ modal nào bằng ID
+// Hàm đóng bất kỳ modal nào bằng ID => Phụ trợ cho currentDeleteId
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) modal.style.display = 'none';
-}
-
-// Xử lý riêng cho chức năng XÓA (Cần lưu lại ID)
-let currentDeleteId = null;
-function openConfirmModal(id, modalId = 'confirm-delete-modal') {
-    console.log("--- BƯỚC 1: MỞ MODAL ---");
-    console.log("ID nhận được từ nút bấm:", id);
-    currentDeleteId = id;
-    openModal(modalId);
 }
 
 // Lắng nghe sự kiện click toàn trang
@@ -71,16 +63,22 @@ window.onclick = function (event) {
         if (event.target.id === 'confirm-delete-modal') currentDeleteId = null;
     }
 };
+// ==================== CLOSE - OPEN - ACTION ====================
+
+// Xử lý riêng cho chức năng XÓA (Cần lưu lại ID)
+let currentDeleteId = null;
+function openConfirmModal(id, modalId = 'confirm-delete-modal') {
+    currentDeleteId = id;
+    document.getElementById('input-delete-id').value = id;
+    openModal(modalId);
+}
 
 // Gắn sự kiện cho nút "Xác nhận xóa" trong modal (Dùng chung)
-const btnConfirmDelete = document.getElementById('btn-confirm-delete');
-if (btnConfirmDelete) {
-    btnConfirmDelete.onclick = function() {
-        if (currentDeleteId) {
-            const form = document.getElementById('delete-form-' + currentDeleteId);
-            if (form) form.submit();
-        }
-    };
+document.getElementById('btn-confirm-delete').onclick = function () {
+    if (currentDeleteId) {
+        const form = document.getElementById('delete-form-id');
+        if (form) form.submit();
+    }
 }
 
 window.addEventListener('load', function () {
@@ -91,10 +89,10 @@ window.addEventListener('load', function () {
     console.log("Success message received:", successMsg); // Dòng này để debug
 
     if (successMsg !== "" && successMsg !== "null") {
-        toast({ title: 'Thành công!', message: successMsg, type: 'success', duration: 4000 });
+        toast({title: 'Thành công!', message: successMsg, type: 'success', duration: 4000});
     }
 
     if (errorMsg !== "" && errorMsg !== "null") {
-        toast({ title: 'Thất bại!', message: errorMsg, type: 'error', duration: 6000 });
+        toast({title: 'Thất bại!', message: errorMsg, type: 'error', duration: 6000});
     }
 });
