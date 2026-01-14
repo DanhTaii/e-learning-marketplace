@@ -35,7 +35,7 @@ public class MyCourseDetailController extends HttpServlet {
         int courseId = Integer.parseInt(request.getParameter("courseId"));
 
         List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(courseId);
-        request.setAttribute("reviewDtos",reviewDtos);
+        request.setAttribute("reviewDtos", reviewDtos);
         EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId);
         enrollmentDetail.setListReviews(reviewDtos);
 
@@ -48,6 +48,13 @@ public class MyCourseDetailController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idStr = request.getParameter("lessonId");
+        String isCompletedStr = request.getParameter("completed");
+
+        int id = Integer.parseInt(idStr);
+        boolean isCompleted = Boolean.parseBoolean(isCompletedStr);
+
+        ulp.updateUserLessonProgress(id, isCompleted);
 
     }
 }

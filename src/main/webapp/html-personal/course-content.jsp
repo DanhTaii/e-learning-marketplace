@@ -445,6 +445,7 @@
     </footer>
 </div>
 
+<form action=""></form>
 
 </body>
 <script src="assets/javascript/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>

@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.elearning.model.UserLessonProgress;
 
 import java.util.List;
 
-public class UserLessonProgressDao extends BaseDao{
+public class UserLessonProgressDao extends BaseDao {
 
     public List<UserLessonProgress> findAll() {
         return getJdbi().withHandle(handle -> {
@@ -38,9 +38,18 @@ public class UserLessonProgressDao extends BaseDao{
 
             }
             int[] results = batch.execute();
-            return  results.length;
+            return results.length;
         });
 
+    }
+
+    public int updateLessonProgress(int id, boolean isCompleted) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE user_lesson_progress SET is_completed = :isCompleted WHERE id = :id")
+                    .bind("id", id)
+                    .bind("isCompleted", isCompleted)
+                    .execute();
+        });
     }
 
 }

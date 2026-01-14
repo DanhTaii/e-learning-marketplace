@@ -27,8 +27,8 @@ public class UserLessonProgressService {
         return null;
     }
 
-    public void updateUserLessonProgress(UserLessonProgress userLessonProgress) {
-        // TODO: Implement update logic
+    public int updateUserLessonProgress(int id, boolean isCompleted) {
+        return this.ulpd.updateLessonProgress(id, isCompleted);
     }
 
     public void deleteUserLessonProgress(int id) {
