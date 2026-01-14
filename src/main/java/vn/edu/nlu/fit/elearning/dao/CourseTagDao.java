@@ -41,9 +41,15 @@ public class CourseTagDao extends BaseDao implements BaseCrudDao<CourseTag, Inte
         return 0;
     }
 
-    public static void main(String[] args) {
-        CourseTagDao ctd = new CourseTagDao();
-        System.out.println(ctd.findAll());
+    public List<Integer> findTagIdByCourseId(int courseId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT tag_id\n" +
+                    "FROM course_tags\n" +
+                    "WHERE course_id = :courseId\n")
+                    .bind("courseId", courseId)
+                    .mapTo(Integer.class)
+                    .list();
+        });
     }
 
 }

@@ -27,7 +27,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     @Override
     public Course findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-                    return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at\n" +
+                    return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, c.thumbnail_url, c.is_public, c.category_id, c.author_name, c.created_at, c.updated_at\n" +
                                     "FROM courses c\n" +
                                     "WHERE c.id = :id ")
                             .bind("id", integer)

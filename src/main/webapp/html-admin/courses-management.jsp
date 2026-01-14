@@ -317,7 +317,8 @@
                                                             <i class="fa-solid fa-pen"></i>
                                                         </button>
                                                     </a>
-                                                    <button type="button" class="icon-action-btn" onclick="openConfirmModal(${course.id})">
+                                                    <button type="button" class="icon-action-btn"
+                                                            onclick="openConfirmModal(${course.id})">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>

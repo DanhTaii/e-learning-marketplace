@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <title>Tạo mới khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=1.0.2">
-    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css-admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -209,6 +209,42 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group flex-1">
+                                <label class="course-create__title-style">Danh mục khóa học</label>
+                                <select name="category_id" class="input-modern select-custom" required>
+                                    <option value="">-- Chọn danh mục --</option>
+
+                                    <c:forEach items="${categories}" var="cat">
+                                        <option value="${cat.id}"
+                                            ${course != null && course.categoryId == cat.id ? "selected" : ""}>
+                                                ${cat.name}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                            <div class="form-row mt-4">
+                                <div class="form-group style-full-width">
+                                    <label class="course-create__title-style">Tag khóa học</label>
+
+                                    <div class="tag-container">
+                                        <c:forEach items="${tags}" var="tag">
+                                            <label class="tag-item">
+                                                <input type="checkbox"
+                                                       name="tags"
+                                                       value="${tag.id}"
+                                                       class="checkbox__item"
+                                                        <c:if test="${course != null && courseTagIdList.contains(tag.id)}">
+                                                            checked
+                                                        </c:if>/>
+                                                    ${tag.name}
+                                            </label>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="course-create__section-3 mt-4">
                                 <label class="checkbox-label">
