@@ -12,12 +12,14 @@
     <title>Quản lý khóa học</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/dashboard.css">
     <link rel="stylesheet" href="assets/css-admin/courses-management.css">
+    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
 
 </head>
 <body>
@@ -315,13 +317,9 @@
                                                             <i class="fa-solid fa-pen"></i>
                                                         </button>
                                                     </a>
-
-                                                    <form action="admin/course/delete" method="post" class="form">
-                                                        <input type="hidden" name="id" value="${course.id}">
-                                                        <button type="submit" class="icon-action-btn">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <button type="button" class="icon-action-btn" onclick="openConfirmModal(${course.id})">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -337,5 +335,39 @@
     </div>
 </div>
 
+<%--COMPONENT CONFIRM FOR DELETE--%>
+<div id="confirm-delete-modal" class="modal"
+     style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div class="modal-content"
+         style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
+        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
+        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa bài học này không?</p>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">
+                Hủy
+            </button>
+            <button id="btn-confirm-delete" class="button dark-button"
+                    style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay
+            </button>
+        </div>
+    </div>
+</div>
+<%--DELETE ACTION--%>
+<form id="delete-form-id" action="admin/course/delete" method="post" class="form" style="display: none">
+    <input id="input-delete-id" type="hidden" name="id">
+</form>
+<%--NOTIFICATION ACTION--%>
+<div id="toast"></div>
 </body>
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

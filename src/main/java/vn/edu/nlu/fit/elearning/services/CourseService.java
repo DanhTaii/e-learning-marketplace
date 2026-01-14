@@ -29,6 +29,10 @@ public class CourseService {
         return this.cd.update(entity);
     }
 
+    public int deleteCourse(int id){
+        return cd.delete(id);
+    }
+
     public List<Course> getAllCourses() {
         return cd.findAllCourses();
     }
