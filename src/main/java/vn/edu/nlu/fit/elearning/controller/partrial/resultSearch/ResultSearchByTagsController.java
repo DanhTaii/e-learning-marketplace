@@ -14,7 +14,7 @@ import java.util.List;
 @WebServlet(name = "ResultSearchByTagsController", value = "/result-search/by-tag")
 public class ResultSearchByTagsController extends HttpServlet {
 
-    private static final int PAGE_SIZE = 3;
+    private static final int PAGE_SIZE = 12;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

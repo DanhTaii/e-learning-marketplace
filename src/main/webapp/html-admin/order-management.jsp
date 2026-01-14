@@ -225,7 +225,7 @@
                                                 <a href="#course-detail" class="button-de-mo" onclick="showOrderDetail(${order.id})">
                                                     <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
                                                 </a>
-                                                <a href="#">
+                                                <a href="admin/order/detail?id=${order.id}" class="turn-page">
                                                     <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
                                                 </a>
                                             </td>
