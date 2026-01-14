@@ -35,4 +35,8 @@ public class CourseTagService {
     public void deleteCourseTag(int id) {
         // TODO: Implement delete logic
     }
+
+    public List<Integer> getAllTagIdByCourseId(int courseId) {
+        return ctd.findTagIdByCourseId(courseId);
+    }
 }
