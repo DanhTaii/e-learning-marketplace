@@ -14,7 +14,7 @@ import java.util.List;
 @WebServlet(name = "ResultSearchByCategoriesController", value = "/result-search/by-category")
 public class ResultSearchByCategoriesController extends HttpServlet {
 
-    private static final int PAGE_SIZE = 3;  // Số khóa học mỗi trang
+    private static final int PAGE_SIZE = 12;  // Số khóa học mỗi trang
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,6 +92,6 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Nếu cần POST thì xử lý ở đây
+
     }
 }
