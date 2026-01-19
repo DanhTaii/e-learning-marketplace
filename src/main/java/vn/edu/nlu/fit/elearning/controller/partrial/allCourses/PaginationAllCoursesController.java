@@ -15,19 +15,16 @@ import java.util.List;
 @WebServlet(name = "PaginationAllCoursesController", value = "/pagination-all-courses")
 public class PaginationAllCoursesController extends HttpServlet {
 
-    private static final int PAGE_SIZE = 4; // giữ nguyên 4 nếu bạn muốn, hoặc tăng lên 8/12
+    private static final int PAGE_SIZE = 16;
     private CourseService courseService;
-    private CategoryService categoryService;
 
     @Override
     public void init() {
         courseService = new CourseService();
-        categoryService = new CategoryService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Lấy tất cả các tham số filter
         String pageStr      = request.getParameter("page");

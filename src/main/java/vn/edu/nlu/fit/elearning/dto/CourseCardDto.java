@@ -14,11 +14,13 @@ public class CourseCardDto implements Serializable {
     private String level;
     private double avgRating;
     private double durationHours;
+    private int studentCount;
+    private boolean inWishlist;
 
     public CourseCardDto() {
     }
 
-    public CourseCardDto(int id, String title, String authorName, int userId, int price, int discountPrice, String thumbnailUrl, String level, double avgRating, double durationHours) {
+    public CourseCardDto(int id, String title, String authorName, int userId, int price, int discountPrice, String thumbnailUrl, String level, double avgRating, double durationHours, int studentCount, int wishlistId) {
         this.id = id;
         this.title = title;
         this.authorName = authorName;
@@ -29,6 +31,23 @@ public class CourseCardDto implements Serializable {
         this.level = level;
         this.avgRating = avgRating;
         this.durationHours = durationHours;
+        this.studentCount = studentCount;
+    }
+
+    public boolean isInWishlist() {
+        return inWishlist;
+    }
+
+    public void setInWishlist(boolean inWishlist) {
+        this.inWishlist = inWishlist;
+    }
+
+    public int getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(int studentCount) {
+        this.studentCount = studentCount;
     }
 
     public int getId() {

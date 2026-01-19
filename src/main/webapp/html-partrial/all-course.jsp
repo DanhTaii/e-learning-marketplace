@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
     <title>All Classes</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="assets/css/default.css?v=1.0.1">
     <link rel="stylesheet" href="assets/css/all-course.css">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -82,18 +83,18 @@
                     <div class="grid">
                         <div class="grid__row-2">
                             <c:forEach var="c" items="${listCourse}">
-                                <div class="grid__column-3">
+                                <div class="grid__column-3 product-card-container">
+
                                     <a href="course-detail?id=${c.id}" class="turn-page">
                                         <div class="product__small-advertisement">
                                             <div class="small-advertisement__image">
                                                 <img src="${c.thumbnailUrl}"
-                                                     alt="Bí quyết sáng tạo quảng cáo viral và livestream bán hàng"
-                                                     class="img-2">
+                                                     alt="Từ Chối Mà Vẫn Được Yêu Quý" class="img-2">
                                             </div>
                                             <div class="small-advertisement__content">
                                                 <div class="content__top">
-                                                    <div class="content__author-name text-medium">${c.authorName}</div>
-                                                    <div class="content__rate">
+                                                    <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                    <div class="content__rate content__rate-2">
                                                         <div class="rate__icon"><i
                                                                 class="text-medium fa-regular fa-star"></i></div>
                                                         <div class="text-medium rate__number">${c.avgRating}</div>
@@ -109,23 +110,32 @@
                                                     <div class="quick-info__users">
                                                         <div class="users__icon icon"><i
                                                                 class="text-medium fa-solid fa-users"></i></div>
-                                                        <div class="users__text text-medium">Số lượng học viên</div>
+                                                        <div class="users__text text-medium">${c.studentCount}</div>
                                                     </div>
                                                     <div class="quick-info__time">
                                                         <div class="time__icon icon"><i
                                                                 class="text-medium fa-regular fa-clock"></i></div>
-                                                        <div class="time__text text-medium">${c.durationHours}h</div>
+                                                        <div class="time__text text text-medium">${c.durationHours}h</div>
                                                     </div>
                                                 </div>
                                                 <div class="content__price">
-                                                    <div class="price__new">${c.price - c.discountPrice}đ</div>
-                                                    <div class="price__old">${c.price}đ</div>
-                                                    <div class="quick-info__save"><i
-                                                            class="quick-info__save__icon fa-solid fa-heart"></i></div>
+                                                    <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
+                                                    <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
+                                    <div class="product-hover-info">
+                                        <h4 class="hover-title">${c.title}</h4>
+                                        <div class="hover-actions">
+
+                                            <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
+
+                                            <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
+                                                <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </c:forEach>
                         </div>

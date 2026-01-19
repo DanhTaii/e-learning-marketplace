@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.*;
@@ -46,10 +47,14 @@ public class IndexController extends HttpServlet {
         request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học
-        Course courseMostPopular = courseService.getCoursesMostPopular();
-        List<Course> coursesLiked = courseService.getThreeCoursesWereLiked();
-        List<Course> coursesLastest = courseService.getSixCoursesLast();
-        List<Course> coursesFeature = courseService.getSixCoursesMostPopular();
+        CourseCardDto courseMostPopular = courseService.getCoursesMostPopular();
+        List<CourseCardDto> coursesLiked = courseService.getThreeCoursesWereLiked();
+        List<CourseCardDto> coursesLastest = courseService.getSixCoursesLast();
+        List<CourseCardDto> coursesFeature = courseService.getSixCoursesMostPopular();
+//
+//        System.out.println("coursesLiked: " + coursesLiked);
+//        System.out.println("coursesLastest: " + coursesLastest);
+//        System.out.println("coursesFeature: " + coursesFeature);
 
         request.setAttribute("courseMostPopular", courseMostPopular);
         request.setAttribute("coursesLiked", coursesLiked);
@@ -71,23 +76,23 @@ public class IndexController extends HttpServlet {
 
 
             // Đánh dấu trạng thái wishlist cho tất cả course hiển thị
-            markWishlistStatus(coursesLiked, wishlistCourseIds);
-            markWishlistStatus(coursesLastest, wishlistCourseIds);
-            markWishlistStatus(coursesFeature, wishlistCourseIds);
+//            markWishlistStatus(coursesLiked, wishlistCourseIds);
+//            markWishlistStatus(coursesLastest, wishlistCourseIds);
+//            markWishlistStatus(coursesFeature, wishlistCourseIds);
         }
 
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
-    private void markWishlistStatus(List<Course> courses, Set<Integer> wishlistCourseIds) {
-        if (courses != null) {
-            for (Course course : courses) {
-                if (course != null) {
-                    course.setInWishlist(wishlistCourseIds.contains(course.getId()));
-                }
-            }
-        }
-    }
+//    private void markWishlistStatus(List<Course> courses, Set<Integer> wishlistCourseIds) {
+//        if (courses != null) {
+//            for (Course course : courses) {
+//                if (course != null) {
+//                    course.setInWishlist(wishlistCourseIds.contains(course.getId()));
+//                }
+//            }
+//        }
+//    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
