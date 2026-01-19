@@ -11,7 +11,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/sign-up.css">
+    <link rel="stylesheet" href="assets/css/sign-up.css?v=1.0.1">
     <link rel="stylesheet" href="assets/css/home.css">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
-                    <div class="box-2">
+                    <div class="box-2-2">
 
                         <form action="sign-up" class="form" method="post">
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>

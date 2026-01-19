@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/forgot-password.css">
+    <link rel="stylesheet" href="assets/css/forgot-password.css?v=1.0.2">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -28,7 +29,7 @@
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
-                    <div class="box-2">
+                    <div class="box-2-2">
                         <form action="forget-password" method="post" class="form">
                             <div class="form__title text-big-title">QUÊN MẬT KHẨU</div>
                             <div class="form__span">

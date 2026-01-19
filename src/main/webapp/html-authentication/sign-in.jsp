@@ -16,7 +16,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/sign-in.css">
+    <link rel="stylesheet" href="assets/css/sign-in.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
-                    <div class="box-2">
+                    <div class="box-2-2">
                         <%
                             String error = (String) request.getAttribute("error");
                             if (error == null) error = "";
@@ -77,7 +77,7 @@
                                     <a href="html-authentication/sign-up.jsp" class="text-big turn-page text-fix">Đăng ký</a>
                                 </div>
                                 <div class="helps__lost-password">
-                                    <a href="html-authentication/forgot-password.jsp" class="turn-page text-big text-fix">Quên mật khẩu?</a>
+                                    <a href="forgot-password" class="turn-page text-big text-fix">Quên mật khẩu?</a>
                                 </div>
                             </div>
                             <div class="form__socials">

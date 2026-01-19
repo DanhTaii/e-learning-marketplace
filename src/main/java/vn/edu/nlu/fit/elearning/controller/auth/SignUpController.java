@@ -5,11 +5,15 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.model.AccessToken;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.services.AccessTokenService;
+import vn.edu.nlu.fit.elearning.services.CategoryService;
+import vn.edu.nlu.fit.elearning.services.TagService;
 import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {
@@ -46,6 +50,13 @@ public class SignUpController extends HttpServlet {
                 return;
             }
         }
+
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
 
         // nếu không có token thì hiển thị form đăng ký
         request.getRequestDispatcher("/html-authentication/sign-up.jsp").forward(request, response);

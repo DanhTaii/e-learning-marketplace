@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.TagService;
 
 import java.io.IOException;
 import java.util.List;
@@ -85,6 +86,13 @@ public class PaginationAllCoursesController extends HttpServlet {
         request.setAttribute("category", categoryStr);
         request.setAttribute("sortPrice", sortPrice);
         request.setAttribute("popular", popular);
+
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
 
         request.setAttribute("categories", categoryService.getAllCategories());
 

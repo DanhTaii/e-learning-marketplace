@@ -198,3 +198,7 @@
     color: inherit;
     display: block;
 }
+
+.quick-info__save__icon:hover{
+    color: red !important;
+}

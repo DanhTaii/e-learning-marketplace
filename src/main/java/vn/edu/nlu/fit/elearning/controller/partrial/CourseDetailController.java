@@ -56,6 +56,13 @@ public class CourseDetailController extends HttpServlet {
         CategoryDto category2 = categoryService.getCategoryByCourseId(id);
         request.setAttribute("category2",category2);
 
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
+
         request.setAttribute("c", c);
         request.getRequestDispatcher("/html-partrial/course-detail.jsp").forward(request, response);
     }
