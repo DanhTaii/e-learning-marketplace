@@ -2,12 +2,27 @@ package vn.edu.nlu.fit.elearning.dao;
 
 import vn.edu.nlu.fit.elearning.model.AccessToken;
 
-public class AccessTokenDao extends BaseDao  {
+public class AccessTokenDao extends BaseDao {
+
+    public AccessToken findByToken(String token) {
+        String sql = """
+        SELECT id, user_id, token, expiry_time, is_used
+        FROM token_forget_password
+        WHERE token = :token
+    """;
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("token", token)
+                        .mapToBean(AccessToken.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
 
     public boolean createToken(AccessToken accessToken) {
         String sql = """
             INSERT INTO token_forget_password (user_id, token, expiry_time, is_used)
-            VALUES (:userId, :token, :expiryTime, :isUsed);
+            VALUES (:userId, :token, :expiryTime, :isUsed)
         """;
         return getJdbi().withHandle(handle ->
                 handle.createUpdate(sql)
@@ -19,15 +34,15 @@ public class AccessTokenDao extends BaseDao  {
         );
     }
 
-    // tìm token trong DB
-    public AccessToken findByToken(String token) {
+    public AccessToken findByUserIdAndToken(int userId, String token) {
         String sql = """
             SELECT id, user_id, token, expiry_time, is_used
             FROM token_forget_password
-            WHERE token = :token
+            WHERE user_id = :userId AND token = :token
         """;
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
+                        .bind("userId", userId)
                         .bind("token", token)
                         .mapToBean(AccessToken.class)
                         .findOne()
@@ -35,7 +50,7 @@ public class AccessTokenDao extends BaseDao  {
         );
     }
 
-    // đánh dấu token đã dùng
+    // Đánh dấu token đã sử dụng
     public boolean markAsUsed(String token) {
         String sql = """
             UPDATE token_forget_password

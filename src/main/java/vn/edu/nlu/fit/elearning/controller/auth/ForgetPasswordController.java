@@ -84,7 +84,12 @@ public class ForgetPasswordController extends HttpServlet {
             return;
         }
 
+        // Lưu email vào session để dùng ở check-email
+        HttpSession session = request.getSession();
+        session.setAttribute("resetEmail", email);
+        session.setMaxInactiveInterval(10 * 60); // 10 phút
+
         request.setAttribute("success", "Gửi thành công!");
-        response.sendRedirect(request.getContextPath() + "/html-authentication/check-email.jsp");
+        response.sendRedirect(request.getContextPath() + "/check-email");
     }
 }

@@ -8,6 +8,9 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import vn.edu.nlu.fit.elearning.dao.AccessTokenDao;
+import vn.edu.nlu.fit.elearning.model.AccessToken;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Properties;
@@ -15,9 +18,12 @@ import java.util.Random;
 import java.util.UUID;
 
 public class AccessTokenService {
-    private final int LIMIT_MINUTE = 1;
+    private final int LIMIT_MINUTE = 10;
     String emailFrom = "minh6112005@gmail.com";
     String password = "xpfwkobwmpoqascz";
+
+    // Thêm DAO để dùng cho validate & mark used
+    private final AccessTokenDao tokenDao = new AccessTokenDao();
 
     public String generateToken() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -40,6 +46,7 @@ public class AccessTokenService {
     }
 
     public boolean isExpireTime(Timestamp expireTime){
+        if(expireTime==null) return false;
         return LocalDateTime.now().isAfter(expireTime.toLocalDateTime().plusMinutes(LIMIT_MINUTE));
     }
 
@@ -91,5 +98,25 @@ public class AccessTokenService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean validateResetToken(int userId, String token) {
+        AccessToken accessToken = tokenDao.findByUserIdAndToken(userId, token);
+        if (accessToken == null) {
+            return false;
+        }
+        // Đã dùng rồi
+        if (accessToken.isUsed()) {
+            return false;
+        }
+        // Hết hạn (dùng method cũ của bạn)
+        if (isExpireTime(accessToken.getExpiriTime())) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean markAsUsed(String token) {
+        return tokenDao.markAsUsed(token);
     }
 }
