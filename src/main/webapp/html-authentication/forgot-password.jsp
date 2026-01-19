@@ -30,7 +30,7 @@
                 </div>
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2">
-                        <form action="forget-password" method="post" class="form">
+                        <form action="forgot-password" method="post" class="form">
                             <div class="form__title text-big-title">QUÊN MẬT KHẨU</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">Vui lòng nhập email của bạn để đặt lại mật khẩu!</span>
@@ -39,7 +39,7 @@
                                 <input type="email" class="input-text text-big" placeholder="Nhập email của bạn" name="email" required>
                             </div>
                             <div class="form__button">
-                                <a href="/html-authentication/check-email.jsp" class="turn-page support">
+                                <a href="check-email" class="turn-page support">
                                     <button class="box-btn button__btn">
                                         <span class="text-header">Tiếp theo</span>
                                     </button>
@@ -47,10 +47,10 @@
                             </div>
                             <div class="form__turn-back">
                                 <div class="turn-back__sign-up turn-back">
-                                    <a href="html-authentication/sign-up.jsp" class="turn-page text-big">Đăng ký</a>
+                                    <a href="sign-up" class="turn-page text-big">Đăng ký</a>
                                 </div>
                                 <div class="turn-back__sign-in turn-back">
-                                    <a href="html-authentication/sign-in.jsp" class="turn-page text-big">Đăng nhập</a>
+                                    <a href="sign-in" class="turn-page text-big">Đăng nhập</a>
                                 </div>
                             </div>
                         </form>
