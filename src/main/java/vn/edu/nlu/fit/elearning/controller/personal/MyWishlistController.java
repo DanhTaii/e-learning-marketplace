@@ -25,7 +25,7 @@ public class MyWishlistController extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect("/html-authentication/sign-in.jsp");
+            response.sendRedirect(request.getContextPath() +  "/html-authentication/sign-in.jsp");
             return;
         }
 

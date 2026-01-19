@@ -69,11 +69,19 @@ public class CourseService {
     }
 
     public Course getCoursesMostPopular() {
-        return cd.findCoursesMostPopular();
+        return cd.findCourseMostPopular();
     }
 
     public List<Course> getSixCoursesLast() {
         return cd.findSixCoursesLast();
+    }
+
+    public List<CourseCardDto> getCoursesPopular() {
+        return cd.findCoursesMostPopular();
+    }
+
+    public List<CourseCardDto> getCoursesLast() {
+        return cd.findCoursesLast();
     }
 
     public Course getCourse(int id) {
@@ -253,5 +261,29 @@ public class CourseService {
                 duration,
                 popular
         );
+    }
+
+    // tổng quát nhất
+    public List<CourseCardDto> filterCourses(
+            Integer categoryId, Integer tagId, String title,
+            String sortPrice, String level, String priceRange,
+            String rating, String duration, String popular,
+            int limit, int offset) {
+
+        return cd.filterCoursesWithPagination(
+                categoryId, tagId, title,
+                sortPrice, level, priceRange, rating, duration, popular,
+                limit, offset);
+    }
+
+    // đếm tổng quát (dùng để tính totalPages)
+    public int countFilteredCourses(
+            Integer categoryId, Integer tagId, String title,
+            String sortPrice, String level, String priceRange,
+            String rating, String duration, String popular) {
+
+        return cd.countFilteredCourses(
+                categoryId, tagId, title,
+                sortPrice, level, priceRange, rating, duration, popular);
     }
 }
