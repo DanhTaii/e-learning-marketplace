@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.dto;
+import java.io.Serializable;
 import java.sql.Timestamp;
-public class OrderDTO {
+public class OrderDTO implements Serializable {
     private int id;
     private String orderCode;
     private int totalAmount;

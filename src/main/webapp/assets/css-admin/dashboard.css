@@ -63,6 +63,8 @@
     margin-top: 2rem;
     gap: 2rem;
     flex-wrap: wrap;
+    /*Cao ít nhất 300px*/
+    min-height: 30rem !important;
 }
 
 .top-course {
@@ -70,6 +72,8 @@
     border: 1px solid var(--light-grey);
     background: var(--white-color);
     width: 45%;
+    /*Không chiều cao cho ăn theo min-height mà ăn theo nội dung*/
+    height: fit-content;
 }
 .top-course th,
 .top-course td {
@@ -125,6 +129,10 @@
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    /* Thêm padding-bottom để chữ không bị cắt mất hoặc tràn ra ngoài */
+    padding-bottom: 2rem !important;
+    overflow: visible;      /* Cho phép chữ hiển thị ra ngoài vùng bar-chart */
 }
 
 .chart__title {
@@ -139,6 +147,11 @@
     /*min-height: 0;*/
     display: flex;
     align-items: flex-end;
+
+    /* Rất quan trọng để label không bị ẩn */
+    overflow: visible;
+    /* Tạo khoảng không cho các label */
+    margin-bottom: 3rem;
 }
 
 .bar-chart__grid {
@@ -197,6 +210,34 @@
     height: 100%;
     width: 100%;
     padding: 0 2rem;
+}
+
+.bar-item {
+    /* Phải cao 100% để cột con tính % height chính xác */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Đẩy cột bám sát đáy */
+    justify-content: flex-end;
+    /* Căn giữa chữ so với cột */
+    align-items: center;
+    /* Làm gốc để định vị label */
+    position: relative;
+    width: 60px;
+}
+
+/* 2. Định vị nhãn ngày tháng xuống dưới trục */
+.bar-label {
+    position: absolute;
+    /* Đẩy xuống bắt đầu từ đáy của biểu đồ */
+    top: 100%;
+    /* Tạo khoảng cách so với đường kẻ ngang */
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--dark-blue);
+    /* Không cho ngày tháng bị xuống dòng */
+    white-space: nowrap;
 }
 
 /*Quy ước chung của từng cột*/

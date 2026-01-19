@@ -2,9 +2,10 @@ package vn.edu.nlu.fit.elearning.dto;
 
 import vn.edu.nlu.fit.elearning.model.Lesson;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EnrollmentDetailDto {
+public class EnrollmentDetailDto implements Serializable {
     private int id;
     private int courseId;
     private String title;

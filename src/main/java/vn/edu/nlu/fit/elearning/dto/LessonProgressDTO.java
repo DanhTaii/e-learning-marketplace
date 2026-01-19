@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.dto;
 
-public class LessonProgressDTO {
+import java.io.Serializable;
+
+public class LessonProgressDTO implements Serializable {
     // Từ bảng Lessons
     private int id;
     private int userId;

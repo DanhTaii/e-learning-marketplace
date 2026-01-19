@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.dto;
 
-public class OrderItemDTO {
+import java.io.Serializable;
+
+public class OrderItemDTO implements Serializable {
     private int id;
     private int orderId;
     private int courseId;
