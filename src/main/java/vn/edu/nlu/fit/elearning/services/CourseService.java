@@ -60,19 +60,19 @@ public class CourseService {
         return Math.round(result * 10.0) / 10.0;
     }
 
-    public List<Course> getThreeCoursesWereLiked() {
+    public List<CourseCardDto> getThreeCoursesWereLiked() {
         return cd.findThreeCoursesWereLiked();
     }
 
-    public List<Course> getSixCoursesMostPopular() {
+    public List<CourseCardDto> getSixCoursesMostPopular() {
         return cd.findSixCoursesMostPopular();
     }
 
-    public Course getCoursesMostPopular() {
+    public CourseCardDto getCoursesMostPopular() {
         return cd.findCourseMostPopular();
     }
 
-    public List<Course> getSixCoursesLast() {
+    public List<CourseCardDto> getSixCoursesLast() {
         return cd.findSixCoursesLast();
     }
 

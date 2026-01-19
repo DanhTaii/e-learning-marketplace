@@ -13,7 +13,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css?v=3">
-    <link rel="stylesheet" href="assets/css/home.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.0.5">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -58,7 +58,7 @@
                                             <div class="content__rate content__rate-3">
                                                 <div class="rate__icon"><i
                                                         class="text-medium fa-regular fa-star"></i></div>
-                                                <div class="text-medium rate__number">5</div>
+                                                <div class="text-medium rate__number">${courseMostPopular.avgRating}</div>
                                             </div>
                                         </div>
                                         <div class="content__quick-info for-fix">
@@ -70,7 +70,7 @@
                                             <div class="quick-info__users">
                                                 <div class="users__icon icon"><i
                                                         class="text-medium fa-solid fa-users"></i></div>
-                                                <div class="users__text text-medium">Số lượng học viên</div>
+                                                <div class="users__text text-medium">${courseMostPopular.studentCount}</div>
                                             </div>
                                             <div class="quick-info__time">
                                                 <div class="time__icon icon"><i
@@ -109,7 +109,7 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <div class="text-medium rate__number">5</div>
+                                                            <div class="text-medium rate__number">${c.avgRating}</div>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -122,7 +122,7 @@
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">Số lượng học viên</div>
+                                                            <div class="users__text text-medium">${c.studentCount}</div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
@@ -144,13 +144,12 @@
 
                                         <div class="product-hover-info">
                                             <h4 class="hover-title">${c.title}</h4>
-                                            <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
 
                                                 <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
                                                 <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+<%--                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>--%>
                                                 </a>
                                             </div>
                                         </div>
@@ -175,7 +174,7 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <div class="text-medium rate__number">5</div>
+                                                            <div class="text-medium rate__number">${c.avgRating}</div>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -188,7 +187,7 @@
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">Số lượng học viên</div>
+                                                            <div class="users__text text-medium">${c.studentCount}</div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
@@ -210,13 +209,12 @@
 
                                         <div class="product-hover-info">
                                             <h4 class="hover-title">${c.title}</h4>
-                                            <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
 
                                                 <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
                                                 <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+<%--                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.wishlistId != null ? 'red' : 'var(--dark-blue)'};"></i>--%>
                                                 </a>
                                             </div>
                                         </div>
@@ -240,7 +238,7 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <div class="text-medium rate__number">5</div>
+                                                            <div class="text-medium rate__number">${c.avgRating}</div>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
@@ -253,7 +251,7 @@
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">Số lượng học viên</div>
+                                                            <div class="users__text text-medium">${c.studentCount}</div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
@@ -274,13 +272,12 @@
                                         </a>
                                         <div class="product-hover-info">
                                             <h4 class="hover-title">${c.title}</h4>
-                                            <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
 
                                                 <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
                                                 <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+<%--                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>--%>
                                                 </a>
                                             </div>
                                         </div>

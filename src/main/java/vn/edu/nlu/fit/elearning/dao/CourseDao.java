@@ -85,41 +85,53 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
     // 3 khóa học được yêu thích nhiều nhất
-    public List<Course> findThreeCoursesWereLiked() {
+    public List<CourseCardDto> findThreeCoursesWereLiked() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price,\n" +
-                    "COUNT(w.course_id) AS wishlist_count\n" +
+            return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours," +
+                    "c.author_name, c.price, c.discount_price, COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "COUNT(w.course_id) AS wishlist_count,\n" +
+                    "COUNT(DISTINCT e.id) AS student_count\n" +
                     "FROM Wishlist w JOIN Courses c ON w.course_id = c.id\n" +
                     "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id\n" +
                     "ORDER BY wishlist_count DESC\n" +
-                    "LIMIT 3;").mapToBean(Course.class).list();
+                    "LIMIT 3;").mapToBean(CourseCardDto.class).list();
         });
     }
 
     // 6 khóa học mới nhất
-    public List<Course> findSixCoursesLast() {
+    public List<CourseCardDto> findSixCoursesLast() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price\n" +
+            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, " +
+                    "c.discount_price, COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "COUNT(DISTINCT e.id) AS student_count\n" +
                     "FROM Courses c\n" +
                     "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id\n" +
                     "ORDER BY c.created_at DESC\n" +
-                    "LIMIT 6;").mapToBean(Course.class).list();
+                    "LIMIT 6;").mapToBean(CourseCardDto.class).list();
         });
     }
 
     // 6 khóa học phổ biến nhất
-    public List<Course> findSixCoursesMostPopular() {
+    public List<CourseCardDto> findSixCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
+                    "COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "COUNT(DISTINCT e.id) AS student_count\n" +
                     "FROM Courses c " +
                     "LEFT JOIN Lessons l ON l.course_id = c.id " +
+                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE " +
                     "GROUP BY c.id " +
-                    "LIMIT 6;").mapToBean(Course.class).list();
+                    "LIMIT 6;").mapToBean(CourseCardDto.class).list();
         });
     }
 
@@ -138,33 +150,41 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     // các khóa học phổ biến nhất
     public List<CourseCardDto> findCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
+                    "COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "COUNT(DISTINCT e.id) AS student_count\n" +
                     "FROM Courses c " +
                     "LEFT JOIN Lessons l ON l.course_id = c.id " +
+                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE " +
                     "GROUP BY c.id ").mapToBean(CourseCardDto.class).list();
         });
     }
 
     // 1 khóa học phổ biến nhất
-    public Course findCourseMostPopular() {
+    public CourseCardDto findCourseMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
                     "LEFT JOIN Lessons l ON l.course_id = c.id " +
                     "WHERE c.is_public = TRUE " +
                     "GROUP BY c.id " +
-                    "LIMIT 1;").mapToBean(Course.class).one();
+                    "LIMIT 1;").mapToBean(CourseCardDto.class).one();
         });
     }
 
     public List<CourseCardDto> findAllCoursesCard() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level, COALESCE(AVG(r.rating), rating) AS avgRating, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+            return handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, " +
+                    "c.thumbnail_url, c.level, COALESCE(AVG(r.rating), rating) AS avgRating, " +
+                    "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, " +
+                    "COUNT(DISTINCT e.id)\n" +
                     "FROM Courses c\n" +
                     "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
                     "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
                     "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
+                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id").mapToBean(CourseCardDto.class).list();
         });
@@ -190,8 +210,9 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
                     "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n" +
-                            "       COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
-                            "       COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+                            "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
+                            "COUNT(DISTINCT e.id) AS student_count,\n" +
+                            "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
                             "FROM Courses c\n" +
                             "JOIN Categories cate ON c.category_id = cate.id\n" +
                             "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
@@ -210,6 +231,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             return handle.createQuery(
                     "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n " +
                             "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
+                            "COUNT(DISTINCT e.id) AS student_count,\n" +
                             "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
                             "FROM Courses c\n " +
                             "JOIN Course_Tags ct ON c.id = ct.course_id\n " +
@@ -229,9 +251,10 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         String title = "%" + search + "%";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n" +
-                            "       COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
-                            "       COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level, \n" +
+                            "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
+                            "COUNT(DISTINCT e.id) AS student_count,\n" +
+                            "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
                             "FROM Courses c\n" +
                             "JOIN Categories cate ON c.category_id = cate.id\n" +
                             "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
