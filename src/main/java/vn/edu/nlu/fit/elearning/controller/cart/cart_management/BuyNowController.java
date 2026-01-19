@@ -36,7 +36,7 @@ public class BuyNowController extends HttpServlet {
         c.selectOnly(course.getId());
         session.setAttribute("cart", c);
 
-        response.sendRedirect(request.getContextPath() + "/show-payment");
+        response.sendRedirect(request.getContextPath() + "/payment");
 
     }
 

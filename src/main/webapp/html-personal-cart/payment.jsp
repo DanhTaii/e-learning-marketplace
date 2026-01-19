@@ -44,9 +44,9 @@
                             <h2 class="section-title">Chọn phương thức thanh toán</h2>
                             <div class="payment-options-grid">
 
-                                <c:forEach var="method" items="${paymentMethod}">
+                                <c:forEach var="method" items="${paymentMethod}" varStatus="status">
                                     <label class="payment-item">
-                                        <input type="radio" name="payment-method-id" value="${method.id}">
+                                        <input type="radio" name="payment-method-id" value="${method.id}"${status.first ? 'checked' : ''} >
 
                                         <div class="payment-item__content">
                                             <img src="${method.iconUrl}" alt="${method.name}">
@@ -133,7 +133,7 @@
 
 
                                     <div class="invoice__pay-btn header__button index-btn">
-                                        <button type="submit" class="button__btn pay-btn"><i
+                                        <button type="submit" id="pay-btn" class="button__btn pay-btn"><i
                                                 class="fa-solid fa-bag-shopping shop-icon"
                                                 style="color: #000000;"></i> Thanh toán
                                         </button>
