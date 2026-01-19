@@ -9,13 +9,12 @@ import vn.edu.nlu.fit.elearning.dto.TagDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
-import vn.edu.nlu.fit.elearning.model.Tag;
 import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CourseDetailController", value = "/course-detail")
+@WebServlet(name = "CourDetailController", value = "/course-detail")
 public class CourseDetailController extends HttpServlet {
 
     private CourseService cs;

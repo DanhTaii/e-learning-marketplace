@@ -123,8 +123,31 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
+    // các khóa học mới nhất
+    public List<CourseCardDto> findCoursesLast() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price\n" +
+                    "FROM Courses c\n" +
+                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "WHERE c.is_public = TRUE\n" +
+                    "GROUP BY c.id\n" +
+                    "ORDER BY c.created_at DESC").mapToBean(CourseCardDto.class).list();
+        });
+    }
+
+    // các khóa học phổ biến nhất
+    public List<CourseCardDto> findCoursesMostPopular() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
+                    "FROM Courses c " +
+                    "LEFT JOIN Lessons l ON l.course_id = c.id " +
+                    "WHERE c.is_public = TRUE " +
+                    "GROUP BY c.id ").mapToBean(CourseCardDto.class).list();
+        });
+    }
+
     // 1 khóa học phổ biến nhất
-    public Course findCoursesMostPopular() {
+    public Course findCourseMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
                     "FROM Courses c " +
@@ -271,10 +294,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                 sql.append(" AND (c.price - c.discount_price) >= 1500000");
             }
 
-            // lọc theo phổ biến
-            if ("true".equals(popular)) {
-                sql.append(" AND c.is_featured = TRUE");
-            }
 
             sql.append(" GROUP BY c.id, cate.id");
 
@@ -359,9 +378,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                 sql.append(" AND (c.price - c.discount_price) < 1500000");
             } else if ("over1500".equals(priceRange)) {
                 sql.append(" AND (c.price - c.discount_price) >= 1500000");
-            }
-            if ("true".equals(popular)) {
-                sql.append(" AND c.is_featured = TRUE");
             }
 
             sql.append(" GROUP BY c.id ");

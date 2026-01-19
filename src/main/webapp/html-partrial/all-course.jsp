@@ -218,25 +218,35 @@
                         <span>Sắp xếp theo:</span>
                     </div>
                     <div class="filter__button">
-                        <button class="btn">Phổ biến</button>
+                        <button class="btn">
+                            <a class="turn-page text-big" href="pagination-all-courses?popular=true&page=1">Phổ biến</a>
+                        </button>
                     </div>
                     <div class="filter__button">
-                        <button class="btn">Mới nhất</button>
+                        <button class="btn">
+                            <a class="turn-page text-big" href="pagination-all-courses?newest=true&page=1">Mới nhất</a>
+                        </button>
                     </div>
                     <div class="filter__price">
                         <div class="price__text">
-                            <a href="">Giá</a>
+                            <span class="text-big">Giá</span>
                         </div>
                         <div class="price__icon">
                             <i class="fa-solid fa-angle-down"></i>
                         </div>
                         <div class="price__list-box">
                             <ul class="price__list">
-                                <li value="" class="price__list-item">Giá thấp đến cao</li>
-                                <li value="" class="price__list-item">Giá cao đến thấp</li>
+                                <li class="price__list-item">
+                                    <a class="turn-page text-big" href="pagination-all-courses?sortPrice=asc&page=1">Giá thấp đến cao</a>
+                                </li>
+                                <li class="price__list-item">
+                                    <a class="turn-page text-big" href="pagination-all-courses?sortPrice=desc&page=1">Giá cao đến thấp</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
+
+                    <!-- Danh mục -->
                     <div class="filter__category">
                         <div class="category__text">Tất cả khóa học</div>
                         <div class="category__icon">
@@ -244,16 +254,17 @@
                         </div>
                         <div class="category__list-box">
                             <ul class="category__list">
-                                <li value="" class="category__list-item">Tất cả khóa học</li>
-                                <li value="" class="category__list-item">Giao tiếp & Thuyết trình</li>
-                                <li value="" class="category__list-item">Năng suất & Quản lý thời gian</li>
-                                <li value="" class="category__list-item">Tư duy phản biện & Sáng tạo</li>
-                                <li value="" class="category__list-item">Trí tuệ cảm xúc (EQ)</li>
-                                <li value="" class="category__list-item">Đàm phán & Thuyết phục</li>
-                                <li value="" class="category__list-item">Phát triển bản thân</li>
-                                <li value="" class="category__list-item">Kỹ năng học tập & Tự học</li>
-                                <li value="" class="category__list-item">Kỹ năng công sở & Networking</li>
-                                <li value="" class="category__list-item">Sức khỏe tinh thần & Chống burnout</li>
+                                <!-- Mục cố định: Tất cả khóa học -->
+                                <li class="category__list-item">
+                                    <a class="turn-page text-big" href="pagination-all-courses?page=1">Tất cả khóa học</a>
+                                </li>
+                                <c:forEach var="cate" items="${categories}">
+                                    <li class="category__list-item">
+                                        <a class="turn-page text-big" href="pagination-all-courses?category=${cate.id}&page=1">
+                                                ${cate.name}
+                                        </a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
