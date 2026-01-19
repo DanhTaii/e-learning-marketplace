@@ -505,7 +505,6 @@ img {
 .container-2__option {
     justify-content: space-between;
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     /*gap: 2rem;*/
 }

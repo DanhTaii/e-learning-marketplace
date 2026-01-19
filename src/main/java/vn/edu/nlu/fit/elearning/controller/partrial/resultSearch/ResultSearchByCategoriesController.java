@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.TagService;
 
 import java.io.IOException;
 import java.util.List;
@@ -86,6 +87,13 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         if (popular != null) paginationUrl.append("&popular=").append(popular);
 
         request.setAttribute("paginationUrl", paginationUrl.toString());
+
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/html-partrial/result-search.jsp").forward(request, response);
     }

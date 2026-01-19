@@ -12,7 +12,7 @@
     <title>Soft Skill</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="assets/css/default.css?v=3">
     <link rel="stylesheet" href="assets/css/home.css?v=1.0.2">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -100,18 +100,35 @@
                                         <a href="course-detail?id=${c.id}" class="turn-page">
                                             <div class="product__small-advertisement">
                                                 <div class="small-advertisement__image">
-                                                    <img src="${c.thumbnailUrl}" alt="${c.title}" class="img-2">
+                                                    <img src="${c.thumbnailUrl}"
+                                                         alt="Từ Chối Mà Vẫn Được Yêu Quý" class="img-2">
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
-                                                        <div class="content__author-name text-medium">${c.authorName}</div>
-                                                        <div class="content__rate">
-                                                            <i class="fa-regular fa-star"></i>
-                                                            <span class="rate__number">5</span>
+                                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                        <div class="content__rate content__rate-2">
+                                                            <div class="rate__icon"><i
+                                                                    class="text-medium fa-regular fa-star"></i></div>
+                                                            <div class="text-medium rate__number">5</div>
                                                         </div>
                                                     </div>
                                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
                                                     <div class="content__quick-info">
+                                                        <div class="quick-info__level">
+                                                            <div class="level__icon icon"><i
+                                                                    class="text-medium fa-solid fa-signal"></i></div>
+                                                            <div class="level__text text-medium">${c.level}</div>
+                                                        </div>
+                                                        <div class="quick-info__users">
+                                                            <div class="users__icon icon"><i
+                                                                    class="text-medium fa-solid fa-users"></i></div>
+                                                            <div class="users__text text-medium">Số lượng học viên</div>
+                                                        </div>
+                                                        <div class="quick-info__time">
+                                                            <div class="time__icon icon"><i
+                                                                    class="text-medium fa-regular fa-clock"></i></div>
+                                                            <div class="time__text text text-medium">${c.durationHours}h</div>
+                                                        </div>
                                                     </div>
                                                     <div class="content__price">
                                                         <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
@@ -130,7 +147,7 @@
                                             <div class="hover-goals">${c.goals != null ? c.goals : 'Khóa học kỹ năng mềm chuyên sâu...'}</div>
                                             <div class="hover-actions">
 
-                                                    <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
+                                                <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
                                                 <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
                                                     <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
@@ -198,9 +215,9 @@
 
                                                 <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
-                                                <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </button>
+                                                <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
+                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -262,9 +279,9 @@
 
                                                 <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
 
-                                                <button class="btn-wishlist" onclick="addToWishlist(${c.id})">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </button>
+                                                <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
+                                                    <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

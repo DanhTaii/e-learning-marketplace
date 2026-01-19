@@ -75,7 +75,7 @@
                     <div class="search__icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <form action="result-search/by-title" method="get">
+                    <form action="result-search/by-title" method="get" style="display: flex; flex: 1;">
                         <div class="search__input">
                             <input type="text" class="input__text text-medium" name="title"
                                    placeholder="Tìm kiếm khóa học, kỹ năng,...">
@@ -170,12 +170,12 @@
                 </c:if>
                 <c:if test="${not loginSession}">
                     <div class="header__button-box">
-                        <a href="html-authentication/sign-up.jsp" class="turn-page">
+                        <a href="sign-up" class="turn-page">
                             <div class="header__button sign-in-box">
                                 <button class="button__btn text-header sign-in">Đăng ký</button>
                             </div>
                         </a>
-                        <a href="html-authentication/sign-in.jsp" class="turn-page">
+                        <a href="sign-in" class="turn-page">
                             <div class="header__button sign-up-box">
                                 <button class="button__btn text-header sign-up">Đăng nhập</button>
                             </div>

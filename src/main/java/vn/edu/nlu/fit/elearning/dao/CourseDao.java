@@ -257,7 +257,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
         return getJdbi().withHandle(handle -> {
             StringBuilder sql = new StringBuilder(
-                    "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, " +
+                    "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.author_name, " +
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
@@ -270,7 +270,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "WHERE c.is_public = TRUE "
             );
 
-            // Copy toàn bộ điều kiện lọc từ method filterCourses cũ của bạn
             if (categoryId != null) {
                 sql.append(" AND cate.id = :idCategory");
             }

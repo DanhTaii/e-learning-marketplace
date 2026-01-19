@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/result-search.css">
-    <link rel="stylesheet" href="assets/css/card.css">
+    <link rel="stylesheet" href="assets/css/card.css?v=1.0.2">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -57,7 +57,6 @@
                                             <input type="radio" class="type__checkbox text-big" name="sortPrice" value="desc">
                                             <div class="type__text text-big">Cao đến thấp</div>
                                         </div>
-                                        <div class="content__number text-big">30</div>
                                     </div>
 
                                     <div class="box__content">
@@ -65,7 +64,6 @@
                                             <input type="radio" class="type__checkbox text-big" name="sortPrice" value="asc">
                                             <div class="type__text text-big">Thấp đến cao</div>
                                         </div>
-                                        <div class="content__number text-big">12</div>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +76,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
                                             <div class="type__text text-big">Người mới</div>
                                         </div>
-                                        <div class="content__number text-big">18</div>
                                     </div>
 
                                     <div class="box__content">
@@ -86,7 +83,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="intermediate">
                                             <div class="type__text text-big">Trung cấp</div>
                                         </div>
-                                        <div class="content__number text-big">25</div>
                                     </div>
 
                                     <div class="box__content">
@@ -94,7 +90,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="advanced">
                                             <div class="type__text text-big">Nâng cao</div>
                                         </div>
-                                        <div class="content__number text-big">10</div>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +102,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under500">
                                             <div class="type__text text-big">Dưới 500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">11</div>
                                     </div>
 
                                     <div class="box__content">
@@ -115,7 +109,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under1500">
                                             <div class="type__text text-big">Dưới 1.500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
 
                                     <div class="box__content">
@@ -123,7 +116,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="over1500">
                                             <div class="type__text text-big">Trên 1.500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">22</div>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +130,6 @@
                                                                                       style="color: var(--yellow-color)"></i>
                                             </div>
                                         </div>
-                                        <div class="content__number text-big">15</div>
                                     </div>
 
                                     <div class="box__content">
@@ -148,7 +139,6 @@
                                                                                       style="color: var(--yellow-color)"></i>
                                             </div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +151,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="short">
                                             <div class="type__text text-big">Dưới 5 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">15</div>
                                     </div>
 
                                     <div class="box__content">
@@ -169,7 +158,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="medium">
                                             <div class="type__text text-big">5 - 10 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
 
                                     <div class="box__content">
@@ -177,7 +165,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="long">
                                             <div class="type__text text-big">Trên 10 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">22</div>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +199,6 @@
                                             <input type="radio" class="type__checkbox text-big" name="sortPrice" value="desc">
                                             <div class="type__text text-big">Cao đến thấp</div>
                                         </div>
-                                        <div class="content__number text-big">30</div>
                                     </div>
 
                                     <div class="box__content">
@@ -220,7 +206,6 @@
                                             <input type="radio" class="type__checkbox text-big" name="sortPrice" value="asc">
                                             <div class="type__text text-big">Thấp đến cao</div>
                                         </div>
-                                        <div class="content__number text-big">12</div>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +218,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
                                             <div class="type__text text-big">Người mới</div>
                                         </div>
-                                        <div class="content__number text-big">18</div>
                                     </div>
 
                                     <div class="box__content">
@@ -241,7 +225,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="intermediate">
                                             <div class="type__text text-big">Trung cấp</div>
                                         </div>
-                                        <div class="content__number text-big">25</div>
                                     </div>
 
                                     <div class="box__content">
@@ -249,7 +232,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="advanced">
                                             <div class="type__text text-big">Nâng cao</div>
                                         </div>
-                                        <div class="content__number text-big">10</div>
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +244,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under500">
                                             <div class="type__text text-big">Dưới 500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">11</div>
                                     </div>
 
                                     <div class="box__content">
@@ -270,7 +251,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under1500">
                                             <div class="type__text text-big">Dưới 1.500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
 
                                     <div class="box__content">
@@ -278,7 +258,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="over1500">
                                             <div class="type__text text-big">Trên 1.500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">22</div>
                                     </div>
                                 </div>
                             </div>
@@ -293,7 +272,6 @@
                                                                                       style="color: var(--yellow-color)"></i>
                                             </div>
                                         </div>
-                                        <div class="content__number text-big">15</div>
                                     </div>
 
                                     <div class="box__content">
@@ -303,7 +281,6 @@
                                                                                       style="color: var(--yellow-color)"></i>
                                             </div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +293,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="short">
                                             <div class="type__text text-big">Dưới 5 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">15</div>
                                     </div>
 
                                     <div class="box__content">
@@ -324,7 +300,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="medium">
                                             <div class="type__text text-big">5 - 10 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
 
                                     <div class="box__content">
@@ -332,7 +307,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="long">
                                             <div class="type__text text-big">Trên 10 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">22</div>
                                     </div>
                                 </div>
                             </div>
@@ -344,7 +318,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="popular" value="true">
                                             <div class="type__text text-big">Phổ biến</div>
                                         </div>
-                                        <div class="content__number text-big">10</div>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +340,6 @@
                                             <input type="radio" class="type__checkbox text-big" name="sortPrice" value="desc">
                                             <div class="type__text text-big">Cao đến thấp</div>
                                         </div>
-                                        <div class="content__number text-big">30</div>
                                     </div>
 
                                     <div class="box__content">
@@ -375,7 +347,6 @@
                                             <input type="radio" class="type__checkbox text-big" name="sortPrice" value="asc">
                                             <div class="type__text text-big">Thấp đến cao</div>
                                         </div>
-                                        <div class="content__number text-big">12</div>
                                     </div>
                                 </div>
                             </div>
@@ -388,7 +359,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
                                             <div class="type__text text-big">Người mới</div>
                                         </div>
-                                        <div class="content__number text-big">18</div>
                                     </div>
 
                                     <div class="box__content">
@@ -396,7 +366,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="intermediate">
                                             <div class="type__text text-big">Trung cấp</div>
                                         </div>
-                                        <div class="content__number text-big">25</div>
                                     </div>
 
                                     <div class="box__content">
@@ -404,7 +373,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="advanced">
                                             <div class="type__text text-big">Nâng cao</div>
                                         </div>
-                                        <div class="content__number text-big">10</div>
                                     </div>
                                 </div>
                             </div>
@@ -417,7 +385,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under500">
                                             <div class="type__text text-big">Dưới 500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">11</div>
                                     </div>
 
                                     <div class="box__content">
@@ -425,7 +392,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="under1500">
                                             <div class="type__text text-big">Dưới 1.500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
 
                                     <div class="box__content">
@@ -433,7 +399,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="priceRange" value="over1500">
                                             <div class="type__text text-big">Trên 1.500.000đ</div>
                                         </div>
-                                        <div class="content__number text-big">22</div>
                                     </div>
                                 </div>
                             </div>
@@ -448,7 +413,6 @@
                                                                                       style="color: var(--yellow-color)"></i>
                                             </div>
                                         </div>
-                                        <div class="content__number text-big">15</div>
                                     </div>
 
                                     <div class="box__content">
@@ -458,7 +422,6 @@
                                                                                       style="color: var(--yellow-color)"></i>
                                             </div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
                                 </div>
                             </div>
@@ -471,7 +434,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="short">
                                             <div class="type__text text-big">Dưới 5 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">15</div>
                                     </div>
 
                                     <div class="box__content">
@@ -479,7 +441,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="medium">
                                             <div class="type__text text-big">5 - 10 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">28</div>
                                     </div>
 
                                     <div class="box__content">
@@ -487,7 +448,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="duration" value="long">
                                             <div class="type__text text-big">Trên 10 giờ</div>
                                         </div>
-                                        <div class="content__number text-big">22</div>
                                     </div>
                                 </div>
                             </div>
@@ -499,7 +459,6 @@
                                             <input type="checkbox" class="type__checkbox text-big" name="popular" value="true">
                                             <div class="type__text text-big">Phổ biến</div>
                                         </div>
-                                        <div class="content__number text-big">10</div>
                                     </div>
                                 </div>
                             </div>
@@ -550,9 +509,6 @@
                                             <div class="content__price">
                                                 <div class="price__new">${c.price - c.discountPrice}đ</div>
                                                 <div class="price__old">${c.price}đ</div>
-                                                <div class="quick-info__save"><i
-                                                        class="quick-info__save__icon fa-solid fa-heart"></i>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

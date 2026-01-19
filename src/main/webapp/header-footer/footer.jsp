@@ -96,10 +96,10 @@
                 </ul>
             </div>
             <div class="grid">
-                <p class="ul__text text-medium">Chịu trách nhiệm quản lý nội dung: Nhóm 20</p>
+                <p class="ul__text text-medium">Chịu trách nhiệm quản lý nội dung: Nhóm 57</p>
             </div>
             <div class="grid">
-                <p class="ul__text text-medium">© 2025 - Bản quyền thuộc về Nhóm 21</p>
+                <p class="ul__text text-medium">© 2025 - Bản quyền thuộc về Nhóm 57</p>
             </div>
         </div>
     </footer>
