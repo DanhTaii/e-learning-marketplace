@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Course Content</title>
     <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/course-content.css">
     <!-- Normalize CSS -->

@@ -10,6 +10,7 @@
     <title>Result search</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/result-search.css">
     <link rel="stylesheet" href="assets/css/card.css">
     <!-- Normalize CSS -->

@@ -9,6 +9,7 @@
     <title>Reset password</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/reset-password.css">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">

@@ -9,6 +9,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/receipt.css">
 </head>
 
