@@ -3,13 +3,12 @@ package vn.edu.nlu.fit.elearning.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.dto.CourseRankingDto;
+import vn.edu.nlu.fit.elearning.dto.RevenueDto;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.User;
-import vn.edu.nlu.fit.elearning.services.CategoryService;
-import vn.edu.nlu.fit.elearning.services.CourseService;
-import vn.edu.nlu.fit.elearning.services.OrderService;
-import vn.edu.nlu.fit.elearning.services.UserService;
+import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +18,7 @@ public class DashboardController extends HttpServlet {
     private UserService userService;
     private OrderService orderService;
     private CourseService courseService;
+    private DashboardService dashboardService;
 
     @Override
     public void init() throws ServletException {
@@ -26,6 +26,7 @@ public class DashboardController extends HttpServlet {
         this.userService = new UserService();
         this.orderService = new OrderService();
         this.courseService = new CourseService();
+        this.dashboardService = new DashboardService();
     }
 
     @Override
@@ -34,13 +35,15 @@ public class DashboardController extends HttpServlet {
         List<User> userTotal = userService.getAllUsers();
         List<Course> courseTotal = courseService.getAllCourses();
         double revenueSum = orderService.getRevenueTotal();
-        List<Course> popularCourses = courseService.getSixCoursesMostPopular();
+        List<CourseRankingDto> popularCourses = dashboardService.getTopSixCourses();
+        List<RevenueDto> revenues = dashboardService.getRevenueChartData();
 
         request.setAttribute("userCount", userTotal.size());
         request.setAttribute("orderCount", orderTotal.size());
         request.setAttribute("courseCount", courseTotal.size());
         request.setAttribute("revenueTotal", revenueSum);
         request.setAttribute("popularCourses", popularCourses);
+        request.setAttribute("chartData", revenues);
 
         request.setAttribute("currentPage", "dashboard");
         request.getRequestDispatcher("/html-admin/dashboard.jsp").forward(request, response);

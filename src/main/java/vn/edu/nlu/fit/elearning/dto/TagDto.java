@@ -2,9 +2,10 @@ package vn.edu.nlu.fit.elearning.dto;
 
 import vn.edu.nlu.fit.elearning.enums.BasicStatus;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class TagDto {
+public class TagDto implements Serializable {
     private int id;
     private String name;
     private String slug;

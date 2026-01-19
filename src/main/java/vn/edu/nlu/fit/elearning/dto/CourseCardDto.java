@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.dto;
 
-public class CourseCardDto {
+import java.io.Serializable;
+
+public class CourseCardDto implements Serializable {
 
     private int id;
     private String title;

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/dashboard.css">
+    <link rel="stylesheet" href="assets/css-admin/dashboard.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -197,20 +197,18 @@
                                     </div>
 
                                     <div class="bar-chart__bar">
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 70%">
-                                            <span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 90%">
-                                            <span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 60%">
-                                            <span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 10%">
-                                            <span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 30%">
-                                            <span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 40%">
-                                            <span>1.8tr</span></div>
-                                        <div class="column-chart column-chart__1" data-label="6/11" style="height: 80%">
-                                            <span>3.6tr</span></div>
+                                        <c:forEach items="${chartData}" var="item">
+                                            <div class="bar-item">
+                                                <div class="column-chart"
+                                                     data-label="${item.orderDate}"
+                                                     style="height: ${item.heightPercent}%">
+                                                    <span>
+                                                        <fmt:formatNumber value="${item.revenueMillion}" maxFractionDigits="1"/>tr
+                                                    </span>
+                                                </div>
+                                                <span class="bar-label">${item.orderDate}</span>
+                                            </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -234,8 +232,8 @@
                                     <c:forEach var="c" items="${popularCourses}" varStatus="loop">
                                         <tr>
                                             <td>${loop.index + 1}</td>
-                                            <td data-full-title="${c.title}">${c.title}</td>
-                                            <td>2100</td>
+                                            <td>${c.title}</td>
+                                            <td>${c.studentCount}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

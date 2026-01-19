@@ -1,8 +1,9 @@
 package vn.edu.nlu.fit.elearning.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ReviewDto {
+public class ReviewDto implements Serializable {
     private int id;
     private int userId;
     private int courseId;
