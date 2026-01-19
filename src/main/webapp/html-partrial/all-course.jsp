@@ -7,6 +7,7 @@
     <title>All Classes</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/all-course.css">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">

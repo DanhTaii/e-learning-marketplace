@@ -11,8 +11,7 @@
     <base href="${pageContext.request.contextPath}/">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <!-- Font Awesome -->
-
+    <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/course-detail.css?v=1.0.4">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
@@ -182,38 +181,11 @@
                                 <ul>
                                     <li class="text-li style__text">
                                         <div class="li-skill__container">
-                                            <div class="li-skill__container-item icon__skill"><i
-                                                    class="fa-duotone fa-solid fa-check"></i></div>
-                                            <div class="li-skill__container-item content__skill">Bạn sẽ biết cách giải
-                                                quyết các vấn đề của cá
-                                                nhân, của tổ chức, và tự vạch ra triết lý sống riêng
+                                            <div class="li-skill__container-item icon__skill">
+                                                <i class="fa-duotone fa-solid fa-check"></i>
                                             </div>
+                                            <div class="li-skill__container-item content__skill">${c.goals}</div>
                                         </div>
-                                    </li>
-                                    <li class="text-li  style__text">
-                                        <div class="li-skill__container">
-                                            <div class="li-skill__container-item icon__skill"><i
-                                                    class="fa-duotone fa-solid fa-check"></i></div>
-                                            <div class="li-skill__container-item content__skill">Biết cách thảo luận có
-                                                tính xây dựng và giải
-                                                quyết được những vấn đề cụ thể
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="section-2__list">
-                                <ul>
-                                    <li class="text-li style__text">
-                                        <div class="li-skill__container">
-                                            <div class="li-skill__container-item icon__skill"><i
-                                                    class="fa-duotone fa-solid fa-check"></i></div>
-                                            <div class="li-skill__container-item content__skill">Độc lập trong suy nghĩ,
-                                                hành động, không bị tác
-                                                động xấu bởi thông tin thiếu chính xác
-                                            </div>
-                                        </div>
-                                        <span></span>
                                     </li>
                                 </ul>
                             </div>
@@ -227,7 +199,7 @@
                         </div>
                         <br>
                         <div class="section-6__content text-big font__sub-title">
-                            ${c.goals}
+
                         </div>
                         <br>
                         <div class="section-6__content text-big font__sub-title">
