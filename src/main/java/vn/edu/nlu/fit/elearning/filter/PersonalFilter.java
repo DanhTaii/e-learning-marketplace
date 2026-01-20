@@ -25,7 +25,6 @@ public class PersonalFilter implements Filter {
         if (user != null ) {
             chain.doFilter(request, response);
         }else {
-            // Nếu không phải Admin, chặn lại và đá về trang Login hoặc trang Error
             req.setAttribute("error", "Vui lòng đăng nhập!");
             req.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(req, res);
         }
