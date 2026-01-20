@@ -14,7 +14,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     @Override
     public int create(Order entity) {
-        String sql = "INSERT INTO Orders (order_code, user_id, payment_method_id, total_amount, discount_amount, final_amount, status)\n" +
+        String sql = "INSERT INTO orders (order_code, user_id, payment_method_id, total_amount, discount_amount, final_amount, status)\n" +
                 "VALUES (:orderCode, :userId, :paymentMethodId, :totalAmount, :discountAmount, :finalAmount, :status)";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
@@ -30,7 +30,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
                 "o.paid_at, o.created_at, o.updated_at " +
-                "FROM Orders o " +
+                "FROM orders o " +
                 "WHERE o.id = :id";
 
         return getJdbi().withHandle(handle ->
@@ -59,9 +59,9 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     public Order findOrderPending(Integer userId) {
         String sql = "SELECT o.*, pm.name AS payment_method_name, u.first_name, u.last_name, u.email AS user_email\n" +
-                "FROM Orders o\n" +
-                "LEFT JOIN Payment_Methods pm ON o.payment_method_id = pm.id\n" +
-                "LEFT JOIN Users u ON o.user_id = u.id\n" +
+                "FROM orders o\n" +
+                "LEFT JOIN payment_methods pm ON o.payment_method_id = pm.id\n" +
+                "LEFT JOIN users u ON o.user_id = u.id\n" +
                 "WHERE o.user_id = :userId AND o.status = 'PENDING'\n" +
                 "ORDER BY o.created_at DESC\n" +
                 "LIMIT 1";
@@ -87,8 +87,8 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
                 "o.created_at AS createdAt, " +
                 "o.updated_at AS updatedAt, " +
                 "u.username AS username " +  // <-- Thêm cột username từ Users
-                "FROM Orders o " +
-                "LEFT JOIN Users u ON o.user_id = u.id " +
+                "FROM orders o " +
+                "LEFT JOIN users u ON o.user_id = u.id " +
                 "ORDER BY o.created_at DESC";
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
@@ -100,7 +100,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     @Override
     public int update(Order entity) {
-        String sql = "UPDATE Orders\n" +
+        String sql = "UPDATE orders\n" +
                 "SET order_code = :orderCode,\n" +
                 "    user_id = :userId,\n" +
                 "    payment_method_id = :paymentMethodId,\n" +
@@ -119,7 +119,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM Orders WHERE id = :id";
+        String sql = "DELETE FROM orders WHERE id = :id";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind("id", id)
@@ -129,7 +129,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
 
     public double calculateRevenueTotal() {
         String sql = "SELECT COALESCE(SUM(final_amount), 0)\n" +
-                "FROM Orders\n" +
+                "FROM orders\n" +
                 "WHERE status = 'PAID' AND DATE(created_at) = CURDATE()";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(sql)
@@ -152,8 +152,8 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
                 .append("o.created_at AS createdAt, ")
                 .append("o.updated_at AS updatedAt, ")
                 .append("u.username AS username ")  // Lấy username để hiển thị
-                .append("FROM Orders o ")
-                .append("LEFT JOIN Users u ON o.user_id = u.id ")
+                .append("FROM orders o ")
+                .append("LEFT JOIN users u ON o.user_id = u.id ")
                 .append("WHERE 1=1 ");
 
         if (orderCode != null && !orderCode.trim().isEmpty()) {
@@ -195,8 +195,8 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
                 "o.paid_at, o.created_at, o.updated_at, u.username AS userName " +
-                "FROM Orders o " +
-                "LEFT JOIN Users u ON o.user_id = u.id " +
+                "FROM orders o " +
+                "LEFT JOIN users u ON o.user_id = u.id " +
                 "ORDER BY o.created_at DESC";
 
         return getJdbi().withHandle(handle ->
@@ -229,9 +229,9 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
                 "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
                 "o.paid_at, o.created_at, o.updated_at, " +
                 "u.username AS userName, pm.name AS paymentName " +
-                "FROM Orders o " +
-                "LEFT JOIN Users u ON o.user_id = u.id " +
-                "LEFT JOIN Payment_Methods pm ON o.payment_method_id = pm.id " +
+                "FROM orders o " +
+                "LEFT JOIN users u ON o.user_id = u.id " +
+                "LEFT JOIN payment_methods pm ON o.payment_method_id = pm.id " +
                 "WHERE 1=1 " +
                 (orderCode != null && !orderCode.isEmpty() ? " AND o.order_code LIKE :orderCode " : "") +
                 (userName != null && !userName.isEmpty() ? " AND u.username LIKE :userName " : "") +
@@ -270,7 +270,7 @@ public class OrderDao extends BaseDao implements BaseCrudDao<Order, Integer> {
     public List<OrderDTO> getOrderHistoryByUserId(int userId) {
         String sql = "SELECT o.id, o.order_code, o.total_amount, o.discount_amount, o.final_amount, " +
                 "o.status, o.created_at, pm.name AS paymentMethodName " +
-                "FROM Orders o " +
+                "FROM orders o " +
                 "JOIN payment_methods pm ON o.payment_method_id = pm.id " +
                 "WHERE o.user_id = :userId " +
                 "ORDER BY o.created_at DESC";

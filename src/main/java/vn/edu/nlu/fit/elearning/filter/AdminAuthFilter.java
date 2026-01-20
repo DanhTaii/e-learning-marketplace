@@ -28,9 +28,7 @@ public class AdminAuthFilter implements Filter {
         if (user != null && "admin".equalsIgnoreCase(user.getRole())) {
             chain.doFilter(request, response);
         }else {
-            // Nếu không phải Admin, chặn lại và đá về trang Login hoặc trang Error
-            req.setAttribute("error", "Bạn không có quyền truy cập vào khu vực này!");
-            req.getRequestDispatcher("/index").forward(req, res);
+            res.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
     }
 }

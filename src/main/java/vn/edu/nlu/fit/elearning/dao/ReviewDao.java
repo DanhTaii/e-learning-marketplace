@@ -11,7 +11,7 @@ public class ReviewDao extends BaseDao{
     public List<ReviewDto> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT r.id AS review_id, r.user_id, u.first_name, u.last_name, u.email, r.course_id, c.title AS course_title, r.rating, r.comment, r.created_at\n" +
-                    "FROM Reviews r\n" +
+                    "FROM reviews r\n" +
                     "JOIN Users u ON r.user_id = u.id\n" +
                     "JOIN Courses c ON r.course_id = c.id\n" +
                     "ORDER BY r.created_at DESC;\n").mapToBean(ReviewDto.class).list();
@@ -32,7 +32,7 @@ public class ReviewDao extends BaseDao{
             return handle.createQuery("SELECT r.id, r.user_id, r.course_id, r.rating,\n" +
                     "r.comment,r.created_at,\n" +
                     "u.username AS user_name, u.avatar_url AS thumbnail_url\n" +
-                    "FROM Reviews r\n" +
+                    "FROM reviews r\n" +
                     "JOIN Users u ON r.user_id = u.id\n" +
                     "WHERE r.course_id = :course_id\n" +
                     "ORDER BY r.created_at DESC;").bind("course_id",courseId).mapToBean(ReviewDto.class).list();

@@ -59,7 +59,7 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
         });
     }
     public int createEnrollment(Enrollment entity) {
-        String sql = "INSERT INTO Enrollments (user_id, course_id, order_id) " +
+        String sql = "INSERT INTO enrollments (user_id, course_id, order_id) " +
                 "VALUES (:userId, :courseId, :orderId)";
         return getJdbi().withHandle(handle ->
                 handle.createUpdate(sql)
@@ -75,8 +75,8 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
                             "    (SELECT IFNULL(SUM(l.duration_minutes), 0) / 60 FROM Lessons l WHERE l.course_id = c.id) AS durationHours,\n" +
                             "    (SELECT COUNT(*) FROM Enrollments e2 WHERE e2.course_id = c.id) AS studentCount,\n" +
                             "    (SELECT COUNT(*) FROM Reviews r WHERE r.course_id = c.id) AS reviewCount\n" +
-                            "FROM Enrollments e\n" +
-                            "JOIN Courses c ON e.course_id = c.id\n" +
+                            "FROM enrollments e\n" +
+                            "JOIN courses c ON e.course_id = c.id\n" +
                             "WHERE e.user_id = :userId")
                     .bind("userId", userId)
                     .mapToBean(EnrollmentDetailDto.class).findFirst().orElse(null);

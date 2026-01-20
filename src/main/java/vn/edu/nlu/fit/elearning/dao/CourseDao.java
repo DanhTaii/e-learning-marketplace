@@ -17,7 +17,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     @Override
     public int create(Course entity) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO Courses( id, title, subtitle, level, goals, description, price, discount_price, thumbnail_url)\n" +
+            return handle.createUpdate("INSERT INTO courses( id, title, subtitle, level, goals, description, price, discount_price, thumbnail_url)\n" +
                             "VALUES (:id, :title,  :subtitle,  :level,  :goals ,  :description, :price, :discountPrice, :thumbnailUrl)")
                     .bindBean(entity)
                     .execute();
@@ -76,8 +76,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<Course> findAllCourses() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, SUM(l.duration_minutes) / 60.0 AS duration_hours, c.author_name, c.discount_price, c.price, c.created_at, c.is_public\n" +
-                    "FROM Courses c\n" +
-                    "LEFT JOIN Lessons l ON c.id = l.course_id\n" +
+                    "FROM courses c\n" +
+                    "LEFT JOIN lessons l ON c.id = l.course_id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id\n" +
                     "ORDER BY c.id DESC;").mapToBean(Course.class).list();
@@ -88,13 +88,13 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findThreeCoursesWereLiked() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours," +
-                    "c.author_name, c.price, c.discount_price, COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "c.author_name, c.price, c.discount_price, AVG(r.rating) AS avgRating,\n" +
                     "COUNT(w.course_id) AS wishlist_count,\n" +
                     "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM Wishlist w JOIN Courses c ON w.course_id = c.id\n" +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
-                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                    "FROM wishlist w JOIN courses c ON w.course_id = c.id\n" +
+                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id\n" +
                     "ORDER BY wishlist_count DESC\n" +
@@ -106,12 +106,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findSixCoursesLast() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, " +
-                    "c.discount_price, COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "c.discount_price, AVG(r.rating) AS avgRating,\n" +
                     "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM Courses c\n" +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
-                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                    "FROM courses c\n" +
+                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id\n" +
                     "ORDER BY c.created_at DESC\n" +
@@ -123,12 +123,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findSixCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
-                    "COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "AVG(r.rating) as avgRating,\n" +
                     "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM Courses c " +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id " +
-                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                    "FROM courses c " +
+                    "LEFT JOIN lessons l ON l.course_id = c.id " +
+                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE " +
                     "GROUP BY c.id " +
                     "LIMIT 6;").mapToBean(CourseCardDto.class).list();
@@ -139,8 +139,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findCoursesLast() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price\n" +
-                    "FROM Courses c\n" +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
+                    "FROM courses c\n" +
+                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id\n" +
                     "ORDER BY c.created_at DESC").mapToBean(CourseCardDto.class).list();
@@ -151,12 +151,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findCoursesMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
-                    "COALESCE(AVG(r.rating), rating) AS avgRating,\n" +
+                    "AVG(r.rating) as avgRating ,\n" +
                     "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM Courses c " +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id " +
-                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                    "FROM courses c " +
+                    "LEFT JOIN lessons l ON l.course_id = c.id " +
+                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE " +
                     "GROUP BY c.id ").mapToBean(CourseCardDto.class).list();
         });
@@ -166,8 +166,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public CourseCardDto findCourseMostPopular() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
-                    "FROM Courses c " +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id " +
+                    "FROM courses c " +
+                    "LEFT JOIN lessons l ON l.course_id = c.id " +
                     "WHERE c.is_public = TRUE " +
                     "GROUP BY c.id " +
                     "LIMIT 1;").mapToBean(CourseCardDto.class).one();
@@ -177,14 +177,14 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findAllCoursesCard() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, " +
-                    "c.thumbnail_url, c.level, COALESCE(AVG(r.rating), rating) AS avgRating, " +
+                    "c.thumbnail_url, c.level, AVG(r.rating) as avgRating, " +
                     "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, " +
                     "COUNT(DISTINCT e.id)\n" +
-                    "FROM Courses c\n" +
-                    "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
-                    "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
-                    "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
-                    "LEFT JOIN Enrollments e ON e.course_id = c.id\n" +
+                    "FROM courses c\n" +
+                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                    "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
+                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
                     "WHERE c.is_public = TRUE\n" +
                     "GROUP BY c.id").mapToBean(CourseCardDto.class).list();
         });
@@ -193,11 +193,11 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public Course findCourseByIdForDetail(int id) {
         Course course = getJdbi().withHandle(handle ->
                 handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating)) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
-                        "FROM Courses c\n" +
-                        "LEFT JOIN Categories cat ON c.category_id = cat.id\n" +
-                        "LEFT JOIN Categories parent ON cat.parent_id = parent.id\n" +
-                        "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
-                        "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
+                        "FROM courses c\n" +
+                        "LEFT JOIN categories cat ON c.category_id = cat.id\n" +
+                        "LEFT JOIN categories parent ON cat.parent_id = parent.id\n" +
+                        "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                        "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                         "WHERE c.is_public = TRUE AND c.id = :id " +
                         "GROUP BY c.id, cat.id, parent.id").bind("id", id).mapToBean(Course.class).one()
         );
@@ -213,11 +213,11 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
                             "COUNT(DISTINCT e.id) AS student_count,\n" +
                             "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
-                            "FROM Courses c\n" +
-                            "JOIN Categories cate ON c.category_id = cate.id\n" +
-                            "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
-                            "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
-                            "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
+                            "FROM courses c\n" +
+                            "JOIN categories cate ON c.category_id = cate.id\n" +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
                             "WHERE c.is_public = TRUE AND cate.id = :id\n" +
                             "GROUP BY c.id\n" +
                             "ORDER BY c.created_at DESC"
@@ -233,12 +233,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
                             "COUNT(DISTINCT e.id) AS student_count,\n" +
                             "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
-                            "FROM Courses c\n " +
-                            "JOIN Course_Tags ct ON c.id = ct.course_id\n " +
-                            "JOIN Tags t ON ct.tag_id = t.id\n " +
-                            "LEFT JOIN Lessons l ON l.course_id = c.id\n " +
-                            "LEFT JOIN Reviews r ON r.course_id = c.id\n " +
-                            "LEFT JOIN Wishlist w ON w.course_id = c.id\n " +
+                            "FROM courses c\n " +
+                            "JOIN course_tags ct ON c.id = ct.course_id\n " +
+                            "JOIN tags t ON ct.tag_id = t.id\n " +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n " +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n " +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id\n " +
                             "WHERE c.is_public = TRUE AND t.id = :id\n " +
                             "GROUP BY c.id\n " +
                             "ORDER BY c.created_at DESC"
@@ -255,11 +255,11 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
                             "COUNT(DISTINCT e.id) AS student_count,\n" +
                             "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
-                            "FROM Courses c\n" +
-                            "JOIN Categories cate ON c.category_id = cate.id\n" +
-                            "LEFT JOIN Lessons l ON l.course_id = c.id\n" +
-                            "LEFT JOIN Reviews r ON r.course_id = c.id\n" +
-                            "LEFT JOIN Wishlist w ON w.course_id = c.id\n" +
+                            "FROM courses c\n" +
+                            "JOIN categories cate ON c.category_id = cate.id\n" +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
                             "WHERE c.is_public = TRUE AND c.title LIKE :title\n" +
                             "GROUP BY c.id\n" +
                             "ORDER BY c.created_at DESC"
@@ -284,12 +284,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
-                            "FROM Courses c " +
-                            "JOIN Categories cate ON c.category_id = cate.id " +
-                            "LEFT JOIN Course_Tags ct ON c.id = ct.course_id " +
-                            "LEFT JOIN Tags t ON ct.tag_id = t.id " +
-                            "LEFT JOIN Lessons l ON c.id = l.course_id " +
-                            "LEFT JOIN Reviews r ON r.course_id = c.id " +
+                            "FROM courses c " +
+                            "JOIN categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
+                            "LEFT JOIN tags t ON ct.tag_id = t.id " +
+                            "LEFT JOIN lessons l ON c.id = l.course_id " +
+                            "LEFT JOIN reviews r ON r.course_id = c.id " +
                             "WHERE c.is_public = TRUE "
             );
 
@@ -372,12 +372,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             StringBuilder sql = new StringBuilder(
                     "SELECT COUNT(*) FROM ( " +
                             "SELECT c.id " +
-                            "FROM Courses c " +
-                            "JOIN Categories cate ON c.category_id = cate.id " +
-                            "LEFT JOIN Course_Tags ct ON c.id = ct.course_id " +
-                            "LEFT JOIN Tags t ON ct.tag_id = t.id " +
-                            "LEFT JOIN Lessons l ON c.id = l.course_id " +
-                            "LEFT JOIN Reviews r ON r.course_id = c.id " +
+                            "FROM courses c " +
+                            "JOIN categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
+                            "LEFT JOIN tags t ON ct.tag_id = t.id " +
+                            "LEFT JOIN lessons l ON c.id = l.course_id " +
+                            "LEFT JOIN reviews r ON r.course_id = c.id " +
                             "WHERE c.is_public = TRUE "
             );
 
@@ -438,9 +438,9 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.is_public, c.created_at, " +
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
                             "SUM(l.duration_minutes)/60.0 AS duration_hours " +
-                            "FROM Courses c " +
-                            "LEFT JOIN Categories cate ON c.category_id = cate.id " +
-                            "LEFT JOIN Lessons l ON c.id = l.course_id " +
+                            "FROM courses c " +
+                            "LEFT JOIN categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN lessons l ON c.id = l.course_id " +
                             "WHERE 1=1"
             );
 
@@ -503,10 +503,10 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                 handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n " +
                                 "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
                                 "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
-                                "FROM Courses c\n " +
-                                "LEFT JOIN Lessons l ON l.course_id = c.id\n " +
-                                "LEFT JOIN Reviews r ON r.course_id = c.id\n " +
-                                "LEFT JOIN Wishlist w ON w.course_id = c.id\n " +
+                                "FROM courses c\n " +
+                                "LEFT JOIN lessons l ON l.course_id = c.id\n " +
+                                "LEFT JOIN reviews r ON r.course_id = c.id\n " +
+                                "LEFT JOIN wishlist w ON w.course_id = c.id\n " +
                                 "WHERE c.is_public = TRUE\n " +
                                 "GROUP BY c.id\n " +
                                 "ORDER BY c.created_at DESC\n " +

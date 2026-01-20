@@ -18,14 +18,14 @@ public class WishlistDao extends BaseDao {
     // Thêm vào wishlist
     public boolean addWishlist(int userId, int courseId) {
         return getJdbi().withHandle(handle ->
-                handle.createUpdate("INSERT INTO Wishlist (user_id, course_id, added_at) VALUES (:userId, :courseId, CURRENT_TIMESTAMP)").bind("userId", userId).bind("courseId", courseId).execute() > 0
+                handle.createUpdate("INSERT INTO wishlist (user_id, course_id, added_at) VALUES (:userId, :courseId, CURRENT_TIMESTAMP)").bind("userId", userId).bind("courseId", courseId).execute() > 0
         );
     }
 
     // Kiểm tra tồn tại
     public boolean exists(int userId, int courseId) {
         return getJdbi().withHandle(handle ->
-                handle.createQuery("SELECT 1 FROM Wishlist WHERE user_id = :userId AND course_id = :courseId")
+                handle.createQuery("SELECT 1 FROM wishlist WHERE user_id = :userId AND course_id = :courseId")
                         .bind("userId", userId).bind("courseId", courseId).mapTo(Integer.class).findOne().isPresent()
         );
     }
@@ -42,8 +42,8 @@ public class WishlistDao extends BaseDao {
                                         "c.price, " +
                                         "c.discount_price AS discountPrice, " +
                                         "COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS durationHours " +
-                                        "FROM Wishlist w " +
-                                        "JOIN Courses c ON w.course_id = c.id " +
+                                        "FROM wishlist w " +
+                                        "JOIN courses c ON w.course_id = c.id " +
                                         "LEFT JOIN lessons l ON l.course_id = c.id " +
                                         "WHERE w.user_id = :userId AND c.is_public = TRUE " +
                                         "GROUP BY w.id, c.id, c.title, c.thumbnail_url, c.level, " +

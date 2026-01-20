@@ -8,7 +8,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
 
     @Override
     public int create(PaymentMethod entity) {
-        String sql = "INSERT INTO Payment_Methods (name, code, icon_url, status) " +
+        String sql = "INSERT INTO payment_methods (name, code, icon_url, status) " +
                 "VALUES (:name, :code, :iconUrl, :status)";
 
         return getJdbi().withHandle(handle ->
@@ -26,7 +26,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
                             "SELECT id, name, code, icon_url, created_at, updated_at " +
-                                    "FROM Payment_Methods WHERE id = :id")
+                                    "FROM payment_methods WHERE id = :id")
                     .bind("id", id)
                     .mapToBean(PaymentMethod.class)
                     .findFirst()
@@ -52,7 +52,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
                             "SELECT id, name, code, icon_url, created_at, updated_at " +
-                                    "FROM Payment_Methods " +
+                                    "FROM payment_methods " +
                                     "ORDER BY id")
                     .mapToBean(PaymentMethod.class)
                     .list();
@@ -61,7 +61,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
 
     @Override
     public int update(PaymentMethod entity) {
-        String sql = "UPDATE Payment_Methods \n" +
+        String sql = "UPDATE payment_methods \n" +
                 "SET name = :name, \n" +
                 "    code = :code, \n" +
                 "    icon_url = :iconUrl, \n" +
@@ -80,7 +80,7 @@ public class PaymentMethodDao extends BaseDao implements BaseCrudDao<PaymentMeth
 
     @Override
     public int delete(Integer id) {
-        String sql = "DELETE FROM Payment_Methods WHERE id = :id";
+        String sql = "DELETE FROM payment_methods WHERE id = :id";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind("id", id)

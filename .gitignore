@@ -20,6 +20,9 @@ out/
 .springBeans
 .sts4-cache
 
+# DB config
+src/main/resources/db.properties
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

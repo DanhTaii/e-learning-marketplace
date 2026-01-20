@@ -63,7 +63,7 @@ public class UserService {
         validatePassword(password);
 
         User user = new User();
-        String hashPass = PasswordUtils.hashpassword(password );
+        String hashPass = PasswordUtils.hashpassword(password);
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(hashPass);
@@ -71,8 +71,7 @@ public class UserService {
     }
 
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
-        String oldHash = PasswordUtils.hashpassword(oldPassword );
-        String newHashPassword = PasswordUtils.hashpassword(newPassword );
+        String oldHash = PasswordUtils.hashpassword(oldPassword);
 
         if (this.getUserByEmail(userMail) == null) {
             throw new IllegalArgumentException("Email không tồn tại !!!");
@@ -81,17 +80,26 @@ public class UserService {
             if (!user.getPassword().equals(oldHash)) {
                 throw new IllegalArgumentException("Mật khẩu cũ không đúng !");
             }
-            if (!newPassword.equals(retypeNewPassword)) {
-                throw new IllegalArgumentException("Mật khẩu mới không khớp !");
-            }
 
-            validatePassword(newPassword);
+            boolean checkReset = changePassword(newPassword, retypeNewPassword, userMail);
 
-            if (userDao.resetPassword(newHashPassword, userMail) == 1) {
+            if (checkReset) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean changePassword(String newPassword, String retypeNewPassword, String userMail) {
+        if (!newPassword.equals(retypeNewPassword)) {
+            throw new IllegalArgumentException("Mật khẩu mới không khớp !");
+        }
+
+        String newHashPassword = PasswordUtils.hashpassword(newPassword);
+
+        validatePassword(newPassword);
+
+        return userDao.resetPassword(newHashPassword, userMail) == 1;
     }
 
     public void validatePassword(String password) {
@@ -99,8 +107,8 @@ public class UserService {
             throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự");
         }
 
-        if (!password.matches(".*[A-Za-z].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ cái");
+        if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*")) {
+            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ thường và 1 chữ hoa");
         }
 
         if (!password.matches(".*[0-9].*")) {

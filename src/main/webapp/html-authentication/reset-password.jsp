@@ -1,3 +1,4 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -29,27 +30,30 @@
                 </div>
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2">
-                        <form action="" class="form">
+                        <form action="reset-password" method="post" class="form">
                             <div class="form__title text-big-title">TẠO MẬT KHẨU MỚI</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">
                                     Tạo mật khẩu mới. Đảm bảo mật khẩu mới khác với mật khẩu trước đó để đảm bảo an toàn.
                                 </span>
                             </div>
+                            <c:if test="${error != null}">
+                                <span style="color: red; font-size: var(--text-xl)"> ${error} </span>
+                            </c:if>
                             <div class="form__input form__input-1">
-                                <input type="text" class="input-text text-big" placeholder="Nhập mật khẩu mới của bạn">
+                                <input type="text" name="password" class="input-text text-big"
+                                       placeholder="Nhập mật khẩu mới của bạn">
                             </div>
                             <div class="form__input form__input-2">
-                                <input type="text" class="input-text text-big" placeholder="Nhập lại mật khẩu">
+                                <input type="text" name="retypePassword" class="input-text text-big"
+                                       placeholder="Nhập lại mật khẩu">
                             </div>
                             <div class="form__button">
-                                <a href="sign-in.jsp" class="turn-page support">
-                                    <div class="box-btn button__btn">
+                                <button type="submit" class="button__btn box-btn">
                                         <span class="text-header">
                                             Đặt lại mật khẩu
                                         </span>
-                                    </div>
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>

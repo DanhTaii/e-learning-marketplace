@@ -32,7 +32,7 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     @Override
     public List<User> findAll() {
         return getJdbi().withHandle(h -> {
-            return h.createQuery("SELECT u.id, u.username, u.email, u.phone, u.role, u.created_at AS createdAt FROM Users u")
+            return h.createQuery("SELECT u.id, u.username, u.email, u.phone, u.role, u.created_at AS createdAt FROM users u")
                     .mapToBean(User.class)
                     .list();
         });
@@ -41,7 +41,7 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     @Override
     public int update(User entity) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("UPDATE Users\n" +
+            return handle.createUpdate("UPDATE users\n" +
                             "SET phone = :phone, username = :username, role = :role, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
                     .bind("phone", entity.getPhone())
@@ -75,7 +75,7 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     }
 
     public List<User> findUsersByFilter(String username, String phone, String dateFrom, String role) {
-        StringBuilder sql = new StringBuilder("SELECT u.id, u.username, u.email, u.phone, u.role, u.created_at AS createdAt FROM Users u WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT u.id, u.username, u.email, u.phone, u.role, u.created_at AS createdAt FROM users u WHERE 1=1");
 
 //      Phải có lúc username.trim().isEmpty() vì có thể sẽ không nhập tên nhưng để khoảng trắng thì DB nó sẽ kiếm khoảng trắng đó
         if (username != null && !username.trim().isEmpty()) {
@@ -116,7 +116,7 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
 //        Do là với withHandle thì nó sẽ trả về kiểu dữ liệu và có đủ CRUD nene có thể return về chính nó luôn
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(
-                            "UPDATE Users\n" +
+                            "UPDATE users\n" +
                                     "SET password =  :newPassword, updated_at = CURRENT_TIMESTAMP\n" +
                                     "WHERE email = :userMail")
                     .bind("userMail", userMail)
