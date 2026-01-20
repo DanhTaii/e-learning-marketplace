@@ -29,12 +29,12 @@ public class PaymentController extends HttpServlet {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null || cart.getSelectedQuantity() == 0) {
-            response.sendRedirect(request.getContextPath() + "/cart");
-            return ;
+            response.sendRedirect(request.getContextPath() + "/personal/cart");
+            return;
         }
 
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();
-           request.setAttribute("paymentMethod",paymentMethods);
+        request.setAttribute("paymentMethod", paymentMethods);
         request.getRequestDispatcher("/html-personal-cart/payment.jsp").forward(request, response);
 
     }

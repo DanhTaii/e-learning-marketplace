@@ -10,7 +10,7 @@ import vn.edu.nlu.fit.elearning.services.EnrollmentService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "MyCourseController", value = "/my-courses")
+@WebServlet(name = "MyCourseController", value = "/personal/my-courses")
 public class MyCourseController extends HttpServlet {
 
     private EnrollmentService enrollmentService;
@@ -30,7 +30,7 @@ public class MyCourseController extends HttpServlet {
         List<EnrollmentCardDTO> enrollmentList = enrollmentService.getAllEnrollments(userId);
 
         request.setAttribute("listEnrollments", enrollmentList);
-        request.getRequestDispatcher("html-personal/my-course.jsp").forward(request, response);
+        request.getRequestDispatcher("/html-personal/my-course.jsp").forward(request, response);
 
     }
 

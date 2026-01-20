@@ -38,7 +38,7 @@ public class ResetPasswordController extends HttpServlet {
             if (isSuccess) {
                 request.setAttribute("userSession", userSession);
                 request.getSession().setAttribute("success", "Đổi lại mật khẩu thành công !");
-                response.sendRedirect(request.getContextPath() + "/account-security");
+                response.sendRedirect(request.getContextPath() + "/personal/account-security");
             }
         } catch (IllegalArgumentException iae) {
             request.setAttribute("error", "Lỗi: " + iae.getMessage());

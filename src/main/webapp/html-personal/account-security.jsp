@@ -38,27 +38,27 @@
                 <nav class="profile-menu">
                     <ul>
                         <li>
-                            <a href="account-profile"
+                            <a href="personal/account-profile"
                                class="menu-link ${param.currentPage == 'profile' ? 'active' : ''}">
                                 <i class="fa-regular fa-user"></i>
                                 <span>Thông tin cá nhân</span>
                             </a>
                         </li>
                         <li>
-                            <a href="account-security"
+                            <a href="personal/account-security"
                                class="menu-link ${param.currentPage == 'security' ? 'active' : ''}">
                                 <i class="fa-solid fa-shield-halved"></i>
                                 <span>Bảo mật tài khoản</span>
                             </a>
                         </li>
                         <li>
-                            <a href="my-course.jsp" class="menu-link">
+                            <a href="personal/my-courses" class="menu-link">
                                 <i class="fa-solid fa-graduation-cap"></i>
                                 <span>Khóa học của tôi</span>
                             </a>
                         </li>
                         <li>
-                            <a href="order-history.jsp" class="menu-link">
+                            <a href="personal/order-history" class="menu-link">
                                 <i class="fa-solid fa-clock-rotate-left"></i>
                                 <span>Lịch sử giao dịch</span>
                             </a>

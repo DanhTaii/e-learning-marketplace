@@ -57,7 +57,7 @@ public class CartManagerController extends HttpServlet {
                     cart.selectAll(status);
             }
         }
-        response.sendRedirect(request.getContextPath() + "/cart");
+        response.sendRedirect(request.getContextPath() + "/personal/cart");
     }
 
     @Override

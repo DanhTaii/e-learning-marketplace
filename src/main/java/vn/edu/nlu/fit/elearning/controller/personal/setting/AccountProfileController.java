@@ -7,7 +7,7 @@ import vn.edu.nlu.fit.elearning.model.User;
 
 import java.io.IOException;
 
-@WebServlet(name = "AccountProfileController", value = "/account-profile")
+@WebServlet(name = "AccountProfileController", value = "/personal/account-profile")
 public class AccountProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,7 +18,7 @@ public class AccountProfileController extends HttpServlet {
             userSession = (User) session.getAttribute("userSession");
         }
         request.setAttribute("currentPage", "profile");
-        request.getRequestDispatcher("html-personal/account-profile.jsp").forward(request, response);
+        request.getRequestDispatcher("/html-personal/account-profile.jsp").forward(request, response);
     }
 
     @Override
