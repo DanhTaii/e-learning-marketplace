@@ -43,6 +43,6 @@ public class UpdateSelectController extends HttpServlet {
         }
 
 
-        response.sendRedirect(request.getContextPath() + "/cart");
+        response.sendRedirect(request.getContextPath() + "/personal/cart");
     }
 }

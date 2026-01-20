@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "ShowCartController", value = "/cart")
+@WebServlet(name = "ShowCartController", value = "/personal/cart")
 
 public class ShowCartController extends HttpServlet {
 

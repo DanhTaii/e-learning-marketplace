@@ -88,6 +88,6 @@ public class ConfirmController extends HttpServlet {
 
 
         session.setAttribute("cart", cart);
-        response.sendRedirect(request.getContextPath() + "/show-receipt?orderId=" + orderId);
+        response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + orderId);
     }
 }

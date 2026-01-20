@@ -17,7 +17,7 @@ import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ShowReceiptController", value = "/show-receipt")
+@WebServlet(name = "ShowReceiptController", value = "/receipt")
 
 public class ShowReceiptController extends HttpServlet {
 OrderItemService orderItemService;

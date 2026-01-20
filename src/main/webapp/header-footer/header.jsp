@@ -85,17 +85,17 @@
                 <c:set var="loginSession" value="${not empty sessionScope.userSession}"/>
                 <c:if test="${loginSession}">
                     <div class="header__class">
-                        <a href="my-courses" class="turn-page text-header">
+                        <a href="personal/my-courses" class="turn-page text-header">
                             Khóa học của tôi
                         </a>
                     </div>
                     <div class="header__wishlist">
-                        <a href="my-wishlist" class="turn-page text-header">
+                        <a href="personal/my-wishlist" class="turn-page text-header">
                             <i class="notification__icon fa-solid fa-heart text-header"></i>
                         </a>
                     </div>
                     <div class="header__cart">
-                        <a href="cart" class="turn-page text-header">
+                        <a href="personal/cart" class="turn-page text-header">
                             <i class="text-header fa-solid fa-cart-shopping"></i>
                             (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
                         </a>
@@ -126,7 +126,7 @@
                                     <div class="user__profile-bio">
                                         <a href="" class="bio-text">Thêm tiểu sử</a>
                                     </div>
-                                    <a href="account-profile" class="turn-page">
+                                    <a href="personal/account-profile" class="turn-page">
                                         <div class="user__profile-btn">
                                             <button class="user-btn button__btn text-header">Xem thông tin</button>
                                         </div>
@@ -135,21 +135,21 @@
                                 <div class="user__menu">
                                     <ul class="user__menu-list">
                                         <li class="user__menu-list-item">
-                                            <a href="html-personal/my-course.jsp" class="turn-page">
+                                            <a href="personal/my-courses" class="turn-page">
                                                 <div class="user__menu-list-item-box text-li">
                                                     Khóa học
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="user__menu-list-item">
-                                            <a href="my-wishlist" class="turn-page">
+                                            <a href="personal/my-wishlist" class="turn-page">
                                                 <div class="user__menu-list-item-box text-li">
                                                     Yêu thích
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="user__menu-list-item">
-                                            <a href="order-history" class="turn-page">
+                                            <a href="personal/order-history" class="turn-page">
                                                 <div class="user__menu-list-item-box text-li">
                                                     Lịch sử giao dịch
                                                 </div>

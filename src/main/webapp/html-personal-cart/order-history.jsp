@@ -48,7 +48,7 @@
                                     <span class="text"><span class="text1">Tổng cộng: </span><fmt:formatNumber value="${order.finalAmount}" type="number" pattern="###,###"></fmt:formatNumber> đ</span></div>
                                 <div class="row2__column3-payment-method">
                                     <span class="text"><span class="text1">Phương thức thanh toán:</span> ${order.paymentMethodName}</span></div>
-                                <a href="show-receipt?orderId=${order.id}" class="turn-page">
+                                <a href="receipt?orderId=${order.id}" class="turn-page">
                                     <div class="row2__column4-btn-receipt header__button receipt-box">
                                         <button type="button" class="btn-receipt button__btn">Biên lai</button>
                                     </div>

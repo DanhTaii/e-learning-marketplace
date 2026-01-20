@@ -17,7 +17,7 @@ import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "OrderHistoryController", value = "/order-history")
+@WebServlet(name = "OrderHistoryController", value = "/personal/order-history")
 
 public class OrderHistoryController extends HttpServlet {
 

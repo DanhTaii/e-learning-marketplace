@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.services.WishlistService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "MyWishlistController", value = "/my-wishlist")
+@WebServlet(name = "MyWishlistController", value = "/personal/my-wishlist")
 public class MyWishlistController extends HttpServlet {
 
     private WishlistService ws;
@@ -24,10 +24,6 @@ public class MyWishlistController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect(request.getContextPath() +  "/html-authentication/sign-in.jsp");
-            return;
-        }
 
         int userId = (int) session.getAttribute("userId");
         String courseIdParam = request.getParameter("courseId");
@@ -45,7 +41,7 @@ public class MyWishlistController extends HttpServlet {
             } else {
                 ws.addCourseToWishlist(userId, courseId);
             }
-            response.sendRedirect(request.getContextPath() + "/my-wishlist");
+            response.sendRedirect(request.getContextPath() + "/personal/my-wishlist");
             return;
         }
 
