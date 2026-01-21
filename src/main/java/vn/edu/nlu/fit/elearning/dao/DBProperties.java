@@ -7,10 +7,12 @@ public class DBProperties {
     private static Properties prop = new Properties();
 
     static {
-        try {
-            prop.load(DBProperties.class.getClassLoader().getResourceAsStream("db.properties"));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        try (var check = DBProperties.class.getClassLoader().getResourceAsStream("db.properties")) {
+            if (check != null) {
+                prop.load(check);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

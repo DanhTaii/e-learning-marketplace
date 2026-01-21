@@ -260,8 +260,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new">${c.price - c.discountPrice}đ</div>
-                                                        <div class="price__old">${c.price}đ</div>
+                                                        <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
+                                                        <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                                     </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
