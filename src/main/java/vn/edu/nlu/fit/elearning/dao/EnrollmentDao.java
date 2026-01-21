@@ -19,6 +19,18 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
         return null;
     }
 
+    public int checkEnrollment(int userId, int courseId) {
+        String sql = "SELECT COUNT(*) FROM enrollments WHERE user_id = :userId AND course_id = :courseId";
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("userId", userId)
+                        .bind("courseId", courseId)
+                        .mapTo(Integer.class)
+                        .findFirst().orElse(null)
+        );
+    }
+
     @Override
     public List<EnrollmentCardDTO> findAll() {
         return getJdbi().withHandle(handle -> {
@@ -58,6 +70,7 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
                     .list();
         });
     }
+
     public int createEnrollment(Enrollment entity) {
         String sql = "INSERT INTO enrollments (user_id, course_id, order_id) " +
                 "VALUES (:userId, :courseId, :orderId)";
@@ -71,10 +84,10 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
     public EnrollmentDetailDto getEnrollmentDetail(int userId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT e.id AS id, c.id AS courseId, c.title AS title, c.author_name AS authorName,\n" +
-                            "    (SELECT IFNULL(AVG(r.rating), 0) FROM Reviews r WHERE r.course_id = c.id) AS rating,\n" +
-                            "    (SELECT IFNULL(SUM(l.duration_minutes), 0) / 60 FROM Lessons l WHERE l.course_id = c.id) AS durationHours,\n" +
-                            "    (SELECT COUNT(*) FROM Enrollments e2 WHERE e2.course_id = c.id) AS studentCount,\n" +
-                            "    (SELECT COUNT(*) FROM Reviews r WHERE r.course_id = c.id) AS reviewCount\n" +
+                            "    (SELECT IFNULL(AVG(r.rating), 0) FROM reviews r WHERE r.course_id = c.id) AS rating,\n" +
+                            "    (SELECT IFNULL(SUM(l.duration_minutes), 0) / 60 FROM lessons l WHERE l.course_id = c.id) AS durationHours,\n" +
+                            "    (SELECT COUNT(*) FROM enrollments e2 WHERE e2.course_id = c.id) AS studentCount,\n" +
+                            "    (SELECT COUNT(*) FROM reviews r WHERE r.course_id = c.id) AS reviewCount\n" +
                             "FROM enrollments e\n" +
                             "JOIN courses c ON e.course_id = c.id\n" +
                             "WHERE e.user_id = :userId")

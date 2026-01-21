@@ -37,7 +37,11 @@ public class EnrollmentService {
         // TODO: Implement delete logic
     }
 
-    public EnrollmentDetailDto getEnrollmentDetail(int userId){
+    public int checkEnrollment(int userId, int courseId) {
+        return ed.checkEnrollment(userId, courseId);
+    }
+
+    public EnrollmentDetailDto getEnrollmentDetail(int userId) {
         return ed.getEnrollmentDetail(userId);
     }
 }

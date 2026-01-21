@@ -9,6 +9,7 @@ import vn.edu.nlu.fit.elearning.dto.TagDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.Lesson;
+import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class CourseDetailController extends HttpServlet {
     private LessonService lessonService;
     private TagService tagService;
     private CategoryService categoryService;
+    private EnrollmentService enrollmentService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -31,6 +33,7 @@ public class CourseDetailController extends HttpServlet {
         this.reviewService = new ReviewService();
         this.tagService = new TagService();
         this.categoryService = new CategoryService();
+        this.enrollmentService = new EnrollmentService();
     }
 
     @Override
@@ -38,13 +41,24 @@ public class CourseDetailController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Course c = cs.getCourse(id);
 
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userSession");
+
+        // này làm cho phần khoa hoc da mua
+        boolean isEnrolled = false;
+        if (user != null) {
+            isEnrolled = enrollmentService.checkEnrollment(user.getId(), c.getId()) > 0;
+        }
+        request.setAttribute("isEnrolled", isEnrolled);
+
+
         // này làm cho reviews
         List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(id);
-        request.setAttribute("reviewDtos",reviewDtos);
+        request.setAttribute("reviewDtos", reviewDtos);
 
         // này làm cho lessons
         List<Lesson> lessons = lessonService.getLessonsByCourseId(id);
-        request.setAttribute("lessons",lessons);
+        request.setAttribute("lessons", lessons);
 
         // này làm cho tags
         List<TagDto> tags = tagService.getTagsByCourseId(id);
@@ -52,9 +66,9 @@ public class CourseDetailController extends HttpServlet {
 
         // này làm cho category
         Category category = categoryService.getCategoryById(id);
-        request.setAttribute("category",category);
+        request.setAttribute("category", category);
         CategoryDto category2 = categoryService.getCategoryByCourseId(id);
-        request.setAttribute("category2",category2);
+        request.setAttribute("category2", category2);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
         CategoryService categoryService = new CategoryService();
