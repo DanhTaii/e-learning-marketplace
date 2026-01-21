@@ -9,12 +9,14 @@
     <title>Profile security</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/profile.css?v=1.0.2">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <jsp:include page="/header-footer/header.jsp"/>
@@ -73,9 +75,8 @@
                     <h2 class="text__title">Bảo mật</h2>
                 </div>
 
-                <form action="reset-password" method="post">
+                <form action="change-password" method="post" id="myForm">
                     <c:set var="user" value="${sessionScope.userSession}"/>
-
                     <div class="form-section">
                         <div class="section-header">
                             <span class="section-indicator"></span>
@@ -84,7 +85,7 @@
 
                         <div class="form-group">
                             <label class="style__sub-title">Email</label>
-                            <input type="text" placeholder="${userSession.email}" value="" name="">
+                            <input type="text" id="email" name="email" value="${userSession.email}" readonly >
                         </div>
                     </div>
 
@@ -92,24 +93,27 @@
                         <div class="section-header">
                             <span class="section-indicator"></span>
                             <h2 class="section-title">Đổi mật khẩu</h2>
-                        </div>
 
+                        </div>
                         <div class="form-group">
                             <label class="style__sub-title">Nhập mật khẩu cũ: </label>
-                            <input type="password" placeholder="Nhập mật khẩu cũ" name="oldPassword"
-                                   value="${param.oldPassword}">
+                            <input type="password" placeholder="Nhập mật khẩu cũ" id="oldPass" name="oldPassword"
+                                   value="${param.oldPassword}"  >
+                            <span id="error_oldPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="style__sub-title">Nhập mật khẩu mới: </label>
-                            <input type="password" placeholder="Nhập mật khẩu mới" name="newPassword"
-                                   value="${param.newPassword}">
+                            <input type="password" placeholder="Nhập mật khẩu mới" id="newPass" name="newPassword"
+                                   value="${param.newPassword}" >
+                            <span id="error_newPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="style__sub-title">Nhập lại mật khẩu mới: </label>
-                            <input type="password" placeholder="Nhập lại mật khẩu mới" name="newPasswordRetype"
+                            <input type="password" placeholder="Nhập lại mật khẩu mới"  id="reNewPass" name="newPasswordRetype"
                                    value="${param.newPasswordRetype}">
+                            <span id="error_reType"  class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                         </div>
                     </div>
 
@@ -125,5 +129,75 @@
 </div>
 
 <jsp:include page="/header-footer/footer.jsp"/>
+<div id="toast"></div>
 </body>
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script>
+    $(document).ready(function () {
+
+
+        function validatePasswordLogic(password) {
+            if (password.length < 8) return "Mật khẩu phải có ít nhất 8 ký tự";
+            if (!/[A-Za-z]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ cái";
+            if (!/[0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ số";
+            if (!/[^A-Za-z0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt";
+            return null; // Hợp lệ
+        }
+
+        $('#myForm').on('submit', function (e) {
+            let oldPass = $('#oldPass').val().trim();
+            let newPass = $('#newPass').val().trim();
+            let reType = $('#reNewPass').val().trim();
+            let isValid = true;
+
+            $('.error-client').text('');
+
+
+            let oldPassError = validatePasswordLogic(oldPass);
+            if (oldPass === '') {
+                $('#error_oldPass').text('Vui lòng nhập mật khẩu cũ');
+                isValid = false;
+            } else if (oldPassError) {
+                $('#error_oldPass').text( oldPassError);
+                isValid = false;
+            }
+
+            let newPassError = validatePasswordLogic(newPass);
+            if (newPass === '') {
+                $('#error_newPass').text('Mật khẩu mới không được để trống');
+                isValid = false;
+            } else if (newPassError) {
+                $('#error_newPass').text(newPassError);
+                isValid = false;
+            }else if(newPass === oldPass){
+                $('#error_newPass').text('Mật khẩu mới trùng mật khẩu cũ');
+                isValid = false;
+            }
+
+            if (newPass !== reType) {
+                $('#error_reType').text('Mật khẩu nhập lại không khớp');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+            return isValid;
+        });
+
+        $('input').on('input', function() {
+            $(this).next('.error-client').text('');
+        });
+    });
+</script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

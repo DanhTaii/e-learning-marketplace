@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page isErrorPage="true" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,6 +42,14 @@
             <div class="error-container">
                 <div class="error-code">Database Exception</div>
                 <h1 class="error-msg">Ối! Hệ thống không kết nối được cơ sở dữ liệu.</h1>
+                <c:if test="${sessionScope.userSession.role == 'ADMIN'}">
+                    <div style="background: #f8d7da; padding: 15px; border: 1px solid red;">
+                        <h3>Thông tin kỹ thuật (Chỉ Admin thấy):</h3>
+                        <p><strong>Loại lỗi:</strong> ${pageContext.errorData.throwable}</p>
+                        <p><strong>Thông điệp:</strong> ${pageContext.errorData.throwable.message}</p>
+                        <p><strong>Vị trí lỗi:</strong></p>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

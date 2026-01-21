@@ -30,6 +30,9 @@ public class IndexController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+// TẠO LỖI GIẢ ĐỂ TEST
+//        String testNull = null;
+//        int length = testNull.length(); // Dòng này chắc chắn ném ra NullPointerException
 
         // 1. Category
         CategoryService categoryService = new CategoryService();

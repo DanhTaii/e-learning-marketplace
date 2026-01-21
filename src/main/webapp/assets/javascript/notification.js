@@ -74,10 +74,13 @@ function openConfirmModal(id, modalId = 'confirm-delete-modal') {
 }
 
 // Gắn sự kiện cho nút "Xác nhận xóa" trong modal (Dùng chung)
-document.getElementById('btn-confirm-delete').onclick = function () {
-    if (currentDeleteId) {
-        const form = document.getElementById('delete-form-id');
-        if (form) form.submit();
+const confirmDeleteBtn = document.getElementById('btn-confirm-delete');
+if (confirmDeleteBtn) { // Kiểm tra nếu tìm thấy nút thì mới gán sự kiện
+    confirmDeleteBtn.onclick = function () {
+        if (currentDeleteId) {
+            const form = document.getElementById('delete-form-id');
+            if (form) form.submit();
+        }
     }
 }
 
