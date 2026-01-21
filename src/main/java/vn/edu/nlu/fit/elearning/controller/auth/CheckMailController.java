@@ -74,6 +74,8 @@ public class CheckMailController extends HttpServlet {
         if (isValid) {
             accessTokenService.markAsUsed(otp);
             session.setAttribute("resetUserId", user.getId());
+            session.setAttribute("userMail", user.getEmail());
+            System.out.println(user.getEmail());
             response.sendRedirect(request.getContextPath() + "/reset-password");
         } else {
             request.setAttribute("error", "Mã xác thực không đúng hoặc đã hết hạn!");

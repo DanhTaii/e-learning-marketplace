@@ -30,7 +30,7 @@ public abstract class BaseDao {
         //Tạo kết nối đến DB dựa theo kiểu DB đang xài (MySQL Database)
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setURL("jdbc:mysql://" + DBProperties.getDbHost() + ":" + DBProperties.getDbPort() + "/"
-                + DBProperties.getDbName());
+                + DBProperties.getDbName() + DBProperties.getDboptions());
         dataSource.setUser(DBProperties.getUsername());
         dataSource.setPassword(DBProperties.getPassword());
         try {

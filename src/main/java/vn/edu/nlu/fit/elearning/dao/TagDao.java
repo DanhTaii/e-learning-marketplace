@@ -10,7 +10,7 @@ import java.util.List;
 public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     @Override
     public int create(Tag entity) {
-        String sql = "INSERT INTO Tags (name,slug)\n" +
+        String sql = "INSERT INTO tags (name,slug)\n" +
                 "VALUES (:name,:slug)";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
@@ -35,8 +35,8 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
         String nameSearch = "%" + name + "%";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
-                            "FROM Tags t " +
-                            "LEFT JOIN Course_Tags ct ON t.id = ct.tag_id " +
+                            "FROM tags t " +
+                            "LEFT JOIN course_tags ct ON t.id = ct.tag_id " +
                             "WHERE t.name LIKE :nameSearch " +
                             "GROUP BY t.id")
                     .bind("nameSearch", nameSearch).mapToBean(Tag.class).list();
@@ -47,14 +47,14 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     public List<Tag> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT t.id ,t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at" +
-                    " FROM Tags t LEFT JOIN Course_Tags ct ON t.id = ct.tag_id" +
+                    " FROM tags t LEFT JOIN course_tags ct ON t.id = ct.tag_id" +
                     " GROUP BY t.id;").mapToBean(Tag.class).list();
         });
     }
 
     @Override
     public int update(Tag entity) {
-        String sql = "UPDATE Tags \n" +
+        String sql = "UPDATE tags \n" +
                 "SET name= :name , slug = :slug \n" +
                 "WHERE id = :id";
       return  getJdbi().withHandle(handle -> {
@@ -69,7 +69,7 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
 
     @Override
     public int delete(Integer tagId) {
-        String sql = "DELETE FROM Tags WHERE id = :id ";
+        String sql = "DELETE FROM tags WHERE id = :id ";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bind("id", tagId)
@@ -80,8 +80,8 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     public List<TagDto> findTagsByCourseId(int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT t.id, t.name, t.slug, t.status, ct.course_id\n" +
-                    "FROM Course_Tags ct\n" +
-                    "JOIN Tags t ON ct.tag_id = t.id\n" +
+                    "FROM course_tags ct\n" +
+                    "JOIN tags t ON ct.tag_id = t.id\n" +
                     "WHERE t.status = 'ACTIVE' AND ct.course_id = :courseId;").bind("courseId",courseId).mapToBean(TagDto.class).list();
         });
     }
