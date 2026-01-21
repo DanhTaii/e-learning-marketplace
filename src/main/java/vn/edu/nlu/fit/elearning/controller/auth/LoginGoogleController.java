@@ -41,6 +41,7 @@ public class LoginGoogleController extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("userSession", user);
+        session.setAttribute("userId", user.getId());
 
         response.sendRedirect(request.getContextPath() + "/index");
     }

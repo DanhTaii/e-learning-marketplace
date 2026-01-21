@@ -1,4 +1,5 @@
 package vn.edu.nlu.fit.elearning.filter;
+
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,7 +9,7 @@ import vn.edu.nlu.fit.elearning.model.User;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "PersonalFilter", urlPatterns = "/personal/*")
+@WebFilter(filterName = "PersonalFilter", urlPatterns = {"/personal/*", "/add-cart", "/buy-now"})
 public class PersonalFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,11 +23,19 @@ public class PersonalFilter implements Filter {
         HttpSession session = req.getSession(false);
 
         User user = (session != null) ? (User) session.getAttribute("userSession") : null;
-        if (user != null ) {
+        if (user != null) {
             chain.doFilter(request, response);
-        }else {
-            req.setAttribute("error", "Vui lòng đăng nhập!");
-            req.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(req, res);
+        } else {
+            boolean isAjax = "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
+
+            if (isAjax) {
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                res.getWriter().write("Unauthenticated");
+            } else {
+                req.setAttribute("error", "Vui lòng đăng nhập!");
+                req.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(req, res);
+            }
+
         }
     }
 

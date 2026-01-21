@@ -298,14 +298,23 @@
 
     function addToCart(courseId) {
 
-        fetch('add-cart?id=' + courseId)
+        fetch('add-cart?id=' + courseId,{
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
             .then(response => {
-                if (response.ok) {
-                    return response.text(); // Đọc con số tổng mà Servlet trả về
+                if (response.status === 401) {
+                    alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
+                    window.location.href = "html-authentication/sign-in.jsp";
+                    return null;
                 }
+                if (response.ok) return response.text();
                 throw new Error('Network response was not ok.');
             })
             .then(newCount => {
+                if (newCount === null) return;
                 const cartElement = document.getElementById('cart-count');
                 if (cartElement) {
                     cartElement.innerText = newCount;

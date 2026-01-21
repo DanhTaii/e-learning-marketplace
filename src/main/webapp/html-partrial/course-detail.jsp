@@ -2,7 +2,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,39 +37,54 @@
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price">${c.price - c.discountPrice}đ</span>
-                                <span class="container-2__original-price">${c.price}đ</span>
+                                <span class="container-2__sold-price"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
+                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
                             </div>
                         </div>
-
                         <div class="container-2__option-group">
-                            <div class="container-2__option">
+                                <c:choose>
 
-                                    <div class="header__button add__button">
-                                        <button type="button" class="container-2__button-add button__btn"
-                                                onclick="addToCart(${c.id})">
-                                            Thêm vào giỏ hàng
-                                        </button>
+                                    <c:when test="${isEnrolled}">
+                                        <a href="my-course/detail?courseId=${c.id}" class="turn-page">
+                                            <div class="header__button add__button" style="margin-bottom: 3rem">
+                                                <button type="button" class="container-2__button-add button__btn">
+                                                    Vào học ngay
+                                                </button>
+                                            </div>
+                                        </a>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <div class="container-2__option">
+                                            <div class="header__button add__button">
+                                                <button type="button" class="container-2__button-add button__btn"
+                                                        onclick="addToCart(${c.id})">
+                                                    Thêm vào giỏ hàng
+                                                </button>
+                                            </div>
+
+                                        <a href="#popup__add-to-wishlist-success" class="turn-page">
+                                            <div class="header__button bookmark__button">
+                                                <button class="dark-button">
+                                                    <i class="fa-solid fa-heart container-2__icon"></i>
+                                                </button>
+                                            </div>
+                                        </a>
                                     </div>
 
-                                <a href="#popup__add-to-wishlist-success" class="turn-page">
-                                    <div class="header__button bookmark__button">
-                                        <button class="dark-button">
-                                            <i class="fa-solid fa-heart container-2__icon"></i>
+                                    <a href="buy-now?id=${c.id}">
+                                        <button class="container-2__button-buy dark-button">
+                                            Mua ngay
                                         </button>
+                                    </a>
+                                    <div class="container-2__note">
+                                        <span>Đảm bảo hoàn tiền trong 30 ngày</span>
                                     </div>
-                                </a>
-                            </div>
-                            <a href="buy-now?id=${c.id}">
-                                <button class="container-2__button-buy dark-button">
-                                    Mua ngay
-                                </button>
-                            </a>
+                                </c:otherwise>
+
+                            </c:choose>
                         </div>
 
-                        <div class="container-2__note">
-                            <span>Đảm bảo hoàn tiền trong 30 ngày</span>
-                        </div>
 
                         <div class="container-2__summary-information">
                             <div class="container-2__subtitle text-big">
@@ -156,7 +172,8 @@
                                     <i class="fa-duotone fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${c.studentCount} rating)
+                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${c.studentCount}
+                                rating)
                             </div>
                         </div>
 
@@ -214,11 +231,11 @@
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
-                                            <c:forEach var="tag" items="${tags}" varStatus="loop">
-                                                <c:if test="${loop.index < 3}">
-                                                    <li class="section-3_li">${tag.name}</li>
-                                                </c:if>
-                                            </c:forEach>
+                                        <c:forEach var="tag" items="${tags}" varStatus="loop">
+                                            <c:if test="${loop.index < 3}">
+                                                <li class="section-3_li">${tag.name}</li>
+                                            </c:if>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>
@@ -246,12 +263,16 @@
                                 <c:forEach var="lesson" items="${lessons}">
                                     <li>
                                         <div class="section-4__lesson-information">
-                                            <div class="section-4__lesson-icon text-medium"><i class="fa-solid fa-play"></i></div>
-                                            <div class="section-4__lesson-title text-medium">Bài ${lesson.orderIndex} : ${lesson.title}</div>
-                                            <div class="section-4__lesson-time text-medium">${lesson.durationMinutes} phút</div>
+                                            <div class="section-4__lesson-icon text-medium"><i
+                                                    class="fa-solid fa-play"></i></div>
+                                            <div class="section-4__lesson-title text-medium">Bài ${lesson.orderIndex}
+                                                : ${lesson.title}</div>
+                                            <div class="section-4__lesson-time text-medium">${lesson.durationMinutes}
+                                                phút
+                                            </div>
                                         </div>
                                     </li>
-                                </c:forEach> </ul>
+                                </c:forEach></ul>
                         </div>
                     </div>
 
@@ -292,65 +313,65 @@
                             </div>
                         </c:forEach>
 
-                    <%--                        <div class="review-box__comment">--%>
-<%--                            <div class="comment__user header__user">--%>
-<%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
-<%--                                     class="user__avatar1">--%>
-<%--                            </div>--%>
-<%--                            <div class="comment__box">--%>
-<%--                                <div class="box__name box">--%>
-<%--                                    <div class="review-in4">--%>
-<%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
-<%--                                        <span class="review__time">5 tháng trước</span>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="box__date box">--%>
-<%--                                    <div class="star">--%>
-<%--                                        <div class="text-medium regular">4.6</div>--%>
-<%--                                        <div class="star-icon"><i class="fa-solid fa-star"--%>
-<%--                                                                  style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                        </div>--%>
+                        <%--                        <div class="review-box__comment">--%>
+                        <%--                            <div class="comment__user header__user">--%>
+                        <%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
+                        <%--                                     class="user__avatar1">--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="comment__box">--%>
+                        <%--                                <div class="box__name box">--%>
+                        <%--                                    <div class="review-in4">--%>
+                        <%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
+                        <%--                                        <span class="review__time">5 tháng trước</span>--%>
+                        <%--                                    </div>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="box__date box">--%>
+                        <%--                                    <div class="star">--%>
+                        <%--                                        <div class="text-medium regular">4.6</div>--%>
+                        <%--                                        <div class="star-icon"><i class="fa-solid fa-star"--%>
+                        <%--                                                                  style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                        </div>--%>
 
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="box__comment box">--%>
-<%--                                    <span class="">Bài học bổ ích quá, e cảm ơn Thầy</span>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="review-box__comment">--%>
-<%--                            <div class="comment__user header__user">--%>
-<%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
-<%--                                     class="user__avatar1">--%>
-<%--                            </div>--%>
-<%--                            <div class="comment__box">--%>
-<%--                                <div class="box__name box">--%>
-<%--                                    <div class="review-in4">--%>
-<%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
-<%--                                        <span class="review__time">5 tháng trước</span>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="box__date box">--%>
-<%--                                    <div class="star">--%>
-<%--                                        <div class="text-medium regular">4.6</div>--%>
-<%--                                        <div class="star-icon"><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-<%--                                        </div>--%>
+                        <%--                                    </div>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="box__comment box">--%>
+                        <%--                                    <span class="">Bài học bổ ích quá, e cảm ơn Thầy</span>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                        </div>--%>
+                        <%--                        <div class="review-box__comment">--%>
+                        <%--                            <div class="comment__user header__user">--%>
+                        <%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
+                        <%--                                     class="user__avatar1">--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="comment__box">--%>
+                        <%--                                <div class="box__name box">--%>
+                        <%--                                    <div class="review-in4">--%>
+                        <%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
+                        <%--                                        <span class="review__time">5 tháng trước</span>--%>
+                        <%--                                    </div>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="box__date box">--%>
+                        <%--                                    <div class="star">--%>
+                        <%--                                        <div class="text-medium regular">4.6</div>--%>
+                        <%--                                        <div class="star-icon"><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
+                        <%--                                        </div>--%>
 
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="box__comment box">--%>
-<%--                                    <span class="">Tôi cảm thấy hứng thú và động viên hơn để tiếp tục học hỏi sau khi hoàn thành khoá học này.</span>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
+                        <%--                                    </div>--%>
+                        <%--                                </div>--%>
+                        <%--                                <div class="box__comment box">--%>
+                        <%--                                    <span class="">Tôi cảm thấy hứng thú và động viên hơn để tiếp tục học hỏi sau khi hoàn thành khoá học này.</span>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                        </div>--%>
 
                     </div>
                 </div>
@@ -418,14 +439,23 @@
 <script>
     function addToCart(courseId) {
 
-        fetch('add-cart?id=' + courseId)
+        fetch('add-cart?id=' + courseId, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
             .then(response => {
-                if (response.ok) {
-                    return response.text();
+                if (response.status === 401) {
+                    alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
+                    window.location.href = "html-authentication/sign-in.jsp";
+                    return null;
                 }
+                if (response.ok) return response.text();
                 throw new Error('Network response was not ok.');
             })
             .then(newCount => {
+                if (newCount === null) return;
                 const cartElement = document.getElementById('cart-count');
                 if (cartElement) {
                     cartElement.innerText = newCount;
