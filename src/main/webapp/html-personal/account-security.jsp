@@ -145,13 +145,7 @@
     $(document).ready(function () {
 
 
-        function validatePasswordLogic(password) {
-            if (password.length < 8) return "Mật khẩu phải có ít nhất 8 ký tự";
-            if (!/[A-Za-z]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ cái";
-            if (!/[0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ số";
-            if (!/[^A-Za-z0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt";
-            return null; // Hợp lệ
-        }
+     Validator.setupAutoClearErrors();
 
         $('#myForm').on('submit', function (e) {
             let oldPass = $('#oldPass').val().trim();
@@ -159,23 +153,14 @@
             let reType = $('#reNewPass').val().trim();
             let isValid = true;
 
-            $('.error-client').text('');
-
-
-            let oldPassError = validatePasswordLogic(oldPass);
-            if (oldPass === '') {
-                $('#error_oldPass').text('Vui lòng nhập mật khẩu cũ');
-                isValid = false;
-            } else if (oldPassError) {
+            let oldPassError =Validator.checkPassword(oldPass);
+             if (oldPassError) {
                 $('#error_oldPass').text( oldPassError);
                 isValid = false;
             }
 
-            let newPassError = validatePasswordLogic(newPass);
-            if (newPass === '') {
-                $('#error_newPass').text('Mật khẩu mới không được để trống');
-                isValid = false;
-            } else if (newPassError) {
+            let newPassError = Validator.checkPassword(newPass);
+             if (newPassError) {
                 $('#error_newPass').text(newPassError);
                 isValid = false;
             }else if(newPass === oldPass){
@@ -194,10 +179,8 @@
             return isValid;
         });
 
-        $('input').on('input', function() {
-            $(this).next('.error-client').text('');
-        });
     });
 </script>
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

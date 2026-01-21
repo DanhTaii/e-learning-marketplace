@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -43,18 +45,20 @@
                             if (email == null) email = "";
 
                         %>
-                        <form action="sign-in" class="form" method="post">
+                        <form action="sign-in" class="form" method="post" id="myForm">
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
                             <span style="color: red; font-size: var(--text-xl)"> <%= error%> </span>
                             <div class="form__input input-1">
                                 <input type="email" class="input-text text-big" placeholder="Nhập email của bạn"
-                                       name="email">
+                                       id='login_email' name="email">
+                                <span id="error_email" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
 
                             <div class="form__input input-2">
                                 <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
-                                       name="password">
+                                       name="password" id="pass">
+                                <span id="error_pass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__sign-in-option">
                                 <div class="sign-in-option-1">
@@ -66,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="form__button">
-                                    <button class="button button__btn">
+                                    <button type="submit" class="button button__btn">
                                         <span class="text-header">Đăng nhập</span>
                                     </button>
                                 </div>
@@ -107,4 +111,33 @@
     <jsp:include page="/header-footer/footer.jsp"/>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        Validator.setupAutoClearErrors();
+
+        $('#myForm').on('submit', function (e) {
+            let email = $('#login_email').val().trim();
+            let pass = $('#pass').val().trim();
+            let isValid = true;
+
+            let emailError = Validator.checkEmail(email);
+            if (emailError) {
+                $('#error_email').text(emailError);
+                isValid = false;
+            }
+
+
+            if (pass === '') {
+                $('#error_pass').text('Vui lòng nhập mật khẩu');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+            return isValid;
+        });
+
+    });
+</script>
 </html>
