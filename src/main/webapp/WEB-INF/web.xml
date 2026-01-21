@@ -15,18 +15,22 @@
     </error-page>
 
     <error-page>
-        <error-code>500</error-code>
-        <location>/error-page/500.jsp</location>
+        <exception-type>org.jdbi.v3.core.statement.UnableToExecuteStatementException</exception-type>
+        <location>/error-page/db-error.jsp</location>
     </error-page>
 
     <error-page>
+        <!--        exception-type có độ ưu tiên cao hơn-->
+        <!--        nếu có các lỗi 500 xảy ra hoặc là Exception thì sẽ vô trang này-->
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error-page/system-error.jsp</location>
     </error-page>
 
+    <!--    Khi bị NullPointerException thì Tomcat chọn /error-page/system-error.jsp để hiển thị.-->
+    <!--    Nó không quan tâm đến trang 500.jsp nữa vì quy tắc exception-type có độ ưu tiên cao hơn error-code.-->
+    <!--    Gần như chỉ được kích hoạt khi bên servlet sendError(500)-->
     <error-page>
-        <exception-type>java.sql.SQLException</exception-type>
-        <location>/error-page/db-error.jsp</location>
+        <error-code>500</error-code>
+        <location>/error-page/500.jsp</location>
     </error-page>
-
 </web-app>

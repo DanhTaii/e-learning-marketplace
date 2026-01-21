@@ -40,13 +40,21 @@
     <div class="web__container">
         <div class="grid">
             <div class="error-container">
-                <%
-                    Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
-                    if (throwable != null) {
-//                        out.print("Chi tiết lỗi: " + throwable.getMessage());
-                    }
-                %>
+                <div class="error-code">System Error</div>
+                <h1 class="error-msg">Ối! Hệ thống không kết nối được cơ sở dữ liệu.</h1>
             </div>
+
+            <%-- Xóa tạm thời điều kiện Admin để kiểm tra xem nó có hiện không --%>
+            <c:if test="${sessionScope.userSession.role == 'ADMIN'}">
+            <div style="background: #f8d7da; padding: 15px; border: 1px solid red;" class="error-container">
+                <h3 class="error-msg">Thông tin kỹ thuật:</h3>
+                <%-- Sửa lại dòng bị lỗi ở đây --%>
+                <p class="error-msg"><strong>Loại lỗi:</strong> <%= exception != null ? exception.getClass().getName() : "N/A" %>
+                </p>
+                <p class="error-msg"><strong>Thông điệp:</strong> ${pageContext.errorData.throwable.message}</p>
+
+            </div>
+            </c:if>
         </div>
     </div>
 

@@ -74,7 +74,7 @@
                         <h2 class="text__title">Cài đặt tài khoản</h2>
                     </div>
 
-                    <form action="account-profile" method="POST" class="personal-detail-form">
+                    <form action="personal/account-profile" method="POST" class="personal-detail-form">
                         <div class="form-section">
                             <div class="section-header">
                                 <span class="section-indicator"></span>

@@ -8,8 +8,8 @@ import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
 
-@WebServlet(name = "ResetPasswordController", value = "/reset-password")
-public class ResetPasswordController extends HttpServlet {
+@WebServlet(name = "ChangePasswordController", value = "/change-password")
+public class ChangePasswordController extends HttpServlet {
     private UserService userService;
 
     @Override
@@ -37,13 +37,13 @@ public class ResetPasswordController extends HttpServlet {
             boolean isSuccess = userService.resetUserPassword(oldPasswordUser, newPasswordUser, retypeNewPasswordUser, userSession.getEmail());
             if (isSuccess) {
                 request.setAttribute("userSession", userSession);
-                request.getSession().setAttribute("success", "Đổi lại mật khẩu thành công !");
+                request.getSession().setAttribute("flashSuccess", "Đổi mật khẩu thành công !");
                 response.sendRedirect(request.getContextPath() + "/personal/account-security");
             }
         } catch (IllegalArgumentException iae) {
-            request.setAttribute("error", "Lỗi: " + iae.getMessage());
+            request.getSession().setAttribute("flashError",  iae.getMessage());
             request.setAttribute("userSession", userSession);
-            request.getRequestDispatcher("/html-personal/account-security.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/personal/account-security");
         }
 
     }
