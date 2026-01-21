@@ -255,10 +255,13 @@
 }
 
 .button__add {
-    width: 10% !important;
+    width: auto !important;
+    min-width: 80px;
+    padding: 10px 20px;
+    white-space: nowrap;
     display: flex;
     justify-content: center;
-    padding: 10px 0;
+    flex-shrink: 0;
     margin-left: auto;
     margin-right: 15px;
 }

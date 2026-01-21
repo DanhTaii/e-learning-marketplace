@@ -22,6 +22,19 @@ const Validator = {
         return null;
     },
 
+    checkPhone: function (phone){
+        if (!phone) return "Vui lòng nhập số điện thoại";
+        const regex = /^\d{10,11}$/;
+
+        if (!/^[a-zA-Z0-9]+$/.test(phone)) {
+            return "Tên đăng nhập không được chứa ký tự đặc biệt, khoảng trắng hoặc dấu tiếng Việt";
+        }
+        if (!regex.test(phone)) {
+            return "Số điện thoại phải có 10 hoặc 11 chữ số";
+        }
+        return null;
+    },
+
     setupAutoClearErrors: function () {
         $('input').on('input', function () {
             $(this).next('.error-client').text('');

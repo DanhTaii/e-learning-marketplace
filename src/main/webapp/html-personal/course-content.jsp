@@ -9,13 +9,14 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/course-content.css">
+    <link rel="stylesheet" href="assets/css/course-content.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -74,14 +75,19 @@
                                 <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
                                      class="user__avatar2">
                             </div>
-                            <form action="my-course/review/create" method="post">
+                            <form action="my-course/review/create" method="post" id="myForm">
+                                <div> <span id="error_comment" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
+                                <div> <span id="error_rating" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
                                 <div class="box__input ">
                                     <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
                                     <input type="text" name="comment" class="input-style"
-                                           placeholder="Viết bình luận...">
-                                    <input type="number" class="input__number" placeholder="" name="rating">
+                                           placeholder="Viết bình luận..." id="user_comment">
+
+
+                                    <input type="number" class="input__number" name="rating" id="ratingInput" min="0" max="5" step="0.1" placeholder="Nhập điểm (0-5)" oninput="validateRating(this)">
                                     <div class="star">
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
+                                        <span id="ratingDisplay" style="font-weight: bold;font-size: 1.5rem ;margin-left: 5px">0</span> <span style="font-size: 1.5rem">/5</span>
                                     </div>
                                     <button class="dark-button button__add" type="submit">
                                         Gửi
@@ -166,4 +172,36 @@
 
 </body>
 <script src="assets/javascript/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
+<script>
+    function validateRating(input) {
+        if (input.value < 0) input.value = 0;
+        if (input.value > 5) input.value = 5;
+        let displayValue = input.value === '' ? 0 : input.value;
+        document.getElementById('ratingDisplay').innerText = displayValue;
+    }
+    $(document).ready(function () {
+        Validator.setupAutoClearErrors();
+
+        $('#myForm').on('submit', function (e) {
+            let comment = $('#user_comment').val().trim();
+            let rating = $('#ratingInput').val().trim();
+            let isValid = true;
+
+
+           if(comment === ""){
+               $('#error_comment').text("Vui lòng nhập bình luận!");
+               isValid = false;
+           }
+ if(rating < 1){
+     $('#error_rating').text("Vui lòng đánh giá sao lớn hơn 1");
+     isValid = false;
+ }
+            if (!isValid) {
+                e.preventDefault();
+            }
+            return isValid;
+        });
+
+    });
+</script>
 </html>

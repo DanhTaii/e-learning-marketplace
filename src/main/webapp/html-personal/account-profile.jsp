@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/profile.css?v=1.0.2">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
 <body>
@@ -74,7 +77,7 @@
                         <h2 class="text__title">Cài đặt tài khoản</h2>
                     </div>
 
-                    <form action="personal/account-profile" method="POST" class="personal-detail-form">
+                    <form action="personal/account-profile" method="POST" id="myForm" class="personal-detail-form">
                         <div class="form-section">
                             <div class="section-header">
                                 <span class="section-indicator"></span>
@@ -83,7 +86,8 @@
 
                             <div class="form-group">
                                 <label class="style__sub-title">Tên người dùng</label>
-                                <input type="text" name="username" value="${user.username}">
+                                <input type="text" name="username" id="user_name" value="${user.username}">
+                                <span id="error_username" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                         </div>
 
@@ -99,7 +103,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="style__sub-title">Số điện thoại</label>
-                                <input type="text" name="phone" value="${user.phone}" placeholder="090x xxx xxx">
+                                <input type="tel" id="user_phone" name="phone" value="${user.phone}" placeholder="090x xxx xxx">
+                                <span id="error_phone" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                         </div>
 
@@ -114,6 +119,54 @@
     </div>
 
     <jsp:include page="/header-footer/footer.jsp"/>
+    <div id="toast"></div>
 </div>
 </body>
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
+<script>
+    $(document).ready(function () {
+        const initialName = $('#user_name').val().trim();
+        const initialPhone = $('#user_phone').val().trim();
+
+        Validator.setupAutoClearErrors();
+
+        $('#myForm').on('submit', function (e) {
+            let name = $('#user_name').val().trim();
+            let phone = $('#user_phone').val().trim();
+            let isValid = true;
+            if (name === initialName && phone === initialPhone) {
+                e.preventDefault();
+                alert("Bạn chưa thay đổi thông tin nào!");
+                return false;}
+
+            let usernameError =Validator.checkUsername(name);
+            if (usernameError) {
+                $('#error_username').text( usernameError);
+                isValid = false;
+            }
+
+            let phoneError = Validator.checkPhone(phone);
+            if (phoneError) {
+                $('#error_phone').text(phoneError);
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+            return isValid;
+        });
+
+    });
+</script>
+<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

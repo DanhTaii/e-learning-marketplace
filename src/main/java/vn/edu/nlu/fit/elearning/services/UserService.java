@@ -69,7 +69,23 @@ public class UserService {
         user.setPassword(hashPass);
         return createUser(user) > 0;
     }
+    public boolean updateUserProfile(User currentUser, String newUsername, String newPhone) {
+        if (currentUser.getUsername().equals(newUsername) && currentUser.getPhone().equals(newPhone)) {
+            throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
+        }
 
+        if (newUsername == null || newUsername.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tên hiển thị không được để trống!");
+        }
+        if (newPhone != null && !newPhone.trim().isEmpty()) {
+            if (!newPhone.matches("\\d{10,11}")) {
+                throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
+            }
+        }
+        currentUser.setUsername(newUsername);
+        currentUser.setPhone(newPhone);
+        return userDao.update(currentUser) > 0;
+    }
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
         String oldHash = PasswordUtils.hashpassword(oldPassword);
 
