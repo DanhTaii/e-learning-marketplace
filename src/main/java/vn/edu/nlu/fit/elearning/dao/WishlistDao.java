@@ -34,20 +34,20 @@ public class WishlistDao extends BaseDao {
     public List<Course> findWishlistCoursesByUser(int userId) {
         return getJdbi().withHandle(handle ->
                 handle.createQuery("SELECT w.id AS wishlistId, " +
-                                        "c.id, " +
-                                        "c.title, " +
-                                        "c.thumbnail_url AS thumbnailUrl, " +
-                                        "c.level, " +
-                                        "c.author_name AS authorName, " +
-                                        "c.price, " +
-                                        "c.discount_price AS discountPrice, " +
-                                        "COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS durationHours " +
-                                        "FROM wishlist w " +
-                                        "JOIN courses c ON w.course_id = c.id " +
-                                        "LEFT JOIN lessons l ON l.course_id = c.id " +
-                                        "WHERE w.user_id = :userId AND c.is_public = TRUE " +
-                                        "GROUP BY w.id, c.id, c.title, c.thumbnail_url, c.level, " +
-                                        "c.author_name, c.price, c.discount_price"
+                                "c.id, " +
+                                "c.title, " +
+                                "c.thumbnail_url AS thumbnailUrl, " +
+                                "c.level, " +
+                                "c.author_name AS authorName, " +
+                                "c.price, " +
+                                "c.discount_price AS discountPrice, " +
+                                "COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS durationHours " +
+                                "FROM wishlist w " +
+                                "JOIN courses c ON w.course_id = c.id " +
+                                "LEFT JOIN lessons l ON l.course_id = c.id " +
+                                "WHERE w.user_id = :userId AND c.is_public = TRUE " +
+                                "GROUP BY w.id, c.id, c.title, c.thumbnail_url, c.level, " +
+                                "c.author_name, c.price, c.discount_price"
                         )
                         .bind("userId", userId)
                         .map((rs, ctx) -> {

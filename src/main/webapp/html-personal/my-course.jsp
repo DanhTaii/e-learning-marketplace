@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>My course</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/my-course.css">
+    <link rel="stylesheet" href="assets/css/my-course.css?v=1.0.2">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/card.css">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -45,43 +45,56 @@
                 <div class="my-course__input">
                     <input type="text" placeholder="Tìm khóa học của bạn">
                 </div>
-
                 <div class="my-course__button-search">
                     <button class="button"><i class="text-li fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
         </div>
 
-        <div class="grid__row-2">
-            <c:forEach var="e" items="${listEnrollments}">
-                <div class="grid__column-3">
-                    <a href="my-course/detail?courseId=${e.courseId}" class="turn-page">
-                        <div class="product__small-advertisement">
-                            <div class="small-advertisement__image">
-                                <img srcset="${e.thumbnailUrl}"
-                                     alt="Tư duy phản biện - Giải quyết tận gốc mọi vấn đề" class="img-2">
-                            </div>
-                            <div class="small-advertisement__content">
-                                <div class="content__top">
-                                    <div class="content__author-name text-medium">Quản trị viên</div>
-                                    <div class="content__rate">
-                                        <div class="rate__icon"><i class="text-medium fa-regular fa-star"></i></div>
-                                        <div class="text-medium rate__number">${e.rating}</div>
+        <c:choose>
+            <c:when test="${not empty listEnrollments}">
+                <div class="grid__row-2">
+                    <c:forEach var="e" items="${listEnrollments}">
+                        <div class="grid__column-3">
+                            <a href="my-course/detail?courseId=${e.courseId}" class="turn-page">
+                                <div class="product__small-advertisement">
+                                    <div class="small-advertisement__image">
+                                        <img srcset="${e.thumbnailUrl}"
+                                             alt="${e.title}" class="img-2">
+                                    </div>
+                                    <div class="small-advertisement__content">
+                                        <div class="content__top">
+                                            <div class="content__author-name text-medium">Quản trị viên</div>
+                                            <div class="content__rate">
+                                                <div class="rate__icon"><i class="text-medium fa-regular fa-star"></i></div>
+                                                <div class="text-medium rate__number">${e.rating}</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-paragraph test-text"><p>${e.title}</p></div>
+                                        <div class="progress-display">
+                                            <div class="progress-display__crossbar"></div>
+                                            <div class="progress-display__percentage" style="width: ${e.percentCompleted}%"></div>
+                                        </div>
+                                        <div class="progress__text">Đã hoàn thành ${e.percentCompleted}%</div>
                                     </div>
                                 </div>
-                                <div class="text-paragraph test-text"><p>${e.title}
-                                </p></div>
-                                <div class="progress-display">
-                                    <div class="progress-display__crossbar"></div>
-                                    <div class="progress-display__percentage" style="width: ${e.percentCompleted}%"></div>
-                                </div>
-                                <div class="progress__text">Đã hoàn thành ${e.percentCompleted}%</div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    </c:forEach>
                 </div>
-            </c:forEach>
-        </div>
+            </c:when>
+
+            <c:otherwise>
+                <div class="my-course-empty-state">
+                    <i class="fa-solid fa-book-open my-course-empty-icon"></i>
+                    <div class="my-course-empty-title">Bạn chưa mua khóa học nào</div>
+                    <div class="my-course-empty-description">
+                        Hãy khám phá và chọn cho mình một khóa học phù hợp nhé!
+                    </div>
+                    <a href="/courses" class="my-course-empty-link">Khám phá khóa học</a>
+                </div>
+            </c:otherwise>
+        </c:choose>
 
     </div>
 

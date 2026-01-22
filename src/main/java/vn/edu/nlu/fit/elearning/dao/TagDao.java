@@ -78,12 +78,21 @@ public class TagDao extends BaseDao implements BaseCrudDao<Tag, Integer> {
     }
 
     public List<TagDto> findTagsByCourseId(int courseId) {
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT t.id, t.name, t.slug, t.status, ct.course_id\n" +
-                    "FROM course_tags ct\n" +
-                    "JOIN tags t ON ct.tag_id = t.id\n" +
-                    "WHERE t.status = 'ACTIVE' AND ct.course_id = :courseId;").bind("courseId",courseId).mapToBean(TagDto.class).list();
-        });
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(
+                                "SELECT t.id AS id, " +
+                                        "       t.name AS name, " +
+                                        "       t.slug AS slug, " +
+                                        "       t.status AS status, " +
+                                        "       ct.course_id AS courseId " +
+                                        "FROM course_tags ct " +
+                                        "JOIN tags t ON ct.tag_id = t.id " +
+                                        "WHERE t.status = 'ACTIVE' AND ct.course_id = :courseId"
+                        )
+                        .bind("courseId", courseId)
+                        .mapToBean(TagDto.class)
+                        .list()
+        );
     }
 
 }

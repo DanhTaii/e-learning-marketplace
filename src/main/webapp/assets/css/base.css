@@ -18,6 +18,7 @@ Mục 6: header-footer
     --white-color: #FFFFFF;
     --hover-color: lightgrey;
     --yellow-color: #FFD43B;
+    --background-color: #F1F5F9;
 
     /*Màu cho Công khai*/
     /*Nền*/
@@ -964,6 +965,10 @@ img {
     .grid { width: 100%; padding: 0 10px; }
     .header__logo { font-size: 2rem; }
     .header__box { flex-direction: column; align-items: flex-start; }
+}
+
+.web__container{
+    background-color: var(--background-color);
 }
 
 

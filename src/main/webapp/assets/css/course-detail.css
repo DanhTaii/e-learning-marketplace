@@ -1,4 +1,16 @@
 
+.goals-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.li-skill__container {
+    width: calc(50% - 8px); /* chia 2 cột, trừ khoảng cách */
+    display: flex;
+    align-items: flex-start;
+}
+
 .dark-bg {
     background: var(--dark-blue);
     height: 34rem;

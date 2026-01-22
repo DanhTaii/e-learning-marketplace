@@ -74,8 +74,6 @@ public class CourseDetailController extends HttpServlet {
         CategoryService categoryService = new CategoryService();
         List<Category> categories = categoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.setAttribute("c", c);
         request.getRequestDispatcher("/html-partrial/course-detail.jsp").forward(request, response);
