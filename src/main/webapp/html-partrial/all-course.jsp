@@ -89,7 +89,7 @@
                                         <div class="product__small-advertisement">
                                             <div class="small-advertisement__image">
                                                 <img src="${c.thumbnailUrl}"
-                                                     alt="Từ Chối Mà Vẫn Được Yêu Quý" class="img-2">
+                                                     alt="${c.title}" class="img-2">
                                             </div>
                                             <div class="small-advertisement__content">
                                                 <div class="content__top">

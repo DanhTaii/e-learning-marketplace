@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/course-detail.css?v=1.0.5">
+    <link rel="stylesheet" href="assets/css/course-detail.css?v=1.0.6">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/modal-notification.css">
 
@@ -197,11 +197,17 @@
                             <div class="section-2__list">
                                 <ul>
                                     <li class="text-li style__text">
-                                        <div class="li-skill__container">
-                                            <div class="li-skill__container-item icon__skill">
-                                                <i class="fa-duotone fa-solid fa-check"></i>
-                                            </div>
-                                            <div class="li-skill__container-item content__skill">${c.goals}</div>
+                                        <div class="goals-wrapper">
+                                            <c:forEach var="goal" items="${fn:split(c.goals, ';')}">
+                                                <div class="li-skill__container">
+                                                    <div class="li-skill__container-item icon__skill">
+                                                        <i class="fa-duotone fa-solid fa-check"></i>
+                                                    </div>
+                                                    <div class="li-skill__container-item content__skill">
+                                                            ${fn:trim(goal)}
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                     </li>
                                 </ul>
@@ -231,10 +237,10 @@
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
-                                        <c:forEach var="tag" items="${tags}" varStatus="loop">
-                                            <c:if test="${loop.index < 3}">
-                                                <li class="section-3_li">${tag.name}</li>
-                                            </c:if>
+                                        <c:forEach var="t" items="${tags}">
+<%--                                            <c:if test="${loop.index < 3}">--%>
+                                                <li class="section-3_li">${t.name}</li>
+<%--                                            </c:if>--%>
                                         </c:forEach>
                                     </ul>
                                 </div>

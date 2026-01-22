@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.model.Lesson;
 import vn.edu.nlu.fit.elearning.model.Review;
 import vn.edu.nlu.fit.elearning.utils.CourseFilter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -270,7 +271,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     // làm cho phần bộ lọc
     // làm cách này thì tích 1 hay nhiều cái thì vẫn đều lọc bình thường
-    // Phiên bản có phân trang của filterCourses
     public List<CourseCardDto> filterCoursesWithPagination(
             Integer categoryId, Integer tagId, String title,
             String sortPrice, String level,
@@ -285,7 +285,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
                             "FROM courses c " +
-                            "JOIN categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN categories cate ON c.category_id = cate.id " +
                             "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
                             "LEFT JOIN tags t ON ct.tag_id = t.id " +
                             "LEFT JOIN lessons l ON c.id = l.course_id " +
@@ -319,30 +319,26 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
             sql.append(" GROUP BY c.id, cate.id");
 
-            // Duration dùng HAVING
+            List<String> havingConditions = new ArrayList<>();
+
             if ("short".equals(duration)) {
-                sql.append(" HAVING durationHours < 5");
+                havingConditions.add("durationHours < 5");
             } else if ("medium".equals(duration)) {
-                sql.append(" HAVING durationHours BETWEEN 5 AND 10");
+                havingConditions.add("durationHours BETWEEN 5 AND 10");
             } else if ("long".equals(duration)) {
-                sql.append(" HAVING durationHours > 10");
+                havingConditions.add("durationHours > 10");
             }
 
-            // Rating cũng HAVING (thêm vào vì bạn có filter rating)
             if ("low".equals(rating)) {
-                sql.append(" HAVING COALESCE(AVG(r.rating), 0) < 3");
+                havingConditions.add("COALESCE(AVG(r.rating), 0) < 3");
             } else if ("high".equals(rating)) {
-                sql.append(" HAVING COALESCE(AVG(r.rating), 0) >= 3");
+                havingConditions.add("COALESCE(AVG(r.rating), 0) >= 3");
             }
 
-            // Sort
-            if ("asc".equals(sortPrice)) {
-                sql.append(" ORDER BY (c.price - c.discount_price) ASC");
-            } else if ("desc".equals(sortPrice)) {
-                sql.append(" ORDER BY (c.price - c.discount_price) DESC");
-            } else {
-                sql.append(" ORDER BY c.created_at DESC");
+            if (!havingConditions.isEmpty()) {
+                sql.append(" HAVING " + String.join(" AND ", havingConditions));
             }
+
 
             // Phân trang
             sql.append(" LIMIT :limit OFFSET :offset");

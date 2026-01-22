@@ -202,3 +202,47 @@ button {
     color: white;
 }
 
+/*css cho phần trang khi chưa có khóa học*/
+.my-course-empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.my-course-empty-icon {
+    font-size: 100px;
+    color: #eee;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    display: block;
+}
+
+.my-course-empty-title {
+    color: #999;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.my-course-empty-description {
+    color: #aaa;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.my-course-empty-link {
+    color: var(--dark-blue);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1.3rem;
+    padding: 10px 20px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.my-course-empty-link:hover {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+
