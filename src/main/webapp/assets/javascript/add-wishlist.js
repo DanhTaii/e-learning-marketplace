@@ -1,17 +1,18 @@
-function addToWishlist(btn, courseId) {
+function addToWishlist(e, btn, courseId) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     // 1. Gửi request lên server
-    fetch('personal/my-wishlist', {
+    fetch('personal/my-wishlist?courseId=' + courseId, {
         method: 'POST',
         headers: {
-            // Quan trọng: Phải có header này để Servlet đọc được Parameter
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'X-Requested-With': 'XMLHttpRequest'
         },
-        body: 'courseId=' + courseId
     })
         .then(response => {
             if (response.status === 401) {
-                alert("Bạn cần đăng nhập để thực hiện tính năng này!");
-                window.location.href = "sign-in";
+                window.location.href = "html-authentication/sign-in.jsp?error=auth_required";
                 return null;
             }
             return response.text();
@@ -33,3 +34,43 @@ function addToWishlist(btn, courseId) {
         })
         .catch(err => console.error("Lỗi Wishlist:", err));
 }
+
+function addToCart(e, courseId) {
+    e.preventDefault();
+    e.stopPropagation();
+    fetch('add-cart?id=' + courseId, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+        .then(response => {
+            if (response.status === 401) {
+                window.location.href = "html-authentication/sign-in.jsp?error=auth_required";
+                return null;
+            }
+            if (response.ok) return response.text();
+            throw new Error('Network response was not ok.');
+        })
+        .then(newCount => {
+            if (newCount === null) return;
+            const cartElement = document.getElementById('cart-count');
+            if (cartElement) {
+                cartElement.innerText = newCount;
+            }
+
+            alert("Đã thêm khóa học vào giỏ hàng!");
+        })
+        .catch(error => {
+            console.error('Lỗi AJAX:', error);
+            alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
+        });
+}
+
+// ép load tại trang khi bấm back
+window.addEventListener("pageshow", function (event) {
+    var historyTraversal = event.persisted
+    if (historyTraversal) {
+        window.location.reload();
+    }
+});

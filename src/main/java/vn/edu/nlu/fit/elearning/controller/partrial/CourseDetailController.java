@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.CategoryDto;
+import vn.edu.nlu.fit.elearning.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.dto.TagDto;
 import vn.edu.nlu.fit.elearning.model.Category;
@@ -53,7 +54,7 @@ public class CourseDetailController extends HttpServlet {
         if (userIdStr != null) {
             userId = Integer.parseInt(userIdStr);
         }
-        Course c = cs.getCourse(id, userId);
+        CourseDetailDto c = cs.getCourse(id, userId);
 
         // này làm cho phần khoa hoc da mua
         boolean isEnrolled = false;

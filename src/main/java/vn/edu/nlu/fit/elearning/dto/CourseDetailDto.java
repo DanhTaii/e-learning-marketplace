@@ -35,39 +35,17 @@ public class CourseDetailDto implements Serializable {
     private List<ReviewDto> reviews;       // danh sách review
     private Category category;        // tên category
     private Category parentCategory;  // category cha
-
-    // này làm riêng cho wishlist
-    private int wishlistId;
+    private boolean inWishlist;
 
     public CourseDetailDto() {
     }
 
-    public CourseDetailDto(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<Tag> tags, List<Lesson> lessons, int lessonCount, List<ReviewDto> reviews, Category category, Category parentCategory, int wishlistId) {
-        this.id = id;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.description = description;
-        this.goals = goals;
-        this.level = level;
-        this.price = price;
-        this.discountPrice = discountPrice;
-        this.studentCount = studentCount;
-        this.isFeatured = isFeatured;
-        this.rating = rating;
-        this.thumbnailUrl = thumbnailUrl;
-        this.isPublic = isPublic;
-        this.categoryId = categoryId;
-        this.authorName = authorName;
-        this.durationHours = durationHours;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.tags = tags;
-        this.lessons = lessons;
-        this.lessonCount = lessonCount;
-        this.reviews = reviews;
-        this.category = category;
-        this.parentCategory = parentCategory;
-        this.wishlistId = wishlistId;
+    public boolean isInWishlist() {
+        return inWishlist;
+    }
+
+    public void setInWishlist(boolean inWishlist) {
+        this.inWishlist = inWishlist;
     }
 
     public int getId() {
@@ -262,14 +240,6 @@ public class CourseDetailDto implements Serializable {
         this.parentCategory = parentCategory;
     }
 
-    public int getWishlistId() {
-        return wishlistId;
-    }
-
-    public void setWishlistId(int wishlistId) {
-        this.wishlistId = wishlistId;
-    }
-
     @Override
     public String toString() {
         return "CourseDetailDto{" +
@@ -297,7 +267,6 @@ public class CourseDetailDto implements Serializable {
                 ", reviews=" + reviews +
                 ", category=" + category +
                 ", parentCategory=" + parentCategory +
-                ", wishlistId=" + wishlistId +
                 '}';
     }
 }

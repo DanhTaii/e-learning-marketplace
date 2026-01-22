@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Cart;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CourseService;
+import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
 
@@ -18,7 +20,9 @@ public class BuyNowController extends HttpServlet {
 
     private CourseService courseService;
 
-    public BuyNowController() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         this.courseService = new CourseService();
     }
 
@@ -31,8 +35,8 @@ public class BuyNowController extends HttpServlet {
         if (userIdStr != null) {
             userId = Integer.parseInt(userIdStr);
         }
-        Course course = courseService.getCourse(id, userId);
-        if(course == null){
+        CourseCardDto course = courseService.getCourseCardById(id, userId);
+        if (course == null) {
             return;
         }
         Cart c = (Cart) session.getAttribute("cart");

@@ -71,13 +71,11 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         // Lấy danh sách khóa học đã lọc + phân trang
         List<CourseCardDto> listCourse = courseService.filterCoursesByCategoryWithPagination(
                 idCategory, sortPrice, level, priceRange, rating, duration, popular,
-                page, PAGE_SIZE
+                page, PAGE_SIZE, userId
         );
 
         // Đếm tổng số khóa học sau lọc
-        int totalCourses = courseService.countFilteredCoursesByCategory(
-                idCategory, sortPrice, level, priceRange, rating, duration, popular
-        );
+        int totalCourses = listCourse.size();
 
         int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 

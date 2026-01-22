@@ -26,20 +26,10 @@ public class Course implements Serializable {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    // này thêm để làm đủ cho trang course-detail
-    private List<String> tags;          // danh sách tag
-    private List<Lesson> lessons;       // danh sách bài học
-    private int lessonCount;            // số lượng bài học
-    private double totalDurationHours;  // tổng thời lượng
-    private List<Review> reviews;       // danh sách review
-    private String categoryName;        // tên category
-    private String parentCategoryName;  // tên category cha
+    public Course() {
+    }
 
-    // này làm riêng cho wishlist
-    public boolean inWishlist = false;
-    private int wishlistId;
-
-    public Course(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt, List<String> tags, List<Lesson> lessons, int lessonCount, double totalDurationHours, List<Review> reviews, String categoryName, String parentCategoryName) {
+    public Course(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -58,16 +48,6 @@ public class Course implements Serializable {
         this.durationHours = durationHours;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.tags = tags;
-        this.lessons = lessons;
-        this.lessonCount = lessonCount;
-        this.totalDurationHours = totalDurationHours;
-        this.reviews = reviews;
-        this.categoryName = categoryName;
-        this.parentCategoryName = parentCategoryName;
-    }
-
-    public Course() {
     }
 
     public int getId() {
@@ -142,7 +122,7 @@ public class Course implements Serializable {
         this.studentCount = studentCount;
     }
 
-    public boolean isFeatured() {
+    public boolean getIsFeatured() {
         return isFeatured;
     }
 
@@ -174,11 +154,11 @@ public class Course implements Serializable {
         isPublic = aPublic;
     }
 
-    public Integer getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -214,82 +194,6 @@ public class Course implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public List<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(List<Lesson> lessons) {
-        this.lessons = lessons;
-    }
-
-    public int getLessonCount() {
-        return lessonCount;
-    }
-
-    public void setLessonCount(int lessonCount) {
-        this.lessonCount = lessonCount;
-    }
-
-    public double getTotalDurationHours() {
-        return totalDurationHours;
-    }
-
-    public void setTotalDurationHours(double totalDurationHours) {
-        this.totalDurationHours = totalDurationHours;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getParentCategoryName() {
-        return parentCategoryName;
-    }
-
-    public void setParentCategoryName(String parentCategoryName) {
-        this.parentCategoryName = parentCategoryName;
-    }
-
-    // này làm cho wishlist
-    public boolean isInWishlist() {
-        return inWishlist;
-    }
-
-    public void setInWishlist(boolean inWishlist) {
-        this.inWishlist = inWishlist;
-    }
-
-    public int getWishlistId() {
-        return wishlistId;
-    }
-    public void setWishlistId(int wishlistId) {
-        this.wishlistId = wishlistId;
-    }
-
     @Override
     public String toString() {
         return "Course{" +
@@ -311,13 +215,6 @@ public class Course implements Serializable {
                 ", durationHours=" + durationHours +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", tags=" + tags +
-                ", lessons=" + lessons +
-                ", lessonCount=" + lessonCount +
-                ", totalDurationHours=" + totalDurationHours +
-                ", reviews=" + reviews +
-                ", categoryName='" + categoryName + '\'' +
-                ", parentCategoryName='" + parentCategoryName + '\'' +
-                '}';
+                '}' + "\n";
     }
 }

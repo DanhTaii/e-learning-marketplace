@@ -41,7 +41,7 @@
         <div class="grid">
             <div class="error-container">
                 <div class="error-code">System Error</div>
-                <h1 class="error-msg">Ối! Hệ thống không kết nối được cơ sở dữ liệu.</h1>
+                <h1 class="error-msg">Ối! Hệ thống đang bị lỗi</h1>
             </div>
 
             <%-- Xóa tạm thời điều kiện Admin để kiểm tra xem nó có hiện không --%>

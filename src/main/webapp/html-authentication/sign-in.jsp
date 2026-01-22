@@ -40,6 +40,14 @@
                     <div class="box-2-2">
                         <%
                             String error = (String) request.getAttribute("error");
+                            if (error == null) {
+                                error = request.getParameter("error");
+                            }
+
+                            if ("auth_required".equals(error)) {
+                                error = "Vui lòng đăng nhập để thực hiện tính năng này!";
+                            }
+
                             if (error == null) error = "";
                             String email = (String) request.getParameter("email");
                             if (email == null) email = "";

@@ -16,22 +16,17 @@ public class CourseCardDto implements Serializable {
     private double durationHours;
     private int studentCount;
     private boolean inWishlist;
+    private int lessonCount;
 
     public CourseCardDto() {
     }
 
-    public CourseCardDto(int id, String title, String authorName, int userId, int price, int discountPrice, String thumbnailUrl, String level, double avgRating, double durationHours, int studentCount, int wishlistId) {
-        this.id = id;
-        this.title = title;
-        this.authorName = authorName;
-        this.userId = userId;
-        this.price = price;
-        this.discountPrice = discountPrice;
-        this.thumbnailUrl = thumbnailUrl;
-        this.level = level;
-        this.avgRating = avgRating;
-        this.durationHours = durationHours;
-        this.studentCount = studentCount;
+    public int getLessonCount() {
+        return lessonCount;
+    }
+
+    public void setLessonCount(int lessonCount) {
+        this.lessonCount = lessonCount;
     }
 
     public boolean isInWishlist() {
