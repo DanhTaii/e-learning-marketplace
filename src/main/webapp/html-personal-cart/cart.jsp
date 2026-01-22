@@ -11,10 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shopping Cart</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/cart.css?v=1.0.5">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/home.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/cart.css?v=<%=System.currentTimeMillis()%>">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -420,6 +421,21 @@
                                                     <fmt:formatNumber value="${c.price}" type="number" pattern="###,###"/> đ
                                                 </div>
                                             </div>
+                                            <a href="" class="turn-page">
+                                                <div class="hover-actions">
+                                                    <button type="submit" style="font-size: 1.5rem"
+                                                            class="btn-add-cart dark-button"
+                                                            onclick="addToCart(${c.id})">Thêm vào giỏ
+                                                    </button>
+
+                                                    <button type="button"
+                                                            class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                            onclick="addToWishlist(this, ${c.id})"
+                                                            title="Thêm vào danh sách yêu thích">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </a>
@@ -536,6 +552,7 @@
         window.location.href = "cart-manager?action=selectAll&status=" + isChecked;
     }
 </script>
+<script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
 </html>

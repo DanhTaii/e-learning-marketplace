@@ -66,6 +66,14 @@
                                     <span>Lịch sử giao dịch</span>
                                 </a>
                             </li>
+                            <c:if test="${user.role == 'ADMIN'}">
+                                <li>
+                                    <a href="admin/dashboard" class="menu-link">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                        <span>Admin</span>
+                                    </a>
+                                </li>
+                            </c:if>
                         </ul>
                     </nav>
                 </div>
@@ -87,7 +95,8 @@
                             <div class="form-group">
                                 <label class="style__sub-title">Tên người dùng</label>
                                 <input type="text" name="username" id="user_name" value="${user.username}">
-                                <span id="error_username" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_username" class="error-client"
+                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                         </div>
 
@@ -103,8 +112,10 @@
                             </div>
                             <div class="form-group">
                                 <label class="style__sub-title">Số điện thoại</label>
-                                <input type="tel" id="user_phone" name="phone" value="${user.phone}" placeholder="090x xxx xxx">
-                                <span id="error_phone" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <input type="tel" id="user_phone" name="phone" value="${user.phone}"
+                                       placeholder="090x xxx xxx">
+                                <span id="error_phone" class="error-client"
+                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                         </div>
 
@@ -146,11 +157,12 @@
             if (name === initialName && phone === initialPhone) {
                 e.preventDefault();
                 alert("Bạn chưa thay đổi thông tin nào!");
-                return false;}
+                return false;
+            }
 
-            let usernameError =Validator.checkUsername(name);
+            let usernameError = Validator.checkUsername(name);
             if (usernameError) {
-                $('#error_username').text( usernameError);
+                $('#error_username').text(usernameError);
                 isValid = false;
             }
 

@@ -1,3 +1,16 @@
+.grid-2 {
+    max-width: 1100px; /* Tăng nhẹ độ rộng vì form đăng ký dài hơn */
+    margin: 60px auto;
+    border-radius: 10px;
+    overflow: hidden; /* Đảm bảo bo góc ăn vào cả 2 box con */
+}
+
+/* 2. Hàng chứa 2 cột: Ép chúng cao bằng nhau */
+.grid__row-2 {
+    display: flex;
+    align-items: stretch;
+}
+
 .header__button-box {
     display: flex;
     margin-left: auto;
@@ -32,11 +45,10 @@
     background-color: var(--dark-blue);
     color: var(--white-color);
     padding: 60px 30px;
-    margin: 60px 0;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    height: 558px;
+    height: 100%;
 }
 
 .box-1__title {
@@ -61,7 +73,6 @@
 
 .box-2-2 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 60px 0;
     padding: 60px 50px 80px;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -118,4 +129,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.error-client {
+    display: block;
+    min-height: 1.8rem; /* Giữ chỗ sẵn cho dòng lỗi */
+    font-size: 1.3rem;
+    color: red;
+    margin-top: 4px;
+    padding-left: 1.6rem;
 }

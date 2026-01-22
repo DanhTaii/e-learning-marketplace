@@ -31,8 +31,11 @@ public class LoginGoogleController extends HttpServlet {
             return;
         }
 
-        // Bước 1: Gọi hàm để đổi mã code lấy Access Token
-        String accessToken = GoogleUtils.getToken(code);
+        // Lấy Redirect URI đúng cho môi trường hiện tại
+        String currentRedirectUri = GoogleConstants.getRedirectUri();
+
+        // Đổi mã code lấy token
+        String accessToken = GoogleUtils.getToken(code, currentRedirectUri);
 
         // Bước 2: Dùng Access Token lấy thông tin User (Email, Tên, Avatar)
         GoogleUser googleUser = GoogleUtils.getUserInfo(accessToken);

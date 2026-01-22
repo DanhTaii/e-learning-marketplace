@@ -2,7 +2,9 @@ package vn.edu.nlu.fit.elearning.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GoogleUser {
+import java.io.Serializable;
+
+public class GoogleUser implements Serializable {
     private String id;
     private String email;
 
