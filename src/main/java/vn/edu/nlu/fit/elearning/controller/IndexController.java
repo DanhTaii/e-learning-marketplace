@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
+import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
@@ -47,9 +48,8 @@ public class IndexController extends HttpServlet {
 
         // 2. Banner stats
         UserService userService = new UserService();
-        request.setAttribute("totalUsers", userService.totalUsers());
-        request.setAttribute("totalCourses", courseService.totalCourses());
-        request.setAttribute("avgRating", courseService.avgRating());
+        User user = userService.getUserById(userId);
+        request.setAttribute("user", user);
 
         // 3.Tag
         TagService tagService = new TagService();

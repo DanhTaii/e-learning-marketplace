@@ -4,7 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
+import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.services.CategoryService;
+import vn.edu.nlu.fit.elearning.services.TagService;
+import vn.edu.nlu.fit.elearning.services.UserService;
 import vn.edu.nlu.fit.elearning.services.WishlistService;
 
 import java.io.IOException;
@@ -45,6 +50,16 @@ public class MyWishlistController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/personal/my-wishlist");
             return;
         }
+
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
+        UserService userService = new UserService();
+        User user = userService.getUserById(userId);
+        request.setAttribute("user", user);
 
         // Nếu không có courseId thì hiển thị danh sách wishlist
         List<CourseCardDto> wishlistCourses = ws.getWishlistCourses(userId);

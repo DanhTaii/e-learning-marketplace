@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/profile.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/profile.css?v=1.0.3">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -30,7 +30,9 @@
                 <div class="profile-sidebar">
                     <div class="profile-block">
                         <div class="profile-block__avatar">
-                            <c:out value="${user.username}"/>
+                            <div class="fix-image-box">
+                                <img src="${user.avatarUrl}" alt="" class="turn-page fix-image">
+                            </div>
                         </div>
                         <div class="profile-block__info">
                             <h2 class="profile-block__title">${user.username}</h2>
