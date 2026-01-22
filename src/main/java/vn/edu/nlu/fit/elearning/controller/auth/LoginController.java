@@ -43,7 +43,7 @@
             User canLogin = userService.login(email, pass);
             if (canLogin != null) {
                 HttpSession session = request.getSession();
-
+                canLogin.setPassword(null);
                 session.setAttribute("userId", canLogin.getId());
                 session.setAttribute("userSession", canLogin);
 

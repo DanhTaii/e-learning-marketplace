@@ -1,8 +1,9 @@
-package vn.edu.nlu.fit.elearning.controller.personal;
+package vn.edu.nlu.fit.elearning.controller.personal.my_wishlist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.WishlistService;
 
@@ -36,7 +37,7 @@ public class MyWishlistController extends HttpServlet {
                 String idParam = request.getParameter("id");
                 if (idParam != null && !idParam.isEmpty()) {
                     int id = Integer.parseInt(idParam);
-                    ws.removeCourseFromWishlist(id);
+                    ws.removeCourseFromWishlist(userId, courseId);
                 }
             } else {
                 ws.addCourseToWishlist(userId, courseId);
@@ -46,7 +47,7 @@ public class MyWishlistController extends HttpServlet {
         }
 
         // Nếu không có courseId thì hiển thị danh sách wishlist
-        List<Course> wishlistCourses = ws.getWishlistCourses(userId);
+        List<CourseCardDto> wishlistCourses = ws.getWishlistCourses(userId);
         request.setAttribute("wishlistCourses", wishlistCourses);
         request.getRequestDispatcher("/html-personal/my-wishlist.jsp").forward(request, response);
 
@@ -54,6 +55,17 @@ public class MyWishlistController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("userId") == null) {
+            response.sendError(401); // Unauthorized
+            return;
+        }
+        int userId = (int) session.getAttribute("userId");
+        System.out.println(userId);
+        int courseId = Integer.parseInt(request.getParameter("courseId"));
 
+        boolean added = ws.toggleWishlist(userId, courseId);
+
+        response.getWriter().write(added ? "added" : "removed");
     }
 }

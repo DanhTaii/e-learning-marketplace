@@ -24,12 +24,15 @@ public class AddCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int userId = (int) session.getAttribute("userId");
+
         int id = Integer.parseInt(request.getParameter("id"));
-        Course course = courseService.getCourse(id);
-        if(course == null){
+        Course course = courseService.getCourse(id, userId);
+        if (course == null) {
             return;
         }
-        HttpSession session = request.getSession();
+
         Cart c = (Cart) session.getAttribute("cart");
         if (c == null) c = new Cart();
         c.addCourse(course);

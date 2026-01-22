@@ -60,37 +60,37 @@ public class CourseService {
         return Math.round(result * 10.0) / 10.0;
     }
 
-    public List<CourseCardDto> getThreeCoursesWereLiked() {
-        return cd.findThreeCoursesWereLiked();
+    public List<CourseCardDto> getThreeCoursesWereLiked(Integer userId) {
+        return cd.findThreeCoursesWereLiked(userId);
     }
 
-    public List<CourseCardDto> getSixCoursesMostPopular() {
-        return cd.findSixCoursesMostPopular();
+    public List<CourseCardDto> getSixCoursesMostPopular(Integer userId) {
+        return cd.findSixCoursesMostPopular(userId);
     }
 
-    public CourseCardDto getCoursesMostPopular() {
-        return cd.findCourseMostPopular();
+    public CourseCardDto getCoursesMostPopular(Integer userId) {
+        return cd.findCourseMostPopular(userId);
     }
 
-    public List<CourseCardDto> getSixCoursesLast() {
-        return cd.findSixCoursesLast();
+    public List<CourseCardDto> getSixCoursesLast(Integer userId) {
+        return cd.findSixCoursesLast(userId);
     }
 
-    public List<CourseCardDto> getCoursesPopular() {
-        return cd.findCoursesMostPopular();
+    public List<CourseCardDto> getCoursesPopular(Integer userId) {
+        return cd.findCoursesMostPopular(userId);
     }
 
-    public List<CourseCardDto> getCoursesLast() {
-        return cd.findCoursesLast();
+    public List<CourseCardDto> getCoursesLast(Integer userId) {
+        return cd.findCoursesLast(userId);
     }
 
-    public Course getCourse(int id) {
-        return cd.findCourseByIdForDetail(id);
+    public Course getCourse(int id, int userId) {
+        return cd.findCourseByIdForDetail(id, userId);
     }
 
-    public List<CourseCardDto> getCourseCards() {
-        return cd.findAllCoursesCard();
-    }
+//    public List<CourseCardDto> getCourseCards(Integer userId) {
+//        return cd.findAllCoursesCard(userId);
+//    }
 
     public List<CourseCardDto> getCoursesByIdCategory(int idCategory) {
         return cd.findCoursesByIdCategory(idCategory);

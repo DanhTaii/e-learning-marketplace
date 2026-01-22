@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.WishlistDao;
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Course;
 
 import java.util.List;
@@ -17,16 +18,15 @@ public class WishlistService {
         // TODO: Implement delete logic
     }
 
-    public boolean addCourseToWishlist(int userId, int courseId) {
-        if (wd.exists(userId, courseId)) return false;
+    public int addCourseToWishlist(int userId, int courseId) {
         return wd.addWishlist(userId, courseId);
     }
 
-    public int removeCourseFromWishlist(int id) {
-        return wd.delete(id);
+    public int removeCourseFromWishlist(int userId, int courseId) {
+        return wd.delete(userId, courseId);
     }
 
-    public List<Course> getWishlistCourses(int userId) {
+    public List<CourseCardDto> getWishlistCourses(int userId) {
         return wd.findWishlistCoursesByUser(userId);
 //        return null;
     }
@@ -35,4 +35,13 @@ public class WishlistService {
         return wd.exists(userId, courseId);
     }
 
+    public boolean toggleWishlist(int userId, int courseId) {
+        if (wd.exists(userId, courseId)) {
+            wd.delete(userId, courseId);
+            return false;
+        } else {
+            wd.addWishlist(userId, courseId);
+            return true;
+        }
+    }
 }

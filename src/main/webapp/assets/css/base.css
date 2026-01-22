@@ -971,6 +971,52 @@ img {
     background-color: var(--background-color);
 }
 
+/* Container của nút wishlist */
+.wishlist-btn {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
+.wishlist-btn:hover {
+    transform: scale(1.1); /* Phóng to nhẹ khi di chuột */
+    border-color: #ff4757;
+    background-color: #fffafb;
+}
 
+/* Định dạng icon trái tim mặc định */
+.wishlist-btn i {
+    color: #ccc; /* Màu xám khi chưa thích */
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
+/* Khi nút ở trạng thái Active (Đã thích) */
+.wishlist-btn.active {
+    border-color: #ff4757;
+}
+
+.wishlist-btn.active i {
+    color: #ff4757 !important; /* Màu đỏ trái tim */
+    transform: scale(1.2); /* Trái tim to hơn một chút */
+}
+
+/* Hiệu ứng nảy (Animation) khi click */
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1.2); }
+}
+
+.animate-heart {
+    animation: heartBeat 0.4s linear;
+}

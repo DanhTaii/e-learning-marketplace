@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <title>My wishlist</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/my-course.css?v=3">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/card.css">
+    <link rel="stylesheet" href="assets/css/my-course.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
@@ -37,47 +37,66 @@
 
         <c:otherwise>
             <div class="grid__row-2">
-                <c:forEach var="course" items="${wishlistCourses}">
+                <c:forEach var="c" items="${wishlistCourses}">
                     <div class="grid__column-3">
-                        <a href="course-detail?id=${course.id}" class="turn-page">
+                        <a href="course-detail?courseId=${c.id}" class="turn-page">
                             <div class="product__small-advertisement">
                                 <div class="small-advertisement__image">
-                                    <img src="${course.thumbnailUrl}" alt="${course.title}" class="img-2">
+                                    <img src="${c.thumbnailUrl}"
+                                         alt="${c.title}" class="img-2">
                                 </div>
                                 <div class="small-advertisement__content">
                                     <div class="content__top">
-                                        <div class="content__author-name text-medium">${course.authorName}</div>
-                                        <div class="content__rate">
-                                            <i class="text-medium fa-regular fa-star"></i>
-                                            <span class="text-medium rate__number">${course.rating}</span>
+                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                        <div class="content__rate content__rate-2">
+                                            <div class="rate__icon"><i
+                                                    class="text-medium fa-regular fa-star"></i></div>
+                                            <div class="text-medium rate__number">${c.avgRating}</div>
                                         </div>
                                     </div>
-                                    <div class="text-paragraph test-text">
-                                        <p>${course.title}</p>
-                                    </div>
+                                    <div class="text-paragraph test-text"><p>${c.title}</p></div>
                                     <div class="content__quick-info">
                                         <div class="quick-info__level">
-                                            <i class="fa-solid fa-signal icon"></i>
-                                            <span class="level__text text-medium">${course.level}</span>
+                                            <div class="level__icon icon"><i
+                                                    class="text-medium fa-solid fa-signal"></i></div>
+                                            <div class="level__text text-medium">${c.level}</div>
                                         </div>
                                         <div class="quick-info__users">
-                                            <i class="fa-solid fa-users icon"></i>
-                                            <span class="users__text text-medium">${course.studentCount}</span>
+                                            <div class="users__icon icon"><i
+                                                    class="text-medium fa-solid fa-users"></i></div>
+                                            <div class="users__text text-medium">${c.studentCount}</div>
                                         </div>
                                         <div class="quick-info__time">
-                                            <i class="fa-regular fa-clock icon"></i>
-                                            <span class="time__text text-medium">${course.durationHours}h</span>
+                                            <div class="time__icon icon"><i
+                                                    class="text-medium fa-regular fa-clock"></i></div>
+                                            <div class="time__text text text-medium">${c.durationHours}h</div>
                                         </div>
                                     </div>
                                     <div class="content__price">
-                                        <div class="price__new">${course.price - course.discountPrice}đ</div>
-                                        <div class="price__old">${course.price}đ</div>
-                                        <div class="quick-info__save">
-                                            <a href="my-wishlist?id=${course.wishlistId}&courseId=${course.id}" class="turn-page">
-                                                <i class="quick-info__save__icon fa-solid fa-heart" style="color:red;"></i>
-                                            </a>
+                                        <div class="price__new"><fmt:formatNumber
+                                                value="${c.price - c.discountPrice}" type="number"
+                                                pattern="###,###"></fmt:formatNumber> đ
+                                        </div>
+                                        <div class="price__old"><fmt:formatNumber value="${c.price}"
+                                                                                  type="number"
+                                                                                  pattern="###,###"></fmt:formatNumber>đ
                                         </div>
                                     </div>
+                                    <a href="" class="turn-page">
+                                        <div class="hover-actions">
+                                            <button type="submit" style="font-size: 1.5rem"
+                                                    class="btn-add-cart dark-button"
+                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
+                                            </button>
+
+                                            <button type="button"
+                                                    class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                    onclick="addToWishlist(this, ${c.id})"
+                                                    title="Thêm vào danh sách yêu thích">
+                                                <i class="fa-solid fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </a>
@@ -89,7 +108,8 @@
 </div>
 
 <jsp:include page="/header-footer/footer.jsp"/>
-
-
 </body>
+
+<script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>
