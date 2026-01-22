@@ -16,6 +16,7 @@ public class CourseCardDto implements Serializable {
     private double durationHours;
     private int studentCount;
     private boolean inWishlist;
+    private boolean enrolled;
     private int lessonCount;
 
     public CourseCardDto() {
@@ -124,6 +125,13 @@ public class CourseCardDto implements Serializable {
     public void setDurationHours(double durationHours) {
         this.durationHours = durationHours;
     }
+    public boolean isEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(boolean enrolled) {
+        this.enrolled = enrolled;
+    }
 
     @Override
     public String toString() {
@@ -141,5 +149,17 @@ public class CourseCardDto implements Serializable {
                 ", studentCount=" + studentCount +
                 ", inWishlist=" + inWishlist +
                 '}' + "\n";
+    }
+    public String getDurationText() {
+        int hours = (int) this.durationHours;
+        int minutes = (int) ((this.durationHours - hours) * 60);
+        if(hours == 0){
+            return minutes + "p";
+        }else if(minutes == 0) {
+            return hours + "h ";
+        }else{
+            return hours + "h " + minutes + "p";
+        }
+
     }
 }
