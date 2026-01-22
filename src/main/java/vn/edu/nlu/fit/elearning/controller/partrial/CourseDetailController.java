@@ -39,10 +39,15 @@ public class CourseDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Course c = cs.getCourse(id);
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userSession");
+
+        String userIdStr = request.getParameter("userId");
+        int userId = 0;
+        if (userIdStr != null) {
+            userId = Integer.parseInt(userIdStr);
+        }
+        Course c = cs.getCourse(id, userId);
 
         // này làm cho phần khoa hoc da mua
         boolean isEnrolled = false;

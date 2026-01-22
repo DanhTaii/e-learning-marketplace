@@ -129,4 +129,22 @@ public class CourseCardDto implements Serializable {
     public void setDurationHours(double durationHours) {
         this.durationHours = durationHours;
     }
+
+    @Override
+    public String toString() {
+        return "CourseCardDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", userId=" + userId +
+                ", price=" + price +
+                ", discountPrice=" + discountPrice +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", level='" + level + '\'' +
+                ", avgRating=" + avgRating +
+                ", durationHours=" + durationHours +
+                ", studentCount=" + studentCount +
+                ", inWishlist=" + inWishlist +
+                '}' + "\n";
+    }
 }

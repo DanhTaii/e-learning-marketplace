@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.partrial.resultSearch;
+package vn.edu.nlu.fit.elearning.controller.partrial.result_search;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

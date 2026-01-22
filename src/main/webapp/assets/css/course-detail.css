@@ -12,12 +12,19 @@
 }
 
 .dark-bg {
-    background: var(--dark-blue);
+    background: var(--dark-blue) !important;
     height: 34rem;
+
+    width: 100%; /* Đảm bảo nó trải dài hết màn hình */
+    position: relative;
+    z-index: 1;
 }
 
 .course-detail__container {
     margin-top: -35rem;
+    position: relative; /* Bắt buộc phải có position thì z-index mới có tác dụng */
+    z-index: 2;         /* Phải lớn hơn z-index: 1 của .dark-bg */
+    /*margin-top: -30rem; !* Giữ nguyên logic kéo nội dung lên trên của bạn *!*/
 }
 
 .section-3_li {

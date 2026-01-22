@@ -33,6 +33,12 @@ public class IndexController extends HttpServlet {
 // TẠO LỖI GIẢ ĐỂ TEST
 //        String testNull = null;
 //        int length = testNull.length(); // Dòng này chắc chắn ném ra NullPointerException
+        HttpSession session = request.getSession();
+        int userId = 0;
+
+        if (session != null && session.getAttribute("userId") != null) {
+            userId = (Integer) session.getAttribute("userId");
+        }
 
         // 1. Category
         CategoryService categoryService = new CategoryService();
@@ -50,52 +56,18 @@ public class IndexController extends HttpServlet {
         request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học
-        CourseCardDto courseMostPopular = courseService.getCoursesMostPopular();
-        List<CourseCardDto> coursesLiked = courseService.getThreeCoursesWereLiked();
-        List<CourseCardDto> coursesLastest = courseService.getSixCoursesLast();
-        List<CourseCardDto> coursesFeature = courseService.getSixCoursesMostPopular();
-//
-//        System.out.println("coursesLiked: " + coursesLiked);
-//        System.out.println("coursesLastest: " + coursesLastest);
-//        System.out.println("coursesFeature: " + coursesFeature);
+        CourseCardDto courseMostPopular = courseService.getCoursesMostPopular(userId);
+        List<CourseCardDto> coursesLiked = courseService.getThreeCoursesWereLiked(userId);
+        List<CourseCardDto> coursesLastest = courseService.getSixCoursesLast(userId);
+        List<CourseCardDto> coursesFeature = courseService.getSixCoursesMostPopular(userId);
 
         request.setAttribute("courseMostPopular", courseMostPopular);
         request.setAttribute("coursesLiked", coursesLiked);
         request.setAttribute("coursesLastest", coursesLastest);
         request.setAttribute("coursesFeature", coursesFeature);
 
-        // xử lý cho phần wishlist
-        HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("userId") != null) {
-            int userId = (Integer) session.getAttribute("userId");
-
-            List<Course> wishlistCourses = wishlistService.getWishlistCourses(userId);
-            Set<Integer> wishlistCourseIds = new HashSet<>();
-            if (wishlistCourses != null) {
-                for (Course c : wishlistCourses) {
-                    wishlistCourseIds.add(c.getId()); // courseId
-                }
-            }
-
-
-            // Đánh dấu trạng thái wishlist cho tất cả course hiển thị
-//            markWishlistStatus(coursesLiked, wishlistCourseIds);
-//            markWishlistStatus(coursesLastest, wishlistCourseIds);
-//            markWishlistStatus(coursesFeature, wishlistCourseIds);
-        }
-
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
-
-//    private void markWishlistStatus(List<Course> courses, Set<Integer> wishlistCourseIds) {
-//        if (courses != null) {
-//            for (Course course : courses) {
-//                if (course != null) {
-//                    course.setInWishlist(wishlistCourseIds.contains(course.getId()));
-//                }
-//            }
-//        }
-//    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

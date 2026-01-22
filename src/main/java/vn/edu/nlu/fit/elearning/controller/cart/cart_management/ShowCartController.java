@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 
@@ -23,7 +24,10 @@ public class ShowCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CourseCardDto> coursesLastest = courseService.getSixCoursesLast();
+        HttpSession session = request.getSession();
+        int userId = (int) session.getAttribute("userId");
+
+        List<CourseCardDto> coursesLastest = courseService.getSixCoursesLast(userId);
         request.setAttribute("coursesLastest", coursesLastest);
         request.getRequestDispatcher("/html-personal-cart/cart.jsp").forward(request, response);
     }

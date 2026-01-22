@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.partrial.resultSearch;
+package vn.edu.nlu.fit.elearning.controller.partrial.result_search;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,26 +12,17 @@ import vn.edu.nlu.fit.elearning.services.TagService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ResultSearchByCategoriesController", value = "/result-search/by-category")
-public class ResultSearchByCategoriesController extends HttpServlet {
+@WebServlet(name = "ResultSearchByTitleController", value = "/result-search/by-title")
+public class ResultSearchByTitleController extends HttpServlet {
 
-    private static final int PAGE_SIZE = 12;  // Số khóa học mỗi trang
+    private static final int PAGE_SIZE = 12;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy id category
-        int idCategory;
-        try {
-            idCategory = Integer.parseInt(request.getParameter("id"));
-        } catch (NumberFormatException | NullPointerException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid category ID");
-            return;
-        }
-
-        CategoryService cs = new CategoryService();
-        Category cate = cs.getCategoryById(idCategory);
-        request.setAttribute("cate", cate);
-        request.setAttribute("mode", "category");
+        // Lấy từ khóa search
+        String search = request.getParameter("title");
+        if (search == null) search = "";
+        search = search.trim();
 
         // Lấy page
         int page = 1;
@@ -55,29 +46,33 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 
         CourseService courseService = new CourseService();
 
-        // Lấy danh sách khóa học đã lọc + phân trang
-        List<CourseCardDto> listCourse = courseService.filterCoursesByCategoryWithPagination(
-                idCategory, sortPrice, level, priceRange, rating, duration, popular,
+        // Lấy list + phân trang
+        List<CourseCardDto> listCourse = courseService.filterCoursesByTitleWithPagination(
+                search, sortPrice, level, priceRange, rating, duration, popular,
                 page, PAGE_SIZE
         );
 
-        // Đếm tổng số khóa học sau lọc
-        int totalCourses = courseService.countFilteredCoursesByCategory(
-                idCategory, sortPrice, level, priceRange, rating, duration, popular
+        // Đếm tổng
+        int totalCourses = courseService.countFilteredCoursesByTitle(
+                search, sortPrice, level, priceRange, rating, duration, popular
         );
 
         int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 
         // Set attributes
         request.setAttribute("listCourse", listCourse);
+        request.setAttribute("search", search);
+        request.setAttribute("mode", "title");
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
 
-        // Set base URL cho phân trang trong JSP
+        // Set base URL cho phân trang (encode title nếu có dấu tiếng Việt)
         StringBuilder paginationUrl = new StringBuilder(request.getContextPath());
-        paginationUrl.append(request.getServletPath());
+        paginationUrl.append(request.getServletPath());  // /result-search/by-title
 
-        paginationUrl.append("?id=").append(idCategory);
+        if (!search.isEmpty()) {
+            paginationUrl.append("?title=").append(java.net.URLEncoder.encode(search, "UTF-8"));
+        }
 
         if (sortPrice != null) paginationUrl.append("&sortPrice=").append(sortPrice);
         if (level != null) paginationUrl.append("&level=").append(level);
@@ -100,6 +95,5 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

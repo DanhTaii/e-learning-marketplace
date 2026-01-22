@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.controller.partrial.allCourses;
+package vn.edu.nlu.fit.elearning.controller.partrial.all_courses;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

@@ -12,9 +12,9 @@
     <base href="${pageContext.request.contextPath}/">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/course-detail.css?v=1.0.6">
+    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/course-detail.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/modal-notification.css">
 
@@ -37,39 +37,42 @@
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
-                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
+                                <span class="container-2__sold-price"><fmt:formatNumber
+                                        value="${c.price - c.discountPrice}" type="number"
+                                        pattern="###,###"></fmt:formatNumber> đ</span>
+                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}"
+                                                                                            type="number"
+                                                                                            pattern="###,###"></fmt:formatNumber> đ</span>
                             </div>
                         </div>
                         <div class="container-2__option-group">
-                                <c:choose>
+                            <c:choose>
 
-                                    <c:when test="${isEnrolled}">
-                                        <a href="my-course/detail?courseId=${c.id}" class="turn-page">
-                                            <div class="header__button add__button" style="margin-bottom: 3rem">
-                                                <button type="button" class="container-2__button-add button__btn">
-                                                    Vào học ngay
-                                                </button>
-                                            </div>
-                                        </a>
-                                    </c:when>
+                                <c:when test="${isEnrolled}">
+                                    <a href="my-course/detail?courseId=${c.id}" class="turn-page">
+                                        <div class="header__button add__button" style="margin-bottom: 3rem">
+                                            <button type="button" class="container-2__button-add button__btn">
+                                                Vào học ngay
+                                            </button>
+                                        </div>
+                                    </a>
+                                </c:when>
 
-                                    <c:otherwise>
-                                        <div class="container-2__option">
-                                            <div class="header__button add__button">
-                                                <button type="button" class="container-2__button-add button__btn"
-                                                        onclick="addToCart(${c.id})">
-                                                    Thêm vào giỏ hàng
-                                                </button>
-                                            </div>
+                                <c:otherwise>
+                                    <div class="container-2__option">
+                                        <div class="header__button add__button">
+                                            <button type="button" class="container-2__button-add button__btn"
+                                                    onclick="addToCart(${c.id})">
+                                                Thêm vào giỏ hàng
+                                            </button>
+                                        </div>
 
-                                        <a href="#popup__add-to-wishlist-success" class="turn-page">
-                                            <div class="header__button bookmark__button">
-                                                <button class="dark-button">
-                                                    <i class="fa-solid fa-heart container-2__icon"></i>
-                                                </button>
-                                            </div>
-                                        </a>
+                                        <button type="button"
+                                                class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                onclick="addToWishlist(this, ${c.id})"
+                                                title="Thêm vào danh sách yêu thích">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </button>
                                     </div>
 
                                     <a href="buy-now?id=${c.id}">
@@ -238,9 +241,9 @@
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
                                         <c:forEach var="t" items="${tags}">
-<%--                                            <c:if test="${loop.index < 3}">--%>
-                                                <li class="section-3_li">${t.name}</li>
-<%--                                            </c:if>--%>
+                                            <%--                                            <c:if test="${loop.index < 3}">--%>
+                                            <li class="section-3_li">${t.name}</li>
+                                            <%--                                            </c:if>--%>
                                         </c:forEach>
                                     </ul>
                                 </div>
@@ -318,66 +321,6 @@
                                 </div>
                             </div>
                         </c:forEach>
-
-                        <%--                        <div class="review-box__comment">--%>
-                        <%--                            <div class="comment__user header__user">--%>
-                        <%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
-                        <%--                                     class="user__avatar1">--%>
-                        <%--                            </div>--%>
-                        <%--                            <div class="comment__box">--%>
-                        <%--                                <div class="box__name box">--%>
-                        <%--                                    <div class="review-in4">--%>
-                        <%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
-                        <%--                                        <span class="review__time">5 tháng trước</span>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                                <div class="box__date box">--%>
-                        <%--                                    <div class="star">--%>
-                        <%--                                        <div class="text-medium regular">4.6</div>--%>
-                        <%--                                        <div class="star-icon"><i class="fa-solid fa-star"--%>
-                        <%--                                                                  style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                        </div>--%>
-
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                                <div class="box__comment box">--%>
-                        <%--                                    <span class="">Bài học bổ ích quá, e cảm ơn Thầy</span>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                        <div class="review-box__comment">--%>
-                        <%--                            <div class="comment__user header__user">--%>
-                        <%--                                <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""--%>
-                        <%--                                     class="user__avatar1">--%>
-                        <%--                            </div>--%>
-                        <%--                            <div class="comment__box">--%>
-                        <%--                                <div class="box__name box">--%>
-                        <%--                                    <div class="review-in4">--%>
-                        <%--                                        <span class="review__name">Hoang Danh Tai</span>--%>
-                        <%--                                        <span class="review__time">5 tháng trước</span>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                                <div class="box__date box">--%>
-                        <%--                                    <div class="star">--%>
-                        <%--                                        <div class="text-medium regular">4.6</div>--%>
-                        <%--                                        <div class="star-icon"><i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                            <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>--%>
-                        <%--                                        </div>--%>
-
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                                <div class="box__comment box">--%>
-                        <%--                                    <span class="">Tôi cảm thấy hứng thú và động viên hơn để tiếp tục học hỏi sau khi hoàn thành khoá học này.</span>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
 
                     </div>
                 </div>
@@ -475,4 +418,6 @@
             });
     }
 </script>
+<script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>

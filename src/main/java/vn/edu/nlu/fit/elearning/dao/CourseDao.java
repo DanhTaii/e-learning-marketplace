@@ -86,121 +86,151 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     }
 
     // 3 khóa học được yêu thích nhiều nhất
-    public List<CourseCardDto> findThreeCoursesWereLiked() {
+    public List<CourseCardDto> findThreeCoursesWereLiked(Integer userId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours," +
-                    "c.author_name, c.price, c.discount_price, AVG(r.rating) AS avgRating,\n" +
-                    "COUNT(w.course_id) AS wishlist_count,\n" +
-                    "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM wishlist w JOIN courses c ON w.course_id = c.id\n" +
-                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE\n" +
-                    "GROUP BY c.id\n" +
-                    "ORDER BY wishlist_count DESC\n" +
-                    "LIMIT 3;").mapToBean(CourseCardDto.class).list();
+                            "c.author_name, c.price, c.discount_price, AVG(r.rating) AS avgRating,\n" +
+                            "COUNT(DISTINCT w_total.user_id) AS wishlist_count,\n" +
+                            "COUNT(DISTINCT e.id) AS student_count,\n" +
+                            "(CASE WHEN :userId IS NOT NULL AND w_user.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist\n" +
+                            "FROM courses c \n" +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w_total ON w_total.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w_user ON w_user.course_id = c.id AND w_user.user_id = :userId\n" +
+                            "WHERE c.is_public = TRUE\n" +
+                            "GROUP BY c.id, w_user.user_id\n" +
+                            "ORDER BY wishlist_count DESC\n" +
+                            "LIMIT 3;")
+                    .bind("userId", userId)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
     // 6 khóa học mới nhất
-    public List<CourseCardDto> findSixCoursesLast() {
+    public List<CourseCardDto> findSixCoursesLast(Integer userId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, " +
-                    "c.discount_price, AVG(r.rating) AS avgRating,\n" +
-                    "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM courses c\n" +
-                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE\n" +
-                    "GROUP BY c.id\n" +
-                    "ORDER BY c.created_at DESC\n" +
-                    "LIMIT 6;").mapToBean(CourseCardDto.class).list();
+                            "c.discount_price, AVG(r.rating) AS avgRating,\n" +
+                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                            "COUNT(DISTINCT e.id) AS student_count\n" +
+                            "FROM courses c\n" +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                            "WHERE c.is_public = TRUE\n" +
+                            "GROUP BY c.id\n" +
+                            "ORDER BY c.created_at DESC\n" +
+                            "LIMIT 6;")
+                    .bind("userId", userId)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
     // 6 khóa học phổ biến nhất
-    public List<CourseCardDto> findSixCoursesMostPopular() {
+    public List<CourseCardDto> findSixCoursesMostPopular(Integer userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
-                    "AVG(r.rating) as avgRating,\n" +
-                    "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM courses c " +
-                    "LEFT JOIN lessons l ON l.course_id = c.id " +
-                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE " +
-                    "GROUP BY c.id " +
-                    "LIMIT 6;").mapToBean(CourseCardDto.class).list();
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, " +
+                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                            "COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
+                            "AVG(r.rating) as avgRating,\n" +
+                            "COUNT(DISTINCT e.id) AS student_count\n" +
+                            "FROM courses c " +
+                            "LEFT JOIN lessons l ON l.course_id = c.id " +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                            "WHERE c.is_public = TRUE " +
+                            "GROUP BY c.id " +
+                            "LIMIT 6;")
+                    .bind("userId", userId)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
     // các khóa học mới nhất
-    public List<CourseCardDto> findCoursesLast() {
+    public List<CourseCardDto> findCoursesLast(Integer userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, c.price, c.discount_price\n" +
-                    "FROM courses c\n" +
-                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE\n" +
-                    "GROUP BY c.id\n" +
-                    "ORDER BY c.created_at DESC").mapToBean(CourseCardDto.class).list();
+            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, " +
+                            "c.price, c.discount_price, \n" +
+                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist\n" +
+                            "FROM courses c\n" +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                            "WHERE c.is_public = TRUE\n" +
+                            "GROUP BY c.id\n" +
+                            "ORDER BY c.created_at DESC")
+                    .bind("userId", userId)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
     // các khóa học phổ biến nhất
-    public List<CourseCardDto> findCoursesMostPopular() {
+    public List<CourseCardDto> findCoursesMostPopular(Integer userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
-                    "AVG(r.rating) as avgRating ,\n" +
-                    "COUNT(DISTINCT e.id) AS student_count\n" +
-                    "FROM courses c " +
-                    "LEFT JOIN lessons l ON l.course_id = c.id " +
-                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
-                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE " +
-                    "GROUP BY c.id ").mapToBean(CourseCardDto.class).list();
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, " +
+                            "COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours, " +
+                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                            "AVG(r.rating) as avgRating ,\n" +
+                            "COUNT(DISTINCT e.id) AS student_count\n" +
+                            "FROM courses c " +
+                            "LEFT JOIN lessons l ON l.course_id = c.id " +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                            "WHERE c.is_public = TRUE " +
+                            "GROUP BY c.id ")
+                    .bind("userId", userId)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
     // 1 khóa học phổ biến nhất
-    public CourseCardDto findCourseMostPopular() {
+    public CourseCardDto findCourseMostPopular(Integer userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours " +
-                    "FROM courses c " +
-                    "LEFT JOIN lessons l ON l.course_id = c.id " +
-                    "WHERE c.is_public = TRUE " +
-                    "GROUP BY c.id " +
-                    "LIMIT 1;").mapToBean(CourseCardDto.class).one();
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, c.price, c.discount_price, " +
+                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                            "c.author_name, COALESCE(SUM(l.duration_minutes), 0) / 60.0 AS duration_hours\n" +
+                            "FROM courses c " +
+                            "LEFT JOIN lessons l ON l.course_id = c.id " +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                            "WHERE c.is_public = TRUE " +
+                            "GROUP BY c.id " +
+                            "LIMIT 1;")
+                    .bind("userId", userId)
+                    .mapToBean(CourseCardDto.class)
+                    .findFirst()
+                    .orElse(null);
         });
     }
 
-    public List<CourseCardDto> findAllCoursesCard() {
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, " +
-                    "c.thumbnail_url, c.level, AVG(r.rating) as avgRating, " +
-                    "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, " +
-                    "COUNT(DISTINCT e.id)\n" +
-                    "FROM courses c\n" +
-                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                    "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
-                    "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
-                    "WHERE c.is_public = TRUE\n" +
-                    "GROUP BY c.id").mapToBean(CourseCardDto.class).list();
-        });
-    }
-
-    public Course findCourseByIdForDetail(int id) {
+    public Course findCourseByIdForDetail(int id, int userId) {
         Course course = getJdbi().withHandle(handle ->
-                handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating)) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
-                        "FROM courses c\n" +
-                        "LEFT JOIN categories cat ON c.category_id = cat.id\n" +
-                        "LEFT JOIN categories parent ON cat.parent_id = parent.id\n" +
-                        "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                        "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                        "WHERE c.is_public = TRUE AND c.id = :id " +
-                        "GROUP BY c.id, cat.id, parent.id").bind("id", id).mapToBean(Course.class).one()
+                handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, " +
+                                "c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, " +
+                                "parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, " +
+                                "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                                "COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating)) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
+                                "FROM courses c\n" +
+                                "LEFT JOIN categories cat ON c.category_id = cat.id\n" +
+                                "LEFT JOIN categories parent ON cat.parent_id = parent.id\n" +
+                                "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                                "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                                "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                                "WHERE c.is_public = TRUE AND c.id = :id " +
+                                "GROUP BY c.id, cat.id, parent.id")
+                        .bind("id", id)
+                        .bind("userId", userId)
+                        .mapToBean(Course.class)
+                        .findFirst()
+                        .orElse(null)
         );
 
         return course;
@@ -210,19 +240,23 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findCoursesByIdCategory(int idCategory) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n" +
-                            "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
-                            "COUNT(DISTINCT e.id) AS student_count,\n" +
-                            "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
-                            "FROM courses c\n" +
-                            "JOIN categories cate ON c.category_id = cate.id\n" +
-                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                            "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
-                            "WHERE c.is_public = TRUE AND cate.id = :id\n" +
-                            "GROUP BY c.id\n" +
-                            "ORDER BY c.created_at DESC"
-            ).bind("id", idCategory).mapToBean(CourseCardDto.class).list();
+                            "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n" +
+                                    "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
+                                    "COUNT(DISTINCT e.id) AS student_count,\n" +
+                                    "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours,\n" +
+//                                    "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist\n" +
+                                    "FROM courses c\n" +
+                                    "JOIN categories cate ON c.category_id = cate.id\n" +
+                                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+                                    "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
+//                                    "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                                    "WHERE c.is_public = TRUE AND cate.id = :id\n" +
+                                    "GROUP BY c.id\n" +
+                                    "ORDER BY c.created_at DESC")
+                    .bind("id", idCategory)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
@@ -230,20 +264,24 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<CourseCardDto> findCoursesByIdTag(int idTag) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n " +
-                            "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
-                            "COUNT(DISTINCT e.id) AS student_count,\n" +
-                            "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
-                            "FROM courses c\n " +
-                            "JOIN course_tags ct ON c.id = ct.course_id\n " +
-                            "JOIN tags t ON ct.tag_id = t.id\n " +
-                            "LEFT JOIN lessons l ON l.course_id = c.id\n " +
-                            "LEFT JOIN reviews r ON r.course_id = c.id\n " +
-                            "LEFT JOIN wishlist w ON w.course_id = c.id\n " +
-                            "WHERE c.is_public = TRUE AND t.id = :id\n " +
-                            "GROUP BY c.id\n " +
-                            "ORDER BY c.created_at DESC"
-            ).bind("id", idTag).mapToBean(CourseCardDto.class).list();
+                            "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level,\n " +
+                                    "COALESCE(AVG(r.rating), 0) AS avgRating,\n " +
+                                    "COUNT(DISTINCT e.id) AS student_count,\n" +
+                                    "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n " +
+//                                    "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
+                                    "FROM courses c\n " +
+                                    "JOIN course_tags ct ON c.id = ct.course_id\n " +
+                                    "JOIN tags t ON ct.tag_id = t.id\n " +
+                                    "LEFT JOIN lessons l ON l.course_id = c.id\n " +
+                                    "LEFT JOIN reviews r ON r.course_id = c.id\n " +
+                                    "LEFT JOIN wishlist w ON w.course_id = c.id\n " +
+//                                    "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                                    "WHERE c.is_public = TRUE AND t.id = :id\n " +
+                                    "GROUP BY c.id\n " +
+                                    "ORDER BY c.created_at DESC")
+                    .bind("id", idTag)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
@@ -252,19 +290,23 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         String title = "%" + search + "%";
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                    "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level, \n" +
-                            "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
-                            "COUNT(DISTINCT e.id) AS student_count,\n" +
-                            "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
-                            "FROM courses c\n" +
-                            "JOIN categories cate ON c.category_id = cate.id\n" +
-                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                            "LEFT JOIN wishlist w ON w.course_id = c.id\n" +
-                            "WHERE c.is_public = TRUE AND c.title LIKE :title\n" +
-                            "GROUP BY c.id\n" +
-                            "ORDER BY c.created_at DESC"
-            ).bind("title", title).mapToBean(CourseCardDto.class).list();
+                            "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level, \n" +
+                                    "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
+                                    "COUNT(DISTINCT e.id) AS student_count,\n" +
+//                                    "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
+                                    "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
+                                    "FROM courses c\n" +
+                                    "JOIN categories cate ON c.category_id = cate.id\n" +
+                                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
+//                                    "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                                    "WHERE c.is_public = TRUE AND c.title LIKE :title\n" +
+                                    "GROUP BY c.id\n" +
+                                    "ORDER BY c.created_at DESC"
+                    )
+                    .bind("title", title)
+                    .mapToBean(CourseCardDto.class)
+                    .list();
         });
     }
 
@@ -283,6 +325,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.author_name, " +
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
+//                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
                             "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
                             "FROM courses c " +
                             "LEFT JOIN categories cate ON c.category_id = cate.id " +
@@ -290,6 +333,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "LEFT JOIN tags t ON ct.tag_id = t.id " +
                             "LEFT JOIN lessons l ON c.id = l.course_id " +
                             "LEFT JOIN reviews r ON r.course_id = c.id " +
+//                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
                             "WHERE c.is_public = TRUE "
             );
 
