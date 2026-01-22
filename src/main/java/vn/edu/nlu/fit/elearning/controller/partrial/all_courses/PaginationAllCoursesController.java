@@ -39,11 +39,13 @@ public class PaginationAllCoursesController extends HttpServlet {
         request.setAttribute("user", user);
 
         // Lấy tất cả các tham số filter
-        String pageStr      = request.getParameter("page");
-        String categoryStr  = request.getParameter("category");
-        String sortPrice    = request.getParameter("sortPrice");
-        String popular      = request.getParameter("popular");   // "true" nếu phổ biến
-        String newest       = request.getParameter("newest");    // tạm thời giữ, sau có thể bỏ
+        String pageStr = request.getParameter("page");
+        String categoryStr = request.getParameter("category");
+        String sortPrice = request.getParameter("sortPrice");
+        String popularStr = request.getParameter("popular");
+        boolean popular = (popularStr != null) ? Boolean.parseBoolean(popularStr) : false;
+        String newestStr = request.getParameter("newest");
+        boolean newest = (newestStr != null) ? Boolean.parseBoolean(newestStr) : false;
 
         int page = 1;
         try {
@@ -58,29 +60,25 @@ public class PaginationAllCoursesController extends HttpServlet {
         if (categoryStr != null && !categoryStr.trim().isEmpty()) {
             try {
                 categoryId = Integer.parseInt(categoryStr);
-            } catch (NumberFormatException ignored) {}
+            } catch (NumberFormatException ignored) {
+            }
         }
 
         List<CourseCardDto> listCourse;
         int totalCourses;
 
         // Dùng filter thống nhất cho mọi trường hợp
-        listCourse = courseService.filterCourses(
+        listCourse = courseService.filterCoursesForAllCourses(
                 categoryId,     // null nếu không lọc cate
-                null,           // tagId (chưa dùng)
-                null,           // search title
-                sortPrice,      // asc/desc hoặc null
-                null,           // level
-                null,           // priceRange
-                null,           // rating
-                null,           // duration
+                sortPrice,      // asc/desc hoặc null// duration
                 popular,        // "true" nếu phổ biến
+                newest,
                 PAGE_SIZE,
-                (page - 1) * PAGE_SIZE
+                (page - 1) * PAGE_SIZE, userId
         );
 
         totalCourses = courseService.countFilteredCourses(
-                categoryId, null, null, sortPrice, null, null, null, null, popular
+                categoryId, null, null, sortPrice, null, null, null, null, popularStr
         );
 
         int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);

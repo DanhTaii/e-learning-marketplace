@@ -94,12 +94,12 @@
                                         <div class="hover-actions">
                                             <button type="submit" style="font-size: 1.5rem"
                                                     class="btn-add-cart dark-button"
-                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
+                                                    onclick="addToCart(event,${c.id})">Thêm vào giỏ
                                             </button>
 
                                             <button type="button"
                                                     class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
-                                                    onclick="addToWishlist(this, ${c.id})"
+                                                    onclick="addToWishlist(event, this, ${c.id})"
                                                     title="Thêm vào danh sách yêu thích">
                                                 <i class="fa-solid fa-heart"></i>
                                             </button>
@@ -161,21 +161,19 @@
                                                         </div>
                                                     </div>
 
-                                                    <a href="" class="turn-page">
-                                                        <div class="hover-actions">
-                                                            <button type="submit" style="font-size: 1.5rem"
-                                                                    class="btn-add-cart dark-button"
-                                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
-                                                            </button>
+                                                    <div class="hover-actions">
+                                                        <button type="submit" style="font-size: 1.5rem"
+                                                                class="btn-add-cart dark-button"
+                                                                onclick="addToCart(event,${c.id})">Thêm vào giỏ
+                                                        </button>
 
-                                                            <button type="button"
-                                                                    class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
-                                                                    onclick="addToWishlist(this, ${c.id})"
-                                                                    title="Thêm vào danh sách yêu thích">
-                                                                <i class="fa-solid fa-heart"></i>
-                                                            </button>
-                                                        </div>
-                                                    </a>
+                                                        <button type="button"
+                                                                class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                                onclick="addToWishlist(event, this, ${c.id})"
+                                                                title="Thêm vào danh sách yêu thích">
+                                                            <i class="fa-solid fa-heart"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
                                                     <i class="fa-solid fa-check"></i>
@@ -234,21 +232,19 @@
                                                                                                   pattern="###,###"></fmt:formatNumber>đ
                                                         </div>
                                                     </div>
-                                                    <a href="" class="turn-page">
-                                                        <div class="hover-actions">
-                                                            <button type="submit" style="font-size: 1.5rem"
-                                                                    class="btn-add-cart dark-button"
-                                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
-                                                            </button>
+                                                    <div class="hover-actions">
+                                                        <button type="submit" style="font-size: 1.5rem"
+                                                                class="btn-add-cart dark-button"
+                                                                onclick="addToCart(event,${c.id})">Thêm vào giỏ
+                                                        </button>
 
-                                                            <button type="button"
-                                                                    class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
-                                                                    onclick="addToWishlist(this, ${c.id})"
-                                                                    title="Thêm vào danh sách yêu thích">
-                                                                <i class="fa-solid fa-heart"></i>
-                                                            </button>
-                                                        </div>
-                                                    </a>
+                                                        <button type="button"
+                                                                class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                                onclick="addToWishlist(event, this, ${c.id})"
+                                                                title="Thêm vào danh sách yêu thích">
+                                                            <i class="fa-solid fa-heart"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
                                                     <i class="fa-solid fa-check"></i>
@@ -307,21 +303,19 @@
                                                                                                   pattern="###,###"></fmt:formatNumber>đ
                                                         </div>
                                                     </div>
-                                                    <a href="" class="turn-page">
-                                                        <div class="hover-actions">
-                                                            <button type="submit" style="font-size: 1.5rem"
-                                                                    class="btn-add-cart dark-button"
-                                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
-                                                            </button>
+                                                    <div class="hover-actions">
+                                                        <button type="submit" style="font-size: 1.5rem"
+                                                                class="btn-add-cart dark-button"
+                                                                onclick="addToCart(event,${c.id})">Thêm vào giỏ
+                                                        </button>
 
-                                                            <button type="button"
-                                                                    class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
-                                                                    onclick="addToWishlist(this, ${c.id})"
-                                                                    title="Thêm vào danh sách yêu thích">
-                                                                <i class="fa-solid fa-heart"></i>
-                                                            </button>
-                                                        </div>
-                                                    </a>
+                                                        <button type="button"
+                                                                class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                                onclick="addToWishlist(event, this, ${c.id})"
+                                                                title="Thêm vào danh sách yêu thích">
+                                                            <i class="fa-solid fa-heart"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <div class="home-product-item__favourite">
                                                     <i class="fa-solid fa-check"></i>
@@ -342,48 +336,7 @@
     <jsp:include page="header-footer/footer.jsp"/>
 </div>
 </body>
-<script>
 
-    function addToCart(courseId) {
-
-        fetch('add-cart?id=' + courseId, {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-            .then(response => {
-                if (response.status === 401) {
-                    alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
-                    window.location.href = "html-authentication/sign-in.jsp";
-                    return null;
-                }
-                if (response.ok) return response.text();
-                throw new Error('Network response was not ok.');
-            })
-            .then(newCount => {
-                if (newCount === null) return;
-                const cartElement = document.getElementById('cart-count');
-                if (cartElement) {
-                    cartElement.innerText = newCount;
-                }
-
-                alert("Đã thêm khóa học vào giỏ hàng!");
-            })
-            .catch(error => {
-                console.error('Lỗi AJAX:', error);
-                alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
-            });
-    }
-
-    // ép load tại trang khi bấm back
-    window.addEventListener("pageshow", function (event) {
-        var historyTraversal = event.persisted
-        if (historyTraversal) {
-            window.location.reload();
-        }
-    });
-</script>
 <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 

@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.model;
 
+import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -11,7 +13,7 @@ public class Cart {
     }
 
 
-    public void addCourse(Course c) {
+    public void addCourse(CourseCardDto c) {
         if (data.containsKey(c.getId())) {
             CartItem ci = data.get(c.getId());
             if (!ci.isSelected()) {

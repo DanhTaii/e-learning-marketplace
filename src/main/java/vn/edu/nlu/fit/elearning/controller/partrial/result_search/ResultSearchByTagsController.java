@@ -72,13 +72,11 @@ public class ResultSearchByTagsController extends HttpServlet {
         // Lấy list + phân trang
         List<CourseCardDto> listCourse = courseService.filterCoursesByTagWithPagination(
                 idTag, sortPrice, level, priceRange, rating, duration, popular,
-                page, PAGE_SIZE
+                page, PAGE_SIZE, userId
         );
 
         // Đếm tổng
-        int totalCourses = courseService.countFilteredCoursesByTag(
-                idTag, sortPrice, level, priceRange, rating, duration, popular
-        );
+        int totalCourses = listCourse.size();
 
         int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 

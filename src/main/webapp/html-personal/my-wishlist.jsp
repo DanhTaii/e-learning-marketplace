@@ -82,21 +82,19 @@
                                                                                   pattern="###,###"></fmt:formatNumber>đ
                                         </div>
                                     </div>
-                                    <a href="" class="turn-page">
-                                        <div class="hover-actions">
-                                            <button type="submit" style="font-size: 1.5rem"
-                                                    class="btn-add-cart dark-button"
-                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
-                                            </button>
+                                    <div class="hover-actions">
+                                        <button type="submit" style="font-size: 1.5rem"
+                                                class="btn-add-cart dark-button"
+                                                onclick="addToCart(event,${c.id})">Thêm vào giỏ
+                                        </button>
 
-                                            <button type="button"
-                                                    class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
-                                                    onclick="addToWishlist(this, ${c.id})"
-                                                    title="Thêm vào danh sách yêu thích">
-                                                <i class="fa-solid fa-heart"></i>
-                                            </button>
-                                        </div>
-                                    </a>
+                                        <button type="button"
+                                                class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                onclick="addToWishlist(event, this, ${c.id})"
+                                                title="Thêm vào danh sách yêu thích">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -111,5 +109,4 @@
 </body>
 
 <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
-
 </html>

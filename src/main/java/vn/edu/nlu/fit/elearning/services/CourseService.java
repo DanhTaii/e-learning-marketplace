@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.services;
 
 import vn.edu.nlu.fit.elearning.dao.CourseDao;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.model.User;
@@ -29,7 +30,7 @@ public class CourseService {
         return this.cd.update(entity);
     }
 
-    public int deleteCourse(int id){
+    public int deleteCourse(int id) {
         return cd.delete(id);
     }
 
@@ -76,28 +77,12 @@ public class CourseService {
         return cd.findSixCoursesLast(userId);
     }
 
-    public List<CourseCardDto> getCoursesPopular(Integer userId) {
-        return cd.findCoursesMostPopular(userId);
-    }
-
-    public List<CourseCardDto> getCoursesLast(Integer userId) {
-        return cd.findCoursesLast(userId);
-    }
-
-    public Course getCourse(int id, int userId) {
+    public CourseDetailDto getCourse(int id, int userId) {
         return cd.findCourseByIdForDetail(id, userId);
     }
 
-//    public List<CourseCardDto> getCourseCards(Integer userId) {
-//        return cd.findAllCoursesCard(userId);
-//    }
-
-    public List<CourseCardDto> getCoursesByIdCategory(int idCategory) {
-        return cd.findCoursesByIdCategory(idCategory);
-    }
-
-    public List<CourseCardDto> getCoursesByIdTag(int idTag) {
-        return cd.findCoursesByIdTag(idTag);
+    public CourseCardDto getCourseCardById(int id, int userId) {
+        return cd.findCourseCardById(id, userId);
     }
 
     public List<CourseCardDto> getCoursesByTitle(String search) {
@@ -106,10 +91,6 @@ public class CourseService {
 
     public List<Course> getAllCourses(CourseFilter filter) {
         return cd.filterAllCourses(filter);
-    }
-
-    public List<CourseCardDto> getCourseCardsByPage(int page, int pageSize) {
-        return cd.findCoursesCardByPage(page, pageSize);
     }
 
     // Filter theo category + phân trang
@@ -122,10 +103,10 @@ public class CourseService {
             String duration,
             String popular,
             int page,
-            int pageSize) {
+            int pageSize, int userId) {
 
         int offset = (page - 1) * pageSize;
-        return cd.filterCoursesWithPagination(
+        return cd.filterResultSearchWithPagination(
                 idCategory,   // categoryId
                 null,         // tagId
                 null,         // title
@@ -136,11 +117,12 @@ public class CourseService {
                 duration,
                 popular,
                 pageSize,     // limit
-                offset        // offset
+                offset,        // offsetus
+                userId
         );
     }
 
-    // Đếm tổng số khóa học sau lọc theo category
+    //    // Đếm tổng số khóa học sau lọc theo category
     public int countFilteredCoursesByCategory(
             int idCategory,
             String sortPrice,
@@ -173,10 +155,11 @@ public class CourseService {
             String duration,
             String popular,
             int page,
-            int pageSize) {
+            int pageSize,
+            int userId) {
 
         int offset = (page - 1) * pageSize;
-        return cd.filterCoursesWithPagination(
+        return cd.filterResultSearchWithPagination(
                 null,
                 null,
                 search,
@@ -187,7 +170,8 @@ public class CourseService {
                 duration,
                 popular,
                 pageSize,
-                offset
+                offset,
+                userId
         );
     }
 
@@ -223,10 +207,10 @@ public class CourseService {
             String duration,
             String popular,
             int page,
-            int pageSize) {
+            int pageSize, int userId) {
 
         int offset = (page - 1) * pageSize;
-        return cd.filterCoursesWithPagination(
+        return cd.filterResultSearchWithPagination(
                 null,
                 idTag,
                 null,
@@ -237,7 +221,8 @@ public class CourseService {
                 duration,
                 popular,
                 pageSize,
-                offset
+                offset,
+                userId
         );
     }
 
@@ -264,19 +249,31 @@ public class CourseService {
     }
 
     // tổng quát nhất
-    public List<CourseCardDto> filterCourses(
+    public List<CourseCardDto> filterCoursesForResultSearch(
             Integer categoryId, Integer tagId, String title,
             String sortPrice, String level, String priceRange,
             String rating, String duration, String popular,
-            int limit, int offset) {
+            int limit, int offset, int userId) {
 
-        return cd.filterCoursesWithPagination(
+        return cd.filterResultSearchWithPagination(
                 categoryId, tagId, title,
                 sortPrice, level, priceRange, rating, duration, popular,
-                limit, offset);
+                limit, offset, userId);
     }
 
-    // đếm tổng quát (dùng để tính totalPages)
+    // tổng quát nhất
+    public List<CourseCardDto> filterCoursesForAllCourses(
+            Integer categoryId,
+            String sortPrice, boolean popular, boolean newest,
+            int limit, int offset, int userId) {
+
+        return cd.filterAllCoursesWithPagination(
+                categoryId,
+                sortPrice, popular, newest,
+                limit, offset, userId);
+    }
+
+    //    // đếm tổng quát (dùng để tính totalPages)
     public int countFilteredCourses(
             Integer categoryId, Integer tagId, String title,
             String sortPrice, String level, String priceRange,
