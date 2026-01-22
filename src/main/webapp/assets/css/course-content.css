@@ -49,6 +49,7 @@
     top: 0;
     align-self: flex-start;
     margin-bottom: 6rem;
+    border-radius: 7px;
 }
 
 /*Phan box chua title*/
@@ -56,6 +57,7 @@
     margin-top: 10px;
     margin-bottom: 60px;
     background-color: var(--white-color);
+    border-radius: 7px;
 }
 
 .container__title-video {
@@ -172,11 +174,12 @@
 /*Phan box chua course content*/
 .content__box {
     width: 100%;
-    border: 1px solid var(--light-grey);
-    padding: 1rem 0 1rem 1rem;
+    /*border: 1px solid var(--light-grey);*/
+    /*padding: 1rem 0 1rem 1rem;*/
     max-height: 635px;
     overflow-y: auto;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 .box__column1 {
@@ -220,6 +223,8 @@
     display: flex;
     align-items: flex-end;
     margin-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    width: 100%;
 }
 
 .box__input {
@@ -231,7 +236,7 @@
 .input-style {
     border: none;
     border-bottom: 1px solid var(--light-grey);
-    width: 75%;
+    width: 100%;
 }
 
 .input-style:focus {
@@ -275,4 +280,39 @@
 
 .comment__user2 {
     margin-right: 1rem;
+}
+
+form{
+    width: 100%;
+}
+
+/*cho phần đánh giá */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    border: 1px solid var(--light-grey);
+    border-radius: 7px;
+    background-color: var(--white-color);
+    margin-top: 30px;
+}
+
+.empty-icon {
+    font-size: 70px;
+    color: var(--dark-blue); /* dùng màu xanh đậm để đồng bộ */
+    margin-bottom: 20px;
+    opacity: 0.9;
+    display: block;
+}
+
+.empty-title {
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.empty-description {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
 }

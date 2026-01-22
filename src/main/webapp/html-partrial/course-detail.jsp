@@ -37,12 +37,8 @@
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price"><fmt:formatNumber
-                                        value="${c.price - c.discountPrice}" type="number"
-                                        pattern="###,###"></fmt:formatNumber> đ</span>
-                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}"
-                                                                                            type="number"
-                                                                                            pattern="###,###"></fmt:formatNumber> đ</span>
+                                <span class="container-2__sold-price"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
+                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
                             </div>
                         </div>
                         <div class="container-2__option-group">
@@ -288,40 +284,51 @@
 
                     <div class="section-7__review section__space">
                         <div class="review-box__header style__sub-title">
-                            <span class="">Đánh giá</span>
+                            <span>Bình luận</span>
                         </div>
 
-                        <c:forEach var="review" items="${reviewDtos}">
-                            <div class="review-box__comment">
-                                <div class="comment__user header__user">
-                                    <img src="${review.thumbnailUrl}" alt="" class="user__avatar1">
-                                </div>
-                                <div class="comment__box">
-                                    <div class="box__name box">
-                                        <div class="review-in4">
-                                            <span class="review__name">${review.userName}</span>
-                                            <span class="review__time">${review.createdAt}</span>
+                        <c:choose>
+                            <c:when test="${not empty reviewDtos}">
+                                <c:forEach var="review" items="${reviewDtos}">
+                                    <div class="review-box__comment">
+                                        <div class="comment__user header__user">
+                                            <img src="${review.thumbnailUrl}" alt="" class="user__avatar1">
                                         </div>
-                                    </div>
-                                    <div class="box__date box">
-                                        <div class="star">
-                                            <div class="text-medium regular">${review.rating}</div>
-                                            <div class="star-icon">
-                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                        <div class="comment__box">
+                                            <div class="box__name box">
+                                                <div class="review-in4">
+                                                    <span class="review__name">${review.userName}</span>
+                                                    <span class="review__time">${review.createdAt}</span>
+                                                </div>
+                                            </div>
+                                            <div class="box__date box">
+                                                <div class="star">
+                                                    <div class="text-medium regular">${review.rating}</div>
+                                                    <div class="star-icon">
+                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box__comment box">
+                                                <span>${review.comment}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="box__comment box">
-                                        <span>${review.comment}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
+                                </c:forEach>
+                            </c:when>
 
+                            <c:otherwise>
+                                <!-- Empty state khi chưa có đánh giá -->
+                                <div class="empty-state">
+                                    <i class="fa-solid fa-comments empty-icon"></i>
+                                    <div class="empty-title">Chưa có đánh giá nào</div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>

@@ -383,3 +383,50 @@ a {
     margin: 0;
     padding: 0;
 }
+
+/*css cho lúc chưa có khóa học nào trong giỏ hàng*/
+.cart-empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    border: 1px solid var(--light-grey);
+    border-radius: 7px;
+    background-color: var(--white-color);
+    margin: 0 0 40px;
+}
+
+.cart-empty-icon {
+    font-size: 100px;
+    color: #ccc;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    display: block;
+}
+
+.cart-empty-title {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.cart-empty-description {
+    color: #777;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.cart-empty-link {
+    color: var(--dark-blue);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1.4rem;
+    padding: 10px 20px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.cart-empty-link:hover {
+    background-color: var(--dark-blue);
+    color: var(--white-color);
+}

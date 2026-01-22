@@ -9,7 +9,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/course-content.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/course-content.css?v=1.0.4">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -67,64 +67,80 @@
                     </div>
 
                     <div class="section-7__review section__space">
+                        <!-- Header -->
                         <div class="review-box__header style__sub-title">
-                            <span class="">${enrollmentDetail.reviewCount} đánh giá</span>
+                            <span>${enrollmentDetail.reviewCount} đánh giá</span>
                         </div>
+
+                        <!-- Form nhập đánh giá -->
                         <div class="comment-input-box">
                             <div class="comment__user2 header__user">
                                 <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
                                      class="user__avatar2">
                             </div>
                             <form action="my-course/review/create" method="post" id="myForm">
-                                <div> <span id="error_comment" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
-                                <div> <span id="error_rating" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
-                                <div class="box__input ">
+                                <div><span id="error_comment" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
+                                <div><span id="error_rating" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
+                                <div class="box__input">
                                     <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
                                     <input type="text" name="comment" class="input-style"
                                            placeholder="Viết bình luận..." id="user_comment">
 
-
-                                    <input type="number" class="input__number" name="rating" id="ratingInput" min="0" max="5" step="0.1" placeholder="Nhập điểm (0-5)" oninput="validateRating(this)">
+                                    <input type="number" class="input__number" name="rating" id="ratingInput" min="0" max="5" step="0.1" oninput="validateRating(this)">
                                     <div class="star">
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
-                                        <span id="ratingDisplay" style="font-weight: bold;font-size: 1.5rem ;margin-left: 5px">0</span> <span style="font-size: 1.5rem">/5</span>
+                                        <span id="ratingDisplay" style="font-weight: bold;font-size: 1.5rem;margin-left: 5px">0</span>
+                                        <span style="font-size: 1.5rem">/5</span>
                                     </div>
-                                    <button class="dark-button button__add" type="submit">
-                                        Gửi
-                                    </button>
+                                    <button class="dark-button button__add" type="submit">Gửi</button>
                                 </div>
                             </form>
                         </div>
 
-                        <c:forEach var="review" items="${enrollmentDetail.listReviews}">
-                            <div class="review-box__comment">
-                                <div class="comment__user header__user">
-                                    <img src="${review.thumbnailUrl}" alt=""
-                                         class="user__avatar1">
-                                </div>
-                                <div class="comment__box">
-                                    <div class="box__name box">
-                                        <div class="review-in4">
-                                            <span class="review__name">${review.userName}</span>
-                                            <span class="review__time">${review.createdAt}</span>
+                        <!-- Danh sách đánh giá hoặc empty state -->
+                        <c:choose>
+                            <c:when test="${not empty enrollmentDetail.listReviews}">
+                                <c:forEach var="review" items="${enrollmentDetail.listReviews}">
+                                    <div class="review-box__comment">
+                                        <div class="comment__user header__user">
+                                            <img src="${review.thumbnailUrl}" alt="" class="user__avatar1">
                                         </div>
-                                    </div>
-                                    <div class="box__date box">
-                                        <div class="star">
-                                            <div class="text-medium regular">${review.rating}</div>
-                                            <div class="star-icon">
-                                                <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1rem"></i>
+                                        <div class="comment__box">
+                                            <div class="box__name box">
+                                                <div class="review-in4">
+                                                    <span class="review__name">${review.userName}</span>
+                                                    <span class="review__time">${review.createdAt}</span>
+                                                </div>
                                             </div>
-
+                                            <div class="box__date box">
+                                                <div class="star">
+                                                    <div class="text-medium regular">${review.rating}</div>
+                                                    <div class="star-icon">
+                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box__comment box">
+                                                <span>${review.comment}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="box__comment box">
-                                        <span class="">${review.comment}</span>
+                                </c:forEach>
+                            </c:when>
+
+                            <c:otherwise>
+                                <!-- Empty state khi chưa có đánh giá -->
+                                <div class="empty-state">
+                                    <i class="fa-solid fa-comments empty-icon"></i>
+                                    <div class="empty-title">Chưa có đánh giá nào</div>
+                                    <div class="empty-description">
+                                        Hãy là người đầu tiên để lại đánh giá cho khóa học này.
                                     </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
+
                 </div>
             </div>
             <div class="grid__column-4 column2">
