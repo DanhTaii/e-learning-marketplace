@@ -7,8 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.model.Cart;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.PaymentMethod;
+import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
+import vn.edu.nlu.fit.elearning.services.TagService;
+import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,10 +33,25 @@ public class PaymentController extends HttpServlet {
 
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
+        int userId = 0;
+
+        if (session != null && session.getAttribute("userId") != null) {
+            userId = (Integer) session.getAttribute("userId");
+        }
+        UserService userService = new UserService();
+        User user = userService.getUserById(userId);
+        request.setAttribute("user", user);
         if (cart == null || cart.getSelectedQuantity() == 0) {
             response.sendRedirect(request.getContextPath() + "/personal/cart");
             return;
         }
+
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
 
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();
         request.setAttribute("paymentMethod", paymentMethods);

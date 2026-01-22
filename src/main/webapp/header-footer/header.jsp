@@ -100,23 +100,14 @@
                             (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
                         </a>
                     </div>
-                    <!-- Toggle checkbox ẩn -->
-                    <div class="header__notification" tabindex="0">
-                        <div class="notification-wrapper text-header">
-                            <i class="notification__icon fa-solid fa-bell text-header"></i>
-                        </div>
-                        <div class="notification__popup">
-                            <div class="text-header">Bạn chưa có thông báo!</div>
-                        </div>
-                    </div>
                     <div class="header__user">
-                        <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                        <img src="${user.avatarUrl}" alt=""
                              class="user__avatar">
                         <div class="user__display">
                             <div class="user__container">
                                 <div class="user__profile">
                                     <div class="user__profile-avatar">
-                                        <img src="assets/image/65472207_145188949876444_2344275901291692032_n.jpg"
+                                        <img src="${user.avatarUrl}"
                                              alt=""
                                              class="user__avatar-mini">
                                     </div>

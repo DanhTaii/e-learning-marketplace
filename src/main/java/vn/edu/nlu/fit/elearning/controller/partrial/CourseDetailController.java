@@ -40,10 +40,16 @@ public class CourseDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("userSession");
+        int userId = 0;
+
+        if (session != null && session.getAttribute("userId") != null) {
+            userId = (Integer) session.getAttribute("userId");
+        }
+        UserService userService = new UserService();
+        User user = userService.getUserById(userId);
+        request.setAttribute("user", user);
 
         String userIdStr = request.getParameter("userId");
-        int userId = 0;
         if (userIdStr != null) {
             userId = Integer.parseInt(userIdStr);
         }

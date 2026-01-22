@@ -90,9 +90,19 @@
                                                                                       pattern="###,###"></fmt:formatNumber>
                                                 đ
                                             </div>
-                                            <div class="quick-info__save"><i
-                                                    class="quick-info__save__icon fa-solid fa-heart"></i>
-                                            </div>
+                                        </div>
+                                        <div class="hover-actions">
+                                            <button type="submit" style="font-size: 1.5rem"
+                                                    class="btn-add-cart dark-button"
+                                                    onclick="addToCart(${c.id})">Thêm vào giỏ
+                                            </button>
+
+                                            <button type="button"
+                                                    class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                    onclick="addToWishlist(this, ${c.id})"
+                                                    title="Thêm vào danh sách yêu thích">
+                                                <i class="fa-solid fa-heart"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

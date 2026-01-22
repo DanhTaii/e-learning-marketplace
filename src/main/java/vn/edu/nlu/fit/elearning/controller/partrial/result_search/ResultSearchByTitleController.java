@@ -5,9 +5,11 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.model.Category;
+import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 import vn.edu.nlu.fit.elearning.services.TagService;
+import vn.edu.nlu.fit.elearning.services.UserService;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +21,17 @@ public class ResultSearchByTitleController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        int userId = 0;
+
+        if (session != null && session.getAttribute("userId") != null) {
+            userId = (Integer) session.getAttribute("userId");
+        }
+        UserService userService = new UserService();
+        User user = userService.getUserById(userId);
+        request.setAttribute("user", user);
+
         // Lấy từ khóa search
         String search = request.getParameter("title");
         if (search == null) search = "";

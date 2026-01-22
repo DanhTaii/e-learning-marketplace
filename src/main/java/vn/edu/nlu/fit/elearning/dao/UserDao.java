@@ -21,7 +21,7 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     @Override
     public User findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("select * from users u where u.id = :id")
+            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.created_at AS createdAt FROM users u where u.id = :id")
                     .bind("id", integer)
                     .mapToBean(User.class)
                     .findFirst()

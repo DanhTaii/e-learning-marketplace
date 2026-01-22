@@ -8,11 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.dto.OrderItemDTO;
+import vn.edu.nlu.fit.elearning.model.Category;
 import vn.edu.nlu.fit.elearning.model.Order;
 import vn.edu.nlu.fit.elearning.model.PaymentMethod;
-import vn.edu.nlu.fit.elearning.services.OrderItemService;
-import vn.edu.nlu.fit.elearning.services.OrderService;
-import vn.edu.nlu.fit.elearning.services.PaymentMethodService;
+import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.services.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,6 +37,16 @@ PaymentMethodService paymentMethodService;
         Integer userId = (Integer) session.getAttribute("userId");
 
         List<OrderDTO> order = orderService.getOrderHistoryByUserId(userId);
+
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
+        UserService userService = new UserService();
+        User user = userService.getUserById(userId);
+        request.setAttribute("user", user);
 
 
         request.setAttribute("orderList",order);
