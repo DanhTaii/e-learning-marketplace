@@ -12,12 +12,12 @@ import java.io.IOException;
 public class GoogleUtils {
 
     // Bước 1: Đổi mã code lấy Access Token
-    public static String getToken(String code) throws IOException {
+    public static String getToken(String code, String redirectUri) throws IOException {
         String response = Request.Post(GoogleConstants.GOOGLE_LINK_GET_TOKEN)
                 .bodyForm(Form.form()
                         .add("client_id", GoogleConstants.GOOGLE_CLIENT_ID)
                         .add("client_secret", GoogleConstants.GOOGLE_CLIENT_SECRET)
-                        .add("redirect_uri", GoogleConstants.GOOGLE_REDIRECT_URI)
+                        .add("redirect_uri", redirectUri)
                         .add("code", code)
                         .add("grant_type", "authorization_code")
                         .build())

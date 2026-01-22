@@ -1,3 +1,15 @@
+.grid__row-2 {
+    display: flex;
+    align-items: stretch; /* Ép các cột con phải cao bằng nhau */
+}
+
+.grid-2 {
+    max-width: 1000px; /* Giới hạn độ rộng để form nhìn cân đối như ảnh mẫu */
+    margin: 60px auto; /* Căn giữa toàn bộ cụm đăng nhập */
+    border-radius: 10px;
+    overflow: hidden; /* Cắt các góc thừa */
+}
+
 .header__button-box {
     display: flex;
     margin-left: auto;
@@ -53,11 +65,11 @@
     background-color: var(--dark-blue);
     color: var(--white-color);
     padding: 60px 30px;
-    margin: 60px 0;
+    /*margin: 60px 0;*/
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    height: 548px;
+    height: 100%;
 }
 
 .box-1__title {
@@ -81,7 +93,6 @@
 
 .box-2-2 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 60px 0;
     padding: 60px 50px 80px;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -191,30 +202,84 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    gap: 25px; /* Khoảng cách giữa các nút */
+    margin-top: 30px;
+}
+
+.social-link {
+    text-decoration: none;
 }
 
 .socials__box {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    background-color: var(--white-color);
+    border: 1px solid #eee;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
-.socials__box:hover {
-    cursor: pointer;
+.socials__box i {
+    font-size: 2.2rem;
+    transition: color 0.3s;
 }
 
-.image {
-    width: 60%;
-    height: 60%;
-    object-fit: cover;
-    border-radius: 50%;
+.socials__box .image {
+    width: 24px;
+    height: 24px;
 }
 
-.google {
-    margin: 0 20px;
+/* Hiệu ứng riêng cho từng nút khi Hover */
+
+/* Facebook: Xanh  */
+.socials__box.facebook i {
+    color: #1877F2;
+}
+
+.socials__box.facebook:hover {
+    background-color: #1877F2;
+    border-color: #1877F2;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4);
+}
+
+.socials__box.facebook:hover i {
+    color: white;
+}
+
+/* Google */
+.socials__box.google:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border-color: #4285F4;
+}
+
+/* Yahoo: Tím */
+.socials__box.yahoo i {
+    color: #6001d2;
+}
+
+.socials__box.yahoo:hover {
+    background-color: #6001d2;
+    border-color: #6001d2;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(96, 1, 210, 0.4);
+}
+
+.socials__box.yahoo:hover i {
+    color: white;
+}
+
+.error-client {
+    display: block;      /* Ép xuống hàng */
+    min-height: 20px;    /* Giữ chỗ sẵn 20px dù có chữ hay không */
+    font-size: 1.3rem;
+    color: red;
+    margin-top: 4px;
+    transition: all 0.2s; /* Hiệu ứng hiện chữ mượt hơn */
 }

@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css?v=1.0.2">
     <link rel="stylesheet" href="assets/css/result-search.css?v=1.0.3">
-    <link rel="stylesheet" href="assets/css/card.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
+    <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -508,20 +510,24 @@
                                                 <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                                 <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                             </div>
+                                            <a href="" class="turn-page">
+                                                <div class="hover-actions">
+                                                    <button type="submit" style="font-size: 1.5rem"
+                                                            class="btn-add-cart dark-button"
+                                                            onclick="addToCart(${c.id})">Thêm vào giỏ
+                                                    </button>
+
+                                                    <button type="button"
+                                                            class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
+                                                            onclick="addToWishlist(this, ${c.id})"
+                                                            title="Thêm vào danh sách yêu thích">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </a>
-                                <div class="product-hover-info">
-                                    <h4 class="hover-title">${c.title}</h4>
-                                    <div class="hover-actions">
-
-                                        <button type="submit"  style="font-size: 1.5rem" class="btn-add-cart" onclick="addToCart(${c.id})">Thêm vào giỏ</button>
-
-                                        <a href="my-wishlist?courseId=${c.id}" class="turn-page-2">
-                                            <i class="quick-info__save__icon fa-solid fa-heart" style="color: ${c.inWishlist ? 'red' : 'var(--dark-blue)'};"></i>
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </c:forEach>
                     </div>

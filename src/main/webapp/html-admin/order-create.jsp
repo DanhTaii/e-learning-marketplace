@@ -125,7 +125,7 @@
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            <i class="fa-solid fa-receipt"></i> Chi tiết đơn hàng
+                            Chi tiết đơn hàng
                         </h2>
                         <a href="${pageContext.request.contextPath}/admin/orders" class="btn-back">
                             <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách

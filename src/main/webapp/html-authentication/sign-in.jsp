@@ -14,9 +14,9 @@
     <%--    Thư mục bắt đầu mặc định khi chạy servlet --%>
 
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/sign-in.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/sign-in.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -48,17 +48,21 @@
                         <form action="sign-in" class="form" method="post" id="myForm">
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
-                            <span style="color: red; font-size: var(--text-xl)"> <%= error%> </span>
+                            <div style="min-height: 25px;">
+                                <span style="color: red; font-size: var(--text-xl)"> <%= error %> </span>
+                            </div>
                             <div class="form__input input-1">
                                 <input type="email" class="input-text text-big" placeholder="Nhập email của bạn"
                                        id='login_email' name="email">
-                                <span id="error_email" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_email" class="error-client"
+                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
 
                             <div class="form__input input-2">
                                 <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
                                        name="password" id="pass">
-                                <span id="error_pass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_pass" class="error-client"
+                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__sign-in-option">
                                 <div class="sign-in-option-1">
@@ -78,27 +82,30 @@
                             <div class="form__helps">
                                 <div class="help__no--account">
                                     <span class="span text-big">Chưa có tài khoản?</span>
-                                    <a href="html-authentication/sign-up.jsp" class="text-big turn-page text-fix">Đăng ký</a>
+                                    <a href="html-authentication/sign-up.jsp" class="text-big turn-page text-fix">Đăng
+                                        ký</a>
                                 </div>
                                 <div class="helps__lost-password">
                                     <a href="forgot-password" class="turn-page text-big text-fix">Quên mật khẩu?</a>
                                 </div>
                             </div>
                             <div class="form__socials">
-                                <a href="" class="turn-page">
-                                    <div class="socials__box">
-                                        <img class="image" src="assets/image/facebook.png"></img>
+                                <a href="URL_FACEBOOK_CUA_BAN" class="social-link">
+                                    <div class="socials__box facebook">
+                                        <i class="fa-brands fa-facebook-f"></i>
                                     </div>
                                 </a>
-                                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=<%=GoogleConstants.GOOGLE_REDIRECT_URI%>&response_type=code&client_id=<%=GoogleConstants.GOOGLE_CLIENT_ID%>&approval_prompt=force" class="turn-page">
+
+                                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=<%=GoogleConstants.getRedirectUri()%>&response_type=code&client_id=<%=GoogleConstants.GOOGLE_CLIENT_ID%>&approval_prompt=force"
+                                   class="social-link">
                                     <div class="socials__box google">
-                                        <img class="image" src="assets/image/search.png"></img>
+                                        <img class="image" src="assets/image/search.png" alt="Google">
                                     </div>
                                 </a>
-                                <a href="https://login.yahoo.com/?.src=ym&pspid=1182037121&activity=header-mail&.lang=vi-VN&.intl=vn&.done=https%3A%2F%2Fvn.mail.yahoo.com%2Fd%3F.intl%3Dvn%26.lang%3Dvi-VN%26pspid%3D1182037121%26activity%3Dheader-mail"
-                                   class="turn-page">
-                                    <div class="socials__box">
-                                        <img class="image" src="assets/image/yahoo.png"></img>
+
+                                <a href="URL_YAHOO_CUA_BAN" class="social-link">
+                                    <div class="socials__box yahoo">
+                                        <i class="fa-brands fa-yahoo"></i>
                                     </div>
                                 </a>
                             </div>

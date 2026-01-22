@@ -24,32 +24,7 @@
 
         <div class="my-course__title">Khóa học đã mua</div>
 
-        <div class="my-course__selection">
-            <ul>
-                <li>
-                    <div class="sidebar__name">
-                        <a href="" class="button">Tất cả</a>
-                        <div class="sidebar_stroke"></div>
-                    </div>
-                </li>
-                <li><a href="" class="button">Đang</a></li>
-                <li><a href="" class="button">Hoàn thành</a></li>
-            </ul>
-        </div>
-
         <div class="stroke"></div>
-
-        <div class="search__container grid__row-2">
-            <div class="my-course__search">
-                <div class="search_blank"></div>
-                <div class="my-course__input">
-                    <input type="text" placeholder="Tìm khóa học của bạn">
-                </div>
-                <div class="my-course__button-search">
-                    <button class="button"><i class="text-li fa-solid fa-magnifying-glass"></i></button>
-                </div>
-            </div>
-        </div>
 
         <c:choose>
             <c:when test="${not empty listEnrollments}">

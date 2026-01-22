@@ -222,11 +222,11 @@
                                                 </div>
                                             </td>
                                             <td class="action__button">
-                                                <a href="#course-detail" class="button-de-mo" onclick="showOrderDetail(${order.id})">
-                                                    <span class="icon-action"><i class="fa-solid fa-eye"></i></span>
-                                                </a>
                                                 <a href="admin/order/detail?id=${order.id}" class="turn-page">
-                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>
+                                                    <button type="button"
+                                                            class="icon-action-btn">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </button>
                                                 </a>
                                             </td>
                                         </tr>

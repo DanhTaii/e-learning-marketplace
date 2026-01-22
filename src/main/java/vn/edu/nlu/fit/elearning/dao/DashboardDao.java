@@ -12,7 +12,7 @@ public class DashboardDao extends BaseDao {
             return handle.createQuery("SELECT DATE_FORMAT(created_at, '%d/%m') AS order_date, COUNT(DISTINCT o.id) AS total_orders, SUM(o.final_amount) AS daily_revenue, SUM(o.final_amount) / 1000000 AS revenue_million\n" +
                             "FROM orders o\n" +
                             "WHERE o.status = 'PAID' AND o.created_at >= CURDATE() - INTERVAL 6 DAY AND o.created_at < CURDATE() + INTERVAL 1 DAY   \n" +
-                            "GROUP BY DATE(created_at)\n" +
+                            "GROUP BY order_date\n" +
                             "ORDER BY order_date ASC;")
                     .mapToBean(RevenueDto.class)
                     .list();
