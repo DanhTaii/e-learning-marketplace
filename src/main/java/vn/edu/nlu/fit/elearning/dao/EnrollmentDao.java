@@ -71,7 +71,7 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
         );
     }
 
-    public EnrollmentDetailDto getEnrollmentDetail(int userId) {
+    public EnrollmentDetailDto getEnrollmentDetail(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT e.id AS id, c.id AS courseId, c.title AS title, c.author_name AS authorName,\n" +
                             "    (SELECT IFNULL(AVG(r.rating), 0) FROM reviews r WHERE r.course_id = c.id) AS rating,\n" +
@@ -80,9 +80,11 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
                             "    (SELECT COUNT(*) FROM reviews r WHERE r.course_id = c.id) AS reviewCount\n" +
                             "FROM enrollments e\n" +
                             "JOIN courses c ON e.course_id = c.id\n" +
-                            "WHERE e.user_id = :userId")
+                            "WHERE e.user_id = :userId AND e.course_id = :courseId")
                     .bind("userId", userId)
-                    .mapToBean(EnrollmentDetailDto.class).findFirst().orElse(null);
+                    .bind("courseId", courseId)
+                    .mapToBean(EnrollmentDetailDto.class)
+                    .findFirst().orElse(null);
         });
     }
 }

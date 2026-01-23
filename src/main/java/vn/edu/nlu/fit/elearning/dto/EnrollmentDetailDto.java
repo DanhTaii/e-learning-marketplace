@@ -135,4 +135,21 @@ public class EnrollmentDetailDto implements Serializable {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "EnrollmentDetailDto{" +
+                "id=" + id +
+                ", courseId=" + courseId +
+                ", title='" + title + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", rating=" + rating +
+                ", durationHours=" + durationHours +
+                ", studentCount=" + studentCount +
+                ", reviewCount=" + reviewCount +
+                ", listLesson=" + listLesson +
+                ", currentLesson=" + currentLesson +
+                ", listReviews=" + listReviews +
+                '}';
+    }
 }

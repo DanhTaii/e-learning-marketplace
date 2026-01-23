@@ -40,9 +40,8 @@ public class MyCourseDetailController extends HttpServlet {
         request.setAttribute("user", user);
         int courseId = Integer.parseInt(request.getParameter("courseId"));
 
+        EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId, courseId);
         List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(courseId);
-        request.setAttribute("reviewDtos", reviewDtos);
-        EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId);
         enrollmentDetail.setListReviews(reviewDtos);
 
         List<LessonProgressDTO> listLessons = ulp.getAllUserLessonProgresss(userId, courseId);

@@ -44,7 +44,7 @@
                                             <div class="content__rate">
                                                 <div class="rate__icon"><i class="text-medium fa-regular fa-star"></i></div>
 <%--                                                <div class="text-medium rate__number">${e.rating}</div>--%>
-                                                <fmt:formatNumber value="${e.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                                <fmt:formatNumber value="${e.rating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
                                                 <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                             </div>
                                         </div>
