@@ -38,7 +38,7 @@ public class EnrollmentService {
     }
 
 
-    public EnrollmentDetailDto getEnrollmentDetail(int userId) {
-        return ed.getEnrollmentDetail(userId);
+    public EnrollmentDetailDto getEnrollmentDetail(int userId,int courseId) {
+        return ed.getEnrollmentDetail(userId, courseId);
     }
 }

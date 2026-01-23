@@ -65,7 +65,7 @@
 
                                         <button type="button"
                                                 class="wishlist-btn ${c.inWishlist ? 'active' : ''}"
-                                                onclick="addToWishlist(this, ${c.id})"
+                                                onclick="addToWishlist(event, this, ${c.id})"
                                                 title="Thêm vào danh sách yêu thích">
                                             <i class="fa-solid fa-heart"></i>
                                         </button>

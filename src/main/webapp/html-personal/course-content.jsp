@@ -8,9 +8,9 @@
     <meta charset="UTF-8">
     <title>Course Content</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/course-content.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/course-content.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -26,11 +26,21 @@
         <div class="grid layout">
             <div class="grid__column-8 column1">
                 <div class="image-container">
-                    <iframe id="mainVideoPlayer" width="100%" height="500"
-                            src="https://www.youtube.com/embed/sGTkYMrWX6U?si=R75SMusg5_-meU-e"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="image-container" style="position: relative; min-height: 500px;">
+                        <iframe id="mainVideoPlayer" width="100%" height="500"
+                                src=""
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                                style="display: none;"></iframe>
+                        <div id="videoPlaceholder" class="placeholder-video"
+                             style="display: none; width: 100%; height: 500px; background: #000; color: #fff; flex-direction: column; justify-content: center; align-items: center;">
+                            <img src="assets/image/video-not-found.png" alt="No video available"
+                                 style="width: 100px; margin-bottom: 15px;">
+                            <p class="text-xl">Bài học này hiện đang được cập nhật video...</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="content-container">
@@ -44,7 +54,8 @@
                         <div class="sub-header__rating-star sub__header">
                             <div class="star1">
                                 <div class="star1__number">
-                                    <span class="text-xl"><fmt:formatNumber value="${enrollmentDetail.rating}" pattern="#.#" /></span></div>
+                                    <span class="text-xl"><fmt:formatNumber value="${enrollmentDetail.rating}"
+                                                                            pattern="#.#"/></span></div>
                                 <div class="star1__star-icon"><i class="fa-solid fa-star icon-star"
                                                                  style="color: #FFD43B; font-size: var(--text-sm)"></i>
                                 </div>
@@ -76,21 +87,25 @@
                         <!-- Form nhập đánh giá -->
                         <div class="comment-input-box">
                             <div class="comment__user2 header__user">
-                                <img src="../assets/image/65472207_145188949876444_2344275901291692032_n.jpg" alt=""
+                                <img src="${sessionScope.userSession.avatarUrl}" alt=""
                                      class="user__avatar2">
                             </div>
                             <form action="my-course/review/create" method="post" id="myForm">
-                                <div><span id="error_comment" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
-                                <div><span id="error_rating" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
+                                <div><span id="error_comment" class="error-client"
+                                           style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
+                                <div><span id="error_rating" class="error-client"
+                                           style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
                                 <div class="box__input">
                                     <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
                                     <input type="text" name="comment" class="input-style"
                                            placeholder="Viết bình luận..." id="user_comment">
 
-                                    <input type="number" class="input__number" name="rating" id="ratingInput" min="0" max="5" step="0.1" oninput="validateRating(this)">
+                                    <input type="number" class="input__number" name="rating" id="ratingInput" min="0"
+                                           max="5" step="0.1" oninput="validateRating(this)">
                                     <div class="star">
                                         <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
-                                        <span id="ratingDisplay" style="font-weight: bold;font-size: 1.5rem;margin-left: 5px">0</span>
+                                        <span id="ratingDisplay"
+                                              style="font-weight: bold;font-size: 1.5rem;margin-left: 5px">0</span>
                                         <span style="font-size: 1.5rem">/5</span>
                                     </div>
                                     <button class="dark-button button__add" type="submit">Gửi</button>
@@ -110,14 +125,16 @@
                                             <div class="box__name box">
                                                 <div class="review-in4">
                                                     <span class="review__name">${review.userName}</span>
-                                                    <span class="review__time"><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
+                                                    <span class="review__time"><fmt:formatDate
+                                                            value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                                                 </div>
                                             </div>
                                             <div class="box__date box">
                                                 <div class="star">
                                                     <div class="text-medium regular">${review.rating}</div>
                                                     <div class="star-icon">
-                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:#FFD43B; font-size:1rem"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,7 +177,7 @@
                                     <div class="column1__tick">
                                         <input type="checkbox" class="tick lesson-checkbox" name="tick"
                                                data-lesson-id="${l.id}"
-                                               ${l.completed ? 'checked' : ''}>
+                                            ${l.completed ? 'checked' : ''}>
                                     </div>
                                 </div>
                                 <div class="box__column2">
@@ -196,6 +213,7 @@
         let displayValue = input.value === '' ? 0 : input.value;
         document.getElementById('ratingDisplay').innerText = displayValue;
     }
+
     $(document).ready(function () {
         Validator.setupAutoClearErrors();
 
@@ -205,14 +223,14 @@
             let isValid = true;
 
 
-           if(comment === ""){
-               $('#error_comment').text("Vui lòng nhập bình luận!");
-               isValid = false;
-           }
- if(rating < 1){
-     $('#error_rating').text("Vui lòng đánh giá sao lớn hơn 1");
-     isValid = false;
- }
+            if (comment === "") {
+                $('#error_comment').text("Vui lòng nhập bình luận!");
+                isValid = false;
+            }
+            if (rating < 1) {
+                $('#error_rating').text("Vui lòng đánh giá sao lớn hơn 1");
+                isValid = false;
+            }
             if (!isValid) {
                 e.preventDefault();
             }

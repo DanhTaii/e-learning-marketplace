@@ -61,7 +61,9 @@
                                             <div class="content__rate content__rate-3">
                                                 <div class="rate__icon"><i
                                                         class="text-medium fa-regular fa-star"></i></div>
-                                                <fmt:formatNumber value="${courseMostPopular.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                                <fmt:formatNumber value="${courseMostPopular.avgRating}" type="number"
+                                                                  maxFractionDigits="1" minFractionDigits="1"
+                                                                  var="formattedRating"/>
                                                 <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                             </div>
                                         </div>
@@ -97,7 +99,9 @@
                                             <c:choose>
                                                 <c:when test="${courseMostPopular.enrolled}">
 
-                                                    <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${courseMostPopular.id}')">
+                                                    <button type="button" class="btn-add-cart dark-button"
+                                                            style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                            onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${courseMostPopular.id}')">
                                                         Vào học ngay
                                                     </button>
 
@@ -105,7 +109,8 @@
                                                 <c:otherwise>
                                                     <button type="submit" style="font-size: 1.5rem"
                                                             class="btn-add-cart dark-button"
-                                                            onclick="addToCart(event,${courseMostPopular.id})">Thêm vào giỏ
+                                                            onclick="addToCart(event,${courseMostPopular.id})">Thêm vào
+                                                        giỏ
                                                     </button>
 
 
@@ -143,7 +148,10 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                                            <fmt:formatNumber value="${c.avgRating}" type="number"
+                                                                              maxFractionDigits="1"
+                                                                              minFractionDigits="1"
+                                                                              var="formattedRating"/>
                                                             <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                                         </div>
                                                     </div>
@@ -181,7 +189,9 @@
                                                         <c:choose>
                                                             <c:when test="${c.enrolled}">
 
-                                                                <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                                <button type="button" class="btn-add-cart dark-button"
+                                                                        style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                                     Vào học ngay
                                                                 </button>
 
@@ -230,7 +240,10 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                                            <fmt:formatNumber value="${c.avgRating}" type="number"
+                                                                              maxFractionDigits="1"
+                                                                              minFractionDigits="1"
+                                                                              var="formattedRating"/>
                                                             <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                                         </div>
                                                     </div>
@@ -266,7 +279,9 @@
                                                         <c:choose>
                                                             <c:when test="${c.enrolled}">
 
-                                                                <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                                <button type="button" class="btn-add-cart dark-button"
+                                                                        style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                                     Vào học ngay
                                                                 </button>
 
@@ -315,7 +330,10 @@
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
-                                                            <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                                            <fmt:formatNumber value="${c.avgRating}" type="number"
+                                                                              maxFractionDigits="1"
+                                                                              minFractionDigits="1"
+                                                                              var="formattedRating"/>
                                                             <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                                         </div>
                                                     </div>
@@ -351,9 +369,11 @@
                                                         <c:choose>
                                                             <c:when test="${c.enrolled}">
 
-                                                                        <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
-                                                                            Vào học ngay
-                                                                        </button>
+                                                                <button type="button" class="btn-add-cart dark-button"
+                                                                        style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                                    Vào học ngay
+                                                                </button>
 
                                                             </c:when>
                                                             <c:otherwise>
@@ -391,9 +411,21 @@
     </div>
     <jsp:include page="header-footer/footer.jsp"/>
 </div>
+<div id="toast"></div>
+
 </body>
 
 <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script>
+    window.flashError = '${sessionScope.flashError}';
+    window.flashSuccess = '${sessionScope.flashSuccess}';
+
+    <%
+        session.removeAttribute("flashError");
+        session.removeAttribute("flashSuccess");
+    %>
+
+</script>
 
 </html>

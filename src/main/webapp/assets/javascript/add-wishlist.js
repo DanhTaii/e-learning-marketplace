@@ -12,7 +12,7 @@ function addToWishlist(e, btn, courseId) {
     })
         .then(response => {
             if (response.status === 401) {
-                window.location.href = "html-authentication/sign-in.jsp?error=auth_required";
+                window.location.href = "sign-in?error=auth_required";
                 return null;
             }
             return response.text();
@@ -46,7 +46,7 @@ function addToCart(e, courseId) {
     })
         .then(response => {
             if (response.status === 401) {
-                window.location.href = "html-authentication/sign-in.jsp?error=auth_required";
+                window.location.href = "sign-in?error=auth_required";
                 return null;
             }
             if (response.ok) return response.text();
