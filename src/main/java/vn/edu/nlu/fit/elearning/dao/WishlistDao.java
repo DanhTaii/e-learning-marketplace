@@ -44,10 +44,11 @@ public class WishlistDao extends BaseDao {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours," +
                             "c.author_name, c.price, c.discount_price, AVG(r.rating) AS avgRating,\n" +
                             "COUNT(DISTINCT e.id) AS student_count,\n" +
+                            "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, " +
                             "(CASE WHEN :userId IS NOT NULL AND w_user.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist\n" +
                             "FROM courses c \n" +
                             "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                            "LEFT JOIN enrollments e ON e.course_id = c.id\n" +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n " +
                             "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                             "LEFT JOIN wishlist w_user ON w_user.course_id = c.id AND w_user.user_id = :userId\n" +
                             "WHERE c.is_public = TRUE AND w_user.user_id = :userId\n" +

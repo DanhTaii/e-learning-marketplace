@@ -122,4 +122,17 @@ public class EnrollmentDetailDto implements Serializable {
     public void setListReviews(List<ReviewDto> listReviews) {
         this.listReviews = listReviews;
     }
+
+    public String getDurationText() {
+        int hours = (int) this.durationHours;
+        int minutes = (int) ((this.durationHours - hours) * 60);
+        if(hours == 0){
+            return minutes + "p";
+        }else if(minutes == 0) {
+            return hours + "h ";
+        }else{
+            return hours + "h " + minutes + "p";
+        }
+
+    }
 }

@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.dto;
 
+import vn.edu.nlu.fit.elearning.enums.Level;
+
 import java.io.Serializable;
 
 public class CourseCardDto implements Serializable {
@@ -11,7 +13,7 @@ public class CourseCardDto implements Serializable {
     private int price;
     private int discountPrice;
     private String thumbnailUrl;
-    private String level;
+    private Level level;
     private double avgRating;
     private double durationHours;
     private int studentCount;
@@ -102,11 +104,11 @@ public class CourseCardDto implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public String getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 

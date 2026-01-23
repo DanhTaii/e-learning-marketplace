@@ -288,13 +288,14 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COUNT(DISTINCT e.id) AS studentCount, " +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                            "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, " +
                             "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
                             "FROM courses c " +
                             "LEFT JOIN categories cate ON c.category_id = cate.id " +
                             "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
                             "LEFT JOIN tags t ON ct.tag_id = t.id " +
                             "LEFT JOIN lessons l ON c.id = l.course_id " +
-                            "LEFT JOIN enrollments e ON e.course_id = c.id " +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n " +
                             "LEFT JOIN reviews r ON r.course_id = c.id " +
                             "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
                             "WHERE c.is_public = TRUE "
@@ -385,6 +386,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COUNT(DISTINCT e.id) AS studentCount, " +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
+                            "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, " +
                             "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
                             "FROM courses c " +
                             "LEFT JOIN categories cate ON c.category_id = cate.id " +
@@ -392,7 +394,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "LEFT JOIN tags t ON ct.tag_id = t.id " +
                             "LEFT JOIN lessons l ON c.id = l.course_id " +
                             "LEFT JOIN reviews r ON r.course_id = c.id " +
-                            "LEFT JOIN enrollments e ON e.course_id = c.id " +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n " +
                             "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
                             "WHERE c.is_public = TRUE "
             );
