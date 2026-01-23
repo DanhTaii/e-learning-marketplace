@@ -493,7 +493,7 @@
                                                 <div class="quick-info__level">
                                                     <div class="level__icon icon"><i
                                                             class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">${c.level}</div>
+                                                    <div class="level__text text-medium">${c.level.vietnameseName}</div>
                                                 </div>
                                                 <div class="quick-info__users">
                                                     <div class="users__icon icon"><i
@@ -503,7 +503,7 @@
                                                 <div class="quick-info__time">
                                                     <div class="time__icon icon"><i
                                                             class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">${c.durationHours}h</div>
+                                                    <div class="time__text text-medium">${c.durationText}</div>
                                                 </div>
                                             </div>
                                             <div class="content__price">
@@ -511,10 +511,23 @@
                                                 <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
                                             </div>
                                             <div class="hover-actions">
-                                                <button type="submit" style="font-size: 1.5rem"
-                                                        class="btn-add-cart dark-button"
-                                                        onclick="addToCart(event,${c.id})">Thêm vào giỏ
-                                                </button>
+                                                <c:choose>
+                                                    <c:when test="${c.enrolled}">
+
+                                                        <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                            Vào học ngay
+                                                        </button>
+
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button type="submit" style="font-size: 1.5rem"
+                                                                class="btn-add-cart dark-button"
+                                                                onclick="addToCart(event,${c.id})">Thêm vào giỏ
+                                                        </button>
+
+
+                                                    </c:otherwise>
+                                                </c:choose>
 
                                                 <button type="button"
                                                         class="wishlist-btn ${c.inWishlist ? 'active' : ''}"

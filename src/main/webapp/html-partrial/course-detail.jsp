@@ -300,7 +300,7 @@
                                             <div class="box__name box">
                                                 <div class="review-in4">
                                                     <span class="review__name">${review.userName}</span>
-                                                    <span class="review__time">${review.createdAt}</span>
+                                                    <span class="review__time"><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                                                 </div>
                                             </div>
                                             <div class="box__date box">

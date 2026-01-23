@@ -43,7 +43,7 @@
                         <div class="sub-header__rating-star sub__header">
                             <div class="star1">
                                 <div class="star1__number">
-                                    <span class="text-xl">${enrollmentDetail.rating}</span></div>
+                                    <span class="text-xl"><fmt:formatNumber value="${enrollmentDetail.rating}" pattern="#.#" /></span></div>
                                 <div class="star1__star-icon"><i class="fa-solid fa-star icon-star"
                                                                  style="color: #FFD43B; font-size: var(--text-sm)"></i>
                                 </div>
@@ -59,7 +59,7 @@
 
                         </div>
                         <div class="sub-header__duration sub__header">
-                            <div class="time"><span class="text-xl">${enrollmentDetail.durationHours}</span></div>
+                            <div class="time"><span class="text-xl">${enrollmentDetail.durationText}</span></div>
 
                             <div class="total"><span class="text-sm light">Tổng cộng</span></div>
 
@@ -109,7 +109,7 @@
                                             <div class="box__name box">
                                                 <div class="review-in4">
                                                     <span class="review__name">${review.userName}</span>
-                                                    <span class="review__time">${review.createdAt}</span>
+                                                    <span class="review__time"><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                                                 </div>
                                             </div>
                                             <div class="box__date box">
@@ -169,7 +169,7 @@
                                     </div>
                                     <div class="column2__duration">
                                         <span class="text-lg light"
-                                              style="color: var(--white-color)">${l.durationMinutes}</span>
+                                              style="color: var(--white-color)">${l.durationMinutes}p</span>
                                     </div>
                                 </div>
                             </div>

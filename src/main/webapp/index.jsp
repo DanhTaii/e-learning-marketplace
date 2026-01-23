@@ -67,7 +67,7 @@
                                             <div class="quick-info__level">
                                                 <div class="level__icon icon"><i
                                                         class="text-medium fa-solid fa-signal"></i></div>
-                                                <div class="level__text text-medium">${courseMostPopular.level}</div>
+                                                <div class="level__text text-medium">${courseMostPopular.level.vietnameseName}</div>
                                             </div>
                                             <div class="quick-info__users">
                                                 <div class="users__icon icon"><i
@@ -149,7 +149,7 @@
                                                         <div class="quick-info__level">
                                                             <div class="level__icon icon"><i
                                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level}</div>
+                                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
                                                         </div>
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
@@ -235,7 +235,7 @@
                                                         <div class="quick-info__level">
                                                             <div class="level__icon icon"><i
                                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level}</div>
+                                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
                                                         </div>
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
@@ -319,7 +319,7 @@
                                                         <div class="quick-info__level">
                                                             <div class="level__icon icon"><i
                                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level}</div>
+                                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
                                                         </div>
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i

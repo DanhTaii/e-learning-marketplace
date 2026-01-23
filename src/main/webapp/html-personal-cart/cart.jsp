@@ -91,9 +91,9 @@
                                                                     </span>
                                                                     </div>
                                                                     <div class="info__stats course-stats">
-                                                                        <span class="stats__hours text-mini">${p.course.durationHours}h</span>
+                                                                        <span class="stats__hours text-mini">${p.course.durationText}</span>
                                                                         <span class="stats__lecture text-mini">• ${p.course.lessonCount} Bài giảng</span>
-                                                                        <span class="stats__level text-mini">• ${p.course.level}</span>
+                                                                        <span class="stats__level text-mini">• ${p.course.level.vietnameseName}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -224,7 +224,7 @@
                                                 <div class="quick-info__level">
                                                     <div class="level__icon icon"><i
                                                             class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">${c.level}</div>
+                                                    <div class="level__text text-medium">${c.level.vietnameseName}</div>
                                                 </div>
                                                 <div class="quick-info__users">
                                                     <div class="users__icon icon"><i
@@ -234,7 +234,7 @@
                                                 <div class="quick-info__time">
                                                     <div class="time__icon icon"><i
                                                             class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">${c.durationHours}h</div>
+                                                    <div class="time__text text-medium">${c.durationText}</div>
                                                 </div>
                                             </div>
                                             <div class="content__price">
