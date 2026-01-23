@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +43,9 @@
                                             <div class="content__author-name text-medium">Quản trị viên</div>
                                             <div class="content__rate">
                                                 <div class="rate__icon"><i class="text-medium fa-regular fa-star"></i></div>
-                                                <div class="text-medium rate__number">${e.rating}</div>
+<%--                                                <div class="text-medium rate__number">${e.rating}</div>--%>
+                                                <fmt:formatNumber value="${e.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                                <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                             </div>
                                         </div>
                                         <div class="text-paragraph test-text"><p>${e.title}</p></div>
@@ -66,7 +69,7 @@
                     <div class="my-course-empty-description">
                         Hãy khám phá và chọn cho mình một khóa học phù hợp nhé!
                     </div>
-                    <a href="/courses" class="my-course-empty-link">Khám phá khóa học</a>
+                    <a href="index" class="my-course-empty-link">Khám phá khóa học</a>
                 </div>
             </c:otherwise>
         </c:choose>

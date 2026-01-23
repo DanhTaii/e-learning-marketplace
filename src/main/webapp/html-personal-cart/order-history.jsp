@@ -13,7 +13,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/order-history.css">
+    <link rel="stylesheet" href="assets/css/order-history.css?v=1.0.2">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
 
 
@@ -33,41 +33,60 @@
                 <div class="header__title">
                     <span class="text-big-title">Lịch sử giao dịch</span>
                 </div>
-                <div class="history-box">
-                    <ul>
-                        <c:forEach items="${orderList}" var="order">
-                        <li>
-                            <div class="box__content">
-                            <div class="box__row1">
-                                <span class="time">${order.createdAt}</span>
-                            </div>
-                            <div class="box__row2">
-                                <div class="row2__column1-order">
-                                    <span class="text"><span class="text1">Mã đơn hàng: </span>${order.orderCode}</span></div>
-                                <div class="row2__column2-total">
-                                    <span class="text"><span class="text1">Tổng cộng: </span><fmt:formatNumber value="${order.finalAmount}" type="number" pattern="###,###"></fmt:formatNumber> đ</span></div>
-                                <div class="row2__column3-payment-method">
-                                    <span class="text"><span class="text1">Phương thức thanh toán:</span> ${order.paymentMethodName}</span></div>
-                                <a href="receipt?orderId=${order.id}" class="turn-page">
-                                    <div class="row2__column4-btn-receipt header__button receipt-box">
-                                        <button type="button" class="btn-receipt button__btn">Biên lai</button>
-                                    </div>
-                                </a>
 
-                                <div class="row2__column4-success">
-                                    <span class="text">${order.status}</span>
+                <c:choose>
+                    <c:when test="${not empty orderList}">
+                        <div class="history-box">
+                            <ul>
+                                <c:forEach items="${orderList}" var="order">
+                                    <li>
+                                        <div class="box__content">
+                                            <div class="box__row1">
+                                                <span class="time">${order.createdAt}</span>
+                                            </div>
+                                            <div class="box__row2">
+                                                <div class="row2__column1-order">
+                                                    <span class="text"><span class="text1">Mã đơn hàng: </span>${order.orderCode}</span>
+                                                </div>
+                                                <div class="row2__column2-total">
+                                                <span class="text"><span class="text1">Tổng cộng: </span>
+                                                    <fmt:formatNumber value="${order.finalAmount}" type="number" pattern="###,###"/> đ
+                                                </span>
+                                                </div>
+                                                <div class="row2__column3-payment-method">
+                                                    <span class="text"><span class="text1">Phương thức thanh toán: </span>${order.paymentMethodName}</span>
+                                                </div>
+                                                <a href="receipt?orderId=${order.id}" class="turn-page">
+                                                    <div class="row2__column4-btn-receipt header__button receipt-box">
+                                                        <button type="button" class="btn-receipt button__btn">Biên lai</button>
+                                                    </div>
+                                                </a>
+                                                <div class="row2__column4-success">
+                                                    <span class="text">${order.status}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </c:when>
+
+                    <c:otherwise>
+                        <!-- Empty state khi chưa có lịch sử giao dịch -->
+                        <div class="history-box">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-file-invoice-dollar empty-icon"></i>
+                                <div class="empty-title">Bạn chưa có lịch sử giao dịch</div>
+                                <div class="empty-description">
+                                    Hãy thực hiện giao dịch đầu tiên để xem lịch sử tại đây.
                                 </div>
-
+                                <a href="index" class="empty-link">Khám phá khóa học</a>
                             </div>
-                        </div></li>
-                        </c:forEach>
-                    </ul>
-
-                </div>
-
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
-
-
         </div>
     </div>
     <jsp:include page="/header-footer/footer.jsp"/>

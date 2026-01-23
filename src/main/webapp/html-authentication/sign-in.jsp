@@ -90,7 +90,7 @@
                             <div class="form__helps">
                                 <div class="help__no--account">
                                     <span class="span text-big">Chưa có tài khoản?</span>
-                                    <a href="html-authentication/sign-up.jsp" class="text-big turn-page text-fix">Đăng
+                                    <a href="sign-up" class="text-big turn-page text-fix">Đăng
                                         ký</a>
                                 </div>
                                 <div class="helps__lost-password">
