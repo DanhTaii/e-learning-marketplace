@@ -36,7 +36,7 @@ public class CourseDetailDto implements Serializable {
     private Category category;        // tên category
     private Category parentCategory;  // category cha
     private boolean inWishlist;
-
+    private boolean enrolled;
     public CourseDetailDto() {
     }
 
@@ -240,6 +240,14 @@ public class CourseDetailDto implements Serializable {
         this.parentCategory = parentCategory;
     }
 
+    public boolean isEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(boolean enrolled) {
+        this.enrolled = enrolled;
+    }
+
     @Override
     public String toString() {
         return "CourseDetailDto{" +
@@ -268,5 +276,17 @@ public class CourseDetailDto implements Serializable {
                 ", category=" + category +
                 ", parentCategory=" + parentCategory +
                 '}';
+    }
+    public String getDurationText() {
+        int hours = (int) this.durationHours;
+        int minutes = (int) ((this.durationHours - hours) * 60);
+        if(hours == 0){
+            return minutes + "p";
+        }else if(minutes == 0) {
+            return hours + "h ";
+        }else{
+            return hours + "h " + minutes + "p";
+        }
+
     }
 }

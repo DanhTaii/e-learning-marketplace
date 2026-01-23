@@ -66,6 +66,13 @@ function addToCart(e, courseId) {
             alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
         });
 }
+function goToCourseContent(e, url) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    window.location.href = url;
+}
 
 // ép load tại trang khi bấm back
 window.addEventListener("pageshow", function (event) {

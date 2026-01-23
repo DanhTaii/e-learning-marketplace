@@ -44,7 +44,7 @@
                         <div class="container-2__option-group">
                             <c:choose>
 
-                                <c:when test="${isEnrolled}">
+                                <c:when test="${c.enrolled}">
                                     <a href="my-course/detail?courseId=${c.id}" class="turn-page">
                                         <div class="header__button add__button" style="margin-bottom: 3rem">
                                             <button type="button" class="container-2__button-add button__btn">
@@ -58,7 +58,7 @@
                                     <div class="container-2__option">
                                         <div class="header__button add__button">
                                             <button type="button" class="container-2__button-add button__btn"
-                                                    onclick="addToCart(${c.id})">
+                                                    onclick="addToCart(event,${c.id})">
                                                 Thêm vào giỏ hàng
                                             </button>
                                         </div>
@@ -95,7 +95,7 @@
                                         Thời lượng:
                                     </span>
                                     <span class="text-li style__text style__text-var">
-                                         ${c.durationHours}h
+                                         ${c.durationText}
                                     </span>
                                 </li>
                                 <li class="text-li">
@@ -186,8 +186,10 @@
                         <span class="section-1__updated-item text-big"><i
                                 class="fa-duotone fa-solid fa-calendar-days"></i></span>
                             <span class="section-1__updated-title section-1__updated-item text-big font__sub-title">Cập nhật lần cuối: </span>
-                            <span class="section-1__updated-date section-1__updated-item text-big font__sub-title">${c.updatedAt}</span>
+                            <span class="section-1__updated-date section-1__updated-item text-big font__sub-title"> <fmt:formatDate value="${c.updatedAt}" pattern="yyyy-MM-dd "/></span>
                         </div>
+
+
                     </div>
 
                     <div class="section-2__skills section__space ">
@@ -258,7 +260,7 @@
                                     ${c.lessonCount} bài giảng
                                 </li>
                                 <li class="text-big font__sub-title">
-                                    ${c.durationHours}h
+                                    ${c.durationText}
                                 </li>
                             </ul>
                         </div>
@@ -392,39 +394,6 @@
 </div>
 
 </body>
-<script>
-    function addToCart(courseId) {
-
-        fetch('add-cart?id=' + courseId, {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-            .then(response => {
-                if (response.status === 401) {
-                    alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
-                    window.location.href = "html-authentication/sign-in.jsp";
-                    return null;
-                }
-                if (response.ok) return response.text();
-                throw new Error('Network response was not ok.');
-            })
-            .then(newCount => {
-                if (newCount === null) return;
-                const cartElement = document.getElementById('cart-count');
-                if (cartElement) {
-                    cartElement.innerText = newCount;
-                }
-
-                alert("Đã thêm khóa học vào giỏ hàng!");
-            })
-            .catch(error => {
-                console.error('Lỗi AJAX:', error);
-                alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
-            });
-    }
-</script>
 <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

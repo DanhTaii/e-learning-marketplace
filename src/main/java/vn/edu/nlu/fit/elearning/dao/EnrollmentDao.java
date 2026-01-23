@@ -4,7 +4,9 @@ import vn.edu.nlu.fit.elearning.dto.EnrollmentCardDTO;
 import vn.edu.nlu.fit.elearning.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.model.Enrollment;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCardDTO, Integer> {
 
@@ -17,18 +19,6 @@ public class EnrollmentDao extends BaseDao implements BaseCrudDao<EnrollmentCard
     public EnrollmentCardDTO findById(Integer id) {
         // TODO: Implement findById logic
         return null;
-    }
-
-    public int checkEnrollment(int userId, int courseId) {
-        String sql = "SELECT COUNT(*) FROM enrollments WHERE user_id = :userId AND course_id = :courseId";
-
-        return getJdbi().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind("userId", userId)
-                        .bind("courseId", courseId)
-                        .mapTo(Integer.class)
-                        .findFirst().orElse(null)
-        );
     }
 
     @Override

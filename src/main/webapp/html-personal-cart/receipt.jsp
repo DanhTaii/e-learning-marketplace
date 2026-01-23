@@ -84,8 +84,8 @@
                             <div class="grid__row-2">
                             <div class="order-items">
                                 <div class="items__content">
-                                    <div class="content__image">
-                                        <img src=${item.thumbnailUrl}""
+                                    <div class="content__image"  style="aspect-ratio: 16/9">
+                                        <img srcset="${item.thumbnailUrl}"
                                              alt="${item.courseTitle}" class="image">
                                     </div>
                                     <div class="content__name text-paragraph">
@@ -113,7 +113,7 @@
                             <button type="button" class="home-btn dark-button">Trang chủ</button>
                         </div>
                     </a>
-                    <a href="my-courses" class="turn-page">
+                    <a href="personal/my-courses" class="turn-page">
                         <div class="header__button button">
                             <button type="button" class="home-btn button__btn">Khóa học của tôi</button>
                         </div>

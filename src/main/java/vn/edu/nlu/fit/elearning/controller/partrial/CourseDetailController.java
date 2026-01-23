@@ -56,14 +56,6 @@ public class CourseDetailController extends HttpServlet {
         }
         CourseDetailDto c = cs.getCourse(id, userId);
 
-        // này làm cho phần khoa hoc da mua
-        boolean isEnrolled = false;
-        if (user != null) {
-            isEnrolled = enrollmentService.checkEnrollment(user.getId(), c.getId()) > 0;
-        }
-        request.setAttribute("isEnrolled", isEnrolled);
-
-
         // này làm cho reviews
         List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(id);
         request.setAttribute("reviewDtos", reviewDtos);
