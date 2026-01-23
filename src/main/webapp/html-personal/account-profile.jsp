@@ -115,7 +115,7 @@
                             <div class="form-group">
                                 <label class="style__sub-title">Số điện thoại</label>
                                 <input type="tel" id="user_phone" name="phone" value="${user.phone}"
-                                       placeholder="090x xxx xxx">
+                                       placeholder="">
                                 <span id="error_phone" class="error-client"
                                       style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>

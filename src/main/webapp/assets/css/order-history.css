@@ -60,3 +60,50 @@
 .btn-receipt {
     padding: 5px 4rem;
 }
+
+/* Empty state trong history-box */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 7px;
+    background-color: var(--white-color);
+    margin-top: 20px;
+}
+
+.empty-icon {
+    font-size: 70px;
+    color: var(--dark-blue); /* màu xanh đậm đồng bộ */
+    margin-bottom: 20px;
+    opacity: 0.9;
+    display: block;
+}
+
+.empty-title {
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.empty-description {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.empty-link {
+    color: var(--dark-blue);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1.4rem;
+    padding: 10px 20px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.empty-link:hover {
+    background-color: var(--dark-blue);
+    color: var(--white-color);
+}
+

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class AccessTokenService {
     private final int LIMIT_MINUTE = 10;
     String emailFrom = "minh6112005@gmail.com";
-    String password = "xpfwkobwmpoqascz";
+    String password = "fppq kvfg qevh hdxv";
 
     // Thêm DAO để dùng cho validate & mark used
     private final AccessTokenDao tokenDao = new AccessTokenDao();
@@ -41,7 +41,7 @@ public class AccessTokenService {
         return UUID.randomUUID().toString();
     }
 
-    public Timestamp expireDateTime(){
+    public Timestamp expireDateTime() {
         return Timestamp.valueOf(LocalDateTime.now().plusMinutes(LIMIT_MINUTE));
     }
 
@@ -81,7 +81,7 @@ public class AccessTokenService {
 
             String content;
             if (isLinkMode) { // gửi link xác nhận
-                String link = "http://localhost:8080/e_learning_war_exploded/html-authentication/sign-in.jsp";
+                String link = "http://localhost:8080/e_learning_war_exploded/sign-in";
                 content = "<h1>Hello " + name + "</h1>" + "<p>Click the link to verify your email: "
                         + "<a href='" + link + "'>Click here</a></p>";
             } else { // gửi mã reset

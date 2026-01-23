@@ -112,7 +112,7 @@
                                              class="user__avatar-mini">
                                     </div>
                                     <div class="user__profile-name">
-                                        <a href="" class="name-text text-header">Ngoc Minh</a>
+                                        <a href="" class="name-text text-header">${user.username}</a>
                                     </div>
                                     <div class="user__profile-bio">
                                         <a href="" class="bio-text">Thêm tiểu sử</a>

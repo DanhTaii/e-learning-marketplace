@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +52,8 @@
                                         <div class="content__rate content__rate-2">
                                             <div class="rate__icon"><i
                                                     class="text-medium fa-regular fa-star"></i></div>
-                                            <div class="text-medium rate__number">${c.avgRating}</div>
+                                            <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
+                                            <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                         </div>
                                     </div>
                                     <div class="text-paragraph test-text"><p>${c.title}</p></div>
