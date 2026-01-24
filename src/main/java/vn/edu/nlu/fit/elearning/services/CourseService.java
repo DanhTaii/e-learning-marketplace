@@ -38,14 +38,14 @@ public class CourseService {
         return cd.findAllCourses();
     }
 
-    public int totalCourses() {
-        int result = 0;
-        List<Course> courseList = cd.findAllCourses();
-        for (Course c : courseList) {
-            result++;
-        }
-        return result;
-    }
+//    public int totalCourses() {
+//        int result = 0;
+//        List<Course> courseList = cd.findAllCourses();
+//        for (Course c : courseList) {
+//            result++;
+//        }
+//        return result;
+//    }
 
     public double avgRating() {
         double result = 0.0;
@@ -85,9 +85,9 @@ public class CourseService {
         return cd.findCourseCardById(id, userId);
     }
 
-    public List<CourseCardDto> getCoursesByTitle(String search) {
-        return cd.findCoursesByTitle(search);
-    }
+//    public List<CourseCardDto> getCoursesByTitle(String search) {
+//        return cd.findCoursesByTitle(search);
+//    }
 
     public List<Course> getAllCourses(CourseFilter filter) {
         return cd.filterAllCourses(filter);

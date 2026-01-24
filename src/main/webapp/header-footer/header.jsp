@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="browse__container-box-2-2 box-2">
                                     <div class="box__title">
-                                        <span class="category__title title">Tags</span>
+                                        <span class="category__title title">Loại</span>
                                     </div>
                                     <ul class="browse__container-box-2-list list">
                                         <c:forEach var="t" items="${tags}" begin="0" end="2">

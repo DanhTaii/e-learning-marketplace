@@ -121,6 +121,18 @@
                             </div>
                         </div>
 
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-indicator"></span>
+                                <h2 class="section-title">Link ảnh URL</h2>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="style__sub-title">Link ảnh avatar</label>
+                                <input type="text" name="avatarUrl" value="${user.avatarUrl}" placeholder="">
+                            </div>
+                        </div>
+
                         <div class="form-actions">
                             <button type="reset" class="btn-secondary ">Hủy bỏ</button>
                             <button type="submit" class="btn-primary">Lưu thay đổi</button>

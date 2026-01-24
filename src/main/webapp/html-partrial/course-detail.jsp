@@ -37,8 +37,12 @@
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
-                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber > đ</span>
+                                <span class="container-2__sold-price"><fmt:formatNumber
+                                        value="${c.price - c.discountPrice}" type="number"
+                                        pattern="###,###"></fmt:formatNumber> đ</span>
+                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}"
+                                                                                            type="number"
+                                                                                            pattern="###,###"></fmt:formatNumber> đ</span>
                             </div>
                         </div>
                         <div class="container-2__option-group">
@@ -80,10 +84,8 @@
                                         <span>Đảm bảo hoàn tiền trong 30 ngày</span>
                                     </div>
                                 </c:otherwise>
-
                             </c:choose>
                         </div>
-
 
                         <div class="container-2__summary-information">
                             <div class="container-2__subtitle text-big">
@@ -95,7 +97,7 @@
                                         Thời lượng:
                                     </span>
                                     <span class="text-li style__text style__text-var">
-                                         ${c.durationText}
+                                        ${c.durationText}
                                     </span>
                                 </li>
                                 <li class="text-li">
@@ -119,28 +121,23 @@
                         <div class="section-1__breadcrumb">
 
                             <div class="">
-                                <a href="home" class="section-1__breadcrumb-name section-1__breadcrumb-item">
+                                <a href="index" class="section-1__breadcrumb-name section-1__breadcrumb-item">
                                     Softskill
                                 </a>
                             </div>
 
-                            <div class="section-1__breadcrumb-item text-li">
-                                <i class="fa-duotone fa-solid fa-angle-right"></i>
-                            </div>
+                            <c:if test="${not empty category}">
+                                <div class="section-1__breadcrumb-item text-li">
+                                    <i class="fa-duotone fa-solid fa-angle-right"></i>
+                                </div>
 
-                            <div class="">
-                                <a href="result-search" class="section-1__breadcrumb-name section-1__breadcrumb-item">
-                                    ${category.name}
-                                </a>
-                            </div>
-
-                            <div class="section-1__breadcrumb-item text-li">
-                                <i class="fa-duotone fa-solid fa-angle-right "></i>
-                            </div>
-
-                            <div class="section-1__breadcrumb-item section-1__breadcrumb-name">
-                                ${category2.name}
-                            </div>
+                                <div class="">
+                                    <a href="result-search/by-category?id=${category.id}"
+                                       class="section-1__breadcrumb-name section-1__breadcrumb-item">
+                                            ${category.name}
+                                    </a>
+                                </div>
+                            </c:if>
                         </div>
 
                         <div class="section-1__main-title text-big-title">${c.title}</div>
@@ -149,11 +146,15 @@
                         </div>
 
                         <div class="section-1__rating">
-                            <div class="section-1__rating-item section-1__best-seller text-mini">Best seller</div>
+<%--                            <div class="section-1__rating-item section-1__best-seller text-mini">Bán chạy</div>--%>
                             <!--                            <div class="section-1__rating-item section-1__high-rated text-mini">High Rated</div>-->
                             <div class="section-1__rating-item section-1__rating-star">
                                 <div class="section-1__number section-1__rating-star-item text-mini">
-                                    5
+                                    <fmt:formatNumber value="${c.avgRating}" type="number"
+                                                      maxFractionDigits="1"
+                                                      minFractionDigits="1"
+                                                      var="formattedRating"/>
+                                    <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
                                 </div>
                                 <div class="section-1__star section-1__rating-star-item text-mini">
                                     <i class="fa-duotone fa-solid fa-star"></i>
@@ -171,7 +172,7 @@
                                     <i class="fa-duotone fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${c.studentCount}
+                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${fn:length(reviewDtos)}
                                 rating)
                             </div>
                         </div>
@@ -186,7 +187,8 @@
                         <span class="section-1__updated-item text-big"><i
                                 class="fa-duotone fa-solid fa-calendar-days"></i></span>
                             <span class="section-1__updated-title section-1__updated-item text-big font__sub-title">Cập nhật lần cuối: </span>
-                            <span class="section-1__updated-date section-1__updated-item text-big font__sub-title"> <fmt:formatDate value="${c.updatedAt}" pattern="yyyy-MM-dd "/></span>
+                            <span class="section-1__updated-date section-1__updated-item text-big font__sub-title"> <fmt:formatDate
+                                    value="${c.updatedAt}" pattern="yyyy-MM-dd "/></span>
                         </div>
 
 
@@ -234,14 +236,14 @@
                     <div class="section-3 section__space">
                         <div class="grid">
                             <div class="section-3__content">
-                                <div class="section-3__title style__sub-title">Tags</div>
+                                <div class="section-3__title style__sub-title">Loại</div>
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
                                         <c:forEach var="t" items="${tags}">
-                                            <%--                                            <c:if test="${loop.index < 3}">--%>
-                                            <li class="section-3_li">${t.name}</li>
-                                            <%--                                            </c:if>--%>
+                                            <a href="result-search/by-tag?id=${t.id}" class="turn-page">
+                                                <li class="section-3_li">${t.name}</li>
+                                            </a>
                                         </c:forEach>
                                     </ul>
                                 </div>
@@ -300,18 +302,24 @@
                                             <div class="box__name box">
                                                 <div class="review-in4">
                                                     <span class="review__name">${review.userName}</span>
-                                                    <span class="review__time"><fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
+                                                    <span class="review__time"><fmt:formatDate
+                                                            value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                                                 </div>
                                             </div>
                                             <div class="box__date box">
                                                 <div class="star">
                                                     <div class="text-medium regular">${review.rating}</div>
                                                     <div class="star-icon">
-                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star" style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:#FFD43B; font-size:1rem"></i>
                                                     </div>
                                                 </div>
                                             </div>

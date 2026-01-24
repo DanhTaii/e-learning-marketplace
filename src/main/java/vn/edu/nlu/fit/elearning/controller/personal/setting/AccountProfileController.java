@@ -52,9 +52,10 @@ public class AccountProfileController extends HttpServlet {
         User userSession = (User) session.getAttribute("userSession");
         String phone = request.getParameter("phone");
         String name = request.getParameter("username");
+        String avatarUrl = request.getParameter("avatarUrl");
         try {
             // Gọi Service để xử lý
-            boolean isSuccess = userService.updateUserProfile(userSession, name, phone);
+            boolean isSuccess = userService.updateUserProfile(userSession, name, phone, avatarUrl);
 
             if (isSuccess) {
                 session.setAttribute("userSession", userSession);

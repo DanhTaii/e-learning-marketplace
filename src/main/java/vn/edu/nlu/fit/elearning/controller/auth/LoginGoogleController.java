@@ -5,7 +5,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.model.User;
-import vn.edu.nlu.fit.elearning.services.CategoryService;
 import vn.edu.nlu.fit.elearning.services.UserService;
 import vn.edu.nlu.fit.elearning.utils.GoogleUtils;
 
