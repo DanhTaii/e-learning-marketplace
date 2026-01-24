@@ -34,10 +34,10 @@ public class CheckMailController extends HttpServlet {
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        // Bảo vệ: phải có email trong session
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("resetEmail") == null) {
-            response.sendRedirect(request.getContextPath() + "/forgot-password");
+        if (session == null ||
+                (session.getAttribute("resetEmail") == null && session.getAttribute("signupEmail") == null)) {
+            response.sendRedirect(request.getContextPath() + "/sign-up");
             return;
         }
 
@@ -47,39 +47,67 @@ public class CheckMailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("resetEmail") == null) {
-            response.sendRedirect(request.getContextPath() + "/forgot-password");
+        if (session == null ||
+                (session.getAttribute("resetEmail") == null && session.getAttribute("signupEmail") == null)) {
+            response.sendRedirect(request.getContextPath() + "/sign-up");
             return;
         }
 
-
-        String email = (String) session.getAttribute("resetEmail");
         String otp = request.getParameter("otp");
-
         if (otp == null || otp.trim().length() != 5) {
             request.setAttribute("error", "Vui lòng nhập đúng mã 5 chữ số!");
             request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
             return;
         }
 
-        User user = userService.getUserByEmail(email);
-        if (user == null) {
-            request.setAttribute("error", "Không tìm thấy tài khoản!");
-            request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
-            return;
+        // Trường hợp quên mật khẩu
+        if (session.getAttribute("resetEmail") != null) {
+            String email = (String) session.getAttribute("resetEmail");
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                request.setAttribute("error", "Không tìm thấy tài khoản!");
+                request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+                return;
+            }
+
+            boolean isValid = accessTokenService.validateResetToken(user.getId(), otp);
+            if (isValid) {
+                accessTokenService.markAsUsed(otp);
+                session.setAttribute("resetUserId", user.getId());
+                session.setAttribute("userMail", user.getEmail()); // thêm dòng này để ResetPasswordController dùng
+                response.sendRedirect(request.getContextPath() + "/reset-password");
+            } else {
+                request.setAttribute("error", "Mã xác thực không đúng hoặc đã hết hạn!");
+                request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+            }
         }
 
-        boolean isValid = accessTokenService.validateResetToken(user.getId(), otp);
+        // Trường hợp đăng ký
+        else if (session.getAttribute("signupEmail") != null) {
+            String email = (String) session.getAttribute("signupEmail");
+            String username = (String) session.getAttribute("signupUsername");
+            String password = (String) session.getAttribute("signupPassword");
 
-        if (isValid) {
-            accessTokenService.markAsUsed(otp);
-            session.setAttribute("resetUserId", user.getId());
-            session.setAttribute("userMail", user.getEmail());
-            System.out.println(user.getEmail());
-            response.sendRedirect(request.getContextPath() + "/reset-password");
-        } else {
-            request.setAttribute("error", "Mã xác thực không đúng hoặc đã hết hạn!");
-            request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+            boolean isValid = accessTokenService.validateSignupToken(otp);
+            if (isValid) {
+                accessTokenService.markAsUsed(otp);
+
+                boolean created = userService.register(email, username, password);
+                if (created) {
+                    session.removeAttribute("signupEmail");
+                    session.removeAttribute("signupUsername");
+                    session.removeAttribute("signupPassword");
+                    request.setAttribute("success", "Xác nhận thành công! Bạn có thể đăng nhập.");
+                    response.sendRedirect(request.getContextPath() + "/sign-in");
+                } else {
+                    request.setAttribute("error", "Không thể tạo tài khoản!");
+                    request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+                }
+            } else {
+                request.setAttribute("error", "Mã xác thực không đúng hoặc đã hết hạn!");
+                request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+            }
         }
     }
 }
+

@@ -13,7 +13,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/default.css?v=1.0.2">
-    <link rel="stylesheet" href="assets/css/result-search.css?v=1.0.3">
+    <link rel="stylesheet" href="assets/css/result-search.css?v=1.0.6">
     <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
     <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
 
@@ -30,19 +30,20 @@
         <div class="grid">
             <div class="grid__row-2">
                 <div class="container__title text-big-title">
-                        <c:if test="${not empty cate}">
-                            ${cate.name}
-                        </c:if>
-                        <c:if test="${empty cate and not empty search}">
-                            Kết quả cho từ khóa: "${search}"
-                        </c:if>
-                        <c:if test="${empty cate and empty search and not empty tag}">
-                            Tag: ${tag.name}
-                        </c:if>
-                        <c:if test="${empty cate and empty search and empty tag}">
-                            Tất cả khóa học
-                        </c:if>
+                    <c:if test="${not empty cate}">
+                        ${cate.name}
+                    </c:if>
+                    <c:if test="${empty cate and not empty search}">
+                        Kết quả cho từ khóa: "${search}"
+                    </c:if>
+                    <c:if test="${empty cate and empty search and not empty tag}">
+                        Tag: ${tag.name}
+                    </c:if>
+                    <c:if test="${empty cate and empty search and empty tag}">
+                        Tất cả khóa học
+                    </c:if>
                 </div>
+
                 <div class="grid__column-3">
                     <c:if test="${mode == 'tag'}">
                         <form action="result-search/by-tag" method="get">
@@ -469,21 +470,23 @@
                         </form>
                     </c:if>
                 </div>
+
                 <div class="grid__colum-9">
                     <div class="grid__row-2">
+                        <!-- Nếu có khóa học -->
                         <c:forEach var="c" items="${listCourse}">
                             <div class="grid__column-4 product-card-container">
+
                                 <a href="course-detail?id=${c.id}" class="turn-page">
                                     <div class="product__small-advertisement">
                                         <div class="small-advertisement__image">
                                             <img src="${c.thumbnailUrl}"
-                                                 alt="Lắng Nghe Chủ Động Và Hiểu Ý Người Nói Một Cách Sâu Sắc"
-                                                 class="img-2">
+                                                 alt="${c.title}" class="img-2">
                                         </div>
                                         <div class="small-advertisement__content">
                                             <div class="content__top">
-                                                <div class="content__author-name text-medium">${c.authorName}</div>
-                                                <div class="content__rate">
+                                                <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                <div class="content__rate content__rate-2">
                                                     <div class="rate__icon"><i
                                                             class="text-medium fa-regular fa-star"></i></div>
                                                     <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
@@ -505,13 +508,21 @@
                                                 <div class="quick-info__time">
                                                     <div class="time__icon icon"><i
                                                             class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text-medium">${c.durationText}</div>
+                                                    <div class="time__text text text-medium">${c.durationText}</div>
                                                 </div>
                                             </div>
                                             <div class="content__price">
-                                                <div class="price__new"><fmt:formatNumber value="${c.price - c.discountPrice}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
-                                                <div class="price__old"><fmt:formatNumber value="${c.price}" type="number" pattern="###,###"></fmt:formatNumber> đ</div>
+                                                <div class="price__new"><fmt:formatNumber
+                                                        value="${c.price - c.discountPrice}" type="number"
+                                                        pattern="###,###"></fmt:formatNumber> đ
+                                                </div>
+                                                <div class="price__old"><fmt:formatNumber value="${c.price}"
+                                                                                          type="number"
+                                                                                          pattern="###,###"></fmt:formatNumber>
+                                                    đ
+                                                </div>
                                             </div>
+
                                             <div class="hover-actions">
                                                 <c:choose>
                                                     <c:when test="${c.enrolled}">
@@ -539,76 +550,32 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="home-product-item__favourite">
+                                            <i class="fa-solid fa-check"></i>
+                                            <span>Yêu thích</span>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
                         </c:forEach>
+
+                        <!-- Nếu không có khóa học -->
+                        <c:if test="${empty listCourse}">
+                            <div class="search-empty-state">
+                                <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                <div class="search-empty-title">Không tìm thấy khóa học nào</div>
+                                <div class="search-empty-description">
+                                    Vui lòng thử lại với từ khóa khác hoặc khám phá các khóa học phổ biến.
+                                </div>
+                                <a href="index" class="search-empty-link">Khám phá khóa học</a>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="grid">
-            <div class="grid__row-2">
-                <div class="grid__column-3"></div>
-                <div class="grid__colum-9">
-                    <ul class="pagination home-product__pagination">
-                        <!-- Previous -->
-                        <c:if test="${currentPage > 1}">
-                            <li class="pagination-item">
-                                <a href="${paginationUrl}&page=${currentPage - 1}" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                                </a>
-                            </li>
-                        </c:if>
-
-                        <!-- Trang 1 -->
-                        <li class="pagination-item ${currentPage == 1 ? 'pagination-item--active' : ''}">
-                            <a href="${paginationUrl}&page=1" class="pagination-item__link">1</a>
-                        </li>
-
-                        <!-- Dấu ... nếu currentPage > 4 -->
-                        <c:if test="${currentPage > 4}">
-                            <li class="pagination-item">
-                                <span class="pagination-item__link">...</span>
-                            </li>
-                        </c:if>
-
-                        <!-- Các trang gần currentPage -->
-                        <c:forEach var="i" begin="${currentPage - 2 < 1 ? 1 : currentPage - 2}" end="${currentPage + 2}">
-                            <c:if test="${i > 1 && i < totalPages}">
-                                <li class="pagination-item ${i == currentPage ? 'pagination-item--active' : ''}">
-                                    <a href="${paginationUrl}&page=${i}" class="pagination-item__link">${i}</a>
-                                </li>
-                            </c:if>
-                        </c:forEach>
-
-                        <!-- Dấu ... nếu currentPage < totalPages - 3 -->
-                        <c:if test="${currentPage < totalPages - 3}">
-                            <li class="pagination-item">
-                                <span class="pagination-item__link">...</span>
-                            </li>
-                        </c:if>
-
-                        <!-- Trang cuối -->
-                        <c:if test="${totalPages > 1}">
-                            <li class="pagination-item ${currentPage == totalPages ? 'pagination-item--active' : ''}">
-                                <a href="${paginationUrl}&page=${totalPages}" class="pagination-item__link">${totalPages}</a>
-                            </li>
-                        </c:if>
-
-                        <!-- Next -->
-                        <c:if test="${currentPage < totalPages}">
-                            <li class="pagination-item">
-                                <a href="${paginationUrl}&page=${currentPage + 1}" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </c:if>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
+
     <jsp:include page="/header-footer/footer.jsp"/>
 </div>
 </body>

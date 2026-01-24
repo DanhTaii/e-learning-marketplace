@@ -29,36 +29,13 @@ public class SignUpController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // xử lý khi người dùng click link xác nhận trong email
-        String token = request.getParameter("token");
-        if (token != null) {
-            AccessToken accessToken = tokenDao.findByToken(token);
-            if (accessToken != null
-                    && !accessToken.isUsed()
-                    && !accessTokenService.isExpireTime(accessToken.getExpiriTime())) {
-
-                // đánh dấu token đã dùng
-                tokenDao.markAsUsed(token);
-
-                // thông báo thành công và cho phép đăng nhập
-                request.setAttribute("success", "Xác nhận email thành công! Bạn có thể đăng nhập.");
-                request.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(request, response);
-                return;
-            } else {
-                request.setAttribute("error", "Token không hợp lệ hoặc đã hết hạn.");
-                request.getRequestDispatcher("/html-authentication/sign-up.jsp").forward(request, response);
-                return;
-            }
-        }
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        // load categories/tags cho header
         CategoryService categoryService = new CategoryService();
         List<Category> categories = categoryService.getAllCategories();
         request.setAttribute("categories", categories);
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        // nếu không có token thì hiển thị form đăng ký
         request.getRequestDispatcher("/html-authentication/sign-up.jsp").forward(request, response);
     }
 
@@ -85,19 +62,10 @@ public class SignUpController extends HttpServlet {
                 throw new IllegalArgumentException("Email đã tồn tại!");
             }
 
-            // Đăng ký user
-            boolean isSuccess = userService.register(email, username, password);
-            if (!isSuccess) {
-                throw new RuntimeException("Đăng ký thất bại!");
-            }
-
-            // Lấy user vừa tạo
-            user = userService.getUserByEmail(email);
-
             // Tạo token xác thực
-            String token = accessTokenService.generateTokenForVerify();
+            String token = accessTokenService.generateToken();
             AccessToken accessToken = new AccessToken(
-                    user.getId(),
+                    0, // chưa có userId vì chưa tạo user
                     token,
                     accessTokenService.expireDateTime(),
                     false
@@ -107,13 +75,19 @@ public class SignUpController extends HttpServlet {
                 throw new RuntimeException("Không thể tạo token xác thực!");
             }
 
-            // Gửi email
-            if (!accessTokenService.sendEmail(email, token, username, true)) {
+            // Gửi email chứa mã
+            if (!accessTokenService.sendEmail(email, token, username)) {
                 throw new RuntimeException("Gửi email xác nhận thất bại!");
             }
 
-            request.setAttribute("success", "Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.");
-            request.getRequestDispatcher("/html-authentication/sign-up.jsp").forward(request, response);
+            // Lưu thông tin đăng ký vào session để dùng ở CheckEmailController
+            HttpSession session = request.getSession();
+            session.setAttribute("signupEmail", email);
+            session.setAttribute("signupUsername", username);
+            session.setAttribute("signupPassword", password);
+            session.setMaxInactiveInterval(10 * 60); // 10 phút
+
+            response.sendRedirect(request.getContextPath() + "/check-email");
 
         } catch (IllegalArgumentException e) {
             request.setAttribute("error", e.getMessage());
@@ -125,5 +99,4 @@ public class SignUpController extends HttpServlet {
             request.getRequestDispatcher("/html-authentication/sign-up.jsp").forward(request, response);
         }
     }
-
 }

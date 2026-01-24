@@ -77,7 +77,7 @@ public class ForgetPasswordController extends HttpServlet {
             return;
         }
 
-        boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername(), false);
+        boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername());
         if(!isSend){
             request.setAttribute("error", "Gửi không thành công!");
             request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
