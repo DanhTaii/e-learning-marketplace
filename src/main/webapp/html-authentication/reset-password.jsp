@@ -25,7 +25,7 @@
             <div class="grid__row-2">
                 <div class="grid__column-4-in-12 fix-padding-1">
                     <div class="box-1">
-                        <img src="../assets/image/Vector3.png" alt="" class="img">
+                        <img src="assets/image/Vector3.png" alt="" class="img">
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">

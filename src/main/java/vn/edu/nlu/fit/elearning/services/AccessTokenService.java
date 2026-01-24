@@ -45,19 +45,18 @@ public class AccessTokenService {
         return Timestamp.valueOf(LocalDateTime.now().plusMinutes(LIMIT_MINUTE));
     }
 
-    public boolean isExpireTime(Timestamp expireTime){
-        if(expireTime==null) return false;
+    public boolean isExpireTime(Timestamp expireTime) {
+        if (expireTime == null) return false;
         return LocalDateTime.now().isAfter(expireTime.toLocalDateTime().plusMinutes(LIMIT_MINUTE));
     }
 
-    public boolean sendEmail(String email, String code, String name, boolean isLinkMode){
+    public boolean sendEmail(String email, String code, String name) {
 
         Properties prop = new Properties();
         prop.setProperty("mail.smtp.host", "smtp.gmail.com");
         prop.setProperty("mail.smtp.port", "587");
         prop.setProperty("mail.smtp.auth", "true");
         prop.setProperty("mail.smtp.starttls.enable", "true");
-
 
         Authenticator auth = new Authenticator() {
             @Override
@@ -73,27 +72,19 @@ public class AccessTokenService {
             msg.addHeader("Content-Type", "text/html; charset=UTF-8");
             msg.setFrom(new InternetAddress(emailFrom));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
-            if (isLinkMode) {
-                msg.setSubject("Xác nhận email", "UTF-8");
-            } else {
-                msg.setSubject("Tạo lại mật khẩu", "UTF-8");
-            }
+            msg.setSubject("Mã xác nhận đăng ký", "UTF-8");
 
-            String content;
-            if (isLinkMode) { // gửi link xác nhận
-                String link = "http://localhost:8080/e_learning_war_exploded/sign-in";
-                content = "<h1>Hello " + name + "</h1>" + "<p>Click the link to verify your email: "
-                        + "<a href='" + link + "'>Click here</a></p>";
-            } else { // gửi mã reset
-                content = "<h1>Hello " + name + "</h1>" + "<p>Your password reset verification code is: " + code + "</p>";
-            }
+            // Nội dung chỉ gửi mã code
+            String content = "<h1>Hello " + name + "</h1>"
+                    + "<p>Your verification code is: <b>" + code + "</b></p>"
+                    + "<p>Code will expire in " + LIMIT_MINUTE + " minutes.</p>";
 
             msg.setContent(content, "text/html; charset=UTF-8");
             Transport.send(msg);
 
             System.out.println("Sent successfully");
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Sent unsuccessfully");
             e.printStackTrace();
             return false;
@@ -102,17 +93,18 @@ public class AccessTokenService {
 
     public boolean validateResetToken(int userId, String token) {
         AccessToken accessToken = tokenDao.findByUserIdAndToken(userId, token);
-        if (accessToken == null) {
-            return false;
-        }
-        // Đã dùng rồi
-        if (accessToken.isUsed()) {
-            return false;
-        }
-        // Hết hạn (dùng method cũ của bạn)
-        if (isExpireTime(accessToken.getExpiriTime())) {
-            return false;
-        }
+        if (accessToken == null) return false;
+        if (accessToken.isUsed()) return false;
+        if (isExpireTime(accessToken.getExpiriTime())) return false;
+        return true;
+    }
+
+    // Dùng cho đăng ký (không cần userId)
+    public boolean validateSignupToken(String token) {
+        AccessToken accessToken = tokenDao.findByToken(token);
+        if (accessToken == null) return false;
+        if (accessToken.isUsed()) return false;
+        if (isExpireTime(accessToken.getExpiriTime())) return false;
         return true;
     }
 
