@@ -69,7 +69,7 @@ public class UserService {
         return createUser(user) > 0;
     }
     public boolean updateUserProfile(User currentUser, String newUsername, String newPhone, String avatarUrl) {
-        if (currentUser.getUsername().equals(newUsername) && currentUser.getPhone().equals(newPhone)) {
+        if (currentUser.getUsername().equals(newUsername) && currentUser.getPhone().equals(newPhone) && currentUser.getAvatarUrl().equals(avatarUrl)) {
             throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
         }
 
@@ -81,7 +81,7 @@ public class UserService {
                 throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
             }
         }
-        if (avatarUrl != null && !avatarUrl.trim().isEmpty()) {
+        if (avatarUrl == null || avatarUrl.trim().isEmpty()) {
             throw new IllegalArgumentException("Đường link ảnh không được để trống!");
         }
         currentUser.setUsername(newUsername);

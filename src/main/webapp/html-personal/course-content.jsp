@@ -47,7 +47,7 @@
                     <div class="container__title-video">
                         <div class="title-video">
                             <span id="mainLessonTitle"
-                                  class="text-3xl regular">${enrollmentDetail.listLesson[0].lessonTitle}</span>
+                                  class="text-3xl regular" style="line-height: normal">${enrollmentDetail.listLesson[0].lessonTitle}</span>
                         </div>
                     </div>
                     <div class="container__sub-header">
