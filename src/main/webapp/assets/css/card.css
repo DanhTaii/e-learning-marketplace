@@ -101,6 +101,7 @@
 .content__quick-info {
     display: flex;
     margin: 17px 0 20px 0;
+    justify-content: space-between;
     color: var(--dark-blue);
 }
 

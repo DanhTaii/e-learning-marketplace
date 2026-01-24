@@ -56,17 +56,6 @@
                                 <div class="big-advertisement__content">
                                     <div class="content__title">${courseMostPopular.title}</div>
                                     <div class="content__information">
-                                        <div class="content__top content__top-2">
-                                            <div class="content__author-name text-medium content__author-name-3">${courseMostPopular.authorName}</div>
-                                            <div class="content__rate content__rate-3">
-                                                <div class="rate__icon"><i
-                                                        class="text-medium fa-regular fa-star"></i></div>
-                                                <fmt:formatNumber value="${courseMostPopular.avgRating}" type="number"
-                                                                  maxFractionDigits="1" minFractionDigits="1"
-                                                                  var="formattedRating"/>
-                                                <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
-                                            </div>
-                                        </div>
                                         <div class="content__quick-info for-fix">
                                             <div class="quick-info__level">
                                                 <div class="level__icon icon"><i
@@ -83,7 +72,16 @@
                                                         class="text-medium fa-regular fa-clock"></i></div>
                                                 <div class="time__text text text-medium">${courseMostPopular.durationText}</div>
                                             </div>
+                                            <div class="quick-info__time ">
+                                                <div class="rate__icon"><i
+                                                        class="text-medium fa-regular fa-star"></i></div>
+                                                <fmt:formatNumber value="${courseMostPopular.avgRating}" type="number"
+                                                                  maxFractionDigits="1" minFractionDigits="1"
+                                                                  var="formattedRating"/>
+                                                <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                            </div>
                                         </div>
+                                        <br>
                                         <div class="content__price content__price-2">
                                             <div class="price__new"><fmt:formatNumber
                                                     value="${courseMostPopular.price - courseMostPopular.discountPrice}"
@@ -95,6 +93,7 @@
                                                 đ
                                             </div>
                                         </div>
+                                        <br>
                                         <div class="hover-actions">
                                             <c:choose>
                                                 <c:when test="${courseMostPopular.enrolled}">
@@ -112,8 +111,6 @@
                                                             onclick="addToCart(event,${courseMostPopular.id})">Thêm vào
                                                         giỏ
                                                     </button>
-
-
                                                 </c:otherwise>
                                             </c:choose>
 

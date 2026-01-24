@@ -347,11 +347,11 @@
                                     </div>
 
                                     <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
+                                        <label><i class="fa-solid fa-calendar-check"></i>Ngày tham gia</label>
                                         <input id="detail-created" type="text" class="input__create" readonly>
                                     </div>
                                     <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tham gia hệ thống</label>
+                                        <label><i class="fa-solid fa-calendar-check"></i>Ngày cập nhật</label>
                                         <input id="detail-updated" type="text" class="input__create" readonly>
                                     </div>
                                 </div>

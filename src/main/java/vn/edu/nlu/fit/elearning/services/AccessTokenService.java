@@ -18,7 +18,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class AccessTokenService {
-    private final int LIMIT_MINUTE = 10;
+    private final int LIMIT_MINUTE = 1;
     String emailFrom = "minh6112005@gmail.com";
     String password = "fppq kvfg qevh hdxv";
 

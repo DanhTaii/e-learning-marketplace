@@ -41,9 +41,11 @@ public class WishlistDao extends BaseDao {
     // Lấy danh sách course trong wishlist
     public List<CourseCardDto> findWishlistCoursesByUser(int userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours," +
-                            "c.author_name, c.price, c.discount_price, AVG(r.rating) AS avgRating,\n" +
-                            "COUNT(DISTINCT e.id) AS student_count,\n" +
+            return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level," +
+                            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours, \n" +
+                            "c.author_name, c.price, c.discount_price, " +
+                            "AVG(r.rating) AS avgRating,\n" +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS student_count, " +
                             "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, " +
                             "(CASE WHEN :userId IS NOT NULL AND w_user.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist\n" +
                             "FROM courses c \n" +

@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.controller.admin.course_management;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.enums.Level;
 import vn.edu.nlu.fit.elearning.model.Course;
 import vn.edu.nlu.fit.elearning.services.CourseService;
 import vn.edu.nlu.fit.elearning.services.CourseTagService;
@@ -32,7 +33,7 @@ public class CourseCreateController extends HttpServlet {
         String courseId = request.getParameter("courseId");
         String title = request.getParameter("title");
         String subtitle = request.getParameter("subtitle");
-        String level = request.getParameter("level");
+        String levelStr = request.getParameter("level");
         String goals = request.getParameter("goals");
         String description = request.getParameter("description");
         String priceStr = request.getParameter("price");
@@ -40,6 +41,8 @@ public class CourseCreateController extends HttpServlet {
         String statusStr = request.getParameter("status");
         String categoryIdStr = request.getParameter("category_id");
         String[] tagIdsStr = request.getParameterValues("tags");
+
+        Level level = Level.valueOf(levelStr);
 
         Course course = new Course();
         course.setTitle(title);

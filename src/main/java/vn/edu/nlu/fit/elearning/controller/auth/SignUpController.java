@@ -57,9 +57,13 @@ public class SignUpController extends HttpServlet {
                 throw new IllegalArgumentException("Mật khẩu và mật khẩu xác nhận không khớp!");
             }
 
-            User user = userService.getUserByEmail(email);
-            if (user != null) {
+            User user = null;
+            if ((user = userService.getUserByEmail(email)) != null) {
                 throw new IllegalArgumentException("Email đã tồn tại!");
+            }
+
+            if ((user = userService.getUserByUsername(username)) != null) {
+                throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
             }
 
             // Tạo token xác thực

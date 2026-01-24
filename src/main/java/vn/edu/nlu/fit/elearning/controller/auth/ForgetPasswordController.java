@@ -42,10 +42,10 @@ public class ForgetPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        System.out.println("Email nhận được từ form: " + email);
+//        System.out.println("Email nhận được từ form: " + email);
 
         User user = userService.getUserByEmail(email);
-        System.out.println("User tìm được: " + (user == null ? "NULL" : user.getUsername()));
+//        System.out.println("User tìm được: " + (user == null ? "NULL" : user.getUsername()));
 
         if (user == null) {
             request.setAttribute("error", "Email không tồn tại!");
@@ -54,11 +54,11 @@ public class ForgetPasswordController extends HttpServlet {
 
         AccessTokenService accessTokenService = new AccessTokenService();
         String token = accessTokenService.generateToken();
-        System.out.println("Token được tạo: " + token);
+//        System.out.println("Token được tạo: " + token);
 
 
 //        String tokenReset = "http://localhost:8080/e_learning_war_exploded/check-mail" + token;
-        System.out.println("Link reset password: " + token);
+//        System.out.println("Link reset password: " + token);
 
         AccessToken accessToken = null;
         if(user != null){

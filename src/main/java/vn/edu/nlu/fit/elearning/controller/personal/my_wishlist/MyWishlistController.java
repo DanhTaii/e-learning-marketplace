@@ -32,24 +32,6 @@ public class MyWishlistController extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         int userId = (int) session.getAttribute("userId");
-        String courseIdParam = request.getParameter("courseId");
-
-        // Nếu có courseId thì toggle (thêm hoặc xóa)
-        if (courseIdParam != null) {
-            int courseId = Integer.parseInt(courseIdParam);
-            if (ws.exists(userId, courseId)) {
-                // dùng idParam để xóa theo wishlist.id
-                String idParam = request.getParameter("id");
-                if (idParam != null && !idParam.isEmpty()) {
-                    int id = Integer.parseInt(idParam);
-                    ws.removeCourseFromWishlist(userId, courseId);
-                }
-            } else {
-                ws.addCourseToWishlist(userId, courseId);
-            }
-            response.sendRedirect(request.getContextPath() + "/personal/my-wishlist");
-            return;
-        }
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
         CategoryService categoryService = new CategoryService();

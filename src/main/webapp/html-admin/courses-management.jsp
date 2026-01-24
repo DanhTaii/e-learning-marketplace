@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quản lý khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -186,13 +186,13 @@
                                                     <option value="" ${empty param.level ? 'selected' : ''}>Tất cả
                                                     </option>
                                                     <option value="beginner" ${param.level == 'beginner' ? 'selected' : ''}>
-                                                        Người mới
+                                                        Sơ cấp
                                                     </option>
                                                     <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>
                                                         Trung cấp
                                                     </option>
                                                     <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>
-                                                        Nâng cao
+                                                        Cao cấp
                                                     </option>
                                                 </select>
                                             </div>
@@ -254,8 +254,8 @@
                                         <th>Khóa học</th>
                                         <th>Thời lượng</th>
                                         <th>Học viên</th>
-                                        <th>Giá</th>
-                                        <th>Level</th>
+<%--                                        <th>Giá</th>--%>
+                                        <th>Cấp độ</th>
                                         <th>Trạng thái</th>
                                         <th>Ngày tạo</th>
                                         <th>Hành động</th>
@@ -271,19 +271,24 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__duration course-row__font-content">
-                                                        ${course.durationHours}
+                                                        ${course.durationText}
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
                                             </td>
-                                            <td>
-                                                <div class="course-row__price course-row__font-content">${course.price}</div>
-                                            </td>
+<%--                                            <td>--%>
+<%--                                                <div class="course-row__price course-row__font-content">--%>
+<%--                                                    <div class="price__old"><fmt:formatNumber value="${c.price}"--%>
+<%--                                                                                              type="number"--%>
+<%--                                                                                              pattern="###,###"></fmt:formatNumber>đ--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </td>--%>
                                             <td>
                                                 <div class="course-row__level course-row__font-content">
                                                     <div class="level-dot"></div>
-                                                        ${course.level}
+                                                        ${course.level.vietnameseName}
                                                 </div>
                                             </td>
                                             <td>
@@ -306,7 +311,7 @@
 
                                                     <fmt:formatDate
                                                             value="${course.createdAt}"
-                                                            pattern="MMMM d, yyyy"/>
+                                                            pattern="dd-MM-YYYY"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">

@@ -36,10 +36,10 @@ public class ResetPasswordController extends HttpServlet {
         String retypePassword = request.getParameter("retypePassword");
         String userMail = (String) session.getAttribute("userMail");
 
-        System.out.println("===> DO POST RESET PASSWORD");
-        System.out.println("password = " + password);
-        System.out.println("retype = " + retypePassword);
-        System.out.println("userMail = " + userMail);
+//        System.out.println("===> DO POST RESET PASSWORD");
+//        System.out.println("password = " + password);
+//        System.out.println("retype = " + retypePassword);
+//        System.out.println("userMail = " + userMail);
 
         try {
             boolean isSuccess = userService.changePassword(password, retypePassword, userMail);

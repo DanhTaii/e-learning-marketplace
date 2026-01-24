@@ -92,7 +92,7 @@ public class CheckMailController extends HttpServlet {
             if (isValid) {
                 accessTokenService.markAsUsed(otp);
 
-                boolean created = userService.register(email, username, password);
+                boolean created = userService.register(email.trim(), username.trim(), password.trim());
                 if (created) {
                     session.removeAttribute("signupEmail");
                     session.removeAttribute("signupUsername");

@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.model;
 
+import vn.edu.nlu.fit.elearning.enums.Level;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -12,7 +14,7 @@ public class Course implements Serializable {
     private String subtitle;
     private String description;
     private String goals;
-    private String level;
+    private Level level;
     private int price;
     private int discountPrice;
     private int studentCount;
@@ -29,7 +31,7 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    public Course(int id, String title, String subtitle, String description, String goals, String level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt) {
+    public Course(int id, String title, String subtitle, String description, String goals, Level level, int price, int discountPrice, int studentCount, boolean isFeatured, double rating, String thumbnailUrl, boolean isPublic, int categoryId, String authorName, double durationHours, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -90,11 +92,11 @@ public class Course implements Serializable {
         this.goals = goals;
     }
 
-    public String getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 

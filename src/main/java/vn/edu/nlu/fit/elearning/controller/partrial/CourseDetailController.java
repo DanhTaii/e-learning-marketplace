@@ -24,7 +24,6 @@ public class CourseDetailController extends HttpServlet {
     private LessonService lessonService;
     private TagService tagService;
     private CategoryService categoryService;
-    private EnrollmentService enrollmentService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -34,7 +33,6 @@ public class CourseDetailController extends HttpServlet {
         this.reviewService = new ReviewService();
         this.tagService = new TagService();
         this.categoryService = new CategoryService();
-        this.enrollmentService = new EnrollmentService();
     }
 
     @Override
@@ -54,6 +52,7 @@ public class CourseDetailController extends HttpServlet {
         if (userIdStr != null) {
             userId = Integer.parseInt(userIdStr);
         }
+
         CourseDetailDto c = cs.getCourse(id, userId);
 
         // này làm cho reviews
@@ -69,10 +68,8 @@ public class CourseDetailController extends HttpServlet {
         request.setAttribute("tags", tags);
 
         // này làm cho category
-        Category category = categoryService.getCategoryById(id);
+        Category category = categoryService.getCategoryById(c.getCategoryId());
         request.setAttribute("category", category);
-        CategoryDto category2 = categoryService.getCategoryByCourseId(id);
-        request.setAttribute("category2", category2);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
         CategoryService categoryService = new CategoryService();
