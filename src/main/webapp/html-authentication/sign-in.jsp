@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="web">
-    <jsp:include page="/header-footer/header.jsp"/>
+    <jsp:include page="/header-footer/header-simple.jsp"/>
     <div class="web__container">
         <div class="grid-2">
             <div class="grid__row-2">

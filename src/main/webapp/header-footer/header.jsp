@@ -8,6 +8,39 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>header</title>
+    <style>
+        .cart-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            padding: 0 5px;
+        }
+
+        /* Style cho badge (con số) */
+        .cart-badge {
+            position: absolute;
+            top: -8px;          /* Điều chỉnh độ cao thấp */
+            right: -10px;       /* Điều chỉnh độ xa gần so với icon */
+            background-color: var(--bright-green); /* Màu nền nổi bật (màu xanh của bạn) */
+            color: var(--dark-blue);              /* Màu chữ con số */
+            font-size: 1.1rem;  /* Kích thước chữ nhỏ lại */
+            font-weight: bold;
+            height: 18px;       /* Độ cao vòng tròn */
+            min-width: 18px;    /* Độ rộng tối thiểu vòng tròn */
+            border-radius: 50%; /* Làm tròn */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 2px solid var(--dark-blue); /* Tạo viền trùng màu header để trông tách biệt */
+            line-height: 1;
+        }
+
+        /* Hiệu ứng khi hover vào giỏ hàng */
+        .header__cart:hover .cart-badge {
+            background-color: var(--white-color);
+            color: var(--dark-blue);
+        }
+    </style>
 </head>
 <body>
     <header class="web__header">
@@ -95,9 +128,13 @@
                         </a>
                     </div>
                     <div class="header__cart">
-                        <a href="personal/cart" class="turn-page text-header">
-                            <i class="text-header fa-solid fa-cart-shopping"></i>
-                            (<span id="cart-count">${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}</span>)
+                        <a href="personal/cart" class="turn-page text-header cart-link">
+                            <div class="cart-icon-wrapper">
+                                <i class="text-header fa-solid fa-cart-shopping"></i>
+                                <span id="cart-count" class="cart-badge">
+                                        ${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}
+                                </span>
+                            </div>
                         </a>
                     </div>
                     <div class="header__user">
