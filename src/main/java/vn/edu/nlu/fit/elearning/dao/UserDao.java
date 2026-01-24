@@ -21,7 +21,8 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     @Override
     public User findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.created_at AS createdAt FROM users u where u.id = :id")
+            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.created_at AS createdAt, u.updated_at AS updatedAt " +
+                            "FROM users u where u.id = :id")
                     .bind("id", integer)
                     .mapToBean(User.class)
                     .findFirst()
@@ -68,7 +69,17 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
 //            .one() sẽ ném ra ngoại lệ IllegalStateException: Expected one element, but found none,
 //            dẫn đến lỗi HTTP 500.
             return handle.createQuery("select * from users u where u.email = :email")
-                    .bind("email", email)
+                    .bind("email", email.trim())
+                    .mapToBean(User.class)
+                    .findFirst()
+                    .orElse(null);
+        });
+    }
+
+    public User findUserByUsername(String username) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("select u.username from users u where u.username = :username")
+                    .bind("username", username)
                     .mapToBean(User.class)
                     .findFirst()
                     .orElse(null);

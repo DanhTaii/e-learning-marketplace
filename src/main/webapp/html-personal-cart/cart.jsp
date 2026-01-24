@@ -103,6 +103,7 @@
                                                             <div class="cart-items__action items-action">
                                                                 <a href="cart-manager?action=moveToWishlist&id=${p.course.id}"
                                                                    class="action__link">Thêm vào Yêu Thích</a>
+
                                                                 <a href="cart-manager?action=delete&id=${p.course.id}"
                                                                    class="action__link1">Xóa</a>
                                                             </div>
@@ -251,7 +252,9 @@
                                                 <c:choose>
                                                     <c:when test="${c.enrolled}">
 
-                                                        <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                        <button type="button" class="btn-add-cart dark-button"
+                                                                style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                                onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                             Vào học ngay
                                                         </button>
 
@@ -261,8 +264,6 @@
                                                                 class="btn-add-cart dark-button"
                                                                 onclick="addToCart(event,${c.id})">Thêm vào giỏ
                                                         </button>
-
-
                                                     </c:otherwise>
                                                 </c:choose>
 

@@ -1,46 +1,47 @@
-    package vn.edu.nlu.fit.elearning.controller.auth;
+package vn.edu.nlu.fit.elearning.controller.auth;
 
-    import jakarta.servlet.*;
-    import jakarta.servlet.http.*;
-    import jakarta.servlet.annotation.*;
-    import vn.edu.nlu.fit.elearning.dao.UserDao;
-    import vn.edu.nlu.fit.elearning.model.Category;
-    import vn.edu.nlu.fit.elearning.model.User;
-    import vn.edu.nlu.fit.elearning.services.CategoryService;
-    import vn.edu.nlu.fit.elearning.services.TagService;
-    import vn.edu.nlu.fit.elearning.services.UserService;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.dao.UserDao;
+import vn.edu.nlu.fit.elearning.model.Category;
+import vn.edu.nlu.fit.elearning.model.User;
+import vn.edu.nlu.fit.elearning.services.CategoryService;
+import vn.edu.nlu.fit.elearning.services.TagService;
+import vn.edu.nlu.fit.elearning.services.UserService;
 
-    import java.io.IOException;
-    import java.util.List;
+import java.io.IOException;
+import java.util.List;
 
-    @WebServlet(name = "LoginController", value = "/sign-in")
-    public class LoginController extends HttpServlet {
+@WebServlet(name = "LoginController", value = "/sign-in")
+public class LoginController extends HttpServlet {
 
-        private UserService userService;
+    private UserService userService;
 
-        @Override
-        public void init() throws ServletException {
-            super.init();
-            this.userService = new UserService();
-        }
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.userService = new UserService();
+    }
 
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-            CategoryService categoryService = new CategoryService();
-            List<Category> categories = categoryService.getAllCategories();
-            request.setAttribute("categories", categories);
-            TagService tagService = new TagService();
-            request.setAttribute("tags", tagService.getAllTags());
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAllCategories();
+        request.setAttribute("categories", categories);
+        TagService tagService = new TagService();
+        request.setAttribute("tags", tagService.getAllTags());
 
-            request.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(request, response);
+    }
 
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String email = request.getParameter("email");
-            String pass = request.getParameter("password");
-            User canLogin = userService.login(email, pass);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String pass = request.getParameter("password");
+        User canLogin = userService.login(email, pass);
+        try {
             if (canLogin != null) {
                 HttpSession session = request.getSession();
                 canLogin.setPassword(null);
@@ -49,8 +50,7 @@
 
                 if (canLogin.getRole().equalsIgnoreCase("admin")) {
                     response.sendRedirect("admin/dashboard");
-                }
-                else {
+                } else {
                     canLogin.setPassword("");
                     response.sendRedirect("index");
                 }
@@ -58,5 +58,10 @@
                 request.setAttribute("error", "Bạn nhập sai email hoặc mật khẩu!");
                 request.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(request, response);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
     }
+}

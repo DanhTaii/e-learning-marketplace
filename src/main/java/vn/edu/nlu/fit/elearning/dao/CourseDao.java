@@ -78,7 +78,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<Course> findAllCourses() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.level, " +
-                    "SUM(l.duration_minutes) / 60.0 AS duration_hours, c.author_name, c.discount_price, c.price, c.created_at, c.is_public\n" +
+                    "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours, " +
+                    "c.author_name, c.discount_price, c.price, c.created_at, c.is_public\n" +
                     "FROM courses c\n" +
                     "LEFT JOIN lessons l ON c.id = l.course_id\n" +
                     "WHERE c.is_public = TRUE\n" +
@@ -93,7 +94,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level, " +
                             "c.author_name, c.price, c.discount_price, " +
                             "COUNT(DISTINCT w_total.user_id) AS wishlist_count,\n" +
-                            "COUNT(DISTINCT e.id) AS student_count,\n" +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS student_count,\n" +
                             "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours, \n" +
                             "(CASE WHEN :userId > 0 AND w_user.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
                             "(CASE WHEN :userId > 0 AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as enrolled, \n" +
@@ -122,7 +123,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "(CASE WHEN :userId > 0 AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
                             "(CASE WHEN :userId > 0 AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, \n" +
                             "COALESCE(AVG(r.rating)) AS avgRating, " +
-                            "COUNT(DISTINCT e.id) AS student_count\n" +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount\n" +
                             "FROM courses c\n" +
                             "LEFT JOIN lessons l ON l.course_id = c.id\n" +
                             "LEFT JOIN reviews r ON r.course_id = c.id\n" +
@@ -146,7 +147,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "(CASE WHEN :userId > 0 AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
                             "(CASE WHEN :userId > 0 AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, \n" +
                             "COALESCE(AVG(r.rating)) AS avgRating, " +
-                            "COUNT(DISTINCT e.id) AS student_count\n" +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount\n" +
                             "FROM courses c " +
                             "LEFT JOIN lessons l ON l.course_id = c.id " +
                             "LEFT JOIN reviews r ON r.course_id = c.id\n" +
@@ -161,25 +162,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
-//    // các khóa học mới nhất
-//    public List<CourseCardDto> findCoursesLast(Integer userId) {
-//        return getJdbi().withHandle(handle -> {
-//            return handle.createQuery("SELECT c.id, c.title,c.thumbnail_url,c.level,SUM(l.duration_minutes) / 60.0 AS duration_hours,c.author_name, " +
-//                            "c.price, c.discount_price, \n" +
-//                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist\n" +
-//                            "FROM courses c\n" +
-//                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-//                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
-//                            "WHERE c.is_public = TRUE\n" +
-//                            "GROUP BY c.id\n" +
-//                            "ORDER BY c.created_at DESC")
-//                    .bind("userId", userId)
-//                    .mapToBean(CourseCardDto.class)
-//                    .list();
-//        });
-//    }
-
-
     // 1 khóa học phổ biến nhất
     public CourseCardDto findCourseMostPopular(Integer userId) {
         return getJdbi().withHandle(handle -> {
@@ -187,6 +169,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours, \n" +
                             "(CASE WHEN :userId > 0 AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
                             "(CASE WHEN :userId > 0 AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, \n" +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount, " +
                             "COALESCE(AVG(r.rating)) AS avgRating " +
                             "FROM courses c " +
                             "LEFT JOIN lessons l ON l.course_id = c.id " +
@@ -206,7 +189,7 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public CourseDetailDto findCourseByIdForDetail(int id, int userId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, \n" +
-                            "c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, \n" +
+                            "c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.id AS categoryId, \n" +
                             "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours, \n" +
                             "(CASE WHEN :userId > 0 AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
                             "(CASE WHEN :userId > 0 AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, \n" +
@@ -215,7 +198,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                             "COUNT(DISTINCT r.id) AS reviewCount\n" +
                             "FROM courses c\n" +
                             "LEFT JOIN categories cat ON c.category_id = cat.id\n" +
-                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
                             "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                             "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
                             "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n" +
@@ -232,19 +214,19 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
     public CourseCardDto findCourseCardById(int id, int userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, " +
-                            "c.thumbnail_url, c.is_public, c.author_name, c.created_at, c.updated_at, cat.name AS categoryName, " +
-                            "parent.name AS parentCategoryName, COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours, " +
+            return handle.createQuery("SELECT c.id, c.title, c.level, c.price, c.discount_price, " +
+                            "c.thumbnail_url, c.is_public, c.author_name, " +
+                            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours, \n" +
                             "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
-                            "COUNT(l.id) AS lessonCount, COALESCE(AVG(r.rating)) AS avgRating, COUNT(DISTINCT r.id) AS reviewCount\n" +
+                            "(CASE WHEN :userId > 0 AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, \n" +
+                            "COALESCE(AVG(r.rating)) AS avgRating, " +
+                            "COUNT(DISTINCT r.id) AS reviewCount\n" +
                             "FROM courses c\n" +
-                            "LEFT JOIN categories cat ON c.category_id = cat.id\n" +
-                            "LEFT JOIN categories parent ON cat.parent_id = parent.id\n" +
-                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
                             "LEFT JOIN reviews r ON r.course_id = c.id\n" +
                             "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n" +
                             "WHERE c.is_public = TRUE AND c.id = :id " +
-                            "GROUP BY c.id, cat.id, parent.id")
+                            "GROUP BY c.id")
                     .bind("id", id)
                     .bind("userId", userId)
                     .mapToBean(CourseCardDto.class)
@@ -252,32 +234,6 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
                     .orElse(null);
         });
     }
-
-    // Lấy khóa học theo title (search)
-//    public List<CourseCardDto> findCoursesByTitle(String search) {
-//        String title = "%" + search + "%";
-//        return getJdbi().withHandle(handle -> {
-//            return handle.createQuery(
-//                            "SELECT c.id, c.title, c.author_name, c.price, w.user_id, c.discount_price, c.thumbnail_url, c.level, \n" +
-//                                    "COALESCE(AVG(r.rating), 0) AS avgRating,\n" +
-//                                    "COUNT(DISTINCT e.id) AS student_count,\n" +
-//                                    "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist,\n" +
-//                                    "COALESCE(SUM(l.duration_minutes),0) / 60.0 AS durationHours\n" +
-//                                    "FROM courses c\n" +
-//                                    "JOIN categories cate ON c.category_id = cate.id\n" +
-//                                    "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-//                                    "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-//                                    "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
-//                                    "WHERE c.is_public = TRUE AND c.title LIKE :title\n" +
-//                                    "GROUP BY c.id\n" +
-//                                    "ORDER BY c.created_at DESC"
-//                    )
-//                    .bind("title", title)
-//                    .mapToBean(CourseCardDto.class)
-//                    .list();
-//        });
-//    }
-
 
     // làm cho phần bộ lọc
     // làm cách này thì tích 1 hay nhiều cái thì vẫn đều lọc bình thường
@@ -292,16 +248,15 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             StringBuilder sql = new StringBuilder(
                     "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.author_name, " +
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
-                            "COUNT(DISTINCT e.id) AS studentCount, " +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount,\n" +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
                             "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, " +
-                            "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
+                            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours \n" +
                             "FROM courses c " +
                             "LEFT JOIN categories cate ON c.category_id = cate.id " +
                             "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
                             "LEFT JOIN tags t ON ct.tag_id = t.id " +
-                            "LEFT JOIN lessons l ON c.id = l.course_id " +
                             "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n " +
                             "LEFT JOIN reviews r ON r.course_id = c.id " +
                             "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
@@ -390,16 +345,15 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             StringBuilder sql = new StringBuilder(
                     "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.author_name, " +
                             "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
-                            "COUNT(DISTINCT e.id) AS studentCount, " +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount,\n" +
                             "COALESCE(AVG(r.rating), 0) AS avgRating, " +
                             "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL THEN TRUE ELSE FALSE END) as inWishlist, " +
                             "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL THEN TRUE ELSE FALSE END)as enrolled, " +
-                            "COALESCE(SUM(l.duration_minutes), 0)/60.0 AS durationHours " +
+                            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours \n" +
                             "FROM courses c " +
                             "LEFT JOIN categories cate ON c.category_id = cate.id " +
                             "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
                             "LEFT JOIN tags t ON ct.tag_id = t.id " +
-                            "LEFT JOIN lessons l ON c.id = l.course_id " +
                             "LEFT JOIN reviews r ON r.course_id = c.id " +
                             "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId\n " +
                             "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId\n" +
@@ -486,10 +440,10 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             if ("short".equals(duration) || "medium".equals(duration) || "long".equals(duration) ||
                     "low".equals(rating) || "high".equals(rating)) {
                 having = "HAVING 1=1 ";
-                if ("short".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 < 5";
+                if ("short".equals(duration)) having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 < 5";
                 if ("medium".equals(duration))
-                    having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 BETWEEN 5 AND 10";
-                if ("long".equals(duration)) having += " AND COALESCE(SUM(l.duration_minutes), 0)/60.0 > 10";
+                    having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 BETWEEN 5 AND 10";
+                if ("long".equals(duration)) having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 > 10";
                 if ("low".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) < 3";
                 if ("high".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) >= 3";
             }
@@ -512,12 +466,11 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     public List<Course> filterAllCourses(CourseFilter filter) {
         return getJdbi().withHandle(handle -> {
             StringBuilder sql = new StringBuilder(
-                    "SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price, c.is_public, c.created_at, " +
-                            "c.thumbnail_url, cate.id AS category_id, cate.name AS category_name, " +
-                            "SUM(l.duration_minutes)/60.0 AS duration_hours " +
+                    "SELECT c.id, c.title, c.level, c.price, c.is_public, c.created_at, " +
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount,\n" +
+                            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS duration_hours \n" +
                             "FROM courses c " +
                             "LEFT JOIN categories cate ON c.category_id = cate.id " +
-                            "LEFT JOIN lessons l ON c.id = l.course_id " +
                             "WHERE 1=1"
             );
 

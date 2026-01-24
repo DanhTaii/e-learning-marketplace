@@ -6,6 +6,7 @@ import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.utils.PasswordUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UserService {
     private UserDao userDao;
@@ -18,13 +19,13 @@ public class UserService {
         email = email.trim();
         password = password.trim();
         if (email.isEmpty() || password.isEmpty()) {
-            System.out.println("Invalid username or password");
+            System.out.println("Mật khẩu hoặc tên người dùng không đúng");
             return null;
         }
 
         User user = userDao.findUserByEmail(email);
         if (user == null) {
-            System.out.println("Account hasn't exist !");
+            System.out.println("Tài khoản không tồn tại");
             return null;
         }
 
@@ -59,6 +60,10 @@ public class UserService {
 
     public boolean register(String email, String username, String password) {
 
+        if (userDao.findUserByUsername(username) != null) {
+            throw new IllegalArgumentException("Tên người dùng đã tồn tại");
+        }
+
         validatePassword(password);
 
         User user = new User();
@@ -68,27 +73,43 @@ public class UserService {
         user.setPassword(hashPass);
         return createUser(user) > 0;
     }
+
     public boolean updateUserProfile(User currentUser, String newUsername, String newPhone, String avatarUrl) {
-        if (currentUser.getUsername().equals(newUsername) && currentUser.getPhone().equals(newPhone) && currentUser.getAvatarUrl().equals(avatarUrl)) {
-            throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
-        }
 
         if (newUsername == null || newUsername.trim().isEmpty()) {
             throw new IllegalArgumentException("Tên hiển thị không được để trống!");
         }
+        if (avatarUrl == null || avatarUrl.trim().isEmpty()) {
+            throw new IllegalArgumentException("Đường link ảnh không được để trống!");
+        }
+
+        //So sánh bằng object sẽ an toàn do nếu dùng equal sẽ không xử lý được TH null
+        boolean isUsernameChanged = !newUsername.equals(currentUser.getUsername());
+        boolean isPhoneChanged = !Objects.equals(newPhone, currentUser.getPhone());
+        boolean isAvatarChanged = !Objects.equals(avatarUrl, currentUser.getAvatarUrl());
+
+        if (!isUsernameChanged && !isPhoneChanged && !isAvatarChanged) {
+            throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
+        }
+
+        if (isUsernameChanged) {
+            if (userDao.findUserByUsername(newUsername) != null) {
+                throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
+            }
+        }
+
         if (newPhone != null && !newPhone.trim().isEmpty()) {
             if (!newPhone.matches("\\d{10,11}")) {
                 throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
             }
         }
-        if (avatarUrl == null || avatarUrl.trim().isEmpty()) {
-            throw new IllegalArgumentException("Đường link ảnh không được để trống!");
-        }
+
         currentUser.setUsername(newUsername);
         currentUser.setPhone(newPhone);
         currentUser.setAvatarUrl(avatarUrl);
         return userDao.update(currentUser) > 0;
     }
+
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
         String oldHash = PasswordUtils.hashpassword(oldPassword);
 
@@ -169,6 +190,10 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return userDao.findUserByEmail(email);
+    }
+
+    public User getUserByUsername(String email) {
+        return userDao.findUserByUsername(email);
     }
 
     public int updateUser(User user) {

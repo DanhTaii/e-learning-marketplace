@@ -37,7 +37,7 @@
     background: var(--privacy-light-grey);
     color: var(--privacy-dark-charcoal);
 }
-.course-row__price {
+.course-row__duration {
     color: red;
     font-weight: var(--fw-semibold);
 }

@@ -15,7 +15,10 @@ function showUserDetail(id) {
             document.getElementById('detail-username').value = user.username;
             document.getElementById('detail-email').value = user.email;
             document.getElementById('detail-phone').value = user.phone || 'Chưa cập nhật';
-            document.getElementById('detail-role').value = user.role;
+
+            const roleSelect = document.getElementById('detail-role');
+            const roleValue = user.role ? user.role.toLowerCase() : 'user';
+            roleSelect.value = roleValue;
 
             if (user.updatedAt) {
                 let updatedAt = new Date(user.updatedAt);

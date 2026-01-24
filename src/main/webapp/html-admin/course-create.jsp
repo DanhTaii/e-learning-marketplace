@@ -207,22 +207,22 @@
                                     <select name="level" class="input-modern select-custom">
                                         <option value="">-- Chọn mức độ --</option>
 
-                                        <option value="beginner"
-                                                <c:if test="${course != null && course.level == 'beginner'}">
+                                        <option value="BEGINNER"
+                                                <c:if test="${course != null && course.level == 'BEGINNER'}">
                                                     selected
                                                 </c:if>>
-                                            Người mới
+                                            Sơ cấp
                                         </option>
 
-                                        <option value="intermediate"
-                                                <c:if test="${course != null && course.level == 'intermediate'}">
+                                        <option value="INTERMEDIATE"
+                                                <c:if test="${course != null && course.level == 'INTERMEDIATE'}">
                                                     selected
                                                 </c:if>>
                                             Trung cấp
                                         </option>
 
-                                        <option value="advanced"
-                                                <c:if test="${course != null && course.level == 'advanced'}">
+                                        <option value="ADVANCED"
+                                                <c:if test="${course != null && course.level == 'ADVANCED'}">
                                                     selected
                                                 </c:if>>
                                             Cao cấp
