@@ -5,7 +5,6 @@ import vn.edu.nlu.fit.elearning.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.model.User;
 import vn.edu.nlu.fit.elearning.utils.PasswordUtils;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class UserService {
@@ -69,7 +68,7 @@ public class UserService {
         user.setPassword(hashPass);
         return createUser(user) > 0;
     }
-    public boolean updateUserProfile(User currentUser, String newUsername, String newPhone) {
+    public boolean updateUserProfile(User currentUser, String newUsername, String newPhone, String avatarUrl) {
         if (currentUser.getUsername().equals(newUsername) && currentUser.getPhone().equals(newPhone)) {
             throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
         }
@@ -82,8 +81,12 @@ public class UserService {
                 throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
             }
         }
+        if (avatarUrl != null && !avatarUrl.trim().isEmpty()) {
+            throw new IllegalArgumentException("Đường link ảnh không được để trống!");
+        }
         currentUser.setUsername(newUsername);
         currentUser.setPhone(newPhone);
+        currentUser.setAvatarUrl(avatarUrl);
         return userDao.update(currentUser) > 0;
     }
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {

@@ -19,7 +19,7 @@ public class CourseDetailDto implements Serializable {
     private int discountPrice;
     private int studentCount;
     private boolean isFeatured;
-    private double rating;
+    private double avgRating;
     private String thumbnailUrl;
     private boolean isPublic;
     private int categoryId;
@@ -128,12 +128,12 @@ public class CourseDetailDto implements Serializable {
         isFeatured = featured;
     }
 
-    public double getRating() {
-        return rating;
+    public double getAvgRating() {
+        return avgRating;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
     }
 
     public String getThumbnailUrl() {
@@ -261,7 +261,7 @@ public class CourseDetailDto implements Serializable {
                 ", discountPrice=" + discountPrice +
                 ", studentCount=" + studentCount +
                 ", isFeatured=" + isFeatured +
-                ", rating=" + rating +
+                ", rating=" + avgRating +
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 ", isPublic=" + isPublic +
                 ", categoryId=" + categoryId +

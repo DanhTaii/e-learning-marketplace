@@ -67,6 +67,14 @@
                                 <span>Lịch sử giao dịch</span>
                             </a>
                         </li>
+                        <c:if test="${user.role == 'ADMIN'}">
+                            <li>
+                                <a href="admin/dashboard" class="menu-link">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    <span>Admin</span>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
