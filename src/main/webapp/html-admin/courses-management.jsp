@@ -144,7 +144,7 @@
                             <div class="header__title">Các khóa học</div>
                             <div class="admin-create__buttons">
                                 <button type="button" class="dark-button">
-                                    <a href="html-admin/course-create.jsp">
+                                    <a href="admin/course/detail">
                                         <i class="fa-solid fa-plus"></i>Tạo mới
                                     </a>
                                 </button>

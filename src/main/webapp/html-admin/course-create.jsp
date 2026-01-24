@@ -239,7 +239,7 @@
 
                                         <c:forEach items="${categories}" var="cat">
                                             <option value="${cat.id}"
-                                                ${course != null && course.categoryId == cat.id ? "selected" : ""}>
+                                                ${course.categoryId == cat.id ? "selected" : ""}>
                                                     ${cat.name}
                                             </option>
                                         </c:forEach>
@@ -252,14 +252,14 @@
                                         <option value="">-- Chọn trạng thái --</option>
 
                                         <option value="true"
-                                                <c:if test="${course != null && course.isPublic}">
+                                                <c:if test="${course.isPublic}">
                                                     selected
                                                 </c:if>>
                                             Hoạt động
                                         </option>
 
                                         <option value="false"
-                                                <c:if test="${course != null && !course.isPublic}">
+                                                <c:if test="${!course.isPublic}">
                                                     selected
                                                 </c:if>>
                                             Bị khóa
@@ -269,7 +269,7 @@
                             </div>
 
 <%--                                CHỉ khi cập nhật mơới có thể thêm tag vô thôi--%>
-                            <c:if test="${course != null && course.id != null}">
+<%--                            <c:if test="${course != null && course.id != null}">--%>
                                 <div class="form-row mt-4">
                                     <div class="form-group style-full-width">
                                         <label class="course-create__title-style">Tag khóa học</label>
@@ -290,7 +290,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </c:if>
+<%--                            </c:if>--%>
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">

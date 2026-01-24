@@ -19,10 +19,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
     @Override
     public int create(Course entity) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO courses( id, title, subtitle, level, goals, description, price, discount_price, thumbnail_url)\n" +
-                            "VALUES (:id, :title,  :subtitle,  :level,  :goals ,  :description, :price, :discountPrice, :thumbnailUrl)")
+            return handle.createUpdate("INSERT INTO courses( id, title, subtitle, level, goals, description, price, discount_price, thumbnail_url, is_public, category_id, author_name)\n" +
+                            "VALUES (:id, :title,  :subtitle,  :level,  :goals ,  :description, :price, :discountPrice, :thumbnailUrl, :isPublic, :categoryId, :authorName)")
                     .bindBean(entity)
-                    .execute();
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(Integer.class)
+                    .one();
         });
     }
 
@@ -440,10 +442,12 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             if ("short".equals(duration) || "medium".equals(duration) || "long".equals(duration) ||
                     "low".equals(rating) || "high".equals(rating)) {
                 having = "HAVING 1=1 ";
-                if ("short".equals(duration)) having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 < 5";
+                if ("short".equals(duration))
+                    having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 < 5";
                 if ("medium".equals(duration))
                     having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 BETWEEN 5 AND 10";
-                if ("long".equals(duration)) having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 > 10";
+                if ("long".equals(duration))
+                    having += " AND COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 > 10";
                 if ("low".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) < 3";
                 if ("high".equals(rating)) having += " AND COALESCE(AVG(r.rating), 0) >= 3";
             }
