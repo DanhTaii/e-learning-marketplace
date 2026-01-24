@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
     <!--    <script src=""></script>-->
 
@@ -31,7 +32,7 @@
 </head>
 <body>
 <div class="web">
-    <jsp:include page="/header-footer/header.jsp"/>
+    <jsp:include page="/header-footer/header-simple.jsp"/>
     <div class="web__container">
         <form action="confirm-payment" method="post" class="payment-layout">
         <div class="grid">
@@ -158,59 +159,62 @@
 
         </div>
         </form>
-        <div id="popup__add-payment-confirm-black" class="modal-backdrop">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="header-content modal-title">THÔNG BÁO</div>
-                </div>
-                <div class="course-body">
-                    <div class="body-title-black">BẠN CÓ XÁC NHẬN THANH TOÁN?</div>
-                    <div class="body-icon"><i class="fa-solid fa-receipt check-popup-black"></i></div>
-                    <div class="body-content">Bạn có chắc chắn muốn thanh toán? Hành động này không thể hoàn tác </div>
-                    <div class="body-selection">
-                        <div class="body-selection__item x__icon">
-                            <a href="#" class="">
-                                <button class="dark-button dark-button-2">Hủy</button>
-                            </a>
-                        </div>
-                        <div class="body-selection__item x__icon">
-                            <a href="receipt.jsp" class="">
-                                <button class="button__btn">Xác nhận</button>
-                            </a>
-                        </div>
+        <div id="popup__add-payment-confirm-black" class="modal-backdrop modal"> <div class="modal-content">
+            <div class="modal-header">
+                <div class="header-content modal-title">THÔNG BÁO</div>
+            </div>
+            <div class="course-body">
+                <div class="body-title-black">BẠN CÓ XÁC NHẬN THANH TOÁN?</div>
+                <div class="body-icon"><i class="fa-solid fa-receipt check-popup-black"></i></div>
+                <div class="body-content">Bạn có chắc chắn muốn thanh toán? Hành động này không thể hoàn tác</div>
+                <div class="body-selection">
+                    <div class="body-selection__item x__icon">
+                        <button type="button" class="dark-button dark-button-2" onclick="closeModal('popup__add-payment-confirm-black')">Hủy</button>
                     </div>
-
+                    <div class="body-selection__item x__icon">
+                        <button type="button" id="btn-confirm-payment" class="button__btn">Xác nhận</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="popup__add-payment-method-success" class="modal-backdrop">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="header-content modal-title">THÔNG BÁO</div>
-                </div>
-                <div class="course-body">
-                    <div class="body-title">THAO TÁC HOÀN TẤT</div>
-                    <div class="body-icon"><i class="fa-solid fa-check check-popup"></i></div>
-                    <div class="body-content">Phương thức thanh toán đã thêm</div>
-                    <div class="body-selection">
-                        <div class="body-selection__item x__icon">
-                            <a href="#" class="">
-                                <button class="dark-button">Tiếp tục</button>
-                            </a>
-                        </div>
-<!--                        <div class="body-selection__item x__icon">-->
-<!--                            <a href="../html-personal-cart/cart.jsp" class="">-->
-<!--                                <button class="button__btn">Tới giỏ hàng</button>-->
-<!--                            </a>-->
-<!--                        </div>-->
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
     <jsp:include page="/header-footer/footer.jsp"/>
 </div>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const payBtn = document.getElementById('pay-btn'); // ID của nút Thanh toán ở hóa đơn
+        const paymentForm = document.querySelector('.payment-layout'); // Form chứa dữ liệu thanh toán
+        const confirmPaymentBtn = document.getElementById('btn-confirm-payment'); // Nút xác nhận trong modal
+
+        if (payBtn) {
+            payBtn.onclick = function(e) {
+                e.preventDefault(); // Không cho form submit ngay
+                openModal('popup__add-payment-confirm-black'); // Dùng hàm JS bạn đã có
+            };
+        }
+
+        if (confirmPaymentBtn) {
+            confirmPaymentBtn.onclick = function() {
+                if (paymentForm) {
+                    paymentForm.submit(); // Gửi form đi sau khi xác nhận
+                }
+            };
+        }
+    });
+
+    // Bổ sung vào hàm window.onclick có sẵn của bạn để hỗ trợ đóng khi click ra ngoài
+    const originalWindowClick = window.onclick;
+    window.onclick = function (event) {
+        if (originalWindowClick) originalWindowClick(event); // Giữ lại logic cũ của bạn
+
+        // Thêm logic đóng cho modal thanh toán
+        if (event.target.id === 'popup__add-payment-confirm-black') {
+            closeModal('popup__add-payment-confirm-black');
+        }
+    };
+</script>
 </html>
