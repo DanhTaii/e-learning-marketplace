@@ -31,7 +31,12 @@
                     <div class="profile-block">
                         <div class="profile-block__avatar">
                             <div class="fix-image-box">
-                                <img src="${user.avatarUrl}" alt="" class="turn-page fix-image">
+                                <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
+
+                                <img src="${not empty user.avatarUrl ? user.avatarUrl : defaultImg}"
+                                     alt="Avatar"
+                                     class="turn-page fix-image"
+                                     onerror="this.onerror=null; this.src='${defaultImg}';">
                             </div>
                         </div>
                         <div class="profile-block__info">
@@ -129,7 +134,9 @@
 
                             <div class="form-group">
                                 <label class="style__sub-title">Link ảnh avatar</label>
-                                <input type="text" name="avatarUrl" value="${user.avatarUrl}" placeholder="">
+                                <input type="text" name="avatarUrl" value="${user.avatarUrl}" placeholder="" id="user_url">
+                                <span id="error_url" class="error-client"
+                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                         </div>
 
@@ -161,14 +168,16 @@
     $(document).ready(function () {
         const initialName = $('#user_name').val().trim();
         const initialPhone = $('#user_phone').val().trim();
+        const initialUrl = $('#user_url').val().trim();
 
         Validator.setupAutoClearErrors();
 
         $('#myForm').on('submit', function (e) {
             let name = $('#user_name').val().trim();
             let phone = $('#user_phone').val().trim();
+            let url = $('#user_url').val().trim();
             let isValid = true;
-            if (name === initialName && phone === initialPhone) {
+            if (name === initialName && phone === initialPhone && url === initialUrl) {
                 e.preventDefault();
                 alert("Bạn chưa thay đổi thông tin nào!");
                 return false;
@@ -177,6 +186,10 @@
             let usernameError = Validator.checkUsername(name);
             if (usernameError) {
                 $('#error_username').text(usernameError);
+                isValid = false;
+            }
+            if(url === ""){
+                $('#error_url').text("Bạn không được bỏ trống!");
                 isValid = false;
             }
 

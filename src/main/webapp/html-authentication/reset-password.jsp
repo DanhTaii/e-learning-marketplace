@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -30,7 +32,7 @@
                 </div>
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2">
-                        <form action="reset-password" method="post" class="form">
+                        <form action="reset-password" method="post" class="form" id="myForm">
                             <div class="form__title text-big-title">TẠO MẬT KHẨU MỚI</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">
@@ -41,12 +43,14 @@
                                 <span style="color: red; font-size: var(--text-xl)"> ${error} </span>
                             </c:if>
                             <div class="form__input form__input-1">
-                                <input type="text" name="password" class="input-text text-big"
-                                       placeholder="Nhập mật khẩu mới của bạn">
+                                <input type="password" name="password" class="input-text text-big"
+                                       placeholder="Nhập mật khẩu mới của bạn" id="oldPass">
+                                <span id="error_oldPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__input form__input-2">
-                                <input type="text" name="retypePassword" class="input-text text-big"
-                                       placeholder="Nhập lại mật khẩu">
+                                <input type="password" name="retypePassword" class="input-text text-big"
+                                       placeholder="Nhập lại mật khẩu" id="reNewPass">
+                                <span id="error_reNewPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__button">
                                 <button type="submit" class="button__btn box-btn">
@@ -64,4 +68,31 @@
     <jsp:include page="/header-footer/footer.jsp"/>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        Validator.setupAutoClearErrors();
+        $('#myForm').on('submit', function (e) {
+            let oldPass = $('#oldPass').val().trim();
+            let reType = $('#reNewPass').val().trim();
+            let isValid = true;
+
+            let newPassError = Validator.checkPassword(oldPass);
+            if (newPassError) {
+                $('#error_oldPass').text(newPassError);
+                isValid = false;
+            }
+
+            if (oldPass !== reType) {
+                $('#error_reNewPass').text('Mật khẩu nhập lại không khớp');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+            return isValid;
+        });
+
+    });
+</script>
 </html>

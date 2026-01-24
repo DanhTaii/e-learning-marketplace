@@ -42,10 +42,11 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     public int update(User entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE users\n" +
-                            "SET phone = :phone, username = :username, role = :role, updated_at = CURRENT_TIMESTAMP\n" +
+                            "SET phone = :phone, username = :username, avatar_url=:avatarUrl ,role = :role, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
                     .bind("phone", entity.getPhone())
                     .bind("username", entity.getUsername())
+                    .bind("avatarUrl", entity.getAvatarUrl())
                     .bind("role", entity.getRole())
                     .bind("id", entity.getId())
                     .execute();

@@ -138,15 +138,24 @@
                         </a>
                     </div>
                     <div class="header__user">
-                        <img src="${user.avatarUrl}" alt=""
-                             class="user__avatar">
+
+                                <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
+
+                                <img src="${not empty user.avatarUrl ? user.avatarUrl : defaultImg}"
+                                     alt="Avatar"
+                                     class="user__avatar"
+                                     onerror="this.onerror=null; this.src='${defaultImg}';">
+
                         <div class="user__display">
                             <div class="user__container">
                                 <div class="user__profile">
                                     <div class="user__profile-avatar">
-                                        <img src="${user.avatarUrl}"
-                                             alt=""
-                                             class="user__avatar-mini">
+                                        <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
+
+                                        <img src="${not empty user.avatarUrl ? user.avatarUrl : defaultImg}"
+                                             alt="Avatar"
+                                             class="user__avatar-mini"
+                                             onerror="this.onerror=null; this.src='${defaultImg}';">
                                     </div>
                                     <div class="user__profile-name">
                                         <a href="" class="name-text text-header">${user.username}</a>
