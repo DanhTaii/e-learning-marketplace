@@ -65,6 +65,8 @@ public class CourseCreateController extends HttpServlet {
 
         course.setThumbnailUrl(request.getParameter("thumbnail"));
 
+        course.setAuthorName("Quản trị viên");
+
         int checkCourseCreate = 0;
         boolean isUpdate = (courseId != null && !courseId.isEmpty());
 
@@ -83,8 +85,10 @@ public class CourseCreateController extends HttpServlet {
             }
 
         } else if (!isUpdate) {
+//            Trả về course id
             checkCourseCreate = courseService.createCourse(course);
             if (checkCourseCreate > 0) {
+                courseTagService.createCourseTag(checkCourseCreate, tagIdsStr);
                 request.getSession().setAttribute("flashSuccess", "Tạo khóa học thành công !");
                 response.sendRedirect(request.getContextPath() + "/admin/courses");
             }

@@ -34,16 +34,29 @@ public class CourseDetailController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Course c = cs.getCourseById(id);
-        List<Tag> tagList = tagService.getAllTags();
+        String idStr = request.getParameter("id");
+        // Luôn lấy Categories và Tags để hiển thị danh sách lựa chọn (Dù tạo hay sửa)
         List<Category> categoryList = categoryService.getAllCategories();
-        List<Integer> tagIdList = courseTagService.getAllTagIdByCourseId(id);
+        List<Tag> tagList = tagService.getAllTags();
 
-        request.setAttribute("course", c);
         request.setAttribute("categories", categoryList);
         request.setAttribute("tags", tagList);
-        request.setAttribute("courseTagIdList", tagIdList);
+
+        if (idStr != null && !idStr.trim().isEmpty()) {
+            try {
+                int id = Integer.parseInt(idStr);
+                Course c = cs.getCourseById(id);
+                // Lấy thêm danh sách ID các tag mà khóa học này ĐÃ CÓ (để check vào checkbox)
+                List<Integer> tagIdList = courseTagService.getAllTagIdByCourseId(id);
+
+                request.setAttribute("course", c);
+                request.setAttribute("courseTagIdList", tagIdList);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         request.getRequestDispatcher("/html-admin/course-create.jsp").forward(request, response);
     }
 
