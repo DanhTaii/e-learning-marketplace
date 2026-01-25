@@ -328,7 +328,16 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             // Bind
             if (categoryId != null) query.bind("idCategory", categoryId);
             if (tagId != null) query.bind("idTag", tagId);
-            if (title != null && !title.isEmpty()) query.bind("title", "%" + title + "%");
+
+            if (title != null && !title.isEmpty()) {
+                String processedTitle = title.trim()
+                        .replace("!", "!!")   // Thoát chính ký tự thoát trước
+                        .replace("%", "!%")   // Biến % thành !%
+                        .replace("_", "!_");  // Biến _ thành !_
+
+                query.bind("title", "%" + processedTitle + "%");
+            }
+
             if (level != null) query.bind("level", level);
 
             query.bind("limit", limit);
@@ -494,8 +503,13 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
 
             // Tìm kiếm theo tên
             if (filter.getTitle() != null && !filter.getTitle().isEmpty()) {
+                String processedTitle = filter.getTitle().trim()
+                        .replace("!", "!!")   // Thoát chính ký tự thoát trước
+                        .replace("%", "!%")   // Biến % thành !%
+                        .replace("_", "!_");  // Biến _ thành !_
+
                 sql.append(" AND c.title LIKE :title");
-                params.put("title", "%" + filter.getTitle() + "%");
+                params.put("title", "%" + processedTitle + "%");
             }
 
             // Khoảng giá (Sử dụng cột tính toán giá sau giảm)
@@ -515,6 +529,8 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
             }
 
             sql.append(" GROUP BY c.id");
+
+            sql.append(" ORDER BY c.id DESC");
 
             // Thời lượng (Sử dụng HAVING vì duration_hours là hàm tổng hợp)
             if (filter.getDuration() != null && !filter.getDuration().isEmpty()) {

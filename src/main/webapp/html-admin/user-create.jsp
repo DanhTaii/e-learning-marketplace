@@ -150,21 +150,21 @@
                                                required>
                                     </div>
                                 </div>
-                                <div class="form-column-4">
-                                    <div class="avatar-upload-box">
-                                        <label class="label-style">Avatar</label>
-                                        <div class="upload-wrapper">
-                                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                                            <span>Tải ảnh lên</span>
-                                            <input name="avatar" type="file" class="file-hidden">
-                                        </div>
-                                    </div>
-                                </div>
+<%--                                <div class="form-column-4">--%>
+<%--                                    <div class="avatar-upload-box">--%>
+<%--                                        <label class="label-style">Avatar</label>--%>
+<%--                                        <div class="upload-wrapper">--%>
+<%--                                            <i class="fa-solid fa-cloud-arrow-up"></i>--%>
+<%--                                            <span>Tải ảnh lên</span>--%>
+<%--                                            <input name="avatar" type="file" class="file-hidden">--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                             </div>
 
                             <div class="form-row mt-4">
                                 <div class="form-group flex-1">
-                                    <label class="label-style">Username</label>
+                                    <label class="label-style">Tên người dùng</label>
                                     <input name="username" type="text" class="input-modern" placeholder="username123"
                                            required>
                                 </div>
@@ -188,8 +188,8 @@
                                 <div class="form-group flex-1">
                                     <label class="label-style">Vai trò</label>
                                     <select name="role" class="input-modern select-custom">
-                                        <option value="user">Người dùng (User)</option>
-                                        <option value="admin">Quản trị viên (Admin)</option>
+                                        <option value="user">Người dùng</option>
+                                        <option value="admin">Quản trị viên</option>
                                     </select>
                                 </div>
                                 <div class="form-group flex-1">

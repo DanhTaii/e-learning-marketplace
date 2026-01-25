@@ -111,6 +111,7 @@
                     <form action="result-search/by-title" method="get" style="display: flex; flex: 1;">
                         <div class="search__input">
                             <input type="text" class="input__text text-medium" name="title"
+                                   value="${param.title}"
                                    placeholder="Tìm kiếm khóa học, kỹ năng,...">
                         </div>
                     </form>

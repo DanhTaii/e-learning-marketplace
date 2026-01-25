@@ -295,7 +295,7 @@
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
-                                                        ${lesson.durationMinutes} min
+                                                        ${lesson.durationMinutes} p
                                                 </div>
                                             </td>
                                             <td>
@@ -304,7 +304,7 @@
 
                                                     <fmt:formatDate
                                                             value="${lesson.createdAt}"
-                                                            pattern="MMMM d, yyyy "/>
+                                                            pattern="dd-MM-YYYY"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
@@ -321,6 +321,21 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    <c:if test="${empty listLessons}">
+                                        <tr>
+                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                                <div class="search-empty-state"
+                                                     style="text-align: center; padding: 40px 0;">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"
+                                                       style="font-size: 3rem; color: #ccc;"></i>
+                                                    <div class="search-empty-title"
+                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                        Không tìm thấy bài học nào
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                     </tbody>
                                 </table>
                             </div>

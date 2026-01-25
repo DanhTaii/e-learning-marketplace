@@ -134,16 +134,19 @@
 
 .product__big-advertisement {
     display: flex;
-    align-items: center;
+    align-items: stretch; /* Để ảnh và nội dung luôn cao bằng nhau */
     border-radius: 10px;
-    height: 235px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    min-height: 235px;    /* Chiều cao tối thiểu, nội dung nhiều sẽ tự giãn ra */
+    height: auto;         /* Cho phép giãn theo nội dung */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    overflow: hidden;     /* Đảm bảo bo góc không bị tràn */
+    flex-wrap: wrap;      /* Để hỗ trợ rớt dòng trên mobile */
 }
 
 .big-advertisement__image {
-    width: 50%;
-    height: 100%;
+    width: 40%;           /* Giảm bớt chiều rộng ảnh để ưu tiên không gian cho chữ */
+    min-width: 250px;     /* Không cho ảnh quá nhỏ */
 }
 
 .img-1 {
@@ -155,18 +158,24 @@
 }
 
 .big-advertisement__content {
-    width: 50%;
-    padding-left: 20px;
-    height: 100%;
+    flex: 1;              /* Tự động lấy phần không gian còn lại */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đẩy giá và nút xuống đáy thẻ */
     background-color: var(--white-color);
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
 }
 
 .content__title {
-    font-size: var(--text-3xl);
+    font-size: 1.8rem;    /* Điều chỉnh lại size chữ cho vừa vặn */
     font-weight: 700;
-    margin-top: 20px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    /* Nếu muốn tối đa 2 dòng rồi hiện "..." */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .for-fix {

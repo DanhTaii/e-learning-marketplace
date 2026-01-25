@@ -43,6 +43,23 @@ public class UserDetailController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+//        String email = request.getParameter("email");
+//        String username = request.getParameter("username");
+        String role = request.getParameter("role");
+//        String phone = request.getParameter("phone");
+
+        User user = new User();
+        user.setId(id);
+//        user.setUsername(username);
+//        user.setEmail(email);
+//        user.setPhone(phone);
+        user.setRole(role);
+
+        if (userService.updateUser(user) > 0) {
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+        }
 
     }
+
 }

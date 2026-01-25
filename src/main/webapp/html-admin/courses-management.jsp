@@ -254,7 +254,7 @@
                                         <th>Khóa học</th>
                                         <th>Thời lượng</th>
                                         <th>Học viên</th>
-<%--                                        <th>Giá</th>--%>
+                                        <%--                                        <th>Giá</th>--%>
                                         <th>Cấp độ</th>
                                         <th>Trạng thái</th>
                                         <th>Ngày tạo</th>
@@ -277,14 +277,14 @@
                                             <td>
                                                 <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
                                             </td>
-<%--                                            <td>--%>
-<%--                                                <div class="course-row__price course-row__font-content">--%>
-<%--                                                    <div class="price__old"><fmt:formatNumber value="${c.price}"--%>
-<%--                                                                                              type="number"--%>
-<%--                                                                                              pattern="###,###"></fmt:formatNumber>đ--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </td>--%>
+                                                <%--                                            <td>--%>
+                                                <%--                                                <div class="course-row__price course-row__font-content">--%>
+                                                <%--                                                    <div class="price__old"><fmt:formatNumber value="${c.price}"--%>
+                                                <%--                                                                                              type="number"--%>
+                                                <%--                                                                                              pattern="###,###"></fmt:formatNumber>đ--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
+                                                <%--                                            </td>--%>
                                             <td>
                                                 <div class="course-row__level course-row__font-content">
                                                     <div class="level-dot"></div>
@@ -330,6 +330,21 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    <c:if test="${empty listCourses}">
+                                        <tr>
+                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                                <div class="search-empty-state"
+                                                     style="text-align: center; padding: 40px 0;">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"
+                                                       style="font-size: 3rem; color: #ccc;"></i>
+                                                    <div class="search-empty-title"
+                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                        Không tìm thấy khóa học nào
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                     </tbody>
                                 </table>
                             </div>
@@ -347,7 +362,7 @@
     <div class="modal-content"
          style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
         <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
-        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa bài học này không?</p>
+        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa khóa học này không?</p>
         <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
             <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">
                 Hủy

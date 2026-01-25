@@ -43,11 +43,11 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     public int update(User entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE users\n" +
-                            "SET phone = :phone, username = :username, avatar_url=:avatarUrl ,role = :role, updated_at = CURRENT_TIMESTAMP\n" +
+                            "SET role = :role, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
-                    .bind("phone", entity.getPhone())
-                    .bind("username", entity.getUsername())
-                    .bind("avatarUrl", entity.getAvatarUrl())
+//                    .bind("phone", entity.getPhone())
+//                    .bind("username", entity.getUsername())
+//                    .bind("avatarUrl", entity.getAvatarUrl())
                     .bind("role", entity.getRole())
                     .bind("id", entity.getId())
                     .execute();
@@ -107,11 +107,20 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
         return getJdbi().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
             if (username != null && !username.trim().isEmpty()) {
-                String usernameSearch = "%" + username.trim() + "%";
+                String processedUsername = username.trim()
+                        .replace("!", "!!")   // Thoát chính ký tự thoát trước
+                        .replace("%", "!%")   // Biến % thành !%
+                        .replace("_", "!_");  // Biến _ thành !_
+                String usernameSearch = "%" + processedUsername.trim() + "%";
                 query.bind("usernameSearch", usernameSearch);
             }
             if (phone != null && !phone.trim().isEmpty()) {
-                String phoneSearch = "%" + phone.trim() + "%";
+                String processedPhone = phone.trim()
+                        .replace("!", "!!")   // Thoát chính ký tự thoát trước
+                        .replace("%", "!%")   // Biến % thành !%
+                        .replace("_", "!_");  // Biến _ thành !_
+
+                String phoneSearch = "%" + processedPhone.trim() + "%";
                 query.bind("phoneSearch", phoneSearch);
             }
             if (role != null && !role.trim().isEmpty()) {
