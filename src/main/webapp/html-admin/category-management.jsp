@@ -264,24 +264,40 @@
                                                 <div class="course-row__font-content">
                                                     <fmt:setLocale value="en_US" scope="page"/>
                                                     <fmt:formatDate value="${cate.createdAt}"
-                                                                    pattern="MMMM d, yyyy"/>
+                                                                    pattern="dd-MM-YYYY"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
                                                 <div class="action-wrapper">
-                                                <button type="button" onclick="showCategoryDetail(${cate.id})"
-                                                        class="icon-action-btn">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-                                                <form action="admin/category/delete" method="post" class="form">
-                                                    <input type="hidden" name="id" value="${cate.id}">
-                                                    <button type="submit" class="icon-action-btn">
-                                                        <i class="fa-solid fa-trash"></i>
+                                                    <button type="button" onclick="showCategoryDetail(${cate.id})"
+                                                            class="icon-action-btn">
+                                                        <i class="fa-solid fa-pen"></i>
                                                     </button>
-                                                </form></div>
+                                                    <form action="admin/category/delete" method="post" class="form">
+                                                        <input type="hidden" name="id" value="${cate.id}">
+                                                        <button type="submit" class="icon-action-btn">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    <c:if test="${empty listCategories}">
+                                        <tr>
+                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                                <div class="search-empty-state"
+                                                     style="text-align: center; padding: 40px 0;">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"
+                                                       style="font-size: 3rem; color: #ccc;"></i>
+                                                    <div class="search-empty-title"
+                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                        Không tìm thấy danh mục nào
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                     </tbody>
                                 </table>
                             </div>
@@ -304,7 +320,7 @@
                             </div>
                             <div class="course-body">
                                 <div class="user-info-grid">
-                                    <input type="hidden" id="detail-id" name="id" >
+                                    <input type="hidden" id="detail-id" name="id">
 
                                     <div class="info-group ">
                                         <label><i class="fa-solid fa-phone"></i> Tên</label>

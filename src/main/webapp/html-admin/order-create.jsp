@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -136,7 +136,8 @@
                         <!-- Thông tin đơn hàng -->
                         <div class="order-info-section">
                             <div class="order-info-header">
-                                <h3 class="text-header">Mã đơn hàng: <span class="text-header">${order.orderCode}</span></h3>
+                                <h3 class="text-header">Mã đơn hàng: <span class="text-header">${order.orderCode}</span>
+                                </h3>
                                 <span class="order-status ${order.status == 'PAID' ? 'status-paid' : 'status-pending'}">
                                     ${order.status}
                                 </span>
@@ -145,34 +146,39 @@
                             <div class="order-info-grid">
                                 <div class="info-item">
                                     <label>Khách hàng</label>
-<%--                                    <p>${order.userName}</p>--%>
+                                    <%--                                    <p>${order.userName}</p>--%>
                                 </div>
                                 <div class="info-item">
                                     <label>Phương thức thanh toán</label>
-<%--                                    <p>${order.paymentMethodName}</p>--%>
+                                    <%--                                    <p>${order.paymentMethodName}</p>--%>
                                 </div>
                                 <div class="info-item">
                                     <label>Thời gian tạo</label>
-                                    <p><fmt:formatDate value="${order.createdAt}" pattern="dd/MM/yyyy HH:mm"/></p>
+                                    <p><fmt:formatDate value="${order.createdAt}"
+                                                       pattern="dd-MM-YYYY"/>
+                                    </p>
                                 </div>
                                 <div class="info-item">
                                     <label>Thời gian thanh toán</label>
-                                    <p>${order.paidAt != null ? '<fmt:formatDate value="${order.paidAt}" pattern="dd/MM/yyyy HH:mm"/>' : 'Chưa thanh toán'}</p>
+                                    <p>${order.paidAt != null ? '<fmt:formatDate value="${order.paidAt}" pattern="dd-MM-YYYY"/>' : 'Chưa thanh toán'}</p>
                                 </div>
                             </div>
 
                             <div class="order-amount">
                                 <div class="amount-row">
                                     <span class="text-big">Tổng tiền gốc:</span>
-                                    <span class="price text-big"><fmt:formatNumber value="${order.totalAmount}" groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big"><fmt:formatNumber value="${order.totalAmount}"
+                                                                                   groupingUsed="true"/> VNĐ</span>
                                 </div>
                                 <div class="amount-row">
                                     <span class="text-big">Giảm giá:</span>
-                                    <span class="price text-big"><fmt:formatNumber value="${order.discountAmount}" groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big"><fmt:formatNumber value="${order.discountAmount}"
+                                                                                   groupingUsed="true"/> VNĐ</span>
                                 </div>
                                 <div class="amount-row total">
                                     <span class="text-big">Thành tiền:</span>
-                                    <span class="price text-big"><fmt:formatNumber value="${order.finalAmount}" groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big"><fmt:formatNumber value="${order.finalAmount}"
+                                                                                   groupingUsed="true"/> VNĐ</span>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +198,8 @@
                                 <c:forEach items="${orderItems}" var="item">
                                     <tr>
                                         <td class="thumbnail-cell">
-                                            <img src="${item.thumbnailUrl}" alt="${item.courseTitle}" class="item-thumbnail">
+                                            <img src="${item.thumbnailUrl}" alt="${item.courseTitle}"
+                                                 class="item-thumbnail">
                                         </td>
                                         <td class="title-cell">${item.courseTitle}</td>
                                         <td class="price-cell">

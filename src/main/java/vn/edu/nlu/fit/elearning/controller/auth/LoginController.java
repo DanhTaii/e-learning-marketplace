@@ -40,8 +40,8 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
-        User canLogin = userService.login(email, pass);
         try {
+            User canLogin = userService.login(email, pass);
             if (canLogin != null) {
                 HttpSession session = request.getSession();
                 canLogin.setPassword(null);
@@ -50,17 +50,28 @@ public class LoginController extends HttpServlet {
 
                 if (canLogin.getRole().equalsIgnoreCase("admin")) {
                     response.sendRedirect("admin/dashboard");
+                    return;
                 } else {
                     canLogin.setPassword("");
                     response.sendRedirect("index");
+                    return;
                 }
             } else {
                 request.setAttribute("error", "Bạn nhập sai email hoặc mật khẩu!");
-                request.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(request, response);
+                doGet(request, response);
+                return;
             }
+        } catch (IllegalArgumentException e) {
+            // Bắt các lỗi nghiệp vụ (Trống thông tin, sai tài khoản...)
+            request.setAttribute("error", e.getMessage());
+            doGet(request, response);
+            return;
         } catch (Exception e) {
+            // Lỗi hệ thống (DB sập, NullPointer...)
             e.printStackTrace();
-            throw new RuntimeException(e);
+            request.setAttribute("error", "Có lỗi hệ thống xảy ra, vui lòng thử lại sau!");
+            doGet(request, response);
+            return;
         }
 
     }

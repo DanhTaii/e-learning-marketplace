@@ -12,7 +12,7 @@ function showUserDetail(id) {
             document.getElementById('modal-title').innerText = "THÔNG TIN: " + user.username.toUpperCase();
             //Những thằng dưới này là input nên điền value
             document.getElementById('detail-id').value = user.id;
-            document.getElementById('detail-username').value = user.username;
+            document.getElementById('detail-username').value = user.username || 'Chưa cập nhật';
             document.getElementById('detail-email').value = user.email;
             document.getElementById('detail-phone').value = user.phone || 'Chưa cập nhật';
 
@@ -40,15 +40,74 @@ function showUserDetail(id) {
         });
 }
 
+function updateUser(event) {
+    event.preventDefault();
+
+    const formData = new FormData(document.getElementById('updateUserForm'));
+    const params = new URLSearchParams(formData);
+
+    fetch('admin/user/detail', {
+        method: 'POST',
+        body: params,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+        .then(response => {
+            if (response.ok) {
+                alert("Cập nhật thành công!");
+                location.reload();
+            } else {
+                // Nếu Server trả về lỗi 400, 500...
+                alert("Cập nhật thất bại! Vui lòng kiểm tra lại Server.");
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi kết nối:', error);
+            alert("Không thể kết nối đến máy chủ!");
+        });
+}
+
 // Hàm đóng modal
 function closeModal() {
-    document.getElementById('user-detail').style.display = 'none';
+// 1. Tìm tất cả các thẻ có class là modal hoặc modal__course-detail
+    const modals = document.querySelectorAll('.modal, .modal__course-detail');
+
+    // 2. Duyệt qua từng thằng và ẩn nó đi
+    modals.forEach(modal => {
+        modal.style.display = 'none';
+    });
 }
 
 // Đóng khi click ra ngoài vùng modal
 window.onclick = function (event) {
-    let modal = document.getElementById('user-detail');
-    if (event.target == modal) {
-        closeModal();
+    if (event.target.classList.contains('modal__course-detail') || event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
     }
+}
+
+let isDirty = false; // Mặc định là chưa có thay đổi
+
+// 1. Khi người dùng nhập bất cứ thứ gì, đánh dấu là đã thay đổi
+// Nên áp dụng cho toàn bộ form trong modal
+document.querySelectorAll('#updateUserForm input, #updateUserForm select, #updateUserForm textarea').forEach(item => {
+    item.addEventListener('input', () => {
+        isDirty = true;
+    });
+});
+
+// 2. Sửa lại hàm closeModal để kiểm tra cái "Cờ" này
+function closeModal() {
+    if (isDirty) {
+        // Hiện thông báo xác nhận kiểu cũ (trình duyệt)
+        const confirmLeave = confirm("Bạn có thay đổi chưa lưu. Bạn có chắc chắn muốn thoát không?");
+        if (!confirmLeave) {
+            return; // Nếu chọn "Hủy" (không thoát) thì dừng lại
+        }
+    }
+
+    // Nếu không có thay đổi hoặc user chấp nhận bỏ qua -> Đóng modal
+    const modals = document.querySelectorAll('.modal, .modal__course-detail');
+    modals.forEach(modal => {
+        modal.style.display = 'none';
+    });
+    isDirty = false; // Reset lại trạng thái cho lần sau
 }

@@ -2,6 +2,7 @@ const Validator = {
     checkPassword: function (password) {
         if (!password) return "Mật khẩu không được để trống";
         if (password.length < 8) return "Mật khẩu phải có ít nhất 8 ký tự";
+        if (password.length > 20) return "Mật khẩu không được quá 25 ký tự";
         if (!/[A-Z]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa";
         if (!/[a-z]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường";
         if (!/[0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ số";
@@ -11,6 +12,7 @@ const Validator = {
     checkUsername: function (username) {
         if (!username) return "Vui lòng nhập tên đăng nhập";
         if (username.length < 3) return "Tên đăng nhập phải có ít nhất 3 ký tự";
+        if (username.length > 16) return "Tên đăng nhập không được dài quá 16 kí tự"
         if (!/^[a-zA-Z0-9]+$/.test(username)) {
             return "Tên đăng nhập không được chứa ký tự đặc biệt, khoảng trắng hoặc dấu tiếng Việt";
         }
@@ -19,10 +21,23 @@ const Validator = {
 
     checkEmail: function (email) {
         if (!email) return "Vui lòng nhập email";
+
+        // 2. Định dạng Regex (Chuẩn và phổ biến nhất)
+        // Cấu trúc: [Tên] @ [Tên miền] . [Phần mở rộng]
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(email)) {
+            return "Định dạng email không hợp lệ (ví dụ: abc@gmail.com)";
+        }
+
+        if (email.length > 255) {
+            return "Email quá dài, vui lòng kiểm tra lại";
+        }
+
         return null;
     },
 
-    checkPhone: function (phone){
+    checkPhone: function (phone) {
         if (!phone) return "Vui lòng nhập số điện thoại";
         const regex = /^\d{10,11}$/;
 
@@ -40,7 +55,7 @@ const Validator = {
             $(this).next('.error-client').text('');
 
             let inputId = $(this).attr('id');
-            if(inputId) {
+            if (inputId) {
                 $('#error_' + inputId).text('');
             }
         });

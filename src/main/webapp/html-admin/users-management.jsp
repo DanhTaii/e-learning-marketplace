@@ -9,13 +9,13 @@
     <title>User Management</title>
 
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css-admin/admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css-admin/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -138,13 +138,13 @@
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
                             <div class="header__title">Người dùng</div>
-                            <div class="admin-create__buttons">
-                                <button type="button" class="dark-button">
-                                    <a href="html-admin/user-create.jsp">
-                                        <i class="fa-solid fa-plus"></i>Tạo mới
-                                    </a>
-                                </button>
-                            </div>
+                            <%--                            <div class="admin-create__buttons">--%>
+                            <%--                                <button type="button" class="dark-button">--%>
+                            <%--                                    <a href="html-admin/user-create.jsp">--%>
+                            <%--                                        <i class="fa-solid fa-plus"></i>Tạo mới--%>
+                            <%--                                    </a>--%>
+                            <%--                                </button>--%>
+                            <%--                            </div>--%>
                         </div>
 
                         <div class="container-2__body">
@@ -195,45 +195,45 @@
 
                             <div class="container-2__list-student">
 
-                               <style>
-                                   .action-wrapper {
-                                       display: flex;
-                                       align-items: center;
-                                       justify-content: flex-start;
-                                       gap: 8px;
-                                       height: 100%;
-                                   }
+                                <style>
+                                    .action-wrapper {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-start;
+                                        gap: 8px;
+                                        height: 100%;
+                                    }
 
-                                   .icon-action-btn {
-                                       width: 32px;
-                                       height: 32px;
-                                       display: inline-flex;
-                                       align-items: center;
-                                       justify-content: center;
-                                       padding: 0;
-                                       border: none;
-                                       background: transparent;
-                                       cursor: pointer;
-                                       border-radius: 4px;
-                                       color: var(--dark-blue);
-                                       transition: all 0.2s;
-                                   }
+                                    .icon-action-btn {
+                                        width: 32px;
+                                        height: 32px;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        padding: 0;
+                                        border: none;
+                                        background: transparent;
+                                        cursor: pointer;
+                                        border-radius: 4px;
+                                        color: var(--dark-blue);
+                                        transition: all 0.2s;
+                                    }
 
-                                   .icon-action-btn:hover {
-                                       background-color: #f0f0f0;
-                                       transform: translateY(-1px);
-                                   }
+                                    .icon-action-btn:hover {
+                                        background-color: #f0f0f0;
+                                        transform: translateY(-1px);
+                                    }
 
 
-                                   table {
-                                       border-collapse: collapse !important;
-                                   }
+                                    table {
+                                        border-collapse: collapse !important;
+                                    }
 
-                                   table td {
-                                       border-bottom: 1px solid var(--light-grey);
-                                       height: 55px;
-                                   }
-                               </style>
+                                    table td {
+                                        border-bottom: 1px solid var(--light-grey);
+                                        height: 55px;
+                                    }
+                                </style>
 
                                 <table>
                                     <thead>
@@ -251,7 +251,9 @@
                                     <c:forEach var="user" items="${listUsers}">
                                         <tr>
                                             <td>
-                                                <div class="title">${user.username}</div>
+                                                <div class="title">
+                                                        ${empty user.username ? "Chưa cập nhật" : user.username}
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="course-row__font-content">
@@ -259,18 +261,20 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="course-row__font-content">${user.phone}</div>
+                                                <div class="course-row__font-content">
+                                                        ${empty user.phone ? "Chưa cập nhật" : user.phone}
+                                                </div>
                                             </td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${user.role == 'ADMIN'}">
                                                         <div class="course-row__status course-row__font-content role-admin">
-                                                                ${user.role}
+                                                            Quản trị viên
                                                         </div>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <div class="course-row__status course-row__font-content course-row__status-private">
-                                                                ${user.role}
+                                                            Người dùng
                                                         </div>
                                                     </c:otherwise>
                                                 </c:choose>
@@ -281,25 +285,38 @@
                                                     <fmt:setLocale value="en_US" scope="page"/>
 
                                                     <fmt:formatDate value="${user.createdAt}"
-                                                                    pattern="MMMM d, yyyy"/>
+                                                                    pattern="dd-MM-YYYY"/>
                                                 </div>
                                             </td>
                                             <td class="action__button">
                                                 <div class="action-wrapper">
-                                                <button type="button" onclick="showUserDetail(${user.id})"
-                                                        class="icon-action-btn">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-                                                <form action="admin/user/delete" method="post" class="form">
-                                                    <input type="hidden" name="id" value="${user.id}">
-                                                    <button type="submit" class="icon-action-btn">
+                                                    <button type="button" onclick="showUserDetail(${user.id})"
+                                                            class="icon-action-btn">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </button>
+                                                    <button type="button" class="icon-action-btn"
+                                                            onclick="openConfirmModal(${user.id})">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
-                                                </form>
                                                 </div>
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    <c:if test="${empty listUsers}">
+                                        <tr>
+                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                                <div class="search-empty-state"
+                                                     style="text-align: center; padding: 40px 0;">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"
+                                                       style="font-size: 3rem; color: #ccc;"></i>
+                                                    <div class="search-empty-title"
+                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                        Không tìm thấy người dùng nào
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                     </tbody>
                                 </table>
                             </div>
@@ -309,7 +326,7 @@
 
                 <div id="user-detail" class="modal__course-detail">
                     <div class="modal__course-content">
-                        <form action="admin/user/detail" method="post">
+                        <form id="updateUserForm" onsubmit="updateUser(event)">
 
                             <div class="course__header">
                                 <div class="course__title">
@@ -326,16 +343,19 @@
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-user"></i> Tên người dùng</label>
-                                        <input id="detail-username" name="username" type="text" class="input__create">
+                                        <input id="detail-username" name="username" type="text" class="input__create"
+                                               readonly disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-envelope"></i> Email</label>
-                                        <input id="detail-email" name="email" type="text" class="input__create">
+                                        <input id="detail-email" name="email" type="text" class="input__create" readonly
+                                               disabled>
                                     </div>
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
-                                        <input id="detail-phone" name="phone" type="text" class="input__create">
+                                        <input id="detail-phone" name="phone" type="text" class="input__create" readonly
+                                               disabled>
                                     </div>
 
                                     <div class="info-group">
@@ -348,19 +368,19 @@
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-calendar-check"></i>Ngày tham gia</label>
-                                        <input id="detail-created" type="text" class="input__create" readonly>
+                                        <input id="detail-created" type="text" class="input__create" readonly disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-calendar-check"></i>Ngày cập nhật</label>
-                                        <input id="detail-updated" type="text" class="input__create" readonly>
+                                        <input id="detail-updated" type="text" class="input__create" readonly disabled>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="button btn-cancel" onclick="closeModal()"
                                             style="margin-right: 1rem;">Hủy
                                     </button>
-                                    <button type="submit" class="button dark-button">Lưu thay
-                                        đổi
+                                    <button type="submit" class="button dark-button">
+                                        Lưu thay đổi
                                     </button>
                                 </div>
                             </div>
@@ -372,19 +392,29 @@
     </div>
 </div>
 
-<div id="notification-modal" class="modal"
-     style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+<%--COMPONENT CONFIRM FOR DELETE--%>
+<div id="confirm-delete-modal" class="modal"
+     style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
     <div class="modal-content"
-         style="background: white; padding: 20px; border-radius: 8px; width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-        <h2 id="noti-title" style="margin-top: 0;">Thông báo</h2>
-        <hr>
-        <p id="noti-message" style="font-size: 16px; margin: 20px 0;"></p>
-        <button onclick="closeNotiModal()" class="dark-button" style="padding: 8px 25px; cursor: pointer;">Đóng</button>
+         style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
+        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
+        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa người dùng này không?</p>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+            <button onclick="closeModal()" class="button btn-cancel" style="padding: 8px 20px;">
+                Hủy
+            </button>
+            <button id="btn-confirm-delete" class="button dark-button"
+                    style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay
+            </button>
+        </div>
     </div>
 </div>
-
-</body>
+<%--DELETE ACTION--%>
+<form id="delete-form-id" action="admin/user/delete" method="post" class="form" style="display: none">
+    <input id="input-delete-id" type="hidden" name="id">
+</form>
 <div id="toast"></div>
+</body>
 <script>
     // Ép kiểu về chuỗi để đảm bảo JS không bị lỗi cú pháp nếu giá trị null
     window.flashError = '${sessionScope.flashError}';

@@ -54,8 +54,8 @@
                                        name="password" value="${param.password}" id="newPass">
                                 <span id="error_newPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
-                            <div class="form__info text-medium">Mật khẩu phải có tối thiểu 8 ký tự gồm số và chữ cái,
-                                trong đó có ít nhất 1 chữ cái viết hoa và ký tự đặc biệt!
+                            <div class="form__info text-medium">Mật khẩu phải từ 8 đến 25 ký tự gồm số và chữ cái,
+                                trong đó có ít nhất 1 chữ cái viết hoa, 1 chữ viết thuòng và ký tự đặc biệt!
                             </div>
                             <div class="form__input input-4">
                                 <input type="password" class="input-text text-big"

@@ -19,14 +19,12 @@ public class UserService {
         email = email.trim();
         password = password.trim();
         if (email.isEmpty() || password.isEmpty()) {
-            System.out.println("Mật khẩu hoặc tên người dùng không đúng");
-            return null;
+            throw new IllegalArgumentException("Vui lòng điền thông tin !");
         }
 
         User user = userDao.findUserByEmail(email);
         if (user == null) {
-            System.out.println("Tài khoản không tồn tại");
-            return null;
+            throw new IllegalArgumentException("Tài khoản không tồn tại");
         }
 
         String hash = PasswordUtils.hashpassword(password);

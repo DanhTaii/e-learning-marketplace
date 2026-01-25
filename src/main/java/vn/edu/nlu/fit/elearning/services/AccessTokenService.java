@@ -20,7 +20,7 @@ import java.util.UUID;
 public class AccessTokenService {
     private final int LIMIT_MINUTE = 1;
     String emailFrom = "minh6112005@gmail.com";
-    String password = "fppq kvfg qevh hdxv";
+    String password = "rwag rmgi tlfw xbmn";
 
     // Thêm DAO để dùng cho validate & mark used
     private final AccessTokenDao tokenDao = new AccessTokenDao();

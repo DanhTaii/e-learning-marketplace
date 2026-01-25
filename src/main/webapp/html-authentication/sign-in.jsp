@@ -61,14 +61,16 @@
                             </div>
                             <div class="form__input input-1">
                                 <input type="email" class="input-text text-big" placeholder="Nhập email của bạn"
-                                       id='login_email' name="email">
+                                       id='login_email' name="email"
+                                       value="${param.email}">
                                 <span id="error_email" class="error-client"
                                       style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
 
                             <div class="form__input input-2">
                                 <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
-                                       name="password" id="pass">
+                                       name="password" id="pass"
+                                       value="${param.password}">
                                 <span id="error_pass" class="error-client"
                                       style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
