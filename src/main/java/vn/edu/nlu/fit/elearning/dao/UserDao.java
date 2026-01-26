@@ -53,6 +53,16 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
                     .execute();
         });
     }
+    public int updateRole(int userId, String role) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE users\n" +
+                            "SET role = :role, updated_at = CURRENT_TIMESTAMP\n" +
+                            "WHERE id = :id")
+                    .bind("role", role)
+                    .bind("id", userId)
+                    .execute();
+        });
+    }
 
     @Override
     public int delete(Integer integer) {

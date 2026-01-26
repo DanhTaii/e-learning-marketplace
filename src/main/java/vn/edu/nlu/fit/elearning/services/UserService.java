@@ -203,6 +203,9 @@ public class UserService {
     public int updateUser(User user) {
         return userDao.update(user);
     }
+    public int updateRole(int userId, String role) {
+        return userDao.updateRole(userId,role);
+    }
 
     public int deleteUser(int id) {
         return userDao.delete(id);

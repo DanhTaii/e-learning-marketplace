@@ -22,7 +22,7 @@ public class WishlistDao extends BaseDao {
     // Thêm vào wishlist
     public int addWishlist(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
-                    return handle.createUpdate("INSERT INTO wishlist (user_id, course_id, added_at) VALUES (:userId, :courseId, CURRENT_TIMESTAMP)")
+                    return handle.createUpdate("INSERT INTO wishlist (user_id, course_id, added_at) VALUES (:userId, :courseId, CURRENT_TIMESTAMP) ON DUPLICATE KEY UPDATE added_at = CURRENT_TIMESTAMP ")
                             .bind("userId", userId)
                             .bind("courseId", courseId)
                             .execute();

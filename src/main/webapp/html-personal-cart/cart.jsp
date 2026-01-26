@@ -41,9 +41,8 @@
                             <c:when test="${not empty sessionScope.cart && sessionScope.cart.totalQuantity > 0}">
                                 <div class="shopping-cart__sub-title">
                                     <div class="sub-title__column1">
-                                        <input type="checkbox" class="tick" name="tick">
                                         <div class="sub_title__title text-paragraph">
-                                            <span class="text-2xl">Sản phẩm</span>
+                                            <span class="text-2xl" style="margin-left: 7rem">Sản phẩm</span>
                                         </div>
                                     </div>
                                     <div class="sub-title__action-price-group action-price-group">

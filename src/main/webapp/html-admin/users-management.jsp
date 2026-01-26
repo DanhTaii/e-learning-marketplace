@@ -344,18 +344,18 @@
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-user"></i> Tên người dùng</label>
                                         <input id="detail-username" name="username" type="text" class="input__create"
-                                               readonly disabled>
+                                               readonly >
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-envelope"></i> Email</label>
                                         <input id="detail-email" name="email" type="text" class="input__create" readonly
-                                               disabled>
+                                               >
                                     </div>
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-phone"></i> Số điện thoại</label>
                                         <input id="detail-phone" name="phone" type="text" class="input__create" readonly
-                                               disabled>
+                                               >
                                     </div>
 
                                     <div class="info-group">
@@ -368,11 +368,11 @@
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-calendar-check"></i>Ngày tham gia</label>
-                                        <input id="detail-created" type="text" class="input__create" readonly disabled>
+                                        <input id="detail-created" type="text" class="input__create" readonly >
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-calendar-check"></i>Ngày cập nhật</label>
-                                        <input id="detail-updated" type="text" class="input__create" readonly disabled>
+                                        <input id="detail-updated" type="text" class="input__create" readonly >
                                     </div>
                                 </div>
                                 <div class="modal-footer">
