@@ -40,7 +40,7 @@
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>
                             <span style="color: red; font-size: var(--text-xl)"> ${requestScope.error} </span>
                             <div class="form__input input-1">
-                                <input type="email" class="input-text text-big" placeholder="Nhập email của bạn"
+                                <input  class="input-text text-big" placeholder="Nhập email của bạn"
                                        name="email" value="${param.email}" id="login_email">
                                 <span id="error_email" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
@@ -50,17 +50,23 @@
                                 <span id="error_username" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__input input-3">
-                                <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
-                                       name="password" value="${param.password}" id="newPass">
+                                <div class="password-group" style="position: relative;">
+                                    <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
+                                           name="password" value="${param.password}" id="newPass">
+                                    <i class="fa-regular fa-eye toggle-password" data-target="#newPass"></i>
+                                </div>
                                 <span id="error_newPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__info text-medium">Mật khẩu phải từ 8 đến 25 ký tự gồm số và chữ cái,
                                 trong đó có ít nhất 1 chữ cái viết hoa, 1 chữ viết thuòng và ký tự đặc biệt!
                             </div>
                             <div class="form__input input-4">
-                                <input type="password" class="input-text text-big"
-                                       placeholder="Nhập lại mật khẩu của bạn" name="confirmPassword"
-                                       value="${param.confirmPassword}" id="reNewPass">
+                                <div class="password-group" style="position: relative;">
+                                    <input type="password" class="input-text text-big"
+                                           placeholder="Nhập lại mật khẩu của bạn" name="confirmPassword"
+                                           value="${param.confirmPassword}" id="reNewPass">
+                                    <i class="fa-regular fa-eye toggle-password" data-target="#reNewPass"></i>
+                                </div>
                                 <span id="error_reNewPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
                             <div class="form__button">
@@ -118,6 +124,22 @@ Validator.setupAutoClearErrors();
             return isValid;
         });
 
+    });
+
+    $(document).ready(function () {
+        // Xử lý ẩn/hiện mật khẩu
+        $('.toggle-password').on('click', function() {
+            // Lấy ID của ô input cần hiện mật khẩu từ attribute data-target
+            const targetSelector = $(this).attr('data-target');
+            const input = $(targetSelector);
+
+            // Chuyển loại input
+            const type = input.attr('type') === 'password' ? 'text' : 'password';
+            input.attr('type', type);
+
+            // Đổi icon
+            $(this).toggleClass('fa-eye fa-eye-slash');
+        });
     });
 </script>
 </html>

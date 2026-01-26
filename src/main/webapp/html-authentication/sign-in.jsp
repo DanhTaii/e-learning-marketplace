@@ -60,7 +60,7 @@
                                 <span style="color: red; font-size: var(--text-xl)"> <%= error %> </span>
                             </div>
                             <div class="form__input input-1">
-                                <input type="email" class="input-text text-big" placeholder="Nhập email của bạn"
+                                <input class="input-text text-big" placeholder="Nhập email của bạn"
                                        id='login_email' name="email"
                                        value="${param.email}">
                                 <span id="error_email" class="error-client"
@@ -68,9 +68,14 @@
                             </div>
 
                             <div class="form__input input-2">
-                                <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
-                                       name="password" id="pass"
-                                       value="${param.password}">
+                                <div class="password-wrapper" style="position: relative;">
+                                    <input type="password" class="input-text text-big"
+                                           placeholder="Nhập mật khẩu của bạn"
+                                           name="password" id="pass" value="${param.password}">
+
+                                    <i class="fa-regular fa-eye" id="togglePassword"></i>
+                                </div>
+
                                 <span id="error_pass" class="error-client"
                                       style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
@@ -144,5 +149,20 @@
         });
 
     });
+
+    $(document).ready(function () {
+        const togglePassword = $('#togglePassword');
+        const passwordInput = $('#pass');
+
+        togglePassword.on('click', function () {
+            // Kiểm tra loại input hiện tại
+            const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+            passwordInput.attr('type', type);
+
+            // Thay đổi icon (từ mắt mở sang mắt đóng và ngược lại)
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+    })
 </script>
 </html>

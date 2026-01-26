@@ -52,15 +52,19 @@ public class AccessTokenService {
 
     public boolean sendEmail(String email, String code, String name) {
 
+        System.setProperty("java.net.preferIPv4Stack", "true");
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "465");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.ssl.enable", "true"); // Thay cho socketFactory
-        prop.put("mail.smtp.ssl.protocols", "TLSv1.2"); // Chỉ định rõ phiên bản TLS
-        prop.put("mail.smtp.connectiontimeout", "10000"); // 10 giây không được thì báo lỗi, đừng bắt user chờ
-        prop.put("mail.smtp.timeout", "10000");
-        System.setProperty("java.net.preferIPv4Stack", "true");
+        prop.put("mail.smtp.ssl.enable", "true");
+
+        prop.put("mail.smtp.socketFactory.port", "465");
+        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+        prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        prop.put("mail.smtp.connectiontimeout", "15000");
+        prop.put("mail.smtp.timeout", "15000");
 
         Authenticator auth = new Authenticator() {
             @Override
