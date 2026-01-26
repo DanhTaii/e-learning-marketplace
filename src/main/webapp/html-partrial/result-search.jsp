@@ -77,7 +77,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
-                                            <div class="type__text text-big">Người mới</div>
+                                            <div class="type__text text-big">Sơ cấp</div>
                                         </div>
                                     </div>
 
@@ -219,7 +219,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
-                                            <div class="type__text text-big">Người mới</div>
+                                            <div class="type__text text-big">Sơ cấp</div>
                                         </div>
                                     </div>
 
@@ -360,7 +360,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="level" value="beginner">
-                                            <div class="type__text text-big">Người mới</div>
+                                            <div class="type__text text-big">Sơ cấp</div>
                                         </div>
                                     </div>
 
@@ -572,6 +572,67 @@
                             </div>
                         </c:if>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="grid__row-2">
+                <div class="grid__column-3"></div>
+                <div class="grid__colum-9">
+                    <ul class="pagination home-product__pagination">
+                        <!-- Previous -->
+                        <c:if test="${currentPage > 1}">
+                            <li class="pagination-item">
+                                <a href="${paginationUrl}&page=${currentPage - 1}" class="pagination-item__link">
+                                    <i class="pagination-item__icon fa-solid fa-angle-left"></i>
+                                </a>
+                            </li>
+                        </c:if>
+
+                        <!-- Trang 1 -->
+                        <li class="pagination-item ${currentPage == 1 ? 'pagination-item--active' : ''}">
+                            <a href="${paginationUrl}&page=1" class="pagination-item__link">1</a>
+                        </li>
+
+                        <!-- Dấu ... nếu currentPage > 4 -->
+                        <c:if test="${currentPage > 4}">
+                            <li class="pagination-item">
+                                <span class="pagination-item__link">...</span>
+                            </li>
+                        </c:if>
+
+                        <!-- Các trang gần currentPage -->
+                        <c:forEach var="i" begin="${currentPage - 2 < 1 ? 1 : currentPage - 2}" end="${currentPage + 2}">
+                            <c:if test="${i > 1 && i < totalPages}">
+                                <li class="pagination-item ${i == currentPage ? 'pagination-item--active' : ''}">
+                                    <a href="${paginationUrl}&page=${i}" class="pagination-item__link">${i}</a>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+
+                        <!-- Dấu ... nếu currentPage < totalPages - 3 -->
+                        <c:if test="${currentPage < totalPages - 3}">
+                            <li class="pagination-item">
+                                <span class="pagination-item__link">...</span>
+                            </li>
+                        </c:if>
+
+                        <!-- Trang cuối -->
+                        <c:if test="${totalPages > 1}">
+                            <li class="pagination-item ${currentPage == totalPages ? 'pagination-item--active' : ''}">
+                                <a href="${paginationUrl}&page=${totalPages}" class="pagination-item__link">${totalPages}</a>
+                            </li>
+                        </c:if>
+
+                        <!-- Next -->
+                        <c:if test="${currentPage < totalPages}">
+                            <li class="pagination-item">
+                                <a href="${paginationUrl}&page=${currentPage + 1}" class="pagination-item__link">
+                                    <i class="pagination-item__icon fa-solid fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </c:if>
+                    </ul>
                 </div>
             </div>
         </div>

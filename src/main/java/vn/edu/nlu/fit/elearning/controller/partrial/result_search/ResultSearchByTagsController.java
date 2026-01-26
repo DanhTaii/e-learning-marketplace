@@ -76,7 +76,9 @@ public class ResultSearchByTagsController extends HttpServlet {
         );
 
         // Đếm tổng
-        int totalCourses = listCourse.size();
+        int totalCourses = courseService.countFilteredCoursesByTag(
+                idTag, sortPrice, level, priceRange, rating, duration, popular
+        );
 
         int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 

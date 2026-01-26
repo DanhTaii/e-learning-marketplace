@@ -100,22 +100,10 @@
                                 </div>
                             </div>
                             <div class="form__socials">
-                                <a href="URL_FACEBOOK_CUA_BAN" class="social-link">
-                                    <div class="socials__box facebook">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                    </div>
-                                </a>
-
                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=<%=GoogleConstants.getRedirectUri()%>&response_type=code&client_id=<%=GoogleConstants.GOOGLE_CLIENT_ID%>&approval_prompt=force"
                                    class="social-link">
                                     <div class="socials__box google">
                                         <img class="image" src="assets/image/search.png" alt="Google">
-                                    </div>
-                                </a>
-
-                                <a href="URL_YAHOO_CUA_BAN" class="social-link">
-                                    <div class="socials__box yahoo">
-                                        <i class="fa-brands fa-yahoo"></i>
                                     </div>
                                 </a>
                             </div>
