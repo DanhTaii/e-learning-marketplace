@@ -13,8 +13,8 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     @Override
     public int create(User user) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO users (id, email, username, password) " +
-                    "VALUES (:id, :email, :username, :password)").bindBean(user).execute();
+            return handle.createUpdate("INSERT INTO users (id, email, username, password, avatar_url) " +
+                    "VALUES (:id, :email, :username, :password, :avatarUrl)").bindBean(user).execute();
         });
     }
 
@@ -43,11 +43,11 @@ public class UserDao extends BaseDao implements BaseCrudDao<User, Integer> {
     public int update(User entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE users\n" +
-                            "SET role = :role, updated_at = CURRENT_TIMESTAMP\n" +
+                            "SET role = :role, username = :username, avatar_url = :avatarUrl, phone = :phone, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
-//                    .bind("phone", entity.getPhone())
-//                    .bind("username", entity.getUsername())
-//                    .bind("avatarUrl", entity.getAvatarUrl())
+                    .bind("phone", entity.getPhone())
+                    .bind("username", entity.getUsername())
+                    .bind("avatarUrl", entity.getAvatarUrl())
                     .bind("role", entity.getRole())
                     .bind("id", entity.getId())
                     .execute();

@@ -34,9 +34,9 @@ public class PaginationAllCoursesController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService = new UserService();
-        User user = userService.getUserById(userId);
-        request.setAttribute("user", user);
+//        UserService userService = new UserService();
+//        User user = userService.getUserById(userId);
+//        request.setAttribute("user", user);
 
         // Lấy tất cả các tham số filter
         String pageStr = request.getParameter("page");

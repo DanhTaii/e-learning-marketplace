@@ -36,21 +36,27 @@ public class UserService {
 
     public User processSocialLogin(GoogleUser googleUser) {
         User user = userDao.findUserByEmail(googleUser.getEmail());
+        System.out.println("Tên lấy từ Google: " + googleUser.getGiven_name());
+        System.out.println("Tên lấy từ Google: " + googleUser.getFamily_name());
+        System.out.println("Tên lấy từ Google: " + googleUser.getName());
 
         if (user == null) {
             user = new User();
             user.setEmail(googleUser.getEmail());
-            user.setFirstName(googleUser.getGivenName());
-            user.setLastName(googleUser.getFamilyName());
-//            user.setAvatar_url(googleUser.getPicture());
-            user.setRole("user"); // Mặc định là khách hàng
-            user.setPassword(""); // Đăng nhập qua Google nên không cần mật khẩu local
+            // Gọi đúng tên biến mới
+            user.setUsername(googleUser.getName());
+            user.setAvatarUrl(googleUser.getPicture());
+
+            user.setRole("user");
+            user.setPassword("");
 
             // Lưu vào database và lấy lại ID vừa tạo
             createUser(user);
         } else {
             // 3. Nếu ĐÃ CÓ: Cập nhật lại ảnh đại diện hoặc tên nếu Google có thay đổi
             user.setAvatarUrl(googleUser.getPicture());
+            user.setUsername(googleUser.getName());
+            updateUser(user);
         }
 
         return user;

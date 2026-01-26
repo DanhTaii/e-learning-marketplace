@@ -7,19 +7,10 @@ import java.io.Serializable;
 public class GoogleUser implements Serializable {
     private String id;
     private String email;
-
-    //Bên Google Json của nó đang trả về snake case
-    // Nên muốn đặt tên là camel case thì phải cho nó biết tên lúc chuyển từ Json
-    @SerializedName("verified_email")
-    private boolean verifiedEmail;
-
+    private boolean verified_email; // Trùng với "verified_email"
     private String name;
-
-    @SerializedName("given_name")
-    private String givenName;
-
-    @SerializedName("family_name")
-    private String familyName;
+    private String given_name;      // Trùng với "given_name"
+    private String family_name;     // Trùng với "family_name"
     private String picture;
 
     public String getId() {
@@ -38,12 +29,12 @@ public class GoogleUser implements Serializable {
         this.email = email;
     }
 
-    public boolean isVerifiedEmail() {
-        return verifiedEmail;
+    public boolean isVerified_email() {
+        return verified_email;
     }
 
-    public void setVerifiedEmail(boolean verifiedEmail) {
-        this.verifiedEmail = verifiedEmail;
+    public void setVerified_email(boolean verified_email) {
+        this.verified_email = verified_email;
     }
 
     public String getName() {
@@ -54,20 +45,20 @@ public class GoogleUser implements Serializable {
         this.name = name;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getGiven_name() {
+        return given_name;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setGiven_name(String given_name) {
+        this.given_name = given_name;
     }
 
-    public String getFamilyName() {
-        return familyName;
+    public String getFamily_name() {
+        return family_name;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+    public void setFamily_name(String family_name) {
+        this.family_name = family_name;
     }
 
     public String getPicture() {

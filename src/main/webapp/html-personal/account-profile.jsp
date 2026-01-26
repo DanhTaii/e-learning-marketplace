@@ -120,7 +120,7 @@
                             <div class="form-group">
                                 <label class="style__sub-title">Số điện thoại</label>
                                 <input type="tel" id="user_phone" name="phone" value="${user.phone}"
-                                       placeholder="">
+                                       placeholder="Chưa cập nhật">
                                 <span id="error_phone" class="error-client"
                                       style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
@@ -134,7 +134,7 @@
 
                             <div class="form-group">
                                 <label class="style__sub-title">Link ảnh avatar</label>
-                                <input type="text" name="avatarUrl" value="${user.avatarUrl}" placeholder="" id="user_url">
+                                <input type="text" name="avatarUrl" value="${user.avatarUrl}" placeholder="Chưa cập nhật" id="user_url">
                                 <span id="error_url" class="error-client"
                                       style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
                             </div>
