@@ -46,7 +46,7 @@ function updateUser(event) {
     const formData = new FormData(document.getElementById('updateUserForm'));
     const params = new URLSearchParams(formData);
 
-    fetch('admin/user/detail', {
+    fetch('admin/user/update', {
         method: 'POST',
         body: params,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}

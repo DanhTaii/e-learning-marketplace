@@ -95,7 +95,7 @@
                                 <li class="text-li">
                                     <span class="text-li style__text">
                                         Thời lượng:
-                                    </span>
+                                     </span>
                                     <span class="text-li style__text style__text-var">
                                         ${c.durationText}
                                     </span>

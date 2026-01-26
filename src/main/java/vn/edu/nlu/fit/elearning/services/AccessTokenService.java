@@ -52,19 +52,11 @@ public class AccessTokenService {
 
     public boolean sendEmail(String email, String code, String name) {
 
-        System.setProperty("java.net.preferIPv4Stack", "true");
         Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.ssl.enable", "true");
-
-        prop.put("mail.smtp.socketFactory.port", "465");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-        prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
-        prop.put("mail.smtp.connectiontimeout", "15000");
-        prop.put("mail.smtp.timeout", "15000");
+        prop.setProperty("mail.smtp.host", "smtp.gmail.com");
+        prop.setProperty("mail.smtp.port", "587");
+        prop.setProperty("mail.smtp.auth", "true");
+        prop.setProperty("mail.smtp.starttls.enable", "true");
 
         Authenticator auth = new Authenticator() {
             @Override
@@ -78,12 +70,12 @@ public class AccessTokenService {
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.addHeader("Content-Type", "text/html; charset=UTF-8");
-            msg.setFrom(new InternetAddress(emailFrom, "Softskill E-Learning"));
+            msg.setFrom(new InternetAddress(emailFrom));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
             msg.setSubject("Mã xác nhận đăng ký", "UTF-8");
 
             // Nội dung chỉ gửi mã code
-            String content = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;'>"
+            String content ="<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;'>"
                     + "<h2 style='color: #4CAF50; text-align: center;'>Xác Thực Tài Khoản Softskill</h2>"
                     + "<p>Xin chào <b>" + name + "</b>,</p>"
                     + "<p>Cảm ơn bạn đã đăng ký tham gia cộng đồng học tập kỹ năng mềm của chúng tôi. Đây là mã xác nhận của bạn:</p>"
@@ -97,7 +89,6 @@ public class AccessTokenService {
 
             msg.setContent(content, "text/html; charset=UTF-8");
             Transport.send(msg);
-
             System.out.println("Sent successfully");
             return true;
         } catch (Exception e) {

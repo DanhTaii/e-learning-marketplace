@@ -28,35 +28,16 @@ public abstract class BaseDao {
         // là nó đã tạo ra được 1 cái thì lúc này đã có CP thì những thằng sau không cần tạo nữa
         if (jdbi != null) return;
         //Tạo kết nối đến DB dựa theo kiểu DB đang xài (MySQL Database)
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:mysql://" + DBProperties.getDbHost() + ":" + DBProperties.getDbPort() + "/"
-                + DBProperties.getDbName() + DBProperties.getDboptions());
-        dataSource.setUser(DBProperties.getUsername());
-        dataSource.setPassword(DBProperties.getPassword());
-        try {
-            dataSource.setUseCompression(true);
-            //Tự reconnect liên tục nếu bị hủy kết nối
-            dataSource.setAutoReconnect(true);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            throw new RuntimeException(throwables);
-        }
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setJdbcUrl("jdbc:mysql://" + DBProperties.getDbHost() + ":" + DBProperties.getDbPort() + "/" + DBProperties.getDbName());
+        config.setUsername(DBProperties.getUsername());
+        config.setPassword(DBProperties.getPassword());
+        config.setMaximumPoolSize(5);
+        config.setIdleTimeout(30000);
 
-        //Khởi tạo cấu hình của Hikari
-        HikariConfig hikariConfig = new HikariConfig();
-
-        //Lấy datasource của MySQL
-        hikariConfig.setDataSource(dataSource);
-
-        //Cấu hình tham số cho Hikari
-        hikariConfig.setMaximumPoolSize(10);
-        hikariConfig.setMinimumIdle(5);
-        hikariConfig.setConnectionTimeout(30000);
-        hikariConfig.setIdleTimeout(600000);
-
-        //Tạo ra Connection Pool dựa trên cấu hình đã có
-        HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
-        jdbi = Jdbi.create(hikariDataSource);
+        HikariDataSource ds = new HikariDataSource(config);
+        jdbi = Jdbi.create(ds);
     }
 
 }
