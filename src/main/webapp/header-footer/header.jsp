@@ -142,7 +142,7 @@
 
                                 <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
 
-                                <img src="${not empty user.avatarUrl ? user.avatarUrl : defaultImg}"
+                                <img src="${not empty userSession.avatarUrl ? userSession.avatarUrl : defaultImg}"
                                      alt="Avatar"
                                      class="user__avatar"
                                      onerror="this.onerror=null; this.src='${defaultImg}';">
@@ -153,13 +153,13 @@
                                     <div class="user__profile-avatar">
                                         <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
 
-                                        <img src="${not empty user.avatarUrl ? user.avatarUrl : defaultImg}"
+                                        <img src="${not empty userSession.avatarUrl ? userSession.avatarUrl : defaultImg}"
                                              alt="Avatar"
                                              class="user__avatar-mini"
                                              onerror="this.onerror=null; this.src='${defaultImg}';">
                                     </div>
                                     <div class="user__profile-name">
-                                        <a href="" class="name-text text-header">${user.username}</a>
+                                        <a href="" class="name-text text-header">${userSession.username}</a>
                                     </div>
                                     <div class="user__profile-bio">
                                         <a href="" class="bio-text">Thêm tiểu sử</a>

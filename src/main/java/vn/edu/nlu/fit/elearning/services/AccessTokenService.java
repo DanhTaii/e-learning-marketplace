@@ -54,9 +54,10 @@ public class AccessTokenService {
 
         Properties prop = new Properties();
         prop.setProperty("mail.smtp.host", "smtp.gmail.com");
-        prop.setProperty("mail.smtp.port", "587");
-        prop.setProperty("mail.smtp.auth", "true");
-        prop.setProperty("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.port", "465");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.socketFactory.port", "465");
+        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
         Authenticator auth = new Authenticator() {
             @Override

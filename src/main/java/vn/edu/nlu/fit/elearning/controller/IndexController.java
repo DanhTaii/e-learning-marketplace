@@ -46,11 +46,6 @@ public class IndexController extends HttpServlet {
         List<Category> categories = categoryService.getAllCategories();
         request.setAttribute("categories", categories);
 
-        // 2. Banner stats
-        UserService userService = new UserService();
-        User user = userService.getUserById(userId);
-        request.setAttribute("user", user);
-
         // 3.Tag
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());

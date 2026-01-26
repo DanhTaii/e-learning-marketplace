@@ -8,6 +8,7 @@ import vn.edu.nlu.fit.elearning.controller.auth.GoogleConstants;
 import vn.edu.nlu.fit.elearning.model.GoogleUser;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class GoogleUtils {
 
@@ -21,7 +22,9 @@ public class GoogleUtils {
                         .add("code", code)
                         .add("grant_type", "authorization_code")
                         .build())
-                .execute().returnContent().asString();
+                .execute()
+                .returnContent()
+                .asString(java.nio.charset.StandardCharsets.UTF_8);
 
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
         return jobj.get("access_token").toString().replaceAll("\"", "");
@@ -30,7 +33,12 @@ public class GoogleUtils {
     // Bước 2: Dùng Access Token để lấy thông tin người dùng
     public static GoogleUser getUserInfo(final String accessToken) throws IOException {
         String link = GoogleConstants.GOOGLE_LINK_GET_USER_INFO + accessToken;
-        String response = Request.Get(link).execute().returnContent().asString();
+
+        // Sửa dòng này: Thêm StandardCharsets.UTF_8 vào asString()
+        String response = Request.Get(link)
+                .execute()
+                .returnContent()
+                .asString(java.nio.charset.StandardCharsets.UTF_8);
 
         System.out.println(response);
 
