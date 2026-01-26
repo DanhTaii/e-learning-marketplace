@@ -75,9 +75,17 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         );
 
         // Đếm tổng số khóa học sau lọc
-        int totalCourses = listCourse.size();
+        int totalCourses = courseService.countFilteredCoursesByCategory(
+                idCategory,
+                sortPrice,
+                level,
+                priceRange,
+                rating,
+                duration,
+                popular
+        );
 
-        int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
+        int totalPages = totalCourses == 0 ? 1 : (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 
         // Set attributes
         request.setAttribute("listCourse", listCourse);
