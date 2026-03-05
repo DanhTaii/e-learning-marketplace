@@ -20,6 +20,10 @@ Mục 6: header-footer
     --yellow-color: #FFD43B;
     --background-color: #F1F5F9;
 
+    --switch-off-bg: #ccc;
+    --switch-on-bg: #4cd964;
+    --switch-circle: #ffffff;
+
     /*Màu cho Công khai*/
     /*Nền*/
     --light-green: #e8f5e9;
@@ -74,7 +78,48 @@ html {
 }
 
 body {
-    background: #F4F4F4;
+    background: var(--background-color);
+}
+
+body.dark-mode {
+        /* Nền và text */
+        --background-color: #0D1117;
+        --text-color: #FFFFFF;
+
+        /* Màu cơ bản */
+        --dark-blue: #0A1929;
+        --bright-green: #00E676;
+        --blue: #7C4DFF;
+        --bright-blue: #4A90E2;
+        --light-grey: #CCCCCC;
+        --white-color: #E0E0E0;
+        --hover-color: #333333;
+        --yellow-color: #FFEB3B;
+
+        /* Switch */
+        --switch-off-bg: #555;
+        --switch-on-bg: #34C759;
+        --switch-circle: #E0E0E0;
+
+        /* Công khai */
+        --light-green: #1B5E20;
+        --green: #81C784;
+
+        /* Riêng tư */
+        --privacy-light-grey: #212121;
+        --privacy-dark-charcoal: #B0BEC5;
+
+        /* Pending */
+        --pending-bg: #3E2723;
+        --pending-text: #FFAB91;
+
+        /* Failed */
+        --failed-bg: #311B1B;
+        --failed-text: #EF9A9A;
+
+        /* Cấp độ */
+        --blue-level: #2196F3;
+
 }
 
 /*Grid System*/
