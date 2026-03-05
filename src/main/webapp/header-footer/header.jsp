@@ -40,6 +40,50 @@
             background-color: var(--white-color);
             color: var(--dark-blue);
         }
+
+        .switch-mode {
+            width: 40px;
+            height: 20px;
+            background-color: var(--switch-off-bg, #ccc);
+            border-radius: 25px;
+            position: relative;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: background-color 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .circle {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .circle i {
+            font-size: 14px;
+            color: #333;
+            line-height: 1;
+        }
+
+        /* trạng thái bật */
+        .switch-mode.active {
+            background-color: #4cd964;
+        }
+
+        .switch-mode.active .circle {
+            transform: translateX(20px);
+        }
+
+
     </style>
 </head>
 <body>
@@ -115,6 +159,14 @@
                                    placeholder="Tìm kiếm khóa học, kỹ năng,...">
                         </div>
                     </form>
+                </div>
+                <div class="header__browse">
+                    <button class="switch-mode">
+                        <span class="circle">
+                            <i class="fa-solid fa-moon"></i>
+                        </span>
+                    </button>
+
                 </div>
                 <c:set var="loginSession" value="${not empty sessionScope.userSession}"/>
                 <c:if test="${loginSession}">
@@ -223,5 +275,6 @@
             </div>
         </div>
     </header>
+    <script src="assets/javascript/dark-mode.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
