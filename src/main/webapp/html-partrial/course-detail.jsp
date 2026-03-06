@@ -146,7 +146,7 @@
                         </div>
 
                         <div class="section-1__rating">
-<%--                            <div class="section-1__rating-item section-1__best-seller text-mini">Bán chạy</div>--%>
+                            <%--                            <div class="section-1__rating-item section-1__best-seller text-mini">Bán chạy</div>--%>
                             <!--                            <div class="section-1__rating-item section-1__high-rated text-mini">High Rated</div>-->
                             <div class="section-1__rating-item section-1__rating-star">
                                 <div class="section-1__number section-1__rating-star-item text-mini">
@@ -172,7 +172,8 @@
                                     <i class="fa-duotone fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="section-1__rating-item section-1__rating-quantity text-mini">(${fn:length(reviewDtos)}
+                            <div class="section-1__rating-item section-1__rating-quantity text-mini">
+                                (${fn:length(reviewDtos)}
                                 rating)
                             </div>
                         </div>
@@ -220,9 +221,11 @@
 
                     <div class="section-6__description section__space">
                         <div class="section-6__title style__sub-title">Giới thiệu khóa học</div>
-                        <div class="section-6__content text-big font__sub-title">
-                            ${c.description}
-                        </div>
+                        <c:forEach var="des" items="${fn:split(c.description, ';')}">
+                            <div class="section-6__content text-big font__sub-title">
+                                    ${fn:trim(des)}
+                            </div>
+                        </c:forEach>
                         <br>
                         <div class="section-6__content text-big font__sub-title">
 

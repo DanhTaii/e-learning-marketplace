@@ -10,12 +10,15 @@ Mục 6: header-footer
 :root {
     /*Main color*/
     --dark-blue: #002333;
+    --dark2-blue: #002333;
     --bright-green: #01FF85;
     --blue: #3722D3;
     --bright-blue: #264457;
     --light-grey: #a4a4a4;
-    --text-color: #000000;
+    --text-color: #002333;
+    --text2-color:#FFFFFF;
     --white-color: #FFFFFF;
+    --white2-color: #FFFFFF;
     --hover-color: lightgrey;
     --yellow-color: #FFD43B;
     --background-color: #F1F5F9;
@@ -83,17 +86,20 @@ body {
 
 body.dark-mode {
         /* Nền và text */
-        --background-color: #0D1117;
+        --background-color: #1A1C1E;
         --text-color: #FFFFFF;
+        --text2-color:#002333;
 
         /* Màu cơ bản */
-        --dark-blue: #0A1929;
+        --dark-blue: #002333;
+        --dark2-blue: #01FF85;
         --bright-green: #00E676;
-        --blue: #7C4DFF;
+        --blue: #7C4DFA;
         --bright-blue: #4A90E2;
         --light-grey: #CCCCCC;
-        --white-color: #E0E0E0;
-        --hover-color: #333333;
+        --white-color: #FFFFFF;
+        --white2-color: #333537;
+        --hover-color: #272B2E;
         --yellow-color: #FFEB3B;
 
         /* Switch */
@@ -559,6 +565,7 @@ body.dark-mode {
 .search__input {
     flex: 1;
     display: flex;
+    position: relative;
 }
 
 .input__text {
@@ -586,6 +593,58 @@ body.dark-mode {
 
 .input__text:focus::placeholder {
     color: transparent;
+}
+
+/* box hiển thị gợi ý */
+.search__suggestions{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--dark-blue);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 7px;
+    margin-top: 5px;
+    max-height: 320px;
+    display: none;
+    z-index: 999;
+}
+
+/* item gợi ý */
+.suggestion__item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+/* hover */
+.suggestion__item:hover{
+    background: rgba(255,255,255,0.08);
+}
+
+/* ảnh khóa học */
+.suggestion__img{
+    width: 40px;
+    height: 28px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* title */
+.suggestion__title{
+    flex: 1;
+    font-size: 1.4rem;
+    color: var(--white-color);
+    white-space: nowrap;
+}
+
+/* giá */
+.suggestion__price{
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--yellow-color);
 }
 
 .header__class {
