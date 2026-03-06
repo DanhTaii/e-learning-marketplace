@@ -22,6 +22,13 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/fonts.css">
+    <style>
+        .button__btn:disabled {
+            background-color: #ccc !important;
+            cursor: not-allowed !important;
+            opacity: 0.7; /* Thêm chút mờ mờ cho đẹp */
+        }
+    </style>
 
 </head>
 <body>
@@ -65,7 +72,7 @@
                                                             <input type="checkbox" class="tick" name="itemSelected"
                                                                    value="${p.course.id}"
                                                                    <c:if test="${p.selected}">checked</c:if>
-                                                                   onchange="this.form.submit()">
+                                                                   onchange="updateSelectionAjax()">
                                                         </div>
 
                                                         <a href="course-detail?id=${p.course.id}" class="turn-page">
@@ -164,32 +171,31 @@
                                     <div class="total__label">
                                         <div class="label">
                                             <div class="label__name">
-                                                <span class="text-medium">Tổng cộng (${sessionScope.cart.selectedQuantity}):</span>
+                                                <span class="text-medium " id="display-selected-qty">Tổng cộng (${sessionScope.cart.selectedQuantity}):</span>
                                             </div>
                                             <div class="charge-note">Chưa tính phí</div>
                                         </div>
                                         <div class="total__price">
-                                            <span class="price-discounted1"><fmt:formatNumber
+                                            <span class="price-discounted1" id="display-final-price"><fmt:formatNumber
                                                     value="${sessionScope.cart.finalPriceTotal}" type="number"
                                                     pattern="###,###"/> đ</span>
-                                            <span class="price-origin"><fmt:formatNumber
+                                            <span class="price-origin" id="display-total-price"><fmt:formatNumber
                                                     value="${sessionScope.cart.total}" type="number" pattern="###,###"/> đ</span>
                                         </div>
                                     </div>
                                 </div>
                                 <c:choose>
                                     <c:when test="${not empty sessionScope.cart && sessionScope.cart.selectedQuantity > 0}">
-                                        <a href="payment" class="turn-page">
+                                        <a href="payment" class="turn-page" id="checkout-link">
                                             <div class="checkout__checkout-button header__button">
-                                                <button class="button__btn">Tiến hành thanh toán</button>
+                                                <button class="button__btn" id="checkout-btn">Tiến hành thanh toán</button>
                                             </div>
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a>
+                                        <a id="checkout-link">
                                             <div class="checkout__checkout-button header__button">
-                                                <button class="button__btn"
-                                                        style="background-color: #ccc; cursor: not-allowed;" disabled>
+                                                <button class="button__btn" id="checkout-btn" disabled>
                                                     Tiến hành thanh toán
                                                 </button>
                                             </div>
@@ -286,18 +292,9 @@
     <jsp:include page="/header-footer/footer.jsp"/>
 </div>
 
-<script>
-    function submitCartForm() {
-        document.getElementById('cartForm').submit();
-    }
-
-    function handleSelectAll(checkbox) {
-        const isChecked = checkbox.checked;
-        // Gửi yêu cầu đến Servlet bạn đã viết
-        window.location.href = "cart-manager?action=selectAll&status=" + isChecked;
-    }
-</script>
 <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/cart/selected-items.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
+
 </html>
