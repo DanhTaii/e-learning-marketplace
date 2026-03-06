@@ -218,12 +218,34 @@ a {
     font-weight: var(--fw-semibold);
 }
 
+/*.container-2__list-student {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    !*margin-top: 2rem;*!*/
+/*    width: 100%;*/
+/*}*/
+/* Đảm bảo danh sách xếp từ trên xuống */
 .container-2__list-student {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    /*margin-top: 2rem;*/
+    flex-direction: column; /* Xếp chồng các thành viên theo chiều dọc */
     width: 100%;
+}
+
+/* Đảm bảo vùng chứa bảng chiếm hết chiều ngang để phân trang không có chỗ "chen" vào bên cạnh */
+.admin-table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Tạo thanh cuộn ngang nếu bảng quá rộng trên màn hình nhỏ */
+    margin-bottom: 20px; /* Khoảng cách giữa bảng và phân trang */
+}
+
+/* Căn giữa thanh phân trang */
+.admin-pagination-container {
+    display: flex;
+    justify-content: center; /* Căn giữa phân trang */
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
 }
 
 /*Filter*/
