@@ -980,6 +980,7 @@ img {
 }
 
 .pagination-item__link {
+    color: #666 !important;
     --height: 30px;
     display: block;
     text-decoration: none;

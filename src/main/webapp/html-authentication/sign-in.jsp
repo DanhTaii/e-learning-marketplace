@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.nlu.fit.elearning.controller.auth.GoogleConstants" %>
+<%@ page import="vn.edu.nlu.fit.elearning.feature.auth.controller.GoogleConstants" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
