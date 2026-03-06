@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                             <button class="user__profile-btn button__btn text-header"
-                                    type="submit" style="justify-content: center">Lọc
+                                    type="submit" style="justify-content: center; display: none">Lọc
                             </button>
                         </form>
                     </c:if>
@@ -325,7 +325,7 @@
                                 </div>
                             </div>
                             <button class="user__profile-btn button__btn text-header"
-                                    type="submit" style="justify-content: center">Lọc
+                                    type="submit" style="justify-content: center; display: none">Lọc
                             </button>
                         </form>
                     </c:if>
@@ -466,7 +466,7 @@
                                 </div>
                             </div>
                             <button class="user__profile-btn button__btn text-header"
-                                    type="submit" style="justify-content: center">Lọc
+                                    type="submit" style="justify-content: center; display: none">Lọc
                             </button>
                         </form>
                     </c:if>

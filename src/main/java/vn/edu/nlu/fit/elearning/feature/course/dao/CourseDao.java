@@ -621,4 +621,20 @@ public class CourseDao extends BaseDao implements BaseCrudDao<Course, Integer> {
         });
     }
 
+
+    public List<CourseCardDto> findCourseSuggestByTitle(String keyword) {
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.price, c.discount_price\n" +
+                            "FROM courses c\n" +
+                            "WHERE c.is_public = TRUE\n" +
+                            "AND c.title LIKE :keyword\n" +
+                            "ORDER BY c.title\n" +
+                            "LIMIT 5")
+                    .bind("keyword", "%" + keyword + "%")
+                    .mapToBean(CourseCardDto.class)
+                    .list();
+        });
+    }
+
 }

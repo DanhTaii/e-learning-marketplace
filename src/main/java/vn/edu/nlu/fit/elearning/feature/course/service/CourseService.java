@@ -284,4 +284,9 @@ public class CourseService {
                 categoryId, tagId, title,
                 sortPrice, level, priceRange, rating, duration, popular);
     }
+
+    public List<CourseCardDto> getCourseSuggestByTitle(String keyword) {
+        return cd.findCourseSuggestByTitle(keyword);
+    }
+
 }

@@ -18,7 +18,7 @@
     font-weight: 600;
     margin: 40px 0;
     width: 100%;
-    color: var(--dark-blue);
+    color: var(--text-color);
 }
 
 .product__small-advertisement {
@@ -44,7 +44,7 @@
 
 .small-advertisement__content {
     padding: 10px;
-    background-color: var(--white-color);
+    background-color: var(--white2-color);
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;
     /*height: 180px;*/
@@ -53,7 +53,7 @@
 .content__top {
     display: flex;
     justify-content: space-between;
-    color: var(--dark-blue);
+    color: var(--text-color);
     align-items: center;
     margin: 10px 0 5px 0;
 }
@@ -102,7 +102,7 @@
     display: flex;
     margin: 17px 0 20px 0;
     justify-content: space-between;
-    color: var(--dark-blue);
+    color: var(--text-color);
 }
 
 .quick-info__level {
@@ -165,7 +165,7 @@
 
     font-size: 1.6rem;   /* Đảm bảo cỡ chữ chuẩn */
     font-weight: 700;
-    color: var(--dark-blue);
+    color: var(--text-color);
 
     /* Line-Clamp ở đây */
     display: -webkit-box;
@@ -258,8 +258,8 @@
 
 .btn-add-cart {
     flex: 1;
-    background-color: var(--dark-blue);
-    color: white;
+    background-color: var(--dark2-blue);
+    color: var(--text2-color);
     border: none;
     padding: 12px;
     border-radius: 4px;
