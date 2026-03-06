@@ -40,7 +40,14 @@ public class UpdateSelectController extends HttpServlet {
                     item.setSelected(false);
                 }
             }
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": %.0f, \"total\": %.0f}",
+                    cart.getSelectedQuantity(), cart.getFinalPriceTotal(), cart.getTotal());
+            response.getWriter().write(json);
+            return ;
         }
+
 
 
         response.sendRedirect(request.getContextPath() + "/personal/cart");

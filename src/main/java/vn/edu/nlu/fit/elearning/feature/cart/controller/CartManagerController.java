@@ -56,6 +56,12 @@ public class CartManagerController extends HttpServlet {
                     boolean status = Boolean.parseBoolean(request.getParameter("status"));
                     cart.selectAll(status);
             }
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": %.0f, \"total\": %.0f}",
+                    cart.getSelectedQuantity(), cart.getFinalPriceTotal(), cart.getTotal());
+            response.getWriter().write(json);
+            return ;
         }
         response.sendRedirect(request.getContextPath() + "/personal/cart");
     }
