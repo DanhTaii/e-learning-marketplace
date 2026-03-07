@@ -151,7 +151,7 @@
 .price__old {
     font-size: 1.6rem;
     margin-left: 20px;
-    color: red;
+    color: var(--discount-price-color);
     text-decoration: line-through;
 }
 

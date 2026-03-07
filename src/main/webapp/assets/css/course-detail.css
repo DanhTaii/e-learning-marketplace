@@ -12,7 +12,7 @@
 }
 
 .dark-bg {
-    background: var(--dark-blue) !important;
+    background: var(--background-header-footer-color) !important;
     height: 34rem;
 
     width: 100%; /* Đảm bảo nó trải dài hết màn hình */
@@ -41,10 +41,11 @@
 /*CHo các tiêu đề nhỏ hơn tiêu đề chính*/
 .font__sub-title {
     font-weight: var(--fw-medium);
+    color: var(--text-color);
 }
 
 .style__sub-title {
-    color: var(--dark-blue);
+    color: var(--text-color);
     font-weight: bold;
     font-size: 2.4rem;
     margin-bottom: 2.4rem;
@@ -72,9 +73,7 @@
 }
 
 .section-1 {
-    background: var(--dark-blue);
-    padding: 20px;
-    padding-left: 0;
+    background: var(--background-header-footer-color);
     padding: 0 2rem 2rem 0;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
@@ -216,7 +215,7 @@
     padding: 2.4rem;
     margin-top: 30px;
     border-radius: 3px;
-    background: var(--white-color);
+    background: var(--white2-color);
 }
 
 .section-2__list ul {
@@ -231,6 +230,7 @@
 
 .li-skill__container {
     font-size: var(--text-3xl);
+    color: var(--text-color);
 }
 
 .li-skill__container {
@@ -318,11 +318,12 @@
     display: flex;
     align-items: center;
     justify-items: center;
-    border: solid 1px var(--dark-blue);
+    border: solid 1px var(--white2-color);
     border-radius: 1px;
-    background: var(--white-color);
+    background: var(--white2-color);
     padding: 16px;
     cursor: pointer;
+    color: var(--text-color);
 }
 
 .section-4__lesson-information:hover {
@@ -374,6 +375,7 @@
 
 .section-6__content {
     line-height: 2.3rem;
+    color: var(--text-color);
 }
 
 /*Section 7 cho phần reviews*/
@@ -402,9 +404,13 @@
     align-items: flex-start;
 }
 
+.regular{
+    color: var(--text-color);
+}
+
 .box span {
     font-size: var(--text-lg);
-
+    color: var(--text-color);
 }
 
 .box {
@@ -414,6 +420,7 @@
 .review-in4 {
     display: flex;
     align-items: center;
+    color: var(--text-color);
 }
 
 .box .review__name {
@@ -480,7 +487,7 @@ img {
 
 .container-2__information {
     padding: 1.6rem 2.0rem;
-    background: var(--white-color);
+    background: var(--white2-color);
     border-radius: 7px;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
@@ -584,7 +591,7 @@ img {
 }
 
 .container-2__note {
-    color: var(--dark-blue);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     padding: 28px 0;
@@ -601,13 +608,17 @@ img {
 }
 
 .container-2__subtitle {
-    color: var(--dark-blue);
+    color: var(--text-color);
     font-weight: bold;
     padding-bottom: 1rem;
 }
 
+.style__text-2{
+    color: var(--text-color) !important;
+}
+
 .style__text-var {
-    color: var(--dark-blue);
+    color: var(--text-color);
     font-weight: 300;
 }
 
@@ -621,22 +632,22 @@ img {
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--white2-color);
     border-radius: 7px;
-    background-color: var(--white-color);
+    background-color: var(--white2-color);
     margin-top: 30px;
 }
 
 .empty-icon {
     font-size: 80px;
-    color: var(--dark-blue);
+    color: var(--text-color);
     margin-bottom: 20px;
     opacity: 0.9;
     display: block;
 }
 
 .empty-title {
-    color: var(--dark-blue);
+    color: var(--text-color);
     margin-bottom: 10px;
     font-size: 2rem;
     font-weight: 600;
