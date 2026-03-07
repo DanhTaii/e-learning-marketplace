@@ -110,7 +110,7 @@
                                                                 <a href="cart-manager?action=moveToWishlist&id=${p.course.id}"
                                                                    class="action__link">Thêm vào Yêu Thích</a>
 
-                                                                <a href="cart-manager?action=delete&id=${p.course.id}"
+                                                                <a href="#" onclick="deleteItemAjax(event, ${p.course.id}, this)"
                                                                    class="action__link1">Xóa</a>
                                                             </div>
                                                             <div class="cart-items__price items-price">
@@ -160,7 +160,7 @@
                                 <label for="checkAll" class="choose text-medium">
                                     Chọn tất cả (${sessionScope.cart.totalQuantity})
                                 </label>
-                                <a href="cart-manager?action=removeSelected" class="text-medium remove">Xóa</a>
+                                <a href="#" onclick="removeSelectedAjax(event)" class="text-medium remove">Xóa</a>
                                 <a href="cart-manager?action=moveSelectedToWishlist" class="text-medium wishlisted"
                                    style="margin-left: 7px;text-decoration: none">Thêm vào Yêu thích</a>
                             </div>
@@ -293,7 +293,7 @@
 </div>
 
 <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/cart/selected-items.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
 
