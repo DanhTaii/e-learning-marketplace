@@ -41,8 +41,13 @@ public class CourseSearchController extends HttpServlet {
             courseFilter.setPublic(null); // Chọn "Tất cả"
         }
         courseFilter.setLevel(request.getParameter("level"));
+
+        //Xử lý chia trang
+        //Lấy tổng số trang
         int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        //1 trang tối đa 16 phần tử
         int pageSize = 16;
+        //
         int offset = (page - 1) * pageSize;
         List<Course> listCourses = courseService.getAllCourses(courseFilter, pageSize, offset);
 
@@ -52,6 +57,7 @@ public class CourseSearchController extends HttpServlet {
 
         PageResponse<Course> result = new PageResponse<>(listCourses, page, totalPages, totalCourses);
 
+        //Đóng gói PageResponse theo dạng JSON
         String json = new Gson().toJson(result);
         response.getWriter().write(json);
 

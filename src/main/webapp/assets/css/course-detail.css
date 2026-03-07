@@ -41,12 +41,11 @@
 /*CHo các tiêu đề nhỏ hơn tiêu đề chính*/
 .font__sub-title {
     font-weight: var(--fw-medium);
-    color: var(--text-color);
 }
 
 .style__sub-title {
-    color: var(--text-color);
     font-weight: bold;
+    color: var(--text-body-color);
     font-size: 2.4rem;
     margin-bottom: 2.4rem;
 }
@@ -215,7 +214,7 @@
     padding: 2.4rem;
     margin-top: 30px;
     border-radius: 3px;
-    background: var(--white2-color);
+    background: var(--sub-background-color);
 }
 
 .section-2__list ul {
@@ -230,10 +229,10 @@
 
 .li-skill__container {
     font-size: var(--text-3xl);
-    color: var(--text-color);
 }
 
 .li-skill__container {
+    color: var(--text-body-color);
     display: flex;
     /*align-items: center;*/
     /*justify-content: center;*/
@@ -318,12 +317,12 @@
     display: flex;
     align-items: center;
     justify-items: center;
-    border: solid 1px var(--white2-color);
+    border: solid 1px var(--sub-background-color);
     border-radius: 1px;
-    background: var(--white2-color);
+    background: var(--sub-background-color);
     padding: 16px;
     cursor: pointer;
-    color: var(--text-color);
+    color: var(--text-body-color);
 }
 
 .section-4__lesson-information:hover {
@@ -375,7 +374,7 @@
 
 .section-6__content {
     line-height: 2.3rem;
-    color: var(--text-color);
+    color: var(--text-body-color);
 }
 
 /*Section 7 cho phần reviews*/
@@ -405,12 +404,12 @@
 }
 
 .regular{
-    color: var(--text-color);
+    color: var(--text-body-color);
 }
 
 .box span {
     font-size: var(--text-lg);
-    color: var(--text-color);
+    color: var(--text-body-color);
 }
 
 .box {
@@ -420,7 +419,7 @@
 .review-in4 {
     display: flex;
     align-items: center;
-    color: var(--text-color);
+    color: var(--text-body-color);
 }
 
 .box .review__name {
@@ -487,7 +486,7 @@ img {
 
 .container-2__information {
     padding: 1.6rem 2.0rem;
-    background: var(--white2-color);
+    background: var(--sub-background-color);
     border-radius: 7px;
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
@@ -591,7 +590,7 @@ img {
 }
 
 .container-2__note {
-    color: var(--text-color);
+    color: var(--text-body-color);
     display: flex;
     justify-content: center;
     padding: 28px 0;
@@ -608,17 +607,17 @@ img {
 }
 
 .container-2__subtitle {
-    color: var(--text-color);
+    color: var(--text-body-color);
     font-weight: bold;
     padding-bottom: 1rem;
 }
 
 .style__text-2{
-    color: var(--text-color) !important;
+    color: var(--text-body-color) !important;
 }
 
 .style__text-var {
-    color: var(--text-color);
+    color: var(--text-body-color);
     font-weight: 300;
 }
 
@@ -632,22 +631,22 @@ img {
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    border: 1px solid var(--white2-color);
+    border: 1px solid var(--sub-background-color);
     border-radius: 7px;
-    background-color: var(--white2-color);
+    background-color: var(--sub-background-color);
     margin-top: 30px;
 }
 
 .empty-icon {
     font-size: 80px;
-    color: var(--text-color);
+    color: var(--text-body-color);
     margin-bottom: 20px;
     opacity: 0.9;
     display: block;
 }
 
 .empty-title {
-    color: var(--text-color);
+    color: var(--text-body-color);
     margin-bottom: 10px;
     font-size: 2rem;
     font-weight: 600;

@@ -14,13 +14,13 @@ import java.util.List;
 
 @WebServlet(name = "AdminCourseController", value = "/admin/courses")
 public class AdminCourseController extends HttpServlet {
-    private CourseService courseService;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        this.courseService = new CourseService();
-    }
+//    private CourseService courseService;
+//
+//    @Override
+//    public void init() throws ServletException {
+//        super.init();
+//        this.courseService = new CourseService();
+//    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

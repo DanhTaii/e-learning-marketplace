@@ -47,11 +47,19 @@ function renderAdminTable(courses) {
 
     tbody.innerHTML = '';
 
+    //Xử lý hiển thị rỗng nếu không có bất kỳ thằng nào
+    if (!courses || courses.length === 0) {
+        const tplEmpty = document.getElementById('tpl-empty-state');
+        const emptyRow = tplEmpty.content.cloneNode(true);
+        tbody.appendChild(emptyRow);
+        return;
+    }
+
     courses.forEach(course => {
         const clone = template.content.cloneNode(true);
 
         clone.querySelector('.js-title').innerText = course.title;
-        clone.querySelector('.js-duration').innerText = course.durationHours;
+        clone.querySelector('.js-duration').innerText = course.durationText;
         clone.querySelector('.js-enrollment').innerText = course.studentCount;
 
         const level = clone.querySelector('.js-level');
@@ -69,7 +77,7 @@ function renderAdminTable(courses) {
         const statusDiv = clone.querySelector('.js-status');
         statusDiv.innerText = course.isPublic ? 'Công khai' : 'Riêng tư';
         statusDiv.classList.add(course.isPublic ? 'course-row__status-public' : 'course-row__status-private');
-        clone.querySelector('.js-created').innerText = course.createdAt;
+        clone.querySelector('.js-created').innerText = formatDate(course.createdAt);
 
         clone.querySelector('.js-edit-link').href = `admin/course/detail?id=${course.id}`;
 
@@ -90,3 +98,4 @@ document.querySelector('.admin-search-btn').addEventListener('click', function (
 
 // Chạy lần đầu khi load trang
 document.addEventListener('DOMContentLoaded', () => loadAdminCourses(1));
+

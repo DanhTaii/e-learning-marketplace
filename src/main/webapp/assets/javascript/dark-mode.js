@@ -4,11 +4,11 @@ const icon = themeBtn.querySelector('i');
 function setTheme(theme) {
     if (theme === 'dark') {
         document.body.classList.add('dark-mode'); // Thêm class vào body
-        icon.classList.replace('fa-moon', 'fa-sun-bright');
+        icon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'dark');
     } else {
         document.body.classList.remove('dark-mode'); // Xóa class khỏi body
-        icon.classList.replace('fa-sun-bright', 'fa-moon');
+        icon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
     }
 }
@@ -19,6 +19,14 @@ themeBtn.addEventListener('click', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+        // Nếu đã có lựa chọn lưu trong máy, dùng lựa chọn đó
+        setTheme(savedTheme);
+    } else {
+        // Nếu chưa có lựa chọn, kiểm tra cài đặt của Windows
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+    }
 });

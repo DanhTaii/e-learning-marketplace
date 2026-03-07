@@ -1,7 +1,6 @@
 :root {
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
-    --bg-body: #f1f5f9;
     --white: #ffffff;
     --text-main: #0f172a;
     --text-sub: #64748b;
@@ -9,15 +8,62 @@
     --radius: 12px;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
 }
+
+/*CHẾ ĐỘ DARK*/
+/* Thêm đoạn này vào file CSS của trang Profile */
+body.dark-mode {
+    /* Định nghĩa lại bảng màu cho riêng trang này */
+    --white: #1E293B;        /* Nền của các card (thay vì trắng) */
+    --bg-body: #0F172A;      /* Nền toàn trang (body) */
+
+    --text-main: #F8FAFC;    /* Màu chữ chính (trắng sáng) */
+    --text-sub: #94A3B8;     /* Màu chữ phụ (xám nhạt) */
+
+    --border: #334155;       /* Màu đường kẻ viền tối */
+
+    /*--background-color: #0F172A;*/
+}
+
+/* Xử lý các class "cứng" không dùng biến hoặc cần chỉnh thêm */
+body.dark-mode .menu-link:hover {
+    background: #334155;
+    color: var(--bright-green);
+}
+
+body.dark-mode .menu-link.active {
+    background: #1E293B;
+    border: 1px solid var(--dark-blue);
+    color: var(--bright-green);
+}
+
+body.dark-mode .input-readonly {
+    background: #0F172A; /* Nền input không cho sửa trong dark mode */
+    color: var(--text-sub);
+}
+
+body.dark-mode .btn-secondary {
+    background: #1E293B;
+    color: var(--text-main);
+    border-color: var(--border);
+}
+
 /*Layout*/
 .user-profile__container {
     max-width: 1200px;
     padding: 40px 0;
-    background-color: var(--bg-body);
+    background-color: var(--background-color);
 }
 
 .profile-sidebar {
     background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 20px;
+    overflow: hidden;
+}
+body.dark-mode .profile-sidebar {
+    background: var(--sub-background-color);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     position: sticky;
@@ -109,6 +155,14 @@
     padding: 32px;
     /*flex: 1;*/
 }
+
+body.dark-mode .information-card {
+    background: var(--sub-background-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    /*flex: 1;*/
+}
 /*Tiêu đề 1 của nội dung*/
 .card-header {
     border-bottom: 1px solid var(--border);
@@ -174,6 +228,8 @@
     border: 1px solid var(--border);
     font-size: var(--text-base);
     font-weight: var(--fw-regular);
+    background: #E9ECEF;
+
 }
 
 .form-group input:focus {
