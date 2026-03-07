@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css-admin/dashboard.css">
-    <link rel="stylesheet" href="assets/css-admin/courses-management.css">
+    <link rel="stylesheet" href="assets/css-admin/courses-management.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
 
 </head>
@@ -258,7 +258,6 @@
                                             <th>Khóa học</th>
                                             <th>Thời lượng</th>
                                             <th>Học viên</th>
-                                            <%--                                        <th>Giá</th>--%>
                                             <th>Cấp độ</th>
                                             <th>Trạng thái</th>
                                             <th>Ngày tạo</th>
@@ -266,23 +265,24 @@
                                         </tr>
                                         </thead>
                                         <tbody id="admin-course-table-body">
-<%--                                        <c:if test="${empty listCourses}">--%>
-<%--                                            <tr>--%>
-<%--                                                <td colspan="7"> &lt;%&ndash; Số 7 này tương ứng với 7 cột của bảng &ndash;%&gt;--%>
-<%--                                                    <div class="search-empty-state"--%>
-<%--                                                         style="text-align: center; padding: 40px 0;">--%>
-<%--                                                        <i class="fa-solid fa-book-open search-empty-icon"--%>
-<%--                                                           style="font-size: 3rem; color: #ccc;"></i>--%>
-<%--                                                        <div class="search-empty-title"--%>
-<%--                                                             style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">--%>
-<%--                                                            Không tìm thấy khóa học nào--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </td>--%>
-<%--                                            </tr>--%>
-<%--                                        </c:if>--%>
                                         </tbody>
                                     </table>
+
+                                    <template id="tpl-empty-state">
+                                        <tr>
+                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                                <div class="search-empty-state"
+                                                     style="text-align: center; padding: 40px 0;">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"
+                                                       style="font-size: 3rem; color: #ccc;"></i>
+                                                    <div class="search-empty-title"
+                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                        Không tìm thấy khóa học nào
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
 
                                     <template id="course-row-template">
                                         <tr class="course-row">
@@ -363,4 +363,5 @@
 <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/pagination/course/course-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

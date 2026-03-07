@@ -22,6 +22,7 @@ public class Course implements Serializable {
     private int categoryId;
     private String authorName;
     private double durationHours;
+    private String durationText;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -175,6 +176,15 @@ public class Course implements Serializable {
 
     public void setDurationHours(double durationHours) {
         this.durationHours = durationHours;
+        this.durationText = calculateDurationText(durationHours); // Tự động cập nhật text
+    }
+
+    public String getDurationText() {
+        return durationText;
+    }
+
+    public void setDurationText(String durationText) {
+        this.durationText = durationText;
     }
 
     public Timestamp getCreatedAt() {
@@ -216,16 +226,24 @@ public class Course implements Serializable {
                 ", updatedAt=" + updatedAt +
                 '}' + "\n";
     }
-    public String getDurationText() {
-        int hours = (int) this.durationHours;
-        int minutes = (int) ((this.durationHours - hours) * 60);
-        if(hours == 0){
-            return minutes + "p";
-        }else if(minutes == 0) {
-            return hours + "h ";
-        }else{
-            return hours + "h " + minutes + "p";
-        }
+//    public String getDurationText() {
+//        int hours = (int) this.durationHours;
+//        int minutes = (int) ((this.durationHours - hours) * 60);
+//        if(hours == 0){
+//            return minutes + "p";
+//        }else if(minutes == 0) {
+//            return hours + "h ";
+//        }else{
+//            return hours + "h " + minutes + "p";
+//        }
+//
+//    }
 
+    private String calculateDurationText(double duration) {
+        int hours = (int) duration;
+        int minutes = (int) Math.round((duration - hours) * 60);
+        if (hours == 0) return minutes + "p";
+        if (minutes == 0) return hours + "h";
+        return hours + "h " + minutes + "p";
     }
 }

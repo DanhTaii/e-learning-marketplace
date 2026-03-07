@@ -17,15 +17,15 @@ Mục 6: header-footer
     --light-grey: #a4a4a4;
 
     /*Màu chữ*/
-    --text-color: #002333;
+    /*--text-color: #002333;*/
     --text2-color: #FFFFFF;
-    --text-body-color: #E9ECEF;
+    --text-body-color: #002333;
 
     --discount-price-color: red;
 
     /*Loại màu trắng*/
     --white-color: #FFFFFF;
-    --white2-color: #FFFFFF;
+    /*--white2-color: #FFFFFF;*/
 
     --hover-color: lightgrey;
     --hover2-color: lightgrey;
@@ -101,12 +101,12 @@ body.dark-mode {
     /* Nền */
     --background-color: #1A1C1E;
     --sub-background-color: #333537;
-    --background-header-footer-color: #555555;
+    --background-header-footer-color: #3C3E40;
 
     /*Màu chữ*/
-    --text-color: #C4CBD2;
+    /*--text-color: #C4CBD2;*/
     --text2-color: #002333;
-    --text-body-color: #FFFFFF;
+    --text-body-color: #C4CBD2;
 
     --discount-price-color: #FF4757;
 
@@ -118,7 +118,7 @@ body.dark-mode {
     --bright-blue: #4A90E2;
     --light-grey: #CCCCCC;
     --white-color: #FFFFFF;
-    --white2-color: #333537;
+    /*--white2-color: #333537;*/
     --hover-color: #334155;
     --hover2-color: lightgrey;
     --yellow-color: #FFEB3B;
@@ -364,9 +364,9 @@ body.dark-mode .dark-button {
     /* Các thông số từ ảnh của bạn */
     border: solid 1px rgba(255, 255, 255, 0.25);
     /*width: 100%;*/
-    height: 100%;
-    font-size: var(--text-lg);
-    font-weight: var(--fw-semibold);
+    /*height: 100%;*/
+    /*font-size: var(--text-lg);*/
+    /*font-weight: var(--fw-semibold);*/
     border-radius: 5px;
     cursor: pointer;
 
@@ -489,7 +489,7 @@ body.dark-mode .dark-button {
 
 .browse__container {
     display: flex;
-    background-color: var(--white2-color);
+    background-color: var(--sub-background-color);
     border-radius: 7px;
     position: absolute;
     top: 100%;
@@ -512,7 +512,7 @@ body.dark-mode .dark-button {
 }
 
 .title {
-    color: var(--text-color);
+    color: var(--text-body-color);
     font-size: 1.5rem;
     font-weight: 700;
 }
@@ -525,7 +525,7 @@ body.dark-mode .dark-button {
 }
 
 .text-list-item {
-    color: var(--text-color);
+    color: var(--text-body-color);
     text-decoration: none;
     font-weight: 600;
 }
@@ -537,8 +537,14 @@ body.dark-mode .dark-button {
 }
 
 .browse__box-category-list-item:hover {
-    background-color: var(--hover2-color);
+    background-color: var(--hover-color);
     border-radius: 5px;
+}
+
+body.dark-mode .browse__box-category-list-item:hover {
+    background-color: var(--hover-color);
+    border-radius: 5px;
+    color: var(--bright-green);
 }
 
 .browse__container-box-1 {
@@ -564,7 +570,7 @@ body.dark-mode .dark-button {
 
 .item-box {
     width: 80%;
-    border: solid 1px var(--text-color);
+    border: solid 1px var(--text-body-color);
     border-radius: 5px;
     margin: 5px 0 15px 0;
     height: 30px;
@@ -577,7 +583,11 @@ body.dark-mode .dark-button {
 }
 
 .item-box:hover {
-    background-color: var(--hover2-color);
+    background-color: var(--hover-color);
+}
+
+body.dark-mode .text-list-item:hover {
+    color: var(--bright-green);
 }
 
 .header__community {
@@ -646,7 +656,7 @@ body.dark-mode .dark-button {
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--white2-color);
+    background: var(--sub-background-color);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 7px;
     margin-top: 5px;

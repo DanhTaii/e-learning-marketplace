@@ -20,6 +20,7 @@
 .my-course__title {
     font-size: var(--text-5xl);
     font-weight: var(--fw-semibold);
+    color: var(--text-body-color);
     margin-top: 6rem;
     line-height: 4rem;
 }
