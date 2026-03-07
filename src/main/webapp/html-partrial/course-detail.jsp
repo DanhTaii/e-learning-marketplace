@@ -92,23 +92,23 @@
                                 Khóa học này gồm có:
                             </div>
                             <ul>
-                                <li class="text-li">
-                                    <span class="text-li style__text">
+                                <li class="text-li style__text-2">
+                                    <span class="text-li style__text ">
                                         Thời lượng:
                                      </span>
                                     <span class="text-li style__text style__text-var">
                                         ${c.durationText}
                                     </span>
                                 </li>
-                                <li class="text-li">
-                                    <span class="text-li style__text">
+                                <li class="text-li style__text-2">
+                                    <span class="text-li style__text ">
                                          Giáo trình:
                                     </span>
                                     <span class="text-li style__text style__text-var">
                                          ${c.lessonCount} bài giảng
                                     </span>
                                 </li>
-                                <li class="text-li">
+                                <li class="text-li style__text-2">
                                     Sở hữa khóa học trọn đời
                                 </li>
                             </ul>

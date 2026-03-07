@@ -1,6 +1,6 @@
 .container__title {
     margin: 40px 0 60px;
-    color: var(--dark-blue);
+    color: var(--text-color);
     width: 100%;
 }
 
@@ -10,14 +10,14 @@
 
 .box__title {
     font-weight: 700;
-    color: black;
+    color: var(--text-color);
 }
 
 .box__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--dark-blue);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -28,7 +28,7 @@
 
 .content__type {
     display: flex;
-    color: var(--dark-blue);
+    color: var(--text-color);
     align-items: center;
 }
 
