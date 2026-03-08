@@ -1,3 +1,4 @@
+// helper
 function updateCartUI(data) {
     const formatCurrency = amount => new Intl.NumberFormat('vi-VN').format(amount) + " đ";
 
@@ -29,6 +30,62 @@ function updateCartUI(data) {
         checkAllBox.checked = false;
     }
 }
+
+function handleStateAfterRemoval(data) {
+    updateCartUI(data);
+    const remainingItems = document.querySelectorAll('input[name="itemSelected"]').length;
+
+    if (remainingItems === 0) {
+        window.location.reload();
+    } else {
+        const checkAllLabel = document.querySelector('label[for="checkAll"]');
+        if (checkAllLabel) {
+            checkAllLabel.innerText = `Chọn tất cả (${remainingItems})`;
+        }
+    }
+}
+
+function executeSingleAction(event, url, element) {
+    event.preventDefault();
+    fetch(url, {
+        method: 'GET',
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+    })
+        .then(response => response.json())
+        .then(data => {
+            const listItem = element.closest('li');
+            if (listItem) listItem.remove();
+
+            handleStateAfterRemoval(data);
+        })
+        .catch(error => console.error('Lỗi khi thao tác:', error));
+}
+
+function executeBulkAction(event, url, errorMessage) {
+    event.preventDefault();
+    const checkedItems = document.querySelectorAll('input[name="itemSelected"]:checked');
+
+    if (checkedItems.length === 0) {
+        alert(errorMessage);
+        return;
+    }
+
+    fetch(url, {
+        method: 'GET',
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+    })
+        .then(response => response.json())
+        .then(data => {
+            checkedItems.forEach(checkbox => {
+                const listItem = checkbox.closest('li');
+                if (listItem) listItem.remove();
+            });
+
+            handleStateAfterRemoval(data);
+        })
+        .catch(error => console.error('Lỗi thao tác hàng loạt:', error));
+}
+//
 
 function updateSelectionAjax() {
     const form = document.getElementById('cartForm');
@@ -65,72 +122,17 @@ function handleSelectAll(checkbox) {
 }
 
 function deleteItemAjax(event, courseId, element) {
-    event.preventDefault();
+    executeSingleAction(event, `cart-manager?action=delete&id=${courseId}`, element);
+}
 
-    fetch(`cart-manager?action=delete&id=${courseId}`, {
-        method: 'GET',
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
-    })
-        .then(response => response.json())
-        .then(data => {
-            const listItem = element.closest('li');
-            if (listItem) {
-                listItem.remove();
-            }
-
-
-            updateCartUI(data);
-            const remainingItems = document.querySelectorAll('input[name="itemSelected"]').length;
-            if (remainingItems === 0) {
-                window.location.reload();
-            } else {
-                const checkAllLabel = document.querySelector('label[for="checkAll"]');
-                if (checkAllLabel) {
-                    checkAllLabel.innerText = `Chọn tất cả (${remainingItems})`;
-                }
-            }
-        })
-        .catch(error => console.error('Lỗi khi xóa sản phẩm:', error));
+function wishlistItemAjax(event, courseId, element) {
+    executeSingleAction(event, `cart-manager?action=moveToWishlist&id=${courseId}`, element);
 }
 
 function removeSelectedAjax(event) {
-    event.preventDefault();
+    executeBulkAction(event, 'cart-manager?action=removeSelected', 'Vui lòng chọn ít nhất một khóa học để xóa!');
+}
 
-    const checkedItems = document.querySelectorAll('input[name="itemSelected"]:checked');
-
-
-    if (checkedItems.length === 0) {
-        alert("Vui lòng chọn ít nhất một khóa học để xóa!");
-        return;
-    }
-
-    fetch('cart-manager?action=removeSelected', {
-        method: 'GET',
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
-    })
-        .then(response => response.json())
-        .then(data => {
-
-            checkedItems.forEach(checkbox => {
-                const listItem = checkbox.closest('li');
-                if (listItem) {
-                    listItem.remove();
-                }
-            });
-
-
-            updateCartUI(data);
-
-
-            const remainingItems = document.querySelectorAll('input[name="itemSelected"]').length;
-            if (remainingItems === 0) {
-                window.location.reload();
-            } else {
-                const checkAllLabel = document.querySelector('label[for="checkAll"]');
-                if (checkAllLabel) {
-                    checkAllLabel.innerText = `Chọn tất cả (${remainingItems})`;
-                }
-            }
-        })
-        .catch(error => console.error('Lỗi khi xóa nhiều sản phẩm:', error));
+function wishlistSelectedAjax(event) {
+    executeBulkAction(event, 'cart-manager?action=moveSelectedToWishlist', 'Vui lòng chọn ít nhất một khóa học để thêm vào Yêu thích!');
 }
