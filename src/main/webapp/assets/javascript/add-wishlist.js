@@ -58,8 +58,11 @@ function addToCart(e, courseId) {
             if (cartElement) {
                 cartElement.innerText = newCount;
             }
-
-            alert("Đã thêm khóa học vào giỏ hàng!");
+            if (window.location.href.includes("cart")) {
+                window.location.reload();
+            } else {
+                alert("Đã thêm khóa học vào giỏ hàng!");
+            }
         })
         .catch(error => {
             console.error('Lỗi AJAX:', error);

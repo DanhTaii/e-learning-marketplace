@@ -107,7 +107,7 @@
 
                                                         <div class="cart-items__action-price-group action-price-group">
                                                             <div class="cart-items__action items-action">
-                                                                <a href="cart-manager?action=moveToWishlist&id=${p.course.id}"
+                                                                <a href ="#" onclick="wishlistItemAjax(event, ${p.course.id}, this)"
                                                                    class="action__link">Thêm vào Yêu Thích</a>
 
                                                                 <a href="#" onclick="deleteItemAjax(event, ${p.course.id}, this)"
@@ -161,7 +161,7 @@
                                     Chọn tất cả (${sessionScope.cart.totalQuantity})
                                 </label>
                                 <a href="#" onclick="removeSelectedAjax(event)" class="text-medium remove">Xóa</a>
-                                <a href="cart-manager?action=moveSelectedToWishlist" class="text-medium wishlisted"
+                                <a href="#" onclick="wishlistSelectedAjax(event)" class="text-medium wishlisted"
                                    style="margin-left: 7px;text-decoration: none">Thêm vào Yêu thích</a>
                             </div>
                         </div>
