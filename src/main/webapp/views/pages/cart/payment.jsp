@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
     <!--    <script src=""></script>-->
 

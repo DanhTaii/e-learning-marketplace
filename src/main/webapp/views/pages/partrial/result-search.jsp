@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/result-search.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
-    <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">

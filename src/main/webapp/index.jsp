@@ -412,8 +412,8 @@
 
 </body>
 
-<script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script>
     window.flashError = '${sessionScope.flashError}';
     window.flashSuccess = '${sessionScope.flashSuccess}';

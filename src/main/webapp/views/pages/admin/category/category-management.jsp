@@ -388,6 +388,6 @@
     %>
 
 </script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/js-admin/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/category/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

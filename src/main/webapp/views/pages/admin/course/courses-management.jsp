@@ -360,8 +360,8 @@
     %>
 
 </script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/pagination/course/course-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/pagination/course/course-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

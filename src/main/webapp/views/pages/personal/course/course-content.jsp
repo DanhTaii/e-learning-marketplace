@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/auth/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -205,7 +205,7 @@
 <form action=""></form>
 
 </body>
-<script src="assets/javascript/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
 <script>
     function validateRating(input) {
         if (input.value < 0) input.value = 0;

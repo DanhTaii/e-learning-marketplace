@@ -17,7 +17,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
-    <script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
 <body>

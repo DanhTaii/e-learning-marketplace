@@ -405,6 +405,6 @@
 </div>
 
 </body>
-<script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>
