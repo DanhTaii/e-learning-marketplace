@@ -383,6 +383,6 @@
     %>
 
 </script>
-<script src="assets/javascript/js-admin/admin-tag-detail.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/tag/admin-tag-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

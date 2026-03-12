@@ -266,7 +266,7 @@
         </div>
     </div>
 </header>
-<script src="assets/javascript/dark-mode.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/dark-mode.js?v=<%=System.currentTimeMillis()%>"></script>
 <script>
     const input = document.getElementById("search-input");
     const suggestionsBox = document.getElementById("searchSuggestions");

@@ -230,7 +230,7 @@
     window.flashSuccess = '${sessionScope.flashSuccess}';
     <% session.removeAttribute("flashError"); session.removeAttribute("flashSuccess"); %>
 </script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
 </html>

@@ -292,8 +292,8 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
-<script src="assets/javascript/add-wishlist.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
 

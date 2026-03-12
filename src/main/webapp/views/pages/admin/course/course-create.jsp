@@ -371,8 +371,8 @@
     %>
 
 </script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/create-course-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/admin/create-course-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script>
     $(document).ready(function () {
         Validator.setupAutoClearErrors();

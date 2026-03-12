@@ -426,6 +426,6 @@
     %>
 
 </script>
-<script src="assets/javascript/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/js-admin/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/user/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

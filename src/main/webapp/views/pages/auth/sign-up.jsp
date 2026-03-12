@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/auth/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
