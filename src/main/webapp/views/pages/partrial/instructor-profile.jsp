@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <title>Instructor Profile</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/profile.css">
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/card.css">
+    <link rel="stylesheet" href="assets/css/profile/profile.css">
+    <link rel="stylesheet" href="assets/css/base/default.css">
+    <link rel="stylesheet" href="assets/css/base/card.css">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 </head>

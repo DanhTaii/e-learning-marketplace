@@ -8,9 +8,9 @@
     <title>Kiểm tra email</title>
     <base href="${pageContext.request.contextPath}/">
 
-    <link rel="stylesheet" href="assets/css/default.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/check-email.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/default.css">
+    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/auth/check-mail.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
