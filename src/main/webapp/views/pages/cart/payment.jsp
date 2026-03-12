@@ -11,15 +11,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/payment.css?v=1.0.1">
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/cart/payment.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/base/home.css">
+    <link rel="stylesheet" href="assets/css/base/default.css">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
-    <!--    <script src=""></script>-->
-
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
 
@@ -28,7 +25,7 @@
 
 
     <link rel="stylesheet" href="assets/fonts/static/." as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="assets/css/modal-notification.css">
+    <link rel="stylesheet" href="assets/css/base/modal-notification.css">
 </head>
 <body>
 <div class="web">
