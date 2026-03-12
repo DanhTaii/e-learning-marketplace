@@ -64,7 +64,7 @@ PaymentMethodService paymentMethodService;
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.getRequestDispatcher("/html-personal-cart/receipt.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/cart/receipt.jsp").forward(request, response);
     }
 
     @Override

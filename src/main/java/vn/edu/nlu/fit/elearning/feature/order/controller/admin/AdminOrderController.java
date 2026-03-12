@@ -28,7 +28,7 @@ public class AdminOrderController extends HttpServlet {
         request.setAttribute("listOrders", listOrders);
         request.setAttribute("currentPage", "orders");
 
-        request.getRequestDispatcher("/html-admin/order-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/order/order-management.jsp").forward(request, response);
     }
 
     @Override

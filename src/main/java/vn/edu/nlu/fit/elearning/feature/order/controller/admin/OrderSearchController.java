@@ -38,7 +38,7 @@ public class OrderSearchController extends HttpServlet {
         List<Map<String, Object>> listOrders = orderService.searchOrders(orderCode, userName, fromDate, status);
         req.setAttribute("listOrders", listOrders);
         req.setAttribute("currentPage", "orders");
-        req.getRequestDispatcher("/html-admin/order-management.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/pages/admin/order/order-management.jsp").forward(req, resp);
     }
 
 
