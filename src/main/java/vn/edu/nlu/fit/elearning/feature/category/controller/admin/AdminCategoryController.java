@@ -25,7 +25,7 @@ public class AdminCategoryController extends HttpServlet {
         List<Category> listCategories = categoryService.getAllCategories();
         request.setAttribute("listCategories", listCategories);
         request.setAttribute("currentPage", "categories");
-        request.getRequestDispatcher("/html-admin/category-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/category/category-management.jsp").forward(request, response);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AdminCategoryController extends HttpServlet {
         } catch (Exception e) {
             request.getSession().setAttribute("flashError", "Tên hoặc Slug đã tồn tại trong hệ thống!");
             request.setAttribute("listTags", categoryService.getAllCategories());
-            request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
         }
     }
 }

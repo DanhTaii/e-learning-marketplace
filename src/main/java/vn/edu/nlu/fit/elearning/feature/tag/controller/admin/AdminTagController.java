@@ -24,7 +24,7 @@ public class AdminTagController extends HttpServlet {
         List<Tag> listTags = tagService.getAllTags();
         request.setAttribute("listTags", listTags);
         request.setAttribute("currentPage", "tags");
-        request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AdminTagController extends HttpServlet {
         if (nameTag.isEmpty() || slugTag.isEmpty()) {
             request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
             request.setAttribute("listTags", tagService.getAllTags());
-            request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
             return;
         }
         try {
@@ -53,7 +53,7 @@ public class AdminTagController extends HttpServlet {
             request.setAttribute("oldName", nameTag);
             request.setAttribute("oldSlug", slugTag);
             request.setAttribute("listTags", tagService.getAllTags());
-            request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
         }
 
     }

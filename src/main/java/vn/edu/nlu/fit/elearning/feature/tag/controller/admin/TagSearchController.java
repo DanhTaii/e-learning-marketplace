@@ -26,7 +26,7 @@ public class TagSearchController extends HttpServlet {
         String nameSearch = request.getParameter("searchName");
         List<Tag> listTags = tagService.getAllTagsByName(nameSearch);
         request.setAttribute("listTags", listTags);
-        request.getRequestDispatcher("/html-admin/tag-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
     }
 
     @Override

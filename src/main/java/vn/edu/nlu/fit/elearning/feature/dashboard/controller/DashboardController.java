@@ -49,7 +49,7 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("chartData", revenues);
 
         request.setAttribute("currentPage", "dashboard");
-        request.getRequestDispatcher("/html-admin/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/dashboard.jsp").forward(request, response);
     }
 
     @Override

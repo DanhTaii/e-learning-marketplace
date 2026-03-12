@@ -25,7 +25,7 @@ public class AdminCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("currentPage", "courses");
-        request.getRequestDispatcher("/html-admin/courses-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/course/courses-management.jsp").forward(request, response);
     }
 
     @Override

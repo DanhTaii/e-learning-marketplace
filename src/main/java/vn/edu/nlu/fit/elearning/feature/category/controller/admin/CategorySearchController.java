@@ -24,7 +24,7 @@ public class CategorySearchController extends HttpServlet {
         String nameSearch = request.getParameter("searchName");
         List<Category> listCategories = categoryService.getAllCategoriesByName(nameSearch);
         request.setAttribute("listCategories", listCategories);
-        request.getRequestDispatcher("/html-admin/category-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/category/category-management.jsp").forward(request, response);
     }
 
     @Override
