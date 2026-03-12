@@ -33,7 +33,7 @@ public class LessonSearchController extends HttpServlet {
         request.setAttribute("listLessons", listLesson);
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
-        request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
     }
 
     @Override

@@ -51,7 +51,7 @@ public class OrderDetailController extends HttpServlet {
             request.setAttribute("order", order);
             request.setAttribute("orderItems", orderItems);
 
-            request.getRequestDispatcher("/html-admin/order-create.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/order/order-create.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
             request.getSession().setAttribute("flashError", "ID đơn hàng không hợp lệ!");

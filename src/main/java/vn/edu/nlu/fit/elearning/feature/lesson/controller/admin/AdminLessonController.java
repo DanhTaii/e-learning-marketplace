@@ -33,7 +33,7 @@ public class AdminLessonController extends HttpServlet {
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
         request.setAttribute("currentPage", "lessons");
-        request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class AdminLessonController extends HttpServlet {
             request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
             request.setAttribute("listLessons", lessonService.getAllLessons());
             request.setAttribute("listCourse", courseService.getAllCourses());
-            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
             return;
         }
         int idCourse = Integer.parseInt(idCourseStr);
@@ -58,7 +58,7 @@ public class AdminLessonController extends HttpServlet {
             request.getSession().setAttribute("flashError", "Vui lòng chọn một khóa học cụ thể!");
             request.setAttribute("listLessons", lessonService.getAllLessons());
             request.setAttribute("listCourse", courseService.getAllCourses());
-            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
             return;
         }
 
@@ -67,7 +67,7 @@ public class AdminLessonController extends HttpServlet {
             request.getSession().setAttribute("flashError", "Bài học bị trùng trong hệ thống");
             request.setAttribute("listLessons", lessonService.getAllLessons());
             request.setAttribute("listCourse", courseService.getAllCourses());
-            request.getRequestDispatcher("/html-admin/lesson-management.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
             return;
         }
 

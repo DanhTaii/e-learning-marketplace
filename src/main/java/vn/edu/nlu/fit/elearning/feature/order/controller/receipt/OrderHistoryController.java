@@ -52,7 +52,7 @@ PaymentMethodService paymentMethodService;
 
         request.setAttribute("orderList",order);
 
-        request.getRequestDispatcher("/html-personal-cart/order-history.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/cart/order-history.jsp").forward(request, response);
     }
 
     @Override
