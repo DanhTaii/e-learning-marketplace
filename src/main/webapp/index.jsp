@@ -12,10 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Soft Skill</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/home.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/card.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -25,7 +25,7 @@
 </head>
 <body>
 <div class="web">
-    <jsp:include page="header-footer/header.jsp"/>
+    <jsp:include page="views/layouts/header.jsp"/>
     <div class="web__container">
         <div class="grid">
             <div class="grid__row-2">
@@ -406,7 +406,7 @@
             </div>
         </div>
     </div>
-    <jsp:include page="header-footer/footer.jsp"/>
+    <jsp:include page="views/layouts/footer.jsp"/>
 </div>
 <div id="toast"></div>
 
