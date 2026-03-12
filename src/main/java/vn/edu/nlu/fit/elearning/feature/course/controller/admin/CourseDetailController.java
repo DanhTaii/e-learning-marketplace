@@ -59,7 +59,7 @@ public class CourseDetailController extends HttpServlet {
             }
         }
 
-        request.getRequestDispatcher("/html-admin/course-create.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/course/course-create.jsp").forward(request, response);
     }
 
     @Override

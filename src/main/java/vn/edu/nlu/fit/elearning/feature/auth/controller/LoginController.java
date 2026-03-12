@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/auth/sign-in.jsp").forward(request, response);
     }
 
     @Override

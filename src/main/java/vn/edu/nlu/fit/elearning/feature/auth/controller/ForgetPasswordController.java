@@ -35,7 +35,7 @@ public class ForgetPasswordController extends HttpServlet {
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
 
     }
 
@@ -49,7 +49,7 @@ public class ForgetPasswordController extends HttpServlet {
 
         if (user == null) {
             request.setAttribute("error", "Email không tồn tại!");
-            request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
         }
 
         AccessTokenService accessTokenService = new AccessTokenService();
@@ -73,14 +73,14 @@ public class ForgetPasswordController extends HttpServlet {
         }
         if (!isCreate) {
             request.setAttribute("error", "Lỗi server");
-            request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
             return;
         }
 
         boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername());
         if(!isSend){
             request.setAttribute("error", "Gửi không thành công!");
-            request.getRequestDispatcher("html-authentication/forgot-password.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
             return;
         }
 

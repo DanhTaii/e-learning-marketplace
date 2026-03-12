@@ -24,7 +24,7 @@ public class ResetPasswordController extends HttpServlet {
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.getRequestDispatcher("/html-authentication/reset-password.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/auth/reset-password.jsp").forward(request, response);
 
     }
 
@@ -50,7 +50,7 @@ public class ResetPasswordController extends HttpServlet {
             }
         } catch (IllegalArgumentException iae) {
             request.setAttribute("error", "Lỗi: " + iae.getMessage());
-            request.getRequestDispatcher("/html-authentication/reset-password.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/reset-password.jsp").forward(request, response);
         }
 
     }

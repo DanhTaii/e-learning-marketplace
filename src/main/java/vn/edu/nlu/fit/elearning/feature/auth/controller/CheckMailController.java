@@ -44,7 +44,7 @@ public class CheckMailController extends HttpServlet {
             return;
         }
 
-        request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CheckMailController extends HttpServlet {
         String otp = request.getParameter("otp");
         if (otp == null || otp.trim().length() != 5) {
             request.setAttribute("error", "Vui lòng nhập đúng mã 5 chữ số!");
-            request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);
             return;
         }
 
@@ -69,7 +69,7 @@ public class CheckMailController extends HttpServlet {
             User user = userService.getUserByEmail(email);
             if (user == null) {
                 request.setAttribute("error", "Không tìm thấy tài khoản!");
-                request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);
                 return;
             }
 
@@ -81,7 +81,7 @@ public class CheckMailController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/reset-password");
             } else {
                 request.setAttribute("error", "Mã xác thực không đúng hoặc đã hết hạn!");
-                request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);
             }
         }
 
@@ -104,11 +104,11 @@ public class CheckMailController extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/sign-in");
                 } else {
                     request.setAttribute("error", "Không thể tạo tài khoản!");
-                    request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+                    request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("error", "Mã xác thực không đúng hoặc đã hết hạn!");
-                request.getRequestDispatcher("/html-authentication/check-email.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);
             }
         }
     }
