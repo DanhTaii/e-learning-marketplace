@@ -65,7 +65,7 @@ public class UserCreateController extends HttpServlet {
             }
         } catch (IllegalArgumentException iae) {
             request.setAttribute("flashError", "Lỗi: " + iae.getMessage());
-            request.getRequestDispatcher("views/pages/admin/user-create.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/admin/user-create.jsp").forward(request, response);
         }
 
 

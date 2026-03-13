@@ -43,7 +43,7 @@ public class AccountProfileController extends HttpServlet {
 //        request.setAttribute("user", user);
 
         request.setAttribute("currentPage", "profile");
-        request.getRequestDispatcher("/html-personal/account-profile.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/personal/profile/account-profile.jsp").forward(request, response);
     }
 
     @Override

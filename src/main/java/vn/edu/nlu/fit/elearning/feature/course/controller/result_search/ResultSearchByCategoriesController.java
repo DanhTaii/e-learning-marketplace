@@ -112,7 +112,7 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.getRequestDispatcher("views/pages/partial/result-search.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);
     }
 
     @Override
