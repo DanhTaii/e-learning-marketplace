@@ -55,7 +55,7 @@ public class PaymentController extends HttpServlet {
 
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();
         request.setAttribute("paymentMethod", paymentMethods);
-        request.getRequestDispatcher("/html-personal-cart/payment.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/cart/payment.jsp").forward(request, response);
 
     }
 

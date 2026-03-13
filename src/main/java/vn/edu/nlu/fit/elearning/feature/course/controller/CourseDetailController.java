@@ -78,7 +78,7 @@ public class CourseDetailController extends HttpServlet {
         request.setAttribute("categories", categories);
 
         request.setAttribute("c", c);
-        request.getRequestDispatcher("/html-partrial/course-detail.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/partial/course-detail.jsp").forward(request, response);
     }
 
     @Override

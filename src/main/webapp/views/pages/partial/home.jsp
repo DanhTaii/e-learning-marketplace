@@ -24,7 +24,7 @@
     <header class="web__header">
         <div class="grid">
             <div class="header__box">
-                <a href="../html-partrial/home.jsp" class="turn-page">
+                <a href="../html-partial/home.jsp" class="turn-page">
                     <div class="header__logo">
                         SKILL
                     </div>

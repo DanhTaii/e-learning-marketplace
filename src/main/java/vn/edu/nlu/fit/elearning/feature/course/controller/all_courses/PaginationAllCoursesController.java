@@ -101,6 +101,6 @@ public class PaginationAllCoursesController extends HttpServlet {
 
         request.setAttribute("categories", categoryService.getAllCategories());
 
-        request.getRequestDispatcher("/html-partrial/all-course.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/partial/all-course.jsp").forward(request, response);
     }
 }

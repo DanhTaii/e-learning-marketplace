@@ -45,7 +45,7 @@ public class MyWishlistController extends HttpServlet {
         // Nếu không có courseId thì hiển thị danh sách wishlist
         List<CourseCardDto> wishlistCourses = ws.getWishlistCourses(userId);
         request.setAttribute("wishlistCourses", wishlistCourses);
-        request.getRequestDispatcher("/html-personal/my-wishlist.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/personal/course/my-wishlist.jsp").forward(request, response);
 
     }
 
