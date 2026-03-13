@@ -9,11 +9,11 @@
     <title>Profile security</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css-admin/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="assets/css/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/profile.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

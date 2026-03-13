@@ -9,13 +9,13 @@
     <meta charset="UTF-8">
     <title>Kiểu thanh toán </title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css/admin/admin.css?v=1.0.4">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/course-edit.css">
-    <link rel="stylesheet" href="assets/css-admin/notification.css">
+    <link rel="stylesheet" href="assets/css/admin/course-edit.css">
+    <link rel="stylesheet" href="assets/css/admin/notification.css">
     <style>
         /* CSS modal Payment Method - giống hệt modal Tag */
         .modal {
