@@ -8,13 +8,13 @@
     <meta charset="UTF-8">
     <title>Tag Management</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css-admin/admin.css?v=1.0.4">
-    <link rel="stylesheet" href="assets/css-admin/notification.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css/admin/notification.css?v=1.0.1">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css-admin/users-management.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/admin/users-management.css?v=1.0.1">
 </head>
 <body>
 <div class="web">
