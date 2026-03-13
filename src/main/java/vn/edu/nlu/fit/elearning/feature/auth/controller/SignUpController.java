@@ -36,7 +36,7 @@ public class SignUpController extends HttpServlet {
         TagService tagService = new TagService();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.getRequestDispatcher("/views/pages/auth/sing-up.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
     }
 
     @Override
@@ -95,12 +95,12 @@ public class SignUpController extends HttpServlet {
 
         } catch (IllegalArgumentException e) {
             request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/views/pages/auth/sing-up.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Lỗi hệ thống, vui lòng thử lại sau!");
-            request.getRequestDispatcher("/views/pages/auth/sing-up.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
         }
     }
 }

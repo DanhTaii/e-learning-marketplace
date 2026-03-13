@@ -54,7 +54,7 @@ public class UserCreateController extends HttpServlet {
 
         if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
             request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin !");
-            request.getRequestDispatcher("/views/pages/auth/sing-up.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
         }
 
         try {
@@ -65,7 +65,7 @@ public class UserCreateController extends HttpServlet {
             }
         } catch (IllegalArgumentException iae) {
             request.setAttribute("flashError", "Lỗi: " + iae.getMessage());
-            request.getRequestDispatcher("/html-admin/user-create.jsp").forward(request, response);
+            request.getRequestDispatcher("views/pages/admin/user-create.jsp").forward(request, response);
         }
 
 

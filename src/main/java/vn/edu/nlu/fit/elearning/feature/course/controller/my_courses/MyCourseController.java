@@ -49,7 +49,7 @@ public class MyCourseController extends HttpServlet {
 
 
         request.setAttribute("listEnrollments", enrollmentList);
-        request.getRequestDispatcher("/html-personal/my-course.jsp").forward(request, response);
+        request.getRequestDispatcher("views/pages/personal/course/my-course.jsp").forward(request, response);
 
     }
 
