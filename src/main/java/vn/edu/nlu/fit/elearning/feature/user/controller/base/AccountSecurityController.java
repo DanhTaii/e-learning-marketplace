@@ -35,7 +35,7 @@ public class AccountSecurityController extends HttpServlet {
 //        request.setAttribute("user", user);
 
         request.setAttribute("currentPage", "security");
-        request.getRequestDispatcher("views/pages/personal/profile/account-security.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/personal/profile/account-security.jsp").forward(request, response);
     }
 
     @Override

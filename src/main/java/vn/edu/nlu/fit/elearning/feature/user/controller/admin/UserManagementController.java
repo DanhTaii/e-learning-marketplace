@@ -24,7 +24,7 @@ public class UserManagementController extends HttpServlet {
         List<User> listUsers = userService.getAllUsers();
         request.setAttribute("listUsers", listUsers);
         request.setAttribute("currentPage", "users");
-        request.getRequestDispatcher("views/pages/admin/users-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/user/users-management.jsp").forward(request, response);
     }
 
     @Override
