@@ -24,6 +24,10 @@ import vn.edu.nlu.fit.elearning.feature.enrollment.dao.EnrollmentDao;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dao.EnrollmentDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.index.dao.IndexDao;
+import vn.edu.nlu.fit.elearning.feature.index.dao.IndexDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDao;
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
@@ -60,6 +64,8 @@ import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDao;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -110,6 +116,12 @@ public class BeanContainer {
 
         UserDao userDao = new UserDaoImpl();
         beans.put(UserService.class, new UserServiceImpl(userDao));
+
+        IndexDao indexDao = new IndexDaoImpl();
+        beans.put(IndexService.class, new IndexServiceImpl(indexDao));
+
+        WishlistDao wishlistDao = new WishlistDaoImpl();
+        beans.put(WishlistService.class, new WishlistServiceImpl(wishlistDao));
 
     }
 

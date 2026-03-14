@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.auth.controller;
+package vn.edu.nlu.fit.elearning.feature.google.service;
 
 public class GoogleConstants {
     public static final String GOOGLE_CLIENT_ID = System.getenv("GOOGLE_CLIENT_ID");

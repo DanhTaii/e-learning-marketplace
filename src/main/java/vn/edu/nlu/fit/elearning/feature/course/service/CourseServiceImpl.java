@@ -64,25 +64,6 @@ public class CourseServiceImpl implements CourseService {
         return Math.round(result * 10.0) / 10.0;
     }
 
-    @Override
-    public List<CourseCardDto> getThreeCoursesWereLiked(Integer userId) {
-        return cd.findThreeCoursesWereLiked(userId);
-    }
-
-    @Override
-    public List<CourseCardDto> getSixCoursesMostPopular(Integer userId) {
-        return cd.findSixCoursesMostPopular(userId);
-    }
-
-    @Override
-    public CourseCardDto getCoursesMostPopular(Integer userId) {
-        return cd.findCourseMostPopular(userId);
-    }
-
-    @Override
-    public List<CourseCardDto> getSixCoursesLast(Integer userId) {
-        return cd.findSixCoursesLast(userId);
-    }
 
     @Override
     public CourseDetailDto getCourse(int id, int userId) {

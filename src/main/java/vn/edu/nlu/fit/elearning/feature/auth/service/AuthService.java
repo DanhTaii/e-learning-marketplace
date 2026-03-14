@@ -1,7 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.common.utils.objects.GoogleUser;
+import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 
 public interface AuthService {
     User login(String email, String password);

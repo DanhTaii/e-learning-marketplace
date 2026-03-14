@@ -5,8 +5,7 @@ import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
-import vn.edu.nlu.fit.elearning.common.utils.objects.GoogleUser;
+import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
 
 public class AuthServiceImpl implements AuthService {

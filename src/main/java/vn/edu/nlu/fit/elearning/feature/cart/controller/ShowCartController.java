@@ -11,6 +11,7 @@ import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
@@ -24,11 +25,11 @@ import java.util.List;
 @WebServlet(name = "ShowCartController", value = "/personal/cart")
 
 public class ShowCartController extends HttpServlet {
-    private CourseService courseServiceImpl;
+    private IndexService indexService;
 
     @Override
     public void init() {
-        courseServiceImpl = BeanContainer.getBean(CourseService.class);
+        this.indexService = BeanContainer.getBean(IndexService.class);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class ShowCartController extends HttpServlet {
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
 
-        List<CourseCardDto> coursesLastest = courseServiceImpl.getSixCoursesLast(userId);
+        List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
         request.setAttribute("coursesLastest", coursesLastest);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong

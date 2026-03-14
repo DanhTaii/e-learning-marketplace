@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature;
+package vn.edu.nlu.fit.elearning.feature.index.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -6,11 +6,9 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
@@ -20,18 +18,18 @@ import java.util.List;
 @WebServlet(name = "IndexController", value = {"/index"})
 public class IndexController extends HttpServlet {
 
-    private CourseService courseServiceImpl;
     private WishlistService wishlistService;
     private CategoryService categoryService;
+    private IndexService indexService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
         // do làm session
         // Khởi tạo 1 lần duy nhất
-        this.wishlistService = new WishlistServiceImpl();
+        this.wishlistService = BeanContainer.getBean(WishlistService.class);
         this.categoryService = BeanContainer.getBean(CategoryService.class);
+        this.indexService = BeanContainer.getBean(IndexService.class);
     }
 
     @Override
@@ -56,10 +54,10 @@ public class IndexController extends HttpServlet {
         request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học
-        CourseCardDto courseMostPopular = courseServiceImpl.getCoursesMostPopular(userId);
-        List<CourseCardDto> coursesLiked = courseServiceImpl.getThreeCoursesWereLiked(userId);
-        List<CourseCardDto> coursesLastest = courseServiceImpl.getSixCoursesLast(userId);
-        List<CourseCardDto> coursesFeature = courseServiceImpl.getSixCoursesMostPopular(userId);
+        CourseCardDto courseMostPopular = indexService.getCoursesMostPopular(userId);
+        List<CourseCardDto> coursesLiked = indexService.getThreeCoursesWereLiked(userId);
+        List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
+        List<CourseCardDto> coursesFeature = indexService.getSixCoursesMostPopular(userId);
 
         request.setAttribute("courseMostPopular", courseMostPopular);
         request.setAttribute("coursesLiked", coursesLiked);

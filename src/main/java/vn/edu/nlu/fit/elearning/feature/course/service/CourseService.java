@@ -20,14 +20,6 @@ public interface CourseService {
 
     double avgRating();
 
-    List<CourseCardDto> getThreeCoursesWereLiked(Integer userId);
-
-    List<CourseCardDto> getSixCoursesMostPopular(Integer userId);
-
-    CourseCardDto getCoursesMostPopular(Integer userId);
-
-    List<CourseCardDto> getSixCoursesLast(Integer userId);
-
     CourseDetailDto getCourse(int id, int userId);
 
     CourseCardDto getCourseCardById(int id, int userId);

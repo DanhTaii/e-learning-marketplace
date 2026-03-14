@@ -26,7 +26,7 @@ public class MyWishlistController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.ws = new WishlistServiceImpl();
+        this.ws = BeanContainer.getBean(WishlistService.class);
     }
 
     @Override

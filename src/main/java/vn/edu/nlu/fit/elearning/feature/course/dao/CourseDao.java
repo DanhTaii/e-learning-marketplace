@@ -20,18 +20,6 @@ public interface CourseDao {
 
     List<Course> findAllCourses();
 
-    // 3 khóa học được yêu thích nhiều nhất
-    List<CourseCardDto> findThreeCoursesWereLiked(Integer userId);
-
-    // 6 khóa học mới nhất
-    List<CourseCardDto> findSixCoursesLast(Integer userId);
-
-    // 6 khóa học phổ biến nhất
-    List<CourseCardDto> findSixCoursesMostPopular(Integer userId);
-
-    // 1 khóa học phổ biến nhất
-    CourseCardDto findCourseMostPopular(Integer userId);
-
     CourseDetailDto findCourseByIdForDetail(int id, int userId);
 
     CourseCardDto findCourseCardById(int id, int userId);

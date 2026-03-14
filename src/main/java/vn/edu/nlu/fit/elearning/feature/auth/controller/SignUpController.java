@@ -29,7 +29,7 @@ public class SignUpController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService =BeanContainer.getBean(UserService.class);
+        this.userService = BeanContainer.getBean(UserService.class);
     }
 
     @Override

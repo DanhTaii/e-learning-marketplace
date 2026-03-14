@@ -1,10 +1,10 @@
-package vn.edu.nlu.fit.elearning.common.utils.objects;
+package vn.edu.nlu.fit.elearning.feature.google.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import vn.edu.nlu.fit.elearning.feature.auth.controller.GoogleConstants;
+import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 
 import java.io.IOException;
 

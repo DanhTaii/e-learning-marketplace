@@ -10,8 +10,8 @@ public class WishlistServiceImpl implements WishlistService {
 
     private WishlistDao wd;
 
-    public WishlistServiceImpl() {
-        this.wd = new WishlistDaoImpl();
+    public WishlistServiceImpl(WishlistDao wishlistDao) {
+        this.wd = wishlistDao;
     }
 
     @Override
