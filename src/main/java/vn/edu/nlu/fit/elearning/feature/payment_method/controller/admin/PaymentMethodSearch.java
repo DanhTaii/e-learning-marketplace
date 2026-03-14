@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
+import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,7 @@ public class PaymentMethodSearch extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.paymentMethodService = new PaymentMethodService();
+        this.paymentMethodService = new PaymentMethodServiceImpl();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

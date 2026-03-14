@@ -1,68 +1,30 @@
 package vn.edu.nlu.fit.elearning.feature.order.service;
 
-import vn.edu.nlu.fit.elearning.feature.order.dao.OrderDao;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
-import java.sql.Timestamp;
 
-public class OrderService {
+public interface OrderService {
+    int createOrder(Order order);
 
-    private OrderDao orderDao;
+    List<Order> getAllOrders();
 
-    public OrderService() {
-        this.orderDao = new OrderDao();
-    }
+    Order getOrderById(int orderId);
 
-    public int createOrder(Order order) {
-       return  orderDao.create(order);
+    Order findOrderPending(Integer userId);
 
-    }
+    List<Map<String, Object>> searchOrders(String orderCode, String userName, Timestamp fromDate, String status);
 
-    public List<Order> getAllOrders() {
-        return orderDao.findAll();
-    }
+    int updateOrder(Order order);
 
-    public Order getOrderById(int orderId) {
-        return orderDao.findById(orderId);
-    }
+    boolean deleteOrder(int orderId);
 
-    public Order findOrderPending(Integer userId) {
-        if (userId == null) {
-            return null;
-        }
-        return orderDao.findOrderPending(userId);
-    }
+    List<Map<String, Object>> getAllOrdersWithUserName();
 
-    public List<Map<String, Object>> searchOrders(String orderCode, String userName, Timestamp fromDate, String status) {
-        return orderDao.searchWithUserAndPayment(orderCode, userName, fromDate, status);
-    }
+    double getRevenueTotal();
 
-    public int updateOrder(Order order) {
-        if (order != null) {
-            return orderDao.update(order);
-        }
-        return 0;
-    }
-
-
-    public boolean deleteOrder(int orderId) {
-        int status = orderDao.delete(orderId);
-        return status > 0;
-    }
-
-    public List<Map<String, Object>> getAllOrdersWithUserName() {
-        return orderDao.findAllWithUserName();
-    }
-
-
-    public double getRevenueTotal() {
-        return orderDao.calculateRevenueTotal();
-    }
-    public List<OrderDTO> getOrderHistoryByUserId(int userId){
-        List<OrderDTO> list = orderDao.getOrderHistoryByUserId(userId);
-        return list;
-    }
+    List<OrderDTO> getOrderHistoryByUserId(int userId);
 }

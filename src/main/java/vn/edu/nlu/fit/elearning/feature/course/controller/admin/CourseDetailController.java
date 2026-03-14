@@ -4,9 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
+import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.helper.enums.Level;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
@@ -18,27 +21,27 @@ import java.util.List;
 @WebServlet(name = "CourseDetailController", value = "/admin/course/detail")
 public class CourseDetailController extends HttpServlet {
 
-    private CourseService cs;
+    private CourseServiceImpl cs;
     private TagService tagService;
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
     private CourseTagService courseTagService;
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.cs = new CourseService();
-        this.categoryService = new CategoryService();
-        this.tagService = new TagService();
-        this.courseTagService = new CourseTagService();
-        this.courseService = new CourseService();
+        this.cs = new CourseServiceImpl();
+        this.ICategoryService = new CategoryService();
+        this.tagService = new TagServiceImpl();
+        this.courseTagService = new CourseTagServiceImpl();
+        this.courseServiceImpl = new CourseServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getParameter("id");
         // Luôn lấy Categories và Tags để hiển thị danh sách lựa chọn (Dù tạo hay sửa)
-        List<Category> categoryList = categoryService.getAllCategories();
+        List<Category> categoryList = ICategoryService.getAllCategories();
         List<Tag> tagList = tagService.getAllTags();
 
         request.setAttribute("categories", categoryList);
@@ -152,7 +155,7 @@ public class CourseDetailController extends HttpServlet {
                 courseTagService.createCourseTag(courseIdInt, tagIdsStr);
             }
 //          Cập nhật khóa học
-            checkCourseCreate = courseService.updateCourse(course);
+            checkCourseCreate = courseServiceImpl.updateCourse(course);
 
             if (checkCourseCreate > 0) {
                 request.getSession().setAttribute("flashSuccess", "Cập nhật khóa học thành công !");
@@ -161,7 +164,7 @@ public class CourseDetailController extends HttpServlet {
 
         } else if (!isUpdate) {
 //            Trả về course id
-            checkCourseCreate = courseService.createCourse(course);
+            checkCourseCreate = courseServiceImpl.createCourse(course);
             if (checkCourseCreate > 0) {
                 if (tagIdsStr != null) {
                     courseTagService.createCourseTag(checkCourseCreate, tagIdsStr);

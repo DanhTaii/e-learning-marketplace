@@ -4,8 +4,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
+import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
 
 import java.io.IOException;
 
@@ -16,7 +17,7 @@ public class CreateReviewController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.reviewService = new ReviewService();
+        this.reviewService = new ReviewServiceImpl();
     }
 
     @Override

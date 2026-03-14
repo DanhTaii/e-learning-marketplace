@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,17 +13,17 @@ import java.util.List;
 @WebServlet(name = "AdminCategoryController", value = "/admin/categories")
 public class AdminCategoryController extends HttpServlet {
 
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.categoryService = new CategoryService();
+        this.ICategoryService = new CategoryService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> listCategories = categoryService.getAllCategories();
+        List<Category> listCategories = ICategoryService.getAllCategories();
         request.setAttribute("listCategories", listCategories);
         request.setAttribute("currentPage", "categories");
         request.getRequestDispatcher("/views/pages/admin/category/category-management.jsp").forward(request, response);
@@ -43,14 +44,14 @@ public class AdminCategoryController extends HttpServlet {
             newCategory.setName(categoryName);
             newCategory.setParentId(categoryParentId);
             newCategory.setSlug(categorySlug);
-            int checkCreate = categoryService.createCategory(newCategory);
+            int checkCreate = ICategoryService.createCategory(newCategory);
             if (checkCreate == 1) {
                 request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
                 response.sendRedirect(request.getContextPath() + "/admin/categories");
             }
         } catch (Exception e) {
             request.getSession().setAttribute("flashError", "Tên hoặc Slug đã tồn tại trong hệ thống!");
-            request.setAttribute("listTags", categoryService.getAllCategories());
+            request.setAttribute("listTags", ICategoryService.getAllCategories());
             request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
         }
     }

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
+import vn.edu.nlu.fit.elearning.feature.order.service.OrderServiceImpl;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -20,7 +21,7 @@ public class OrderSearchController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderService();
+        this.orderService = new OrderServiceImpl();
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

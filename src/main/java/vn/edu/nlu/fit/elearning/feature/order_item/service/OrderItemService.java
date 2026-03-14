@@ -1,66 +1,27 @@
 package vn.edu.nlu.fit.elearning.feature.order_item.service;
 
-import vn.edu.nlu.fit.elearning.feature.order_item.dao.OrderItemDao;
 import vn.edu.nlu.fit.elearning.feature.order_item.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 
 import java.util.List;
 
-public class OrderItemService {
+public interface OrderItemService {
+    List<OrderItem> getCartItems(Integer userId);
 
-    private OrderItemDao oid;
-
-    public OrderItemService() {
-        this.oid = new OrderItemDao();
-    }
-
-    public List<OrderItem> getCartItems(Integer userId) {
-        List<OrderItem> cartItems = oid.getCartItemsByUserId(userId);
-        return cartItems;
-    }
-
-    public List<OrderItem> getOrderItemSelected(Integer userId) {
-        List<OrderItem> itemSelected = oid.geOrderItemSelected(userId);
-        return itemSelected;
-    }
+    List<OrderItem> getOrderItemSelected(Integer userId);
 
     // cập nhật tick
-    public void updateSelected(Integer orderItemId, String[] selectedItemId) {
-// bước 1 bỏ hết tick
-        oid.unselectAll(orderItemId);
-// bước 2 lập qua tat ca order-item được tick
-        if (selectedItemId != null) {
-            for (String item : selectedItemId) {
-                int itemId = Integer.parseInt(item);
-                oid.updateSelection(itemId, true);
-            }
+    void updateSelected(Integer orderItemId, String[] selectedItemId);
 
-        }
-    }
+    int createOrderItem(OrderItem orderItem);
 
-    public int createOrderItem(OrderItem orderItem) {
-        return oid.create(orderItem);
-    }
+    List<OrderItem> getAllOrderItems();
 
-    public List<OrderItem> getAllOrderItems() {
-        // TODO: Implement getAll logic
-        return oid.findAll();
-    }
+    OrderItem getOrderItemById(int id);
 
-    public OrderItem getOrderItemById(int id) {
-        // TODO: Implement getById logic
-        return null;
-    }
+    void updateOrderItem(OrderItem orderItem);
 
-    public void updateOrderItem(OrderItem orderItem) {
-        // TODO: Implement update logic
-    }
+    void deleteOrderItem(int id);
 
-    public void deleteOrderItem(int id) {
-        // TODO: Implement delete logic
-    }
-    public List<OrderItemDTO> getReceiptByOrderId(int orderId){
-       List<OrderItemDTO> receipt = oid.getReceiptItems(orderId);
-       return  receipt;
-    }
+    List<OrderItemDTO> getReceiptByOrderId(int orderId);
 }

@@ -6,9 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.cart.service.Cart;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 
 import java.io.IOException;
 
@@ -16,12 +17,12 @@ import java.io.IOException;
 
 public class AddCartController extends HttpServlet {
 
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.courseService = new CourseService();
+        this.courseServiceImpl = new CourseServiceImpl();
     }
 
     @Override
@@ -30,12 +31,12 @@ public class AddCartController extends HttpServlet {
         int userId = (int) session.getAttribute("userId");
 
         int id = Integer.parseInt(request.getParameter("id"));
-        CourseCardDto course = courseService.getCourseCardById(id, userId);
+        CourseCardDto course = courseServiceImpl.getCourseCardById(id, userId);
         if (course == null) {
             return;
         }
 
-        Cart c = (Cart) session.getAttribute("cart");
+        ICart c = (ICart) session.getAttribute("cart");
         if (c == null) c = new Cart();
         c.addCourse(course);
         session.setAttribute("cart", c);

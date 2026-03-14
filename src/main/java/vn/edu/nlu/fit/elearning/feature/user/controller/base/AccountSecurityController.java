@@ -7,7 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,10 +27,10 @@ public class AccountSecurityController extends HttpServlet {
 //        }
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 //        UserService userService = new UserService();
 //        User user = userService.getUserById(userId);

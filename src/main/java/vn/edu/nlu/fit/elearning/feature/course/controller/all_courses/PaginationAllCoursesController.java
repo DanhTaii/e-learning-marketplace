@@ -3,11 +3,13 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.all_courses;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,11 +18,11 @@ import java.util.List;
 public class PaginationAllCoursesController extends HttpServlet {
 
     private static final int PAGE_SIZE = 16;
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
 
     @Override
     public void init() {
-        courseService = new CourseService();
+        courseServiceImpl = new CourseServiceImpl();
     }
 
     @Override
@@ -66,7 +68,7 @@ public class PaginationAllCoursesController extends HttpServlet {
         int totalCourses;
 
         // Dùng filter thống nhất cho mọi trường hợp
-        listCourse = courseService.filterCoursesForAllCourses(
+        listCourse = courseServiceImpl.filterCoursesForAllCourses(
                 categoryId,     // null nếu không lọc cate
                 sortPrice,      // asc/desc hoặc null// duration
                 popular,        // "true" nếu phổ biến
@@ -75,7 +77,7 @@ public class PaginationAllCoursesController extends HttpServlet {
                 (page - 1) * PAGE_SIZE, userId
         );
 
-        totalCourses = courseService.countFilteredCourses(
+        totalCourses = courseServiceImpl.countFilteredCourses(
                 categoryId, null, null, sortPrice, null, null, null, null, popularStr
         );
 
@@ -93,13 +95,13 @@ public class PaginationAllCoursesController extends HttpServlet {
         request.setAttribute("popular", popular);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
-        request.setAttribute("categories", categoryService.getAllCategories());
+        request.setAttribute("categories", ICategoryService.getAllCategories());
 
         request.getRequestDispatcher("views/pages/partial/all-course.jsp").forward(request, response);
     }

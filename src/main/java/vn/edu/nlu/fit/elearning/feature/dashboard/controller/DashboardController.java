@@ -3,15 +3,18 @@ package vn.edu.nlu.fit.elearning.feature.dashboard.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseRankingDto;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.dashboard.dto.CourseRankingDto;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.dashboard.service.DashboardService;
+import vn.edu.nlu.fit.elearning.feature.dashboard.service.DashboardServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
+import vn.edu.nlu.fit.elearning.feature.order.service.OrderServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.RevenueDto;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,23 +23,23 @@ import java.util.List;
 public class DashboardController extends HttpServlet {
     private UserService userService;
     private OrderService orderService;
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
     private DashboardService dashboardService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserService();
-        this.orderService = new OrderService();
-        this.courseService = new CourseService();
-        this.dashboardService = new DashboardService();
+        this.userService = new UserServiceImpl();
+        this.orderService = new OrderServiceImpl();
+        this.courseServiceImpl = new CourseServiceImpl();
+        this.dashboardService = new DashboardServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Order> orderTotal = orderService.getAllOrders();
         List<User> userTotal = userService.getAllUsers();
-        List<Course> courseTotal = courseService.getAllCourses();
+        List<Course> courseTotal = courseServiceImpl.getAllCourses();
         double revenueSum = orderService.getRevenueTotal();
         List<CourseRankingDto> popularCourses = dashboardService.getTopSixCourses();
         List<RevenueDto> revenues = dashboardService.getRevenueChartData();

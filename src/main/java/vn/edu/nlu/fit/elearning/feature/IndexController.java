@@ -4,11 +4,14 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +19,16 @@ import java.util.List;
 @WebServlet(name = "IndexController", value = {"/index"})
 public class IndexController extends HttpServlet {
 
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
     private WishlistService wishlistService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        courseService = new CourseService();
+        courseServiceImpl = new CourseServiceImpl();
         // do làm session
         // Khởi tạo 1 lần duy nhất
-        wishlistService = new WishlistService();
+        wishlistService = new WishlistServiceImpl();
     }
 
     @Override
@@ -41,19 +44,19 @@ public class IndexController extends HttpServlet {
         }
 
         // 1. Category
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
 
         // 3.Tag
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học
-        CourseCardDto courseMostPopular = courseService.getCoursesMostPopular(userId);
-        List<CourseCardDto> coursesLiked = courseService.getThreeCoursesWereLiked(userId);
-        List<CourseCardDto> coursesLastest = courseService.getSixCoursesLast(userId);
-        List<CourseCardDto> coursesFeature = courseService.getSixCoursesMostPopular(userId);
+        CourseCardDto courseMostPopular = courseServiceImpl.getCoursesMostPopular(userId);
+        List<CourseCardDto> coursesLiked = courseServiceImpl.getThreeCoursesWereLiked(userId);
+        List<CourseCardDto> coursesLastest = courseServiceImpl.getSixCoursesLast(userId);
+        List<CourseCardDto> coursesFeature = courseServiceImpl.getSixCoursesMostPopular(userId);
 
         request.setAttribute("courseMostPopular", courseMostPopular);
         request.setAttribute("coursesLiked", coursesLiked);

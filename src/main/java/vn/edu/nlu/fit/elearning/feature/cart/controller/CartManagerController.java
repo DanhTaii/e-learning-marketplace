@@ -6,8 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
+import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.io.IOException;
 
@@ -19,47 +20,47 @@ public class CartManagerController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.ws = new WishlistService();
+        this.ws = new WishlistServiceImpl();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        Cart cart = (Cart) session.getAttribute("cart");
+        ICart ICart = (ICart) session.getAttribute("cart");
 
-        if (cart != null && action != null) {
+        if (ICart != null && action != null) {
             switch (action) {
                 case "delete":
                     int id = Integer.parseInt(request.getParameter("id"));
-                    cart.deleteCourse(id);
+                    ICart.deleteCourse(id);
                     break;
 
                 case "moveToWishlist":
                     int courseId = Integer.parseInt(request.getParameter("id"));
                     ws.addCourseToWishlist(userId, courseId);
-                    cart.deleteCourse(courseId);
+                    ICart.deleteCourse(courseId);
                     break;
 
                 case "moveSelectedToWishlist":
-                    cart.getSelectedItems().forEach(item -> {
+                    ICart.getSelectedItems().forEach(item -> {
                         ws.addCourseToWishlist(userId, item.getCourse().getId());
                     });
-                    cart.removeSelected();
+                    ICart.removeSelected();
                     break;
 
                 case "removeSelected":
-                    cart.removeSelected();
+                    ICart.removeSelected();
                     break;
 
                 case "selectAll":
                     boolean status = Boolean.parseBoolean(request.getParameter("status"));
-                    cart.selectAll(status);
+                    ICart.selectAll(status);
             }
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": %.0f, \"total\": %.0f}",
-                    cart.getSelectedQuantity(), cart.getFinalPriceTotal(), cart.getTotal());
+                    ICart.getSelectedQuantity(), ICart.getFinalPriceTotal(), ICart.getTotal());
             response.getWriter().write(json);
             return ;
         }

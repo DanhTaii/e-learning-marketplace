@@ -5,24 +5,25 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "CategorySearchController", value = "/admin/categories/search")
 public class CategorySearchController extends HttpServlet {
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.categoryService = new CategoryService();
+        this.ICategoryService = new CategoryService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameSearch = request.getParameter("searchName");
-        List<Category> listCategories = categoryService.getAllCategoriesByName(nameSearch);
+        List<Category> listCategories = ICategoryService.getAllCategoriesByName(nameSearch);
         request.setAttribute("listCategories", listCategories);
         request.getRequestDispatcher("/views/pages/admin/category/category-management.jsp").forward(request, response);
     }

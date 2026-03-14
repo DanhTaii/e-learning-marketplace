@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
@@ -13,12 +14,12 @@ import java.io.IOException;
 @WebServlet(name = "CategoryUpdateController", value = "/admin/category/update")
 public class CategoryUpdateController extends HttpServlet {
 
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.categoryService = new CategoryService();
+        this.ICategoryService = new CategoryService();
     }
 
     @Override
@@ -29,7 +30,7 @@ public class CategoryUpdateController extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
 
-        Category cate = categoryService.getCategoryById(id);
+        Category cate = ICategoryService.getCategoryById(id);
         if (cate != null) {
             String cateJson = new Gson().toJson(cate);
             response.getWriter().write(cateJson);
@@ -56,7 +57,7 @@ public class CategoryUpdateController extends HttpServlet {
         cate.setIconUrl(icon);
         cate.setStatus(statusEnum);
 
-        if (categoryService.updateCategory(cate) > 0) {
+        if (ICategoryService.updateCategory(cate) > 0) {
             request.getSession().setAttribute("flashSuccess", "Cập nhật thành công danh mục !");
             response.sendRedirect(request.getContextPath() + "/admin/categories");
         }

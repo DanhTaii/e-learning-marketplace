@@ -3,9 +3,8 @@ package vn.edu.nlu.fit.elearning.feature.cart.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
-
+import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
 
 
 import java.io.IOException;
@@ -26,12 +25,12 @@ public class UpdateSelectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("cart");
+        ICart ICart = (ICart) session.getAttribute("cart");
 
-        if (cart != null) {
+        if (ICart != null) {
             String[] selectedIds = request.getParameterValues("itemSelected");
             List<String> listId = (selectedIds != null) ? Arrays.asList(selectedIds) : new ArrayList<>();
-            for (CartItem item : cart.getList()) {
+            for (CartItem item : ICart.getList()) {
                 String currentId = String.valueOf(item.getCourse().getId());
 
                 if (listId.contains(currentId)) {
@@ -43,7 +42,7 @@ public class UpdateSelectController extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": %.0f, \"total\": %.0f}",
-                    cart.getSelectedQuantity(), cart.getFinalPriceTotal(), cart.getTotal());
+                    ICart.getSelectedQuantity(), ICart.getFinalPriceTotal(), ICart.getTotal());
             response.getWriter().write(json);
             return ;
         }

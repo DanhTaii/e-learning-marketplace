@@ -4,13 +4,18 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.IAccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.IAccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,17 +27,17 @@ public class ForgetPasswordController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.userService = new UserService();
+        this.userService = new UserServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
@@ -52,8 +57,8 @@ public class ForgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
         }
 
-        AccessTokenService accessTokenService = new AccessTokenService();
-        String token = accessTokenService.generateToken();
+        IAccessTokenService IAccessTokenService = new AccessTokenService();
+        String token = IAccessTokenService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 
 
@@ -62,11 +67,11 @@ public class ForgetPasswordController extends HttpServlet {
 
         AccessToken accessToken = null;
         if(user != null){
-            accessToken = new AccessToken(user.getId(), token, accessTokenService.expireDateTime(), false);
+            accessToken = new AccessToken(user.getId(), token, IAccessTokenService.expireDateTime(), false);
 
         }
 
-        AccessTokenDao tokenDao = new AccessTokenDao();
+        IAccessTokenDao tokenDao = new AccessTokenDao();
         boolean isCreate = false;
         if ( accessToken != null){
             isCreate = tokenDao.createToken(accessToken);
@@ -77,7 +82,7 @@ public class ForgetPasswordController extends HttpServlet {
             return;
         }
 
-        boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername());
+        boolean isSend = IAccessTokenService.sendEmail(email, token, user.getUsername());
         if(!isSend){
             request.setAttribute("error", "Gửi không thành công!");
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);

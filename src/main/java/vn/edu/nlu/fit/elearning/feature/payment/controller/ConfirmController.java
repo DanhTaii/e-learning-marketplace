@@ -6,18 +6,23 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
+import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
 import vn.edu.nlu.fit.elearning.feature.enrollment.model.Enrollment;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
+import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
+import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.model.UserLessonProgress;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.service.UserLessonProgressService;
+import vn.edu.nlu.fit.elearning.feature.lesson_progress.service.UserLessonProgressServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
+import vn.edu.nlu.fit.elearning.feature.order.service.OrderServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
+import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemServiceImpl;
 import vn.edu.nlu.fit.elearning.helper.enums.OrderStatus;
 
 import java.io.IOException;
@@ -35,11 +40,11 @@ public class ConfirmController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderService();
-        this.orderItemService = new OrderItemService();
-        this.enrollmentService = new EnrollmentService();
-        this.lessonService = new LessonService();
-        this.userLessonProgressService = new UserLessonProgressService();
+        this.orderService = new OrderServiceImpl();
+        this.orderItemService = new OrderItemServiceImpl();
+        this.enrollmentService = new EnrollmentServiceImpl();
+        this.lessonService = new LessonServiceImpl();
+        this.userLessonProgressService = new UserLessonProgressServiceImpl();
     }
 
     @Override
@@ -51,7 +56,7 @@ public class ConfirmController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        Cart cart = (Cart) session.getAttribute("cart");
+        ICart ICart = (ICart) session.getAttribute("cart");
         int paymentMethodId = Integer.parseInt(request.getParameter("payment-method-id"));
 
         //khỏi tạo order
@@ -59,16 +64,16 @@ public class ConfirmController extends HttpServlet {
         order.setOrderCode("ORD-" + System.currentTimeMillis());
         order.setUserId(userId);
         order.setPaymentMethodId(paymentMethodId);
-        order.setTotalAmount((int) cart.getTotal());
-        order.setDiscountAmount((int) cart.getDiscountPriceTotal());
-        order.setFinalAmount((int) cart.getFinalPriceTotal());
+        order.setTotalAmount((int) ICart.getTotal());
+        order.setDiscountAmount((int) ICart.getDiscountPriceTotal());
+        order.setFinalAmount((int) ICart.getFinalPriceTotal());
         order.setStatus(OrderStatus.PAID);
         order.setPaidAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
 
         int orderId = orderService.createOrder(order);
 
-        for (CartItem item : cart.getSelectedItems()) {
+        for (CartItem item : ICart.getSelectedItems()) {
             OrderItem oi = new OrderItem();
             oi.setOrderId(orderId);
             oi.setCourseId(item.getCourse().getId());
@@ -93,10 +98,10 @@ public class ConfirmController extends HttpServlet {
             }
             userLessonProgressService.createUserLessonProgress(progressList);
         }
-        cart.removeSelected();
+        ICart.removeSelected();
 
 
-        session.setAttribute("cart", cart);
+        session.setAttribute("cart", ICart);
         response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + orderId);
     }
 }

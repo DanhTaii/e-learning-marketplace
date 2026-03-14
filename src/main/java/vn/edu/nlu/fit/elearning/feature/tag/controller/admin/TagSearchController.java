@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +18,7 @@ public class TagSearchController extends HttpServlet {
 
     @Override
     public void init() {
-        this.tagService = new TagService();
+        this.tagService = new TagServiceImpl();
     }
 
 

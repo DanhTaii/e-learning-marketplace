@@ -4,13 +4,18 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.IAccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.IAccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,22 +23,22 @@ import java.util.List;
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {
     private UserService userService;
-    private AccessTokenService accessTokenService = new AccessTokenService();
-    private AccessTokenDao tokenDao = new AccessTokenDao();
+    private IAccessTokenService IAccessTokenService = new AccessTokenService();
+    private IAccessTokenDao tokenDao = new AccessTokenDao();
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserService();
+        this.userService = new UserServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // load categories/tags cho header
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
@@ -67,11 +72,11 @@ public class SignUpController extends HttpServlet {
             }
 
             // Tạo token xác thực
-            String token = accessTokenService.generateToken();
+            String token = IAccessTokenService.generateToken();
             AccessToken accessToken = new AccessToken(
                     0, // chưa có userId vì chưa tạo user
                     token,
-                    accessTokenService.expireDateTime(),
+                    IAccessTokenService.expireDateTime(),
                     false
             );
 
@@ -80,7 +85,7 @@ public class SignUpController extends HttpServlet {
             }
 
             // Gửi email chứa mã
-            if (!accessTokenService.sendEmail(email, token, username)) {
+            if (!IAccessTokenService.sendEmail(email, token, username)) {
                 throw new RuntimeException("Gửi email xác nhận thất bại!");
             }
 

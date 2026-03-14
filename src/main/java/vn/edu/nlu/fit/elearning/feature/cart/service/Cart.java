@@ -1,11 +1,12 @@
-package vn.edu.nlu.fit.elearning.feature.cart.model;
+package vn.edu.nlu.fit.elearning.feature.cart.service;
 
+import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Cart {
+public class Cart implements ICart {
     Map<Integer, CartItem> data;
 
     public Cart() {
@@ -13,6 +14,7 @@ public class Cart {
     }
 
 
+    @Override
     public void addCourse(CourseCardDto c) {
         if (data.containsKey(c.getId())) {
             CartItem ci = data.get(c.getId());
@@ -24,14 +26,17 @@ public class Cart {
         }
     }
 
+    @Override
     public CartItem deleteCourse(int id) {
         return data.remove(id);
     }
 
+    @Override
     public void removeSelected() {
         data.entrySet().removeIf(entry -> entry.getValue().isSelected());
     }
 
+    @Override
     public List<CartItem> getSelectedItems() {
         List<CartItem> selected = new ArrayList<>();
         for (CartItem item : data.values()) {
@@ -42,11 +47,13 @@ public class Cart {
         return selected;
     }
 
+    @Override
     public void selectAll(boolean isSelected) {
 
         data.values().forEach(item -> item.setSelected(isSelected));
     }
 
+    @Override
     public void selectOnly(int courseId) {
         data.values().forEach(item -> {
             if (item.getCourse().getId() == courseId) {
@@ -58,14 +65,17 @@ public class Cart {
     }
 
 
+    @Override
     public int getTotalQuantity() {
         return data.size();
     }
 
+    @Override
     public List<CartItem> getList() {
         return new ArrayList<>(data.values());
     }
 
+    @Override
     public double getTotal() {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
@@ -78,6 +88,7 @@ public class Cart {
     }
 
 
+    @Override
     public double getFinalPriceTotal() {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
@@ -87,6 +98,7 @@ public class Cart {
         });
         return total.get();
     }
+    @Override
     public double getDiscountPriceTotal() {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         data.values().forEach(p -> {
@@ -97,6 +109,7 @@ public class Cart {
         return total.get();
     }
 
+    @Override
     public int getSelectedQuantity() {
         int count = 0;
         for (CartItem c : data.values()) {

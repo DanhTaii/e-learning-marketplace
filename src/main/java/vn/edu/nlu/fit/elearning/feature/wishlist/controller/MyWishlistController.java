@@ -1,15 +1,19 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.my_wishlist;
+package vn.edu.nlu.fit.elearning.feature.wishlist.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +26,7 @@ public class MyWishlistController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.ws = new WishlistService();
+        this.ws = new WishlistServiceImpl();
     }
 
     @Override
@@ -33,12 +37,12 @@ public class MyWishlistController extends HttpServlet {
         int userId = (int) session.getAttribute("userId");
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
-        UserService userService = new UserService();
+        UserService userService = new UserServiceImpl();
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
 
