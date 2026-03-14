@@ -1,11 +1,11 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;

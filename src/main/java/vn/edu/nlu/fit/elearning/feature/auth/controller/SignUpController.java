@@ -8,17 +8,9 @@ import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
-
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {

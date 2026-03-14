@@ -1,13 +1,13 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.result_search;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller.result_search;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,6 +15,13 @@ import java.util.List;
 public class ResultSearchByCategoriesController extends HttpServlet {
 
     private static final int PAGE_SIZE = 12;  // Số khóa học mỗi trang
+    private CourseSearchService courseSearchService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        this.courseSearchService = BeanContainer.getBean(CourseSearchService.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,16 +70,14 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        CourseService courseServiceImpl = BeanContainer.getBean(CourseService.class);
-
         // Lấy danh sách khóa học đã lọc + phân trang
-        List<CourseCardDto> listCourse = courseServiceImpl.filterCoursesByCategoryWithPagination(
+        List<CourseCardDto> listCourse = courseSearchService.filterCoursesByCategoryWithPagination(
                 idCategory, sortPrice, level, priceRange, rating, duration, popular,
                 page, PAGE_SIZE, userId
         );
 
         // Đếm tổng số khóa học sau lọc
-        int totalCourses = courseServiceImpl.countFilteredCoursesByCategory(
+        int totalCourses = courseSearchService.countFilteredCoursesByCategory(
                 idCategory,
                 sortPrice,
                 level,

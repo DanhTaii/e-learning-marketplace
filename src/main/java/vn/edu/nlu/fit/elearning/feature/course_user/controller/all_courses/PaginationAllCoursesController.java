@@ -1,12 +1,11 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.all_courses;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller.all_courses;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,11 +13,11 @@ import java.util.List;
 public class PaginationAllCoursesController extends HttpServlet {
 
     private static final int PAGE_SIZE = 16;
-    private CourseService courseServiceImpl;
+    private CourseSearchService courseSearchServiceImpl;
 
     @Override
     public void init() {
-        courseServiceImpl = BeanContainer.getBean(CourseService.class);
+        courseSearchServiceImpl = BeanContainer.getBean(CourseSearchService.class);
     }
 
     @Override
@@ -64,7 +63,7 @@ public class PaginationAllCoursesController extends HttpServlet {
         int totalCourses;
 
         // Dùng filter thống nhất cho mọi trường hợp
-        listCourse = courseServiceImpl.filterCoursesForAllCourses(
+        listCourse = courseSearchServiceImpl.filterCoursesForAllCourses(
                 categoryId,     // null nếu không lọc cate
                 sortPrice,      // asc/desc hoặc null// duration
                 popular,        // "true" nếu phổ biến
@@ -73,7 +72,7 @@ public class PaginationAllCoursesController extends HttpServlet {
                 (page - 1) * PAGE_SIZE, userId
         );
 
-        totalCourses = courseServiceImpl.countFilteredCourses(
+        totalCourses = courseSearchServiceImpl.countFilteredCourses(
                 categoryId, null, null, sortPrice, null, null, null, null, popularStr
         );
 

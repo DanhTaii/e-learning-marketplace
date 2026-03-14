@@ -4,16 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
-import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.io.IOException;
 import java.util.List;

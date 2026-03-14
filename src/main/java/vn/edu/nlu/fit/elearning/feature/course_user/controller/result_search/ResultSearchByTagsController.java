@@ -1,17 +1,13 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.result_search;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller.result_search;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +16,15 @@ import java.util.List;
 public class ResultSearchByTagsController extends HttpServlet {
 
     private static final int PAGE_SIZE = 12;
+    private CourseSearchService courseSearchService;
+    private TagService tagService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        this.courseSearchService = BeanContainer.getBean(CourseSearchService.class);
+        this.tagService = BeanContainer.getBean(TagService.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,8 +48,7 @@ public class ResultSearchByTagsController extends HttpServlet {
             return;
         }
 
-        TagService ts = BeanContainer.getBean(TagService.class);
-        Tag tag = ts.getTagById(idTag);
+        Tag tag = tagService.getTagById(idTag);
         request.setAttribute("tag", tag);
         request.setAttribute("mode", "tag");
 
@@ -68,16 +72,14 @@ public class ResultSearchByTagsController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        CourseService courseServiceImpl = BeanContainer.getBean(CourseService.class);
-
         // Lấy list + phân trang
-        List<CourseCardDto> listCourse = courseServiceImpl.filterCoursesByTagWithPagination(
+        List<CourseCardDto> listCourse = courseSearchService.filterCoursesByTagWithPagination(
                 idTag, sortPrice, level, priceRange, rating, duration, popular,
                 page, PAGE_SIZE, userId
         );
 
         // Đếm tổng
-        int totalCourses = courseServiceImpl.countFilteredCoursesByTag(
+        int totalCourses = courseSearchService.countFilteredCoursesByTag(
                 idTag, sortPrice, level, priceRange, rating, duration, popular
         );
 

@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.cart.model;
 
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 public class CartItem {
     private CourseCardDto course;
