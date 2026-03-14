@@ -131,13 +131,14 @@
                                                     <c:choose>
                                                         <c:when test="${c.enrolled}">
 
-                                                            <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                            <button type="button"  class="btn-add-cart dark-button" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                                 Vào học ngay
                                                             </button>
 
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <button type="submit" style="font-size: 1.5rem"
+                                                            <button id="fix"
+                                                                    type="submit"
                                                                     class="btn-add-cart dark-button"
                                                                     onclick="addToCart(event,${c.id})">Thêm vào giỏ
                                                             </button>

@@ -302,3 +302,22 @@
 .input-text {
     padding-right: 45px !important;
 }
+
+.add-to-fix-1{
+    min-height: 25px;
+}
+.add-to-fix-2{
+    color: red;
+    font-size: var(--text-xl);
+}
+#error_email{
+    color: red;font-size: 1.5rem;padding-left: 1.6rem;
+}
+
+.password-wrapper{
+    position: relative;
+}
+
+#error_pass{
+    color: red;font-size: 1.5rem;padding-left: 1.6rem;
+}

@@ -209,7 +209,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="course-row__font-content course-row__status "style="color: #018d4a">
+                                                <div class="course-row__font-content course-row__status ">
                                                         ${order.status}
                                                 </div>
                                             </td>
@@ -237,12 +237,9 @@
                                     <c:if test="${empty listOrders}">
                                         <tr>
                                             <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                <div class="search-empty-state"
-                                                     style="text-align: center; padding: 40px 0;">
-                                                    <i class="fa-solid fa-book-open search-empty-icon"
-                                                       style="font-size: 3rem; color: #ccc;"></i>
-                                                    <div class="search-empty-title"
-                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                <div class="search-empty-state">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                                    <div class="search-empty-title">
                                                         Không tìm thấy đơn hàng nào
                                                     </div>
                                                 </div>

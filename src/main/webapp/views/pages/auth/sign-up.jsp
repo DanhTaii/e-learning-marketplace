@@ -37,36 +37,36 @@
 
                         <form action="sign-up" class="form" method="post" id="myForm">
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>
-                            <span style="color: red; font-size: var(--text-xl)"> ${requestScope.error} </span>
+                            <span class="add-to-fix-3"> ${requestScope.error} </span>
                             <div class="form__input input-1">
                                 <input  class="input-text text-big" placeholder="Nhập email của bạn"
                                        name="email" value="${param.email}" id="login_email">
-                                <span id="error_email" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_email" class="error-client"></span>
                             </div>
                             <div class="form__input input-2">
                                 <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng"
                                        name="username" value="${param.username}" id="name">
-                                <span id="error_username" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_username" class="error-client"></span>
                             </div>
                             <div class="form__input input-3">
-                                <div class="password-group" style="position: relative;">
+                                <div class="password-group">
                                     <input type="password" class="input-text text-big" placeholder="Nhập mật khẩu của bạn"
                                            name="password" value="${param.password}" id="newPass">
                                     <i class="fa-regular fa-eye toggle-password" data-target="#newPass"></i>
                                 </div>
-                                <span id="error_newPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_newPass" class="error-client"></span>
                             </div>
                             <div class="form__info text-medium">Mật khẩu phải từ 8 đến 25 ký tự gồm số và chữ cái,
                                 trong đó có ít nhất 1 chữ cái viết hoa, 1 chữ viết thuòng và ký tự đặc biệt!
                             </div>
                             <div class="form__input input-4">
-                                <div class="password-group" style="position: relative;">
+                                <div class="password-group">
                                     <input type="password" class="input-text text-big"
                                            placeholder="Nhập lại mật khẩu của bạn" name="confirmPassword"
                                            value="${param.confirmPassword}" id="reNewPass">
                                     <i class="fa-regular fa-eye toggle-password" data-target="#reNewPass"></i>
                                 </div>
-                                <span id="error_reNewPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_reNewPass" class="error-client"></span>
                             </div>
                             <div class="form__button">
                                 <button class="button button__btn" type="submit">

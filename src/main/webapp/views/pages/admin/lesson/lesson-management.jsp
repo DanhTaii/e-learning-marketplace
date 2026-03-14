@@ -230,45 +230,6 @@
                                 </div>
                             </form>
                             <div class="container-2__list-student">
-                                <style>
-                                    .action-wrapper {
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: flex-start;
-                                        gap: 8px;
-                                        height: 100%;
-                                    }
-
-                                    .icon-action-btn {
-                                        width: 32px;
-                                        height: 32px;
-                                        display: inline-flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        padding: 0;
-                                        border: none;
-                                        background: transparent;
-                                        cursor: pointer;
-                                        border-radius: 4px;
-                                        color: var(--dark-blue);
-                                        transition: all 0.2s;
-                                    }
-
-                                    .icon-action-btn:hover {
-                                        background-color: #f0f0f0;
-                                        transform: translateY(-1px);
-                                    }
-
-
-                                    table {
-                                        border-collapse: collapse !important;
-                                    }
-
-                                    table td {
-                                        border-bottom: 1px solid var(--light-grey);
-                                        height: 55px;
-                                    }
-                                </style>
                                 <table>
                                     <thead>
                                     <tr>
@@ -324,12 +285,9 @@
                                     <c:if test="${empty listLessons}">
                                         <tr>
                                             <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                <div class="search-empty-state"
-                                                     style="text-align: center; padding: 40px 0;">
-                                                    <i class="fa-solid fa-book-open search-empty-icon"
-                                                       style="font-size: 3rem; color: #ccc;"></i>
-                                                    <div class="search-empty-title"
-                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                <div class="search-empty-state">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                                    <div class="search-empty-title">
                                                         Không tìm thấy bài học nào
                                                     </div>
                                                 </div>

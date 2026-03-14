@@ -2,8 +2,10 @@
 .modal__course-detail {
     display: none;
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1000;
     align-items: center;
@@ -17,14 +19,20 @@
     border-radius: 1.2rem;
     width: 90%;
     max-width: 65rem; /* Tăng nhẹ chiều rộng để chữ to không bị chật */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     animation: slideDown 0.3s ease-out;
 }
 
 @keyframes slideDown {
-    from { transform: translateY(-5rem); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-5rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* --- Header --- */
@@ -145,4 +153,158 @@
     color: var(--pending-text) !important;
     font-weight: var(--fw-bold);
     background-color: var(--pending-bg);
+}
+
+.action-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    height: 100%;
+}
+
+.icon-action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--dark-blue);
+    transition: all 0.2s;
+}
+
+.icon-action-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+}
+
+
+table {
+    border-collapse: collapse !important;
+}
+
+table td {
+    border-bottom: 1px solid var(--light-grey);
+    height: 55px;
+}
+
+.search-empty-state {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.search-empty-icon {
+    font-size: 3rem;
+    color: #ccc;
+}
+
+.search-empty-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.button.btn-cancel {
+    margin-right: 1rem;
+}
+
+.container-2__list-student {
+
+    .action-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        height: 100%;
+    }
+
+    .icon-action-btn {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        border-radius: 4px;
+        color: var(--dark-blue);
+        transition: all 0.2s;
+    }
+
+    .icon-action-btn:hover {
+        background-color: #f0f0f0;
+        transform: translateY(-1px);
+    }
+
+
+    table {
+        border-collapse: collapse !important;
+    }
+
+    table td {
+        border-bottom: 1px solid var(--light-grey);
+        height: 55px;
+    }
+
+}
+
+.search-empty-state{
+    text-align: center; padding: 40px 0;
+}
+.search-empty-icon{
+    font-size: 3rem; color: #ccc;
+}
+.search-empty-title{
+    font-size: 1.8rem; font-weight: bold; margin-top: 15px;
+}
+
+.modal-footer .btn-cancel{
+    margin-right: 1rem;
+}
+
+#confirm-delete-modal{
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+}
+.modal-content{
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 350px;
+    text-align: center;
+}
+.modal-content h3{
+    color: #dc3545;
+    font-size:1.8rem;
+}
+.modal-content p{
+    font-size: 1.6rem;
+}
+.modal-content div{
+    display: flex; justify-content: center; gap: 10px; margin-top: 20px;
+}
+.modal-content div .btn-cancel{
+    padding: 8px 20px;
+}
+#btn-confirm-delete{
+    background-color: #dc3545; padding: 8px 20px;
+}
+
+#delete-form-id{
+    display: none;
 }

@@ -205,3 +205,11 @@
     background-color: var(--dark-blue);
     color: var(--white-color);
 }
+
+.content__type .text-big.fa-solid{
+    color: var(--yellow-color);
+}
+
+.user__profile-btn{
+    justify-content: center; display: none;
+}
