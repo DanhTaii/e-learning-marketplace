@@ -3,8 +3,8 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagServiceImpl;
@@ -23,7 +23,7 @@ public class CourseDetailController extends HttpServlet {
 
     private CourseServiceImpl cs;
     private TagService tagService;
-    private ICategoryService ICategoryService;
+    private CategoryService ICategoryService;
     private CourseTagService courseTagService;
     private CourseServiceImpl courseServiceImpl;
 
@@ -31,7 +31,7 @@ public class CourseDetailController extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.cs = new CourseServiceImpl();
-        this.ICategoryService = new CategoryService();
+        this.ICategoryService = BeanContainer.getBean(CategoryService.class);
         this.tagService = new TagServiceImpl();
         this.courseTagService = new CourseTagServiceImpl();
         this.courseServiceImpl = new CourseServiceImpl();

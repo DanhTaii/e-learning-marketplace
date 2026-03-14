@@ -3,10 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.result_search;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
@@ -41,7 +41,7 @@ public class ResultSearchByCategoriesController extends HttpServlet {
             return;
         }
 
-        ICategoryService cs = new CategoryService();
+        CategoryService cs = BeanContainer.getBean(CategoryService.class);
         Category cate = cs.getCategoryById(idCategory);
         request.setAttribute("cate", cate);
         request.setAttribute("mode", "category");
@@ -108,8 +108,8 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         request.setAttribute("paginationUrl", paginationUrl.toString());
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        ICategoryService ICategoryService = new CategoryService();
-        List<Category> categories = ICategoryService.getAllCategories();
+        CategoryService categoryService = BeanContainer.getBean(CategoryService.class);
+        List<Category> categories = categoryService.getAllCategories();
         request.setAttribute("categories", categories);
         TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());

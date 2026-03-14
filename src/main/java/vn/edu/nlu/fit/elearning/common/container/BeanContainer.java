@@ -4,6 +4,8 @@ import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
 import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDao;
@@ -58,7 +60,7 @@ public class BeanContainer {
         UserDao userDao = new UserDaoImpl();
         WishlistDao wishlistDao = new WishlistDaoImpl();
 
-        
+        beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
 
     }
 
