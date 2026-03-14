@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
@@ -20,7 +21,7 @@ public class CartManagerController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.ws = new WishlistServiceImpl();
+        this.ws = BeanContainer.getBean(WishlistService.class);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

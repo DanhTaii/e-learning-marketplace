@@ -1,23 +1,19 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
-import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
-import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -76,11 +72,6 @@ public class CourseDetailController extends HttpServlet {
         // này làm cho category
         Category category = categoryService.getCategoryById(c.getCategoryId());
         request.setAttribute("category", category);
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
 
         request.setAttribute("c", c);
         request.getRequestDispatcher("/views/pages/partial/course-detail.jsp").forward(request, response);

@@ -35,12 +35,6 @@ public class AccountProfileController extends HttpServlet {
 //            userId = (Integer) session.getAttribute("userId");
 //        }
 
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 //        UserService userService = new UserService();
 //        User user = userService.getUserById(userId);
 //        request.setAttribute("user", user);

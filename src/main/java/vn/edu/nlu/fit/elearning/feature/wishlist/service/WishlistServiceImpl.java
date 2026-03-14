@@ -1,8 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.wishlist.service;
 
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDao;
-import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 import java.util.List;
 
@@ -10,8 +9,8 @@ public class WishlistServiceImpl implements WishlistService {
 
     private WishlistDao wd;
 
-    public WishlistServiceImpl() {
-        this.wd = new WishlistDaoImpl();
+    public WishlistServiceImpl(WishlistDao wishlistDao) {
+        this.wd = wishlistDao;
     }
 
     @Override

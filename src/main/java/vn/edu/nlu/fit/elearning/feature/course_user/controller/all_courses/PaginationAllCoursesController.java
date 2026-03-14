@@ -1,43 +1,35 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.all_courses;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller.all_courses;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-
+import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
+import vn.edu.nlu.fit.elearning.common.utils.search.CourseFilter;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "PaginationAllCoursesController", value = "/pagination-all-courses")
 public class PaginationAllCoursesController extends HttpServlet {
-
-    private static final int PAGE_SIZE = 16;
-    private CourseService courseServiceImpl;
+    private CourseSearchService courseSearchServiceImpl;
 
     @Override
     public void init() {
-        courseServiceImpl = BeanContainer.getBean(CourseService.class);
+        courseSearchServiceImpl = BeanContainer.getBean(CourseSearchService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Filter cho AllCourse
+        AllCourseFilter allCourseFilter = new AllCourseFilter();
 
         HttpSession session = request.getSession();
         int userId = 0;
-
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-//        UserService userService = new UserService();
-//        User user = userService.getUserById(userId);
-//        request.setAttribute("user", user);
 
         // Lấy tất cả các tham số filter
         String pageStr = request.getParameter("page");
@@ -67,26 +59,26 @@ public class PaginationAllCoursesController extends HttpServlet {
 
         List<CourseCardDto> listCourse;
         int totalCourses;
+        allCourseFilter.setCategoryId(categoryId);
+        allCourseFilter.setSortPrice(sortPrice);
+        allCourseFilter.setPopular(popular);
+        allCourseFilter.setNewest(newest);
+        allCourseFilter.setUserId(userId);
+        allCourseFilter.setSize(16);
+        allCourseFilter.setPage(page);
 
         // Dùng filter thống nhất cho mọi trường hợp
-        listCourse = courseServiceImpl.filterCoursesForAllCourses(
-                categoryId,     // null nếu không lọc cate
-                sortPrice,      // asc/desc hoặc null// duration
-                popular,        // "true" nếu phổ biến
-                newest,
-                PAGE_SIZE,
-                (page - 1) * PAGE_SIZE, userId
-        );
+        listCourse = courseSearchServiceImpl.filterCoursesForAllCourses(allCourseFilter);
 
-        totalCourses = courseServiceImpl.countFilteredCourses(
+        totalCourses = courseSearchServiceImpl.countFilteredCourses(
                 categoryId, null, null, sortPrice, null, null, null, null, popularStr
         );
 
-        int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
+        int totalPages = (int) Math.ceil((double) totalCourses / allCourseFilter.getSize());
 
         // Set attributes
         request.setAttribute("listCourse", listCourse);
-        request.setAttribute("currentPage", page);
+        request.setAttribute("currentPage", allCourseFilter.getPage());
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("totalCourses", totalCourses);
 
@@ -94,15 +86,6 @@ public class PaginationAllCoursesController extends HttpServlet {
         request.setAttribute("category", categoryStr);
         request.setAttribute("sortPrice", sortPrice);
         request.setAttribute("popular", popular);
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
-
-        request.setAttribute("categories", ICategoryService.getAllCategories());
 
         request.getRequestDispatcher("views/pages/partial/all-course.jsp").forward(request, response);
     }

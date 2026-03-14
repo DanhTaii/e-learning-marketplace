@@ -38,19 +38,11 @@ public class MyCourseController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService =BeanContainer.getBean(UserService.class);
-        User user = userService.getUserById(userId);
-        request.setAttribute("user", user);
+//        UserService userService =BeanContainer.getBean(UserService.class);
+//        User user = userService.getUserById(userId);
+//        request.setAttribute("user", user);
 
         List<EnrollmentCardDTO> enrollmentList = enrollmentService.getAllEnrollments(userId);
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
-
 
         request.setAttribute("listEnrollments", enrollmentList);
         request.getRequestDispatcher("/views/pages/personal/course/my-course.jsp").forward(request, response);

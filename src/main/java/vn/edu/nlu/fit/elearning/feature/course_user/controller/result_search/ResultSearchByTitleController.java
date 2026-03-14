@@ -1,17 +1,12 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.result_search;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller.result_search;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,6 +15,13 @@ import java.util.List;
 public class ResultSearchByTitleController extends HttpServlet {
 
     private static final int PAGE_SIZE = 12;
+    private CourseSearchService courseSearchService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        this.courseSearchService = BeanContainer.getBean(CourseSearchService.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,8 +44,8 @@ public class ResultSearchByTitleController extends HttpServlet {
             if (keyword == null) keyword = "";
             keyword = keyword.trim();
 
-            CourseService courseServiceImpl = BeanContainer.getBean(CourseService.class);
-            List<CourseCardDto> list = courseServiceImpl.getCourseSuggestByTitle(keyword);
+            CourseService courseSearchService = BeanContainer.getBean(CourseService.class);
+            List<CourseCardDto> list = courseSearchService.getCourseSuggestByTitle(keyword);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -98,16 +100,14 @@ public class ResultSearchByTitleController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        CourseService courseServiceImpl = BeanContainer.getBean(CourseService.class);
-
         // Lấy list + phân trang
-        List<CourseCardDto> listCourse = courseServiceImpl.filterCoursesByTitleWithPagination(
+        List<CourseCardDto> listCourse = courseSearchService.filterCoursesByTitleWithPagination(
                 search, sortPrice, level, priceRange, rating, duration, popular,
                 page, PAGE_SIZE, userId
         );
 
         // Đếm tổng
-        int totalCourses = courseServiceImpl.countFilteredCoursesByTitle(
+        int totalCourses = courseSearchService.countFilteredCoursesByTitle(
                 search, sortPrice, level, priceRange, rating, duration, popular
         );
 
@@ -136,13 +136,6 @@ public class ResultSearchByTitleController extends HttpServlet {
         if (popular != null) paginationUrl.append("&popular=").append(popular);
 
         request.setAttribute("paginationUrl", paginationUrl.toString());
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);
     }

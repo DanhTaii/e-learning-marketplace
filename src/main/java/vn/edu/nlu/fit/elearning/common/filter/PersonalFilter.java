@@ -33,7 +33,7 @@ public class PersonalFilter implements Filter {
                 res.getWriter().write("Unauthenticated");
             } else {
                 req.setAttribute("error", "Vui lòng đăng nhập!");
-                req.getRequestDispatcher("/html-authentication/sign-in.jsp").forward(req, res);
+                req.getRequestDispatcher("/views/pages/auth/sign-in.jsp").forward(req, res);
             }
 
         }

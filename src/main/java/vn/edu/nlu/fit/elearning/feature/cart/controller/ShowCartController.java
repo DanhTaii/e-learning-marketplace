@@ -7,16 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,11 +16,11 @@ import java.util.List;
 @WebServlet(name = "ShowCartController", value = "/personal/cart")
 
 public class ShowCartController extends HttpServlet {
-    private CourseService courseServiceImpl;
+    private IndexService indexService;
 
     @Override
     public void init() {
-        courseServiceImpl = BeanContainer.getBean(CourseService.class);
+        this.indexService = BeanContainer.getBean(IndexService.class);
     }
 
     @Override
@@ -39,19 +31,12 @@ public class ShowCartController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService =BeanContainer.getBean(UserService.class);
-        User user = userService.getUserById(userId);
-        request.setAttribute("user", user);
+//        UserService userService =BeanContainer.getBean(UserService.class);
+//        User user = userService.getUserById(userId);
+//        request.setAttribute("user", user);
 
-        List<CourseCardDto> coursesLastest = courseServiceImpl.getSixCoursesLast(userId);
+        List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
         request.setAttribute("coursesLastest", coursesLastest);
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/cart/cart.jsp").forward(request, response);
     }

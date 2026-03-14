@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.course.dto;
+package vn.edu.nlu.fit.elearning.feature.course_user.dto;
 
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;

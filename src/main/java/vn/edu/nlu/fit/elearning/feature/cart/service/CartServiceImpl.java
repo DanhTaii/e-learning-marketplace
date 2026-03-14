@@ -1,7 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.cart.service;
 
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;

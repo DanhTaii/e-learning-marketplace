@@ -1,24 +1,30 @@
-package vn.edu.nlu.fit.elearning.feature.course.controller.result_search;
+package vn.edu.nlu.fit.elearning.feature.course_user.controller.result_search;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
+import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ResultSearchByCategoriesController", value = "/result-search/by-category")
-public class ResultSearchByCategoriesController extends HttpServlet {
+@WebServlet(name = "ResultSearchByTagsController", value = "/result-search/by-tag")
+public class ResultSearchByTagsController extends HttpServlet {
 
-    private static final int PAGE_SIZE = 12;  // Số khóa học mỗi trang
+    private static final int PAGE_SIZE = 12;
+    private CourseSearchService courseSearchService;
+    private TagService tagService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        this.courseSearchService = BeanContainer.getBean(CourseSearchService.class);
+        this.tagService = BeanContainer.getBean(TagService.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,19 +39,18 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 //        User user = userService.getUserById(userId);
 //        request.setAttribute("user", user);
 
-        // Lấy id category
-        int idCategory;
+        // Lấy id tag
+        int idTag;
         try {
-            idCategory = Integer.parseInt(request.getParameter("id"));
+            idTag = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException | NullPointerException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid category ID");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid tag ID");
             return;
         }
 
-        CategoryService cs = BeanContainer.getBean(CategoryService.class);
-        Category cate = cs.getCategoryById(idCategory);
-        request.setAttribute("cate", cate);
-        request.setAttribute("mode", "category");
+        Tag tag = tagService.getTagById(idTag);
+        request.setAttribute("tag", tag);
+        request.setAttribute("mode", "tag");
 
         // Lấy page
         int page = 1;
@@ -67,37 +72,28 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        CourseService courseServiceImpl = BeanContainer.getBean(CourseService.class);
-
-        // Lấy danh sách khóa học đã lọc + phân trang
-        List<CourseCardDto> listCourse = courseServiceImpl.filterCoursesByCategoryWithPagination(
-                idCategory, sortPrice, level, priceRange, rating, duration, popular,
+        // Lấy list + phân trang
+        List<CourseCardDto> listCourse = courseSearchService.filterCoursesByTagWithPagination(
+                idTag, sortPrice, level, priceRange, rating, duration, popular,
                 page, PAGE_SIZE, userId
         );
 
-        // Đếm tổng số khóa học sau lọc
-        int totalCourses = courseServiceImpl.countFilteredCoursesByCategory(
-                idCategory,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular
+        // Đếm tổng
+        int totalCourses = courseSearchService.countFilteredCoursesByTag(
+                idTag, sortPrice, level, priceRange, rating, duration, popular
         );
 
-        int totalPages = totalCourses == 0 ? 1 : (int) Math.ceil((double) totalCourses / PAGE_SIZE);
+        int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 
         // Set attributes
         request.setAttribute("listCourse", listCourse);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
 
-        // Set base URL cho phân trang trong JSP
+        // Set base URL cho phân trang
         StringBuilder paginationUrl = new StringBuilder(request.getContextPath());
-        paginationUrl.append(request.getServletPath());
-
-        paginationUrl.append("?id=").append(idCategory);
+        paginationUrl.append(request.getServletPath());  // /result-search/by-tag
+        paginationUrl.append("?id=").append(idTag);      // bắt đầu bằng ?id=...
 
         if (sortPrice != null) paginationUrl.append("&sortPrice=").append(sortPrice);
         if (level != null) paginationUrl.append("&level=").append(level);
@@ -108,18 +104,10 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 
         request.setAttribute("paginationUrl", paginationUrl.toString());
 
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = categoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
-
         request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

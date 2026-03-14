@@ -10,6 +10,10 @@ import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
 import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
+import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
+import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDao;
@@ -24,6 +28,10 @@ import vn.edu.nlu.fit.elearning.feature.enrollment.dao.EnrollmentDao;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dao.EnrollmentDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.index.dao.IndexDao;
+import vn.edu.nlu.fit.elearning.feature.index.dao.IndexDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
+import vn.edu.nlu.fit.elearning.feature.index.service.IndexServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDao;
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
@@ -40,8 +48,6 @@ import vn.edu.nlu.fit.elearning.feature.order_item.dao.OrderItemDao;
 import vn.edu.nlu.fit.elearning.feature.order_item.dao.OrderItemDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDao;
-import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDao;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
@@ -60,6 +66,8 @@ import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDao;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +85,9 @@ public class BeanContainer {
 
         CourseDao courseDao = new CourseDaoImpl();
         beans.put(CourseService.class, new CourseServiceImpl(courseDao));
+
+        CourseSearchDao courseSearchDao = new CourseSearchDaoImpl();
+        beans.put(CourseSearchService.class, new CourseSearchServiceImpl(courseSearchDao));
 
         CourseTagDao courseTagDao = new CourseTagDaoImpl();
         beans.put(CourseTagService.class, new CourseTagServiceImpl(courseTagDao));
@@ -110,6 +121,12 @@ public class BeanContainer {
 
         UserDao userDao = new UserDaoImpl();
         beans.put(UserService.class, new UserServiceImpl(userDao));
+
+        IndexDao indexDao = new IndexDaoImpl();
+        beans.put(IndexService.class, new IndexServiceImpl(indexDao));
+
+        WishlistDao wishlistDao = new WishlistDaoImpl();
+        beans.put(WishlistService.class, new WishlistServiceImpl(wishlistDao));
 
     }
 

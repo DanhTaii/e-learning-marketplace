@@ -8,17 +8,9 @@ import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
-
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {
@@ -29,17 +21,11 @@ public class SignUpController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService =BeanContainer.getBean(UserService.class);
+        this.userService = BeanContainer.getBean(UserService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // load categories/tags cho header
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
     }

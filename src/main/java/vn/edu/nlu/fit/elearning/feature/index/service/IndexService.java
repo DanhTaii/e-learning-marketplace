@@ -1,0 +1,16 @@
+package vn.edu.nlu.fit.elearning.feature.index.service;
+
+import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+
+import java.util.List;
+
+public interface IndexService {
+    List<CourseCardDto> getThreeCoursesWereLiked(Integer userId);
+
+    List<CourseCardDto> getSixCoursesMostPopular(Integer userId);
+
+    CourseCardDto getCoursesMostPopular(Integer userId);
+
+    List<CourseCardDto> getSixCoursesLast(Integer userId);
+
+}
