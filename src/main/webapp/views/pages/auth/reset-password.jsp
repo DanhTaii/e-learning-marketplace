@@ -40,17 +40,17 @@
                                 </span>
                             </div>
                             <c:if test="${error != null}">
-                                <span style="color: red; font-size: var(--text-xl)"> ${error} </span>
+                                <span class="add-to-fix"> ${error} </span>
                             </c:if>
                             <div class="form__input form__input-1">
                                 <input type="password" name="password" class="input-text text-big"
                                        placeholder="Nhập mật khẩu mới của bạn" id="oldPass">
-                                <span id="error_oldPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_oldPass" class="error-client"></span>
                             </div>
                             <div class="form__input form__input-2">
                                 <input type="password" name="retypePassword" class="input-text text-big"
                                        placeholder="Nhập lại mật khẩu" id="reNewPass">
-                                <span id="error_reNewPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_reNewPass" class="error-client"></span>
                             </div>
                             <div class="form__button">
                                 <button type="submit" class="button__btn box-btn">

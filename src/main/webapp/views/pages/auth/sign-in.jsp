@@ -56,19 +56,18 @@
                         <form action="sign-in" class="form" method="post" id="myForm">
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
-                            <div style="min-height: 25px;">
-                                <span style="color: red; font-size: var(--text-xl)"> <%= error %> </span>
+                            <div class="add-to-fix-1">
+                                <span class="add-to-fix-2"> <%= error %> </span>
                             </div>
                             <div class="form__input input-1">
                                 <input class="input-text text-big" placeholder="Nhập email của bạn"
                                        id='login_email' name="email"
                                        value="${param.email}">
-                                <span id="error_email" class="error-client"
-                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_email" class="error-client"></span>
                             </div>
 
                             <div class="form__input input-2">
-                                <div class="password-wrapper" style="position: relative;">
+                                <div class="password-wrapper">
                                     <input type="password" class="input-text text-big"
                                            placeholder="Nhập mật khẩu của bạn"
                                            name="password" id="pass" value="${param.password}">
@@ -76,8 +75,7 @@
                                     <i class="fa-regular fa-eye" id="togglePassword"></i>
                                 </div>
 
-                                <span id="error_pass" class="error-client"
-                                      style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                                <span id="error_pass" class="error-client"></span>
                             </div>
                             <div class="form__sign-in-option">
                                 <div class="sign-in-option-1">
