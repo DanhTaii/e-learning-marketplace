@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.helper.enums;
+package vn.edu.nlu.fit.elearning.common.helper.enums;
 
 public enum Level {
     BEGINNER("Sơ cấp"),

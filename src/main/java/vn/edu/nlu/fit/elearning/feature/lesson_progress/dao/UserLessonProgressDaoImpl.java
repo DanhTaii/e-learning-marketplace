@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.lesson_progress.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.dto.LessonProgressDTO;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.model.UserLessonProgress;
 

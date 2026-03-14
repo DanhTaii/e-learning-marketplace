@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;

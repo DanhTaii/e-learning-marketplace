@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.filter;
+package vn.edu.nlu.fit.elearning.common.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;

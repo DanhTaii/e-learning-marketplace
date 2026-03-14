@@ -3,15 +3,15 @@ package vn.edu.nlu.fit.elearning.feature.auth.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
-import vn.edu.nlu.fit.elearning.feature.access_token.dao.IAccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.IAccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
@@ -57,8 +57,8 @@ public class ForgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
         }
 
-        IAccessTokenService IAccessTokenService = new AccessTokenService();
-        String token = IAccessTokenService.generateToken();
+        AccessTokenService AccessTokenService = new AccessTokenServiceImpl();
+        String token = AccessTokenService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 
 
@@ -67,11 +67,11 @@ public class ForgetPasswordController extends HttpServlet {
 
         AccessToken accessToken = null;
         if(user != null){
-            accessToken = new AccessToken(user.getId(), token, IAccessTokenService.expireDateTime(), false);
+            accessToken = new AccessToken(user.getId(), token, AccessTokenService.expireDateTime(), false);
 
         }
 
-        IAccessTokenDao tokenDao = new AccessTokenDao();
+        AccessTokenDao tokenDao = new AccessTokenDaoImpl();
         boolean isCreate = false;
         if ( accessToken != null){
             isCreate = tokenDao.createToken(accessToken);
@@ -82,7 +82,7 @@ public class ForgetPasswordController extends HttpServlet {
             return;
         }
 
-        boolean isSend = IAccessTokenService.sendEmail(email, token, user.getUsername());
+        boolean isSend = AccessTokenService.sendEmail(email, token, user.getUsername());
         if(!isSend){
             request.setAttribute("error", "Gửi không thành công!");
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);

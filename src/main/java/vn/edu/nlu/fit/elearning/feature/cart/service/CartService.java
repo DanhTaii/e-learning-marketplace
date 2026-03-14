@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 
 import java.util.List;
 
-public interface ICart {
+public interface CartService {
     void addCourse(CourseCardDto c);
 
     CartItem deleteCourse(int id);

@@ -6,9 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.cart.service.Cart;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 
 import java.io.IOException;
@@ -36,8 +36,8 @@ public class AddCartController extends HttpServlet {
             return;
         }
 
-        ICart c = (ICart) session.getAttribute("cart");
-        if (c == null) c = new Cart();
+        CartService c = (CartService) session.getAttribute("cart");
+        if (c == null) c = new CartServiceImpl();
         c.addCourse(course);
         session.setAttribute("cart", c);
         response.setContentType("text/plain");

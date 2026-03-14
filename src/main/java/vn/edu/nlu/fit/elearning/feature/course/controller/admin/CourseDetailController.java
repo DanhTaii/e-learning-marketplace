@@ -10,7 +10,7 @@ import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.helper.enums.Level;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Level;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;

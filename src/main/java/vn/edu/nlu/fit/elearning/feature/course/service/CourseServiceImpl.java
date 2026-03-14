@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.utils.objects.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.utils.objects.CourseFilter;
 
 import java.util.List;
 

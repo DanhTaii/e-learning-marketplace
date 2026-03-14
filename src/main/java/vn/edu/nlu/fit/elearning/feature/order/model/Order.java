@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.order.model;
 
-import vn.edu.nlu.fit.elearning.helper.enums.OrderStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.category.dto;
 
-import vn.edu.nlu.fit.elearning.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 
 public class CategoryDto {
     private int id;

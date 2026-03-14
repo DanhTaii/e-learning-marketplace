@@ -5,7 +5,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
-import vn.edu.nlu.fit.elearning.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 

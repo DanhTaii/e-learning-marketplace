@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
@@ -27,40 +27,40 @@ public class CartManagerController extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        ICart ICart = (ICart) session.getAttribute("cart");
+        CartService ICartService = (CartService) session.getAttribute("cart");
 
-        if (ICart != null && action != null) {
+        if (ICartService != null && action != null) {
             switch (action) {
                 case "delete":
                     int id = Integer.parseInt(request.getParameter("id"));
-                    ICart.deleteCourse(id);
+                    ICartService.deleteCourse(id);
                     break;
 
                 case "moveToWishlist":
                     int courseId = Integer.parseInt(request.getParameter("id"));
                     ws.addCourseToWishlist(userId, courseId);
-                    ICart.deleteCourse(courseId);
+                    ICartService.deleteCourse(courseId);
                     break;
 
                 case "moveSelectedToWishlist":
-                    ICart.getSelectedItems().forEach(item -> {
+                    ICartService.getSelectedItems().forEach(item -> {
                         ws.addCourseToWishlist(userId, item.getCourse().getId());
                     });
-                    ICart.removeSelected();
+                    ICartService.removeSelected();
                     break;
 
                 case "removeSelected":
-                    ICart.removeSelected();
+                    ICartService.removeSelected();
                     break;
 
                 case "selectAll":
                     boolean status = Boolean.parseBoolean(request.getParameter("status"));
-                    ICart.selectAll(status);
+                    ICartService.selectAll(status);
             }
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": %.0f, \"total\": %.0f}",
-                    ICart.getSelectedQuantity(), ICart.getFinalPriceTotal(), ICart.getTotal());
+                    ICartService.getSelectedQuantity(), ICartService.getFinalPriceTotal(), ICartService.getTotal());
             response.getWriter().write(json);
             return ;
         }

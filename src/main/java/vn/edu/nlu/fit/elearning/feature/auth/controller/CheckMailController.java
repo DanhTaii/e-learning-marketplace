@@ -3,14 +3,14 @@ package vn.edu.nlu.fit.elearning.feature.auth.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.IAccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
@@ -23,13 +23,13 @@ import java.util.List;
 public class CheckMailController extends HttpServlet {
 
     private AuthService AuthService;
-    private IAccessTokenService IAccessTokenService;
+    private AccessTokenService AccessTokenService;
     private UserService userService;
 
     @Override
     public void init() throws ServletException {
         this.AuthService = new AuthServiceImpl();
-        this.IAccessTokenService = new AccessTokenService();
+        this.AccessTokenService = new AccessTokenServiceImpl();
         this.userService = new UserServiceImpl();
     }
 
@@ -78,9 +78,9 @@ public class CheckMailController extends HttpServlet {
                 return;
             }
 
-            boolean isValid = IAccessTokenService.validateResetToken(user.getId(), otp);
+            boolean isValid = AccessTokenService.validateResetToken(user.getId(), otp);
             if (isValid) {
-                IAccessTokenService.markAsUsed(otp);
+                AccessTokenService.markAsUsed(otp);
                 session.setAttribute("resetUserId", user.getId());
                 session.setAttribute("userMail", user.getEmail()); // thêm dòng này để ResetPasswordController dùng
                 response.sendRedirect(request.getContextPath() + "/reset-password");
@@ -96,9 +96,9 @@ public class CheckMailController extends HttpServlet {
             String username = (String) session.getAttribute("signupUsername");
             String password = (String) session.getAttribute("signupPassword");
 
-            boolean isValid = IAccessTokenService.validateSignupToken(otp);
+            boolean isValid = AccessTokenService.validateSignupToken(otp);
             if (isValid) {
-                IAccessTokenService.markAsUsed(otp);
+                AccessTokenService.markAsUsed(otp);
 
                 boolean created = AuthService.register(email.trim(), username.trim(), password.trim());
                 if (created) {

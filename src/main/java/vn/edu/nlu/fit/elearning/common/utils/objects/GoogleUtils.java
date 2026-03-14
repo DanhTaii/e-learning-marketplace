@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.utils.objects;
+package vn.edu.nlu.fit.elearning.common.utils.objects;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

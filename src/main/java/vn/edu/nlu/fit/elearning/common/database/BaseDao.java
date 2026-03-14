@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.database;
+package vn.edu.nlu.fit.elearning.common.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

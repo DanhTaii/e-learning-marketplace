@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
@@ -36,7 +36,7 @@ public class PaymentController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        ICart ICart = (ICart) session.getAttribute("cart");
+        CartService ICartService = (CartService) session.getAttribute("cart");
         int userId = 0;
 
         if (session != null && session.getAttribute("userId") != null) {
@@ -45,7 +45,7 @@ public class PaymentController extends HttpServlet {
         UserService userService = new UserServiceImpl();
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
-        if (ICart == null || ICart.getSelectedQuantity() == 0) {
+        if (ICartService == null || ICartService.getSelectedQuantity() == 0) {
             response.sendRedirect(request.getContextPath() + "/personal/cart");
             return;
         }

@@ -6,10 +6,10 @@ import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Cart implements ICart {
+public class CartServiceImpl implements CartService {
     Map<Integer, CartItem> data;
 
-    public Cart() {
+    public CartServiceImpl() {
         data = new HashMap<>();
     }
 

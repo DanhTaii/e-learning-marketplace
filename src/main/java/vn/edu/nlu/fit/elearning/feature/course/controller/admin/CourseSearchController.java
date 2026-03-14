@@ -6,8 +6,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.helper.pagination.PageResponse;
-import vn.edu.nlu.fit.elearning.utils.objects.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.PageResponse;
+import vn.edu.nlu.fit.elearning.common.utils.objects.CourseFilter;
 
 import java.io.IOException;
 import java.util.List;

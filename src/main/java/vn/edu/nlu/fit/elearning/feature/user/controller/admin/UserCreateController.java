@@ -6,10 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
-import vn.edu.nlu.fit.elearning.utils.objects.PasswordUtils;
+import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
 
 import java.io.IOException;
 
