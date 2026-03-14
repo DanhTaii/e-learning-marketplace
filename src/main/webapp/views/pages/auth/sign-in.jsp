@@ -22,7 +22,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/validation/auth/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -119,48 +119,5 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 </body>
-<script>
-    $(document).ready(function () {
-        Validator.setupAutoClearErrors();
-
-        $('#myForm').on('submit', function (e) {
-            let email = $('#login_email').val().trim();
-            let pass = $('#pass').val().trim();
-            let isValid = true;
-
-            let emailError = Validator.checkEmail(email);
-            if (emailError) {
-                $('#error_email').text(emailError);
-                isValid = false;
-            }
-
-
-            if (pass === '') {
-                $('#error_pass').text('Vui lòng nhập mật khẩu');
-                isValid = false;
-            }
-
-            if (!isValid) {
-                e.preventDefault();
-            }
-            return isValid;
-        });
-
-    });
-
-    $(document).ready(function () {
-        const togglePassword = $('#togglePassword');
-        const passwordInput = $('#pass');
-
-        togglePassword.on('click', function () {
-            // Kiểm tra loại input hiện tại
-            const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
-            passwordInput.attr('type', type);
-
-            // Thay đổi icon (từ mắt mở sang mắt đóng và ngược lại)
-            this.classList.toggle('fa-eye-slash');
-            this.classList.toggle('fa-eye');
-        });
-    })
-</script>
+<script src="assets/javascript/validation/auth/sign-in.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

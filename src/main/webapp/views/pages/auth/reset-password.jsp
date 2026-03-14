@@ -17,7 +17,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/validation/auth/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -68,31 +68,6 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 </body>
-<script>
-    $(document).ready(function () {
-        Validator.setupAutoClearErrors();
-        $('#myForm').on('submit', function (e) {
-            let oldPass = $('#oldPass').val().trim();
-            let reType = $('#reNewPass').val().trim();
-            let isValid = true;
+<script src="assets/javascript/validation/auth/reset-password.js?v=<%=System.currentTimeMillis()%>"></script>
 
-            let newPassError = Validator.checkPassword(oldPass);
-            if (newPassError) {
-                $('#error_oldPass').text(newPassError);
-                isValid = false;
-            }
-
-            if (oldPass !== reType) {
-                $('#error_reNewPass').text('Mật khẩu nhập lại không khớp');
-                isValid = false;
-            }
-
-            if (!isValid) {
-                e.preventDefault();
-            }
-            return isValid;
-        });
-
-    });
-</script>
 </html>

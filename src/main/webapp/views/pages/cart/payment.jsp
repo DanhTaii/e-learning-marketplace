@@ -178,40 +178,6 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
-
+<script src="assets/javascript/features/cart/payment-modal.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const payBtn = document.getElementById('pay-btn'); // ID của nút Thanh toán ở hóa đơn
-        const paymentForm = document.querySelector('.payment-layout'); // Form chứa dữ liệu thanh toán
-        const confirmPaymentBtn = document.getElementById('btn-confirm-payment'); // Nút xác nhận trong modal
-
-        if (payBtn) {
-            payBtn.onclick = function(e) {
-                e.preventDefault(); // Không cho form submit ngay
-                openModal('popup__add-payment-confirm-black'); // Dùng hàm JS bạn đã có
-            };
-        }
-
-        if (confirmPaymentBtn) {
-            confirmPaymentBtn.onclick = function() {
-                if (paymentForm) {
-                    paymentForm.submit(); // Gửi form đi sau khi xác nhận
-                }
-            };
-        }
-    });
-
-    // Bổ sung vào hàm window.onclick có sẵn của bạn để hỗ trợ đóng khi click ra ngoài
-    const originalWindowClick = window.onclick;
-    window.onclick = function (event) {
-        if (originalWindowClick) originalWindowClick(event); // Giữ lại logic cũ của bạn
-
-        // Thêm logic đóng cho modal thanh toán
-        if (event.target.id === 'popup__add-payment-confirm-black') {
-            closeModal('popup__add-payment-confirm-black');
-        }
-    };
-</script>
 </html>

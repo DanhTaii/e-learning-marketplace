@@ -414,7 +414,7 @@
 
 <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-<script>
+assets/css/base/default.css
     window.flashError = '${sessionScope.flashError}';
     window.flashSuccess = '${sessionScope.flashSuccess}';
 
