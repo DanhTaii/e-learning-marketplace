@@ -303,20 +303,9 @@
 <form id="delete-form-id" action="admin/course/delete" method="post" class="form">
     <input id="input-delete-id" type="hidden" name="id">
 </form>
-<%--NOTIFICATION ACTION--%>
-<div id="toast"></div>
+<jsp:include page="/views/layouts/toast.jsp"/>
 </body>
-<script>
-    window.flashError = '${sessionScope.flashError}';
-    window.flashSuccess = '${sessionScope.flashSuccess}';
 
-    <%
-        session.removeAttribute("flashError");
-        session.removeAttribute("flashSuccess");
-    %>
-
-</script>
-<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/pagination/course/course-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
