@@ -1,26 +1,20 @@
 package vn.edu.nlu.fit.elearning.feature.user.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
 
-public interface UserDao extends BaseCrudDao<User, Integer> {
-    @Override
+public interface UserDao {
     int create(User user);
 
-    @Override
     User findById(Integer integer);
 
-    @Override
     List<User> findAll();
 
-    @Override
     int update(User entity);
 
     int updateRole(int userId, String role);
 
-    @Override
     int delete(Integer integer);
 
     User findUserByEmail(String email);

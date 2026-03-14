@@ -1,24 +1,18 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
 
-public interface LessonDao extends BaseCrudDao<Lesson, Integer> {
-    @Override
+public interface LessonDao {
     int create(Lesson entity);
 
-    @Override
     Lesson findById(Integer integer);
 
-    @Override
     List<Lesson> findAll();
 
-    @Override
     int update(Lesson entity);
 
-    @Override
     int delete(Integer lessonId);
 
     List<Lesson> findByName(String name);

@@ -1,6 +1,5 @@
 package vn.edu.nlu.fit.elearning.feature.payment.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 

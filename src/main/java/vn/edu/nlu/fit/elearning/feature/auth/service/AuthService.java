@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.utils.objects.GoogleUser;
 
 public interface AuthService {
@@ -15,4 +16,5 @@ public interface AuthService {
     boolean changePassword(String newPassword, String retypeNewPassword, String userMail);
 
     void validatePassword(String password);
+
 }

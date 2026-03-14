@@ -1,6 +1,5 @@
 package vn.edu.nlu.fit.elearning.feature.tag.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;

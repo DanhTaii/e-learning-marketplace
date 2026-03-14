@@ -1,7 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.order_item.dao;
 
 import org.jdbi.v3.core.Jdbi;
-import vn.edu.nlu.fit.elearning.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.order_item.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
