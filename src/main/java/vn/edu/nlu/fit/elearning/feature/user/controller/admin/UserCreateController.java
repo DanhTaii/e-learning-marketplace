@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
@@ -21,7 +22,7 @@ public class UserCreateController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserServiceImpl();
+        this.userService = BeanContainer.getBean(UserService.class);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -23,7 +23,7 @@ public class ResetPasswordController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/reset-password.jsp").forward(request, response);

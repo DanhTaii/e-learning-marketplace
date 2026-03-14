@@ -10,8 +10,8 @@ import java.util.List;
 public class DashboardServiceImpl implements DashboardService {
     private DashboardDao dashboardDao;
 
-    public DashboardServiceImpl() {
-        this.dashboardDao = new DashboardDaoImpl();
+    public DashboardServiceImpl(DashboardDao dashboardDao) {
+        this.dashboardDao = dashboardDao;
     }
 
     @Override

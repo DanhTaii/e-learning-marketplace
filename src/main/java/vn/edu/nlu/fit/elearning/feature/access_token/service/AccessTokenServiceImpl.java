@@ -19,12 +19,18 @@ import java.util.Random;
 import java.util.UUID;
 
 public class AccessTokenServiceImpl implements AccessTokenService {
+    private AccessTokenDao accessTokenDao;
     private final int LIMIT_MINUTE = 1;
     String emailFrom = "minh6112005@gmail.com";
     String password = "zwbo jmsn tlpr mieh";
 
     // Thêm DAO để dùng cho validate & mark used
-    private final AccessTokenDao tokenDao = new AccessTokenDaoImpl();
+//    private final AccessTokenDao accessTokenDao = new AccessTokenDaoImpl();
+
+
+    public AccessTokenServiceImpl(AccessTokenDao accessTokenDao) {
+        this.accessTokenDao = accessTokenDao;
+    }
 
     @Override
     public String generateToken() {
@@ -106,7 +112,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
     @Override
     public boolean validateResetToken(int userId, String token) {
-        AccessToken accessToken = tokenDao.findByUserIdAndToken(userId, token);
+        AccessToken accessToken = accessTokenDao.findByUserIdAndToken(userId, token);
         if (accessToken == null) return false;
         if (accessToken.isUsed()) return false;
         if (isExpireTime(accessToken.getExpiriTime())) return false;
@@ -116,7 +122,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
     // Dùng cho đăng ký (không cần userId)
     @Override
     public boolean validateSignupToken(String token) {
-        AccessToken accessToken = tokenDao.findByToken(token);
+        AccessToken accessToken = accessTokenDao.findByToken(token);
         if (accessToken == null) return false;
         if (accessToken.isUsed()) return false;
         if (isExpireTime(accessToken.getExpiriTime())) return false;
@@ -125,6 +131,6 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
     @Override
     public boolean markAsUsed(String token) {
-        return tokenDao.markAsUsed(token);
+        return accessTokenDao.markAsUsed(token);
     }
 }

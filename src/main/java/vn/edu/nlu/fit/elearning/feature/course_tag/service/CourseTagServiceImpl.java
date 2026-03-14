@@ -10,8 +10,8 @@ public class CourseTagServiceImpl implements CourseTagService {
 
     private CourseTagDao ctd;
 
-    public CourseTagServiceImpl() {
-        this.ctd = new CourseTagDaoImpl();
+    public CourseTagServiceImpl(CourseTagDao courseTagDao) {
+        this.ctd = courseTagDao;
     }
 
     @Override

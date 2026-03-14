@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
 
@@ -18,7 +19,7 @@ public class PaymentMethodDeleteController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.paymentMethodService = new PaymentMethodServiceImpl();
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

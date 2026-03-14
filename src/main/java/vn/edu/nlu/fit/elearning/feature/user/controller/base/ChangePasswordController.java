@@ -31,7 +31,7 @@ public class ChangePasswordController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
 

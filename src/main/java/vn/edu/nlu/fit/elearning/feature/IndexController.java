@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
@@ -19,14 +20,14 @@ import java.util.List;
 @WebServlet(name = "IndexController", value = {"/index"})
 public class IndexController extends HttpServlet {
 
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
     private WishlistService wishlistService;
     private CategoryService categoryService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
         // do làm session
         // Khởi tạo 1 lần duy nhất
         this.wishlistService = new WishlistServiceImpl();
@@ -51,7 +52,7 @@ public class IndexController extends HttpServlet {
         request.setAttribute("categories", categories);
 
         // 3.Tag
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học

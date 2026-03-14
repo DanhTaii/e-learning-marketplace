@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 
@@ -17,7 +18,7 @@ public class LessonDeleteController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.lessonService = new LessonServiceImpl();
+        this.lessonService = BeanContainer.getBean(LessonService.class);
     }
 
     @Override

@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
@@ -42,7 +43,7 @@ public class ResultSearchByTagsController extends HttpServlet {
             return;
         }
 
-        TagService ts = new TagServiceImpl();
+        TagService ts = BeanContainer.getBean(TagService.class);
         Tag tag = ts.getTagById(idTag);
         request.setAttribute("tag", tag);
         request.setAttribute("mode", "tag");
@@ -67,7 +68,7 @@ public class ResultSearchByTagsController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        CourseServiceImpl courseServiceImpl = new CourseServiceImpl();
+        CourseService courseServiceImpl = BeanContainer.getBean(CourseService.class);
 
         // Lấy list + phân trang
         List<CourseCardDto> listCourse = courseServiceImpl.filterCoursesByTagWithPagination(
@@ -105,7 +106,7 @@ public class ResultSearchByTagsController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);

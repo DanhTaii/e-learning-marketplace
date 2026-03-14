@@ -29,7 +29,7 @@ public class PaymentController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.paymentMethodService = new PaymentMethodServiceImpl();
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class PaymentController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService = new UserServiceImpl();
+        UserService userService =BeanContainer.getBean(UserService.class);
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
         if (ICartService == null || ICartService.getSelectedQuantity() == 0) {
@@ -54,7 +54,7 @@ public class PaymentController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();

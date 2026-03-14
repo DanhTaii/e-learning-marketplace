@@ -26,7 +26,7 @@ public class MyCourseController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.enrollmentService = new EnrollmentServiceImpl();
+        this.enrollmentService = BeanContainer.getBean(EnrollmentService.class);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MyCourseController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService = new UserServiceImpl();
+        UserService userService =BeanContainer.getBean(UserService.class);
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
 
@@ -48,7 +48,7 @@ public class MyCourseController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
 

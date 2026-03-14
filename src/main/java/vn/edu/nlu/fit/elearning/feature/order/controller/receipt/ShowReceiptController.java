@@ -36,9 +36,9 @@ PaymentMethodService paymentMethodService;
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderItemService = new OrderItemServiceImpl();
-        this.orderService = new OrderServiceImpl();
-        this.paymentMethodService = new PaymentMethodServiceImpl();
+        this.orderItemService = BeanContainer.getBean(OrderItemService.class);
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
 
 
@@ -51,7 +51,7 @@ PaymentMethodService paymentMethodService;
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService = new UserServiceImpl();
+        UserService userService =BeanContainer.getBean(UserService.class);
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
          int orderId = Integer.parseInt(request.getParameter("orderId"));
@@ -67,7 +67,7 @@ PaymentMethodService paymentMethodService;
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/cart/receipt.jsp").forward(request, response);

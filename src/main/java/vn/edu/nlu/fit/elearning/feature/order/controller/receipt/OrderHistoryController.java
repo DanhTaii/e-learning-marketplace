@@ -32,8 +32,8 @@ PaymentMethodService paymentMethodService;
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderServiceImpl();
-        this.paymentMethodService = new PaymentMethodServiceImpl();
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
 
 
@@ -48,9 +48,9 @@ PaymentMethodService paymentMethodService;
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
-        UserService userService = new UserServiceImpl();
+        UserService userService = BeanContainer.getBean(UserService.class);
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
 

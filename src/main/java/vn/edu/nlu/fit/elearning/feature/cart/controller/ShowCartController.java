@@ -10,6 +10,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
@@ -23,11 +24,11 @@ import java.util.List;
 @WebServlet(name = "ShowCartController", value = "/personal/cart")
 
 public class ShowCartController extends HttpServlet {
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init() {
-        courseServiceImpl = new CourseServiceImpl();
+        courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class ShowCartController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService = new UserServiceImpl();
+        UserService userService =BeanContainer.getBean(UserService.class);
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
 
@@ -49,7 +50,7 @@ public class ShowCartController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/cart/cart.jsp").forward(request, response);

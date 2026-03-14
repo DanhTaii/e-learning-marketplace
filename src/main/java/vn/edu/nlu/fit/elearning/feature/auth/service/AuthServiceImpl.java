@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
@@ -15,7 +16,7 @@ public class AuthServiceImpl implements AuthService {
 
     public AuthServiceImpl() {
         this.userDao = new UserDaoImpl();
-        this.userService = new UserServiceImpl();
+        this.userService = BeanContainer.getBean(UserService.class);
     }
 
     @Override

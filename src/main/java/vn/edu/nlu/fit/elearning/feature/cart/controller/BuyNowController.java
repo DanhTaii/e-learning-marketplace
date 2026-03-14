@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 
 import java.io.IOException;
@@ -17,12 +19,12 @@ import java.io.IOException;
 
 public class BuyNowController extends HttpServlet {
 
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override

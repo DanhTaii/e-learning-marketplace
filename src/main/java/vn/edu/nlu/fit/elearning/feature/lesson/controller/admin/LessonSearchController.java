@@ -5,7 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
@@ -17,13 +19,13 @@ import java.util.List;
 @WebServlet(name = "LessonSearchController", value = "/admin/lesson/search")
 public class LessonSearchController extends HttpServlet {
     private LessonService lessonService;
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.lessonService = new LessonServiceImpl();
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.lessonService = BeanContainer.getBean(LessonService.class);
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override

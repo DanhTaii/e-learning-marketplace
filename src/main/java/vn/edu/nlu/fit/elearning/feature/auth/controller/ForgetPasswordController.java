@@ -27,7 +27,7 @@ public class ForgetPasswordController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.userService = new UserServiceImpl();
+        this.userService =BeanContainer.getBean(UserService.class);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ForgetPasswordController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
@@ -57,7 +57,7 @@ public class ForgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
         }
 
-        AccessTokenService AccessTokenService = new AccessTokenServiceImpl();
+        AccessTokenService AccessTokenService = BeanContainer.getBean(AccessTokenService.class);
         String token = AccessTokenService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 

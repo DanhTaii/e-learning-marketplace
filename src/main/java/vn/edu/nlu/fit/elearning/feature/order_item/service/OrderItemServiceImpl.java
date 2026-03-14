@@ -11,8 +11,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     private OrderItemDao oid;
 
-    public OrderItemServiceImpl() {
-        this.oid = new OrderItemDaoImpl();
+    public OrderItemServiceImpl(OrderItemDao orderItemDao) {
+        this.oid = orderItemDao;
     }
 
     @Override

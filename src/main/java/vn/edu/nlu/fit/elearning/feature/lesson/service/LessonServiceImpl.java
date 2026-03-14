@@ -11,8 +11,8 @@ public class LessonServiceImpl implements LessonService {
 
     private LessonDao lessonDao;
 
-    public LessonServiceImpl() {
-        this.lessonDao = new LessonDaoImpl();
+    public LessonServiceImpl(LessonDao lessonDao) {
+        this.lessonDao = lessonDao;
     }
 
     @Override

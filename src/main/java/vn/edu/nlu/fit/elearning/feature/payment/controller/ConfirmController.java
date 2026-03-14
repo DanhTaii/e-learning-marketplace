@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.model.Enrollment;
@@ -40,11 +41,11 @@ public class ConfirmController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderServiceImpl();
-        this.orderItemService = new OrderItemServiceImpl();
-        this.enrollmentService = new EnrollmentServiceImpl();
-        this.lessonService = new LessonServiceImpl();
-        this.userLessonProgressService = new UserLessonProgressServiceImpl();
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.orderItemService =BeanContainer.getBean(OrderItemService.class);
+        this.enrollmentService = BeanContainer.getBean(EnrollmentService.class);
+        this.lessonService = BeanContainer.getBean(LessonService.class);
+        this.userLessonProgressService = BeanContainer.getBean(UserLessonProgressService.class);
     }
 
     @Override

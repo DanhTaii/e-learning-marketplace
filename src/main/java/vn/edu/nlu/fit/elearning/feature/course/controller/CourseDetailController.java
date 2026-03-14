@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
@@ -24,7 +25,7 @@ import java.util.List;
 @WebServlet(name = "CourDetailController", value = "/course-detail")
 public class CourseDetailController extends HttpServlet {
 
-    private CourseServiceImpl cs;
+    private CourseService cs;
     private ReviewService reviewService;
     private LessonService lessonService;
     private TagService tagService;
@@ -33,10 +34,10 @@ public class CourseDetailController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.cs = new CourseServiceImpl();
-        this.lessonService = new LessonServiceImpl();
-        this.reviewService = new ReviewServiceImpl();
-        this.tagService = new TagServiceImpl();
+        this.cs = BeanContainer.getBean(CourseService.class);
+        this.lessonService = BeanContainer.getBean(LessonService.class);
+        this.reviewService = BeanContainer.getBean(ReviewService.class);
+        this.tagService = BeanContainer.getBean(TagService.class);
         this.categoryService = BeanContainer.getBean(CategoryService.class);
     }
 

@@ -29,8 +29,8 @@ public class CheckMailController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         this.AuthService = new AuthServiceImpl();
-        this.AccessTokenService = new AccessTokenServiceImpl();
-        this.userService = new UserServiceImpl();
+        this.AccessTokenService =BeanContainer.getBean(AccessTokenService.class);
+        this.userService =BeanContainer.getBean(UserService.class);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CheckMailController extends HttpServlet {
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
 
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         HttpSession session = request.getSession(false);

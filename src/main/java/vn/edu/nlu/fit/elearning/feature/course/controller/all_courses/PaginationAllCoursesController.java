@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
@@ -18,11 +19,11 @@ import java.util.List;
 public class PaginationAllCoursesController extends HttpServlet {
 
     private static final int PAGE_SIZE = 16;
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init() {
-        courseServiceImpl = new CourseServiceImpl();
+        courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override
@@ -98,7 +99,7 @@ public class PaginationAllCoursesController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.setAttribute("categories", ICategoryService.getAllCategories());

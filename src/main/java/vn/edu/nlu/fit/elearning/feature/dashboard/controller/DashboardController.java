@@ -3,6 +3,8 @@ package vn.edu.nlu.fit.elearning.feature.dashboard.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.CourseRankingDto;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.dashboard.service.DashboardService;
@@ -23,16 +25,16 @@ import java.util.List;
 public class DashboardController extends HttpServlet {
     private UserService userService;
     private OrderService orderService;
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
     private DashboardService dashboardService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserServiceImpl();
-        this.orderService = new OrderServiceImpl();
-        this.courseServiceImpl = new CourseServiceImpl();
-        this.dashboardService = new DashboardServiceImpl();
+        this.userService =BeanContainer.getBean(UserService.class);
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
+        this.dashboardService = BeanContainer.getBean(DashboardService.class);
     }
 
     @Override

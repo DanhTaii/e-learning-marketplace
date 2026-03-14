@@ -10,8 +10,8 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
-    public UserServiceImpl() {
-        this.userDao = new UserDaoImpl();
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
@@ -98,9 +98,10 @@ public class UserServiceImpl implements UserService {
     public int updateUser(User user) {
         return userDao.update(user);
     }
+
     @Override
     public int updateRole(int userId, String role) {
-        return userDao.updateRole(userId,role);
+        return userDao.updateRole(userId, role);
     }
 
     @Override

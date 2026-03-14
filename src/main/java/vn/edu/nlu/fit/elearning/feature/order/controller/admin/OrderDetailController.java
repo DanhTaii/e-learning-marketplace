@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.order.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 import vn.edu.nlu.fit.elearning.feature.order_item.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
@@ -22,8 +23,8 @@ public class OrderDetailController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.orderService = new OrderServiceImpl();
-        this.orderItemService = new OrderItemServiceImpl();
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.orderItemService = BeanContainer.getBean(OrderItemService.class);
     }
 
     @Override

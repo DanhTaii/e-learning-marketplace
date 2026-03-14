@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderServiceImpl;
 
@@ -21,7 +22,7 @@ public class OrderSearchController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderServiceImpl();
+        this.orderService = BeanContainer.getBean(OrderService.class);
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

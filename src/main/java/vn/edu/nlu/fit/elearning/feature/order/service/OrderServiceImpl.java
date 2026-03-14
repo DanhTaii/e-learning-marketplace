@@ -13,8 +13,8 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderDao orderDao;
 
-    public OrderServiceImpl() {
-        this.orderDao = new OrderDaoImpl();
+    public OrderServiceImpl(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
 
     @Override

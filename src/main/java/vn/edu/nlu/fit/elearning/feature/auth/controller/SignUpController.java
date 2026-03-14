@@ -23,13 +23,13 @@ import java.util.List;
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {
     private UserService userService;
-    private AccessTokenService AccessTokenService = new AccessTokenServiceImpl();
+    private AccessTokenService AccessTokenService = BeanContainer.getBean(AccessTokenService.class);
     private AccessTokenDao tokenDao = new AccessTokenDaoImpl();
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserServiceImpl();
+        this.userService =BeanContainer.getBean(UserService.class);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SignUpController extends HttpServlet {
         CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);

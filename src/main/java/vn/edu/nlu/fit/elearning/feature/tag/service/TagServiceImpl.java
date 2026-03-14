@@ -11,8 +11,8 @@ public class TagServiceImpl implements TagService {
 
     private TagDao tagDao;
 
-    public TagServiceImpl() {
-        this.tagDao = new TagDaoImpl();
+    public TagServiceImpl(TagDao tagDao) {
+        this.tagDao = tagDao;
     }
 
     @Override

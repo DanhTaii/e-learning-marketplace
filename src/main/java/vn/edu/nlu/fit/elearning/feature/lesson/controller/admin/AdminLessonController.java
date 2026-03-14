@@ -5,7 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
@@ -18,20 +20,20 @@ import java.util.List;
 public class AdminLessonController extends HttpServlet {
 
     private LessonService lessonService;
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.lessonService = new LessonServiceImpl();
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.lessonService = BeanContainer.getBean(LessonService.class);
+        this.courseService = BeanContainer.getBean(CourseService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Lesson> listLessons = lessonService.getAllLessons();
         request.setAttribute("listLessons", listLessons);
-        List<Course> listCourses = courseServiceImpl.getAllCourses();
+        List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
         request.setAttribute("currentPage", "lessons");
         request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
@@ -49,7 +51,7 @@ public class AdminLessonController extends HttpServlet {
 
             request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
             request.setAttribute("listLessons", lessonService.getAllLessons());
-            request.setAttribute("listCourse", courseServiceImpl.getAllCourses());
+            request.setAttribute("listCourse", courseService.getAllCourses());
             request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
             return;
         }
@@ -58,7 +60,7 @@ public class AdminLessonController extends HttpServlet {
         if (idCourse <= 0) {
             request.getSession().setAttribute("flashError", "Vui lòng chọn một khóa học cụ thể!");
             request.setAttribute("listLessons", lessonService.getAllLessons());
-            request.setAttribute("listCourse", courseServiceImpl.getAllCourses());
+            request.setAttribute("listCourse", courseService.getAllCourses());
             request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
             return;
         }
@@ -67,7 +69,7 @@ public class AdminLessonController extends HttpServlet {
         if(duplicate){
             request.getSession().setAttribute("flashError", "Bài học bị trùng trong hệ thống");
             request.setAttribute("listLessons", lessonService.getAllLessons());
-            request.setAttribute("listCourse", courseServiceImpl.getAllCourses());
+            request.setAttribute("listCourse", courseService.getAllCourses());
             request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
             return;
         }
