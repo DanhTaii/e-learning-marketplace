@@ -4,7 +4,7 @@ import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.common.utils.objects.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.utils.search.CourseFilter;
 
 import java.util.List;
 

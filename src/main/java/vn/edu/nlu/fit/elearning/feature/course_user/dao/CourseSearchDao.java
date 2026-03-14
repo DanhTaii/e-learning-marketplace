@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course_user.dao;
 
+import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 import java.util.List;
@@ -14,9 +15,7 @@ public interface CourseSearchDao {
             String duration, String popular,
             int limit, int offset, int userId);
 
-    List<CourseCardDto> filterAllCoursesWithPagination(
-            Integer categoryId, String sortPrice, boolean popular, boolean newest,
-            int limit, int offset, int userId);
+    List<CourseCardDto> filterAllCoursesWithPagination(AllCourseFilter allCourseFilter);
 
     // Đếm tổng số sau lọc
     int countFilteredCourses(

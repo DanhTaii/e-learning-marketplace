@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.course_user.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 import java.util.ArrayList;
@@ -121,9 +122,7 @@ public class CourseSearchDaoImpl extends BaseDao implements CourseSearchDao {
     }
 
     @Override
-    public List<CourseCardDto> filterAllCoursesWithPagination(
-            Integer categoryId, String sortPrice, boolean popular, boolean newest,
-            int limit, int offset, int userId) {
+    public List<CourseCardDto> filterAllCoursesWithPagination(AllCourseFilter allCourseFilter) {
 
         return getJdbi().withHandle(handle -> {
             StringBuilder sql = new StringBuilder(
@@ -144,17 +143,17 @@ public class CourseSearchDaoImpl extends BaseDao implements CourseSearchDao {
                             "WHERE c.is_public = TRUE "
             );
 
-            if (categoryId != null) {
+            if (allCourseFilter.getCategoryId() != null) {
                 sql.append(" AND cate.id = :idCategory");
             }
 
             sql.append(" GROUP BY c.id, cate.id ");
 
-            if (popular) {
+            if (allCourseFilter.isPopular()) {
                 sql.append(" ORDER BY studentCount DESC "); // Ưu tiên sắp xếp theo độ phổ biến
-            } else if ("asc".equals(sortPrice)) {
+            } else if ("asc".equals(allCourseFilter.getSortPrice())) {
                 sql.append(" ORDER BY (c.price - c.discount_price) ASC ");
-            } else if ("desc".equals(sortPrice)) {
+            } else if ("desc".equals(allCourseFilter.getSortPrice())) {
                 sql.append(" ORDER BY (c.price - c.discount_price) DESC ");
             } else {
                 sql.append(" ORDER BY c.id DESC "); // Mặc định là mới nhất (newest)
@@ -166,11 +165,11 @@ public class CourseSearchDaoImpl extends BaseDao implements CourseSearchDao {
             var query = handle.createQuery(sql.toString());
 
             // Bind
-            if (categoryId != null) query.bind("idCategory", categoryId);
+            if (allCourseFilter.getCategoryId() != null) query.bind("idCategory", allCourseFilter.getCategoryId());
 
-            query.bind("limit", limit);
-            query.bind("offset", offset);
-            query.bind("userId", userId);
+            query.bind("limit", allCourseFilter.getLimit());
+            query.bind("offset", allCourseFilter.getOffSet());
+            query.bind("userId", allCourseFilter.getUserId());
 
             return query.mapToBean(CourseCardDto.class).list();
         });

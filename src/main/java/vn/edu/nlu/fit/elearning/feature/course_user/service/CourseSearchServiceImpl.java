@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course_user.service;
 
+import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
 import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
@@ -175,15 +176,9 @@ public class CourseSearchServiceImpl implements CourseSearchService {
 
     // tổng quát nhất
     @Override
-    public List<CourseCardDto> filterCoursesForAllCourses(
-            Integer categoryId,
-            String sortPrice, boolean popular, boolean newest,
-            int limit, int offset, int userId) {
+    public List<CourseCardDto> filterCoursesForAllCourses(AllCourseFilter allCourseFilter) {
 
-        return courseSearchDao.filterAllCoursesWithPagination(
-                categoryId,
-                sortPrice, popular, newest,
-                limit, offset, userId);
+        return courseSearchDao.filterAllCoursesWithPagination(allCourseFilter);
     }
 
     //    // đếm tổng quát (dùng để tính totalPages)

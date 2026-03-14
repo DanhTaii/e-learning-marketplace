@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course_user.service;
 
+import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 import java.util.List;
@@ -78,10 +79,7 @@ public interface CourseSearchService {
             String popular);
 
     // tổng quát nhất
-    List<CourseCardDto> filterCoursesForAllCourses(
-            Integer categoryId,
-            String sortPrice, boolean popular, boolean newest,
-            int limit, int offset, int userId);
+    List<CourseCardDto> filterCoursesForAllCourses(AllCourseFilter allCourseFilter);
 
     //    // đếm tổng quát (dùng để tính totalPages)
     int countFilteredCourses(
