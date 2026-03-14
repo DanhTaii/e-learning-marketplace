@@ -35,12 +35,6 @@ public class CheckMailController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         HttpSession session = request.getSession(false);
         if (session == null ||

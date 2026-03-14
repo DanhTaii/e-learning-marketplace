@@ -34,12 +34,6 @@ public class SignUpController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // load categories/tags cho header
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
     }

@@ -42,20 +42,13 @@ public class PaymentController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService =BeanContainer.getBean(UserService.class);
-        User user = userService.getUserById(userId);
-        request.setAttribute("user", user);
+//        UserService userService =BeanContainer.getBean(UserService.class);
+//        User user = userService.getUserById(userId);
+//        request.setAttribute("user", user);
         if (ICartService == null || ICartService.getSelectedQuantity() == 0) {
             response.sendRedirect(request.getContextPath() + "/personal/cart");
             return;
         }
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();
         request.setAttribute("paymentMethod", paymentMethods);

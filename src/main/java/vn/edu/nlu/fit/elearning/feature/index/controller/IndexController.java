@@ -4,22 +4,14 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
-import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "IndexController", value = {"/index"})
 public class IndexController extends HttpServlet {
-
-    private WishlistService wishlistService;
-    private CategoryService categoryService;
     private IndexService indexService;
 
     @Override
@@ -27,8 +19,6 @@ public class IndexController extends HttpServlet {
         super.init();
         // do làm session
         // Khởi tạo 1 lần duy nhất
-        this.wishlistService = BeanContainer.getBean(WishlistService.class);
-        this.categoryService = BeanContainer.getBean(CategoryService.class);
         this.indexService = BeanContainer.getBean(IndexService.class);
     }
 
@@ -43,15 +33,6 @@ public class IndexController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-
-        // 1. Category
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = categoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-
-        // 3.Tag
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         // 4 Các danh sách khóa học
         CourseCardDto courseMostPopular = indexService.getCoursesMostPopular(userId);

@@ -4,14 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -136,13 +130,6 @@ public class ResultSearchByTitleController extends HttpServlet {
         if (popular != null) paginationUrl.append("&popular=").append(popular);
 
         request.setAttribute("paginationUrl", paginationUrl.toString());
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);
     }

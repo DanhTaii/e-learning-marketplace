@@ -4,13 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -94,15 +89,6 @@ public class PaginationAllCoursesController extends HttpServlet {
         request.setAttribute("category", categoryStr);
         request.setAttribute("sortPrice", sortPrice);
         request.setAttribute("popular", popular);
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
-
-        request.setAttribute("categories", ICategoryService.getAllCategories());
 
         request.getRequestDispatcher("views/pages/partial/all-course.jsp").forward(request, response);
     }

@@ -40,19 +40,12 @@ public class ShowCartController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-        UserService userService =BeanContainer.getBean(UserService.class);
-        User user = userService.getUserById(userId);
-        request.setAttribute("user", user);
+//        UserService userService =BeanContainer.getBean(UserService.class);
+//        User user = userService.getUserById(userId);
+//        request.setAttribute("user", user);
 
         List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
         request.setAttribute("coursesLastest", coursesLastest);
-
-        // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
-        List<Category> categories = ICategoryService.getAllCategories();
-        request.setAttribute("categories", categories);
-        TagService tagService = BeanContainer.getBean(TagService.class);
-        request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/cart/cart.jsp").forward(request, response);
     }
