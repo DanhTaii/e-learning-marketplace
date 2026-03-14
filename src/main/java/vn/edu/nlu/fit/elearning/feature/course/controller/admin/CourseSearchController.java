@@ -4,22 +4,24 @@ import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-import vn.edu.nlu.fit.elearning.helper.pagination.PageResponse;
-import vn.edu.nlu.fit.elearning.utils.objects.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.PageResponse;
+import vn.edu.nlu.fit.elearning.common.utils.objects.CourseFilter;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "CourseSearchController", value = "/api/admin/courses")
 public class CourseSearchController extends HttpServlet {
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override

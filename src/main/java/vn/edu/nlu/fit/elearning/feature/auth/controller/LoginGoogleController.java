@@ -5,9 +5,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.utils.objects.GoogleUser;
+import vn.edu.nlu.fit.elearning.common.utils.objects.GoogleUser;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.utils.objects.GoogleUtils;
+import vn.edu.nlu.fit.elearning.common.utils.objects.GoogleUtils;
 
 import java.io.IOException;
 

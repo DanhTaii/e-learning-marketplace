@@ -3,16 +3,16 @@ package vn.edu.nlu.fit.elearning.feature.auth.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
-import vn.edu.nlu.fit.elearning.feature.access_token.dao.IAccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.IAccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
@@ -27,17 +27,17 @@ public class ForgetPasswordController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.userService = new UserServiceImpl();
+        this.userService =BeanContainer.getBean(UserService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        ICategoryService ICategoryService = new CategoryService();
+        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
@@ -57,8 +57,8 @@ public class ForgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
         }
 
-        IAccessTokenService IAccessTokenService = new AccessTokenService();
-        String token = IAccessTokenService.generateToken();
+        AccessTokenService AccessTokenService = BeanContainer.getBean(AccessTokenService.class);
+        String token = AccessTokenService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 
 
@@ -67,11 +67,11 @@ public class ForgetPasswordController extends HttpServlet {
 
         AccessToken accessToken = null;
         if(user != null){
-            accessToken = new AccessToken(user.getId(), token, IAccessTokenService.expireDateTime(), false);
+            accessToken = new AccessToken(user.getId(), token, AccessTokenService.expireDateTime(), false);
 
         }
 
-        IAccessTokenDao tokenDao = new AccessTokenDao();
+        AccessTokenDao tokenDao = new AccessTokenDaoImpl();
         boolean isCreate = false;
         if ( accessToken != null){
             isCreate = tokenDao.createToken(accessToken);
@@ -82,7 +82,7 @@ public class ForgetPasswordController extends HttpServlet {
             return;
         }
 
-        boolean isSend = IAccessTokenService.sendEmail(email, token, user.getUsername());
+        boolean isSend = AccessTokenService.sendEmail(email, token, user.getUsername());
         if(!isSend){
             request.setAttribute("error", "Gửi không thành công!");
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);

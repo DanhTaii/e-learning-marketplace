@@ -3,9 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.category.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,17 +14,17 @@ import java.util.List;
 @WebServlet(name = "AdminCategoryController", value = "/admin/categories")
 public class AdminCategoryController extends HttpServlet {
 
-    private ICategoryService ICategoryService;
+    private CategoryService categoryService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.ICategoryService = new CategoryService();
+        this.categoryService = BeanContainer.getBean(CategoryService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> listCategories = ICategoryService.getAllCategories();
+        List<Category> listCategories = categoryService.getAllCategories();
         request.setAttribute("listCategories", listCategories);
         request.setAttribute("currentPage", "categories");
         request.getRequestDispatcher("/views/pages/admin/category/category-management.jsp").forward(request, response);
@@ -44,14 +45,14 @@ public class AdminCategoryController extends HttpServlet {
             newCategory.setName(categoryName);
             newCategory.setParentId(categoryParentId);
             newCategory.setSlug(categorySlug);
-            int checkCreate = ICategoryService.createCategory(newCategory);
+            int checkCreate = categoryService.createCategory(newCategory);
             if (checkCreate == 1) {
                 request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
                 response.sendRedirect(request.getContextPath() + "/admin/categories");
             }
         } catch (Exception e) {
             request.getSession().setAttribute("flashError", "Tên hoặc Slug đã tồn tại trong hệ thống!");
-            request.setAttribute("listTags", ICategoryService.getAllCategories());
+            request.setAttribute("listTags", categoryService.getAllCategories());
             request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
         }
     }

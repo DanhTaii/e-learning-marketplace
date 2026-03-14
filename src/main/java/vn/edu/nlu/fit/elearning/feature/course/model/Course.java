@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course.model;
 
-import vn.edu.nlu.fit.elearning.helper.enums.Level;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Level;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

@@ -1,8 +1,8 @@
 package vn.edu.nlu.fit.elearning.feature.order.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
-import vn.edu.nlu.fit.elearning.helper.enums.OrderStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 
 import java.sql.Timestamp;

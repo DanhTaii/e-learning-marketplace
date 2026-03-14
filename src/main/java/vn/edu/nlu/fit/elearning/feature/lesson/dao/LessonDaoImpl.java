@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;

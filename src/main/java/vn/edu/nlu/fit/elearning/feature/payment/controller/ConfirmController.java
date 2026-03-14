@@ -6,8 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
-import vn.edu.nlu.fit.elearning.feature.cart.service.ICart;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.model.Enrollment;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentServiceImpl;
@@ -23,7 +24,7 @@ import vn.edu.nlu.fit.elearning.feature.order.service.OrderServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemServiceImpl;
-import vn.edu.nlu.fit.elearning.helper.enums.OrderStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,11 +41,11 @@ public class ConfirmController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderServiceImpl();
-        this.orderItemService = new OrderItemServiceImpl();
-        this.enrollmentService = new EnrollmentServiceImpl();
-        this.lessonService = new LessonServiceImpl();
-        this.userLessonProgressService = new UserLessonProgressServiceImpl();
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.orderItemService =BeanContainer.getBean(OrderItemService.class);
+        this.enrollmentService = BeanContainer.getBean(EnrollmentService.class);
+        this.lessonService = BeanContainer.getBean(LessonService.class);
+        this.userLessonProgressService = BeanContainer.getBean(UserLessonProgressService.class);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class ConfirmController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        ICart ICart = (ICart) session.getAttribute("cart");
+        CartService ICartService = (CartService) session.getAttribute("cart");
         int paymentMethodId = Integer.parseInt(request.getParameter("payment-method-id"));
 
         //khỏi tạo order
@@ -64,16 +65,16 @@ public class ConfirmController extends HttpServlet {
         order.setOrderCode("ORD-" + System.currentTimeMillis());
         order.setUserId(userId);
         order.setPaymentMethodId(paymentMethodId);
-        order.setTotalAmount((int) ICart.getTotal());
-        order.setDiscountAmount((int) ICart.getDiscountPriceTotal());
-        order.setFinalAmount((int) ICart.getFinalPriceTotal());
+        order.setTotalAmount((int) ICartService.getTotal());
+        order.setDiscountAmount((int) ICartService.getDiscountPriceTotal());
+        order.setFinalAmount((int) ICartService.getFinalPriceTotal());
         order.setStatus(OrderStatus.PAID);
         order.setPaidAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
 
         int orderId = orderService.createOrder(order);
 
-        for (CartItem item : ICart.getSelectedItems()) {
+        for (CartItem item : ICartService.getSelectedItems()) {
             OrderItem oi = new OrderItem();
             oi.setOrderId(orderId);
             oi.setCourseId(item.getCourse().getId());
@@ -98,10 +99,10 @@ public class ConfirmController extends HttpServlet {
             }
             userLessonProgressService.createUserLessonProgress(progressList);
         }
-        ICart.removeSelected();
+        ICartService.removeSelected();
 
 
-        session.setAttribute("cart", ICart);
+        session.setAttribute("cart", ICartService);
         response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + orderId);
     }
 }

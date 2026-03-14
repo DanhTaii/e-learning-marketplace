@@ -12,8 +12,8 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     private EnrollmentDao ed;
 
-    public EnrollmentServiceImpl() {
-        this.ed = new EnrollmentDaoImpl();
+    public EnrollmentServiceImpl(EnrollmentDao enrollmentDao) {
+        this.ed = enrollmentDao;
     }
 
     @Override

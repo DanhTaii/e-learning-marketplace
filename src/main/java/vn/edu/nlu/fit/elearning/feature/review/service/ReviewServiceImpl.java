@@ -10,8 +10,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     private ReviewDao rd;
 
-    public ReviewServiceImpl() {
-        this.rd = new ReviewDaoImpl();
+    public ReviewServiceImpl(ReviewDao reviewDao) {
+        this.rd = reviewDao;
     }
 
     @Override

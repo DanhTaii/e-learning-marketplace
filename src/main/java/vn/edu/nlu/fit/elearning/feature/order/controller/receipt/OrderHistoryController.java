@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
@@ -32,8 +32,8 @@ PaymentMethodService paymentMethodService;
     @Override
     public void init() throws ServletException {
         super.init();
-        this.orderService = new OrderServiceImpl();
-        this.paymentMethodService = new PaymentMethodServiceImpl();
+        this.orderService = BeanContainer.getBean(OrderService.class);
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
 
 
@@ -45,12 +45,12 @@ PaymentMethodService paymentMethodService;
         List<OrderDTO> order = orderService.getOrderHistoryByUserId(userId);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        ICategoryService ICategoryService = new CategoryService();
+        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagServiceImpl();
+        TagService tagService = BeanContainer.getBean(TagService.class);
         request.setAttribute("tags", tagService.getAllTags());
-        UserService userService = new UserServiceImpl();
+        UserService userService = BeanContainer.getBean(UserService.class);
         User user = userService.getUserById(userId);
         request.setAttribute("user", user);
 

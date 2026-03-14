@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.user.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
@@ -17,7 +18,7 @@ public class UserManagementController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserServiceImpl();
+        this.userService = BeanContainer.getBean(UserService.class);
     }
 
     @Override

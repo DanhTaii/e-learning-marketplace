@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.review.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
@@ -17,7 +18,7 @@ public class CreateReviewController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.reviewService = new ReviewServiceImpl();
+        this.reviewService = BeanContainer.getBean(ReviewService.class);
     }
 
     @Override

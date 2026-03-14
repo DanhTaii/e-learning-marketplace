@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.category.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 

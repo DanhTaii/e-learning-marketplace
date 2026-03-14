@@ -10,8 +10,8 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
     private PaymentMethodDao pmd;
 
-    public PaymentMethodServiceImpl() {
-        this.pmd = new PaymentMethodDaoImpl();
+    public PaymentMethodServiceImpl(PaymentMethodDao paymentMethodDao) {
+        this.pmd = paymentMethodDao;
     }
 
     @Override

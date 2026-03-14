@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.payment.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 
 import java.util.List;

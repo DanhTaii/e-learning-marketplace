@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.category.model;
 
-import vn.edu.nlu.fit.elearning.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

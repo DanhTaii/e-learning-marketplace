@@ -1,7 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.wishlist.dao;
 
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 
 import java.util.List;
 

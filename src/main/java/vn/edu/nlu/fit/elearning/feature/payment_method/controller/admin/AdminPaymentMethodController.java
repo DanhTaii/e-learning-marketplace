@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.payment_method.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
@@ -18,7 +19,7 @@ public class AdminPaymentMethodController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.paymentMethodService = new PaymentMethodServiceImpl();
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

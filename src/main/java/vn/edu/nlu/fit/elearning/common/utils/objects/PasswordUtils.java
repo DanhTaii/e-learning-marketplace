@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.utils.objects;
+package vn.edu.nlu.fit.elearning.common.utils.objects;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

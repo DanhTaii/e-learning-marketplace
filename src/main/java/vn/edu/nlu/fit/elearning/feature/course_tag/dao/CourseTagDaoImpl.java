@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course_tag.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.course_tag.model.CourseTag;
 
 import java.util.List;

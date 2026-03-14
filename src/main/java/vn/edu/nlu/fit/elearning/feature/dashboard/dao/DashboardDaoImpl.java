@@ -1,7 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.dashboard.dao;
 
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.CourseRankingDto;
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.RevenueDto;
 
 import java.util.List;

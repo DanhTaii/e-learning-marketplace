@@ -3,9 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.course.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
@@ -24,20 +25,20 @@ import java.util.List;
 @WebServlet(name = "CourDetailController", value = "/course-detail")
 public class CourseDetailController extends HttpServlet {
 
-    private CourseServiceImpl cs;
+    private CourseService cs;
     private ReviewService reviewService;
     private LessonService lessonService;
     private TagService tagService;
-    private ICategoryService ICategoryService;
+    private CategoryService categoryService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.cs = new CourseServiceImpl();
-        this.lessonService = new LessonServiceImpl();
-        this.reviewService = new ReviewServiceImpl();
-        this.tagService = new TagServiceImpl();
-        this.ICategoryService = new CategoryService();
+        this.cs = BeanContainer.getBean(CourseService.class);
+        this.lessonService = BeanContainer.getBean(LessonService.class);
+        this.reviewService = BeanContainer.getBean(ReviewService.class);
+        this.tagService = BeanContainer.getBean(TagService.class);
+        this.categoryService = BeanContainer.getBean(CategoryService.class);
     }
 
     @Override
@@ -73,11 +74,11 @@ public class CourseDetailController extends HttpServlet {
         request.setAttribute("tags", tags);
 
         // này làm cho category
-        Category category = ICategoryService.getCategoryById(c.getCategoryId());
+        Category category = categoryService.getCategoryById(c.getCategoryId());
         request.setAttribute("category", category);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        ICategoryService ICategoryService = new CategoryService();
+        CategoryService ICategoryService = BeanContainer.getBean(CategoryService.class);
         List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
 

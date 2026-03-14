@@ -11,8 +11,8 @@ public class UserLessonProgressServiceImpl implements UserLessonProgressService 
 
     private UserLessonProgressDao ulpd;
 
-    public UserLessonProgressServiceImpl() {
-        this.ulpd = new UserLessonProgressDaoImpl();
+    public UserLessonProgressServiceImpl(UserLessonProgressDao userLessonProgressDao) {
+        this.ulpd = userLessonProgressDao;
     }
 
     @Override

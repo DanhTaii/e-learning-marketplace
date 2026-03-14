@@ -3,18 +3,20 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 
 import java.io.IOException;
 
 @WebServlet(name = "CourseDeleteController", value = "/admin/course/delete")
 public class CourseDeleteController extends HttpServlet {
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.enrollment.dao;
 
-import vn.edu.nlu.fit.elearning.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentCardDTO;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.feature.enrollment.model.Enrollment;

@@ -3,14 +3,15 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.helper.enums.Level;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Level;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
@@ -21,20 +22,20 @@ import java.util.List;
 @WebServlet(name = "CourseDetailController", value = "/admin/course/detail")
 public class CourseDetailController extends HttpServlet {
 
-    private CourseServiceImpl cs;
+    private CourseService cs;
     private TagService tagService;
-    private ICategoryService ICategoryService;
+    private CategoryService ICategoryService;
     private CourseTagService courseTagService;
-    private CourseServiceImpl courseServiceImpl;
+    private CourseService courseServiceImpl;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.cs = new CourseServiceImpl();
-        this.ICategoryService = new CategoryService();
-        this.tagService = new TagServiceImpl();
-        this.courseTagService = new CourseTagServiceImpl();
-        this.courseServiceImpl = new CourseServiceImpl();
+        this.cs = BeanContainer.getBean(CourseService.class);
+        this.ICategoryService = BeanContainer.getBean(CategoryService.class);
+        this.tagService = BeanContainer.getBean(TagService.class);
+        this.courseTagService = BeanContainer.getBean(CourseTagService.class);
+        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
     }
 
     @Override
