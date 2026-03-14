@@ -50,7 +50,7 @@
 
                                 <c:when test="${c.enrolled}">
                                     <a href="my-course/detail?courseId=${c.id}" class="turn-page">
-                                        <div class="header__button add__button" style="margin-bottom: 3rem">
+                                        <div class="header__button add__button">
                                             <button type="button" class="container-2__button-add button__btn">
                                                 Vào học ngay
                                             </button>
@@ -313,16 +313,11 @@
                                                 <div class="star">
                                                     <div class="text-medium regular">${review.rating}</div>
                                                     <div class="star-icon">
-                                                        <i class="fa-solid fa-star"
-                                                           style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star"
-                                                           style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star"
-                                                           style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star"
-                                                           style="color:#FFD43B; font-size:1rem"></i>
-                                                        <i class="fa-solid fa-star"
-                                                           style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star icon"></i>
+                                                        <i class="fa-solid fa-star icon"></i>
+                                                        <i class="fa-solid fa-star icon"></i>
+                                                        <i class="fa-solid fa-star icon"></i>
+                                                        <i class="fa-solid fa-star icon"></i>
                                                     </div>
                                                 </div>
                                             </div>
