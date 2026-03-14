@@ -34,6 +34,10 @@ ul {
     color: #018d4a;
 }
 
+.status .fa-solid.fa-circle-check.icon-check{
+    color: #018d4a;
+}
+
 .icon-check {
     margin-right: 1px;
     font-size: var(--text-3xl);
@@ -151,7 +155,7 @@ ul {
     width: 175px;
     margin-right: 20px;
     height: 100px;
-
+    aspect-ratio: 16/9;
 }
 
 .image {

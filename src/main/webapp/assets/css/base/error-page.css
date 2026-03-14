@@ -1,0 +1,19 @@
+.error-container {
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 60vh;
+}
+
+.error-code {
+    margin-top: 4rem;
+    font-size: 80px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.error-msg {
+    font-size: 24px;
+    margin-bottom: 30px;
+    margin-top: 5rem;
+    color: #333;
+}

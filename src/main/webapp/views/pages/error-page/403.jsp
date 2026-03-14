@@ -8,30 +8,11 @@
     <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/css/base/home.css">
     <link rel="stylesheet" href="assets/css/base/default.css">
+    <link rel="stylesheet" href="assets/css/base/error-page.css">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <style>
-        .error-container {
-            text-align: center;
-            padding: 100px 20px;
-            min-height: 60vh;
-        }
 
-        .error-code {
-            margin-top: 4rem;
-            font-size: 80px;
-            font-weight: bold;
-            color: #ccc;
-        }
-
-        .error-msg {
-            font-size: 24px;
-            margin-bottom: 30px;
-            margin-top: 5rem;
-            color: #333;
-        }
-    </style>
 </head>
 <body>
 <div class="web">

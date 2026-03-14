@@ -207,7 +207,15 @@
 .content__image {
     width: 120px;
     height: 70px;
+    aspect-ratio: 16/9;
+}
 
+.fa-solid.fa-bag-shopping.shop-icon {
+    color: #000000;
+}
+
+.fa-solid.fa-tag.price-icon {
+    color: #3722d3;
 }
 
 .image {
@@ -266,12 +274,12 @@ ul {
 
 /* Khung trắng tổng thể bên trái */
 .main-payment-wrapper {
-    margin:7.5rem 0 2rem 0;
+    margin: 7.5rem 0 2rem 0;
     background-color: #fff;
     border-radius: 12px;
     padding: 30px;
     border: 1px solid #e0e0e0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .section-title {
@@ -353,51 +361,51 @@ ul {
     text-align: right;
 }
 
-    .payment-options-grid {
-        display: grid;
-        /* Tự động tính toán số cột: mỗi cột tối thiểu 140px, tối đa chiếm hết chỗ trống */
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
-        margin-bottom: 30px;
-    }
+.payment-options-grid {
+    display: grid;
+    /* Tự động tính toán số cột: mỗi cột tối thiểu 140px, tối đa chiếm hết chỗ trống */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
 
-    .payment-item__content {
-        position: relative; /* Để làm dấu tích chọn */
-        height: 100px; /* Cố định chiều cao để các ô đều nhau */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        border: 2px solid #eee;
-        border-radius: 8px;
-        cursor: pointer;
-        background-color: #fafafa;
-        transition: all 0.2s ease-in-out;
-    }
+.payment-item__content {
+    position: relative; /* Để làm dấu tích chọn */
+    height: 100px; /* Cố định chiều cao để các ô đều nhau */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fafafa;
+    transition: all 0.2s ease-in-out;
+}
 
-    .payment-item__content img {
-        height: 35px; /* Giới hạn chiều cao logo */
-        max-width: 90%;
-        object-fit: contain;
-        margin-bottom: 8px;
-    }
+.payment-item__content img {
+    height: 35px; /* Giới hạn chiều cao logo */
+    max-width: 90%;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
 
-    .payment-item__content span {
-        font-size: 1.3rem;
-        font-weight: 500;
-        text-align: center;
-        color: #555;
-    }
+.payment-item__content span {
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+    color: #555;
+}
 
-    /* Hiệu ứng khi được chọn (Radio Checked) */
-    .payment-item input:checked + .payment-item__content {
-        border-color: #3722D3;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(55, 34, 211, 0.15);
-    }
+/* Hiệu ứng khi được chọn (Radio Checked) */
+.payment-item input:checked + .payment-item__content {
+    border-color: #3722D3;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(55, 34, 211, 0.15);
+}
 
-    .payment-item input:checked + .payment-item__content span {
-        color: #3722D3;
-        font-weight: bold;
-    }
+.payment-item input:checked + .payment-item__content span {
+    color: #3722D3;
+    font-weight: bold;
+}
