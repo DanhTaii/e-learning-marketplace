@@ -187,3 +187,11 @@
 .filter__category:hover .category__list-box {
     display: block;
 }
+
+.btn-add-cart.dark-button{
+    font-size: 1.5rem;background-color: #01FF85;color: #002333;
+}
+
+.fix{
+    font-size: 1.5rem;
+}

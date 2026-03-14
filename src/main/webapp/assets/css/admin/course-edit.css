@@ -194,3 +194,55 @@ textarea.input-modern {
     width: 1.4rem;
     height: 1.4rem;
 }
+
+#error_courseTitle{
+    color: red;
+    font-size: 1.2rem;
+}
+#error_courseSubtitle{
+    color: red;
+    font-size: 1.2rem;
+}
+#image-preview{
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+#error_coursePrice{
+    color: red;
+    font-size: 1.2rem;
+}
+#error_courseDiscount{
+    color: red;
+    font-size: 1.2rem;
+}
+#error_courseLevel{
+    color: red;
+    font-size: 1.2rem;
+}
+#error_courseCategory{
+    color: red;
+    font-size: 1.2rem;
+}
+#error_courseStatus{
+    color: red;
+    font-size: 1.2rem;
+}
+#courseGoals{
+    height: 100px;
+    padding: 10px;
+}
+#error_courseGoals{
+    color: red;
+    font-size: 1.2rem;
+}
+#courseDescription{
+    height: 150px;
+    padding: 10px;
+}
+#error_courseDescription{
+    color: red;
+    font-size: 1.2rem;
+}

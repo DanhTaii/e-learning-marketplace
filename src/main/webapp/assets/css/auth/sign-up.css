@@ -161,3 +161,27 @@
 .input-text {
     padding-right: 45px !important;
 }
+
+.add-to-fix-3{
+    color: red; font-size: var(--text-xl);
+}
+
+#error_email{
+    color: red;font-size: 1.5rem;padding-left: 1.6rem;
+}
+
+#error_username{
+    color: red;font-size: 1.5rem;padding-left: 1.6rem;
+}
+
+.password-group{
+    position: relative;
+}
+
+#error_newPass{
+    color: red;font-size: 1.5rem;padding-left: 1.6rem;
+}
+
+#error_reNewPass{
+    color: red;font-size: 1.5rem;padding-left: 1.6rem;
+}

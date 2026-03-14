@@ -153,3 +153,6 @@
 .span__text {
     color: rgb(128, 128, 128);
 }
+.error-message.text-big{
+    color: #ff4d4d; font-weight: 500; margin: 12px 0;
+}

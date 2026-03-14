@@ -45,7 +45,7 @@
 
                             <!-- Hiển thị lỗi nếu có -->
                             <c:if test="${not empty requestScope.error}">
-                                <div class="error-message text-big" style="color: #ff4d4d; font-weight: 500; margin: 12px 0;">
+                                <div class="error-message text-big">
                                         ${requestScope.error}
                                 </div>
                             </c:if>

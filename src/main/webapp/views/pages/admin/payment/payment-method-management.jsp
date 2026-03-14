@@ -16,144 +16,6 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/course-edit.css">
     <link rel="stylesheet" href="assets/css/admin/notification.css">
-    <style>
-        /* CSS modal Payment Method - giống hệt modal Tag */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .modal.show {
-            display: flex !important;
-        }
-
-        .modal__course-content {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 700px;
-            overflow: hidden;
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .course__header {
-            background: #1a1f36;
-            color: white;
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 19px;
-            font-weight: 600;
-        }
-
-        .course__header .course__title i {
-            margin-right: 12px;
-            font-size: 22px;
-        }
-
-        .x__icon {
-            cursor: pointer;
-            font-size: 26px;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .x__icon:hover {
-            color: red;
-        }
-
-        .course-body {
-            padding: 30px;
-        }
-
-        .user-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .info-group {
-            margin-bottom: 20px;
-        }
-
-        .info-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: #333;
-            font-size: 15px;
-        }
-
-        .info-group label i {
-            color: #5e72e4;
-            margin-right: 10px;
-            font-size: 18px;
-        }
-
-        .input__create {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 15px;
-            background-color: #fafafa;
-            transition: all 0.3s;
-        }
-
-        .input__create:focus {
-            outline: none;
-            border-color: #5e72e4;
-            background-color: white;
-            box-shadow: 0 0 0 4px rgba(94, 114, 228, 0.15);
-        }
-
-        .input__create[disabled] {
-            background-color: #f5f5f5;
-            color: #888;
-            cursor: not-allowed;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
-            margin-top: 35px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .btn-cancel {
-            background: #f8f9fa !important;
-            color: #6c757d !important;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 1.6rem;
-        }
-
-        .btn-cancel:hover {
-            background: #e9ecef !important;
-        }
-
-
-    </style>
 
 </head>
 <body>
@@ -279,8 +141,7 @@
                         <div class="container-2__body">
                             <div class="title__admin">Tạo phương thức thanh toán</div>
                             <div class="container-2__create">
-                                <form action="${pageContext.request.contextPath}/admin/payment-methods" method="post"
-                                      style="width: 100%;">
+                                <form action="${pageContext.request.contextPath}/admin/payment-methods" method="post">
                                     <div class="create__selection">
                                         <div class="create__selection-input">
                                             <div class="create__selection-items">
@@ -304,7 +165,7 @@
                             <div class="title__admin">Tất cả phương thức thanh toán (${listPaymentMethods.size()})</div>
                             <div class="container-2__filter">
                                 <form action="${pageContext.request.contextPath}/admin/payment-methods/search"
-                                      method="get" style="width: 100%;">
+                                      method="get">
                                     <div class="filter__selection">
                                         <div class="filter__selection-input">
                                             <div class="filter__selection-items filter__selection-name">
@@ -364,10 +225,9 @@
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
                                                 <form action="${pageContext.request.contextPath}/admin/payment-methods/delete"
-                                                      method="post" style="display: inline;">
+                                                      method="post">
                                                     <input type="hidden" name="id" value="${pm.id}">
-                                                    <button type="submit"
-                                                            style="background: none; border: none; cursor: pointer; padding: 0;">
+                                                    <button type="submit">
                                                         <span class="icon-action"><i
                                                                 class="fa-solid fa-trash"></i></span>
                                                     </button>
@@ -378,12 +238,9 @@
                                     <c:if test="${empty listPaymentMethods}">
                                         <tr>
                                             <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                <div class="search-empty-state"
-                                                     style="text-align: center; padding: 40px 0;">
-                                                    <i class="fa-solid fa-book-open search-empty-icon"
-                                                       style="font-size: 3rem; color: #ccc;"></i>
-                                                    <div class="search-empty-title"
-                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                <div class="search-empty-state">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                                    <div class="search-empty-title">
                                                         Không tìm thấy kiểu thanh toán nào
                                                     </div>
                                                 </div>

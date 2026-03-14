@@ -129,8 +129,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="rating" value="low">
-                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
-                                                                                      style="color: var(--yellow-color)"></i>
+                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -138,8 +137,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="rating" value="high">
-                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
-                                                                                      style="color: var(--yellow-color)"></i>
+                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +182,7 @@
                                 </div>
                             </div>
                             <button class="user__profile-btn button__btn text-header"
-                                    type="submit" style="justify-content: center; display: none">Lọc
+                                    type="submit">Lọc
                             </button>
                         </form>
                     </c:if>
@@ -272,7 +270,7 @@
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="rating" value="low">
                                             <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
-                                                                                      style="color: var(--yellow-color)"></i>
+                                                                                      ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -281,7 +279,7 @@
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="rating" value="high">
                                             <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
-                                                                                      style="color: var(--yellow-color)"></i>
+                                                                                      ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -325,7 +323,7 @@
                                 </div>
                             </div>
                             <button class="user__profile-btn button__btn text-header"
-                                    type="submit" style="justify-content: center; display: none">Lọc
+                                    type="submit">Lọc
                             </button>
                         </form>
                     </c:if>
@@ -412,8 +410,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="rating" value="low">
-                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
-                                                                                      style="color: var(--yellow-color)"></i>
+                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -421,8 +418,7 @@
                                     <div class="box__content">
                                         <div class="content__type">
                                             <input type="checkbox" class="type__checkbox text-big" name="rating" value="high">
-                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
-                                                                                      style="color: var(--yellow-color)"></i>
+                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -466,7 +462,7 @@
                                 </div>
                             </div>
                             <button class="user__profile-btn button__btn text-header"
-                                    type="submit" style="justify-content: center; display: none">Lọc
+                                    type="submit">Lọc
                             </button>
                         </form>
                     </c:if>

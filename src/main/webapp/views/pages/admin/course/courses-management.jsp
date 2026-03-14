@@ -211,45 +211,6 @@
                             </form>
 
                             <div class="container-2__list-student">
-                                <style>
-                                    .action-wrapper {
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: flex-start;
-                                        gap: 8px;
-                                        height: 100%;
-                                    }
-
-                                    .icon-action-btn {
-                                        width: 32px;
-                                        height: 32px;
-                                        display: inline-flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        padding: 0;
-                                        border: none;
-                                        background: transparent;
-                                        cursor: pointer;
-                                        border-radius: 4px;
-                                        color: var(--dark-blue);
-                                        transition: all 0.2s;
-                                    }
-
-                                    .icon-action-btn:hover {
-                                        background-color: #f0f0f0;
-                                        transform: translateY(-1px);
-                                    }
-
-
-                                    table {
-                                        border-collapse: collapse !important;
-                                    }
-
-                                    table td {
-                                        border-bottom: 1px solid var(--light-grey);
-                                        height: 55px;
-                                    }
-                                </style>
 
                                 <div class="admin-table-responsive">
                                     <table id="admin-course-table">
@@ -271,12 +232,9 @@
                                     <template id="tpl-empty-state">
                                         <tr>
                                             <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                <div class="search-empty-state"
-                                                     style="text-align: center; padding: 40px 0;">
-                                                    <i class="fa-solid fa-book-open search-empty-icon"
-                                                       style="font-size: 3rem; color: #ccc;"></i>
-                                                    <div class="search-empty-title"
-                                                         style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                <div class="search-empty-state">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                                    <div class="search-empty-title">
                                                         Không tìm thấy khóa học nào
                                                     </div>
                                                 </div>
@@ -305,7 +263,7 @@
                                         </tr>
                                     </template>
 
-                                    <jsp:include page="/views/common/pagination.jsp"/>
+                                    <jsp:include page="/views/components/pagination.jsp"/>
                                 </div>
 
                                 <div class="admin-pagination-container">
@@ -327,24 +285,22 @@
 </div>
 
 <%--COMPONENT CONFIRM FOR DELETE--%>
-<div id="confirm-delete-modal" class="modal"
-     style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
-    <div class="modal-content"
-         style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
-        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
-        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa khóa học này không?</p>
-        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">
+<div id="confirm-delete-modal" class="modal">
+    <div class="modal-content">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
+        <p>Bạn có chắc chắn muốn xóa khóa học này không?</p>
+        <div>
+            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel">
                 Hủy
             </button>
-            <button id="btn-confirm-delete" class="button dark-button"
-                    style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay
+            <button id="btn-confirm-delete" class="button dark-button">
+                Xóa ngay
             </button>
         </div>
     </div>
 </div>
 <%--DELETE ACTION--%>
-<form id="delete-form-id" action="admin/course/delete" method="post" class="form" style="display: none">
+<form id="delete-form-id" action="admin/course/delete" method="post" class="form">
     <input id="input-delete-id" type="hidden" name="id">
 </form>
 <%--NOTIFICATION ACTION--%>

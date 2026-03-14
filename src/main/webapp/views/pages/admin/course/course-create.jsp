@@ -162,16 +162,14 @@
                                                id="courseTitle"
                                                placeholder="Nhập tên khóa học..."
                                                value="${ course != null ? course.title : param.title}">
-                                        <span class="error-client" id="error_courseTitle"
-                                              style="color: red; font-size: 1.2rem;"></span>
+                                        <span class="error-client" id="error_courseTitle"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="course-create__title-style">Phụ đề</label>
                                         <input id="courseSubtitle" name="subtitle" type="text" class="input-modern"
                                                placeholder="Tóm tắt ngắn gọn nội dung..."
                                                value="${ course != null ? course.subtitle : param.subtitle}">
-                                        <span class="error-client" id="error_courseSubtitle"
-                                              style="color: red; font-size: 1.2rem;"></span>
+                                        <span class="error-client" id="error_courseSubtitle"></span>
                                     </div>
 
                                     <c:if test="${course != null}">
@@ -210,8 +208,7 @@
 
                                             <img id="image-preview"
                                                  src="${previewUrl}"
-                                                 alt="Preview"
-                                                 style="width: 100%; height: 230px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
+                                                 alt="Preview">
                                         </div>
                                     </div>
                                 </div>
@@ -224,8 +221,7 @@
                                            placeholder="Ví dụ: 500000"
                                            value="${course != null ? course.price : param.price}"
                                     >
-                                    <span class="error-client" id="error_coursePrice"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_coursePrice"></span>
                                 </div>
                                 <div class="form-group flex-1">
                                     <label class="course-create__title-style">Giá giảm</label>
@@ -233,8 +229,7 @@
                                            class="input-modern"
                                            value="${course != null ? course.discountPrice : param.discount_price}"
                                            placeholder="Để trống nếu không giảm">
-                                    <span class="error-client" id="error_courseDiscount"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_courseDiscount"></span>
                                 </div>
                                 <div class="form-group flex-1">
                                     <label class="course-create__title-style">Mức độ</label>
@@ -251,8 +246,7 @@
                                             Cao cấp
                                         </option>
                                     </select>
-                                    <span class="error-client" id="error_courseLevel"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_courseLevel"></span>
                                 </div>
                             </div>
 
@@ -270,8 +264,7 @@
                                             </option>
                                         </c:forEach>
                                     </select>
-                                    <span class="error-client" id="error_courseCategory"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_courseCategory"></span>
                                 </div>
 
                                 <div class="form-group flex-1">
@@ -286,8 +279,7 @@
                                             Riêng tư
                                         </option>
                                     </select>
-                                    <span class="error-client" id="error_courseStatus"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_courseStatus"></span>
                                 </div>
                             </div>
 
@@ -317,11 +309,9 @@
                                 <div class="form-group style-full-width">
                                     <label class="course-create__title-style">Mục tiêu khóa học</label>
                                     <textarea id="courseGoals" name="goals" class="input-modern textarea-modern"
-                                              style="height: 100px; padding: 10px;"
                                               placeholder="Học viên sẽ đạt được gì sau khóa học?"
                                     >${course != null ? course.goals : param.goals}</textarea>
-                                    <span class="error-client" id="error_courseGoals"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_courseGoals"></span>
                                 </div>
                             </div>
 
@@ -330,10 +320,8 @@
                                     <label class="course-create__title-style">Mô tả chi tiết</label>
                                     <textarea id="courseDescription" name="description"
                                               class="input-modern textarea-modern"
-                                              style="height: 150px; padding: 10px;"
                                               placeholder="Viết mô tả đầy đủ về khóa học tại đây...">${course != null ? course.description : param.description}</textarea>
-                                    <span class="error-client" id="error_courseDescription"
-                                          style="color: red; font-size: 1.2rem;"></span>
+                                    <span class="error-client" id="error_courseDescription"></span>
                                 </div>
                             </div>
 

@@ -651,3 +651,11 @@ img {
     font-size: 2rem;
     font-weight: 600;
 }
+
+.header__button.add__button{
+    margin-bottom: 3rem;
+}
+
+.star-icon .icon{
+    color:#FFD43B; font-size:1rem;
+}

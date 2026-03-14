@@ -67,3 +67,20 @@
 .modal__course-detail:target {
     display: flex; /* Hiện ra */
 }
+
+.course-row__font-content.course-row__status{
+    color: #018d4a;
+}
+.search-empty-state{
+    text-align: center;
+    padding: 40px 0;
+}
+.search-empty-icon{
+    font-size: 3rem;
+    color: #ccc;
+}
+.search-empty-title{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 15px;
+}
