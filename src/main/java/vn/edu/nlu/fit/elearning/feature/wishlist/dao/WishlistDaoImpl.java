@@ -1,13 +1,14 @@
-package vn.edu.nlu.fit.elearning.feature.course.dao;
+package vn.edu.nlu.fit.elearning.feature.wishlist.dao;
 
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.database.BaseDao;
 
 import java.util.List;
 
-public class WishlistDao extends BaseDao {
+public class WishlistDaoImpl extends BaseDao implements WishlistDao {
 
 
+    @Override
     public int delete(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
                     return handle.createUpdate("DELETE FROM wishlist WHERE user_id = :id AND  course_id = :courseId")
@@ -20,6 +21,7 @@ public class WishlistDao extends BaseDao {
     }
 
     // Thêm vào wishlist
+    @Override
     public int addWishlist(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
                     return handle.createUpdate("INSERT INTO wishlist (user_id, course_id, added_at) VALUES (:userId, :courseId, CURRENT_TIMESTAMP) ON DUPLICATE KEY UPDATE added_at = CURRENT_TIMESTAMP ")
@@ -31,6 +33,7 @@ public class WishlistDao extends BaseDao {
     }
 
     // Kiểm tra tồn tại
+    @Override
     public boolean exists(int userId, int courseId) {
         return getJdbi().withHandle(handle ->
                 handle.createQuery("SELECT 1 FROM wishlist WHERE user_id = :userId AND course_id = :courseId")
@@ -39,6 +42,7 @@ public class WishlistDao extends BaseDao {
     }
 
     // Lấy danh sách course trong wishlist
+    @Override
     public List<CourseCardDto> findWishlistCoursesByUser(int userId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id,c.title, c.thumbnail_url, c.level," +

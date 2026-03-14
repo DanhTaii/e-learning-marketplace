@@ -8,6 +8,7 @@
     import jakarta.servlet.http.HttpServletResponse;
     import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
     import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
+    import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 
     import java.io.IOException;
 
@@ -18,7 +19,7 @@
         @Override
         public void init() throws ServletException {
             super.init();
-            this.lessonService = new LessonService();
+            this.lessonService = new LessonServiceImpl();
         }
     
         @Override

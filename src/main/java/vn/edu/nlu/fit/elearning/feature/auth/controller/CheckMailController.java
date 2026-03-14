@@ -3,13 +3,18 @@ package vn.edu.nlu.fit.elearning.feature.auth.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.access_token.service.IAccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,24 +22,24 @@ import java.util.List;
 @WebServlet(name = "CheckMailController", value = "/check-email")
 public class CheckMailController extends HttpServlet {
 
-    private AuthService authService;
-    private AccessTokenService accessTokenService;
-    private  UserService userService;
+    private AuthService AuthService;
+    private IAccessTokenService IAccessTokenService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
-        this.authService = new AuthService();
-        this.accessTokenService = new AccessTokenService();
-        this.userService = new UserService();
+        this.AuthService = new AuthServiceImpl();
+        this.IAccessTokenService = new AccessTokenService();
+        this.userService = new UserServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
 
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
         HttpSession session = request.getSession(false);
@@ -73,9 +78,9 @@ public class CheckMailController extends HttpServlet {
                 return;
             }
 
-            boolean isValid = accessTokenService.validateResetToken(user.getId(), otp);
+            boolean isValid = IAccessTokenService.validateResetToken(user.getId(), otp);
             if (isValid) {
-                accessTokenService.markAsUsed(otp);
+                IAccessTokenService.markAsUsed(otp);
                 session.setAttribute("resetUserId", user.getId());
                 session.setAttribute("userMail", user.getEmail()); // thêm dòng này để ResetPasswordController dùng
                 response.sendRedirect(request.getContextPath() + "/reset-password");
@@ -91,11 +96,11 @@ public class CheckMailController extends HttpServlet {
             String username = (String) session.getAttribute("signupUsername");
             String password = (String) session.getAttribute("signupPassword");
 
-            boolean isValid = accessTokenService.validateSignupToken(otp);
+            boolean isValid = IAccessTokenService.validateSignupToken(otp);
             if (isValid) {
-                accessTokenService.markAsUsed(otp);
+                IAccessTokenService.markAsUsed(otp);
 
-                boolean created = authService.register(email.trim(), username.trim(), password.trim());
+                boolean created = AuthService.register(email.trim(), username.trim(), password.trim());
                 if (created) {
                     session.removeAttribute("signupEmail");
                     session.removeAttribute("signupUsername");

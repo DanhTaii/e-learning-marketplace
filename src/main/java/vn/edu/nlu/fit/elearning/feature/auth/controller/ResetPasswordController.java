@@ -3,11 +3,13 @@ package vn.edu.nlu.fit.elearning.feature.auth.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,10 +20,10 @@ public class ResetPasswordController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/auth/reset-password.jsp").forward(request, response);
@@ -30,7 +32,7 @@ public class ResetPasswordController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AuthService authService = new AuthService();
+        AuthService AuthService = new AuthServiceImpl();
         HttpSession session = request.getSession();
 
         String password = request.getParameter("password");
@@ -43,7 +45,7 @@ public class ResetPasswordController extends HttpServlet {
 //        System.out.println("userMail = " + userMail);
 
         try {
-            boolean isSuccess = authService.changePassword(password, retypePassword, userMail);
+            boolean isSuccess = AuthService.changePassword(password, retypePassword, userMail);
             if (isSuccess) {
                 response.setStatus(200);
                 response.sendRedirect(request.getContextPath() + "/sign-in");

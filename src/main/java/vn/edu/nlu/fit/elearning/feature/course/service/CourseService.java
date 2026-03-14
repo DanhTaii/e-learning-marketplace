@@ -1,6 +1,5 @@
 package vn.edu.nlu.fit.elearning.feature.course.service;
 
-import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
@@ -8,94 +7,37 @@ import vn.edu.nlu.fit.elearning.utils.objects.CourseFilter;
 
 import java.util.List;
 
-public class CourseService {
-    private CourseDao cd;
+public interface CourseService {
+    int createCourse(Course course);
 
-    public CourseService() {
-        this.cd = new CourseDao();
-    }
+    Course getCourseById(int id);
 
-    public int createCourse(Course course) {
-        return cd.create(course);
-    }
+    int updateCourse(Course entity);
 
-    public Course getCourseById(int id) {
-        return cd.findById(id);
-    }
+    int deleteCourse(int id);
 
-    public int updateCourse(Course entity) {
-        return this.cd.update(entity);
-    }
+    List<Course> getAllCourses();
 
-    public int deleteCourse(int id) {
-        return cd.delete(id);
-    }
+    double avgRating();
 
-    public List<Course> getAllCourses() {
-        return cd.findAllCourses();
-    }
+    List<CourseCardDto> getThreeCoursesWereLiked(Integer userId);
 
-//    public int totalCourses() {
-//        int result = 0;
-//        List<Course> courseList = cd.findAllCourses();
-//        for (Course c : courseList) {
-//            result++;
-//        }
-//        return result;
-//    }
+    List<CourseCardDto> getSixCoursesMostPopular(Integer userId);
 
-    public double avgRating() {
-        double result = 0.0;
-        int count = 0;
-        double sum = 0.0;
-        List<Course> courseList = cd.findAllCourses();
-        for (Course c : courseList) {
-            sum += c.getRating();
-            count++;
-        }
-        result += sum / count;
-        // làm tròn 1 chữ số sau dấu phẩy
-        return Math.round(result * 10.0) / 10.0;
-    }
+    CourseCardDto getCoursesMostPopular(Integer userId);
 
-    public List<CourseCardDto> getThreeCoursesWereLiked(Integer userId) {
-        return cd.findThreeCoursesWereLiked(userId);
-    }
+    List<CourseCardDto> getSixCoursesLast(Integer userId);
 
-    public List<CourseCardDto> getSixCoursesMostPopular(Integer userId) {
-        return cd.findSixCoursesMostPopular(userId);
-    }
+    CourseDetailDto getCourse(int id, int userId);
 
-    public CourseCardDto getCoursesMostPopular(Integer userId) {
-        return cd.findCourseMostPopular(userId);
-    }
+    CourseCardDto getCourseCardById(int id, int userId);
 
-    public List<CourseCardDto> getSixCoursesLast(Integer userId) {
-        return cd.findSixCoursesLast(userId);
-    }
+    List<Course> getAllCourses(CourseFilter filter, int pageSize, int offset);
 
-    public CourseDetailDto getCourse(int id, int userId) {
-        return cd.findCourseByIdForDetail(id, userId);
-    }
-
-    public CourseCardDto getCourseCardById(int id, int userId) {
-        return cd.findCourseCardById(id, userId);
-    }
-
-//    public List<CourseCardDto> getCoursesByTitle(String search) {
-//        return cd.findCoursesByTitle(search);
-//    }
-
-    public List<Course> getAllCourses(CourseFilter filter, int pageSize, int offset) {
-        return cd.filterAllCourses(filter, pageSize, offset);
-    }
-
-    public int countAllCourseAdmin(CourseFilter filter){
-        return cd.countAdminAllCourses(filter);
-    }
+    int countAllCourseAdmin(CourseFilter filter);
 
     // Filter theo category + phân trang
-    public List<CourseCardDto> filterCoursesByCategoryWithPagination(
+    List<CourseCardDto> filterCoursesByCategoryWithPagination(
             int idCategory,
             String sortPrice,
             String level,
@@ -104,50 +46,20 @@ public class CourseService {
             String duration,
             String popular,
             int page,
-            int pageSize, int userId) {
-
-        int offset = (page - 1) * pageSize;
-        return cd.filterResultSearchWithPagination(
-                idCategory,   // categoryId
-                null,         // tagId
-                null,         // title
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular,
-                pageSize,     // limit
-                offset,        // offsetus
-                userId
-        );
-    }
+            int pageSize, int userId);
 
     //    // Đếm tổng số khóa học sau lọc theo category
-    public int countFilteredCoursesByCategory(
+    int countFilteredCoursesByCategory(
             int idCategory,
             String sortPrice,
             String level,
             String priceRange,
             String rating,
             String duration,
-            String popular) {
-
-        return cd.countFilteredCourses(
-                idCategory,
-                null,
-                null,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular
-        );
-    }
+            String popular);
 
     // Tương tự cho search theo title (nếu bạn có controller by-title)
-    public List<CourseCardDto> filterCoursesByTitleWithPagination(
+    List<CourseCardDto> filterCoursesByTitleWithPagination(
             String search,
             String sortPrice,
             String level,
@@ -157,49 +69,19 @@ public class CourseService {
             String popular,
             int page,
             int pageSize,
-            int userId) {
+            int userId);
 
-        int offset = (page - 1) * pageSize;
-        return cd.filterResultSearchWithPagination(
-                null,
-                null,
-                search,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular,
-                pageSize,
-                offset,
-                userId
-        );
-    }
-
-    public int countFilteredCoursesByTitle(
+    int countFilteredCoursesByTitle(
             String search,
             String sortPrice,
             String level,
             String priceRange,
             String rating,
             String duration,
-            String popular) {
-
-        return cd.countFilteredCourses(
-                null,
-                null,
-                search,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular
-        );
-    }
+            String popular);
 
     // Tương tự cho tag (nếu cần)
-    public List<CourseCardDto> filterCoursesByTagWithPagination(
+    List<CourseCardDto> filterCoursesByTagWithPagination(
             int idTag,
             String sortPrice,
             String level,
@@ -208,85 +90,35 @@ public class CourseService {
             String duration,
             String popular,
             int page,
-            int pageSize, int userId) {
+            int pageSize, int userId);
 
-        int offset = (page - 1) * pageSize;
-        return cd.filterResultSearchWithPagination(
-                null,
-                idTag,
-                null,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular,
-                pageSize,
-                offset,
-                userId
-        );
-    }
-
-    public int countFilteredCoursesByTag(
+    int countFilteredCoursesByTag(
             int idTag,
             String sortPrice,
             String level,
             String priceRange,
             String rating,
             String duration,
-            String popular) {
-
-        return cd.countFilteredCourses(
-                null,
-                idTag,
-                null,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular
-        );
-    }
+            String popular);
 
     // tổng quát nhất
-    public List<CourseCardDto> filterCoursesForResultSearch(
+    List<CourseCardDto> filterCoursesForResultSearch(
             Integer categoryId, Integer tagId, String title,
             String sortPrice, String level, String priceRange,
             String rating, String duration, String popular,
-            int limit, int offset, int userId) {
-
-        return cd.filterResultSearchWithPagination(
-                categoryId, tagId, title,
-                sortPrice, level, priceRange, rating, duration, popular,
-                limit, offset, userId);
-    }
+            int limit, int offset, int userId);
 
     // tổng quát nhất
-    public List<CourseCardDto> filterCoursesForAllCourses(
+    List<CourseCardDto> filterCoursesForAllCourses(
             Integer categoryId,
             String sortPrice, boolean popular, boolean newest,
-            int limit, int offset, int userId) {
-
-        return cd.filterAllCoursesWithPagination(
-                categoryId,
-                sortPrice, popular, newest,
-                limit, offset, userId);
-    }
+            int limit, int offset, int userId);
 
     //    // đếm tổng quát (dùng để tính totalPages)
-    public int countFilteredCourses(
+    int countFilteredCourses(
             Integer categoryId, Integer tagId, String title,
             String sortPrice, String level, String priceRange,
-            String rating, String duration, String popular) {
+            String rating, String duration, String popular);
 
-        return cd.countFilteredCourses(
-                categoryId, tagId, title,
-                sortPrice, level, priceRange, rating, duration, popular);
-    }
-
-    public List<CourseCardDto> getCourseSuggestByTitle(String keyword) {
-        return cd.findCourseSuggestByTitle(keyword);
-    }
-
+    List<CourseCardDto> getCourseSuggestByTitle(String keyword);
 }

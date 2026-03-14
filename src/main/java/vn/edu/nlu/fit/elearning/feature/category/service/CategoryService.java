@@ -1,48 +1,56 @@
 package vn.edu.nlu.fit.elearning.feature.category.service;
 
+import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 
 import java.util.List;
 
-public class CategoryService {
-    private CategoryDao categoryDao;
+public class CategoryService implements ICategoryService {
+    private CategoryDao CategoryDao;
 
     public CategoryService() {
-        this.categoryDao = new CategoryDao();
+        this.CategoryDao = new CategoryDaoImpl();
     }
 
+    @Override
     public int createCategory(Category category) {
         if (category != null) {
-            categoryDao.create(category);
+            CategoryDao.create(category);
             return 1;
         }
         return 0;
     }
 
+    @Override
     public List<Category> getAllCategories() {
-        return categoryDao.findAll();
+        return CategoryDao.findAll();
     }
 
+    @Override
     public Category getCategoryById(int id) {
-        return categoryDao.findById(id);
+        return CategoryDao.findById(id);
     }
 
+    @Override
     public int updateCategory(Category category) {
-        return categoryDao.update(category);
+        return CategoryDao.update(category);
     }
 
+    @Override
     public int deleteCategory(int id) {
-        return categoryDao.delete(id);
+        return CategoryDao.delete(id);
     }
 
+    @Override
     public List<Category> getAllCategoriesByName(String name) {
-        return categoryDao.findByName(name);
+        return CategoryDao.findByName(name);
     }
 
+    @Override
     public CategoryDto getCategoryByCourseId(int courseId) {
-        return categoryDao.getCategoryByCourseId(courseId);
+        return CategoryDao.getCategoryByCourseId(courseId);
     }
 
 

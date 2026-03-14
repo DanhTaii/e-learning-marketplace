@@ -3,33 +3,35 @@ package vn.edu.nlu.fit.elearning.feature.user.controller.base;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "ChangePasswordController", value = "/change-password")
 public class ChangePasswordController extends HttpServlet {
-    private AuthService authService;
+    private AuthService AuthService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.authService = new AuthService();
+        this.AuthService = new AuthServiceImpl();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
 
@@ -48,7 +50,7 @@ public class ChangePasswordController extends HttpServlet {
         String retypeNewPasswordUser = request.getParameter("newPasswordRetype");
 //        Sử dụng try-catch để lấy message từ thằng Service quăng qua
         try {
-            boolean isSuccess = authService.resetUserPassword(oldPasswordUser, newPasswordUser, retypeNewPasswordUser, userSession.getEmail());
+            boolean isSuccess = AuthService.resetUserPassword(oldPasswordUser, newPasswordUser, retypeNewPasswordUser, userSession.getEmail());
             if (isSuccess) {
                 request.setAttribute("userSession", userSession);
                 request.getSession().setAttribute("flashSuccess", "Đổi mật khẩu thành công !");

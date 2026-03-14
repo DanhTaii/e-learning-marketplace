@@ -3,11 +3,13 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.result_search;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,8 +41,8 @@ public class ResultSearchByTitleController extends HttpServlet {
             if (keyword == null) keyword = "";
             keyword = keyword.trim();
 
-            CourseService courseService = new CourseService();
-            List<CourseCardDto> list = courseService.getCourseSuggestByTitle(keyword);
+            CourseServiceImpl courseServiceImpl = new CourseServiceImpl();
+            List<CourseCardDto> list = courseServiceImpl.getCourseSuggestByTitle(keyword);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -95,16 +97,16 @@ public class ResultSearchByTitleController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        CourseService courseService = new CourseService();
+        CourseServiceImpl courseServiceImpl = new CourseServiceImpl();
 
         // Lấy list + phân trang
-        List<CourseCardDto> listCourse = courseService.filterCoursesByTitleWithPagination(
+        List<CourseCardDto> listCourse = courseServiceImpl.filterCoursesByTitleWithPagination(
                 search, sortPrice, level, priceRange, rating, duration, popular,
                 page, PAGE_SIZE, userId
         );
 
         // Đếm tổng
-        int totalCourses = courseService.countFilteredCoursesByTitle(
+        int totalCourses = courseServiceImpl.countFilteredCoursesByTitle(
                 search, sortPrice, level, priceRange, rating, duration, popular
         );
 
@@ -135,10 +137,10 @@ public class ResultSearchByTitleController extends HttpServlet {
         request.setAttribute("paginationUrl", paginationUrl.toString());
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
-        TagService tagService = new TagService();
+        TagService tagService = new TagServiceImpl();
         request.setAttribute("tags", tagService.getAllTags());
 
         request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);

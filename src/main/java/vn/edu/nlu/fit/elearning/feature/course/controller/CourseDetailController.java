@@ -4,15 +4,19 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.dto.CourseDetailDto;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
+import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
+import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
+import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,20 +24,20 @@ import java.util.List;
 @WebServlet(name = "CourDetailController", value = "/course-detail")
 public class CourseDetailController extends HttpServlet {
 
-    private CourseService cs;
+    private CourseServiceImpl cs;
     private ReviewService reviewService;
     private LessonService lessonService;
     private TagService tagService;
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.cs = new CourseService();
-        this.lessonService = new LessonService();
-        this.reviewService = new ReviewService();
-        this.tagService = new TagService();
-        this.categoryService = new CategoryService();
+        this.cs = new CourseServiceImpl();
+        this.lessonService = new LessonServiceImpl();
+        this.reviewService = new ReviewServiceImpl();
+        this.tagService = new TagServiceImpl();
+        this.ICategoryService = new CategoryService();
     }
 
     @Override
@@ -69,12 +73,12 @@ public class CourseDetailController extends HttpServlet {
         request.setAttribute("tags", tags);
 
         // này làm cho category
-        Category category = categoryService.getCategoryById(c.getCategoryId());
+        Category category = ICategoryService.getCategoryById(c.getCategoryId());
         request.setAttribute("category", category);
 
         // này là làm để phần danh mục ở header hiện đc nội dung bên trong
-        CategoryService categoryService = new CategoryService();
-        List<Category> categories = categoryService.getAllCategories();
+        ICategoryService ICategoryService = new CategoryService();
+        List<Category> categories = ICategoryService.getAllCategories();
         request.setAttribute("categories", categories);
 
         request.setAttribute("c", c);

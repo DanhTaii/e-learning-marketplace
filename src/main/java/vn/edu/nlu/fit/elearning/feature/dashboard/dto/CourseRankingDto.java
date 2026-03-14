@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.course.dto;
+package vn.edu.nlu.fit.elearning.feature.dashboard.dto;
 
 import java.io.Serializable;
 

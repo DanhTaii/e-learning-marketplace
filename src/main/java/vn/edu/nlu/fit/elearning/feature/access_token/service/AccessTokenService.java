@@ -9,6 +9,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.IAccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 
 import java.sql.Timestamp;
@@ -17,14 +18,15 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
 
-public class AccessTokenService {
+public class AccessTokenService implements IAccessTokenService {
     private final int LIMIT_MINUTE = 1;
     String emailFrom = "minh6112005@gmail.com";
     String password = "zwbo jmsn tlpr mieh";
 
     // Thêm DAO để dùng cho validate & mark used
-    private final AccessTokenDao tokenDao = new AccessTokenDao();
+    private final IAccessTokenDao tokenDao = new AccessTokenDao();
 
+    @Override
     public String generateToken() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder token = new StringBuilder();
@@ -37,19 +39,23 @@ public class AccessTokenService {
         return token.toString();
     }
 
+    @Override
     public String generateTokenForVerify() {
         return UUID.randomUUID().toString();
     }
 
+    @Override
     public Timestamp expireDateTime() {
         return Timestamp.valueOf(LocalDateTime.now().plusMinutes(LIMIT_MINUTE));
     }
 
+    @Override
     public boolean isExpireTime(Timestamp expireTime) {
         if (expireTime == null) return false;
         return LocalDateTime.now().isAfter(expireTime.toLocalDateTime().plusMinutes(LIMIT_MINUTE));
     }
 
+    @Override
     public boolean sendEmail(String email, String code, String name) {
 
         Properties prop = new Properties();
@@ -98,6 +104,7 @@ public class AccessTokenService {
         }
     }
 
+    @Override
     public boolean validateResetToken(int userId, String token) {
         AccessToken accessToken = tokenDao.findByUserIdAndToken(userId, token);
         if (accessToken == null) return false;
@@ -107,6 +114,7 @@ public class AccessTokenService {
     }
 
     // Dùng cho đăng ký (không cần userId)
+    @Override
     public boolean validateSignupToken(String token) {
         AccessToken accessToken = tokenDao.findByToken(token);
         if (accessToken == null) return false;
@@ -115,6 +123,7 @@ public class AccessTokenService {
         return true;
     }
 
+    @Override
     public boolean markAsUsed(String token) {
         return tokenDao.markAsUsed(token);
     }

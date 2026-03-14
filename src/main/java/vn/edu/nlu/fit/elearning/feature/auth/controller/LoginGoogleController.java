@@ -3,10 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.auth.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.utils.objects.GoogleUser;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.utils.objects.GoogleUtils;
 
 import java.io.IOException;
@@ -14,12 +14,12 @@ import java.io.IOException;
 @WebServlet(name = "LoginGoogleController", value = "/sign-in/google")
 public class LoginGoogleController extends HttpServlet {
 
-    private AuthService authService;
+    private AuthService AuthService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.authService = new AuthService();
+        this.AuthService = new AuthServiceImpl();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class LoginGoogleController extends HttpServlet {
         // Bước 2: Dùng Access Token lấy thông tin User (Email, Tên, Avatar)
         GoogleUser googleUser = GoogleUtils.getUserInfo(accessToken);
 
-        User user = authService.processSocialLogin(googleUser);
+        User user = AuthService.processSocialLogin(googleUser);
 
         HttpSession session = request.getSession();
         session.setAttribute("userSession", user);

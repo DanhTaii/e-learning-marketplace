@@ -3,10 +3,12 @@ package vn.edu.nlu.fit.elearning.feature.order.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 import vn.edu.nlu.fit.elearning.feature.order_item.dto.OrderItemDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
-import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
+import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.order.service.OrderServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,8 +22,8 @@ public class OrderDetailController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.orderService = new OrderService();
-        this.orderItemService = new OrderItemService();
+        this.orderService = new OrderServiceImpl();
+        this.orderItemService = new OrderItemServiceImpl();
     }
 
     @Override

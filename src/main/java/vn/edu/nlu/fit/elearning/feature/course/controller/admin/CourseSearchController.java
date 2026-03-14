@@ -5,7 +5,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.helper.pagination.PageResponse;
 import vn.edu.nlu.fit.elearning.utils.objects.CourseFilter;
 
@@ -14,12 +14,12 @@ import java.util.List;
 
 @WebServlet(name = "CourseSearchController", value = "/api/admin/courses")
 public class CourseSearchController extends HttpServlet {
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.courseService = new CourseService();
+        this.courseServiceImpl = new CourseServiceImpl();
     }
 
     @Override
@@ -49,10 +49,10 @@ public class CourseSearchController extends HttpServlet {
         int pageSize = 16;
         //
         int offset = (page - 1) * pageSize;
-        List<Course> listCourses = courseService.getAllCourses(courseFilter, pageSize, offset);
+        List<Course> listCourses = courseServiceImpl.getAllCourses(courseFilter, pageSize, offset);
 
         // 4. Tính toán phân trang
-        int totalCourses = courseService.countAllCourseAdmin(courseFilter);
+        int totalCourses = courseServiceImpl.countAllCourseAdmin(courseFilter);
         int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
 
         PageResponse<Course> result = new PageResponse<>(listCourses, page, totalPages, totalCourses);

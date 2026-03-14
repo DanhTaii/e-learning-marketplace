@@ -1,62 +1,27 @@
-
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
-import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDao;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
 
-public class LessonService {
+public interface LessonService {
+    int createLesson(Lesson lesson);
 
-    private LessonDao lessonDao;
+    List<Lesson> getAllLessons();
 
-    public LessonService() {
-        this.lessonDao = new LessonDao();
-    }
+    Lesson getLessonById(int id);
 
-    public int createLesson(Lesson lesson) {
-        if (lesson != null) {
-            lessonDao.create(lesson);
-            return 1;
-        };
+    int updateLesson(Lesson lesson);
 
-        return 0;
-    }
+    int deleteLesson(int id);
 
-    public List<Lesson> getAllLessons() {
-        return lessonDao.findAll();
-    }
+    List<Lesson> getAllTagsByName(String name);
 
-    public Lesson getLessonById(int id) {
-        return lessonDao.findById(id);
-    }
+    boolean checkLessonName(String title, int courseId);
 
-    public int updateLesson(Lesson lesson) {
-return  lessonDao.update(lesson);
-    }
+    List<Lesson> getSearchLessons(String lessonName, String courseId);
 
-    public int deleteLesson(int id) {
-    return lessonDao.delete(id);
-    }
+    boolean updateLessonWithOrdering(Lesson lesson, int oldOrderIndex, int oldCourseId);
 
-    public List<Lesson> getAllTagsByName(String name) {
-        return lessonDao.findByName(name);
-    }
-
-    public boolean checkLessonName(String title, int courseId) {
-        return lessonDao.checkExists(title, courseId);
-    }
-
-    public List<Lesson> getSearchLessons(String lessonName, String courseId) {
-        return lessonDao.findLessonsByFilter(lessonName,courseId );
-    }
-    public boolean updateLessonWithOrdering(Lesson lesson, int oldOrderIndex, int oldCourseId) {
-
-        return lessonDao.updateWithReorder(lesson, oldOrderIndex,oldCourseId) > 0;
-    }
-
-    public List<Lesson> getLessonsByCourseId(int courseId) {
-        return lessonDao.findByCourseId(courseId);
-    }
-
+    List<Lesson> getLessonsByCourseId(int courseId);
 }

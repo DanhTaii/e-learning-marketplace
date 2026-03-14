@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class UserDetailController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.userService = new UserService();
+        this.userService = new UserServiceImpl();
     }
 
     @Override

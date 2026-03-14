@@ -4,17 +4,18 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.category.service.ICategoryService;
 
 import java.io.IOException;
 
 @WebServlet(name = "CategoryDeleteController", value = "/admin/category/delete")
 public class CategoryDeleteController extends HttpServlet {
-    private CategoryService categoryService;
+    private ICategoryService ICategoryService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.categoryService = new CategoryService();
+        this.ICategoryService = new CategoryService();
     }
 
     @Override
@@ -25,7 +26,7 @@ public class CategoryDeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        int checkDelete = categoryService.deleteCategory(id);
+        int checkDelete = ICategoryService.deleteCategory(id);
         if (checkDelete > 0) {
             request.getSession().setAttribute("flashSuccess", "Xóa danh mục thành công !");
             response.sendRedirect(request.getContextPath() + "/admin/categories");
