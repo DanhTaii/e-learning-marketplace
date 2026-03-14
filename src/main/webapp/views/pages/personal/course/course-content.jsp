@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/validation/auth/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -206,37 +206,5 @@
 
 </body>
 <script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
-<script>
-    function validateRating(input) {
-        if (input.value < 0) input.value = 0;
-        if (input.value > 5) input.value = 5;
-        let displayValue = input.value === '' ? 0 : input.value;
-        document.getElementById('ratingDisplay').innerText = displayValue;
-    }
-
-    $(document).ready(function () {
-        Validator.setupAutoClearErrors();
-
-        $('#myForm').on('submit', function (e) {
-            let comment = $('#user_comment').val().trim();
-            let rating = $('#ratingInput').val().trim();
-            let isValid = true;
-
-
-            if (comment === "") {
-                $('#error_comment').text("Vui lòng nhập bình luận!");
-                isValid = false;
-            }
-            if (rating < 1) {
-                $('#error_rating').text("Vui lòng đánh giá sao lớn hơn 1");
-                isValid = false;
-            }
-            if (!isValid) {
-                e.preventDefault();
-            }
-            return isValid;
-        });
-
-    });
-</script>
+<script src="assets/javascript/validation/personal/course/rating-star.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
