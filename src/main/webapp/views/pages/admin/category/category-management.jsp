@@ -335,18 +335,8 @@
         </div>
     </div>
 </div>
-<div id="toast"></div>
-</body>
-<script>
-    window.flashError = '${sessionScope.flashError}';
-    window.flashSuccess = '${sessionScope.flashSuccess}';
-
-    <%
-        session.removeAttribute("flashError");
-        session.removeAttribute("flashSuccess");
-    %>
-
-</script>
-<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
+<jsp:include page="/views/layouts/toast.jsp"/>
 <script src="assets/javascript/admin/category/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
+
 </html>

@@ -368,19 +368,7 @@
 <form id="delete-form-id" action="admin/user/delete" method="post" class="form">
     <input id="input-delete-id" type="hidden" name="id">
 </form>
-<div id="toast"></div>
+<jsp:include page="/views/layouts/toast.jsp"/>
 </body>
-<script>
-    // Ép kiểu về chuỗi để đảm bảo JS không bị lỗi cú pháp nếu giá trị null
-    window.flashError = '${sessionScope.flashError}';
-    window.flashSuccess = '${sessionScope.flashSuccess}';
-
-    <%
-        session.removeAttribute("flashError");
-        session.removeAttribute("flashSuccess");
-    %>
-
-</script>
-<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/user/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
