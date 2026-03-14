@@ -109,21 +109,21 @@
                             <label class="style__sub-title">Nhập mật khẩu cũ: </label>
                             <input type="password" placeholder="Nhập mật khẩu cũ" id="oldPass" name="oldPassword"
                                    value="${param.oldPassword}"  >
-                            <span id="error_oldPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                            <span id="error_oldPass" class="error-client"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="style__sub-title">Nhập mật khẩu mới: </label>
                             <input type="password" placeholder="Nhập mật khẩu mới" id="newPass" name="newPassword"
                                    value="${param.newPassword}" >
-                            <span id="error_newPass" class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                            <span id="error_newPass" class="error-client"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="style__sub-title">Nhập lại mật khẩu mới: </label>
                             <input type="password" placeholder="Nhập lại mật khẩu mới"  id="reNewPass" name="newPasswordRetype"
                                    value="${param.newPasswordRetype}">
-                            <span id="error_reType"  class="error-client" style="color: red;font-size: 1.5rem;padding-left: 1.6rem"></span>
+                            <span id="error_reType"  class="error-client"></span>
                         </div>
                     </div>
 

@@ -40,7 +40,23 @@
 .column1 {
     margin-top: 2rem;
 }
-
+.image-container.imgg{
+    position: relative;
+    min-height: 500px;
+}
+.placeholder-video{
+    display: none;
+    width: 100%;
+    height: 500px;
+    background: #000;
+    color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title-video .text-3xl.regular{
+    line-height: normal;
+}
 .column2 {
     margin-top: 2rem;
     height: 710px;
@@ -92,7 +108,15 @@
 .star1__star-icon {
     margin-left: 2px;
 }
-
+.star1__star-icon .fa-solid.fa-star.icon-star {
+    color: #FFD43B;
+    font-size: var(--text-sm);
+}
+.error-client{
+    color: red;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+}
 /*Phan review*/
 .review-box__header {
     padding: 20px 20px 0 20px;
@@ -160,12 +184,18 @@
     margin-right: 0.5rem;
     padding-top: 0.1rem;
 }
-
+.star .fa-solid.fa-star{
+    color: #FFD43B;
+    font-size: 1.6rem;
+}
 .star-icon {
     display: flex;
     margin-left: 5px;
 }
-
+.star-icon .fa-solid.fa-star{
+    color:#FFD43B;
+    font-size:1rem;
+}
 .box__comment {
     margin-top: 1rem;
 }
@@ -213,9 +243,22 @@
     background: var(--dark-blue);
     color: var(--white-color);
 }
-
+.box__content.lesson-item{
+    background: var(--dark-blue);
+    cursor: pointer;
+}
 .column2__header {
     margin-bottom: 1rem;
+}
+.column2__header .text-lg.regular.header{
+    color: var(--white-color);
+}
+.column2__duration .text-lg.light{
+    color: var(--white-color);
+}
+.imgg{
+    width: 100px;
+    margin-bottom: 15px;
 }
 
 /*phan comment nguoi dùng nhap vao (input)*/
@@ -257,6 +300,14 @@
 .star {
     display: flex;
     align-items: center;
+}
+.star .rating-display{
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 5px;
+}
+.star .num{
+    font-size: 1.5rem;
 }
 
 .button__add {

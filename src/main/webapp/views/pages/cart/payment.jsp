@@ -79,7 +79,7 @@
                                         <li>
                                             <div class="order-item-row">
                                                 <div class="order-item__info">
-                                                    <div class="content__image" style="aspect-ratio: 16/9">
+                                                    <div class="content__image">
 
                                                         <img srcset="${p.course.thumbnailUrl}"
 
@@ -94,8 +94,7 @@
                                                 </div>
                                                 <div class="order-item__price">
                                                     <span class="amount-discounted"><fmt:formatNumber value="${p.price}" type="number" pattern="###,###" /> đ <i
-                                                            class="fa-solid fa-tag price-icon"
-                                                            style="color: #3722d3;"></i></span>
+                                                            class="fa-solid fa-tag price-icon"></i></span>
 
                                                 </div>
                                             </div>
@@ -134,7 +133,7 @@
                                     <div class="invoice__pay-btn header__button index-btn">
                                         <button type="submit" id="pay-btn" class="button__btn pay-btn"><i
                                                 class="fa-solid fa-bag-shopping shop-icon"
-                                                style="color: #000000;"></i> Thanh toán
+                                                ></i> Thanh toán
                                         </button>
                                     </div>
 

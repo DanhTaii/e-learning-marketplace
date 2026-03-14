@@ -26,7 +26,7 @@
         <div class="grid layout">
             <div class="grid__column-8 column1">
                 <div class="image-container">
-                    <div class="image-container" style="position: relative; min-height: 500px;">
+                    <div class="image-container imgg">
                         <iframe id="mainVideoPlayer" width="100%" height="500"
                                 src=""
                                 title="YouTube video player" frameborder="0"
@@ -34,10 +34,8 @@
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen
                                 style="display: none;"></iframe>
-                        <div id="videoPlaceholder" class="placeholder-video"
-                             style="display: none; width: 100%; height: 500px; background: #000; color: #fff; flex-direction: column; justify-content: center; align-items: center;">
-                            <img src="assets/image/video-not-found.png" alt="No video available"
-                                 style="width: 100px; margin-bottom: 15px;">
+                        <div id="videoPlaceholder" class="placeholder-video">
+                            <img src="assets/image/video-not-found.png" alt="No video available" class="imgg">
                             <p class="text-xl">Bài học này hiện đang được cập nhật video...</p>
                         </div>
                     </div>
@@ -47,7 +45,7 @@
                     <div class="container__title-video">
                         <div class="title-video">
                             <span id="mainLessonTitle"
-                                  class="text-3xl regular" style="line-height: normal">${enrollmentDetail.listLesson[0].lessonTitle}</span>
+                                  class="text-3xl regular">${enrollmentDetail.listLesson[0].lessonTitle}</span>
                         </div>
                     </div>
                     <div class="container__sub-header">
@@ -56,8 +54,7 @@
                                 <div class="star1__number">
                                     <span class="text-xl"><fmt:formatNumber value="${enrollmentDetail.rating}"
                                                                             pattern="#.#"/></span></div>
-                                <div class="star1__star-icon"><i class="fa-solid fa-star icon-star"
-                                                                 style="color: #FFD43B; font-size: var(--text-sm)"></i>
+                                <div class="star1__star-icon"><i class="fa-solid fa-star icon-star"></i>
                                 </div>
                             </div>
                             <div class="number-rating">
@@ -91,10 +88,8 @@
                                      class="user__avatar2">
                             </div>
                             <form action="my-course/review/create" method="post" id="myForm">
-                                <div><span id="error_comment" class="error-client"
-                                           style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
-                                <div><span id="error_rating" class="error-client"
-                                           style="color: red;font-size: 1.5rem;padding-left: 1rem"></span></div>
+                                <div><span id="error_comment" class="error-client"></span></div>
+                                <div><span id="error_rating" class="error-client"></span></div>
                                 <div class="box__input">
                                     <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
                                     <input type="text" name="comment" class="input-style"
@@ -103,10 +98,9 @@
                                     <input type="number" class="input__number" name="rating" id="ratingInput" min="0"
                                            max="5" step="0.1" oninput="validateRating(this)">
                                     <div class="star">
-                                        <i class="fa-solid fa-star" style="color: #FFD43B; font-size: 1.6rem"></i>
-                                        <span id="ratingDisplay"
-                                              style="font-weight: bold;font-size: 1.5rem;margin-left: 5px">0</span>
-                                        <span style="font-size: 1.5rem">/5</span>
+                                        <i class="fa-solid fa-star"></i>
+                                        <span id="ratingDisplay" class="rating-display">0</span>
+                                        <span class="num">/5</span>
                                     </div>
                                     <button class="dark-button button__add" type="submit">Gửi</button>
                                 </div>
@@ -133,8 +127,7 @@
                                                 <div class="star">
                                                     <div class="text-medium regular">${review.rating}</div>
                                                     <div class="star-icon">
-                                                        <i class="fa-solid fa-star"
-                                                           style="color:#FFD43B; font-size:1rem"></i>
+                                                        <i class="fa-solid fa-star"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,7 +162,6 @@
                     <div class="content__box">
                         <c:forEach var="l" items="${enrollmentDetail.listLesson}">
                             <div class="box__content lesson-item"
-                                 style="background: var(--dark-blue); cursor: pointer;"
                                  data-video-url="${l.videoUrl}"
                                  data-title="Bài ${l.orderIndex}: ${l.lessonTitle}">
 
@@ -182,12 +174,10 @@
                                 </div>
                                 <div class="box__column2">
                                     <div class="column2__header">
-                                        <span class="text-lg regular"
-                                              style="color: var(--white-color)">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
+                                        <span class="text-lg regular header">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
                                     </div>
                                     <div class="column2__duration">
-                                        <span class="text-lg light"
-                                              style="color: var(--white-color)">${l.durationMinutes}p</span>
+                                        <span class="text-lg light">${l.durationMinutes}p</span>
                                     </div>
                                 </div>
                             </div>

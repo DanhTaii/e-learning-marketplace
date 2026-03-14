@@ -32,7 +32,7 @@
                         <div><span class="text-small-title">Biên nhận cho Giỏ hàng - <fmt:formatDate value="${order.createdAt}" pattern="dd 'tháng' MM, yyyy" /> </span></div>
                         <div>
                             <span class="status text-small-title">
-                                <i class="fa-solid fa-circle-check icon-check" style="color: #018d4a;"></i>
+                                <i class="fa-solid fa-circle-check icon-check"></i>
                                 Thành công</span></div>
 
                     </div>
@@ -84,7 +84,7 @@
                             <div class="grid__row-2">
                             <div class="order-items">
                                 <div class="items__content">
-                                    <div class="content__image"  style="aspect-ratio: 16/9">
+                                    <div class="content__image"">
                                         <img srcset="${item.thumbnailUrl}"
                                              alt="${item.courseTitle}" class="image">
                                     </div>

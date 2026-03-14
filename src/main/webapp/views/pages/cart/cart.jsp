@@ -21,13 +21,6 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <style>
-        .button__btn:disabled {
-            background-color: #ccc !important;
-            cursor: not-allowed !important;
-            opacity: 0.7;
-        }
-    </style>
 
 </head>
 <body>
@@ -48,7 +41,7 @@
                                 <div class="shopping-cart__sub-title">
                                     <div class="sub-title__column1">
                                         <div class="sub_title__title text-paragraph">
-                                            <span class="text-2xl" style="margin-left: 7rem">Sản phẩm</span>
+                                            <span class="text-2xl" >Sản phẩm</span>
                                         </div>
                                     </div>
                                     <div class="sub-title__action-price-group action-price-group">
@@ -77,7 +70,7 @@
                                                         <a href="course-detail?id=${p.course.id}" class="turn-page">
                                                             <div class="cart-items__detail">
                                                                 <div class="detail__image-container"
-                                                                     style="aspect-ratio: 16 / 9;">
+                                                                    >
                                                                     <img src="${p.course.thumbnailUrl}"
                                                                          alt="${p.course.title}" class="image">
                                                                 </div>
@@ -89,7 +82,7 @@
                                                                         <span class="rating-group__tags tags text-mini">Bestseller</span>
                                                                         <span class="rating-group__rating rating text-mini">${p.course.avgRating}
                                                                         <i class="fa-solid fa-star"
-                                                                           style="color: #FFD43B; font-size: 1rem"></i>
+                                                                           ></i>
                                                                     </span>
                                                                         <span class="rating-group__rating-count ratings-count text-mini">
                                                                         (${p.course.studentCount} rating)
@@ -118,7 +111,7 @@
                                                                         value="${p.course.price - p.course.discountPrice}"
                                                                         type="number" pattern="###,###"/> đ
                                                                 <i class="fa-solid fa-tag price-icon"
-                                                                   style="color: #3722d3;"></i>
+                                                                   ></i>
                                                             </span></div>
                                                                 <div><span class="price-origin">
                                                                 <fmt:formatNumber value="${p.course.price}"
@@ -161,7 +154,7 @@
                                 </label>
                                 <a href="#" onclick="removeSelectedAjax(event)" class="text-medium remove">Xóa</a>
                                 <a href="#" onclick="wishlistSelectedAjax(event)" class="text-medium wishlisted"
-                                   style="margin-left: 7px;text-decoration: none">Thêm vào Yêu thích</a>
+                                  >Thêm vào Yêu thích</a>
                             </div>
                         </div>
                         <div class="grid__column-5">
@@ -256,15 +249,14 @@
                                                 <c:choose>
                                                     <c:when test="${c.enrolled}">
 
-                                                        <button type="button" class="btn-add-cart dark-button"
-                                                                style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                        <button type="button" class="btn-add-cart dark-button btn-fix"
                                                                 onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                             Vào học ngay
                                                         </button>
 
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <button type="submit" style="font-size: 1.5rem"
+                                                        <button type="submit"
                                                                 class="btn-add-cart dark-button"
                                                                 onclick="addToCart(event,${c.id})">Thêm vào giỏ
                                                         </button>
