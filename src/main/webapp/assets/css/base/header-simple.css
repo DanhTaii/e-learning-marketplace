@@ -1,0 +1,19 @@
+.back{
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+.header1{
+    color: var(--white-color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.header1 .fa-solid.fa-arrow-left{
+    font-size: 3rem;
+    margin-right: 10px;
+}
+.link{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
