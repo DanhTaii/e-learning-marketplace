@@ -21,13 +21,6 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <style>
-        .button__btn:disabled {
-            background-color: #ccc !important;
-            cursor: not-allowed !important;
-            opacity: 0.7;
-        }
-    </style>
 
 </head>
 <body>

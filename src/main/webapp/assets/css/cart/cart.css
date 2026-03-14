@@ -430,3 +430,8 @@ a {
     background-color: var(--dark-blue);
     color: var(--white-color);
 }
+.button__btn:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
