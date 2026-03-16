@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="assets/css/base/home.css">
     <link rel="stylesheet" href="assets/css/base/default.css">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
 
@@ -176,6 +175,8 @@
         </div>
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
+    <jsp:include page="/views/layouts/toast.jsp"/>
+
 </div>
 <script src="assets/javascript/features/cart/payment-modal.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>

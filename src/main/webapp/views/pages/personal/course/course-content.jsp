@@ -35,7 +35,7 @@
                                 allowfullscreen
                                 style="display: none;"></iframe>
                         <div id="videoPlaceholder" class="placeholder-video">
-                            <img src="assets/image/video-not-found.png" alt="No video available" class="imgg">
+                            <img src="assets/image/video-not-found.png" alt="No video available" class="imgg1">
                             <p class="text-xl">Bài học này hiện đang được cập nhật video...</p>
                         </div>
                     </div>
