@@ -131,7 +131,7 @@
                                                     <c:choose>
                                                         <c:when test="${c.enrolled}">
 
-                                                            <button type="button"  class="btn-add-cart dark-button" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                            <button type="button"  class="btn-add-cart dark-button da" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                                 Vào học ngay
                                                             </button>
 

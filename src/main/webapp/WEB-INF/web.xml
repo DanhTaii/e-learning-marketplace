@@ -10,24 +10,24 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/error-page/404.jsp</location>
+        <location>/views/pages/error-page/404.jsp</location>
     </error-page>
 
     <error-page>
         <error-code>403</error-code>
-        <location>/error-page/403.jsp</location>
+        <location>/views/pages/error-page/403.jsp</location>
     </error-page>
 
     <error-page>
         <exception-type>org.jdbi.v3.core.statement.UnableToExecuteStatementException</exception-type>
-        <location>/error-page/db-error.jsp</location>
+        <location>/views/pages/error-page/db-error.jsp</location>
     </error-page>
 
     <error-page>
         <!--        exception-type có độ ưu tiên cao hơn-->
         <!--        nếu có các lỗi 500 xảy ra hoặc là Exception thì sẽ vô trang này-->
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/error-page/system-error.jsp</location>
+        <location>/views/pages/error-page/system-error.jsp</location>
     </error-page>
 
     <!--    Khi bị NullPointerException thì Tomcat chọn /error-page/system-error.jsp để hiển thị.-->
@@ -35,7 +35,7 @@
     <!--    Gần như chỉ được kích hoạt khi bên servlet sendError(500)-->
     <error-page>
         <error-code>500</error-code>
-        <location>/error-page/500.jsp</location>
+        <location>/views/pages/error-page/500.jsp</location>
     </error-page>
 
     <welcome-file-list>
