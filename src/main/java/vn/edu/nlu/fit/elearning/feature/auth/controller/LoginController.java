@@ -23,7 +23,7 @@ public class LoginController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.AuthService = new AuthServiceImpl();
+        this.AuthService = BeanContainer.getBean(AuthService.class);
     }
 
     @Override

@@ -24,10 +24,6 @@ public class AccessTokenServiceImpl implements AccessTokenService {
     String emailFrom = "minh6112005@gmail.com";
     String password = "zwbo jmsn tlpr mieh";
 
-    // Thêm DAO để dùng cho validate & mark used
-//    private final AccessTokenDao accessTokenDao = new AccessTokenDaoImpl();
-
-
     public AccessTokenServiceImpl(AccessTokenDao accessTokenDao) {
         this.accessTokenDao = accessTokenDao;
     }

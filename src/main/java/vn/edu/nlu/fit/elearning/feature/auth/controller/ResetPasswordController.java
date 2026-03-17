@@ -16,6 +16,15 @@ import java.util.List;
 
 @WebServlet(name = "ResetPasswordController", value = "/reset-password")
 public class ResetPasswordController extends HttpServlet {
+    private AuthService authService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.authService = BeanContainer.getBean(AuthService.class);
+    }
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,7 +34,6 @@ public class ResetPasswordController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AuthService AuthService = new AuthServiceImpl();
         HttpSession session = request.getSession();
 
         String password = request.getParameter("password");
@@ -38,7 +46,7 @@ public class ResetPasswordController extends HttpServlet {
 //        System.out.println("userMail = " + userMail);
 
         try {
-            boolean isSuccess = AuthService.changePassword(password, retypePassword, userMail);
+            boolean isSuccess = authService.changePassword(password, retypePassword, userMail);
             if (isSuccess) {
                 response.setStatus(200);
                 response.sendRedirect(request.getContextPath() + "/sign-in");

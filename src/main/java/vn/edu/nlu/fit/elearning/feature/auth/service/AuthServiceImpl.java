@@ -9,12 +9,9 @@ import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
 
 public class AuthServiceImpl implements AuthService {
-
-    private UserDao userDao;
     private UserService userService;
 
     public AuthServiceImpl() {
-        this.userDao = new UserDaoImpl();
         this.userService = BeanContainer.getBean(UserService.class);
     }
 
@@ -26,7 +23,7 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Vui lòng điền thông tin !");
         }
 
-        User user = userDao.findUserByEmail(email);
+        User user = userService.getUserByEmail(email);
         if (user == null) {
             throw new IllegalArgumentException("Tài khoản không tồn tại");
         }
@@ -40,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User processSocialLogin(GoogleUser googleUser) {
-        User user = userDao.findUserByEmail(googleUser.getEmail());
+        User user = userService.getUserByEmail(googleUser.getEmail());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getGiven_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getFamily_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getName());
@@ -70,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean register(String email, String username, String password) {
 
-        if (userDao.findUserByUsername(username) != null) {
+        if (userService.getUserByEmail(username) != null) {
             throw new IllegalArgumentException("Tên người dùng đã tồn tại");
         }
 
@@ -115,7 +112,7 @@ public class AuthServiceImpl implements AuthService {
 
         validatePassword(newPassword);
 
-        return userDao.resetPassword(newHashPassword, userMail) == 1;
+        return userService.changePasswordByEmail(newHashPassword, userMail) == 1;
     }
 
     @Override

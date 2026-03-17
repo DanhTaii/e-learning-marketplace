@@ -26,4 +26,6 @@ public interface UserService {
     int updateRole(int userId, String role);
 
     int deleteUser(int id);
+
+    int changePasswordByEmail(String newPassword, String userMail);
 }

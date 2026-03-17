@@ -4,6 +4,8 @@ import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
+import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
@@ -80,6 +82,10 @@ public class BeanContainer {
         AccessTokenDao accessTokenDao = new AccessTokenDaoImpl();
         beans.put(AccessTokenService.class, new AccessTokenServiceImpl(accessTokenDao));
 
+        UserDao userDao = new UserDaoImpl();
+        beans.put(UserService.class, new UserServiceImpl(userDao));
+        beans.put(AuthService.class, new AuthServiceImpl());
+
         CategoryDao categoryDao = new CategoryDaoImpl();
         beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
 
@@ -118,9 +124,6 @@ public class BeanContainer {
 
         TagDao tagDao = new TagDaoImpl();
         beans.put(TagService.class, new TagServiceImpl(tagDao));
-
-        UserDao userDao = new UserDaoImpl();
-        beans.put(UserService.class, new UserServiceImpl(userDao));
 
         IndexDao indexDao = new IndexDaoImpl();
         beans.put(IndexService.class, new IndexServiceImpl(indexDao));
