@@ -16,11 +16,13 @@ public class ResultSearchByCategoriesController extends HttpServlet {
 
     private static final int PAGE_SIZE = 12;  // Số khóa học mỗi trang
     private CourseSearchService courseSearchService;
+    private CategoryService categoryService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.courseSearchService = BeanContainer.getBean(CourseSearchService.class);
+        this.categoryService = BeanContainer.getBean(CategoryService.class);
     }
 
     @Override
@@ -32,9 +34,6 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-//        UserService userService = new UserService();
-//        User user = userService.getUserById(userId);
-//        request.setAttribute("user", user);
 
         // Lấy id category
         int idCategory;
@@ -45,8 +44,7 @@ public class ResultSearchByCategoriesController extends HttpServlet {
             return;
         }
 
-        CategoryService cs = BeanContainer.getBean(CategoryService.class);
-        Category cate = cs.getCategoryById(idCategory);
+        Category cate = categoryService.getCategoryById(idCategory);
         request.setAttribute("cate", cate);
         request.setAttribute("mode", "category");
 

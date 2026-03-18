@@ -4,8 +4,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
@@ -15,13 +13,13 @@ import java.io.IOException;
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {
     private UserService userService;
-    private AccessTokenService AccessTokenService = BeanContainer.getBean(AccessTokenService.class);
-    private AccessTokenDao tokenDao = new AccessTokenDaoImpl();
+    private AccessTokenService accessTokenService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = BeanContainer.getBean(UserService.class);
+        this.accessTokenService = BeanContainer.getBean(AccessTokenService.class);
     }
 
     @Override
@@ -58,20 +56,20 @@ public class SignUpController extends HttpServlet {
             }
 
             // Tạo token xác thực
-            String token = AccessTokenService.generateToken();
+            String token = accessTokenService.generateToken();
             AccessToken accessToken = new AccessToken(
                     0, // chưa có userId vì chưa tạo user
                     token,
-                    AccessTokenService.expireDateTime(),
+                    accessTokenService.expireDateTime(),
                     false
             );
 
-            if (!tokenDao.createToken(accessToken)) {
-                throw new RuntimeException("Không thể tạo token xác thực!");
-            }
+//            if (!tokenDao.createToken(accessToken)) {
+//                throw new RuntimeException("Không thể tạo token xác thực!");
+//            }
 
             // Gửi email chứa mã
-            if (!AccessTokenService.sendEmail(email, token, username)) {
+            if (!accessTokenService.sendEmail(email, token, username)) {
                 throw new RuntimeException("Gửi email xác nhận thất bại!");
             }
 

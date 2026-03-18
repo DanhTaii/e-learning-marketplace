@@ -7,17 +7,9 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
-
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "CheckMailController", value = "/check-email")
 public class CheckMailController extends HttpServlet {
@@ -28,7 +20,7 @@ public class CheckMailController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        this.AuthService = new AuthServiceImpl();
+        this.AuthService = BeanContainer.getBean(AuthService.class);
         this.AccessTokenService =BeanContainer.getBean(AccessTokenService.class);
         this.userService =BeanContainer.getBean(UserService.class);
     }

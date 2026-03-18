@@ -5,8 +5,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
-
 import java.io.IOException;
 
 @WebServlet(name = "CourseDeleteController", value = "/admin/course/delete")

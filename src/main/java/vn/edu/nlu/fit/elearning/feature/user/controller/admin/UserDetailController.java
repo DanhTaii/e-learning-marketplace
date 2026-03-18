@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
@@ -55,7 +56,7 @@ public class UserDetailController extends HttpServlet {
 //        user.setUsername(username);
 //        user.setEmail(email);
 //        user.setPhone(phone);
-        user.setRole(role);
+        user.setRole(Role.valueOf(role));
 
         if (userService.updateUser(user) > 0) {
             response.sendRedirect(request.getContextPath() + "/admin/users");

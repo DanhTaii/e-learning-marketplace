@@ -5,8 +5,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

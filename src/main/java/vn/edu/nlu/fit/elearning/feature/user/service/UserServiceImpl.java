@@ -109,4 +109,14 @@ public class UserServiceImpl implements UserService {
         return userDao.delete(id);
     }
 
+    @Override
+    public int changePasswordByEmail(String newPassword, String userMail) {
+        return userDao.resetPassword(newPassword, userMail);
+    }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return userDao.existsUserByEmail(email);
+    }
+
 }

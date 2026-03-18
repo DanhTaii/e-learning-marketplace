@@ -46,9 +46,6 @@ public class CourseDetailController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-//        UserService userService = new UserService();
-//        User user = userService.getUserById(userId);
-//        request.setAttribute("user", user);
 
         String userIdStr = request.getParameter("userId");
         if (userIdStr != null) {
