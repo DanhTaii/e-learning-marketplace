@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
@@ -49,7 +50,8 @@ public class UserCreateController extends HttpServlet {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhone(phone);
-        user.setRole(role);
+        Role userRole = Role.valueOf(role);
+        user.setRole(userRole);
         //ÉP kiểu string về ENUM
         BasicStatus statusEnum = BasicStatus.valueOf(status);
         user.setStatus(statusEnum);

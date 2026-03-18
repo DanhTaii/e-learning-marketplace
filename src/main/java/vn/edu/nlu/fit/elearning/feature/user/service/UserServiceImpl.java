@@ -114,4 +114,9 @@ public class UserServiceImpl implements UserService {
         return userDao.resetPassword(newPassword, userMail);
     }
 
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return userDao.existsUserByEmail(email);
+    }
+
 }

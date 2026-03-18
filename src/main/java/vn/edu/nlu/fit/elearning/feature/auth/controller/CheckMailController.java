@@ -20,7 +20,7 @@ public class CheckMailController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        this.AuthService = new AuthServiceImpl();
+        this.AuthService = BeanContainer.getBean(AuthService.class);
         this.AccessTokenService =BeanContainer.getBean(AccessTokenService.class);
         this.userService =BeanContainer.getBean(UserService.class);
     }

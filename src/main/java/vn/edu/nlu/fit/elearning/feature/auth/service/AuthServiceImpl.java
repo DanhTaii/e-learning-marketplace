@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
@@ -14,18 +16,19 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User login(String email, String password) {
-        email = email.trim();
-        password = password.trim();
+    public User login(LoginRequestDto loginRequestDto) {
+        String email = loginRequestDto.getEmail().trim();
+        String password = loginRequestDto.getPassword().trim();
         if (email.isEmpty() || password.isEmpty()) {
             throw new IllegalArgumentException("Vui lòng điền thông tin !");
         }
 
-        User user = userService.getUserByEmail(email);
-        if (user == null) {
+//        System.out.println(email);
+        if (!userService.existsUserByEmail(email)) {
             throw new IllegalArgumentException("Tài khoản không tồn tại");
         }
 
+        User user = userService.getUserByEmail(email);
         String hash = PasswordUtils.hashpassword(password);
         if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
             return user;
@@ -47,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
             user.setUsername(googleUser.getName());
             user.setAvatarUrl(googleUser.getPicture());
 
-            user.setRole("user");
+            user.setRole(Role.USER);
             user.setPassword("");
 
             // Lưu vào database và lấy lại ID vừa tạo

@@ -28,4 +28,6 @@ public interface UserService {
     int deleteUser(int id);
 
     int changePasswordByEmail(String newPassword, String userMail);
+
+    boolean existsUserByEmail(String email);
 }

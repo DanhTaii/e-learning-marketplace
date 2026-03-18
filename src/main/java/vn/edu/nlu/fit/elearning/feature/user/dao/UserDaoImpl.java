@@ -158,4 +158,14 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     .execute();
         });
     }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(id) FROM users WHERE email = :email")
+                    .bind("email", email)
+                    .mapTo(Integer.class)
+                    .one() > 0;
+        });
+    }
 }
