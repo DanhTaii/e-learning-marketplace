@@ -4,23 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
-import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.dto.LessonProgressDTO;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.service.UserLessonProgressService;
-import vn.edu.nlu.fit.elearning.feature.lesson_progress.service.UserLessonProgressServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
-import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
-import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
-import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -46,9 +35,7 @@ public class MyCourseDetailController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-//        UserService userService =BeanContainer.getBean(UserService.class);
-//        User user = userService.getUserById(userId);
-//        request.setAttribute("user", user);
+
         int courseId = Integer.parseInt(request.getParameter("courseId"));
 
         EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId, courseId);

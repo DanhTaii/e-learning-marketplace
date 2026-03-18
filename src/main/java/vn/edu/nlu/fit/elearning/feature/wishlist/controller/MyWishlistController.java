@@ -27,11 +27,6 @@ public class MyWishlistController extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         int userId = (int) session.getAttribute("userId");
-
-//        UserService userService =BeanContainer.getBean(UserService.class);
-//        User user = userService.getUserById(userId);
-//        request.setAttribute("user", user);
-
         // Nếu không có courseId thì hiển thị danh sách wishlist
         List<CourseCardDto> wishlistCourses = ws.getWishlistCourses(userId);
         request.setAttribute("wishlistCourses", wishlistCourses);

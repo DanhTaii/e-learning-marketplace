@@ -6,10 +6,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-
 import java.io.IOException;
 
 @WebServlet(name = "CategoryUpdateController", value = "/admin/category/update")

@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -31,9 +30,6 @@ public class ShowCartController extends HttpServlet {
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-//        UserService userService =BeanContainer.getBean(UserService.class);
-//        User user = userService.getUserById(userId);
-//        request.setAttribute("user", user);
 
         List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
         request.setAttribute("coursesLastest", coursesLastest);

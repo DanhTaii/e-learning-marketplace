@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
-import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistServiceImpl;
-
 import java.io.IOException;
 
 @WebServlet(name = "CartManagerController", value = "/cart-manager")

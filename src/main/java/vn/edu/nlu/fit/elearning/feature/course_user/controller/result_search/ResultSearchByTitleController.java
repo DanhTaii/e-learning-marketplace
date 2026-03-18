@@ -16,11 +16,13 @@ public class ResultSearchByTitleController extends HttpServlet {
 
     private static final int PAGE_SIZE = 12;
     private CourseSearchService courseSearchService;
+    private CourseService courseService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.courseSearchService = BeanContainer.getBean(CourseSearchService.class);
+        this.courseService = BeanContainer.getBean(CourseService.class);
     }
 
     @Override
@@ -44,8 +46,7 @@ public class ResultSearchByTitleController extends HttpServlet {
             if (keyword == null) keyword = "";
             keyword = keyword.trim();
 
-            CourseService courseSearchService = BeanContainer.getBean(CourseService.class);
-            List<CourseCardDto> list = courseSearchService.getCourseSuggestByTitle(keyword);
+            List<CourseCardDto> list = courseService.getCourseSuggestByTitle(keyword);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

@@ -42,7 +42,6 @@ public class CreateReviewController extends HttpServlet {
         newReview.setRating(rating);
         reviewService.createReview(newReview);
 
-//        request.getRequestDispatcher("my-course/detail").forward(request, response);
         response.sendRedirect(request.getContextPath() + "/my-course/detail?courseId=" + courseId);
     }
 }
