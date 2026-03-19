@@ -303,7 +303,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <%--                            </c:if>--%>
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
