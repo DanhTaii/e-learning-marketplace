@@ -8,8 +8,8 @@
     <title>Kiểm tra email</title>
     <base href="${pageContext.request.contextPath}/">
 
-    <link rel="stylesheet" href="assets/css/base/default.css">
-    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/auth/check-mail.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -23,12 +23,12 @@
         <div class="grid-2">
             <div class="grid__row-2">
                 <div class="grid__column-4-in-12 fix-padding-1">
-                    <div class="box-1">
+                    <div class="box-1 add-to-fix-box-1">
                         <img src="assets/image/Vector2.png" alt="" class="img">
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
-                    <div class="box-2-2">
+                    <div class="box-2-2-2">
                         <form action="${pageContext.request.contextPath}/check-email"
                               method="POST"
                               class="form"

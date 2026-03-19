@@ -31,13 +31,13 @@
         <div class="grid-2">
             <div class="grid__row-2">
                 <div class="grid__column-4-in-12 fix-padding-1">
-                    <div class="box-1">
+                    <div class="box-1 add-to-fix-box-1-2">
                         <div class="box-1__title text-big-title"> Chào mừng trở lại</div>
                         <div class="box-1__content">Nâng cao kỹ năng của bạn.</div>
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
-                    <div class="box-2-2">
+                    <div class="box-2-2-1">
                         <%
                             String error = (String) request.getAttribute("error");
                             if (error == null) {

@@ -11,44 +11,12 @@
     align-items: stretch;
 }
 
-.header__button-box {
-    display: flex;
-    margin-left: auto;
-}
-
-.sign-in-box {
-    margin-right: 10px;
-    border: solid 2px var(--white-color);
-    border-radius: 5px;
-}
-
-.sign-in {
-    background-color: var(--dark-blue) !important;
-    color: var(--white-color) !important;
-}
-
-.header__search-2 {
-    margin-left: 30px;
-}
-
 .fix-padding-1 {
     padding-right: 0 !important;
 }
 
 .fix-padding-2 {
     padding-left: 0 !important;
-}
-
-.box-1 {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--dark-blue);
-    color: var(--white-color);
-    padding: 60px 30px;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    height: 100%;
 }
 
 .box-1__title {
@@ -64,25 +32,6 @@
     margin-bottom: -22px;
 }
 
-
-.box-2 {
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    background-color: var(--white-color);
-}
-
-.box-2-2 {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 60px 50px 80px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    background-color: var(--white-color);
-}
-
-.form {
-    cursor: default;
-}
-
 .form__title {
     line-height: 3.6rem;
     color: var(--dark-blue);
@@ -92,15 +41,6 @@
 .form__input {
     margin-bottom: 25px;
     width: 100%;
-}
-
-.input-text {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    outline: none;
-    box-shadow: none;
 }
 
 .input-3 {
