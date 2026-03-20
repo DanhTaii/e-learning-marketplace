@@ -2,6 +2,8 @@ package vn.edu.nlu.fit.elearning.feature.order_item.dto;
 
 import java.io.Serializable;
 
+import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+
 public class OrderItemDTO implements Serializable {
     private int id;
     private int orderId;
@@ -59,5 +61,9 @@ public class OrderItemDTO implements Serializable {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public String getPriceAtPurchaseFormat() {
+        return formatAndConvert(this.priceAtPurchase);
     }
 }

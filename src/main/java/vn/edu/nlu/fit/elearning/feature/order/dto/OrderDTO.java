@@ -1,6 +1,9 @@
 package vn.edu.nlu.fit.elearning.feature.order.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+
 public class OrderDTO implements Serializable {
     private int id;
     private String orderCode;
@@ -76,5 +79,10 @@ public class OrderDTO implements Serializable {
 
     public void setPaymentMethodName(String paymentMethodName) {
         this.paymentMethodName = paymentMethodName;
+    }
+
+
+    public String getFormatFinal(){
+        return formatAndConvert(this.finalAmount);
     }
 }

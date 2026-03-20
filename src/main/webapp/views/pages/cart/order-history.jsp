@@ -50,7 +50,7 @@
                                                 </div>
                                                 <div class="row2__column2-total">
                                                 <span class="text"><span class="text1">Tổng cộng: </span>
-                                                    <fmt:formatNumber value="${order.finalAmount}" type="number" pattern="###,###"/> đ
+                                                    ${order.formatFinal}
                                                 </span>
                                                 </div>
                                                 <div class="row2__column3-payment-method">
