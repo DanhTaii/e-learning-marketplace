@@ -139,7 +139,7 @@
 </div>
 
 <jsp:include page="/views/layouts/footer.jsp"/>
-<jsp:include page="/views/layouts/toast.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/personal/profile/change-password.js?v=<%=System.currentTimeMillis()%>"></script>

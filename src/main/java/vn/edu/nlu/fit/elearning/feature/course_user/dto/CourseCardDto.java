@@ -4,6 +4,8 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.Level;
 
 import java.io.Serializable;
 
+import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+
 public class CourseCardDto implements Serializable {
 
     private int id;
@@ -163,5 +165,12 @@ public class CourseCardDto implements Serializable {
             return hours + "h " + minutes + "p";
         }
 
+    }
+    public String getOriginPrice() {
+        return formatAndConvert(this.price);
+    }
+    public String getDiscountedPrice(){
+        int finalPrice = this.price - this.discountPrice;
+        return formatAndConvert(finalPrice);
     }
 }

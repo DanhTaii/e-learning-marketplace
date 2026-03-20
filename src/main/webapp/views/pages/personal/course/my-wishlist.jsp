@@ -76,13 +76,10 @@
                                         </div>
                                     </div>
                                     <div class="content__price">
-                                        <div class="price__new"><fmt:formatNumber
-                                                value="${c.price - c.discountPrice}" type="number"
-                                                pattern="###,###"></fmt:formatNumber> đ
+                                        <div class="price__new">
+                                             ${c.discountedPrice}
                                         </div>
-                                        <div class="price__old"><fmt:formatNumber value="${c.price}"
-                                                                                  type="number"
-                                                                                  pattern="###,###"></fmt:formatNumber>đ
+                                        <div class="price__old">${c.originPrice}
                                         </div>
                                     </div>
                                     <div class="hover-actions">

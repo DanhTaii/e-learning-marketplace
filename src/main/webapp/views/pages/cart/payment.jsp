@@ -92,7 +92,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="order-item__price">
-                                                    <span class="amount-discounted"><fmt:formatNumber value="${p.price}" type="number" pattern="###,###" /> đ <i
+                                                    <span class="amount-discounted">${p.priceFormat} <i
                                                             class="fa-solid fa-tag price-icon"></i></span>
 
                                                 </div>
@@ -113,16 +113,16 @@
                                 <div class="detail__price">
                                     <div class="price__original">
                                         <span class="price__original text-medium original">Giá gốc: </span>
-                                        <span class="price__original text-medium amount"><fmt:formatNumber value="${sessionScope.cart.total}" type="number" pattern="###,###" /> đ</span>
+                                        <span class="price__original text-medium amount">${sessionScope.cart.formatedTotal}</span>
                                     </div>
                                     <div class="price__discount">
                                         <span class="price__discount text-medium discount">Số tiền giảm: </span>
-                                        <span class="price__discount text-medium amount">- <fmt:formatNumber value="${sessionScope.cart.discountPriceTotal}" type="number" pattern="###,###" /> đ</span>
+                                        <span class="price__discount text-medium amount">- ${sessionScope.cart.formatedDiscountPriceTotal}</span>
 
                                     </div>
                                     <div class="price__total index">
                                         <span class="price__total ">Tổng cộng (${sessionScope.cart.selectedQuantity}): </span>
-                                        <span class="price__total text-medium amount"><fmt:formatNumber value="${sessionScope.cart.finalPriceTotal}" type="number" pattern="###,###" /> đ</span>
+                                        <span class="price__total text-medium amount">${sessionScope.cart.formatedFinalPriceTotal}</span>
                                     </div>
 
 
@@ -175,7 +175,7 @@
         </div>
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
-    <jsp:include page="/views/layouts/toast.jsp"/>
+    <jsp:include page="/views/components/toast.jsp"/>
 
 </div>
 <script src="assets/javascript/features/cart/payment-modal.js?v=<%=System.currentTimeMillis()%>"></script>

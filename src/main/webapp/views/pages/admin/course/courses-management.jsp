@@ -304,7 +304,7 @@
 <form id="delete-form-id" action="admin/course/delete" method="post" class="form">
     <input id="input-delete-id" type="hidden" name="id">
 </form>
-<jsp:include page="/views/layouts/toast.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 
 <script src="assets/javascript/utils/pagination/course/course-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
