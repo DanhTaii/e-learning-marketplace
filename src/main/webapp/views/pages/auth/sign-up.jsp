@@ -27,13 +27,13 @@
         <div class="grid-2">
             <div class="grid__row-2">
                 <div class="grid__column-4-in-12 fix-padding-1">
-                    <div class="box-1">
+                    <div class="box-1 add-to-fix-box-1-2">
                         <div class="box-1__title text-big-title">THAM GIA SOFTSKILL</div>
                         <div class="box-1__content">Nâng cao kỹ năng của bạn.</div>
                     </div>
                 </div>
                 <div class="grid__column-8 fix-padding-2">
-                    <div class="box-2-2">
+                    <div class="box-2-2-1">
 
                         <form action="sign-up" class="form" method="post" id="myForm">
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>

@@ -8,12 +8,12 @@
     <meta charset="UTF-8">
     <title>Order Management</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/order-management.css">
+    <link rel="stylesheet" href="assets/css/admin/order-management.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>

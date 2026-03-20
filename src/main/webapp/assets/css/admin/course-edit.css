@@ -30,7 +30,6 @@
 .course-create__section-1 {
     display: flex;
     width: 100%;
-    /*justify-content: space-between;*/
 }
 
 .course-create__img {
@@ -195,14 +194,11 @@ textarea.input-modern {
     height: 1.4rem;
 }
 
-#error_courseTitle{
+.error-client{
     color: red;
     font-size: 1.2rem;
 }
-#error_courseSubtitle{
-    color: red;
-    font-size: 1.2rem;
-}
+
 #image-preview{
     width: 100%;
     height: 230px;
@@ -210,39 +206,13 @@ textarea.input-modern {
     border-radius: 8px;
     border: 1px solid #ddd;
 }
-#error_coursePrice{
-    color: red;
-    font-size: 1.2rem;
-}
-#error_courseDiscount{
-    color: red;
-    font-size: 1.2rem;
-}
-#error_courseLevel{
-    color: red;
-    font-size: 1.2rem;
-}
-#error_courseCategory{
-    color: red;
-    font-size: 1.2rem;
-}
-#error_courseStatus{
-    color: red;
-    font-size: 1.2rem;
-}
+
 #courseGoals{
     height: 100px;
     padding: 10px;
 }
-#error_courseGoals{
-    color: red;
-    font-size: 1.2rem;
-}
+
 #courseDescription{
     height: 150px;
     padding: 10px;
-}
-#error_courseDescription{
-    color: red;
-    font-size: 1.2rem;
 }

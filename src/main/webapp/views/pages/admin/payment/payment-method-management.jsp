@@ -9,13 +9,14 @@
     <meta charset="UTF-8">
     <title>Kiểu thanh toán </title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=1.0.4">
+    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/course-edit.css">
-    <link rel="stylesheet" href="assets/css/admin/notification.css">
+    <link rel="stylesheet" href="assets/css/admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/payment-method-management.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -217,9 +218,6 @@
                                                 </div>
                                             </td>
                                             <td class="action__button">
-                                                    <%--                                                <a href="">--%>
-                                                    <%--                                                    <span class="icon-action"><i class="fa-solid fa-pen"></i></span>--%>
-                                                    <%--                                                </a>--%>
                                                 <button type="button" onclick="showPaymentMethodDetail(${pm.id})"
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
