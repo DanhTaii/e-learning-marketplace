@@ -108,6 +108,10 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public BasicStatus getStatus() { return status; }
+
+    public void setStatus(BasicStatus status) { this.status = status; }
+
     public String getAvatarUrl() {
         return avatarUrl;
     }
@@ -130,14 +134,6 @@ public class User implements Serializable {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public BasicStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(BasicStatus status) {
-        this.status = status;
     }
 
     @Override

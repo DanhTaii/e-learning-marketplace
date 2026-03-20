@@ -39,6 +39,10 @@
     background: var(--light-green);
     color: var(--green);
 }
+.course-row-status-unactive{
+    background: #FFB3B3;
+    color: red;
+}
 .course-row__status-private{
     background: var(--privacy-light-grey);
     color: var(--privacy-dark-charcoal);

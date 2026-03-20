@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.user.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseCrudDao;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface UserDao extends BaseCrudDao<User, Integer> {
 //
 //    int delete(Integer integer);
 
-    int updateRole(int userId, String role);
+    int updateRole(int userId, String role, BasicStatus status);
 
     User findUserByEmail(String email);
 

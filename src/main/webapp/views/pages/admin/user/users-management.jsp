@@ -202,6 +202,7 @@
                                         <th>Email</th>
                                         <th>Số điện thoại</th>
                                         <th>Vai trò</th>
+                                        <th>Hoạt động</th>
                                         <th>Ngày tạo</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -239,6 +240,20 @@
                                                     </c:otherwise>
                                                 </c:choose>
 
+                                            </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${user.status == 'ACTIVE'}">
+                                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                                                Hoạt động
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="course-row__status course-row__font-content course-row-status-unactive">
+                                                                Bị khóa
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </td>
                                             <td>
                                                 <div class="course-row__created course-row__font-content">
@@ -320,6 +335,14 @@
                                         <select id="detail-role" name="role" class="input__create role-badge">
                                             <option value="user">Người dùng</option>
                                             <option value="admin">Quản trị viên</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="info-group">
+                                        <label><i class="fa-solid fa-user-check"></i> Hoạt động</label>
+                                        <select id="detail-active" name="status" class="input__create role-badge">
+                                            <option value="active">Hoạt động</option>
+                                            <option value="inactive">Bị khóa</option>
                                         </select>
                                     </div>
 

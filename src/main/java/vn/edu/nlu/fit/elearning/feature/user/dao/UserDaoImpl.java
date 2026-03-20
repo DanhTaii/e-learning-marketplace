@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.user.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public User findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.created_at AS createdAt, u.updated_at AS updatedAt " +
+            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.status, u.created_at AS createdAt, u.updated_at AS updatedAt " +
                             "FROM users u where u.id = :id")
                     .bind("id", integer)
                     .mapToBean(User.class)
@@ -31,7 +32,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public List<User> findAll() {
         return getJdbi().withHandle(h -> {
-            return h.createQuery("SELECT u.id, u.username, u.email, u.phone, u.role, u.created_at AS createdAt FROM users u")
+            return h.createQuery("SELECT u.id, u.username, u.email, u.phone, u.role, u.status, u.created_at AS createdAt FROM users u")
                     .mapToBean(User.class)
                     .list();
         });
@@ -47,17 +48,19 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     .bind("username", entity.getUsername())
                     .bind("avatarUrl", entity.getAvatarUrl())
                     .bind("role", entity.getRole())
+//                    .bind("status", entity.getStatus())
                     .bind("id", entity.getId())
                     .execute();
         });
     }
     @Override
-    public int updateRole(int userId, String role) {
+    public int updateRole(int userId, String role, BasicStatus status) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE users\n" +
-                            "SET role = :role, updated_at = CURRENT_TIMESTAMP\n" +
+                            "SET role = :role, status = :status, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
                     .bind("role", role)
+                    .bind("status", status.name())
                     .bind("id", userId)
                     .execute();
         });
