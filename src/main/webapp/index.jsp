@@ -44,7 +44,7 @@
 
                     </div>
                 </div>
-                <div class="grid__colum-9">
+                <div class="grid__colum-9"  >
                     <div class="container__product">
                         <div class="product__big-title text-big-title">Gợi ý cho bạn</div>
                         <a href="course-detail?id=${courseMostPopular.id}" class="turn-page">
@@ -83,14 +83,10 @@
                                         </div>
                                         <br>
                                         <div class="content__price content__price-2">
-                                            <div class="price__new"><fmt:formatNumber
-                                                    value="${courseMostPopular.price - courseMostPopular.discountPrice}"
-                                                    type="number" pattern="###,###"></fmt:formatNumber> đ
+                                            <div class="price__new">
+                                                    ${courseMostPopular.discountedPrice}
                                             </div>
-                                            <div class="price__old"><fmt:formatNumber value="${courseMostPopular.price}"
-                                                                                      type="number"
-                                                                                      pattern="###,###"></fmt:formatNumber>
-                                                đ
+                                            <div class="price__old">${courseMostPopular.originPrice}
                                             </div>
                                         </div>
                                         <br>
@@ -171,14 +167,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new"><fmt:formatNumber
-                                                                value="${c.price - c.discountPrice}" type="number"
-                                                                pattern="###,###"></fmt:formatNumber> đ
+                                                        <div class="price__new">${c.discountedPrice}
+
                                                         </div>
-                                                        <div class="price__old"><fmt:formatNumber value="${c.price}"
-                                                                                                  type="number"
-                                                                                                  pattern="###,###"></fmt:formatNumber>
-                                                            đ
+                                                        <div class="price__old">${c.originPrice}
                                                         </div>
                                                     </div>
 
@@ -263,13 +255,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new"><fmt:formatNumber
-                                                                value="${c.price - c.discountPrice}" type="number"
-                                                                pattern="###,###"></fmt:formatNumber> đ
+                                                        <div class="price__new">${c.discountedPrice}
                                                         </div>
-                                                        <div class="price__old"><fmt:formatNumber value="${c.price}"
-                                                                                                  type="number"
-                                                                                                  pattern="###,###"></fmt:formatNumber>đ
+                                                        <div class="price__old">${c.originPrice}
+
                                                         </div>
                                                     </div>
                                                     <div class="hover-actions">
@@ -353,14 +342,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new"><fmt:formatNumber
-                                                                value="${c.price - c.discountPrice}" type="number"
-                                                                pattern="###,###"></fmt:formatNumber> đ
+                                                        <div class="price__new">${c.discountedPrice}
                                                         </div>
-                                                        <div class="price__old"><fmt:formatNumber value="${c.price}"
-                                                                                                  type="number"
-                                                                                                  pattern="###,###"></fmt:formatNumber>đ
-                                                        </div>
+                                                        <div class="price__old">${c.originPrice}</div>
                                                     </div>
                                                     <div class="hover-actions">
                                                         <c:choose>

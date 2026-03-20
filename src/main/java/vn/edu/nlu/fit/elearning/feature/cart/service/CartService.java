@@ -28,5 +28,11 @@ public interface CartService {
 
     double getDiscountPriceTotal();
 
+    String getFormatedTotal();
+
+    String getFormatedFinalPriceTotal();
+
+    String getFormatedDiscountPriceTotal();
+
     int getSelectedQuantity();
 }

@@ -1,11 +1,8 @@
 // helper
 function updateCartUI(data) {
-    const formatCurrency = amount => new Intl.NumberFormat('vi-VN').format(amount) + " đ";
-
-
     document.getElementById('display-selected-qty').innerText = "Tổng cộng (" + data.selectedQuantity + "):";
-    document.getElementById('display-final-price').innerText = formatCurrency(data.finalPriceTotal);
-    document.getElementById('display-total-price').innerText = formatCurrency(data.total);
+    document.getElementById('display-final-price').innerText = data.finalPriceTotal;
+    document.getElementById('display-total-price').innerText = data.total;
 
 
     const checkoutBtn = document.getElementById('checkout-btn');

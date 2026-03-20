@@ -107,15 +107,13 @@
                                                             </div>
                                                             <div class="cart-items__price items-price">
                                                                 <div><span class="price-discounted">
-                                                                <fmt:formatNumber
-                                                                        value="${p.course.price - p.course.discountPrice}"
-                                                                        type="number" pattern="###,###"/> đ
+                                                                ${p.course.discountedPrice}
+
                                                                 <i class="fa-solid fa-tag price-icon"
                                                                    ></i>
                                                             </span></div>
                                                                 <div><span class="price-origin">
-                                                                <fmt:formatNumber value="${p.course.price}"
-                                                                                  type="number" pattern="###,###"/> đ
+                                                               ${p.course.originPrice}
                                                             </span></div>
                                                             </div>
                                                         </div>
@@ -168,11 +166,9 @@
                                             <div class="charge-note">Chưa tính phí</div>
                                         </div>
                                         <div class="total__price">
-                                            <span class="price-discounted1" id="display-final-price"><fmt:formatNumber
-                                                    value="${sessionScope.cart.finalPriceTotal}" type="number"
-                                                    pattern="###,###"/> đ</span>
-                                            <span class="price-origin" id="display-total-price"><fmt:formatNumber
-                                                    value="${sessionScope.cart.total}" type="number" pattern="###,###"/> đ</span>
+                                            <span class="price-discounted1" id="display-final-price">${sessionScope.cart.formatedFinalPriceTotal}</span>
+                                            <span class="price-origin" id="display-total-price">
+                                                    ${sessionScope.cart.formatedTotal}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -237,12 +233,10 @@
                                             </div>
                                             <div class="content__price">
                                                 <div class="price__new">
-                                                    <fmt:formatNumber value="${c.price - c.discountPrice}" type="number"
-                                                                      pattern="###,###"/> đ
+                                                   ${c.discountedPrice}
                                                 </div>
                                                 <div class="price__old">
-                                                    <fmt:formatNumber value="${c.price}" type="number"
-                                                                      pattern="###,###"/> đ
+                                                   ${c.originPrice}
                                                 </div>
                                             </div>
                                             <div class="hover-actions">

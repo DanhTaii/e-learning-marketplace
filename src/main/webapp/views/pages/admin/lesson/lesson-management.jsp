@@ -403,7 +403,7 @@
       style="display: none">
     <input id="input-delete-id" type="hidden" name="id">
 </form>
-<jsp:include page="/views/layouts/toast.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 
 <script src="assets/javascript/admin/lesson/admin-lesson-detail.js?v=<%=System.currentTimeMillis()%>"></script>

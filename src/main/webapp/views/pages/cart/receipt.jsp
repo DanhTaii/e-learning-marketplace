@@ -50,15 +50,15 @@
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Giá gốc:</span>
-                            <span class="number"><fmt:formatNumber value="${order.totalAmount}" type="number" pattern="###,###" /> đ</span>
+                            <span class="number">${order.formatTotal}</span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Số tiền giảm:</span>
-                            <span class="number">-<fmt:formatNumber value="${order.discountAmount}" type="number" pattern="###,###" /> đ</span>
+                            <span class="number">-${order.formatDiscount}</span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Tổng cộng:</span>
-                            <span class="number"><fmt:formatNumber value="${order.finalAmount}" type="number" pattern="###,###" /> đ</span>
+                            <span class="number">${order.formatFinal}</span>
                         </div>
                         <div class="box__row4">
                             <span class="row4__payment-method text">Phương thức thanh toán:</span>
@@ -95,7 +95,7 @@
                                 </div>
 
                                 <div class="items__price">
-                                    <span class="amount-discounted "><fmt:formatNumber value="${item.priceAtPurchase}" type="number" pattern="###,###" /> đ </span>
+                                    <span class="amount-discounted ">${item.priceAtPurchaseFormat} </span>
                                 </div>
 
                             </div>

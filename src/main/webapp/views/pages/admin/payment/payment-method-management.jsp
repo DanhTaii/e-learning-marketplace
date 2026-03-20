@@ -311,7 +311,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="/views/layouts/toast.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 
 <script src="assets/javascript/admin/payment/admin-payment-method-detail.js?v=<%=System.currentTimeMillis()%>"></script>

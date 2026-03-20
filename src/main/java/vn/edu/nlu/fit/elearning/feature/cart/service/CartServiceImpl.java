@@ -6,6 +6,8 @@ import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+
 public class CartServiceImpl implements CartService {
     Map<Integer, CartItem> data;
 
@@ -107,6 +109,21 @@ public class CartServiceImpl implements CartService {
             }
         });
         return total.get();
+    }
+
+    @Override
+    public String getFormatedTotal() {
+        return formatAndConvert(getTotal());
+    }
+
+    @Override
+    public String getFormatedFinalPriceTotal() {
+        return formatAndConvert(getFinalPriceTotal());
+    }
+
+    @Override
+    public String getFormatedDiscountPriceTotal() {
+        return formatAndConvert(getDiscountPriceTotal());
     }
 
     @Override

@@ -39,8 +39,8 @@ public class UpdateSelectController extends HttpServlet {
             }
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": %.0f, \"total\": %.0f}",
-                    ICartService.getSelectedQuantity(), ICartService.getFinalPriceTotal(), ICartService.getTotal());
+            String json = String.format("{\"selectedQuantity\": %d, \"finalPriceTotal\": \"%s\", \"total\": \"%s\"}",
+                    ICartService.getSelectedQuantity(), ICartService.getFormatedFinalPriceTotal(), ICartService.getFormatedTotal());
             response.getWriter().write(json);
             return ;
         }

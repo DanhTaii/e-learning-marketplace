@@ -391,7 +391,7 @@
 <form id="delete-form-id" action="admin/user/delete" method="post" class="form">
     <input id="input-delete-id" type="hidden" name="id">
 </form>
-<jsp:include page="/views/layouts/toast.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 <script src="assets/javascript/admin/user/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

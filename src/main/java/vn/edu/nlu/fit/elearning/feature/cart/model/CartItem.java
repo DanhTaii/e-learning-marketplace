@@ -2,6 +2,8 @@ package vn.edu.nlu.fit.elearning.feature.cart.model;
 
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
+import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+
 public class CartItem {
     private CourseCardDto course;
     private int price;
@@ -35,5 +37,9 @@ public class CartItem {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getPriceFormat(){
+        return formatAndConvert(this.price);
     }
 }

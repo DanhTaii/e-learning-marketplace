@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+
 public class CourseDetailDto implements Serializable {
     private int id;
     private String title;
@@ -289,5 +291,12 @@ public class CourseDetailDto implements Serializable {
             return hours + "h " + minutes + "p";
         }
 
+    }
+    public String getOriginPrice() {
+        return formatAndConvert(this.price);
+    }
+    public String getDiscountedPrice(){
+        int finalPrice = this.price - this.discountPrice;
+        return formatAndConvert(finalPrice);
     }
 }
