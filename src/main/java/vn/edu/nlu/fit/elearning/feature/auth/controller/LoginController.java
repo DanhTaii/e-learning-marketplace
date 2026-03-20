@@ -38,9 +38,11 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("userSession", canLogin);
 
                 if (canLogin.getRole() == Role.ADMIN) {
+                    request.getSession().setAttribute("flashSuccess", "Đăng nhập thành công!");
                     response.sendRedirect("admin/dashboard");
                     return;
                 } else {
+                    request.getSession().setAttribute("flashSuccess", "Đăng nhập thành công!");
                     response.sendRedirect("index");
                     return;
                 }
