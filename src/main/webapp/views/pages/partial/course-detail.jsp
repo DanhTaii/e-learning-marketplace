@@ -37,12 +37,8 @@
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price"><fmt:formatNumber
-                                        value="${c.price - c.discountPrice}" type="number"
-                                        pattern="###,###"></fmt:formatNumber> đ</span>
-                                <span class="container-2__original-price"><fmt:formatNumber value="${c.price}"
-                                                                                            type="number"
-                                                                                            pattern="###,###"></fmt:formatNumber> đ</span>
+                                <span class="container-2__sold-price">${c.discountedPrice}</span>
+                                <span class="container-2__original-price">${c.originPrice}</span>
                             </div>
                         </div>
                         <div class="container-2__option-group">
