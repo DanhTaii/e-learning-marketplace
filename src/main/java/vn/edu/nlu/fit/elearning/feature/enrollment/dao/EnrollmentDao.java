@@ -12,4 +12,6 @@ public interface EnrollmentDao {
     int createEnrollment(Enrollment entity);
 
     EnrollmentDetailDto findEnrollmentDetail(int userId, int courseId);
+
+    int findNewPercentComplete(int enrollmentId);
 }

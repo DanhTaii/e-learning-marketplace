@@ -41,10 +41,10 @@ public class UserLessonProgressServiceImpl implements UserLessonProgressService 
         // TODO: Implement delete logic
     }
 
-    @Override
-    public void main(String[] args) {
-//        List<LessonProgressDTO> result = this.getAllUserLessonProgresss(7,7);
-        System.out.println(this.getAllUserLessonProgresss(3, 1));
-    }
+//    @Override
+//    public void main(String[] args) {
+////        List<LessonProgressDTO> result = this.getAllUserLessonProgresss(7,7);
+//        System.out.println(this.getAllUserLessonProgresss(3, 1));
+//    }
 
 }

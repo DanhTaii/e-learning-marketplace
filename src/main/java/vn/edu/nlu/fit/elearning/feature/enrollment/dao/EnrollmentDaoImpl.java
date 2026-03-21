@@ -71,4 +71,20 @@ public class EnrollmentDaoImpl extends BaseDao implements EnrollmentDao {
                     .findFirst().orElse(null);
         });
     }
+
+    @Override
+    public int findNewPercentComplete(int enrollmentId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT ROUND(IFNULL(SUM(CASE WHEN ulp.is_completed = 1 THEN 1 ELSE 0 END) / COUNT(l.id) * 100, 0), 2)\n" +
+                            "FROM enrollments e\n" +
+                            "LEFT JOIN lessons l ON l.course_id = e.course_id\n" +
+                            "LEFT JOIN user_lesson_progress ulp ON ulp.lesson_id = l.id AND ulp.user_id = e.user_id\n" +
+                            "WHERE e.id = :enrollmentId\n" +
+                            "GROUP BY e.id")
+                    .bind("enrollmentId", enrollmentId)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
 }

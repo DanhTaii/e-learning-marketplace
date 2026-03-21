@@ -11,6 +11,7 @@ import vn.edu.nlu.fit.elearning.feature.lesson_progress.service.UserLessonProgre
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "MyCourseDetailController", value = "/personal/my-course/detail")
@@ -51,13 +52,22 @@ public class MyCourseDetailController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idStr = request.getParameter("lessonId");
+        String lessonIdStr = request.getParameter("lessonId");
         String isCompletedStr = request.getParameter("completed");
+        String enrollmentIdString = request.getParameter("enrollmentId");
 
-        int id = Integer.parseInt(idStr);
+        int id = Integer.parseInt(lessonIdStr);
         boolean isCompleted = Boolean.parseBoolean(isCompletedStr);
 
         ulp.updateUserLessonProgress(id, isCompleted);
+
+        int enrollmentId = Integer.parseInt(enrollmentIdString);
+        int newPercent = enrollmentService.getNewPercentComplete(enrollmentId);
+
+        response.setContentType("application/json");
+        PrintWriter result = response.getWriter();
+        result.write("{\"status\" : \"success\", \"newPercent\":" + newPercent +"}");
+        result.flush();
 
     }
 }

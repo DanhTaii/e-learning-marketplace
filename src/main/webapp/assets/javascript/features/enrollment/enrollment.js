@@ -62,6 +62,7 @@ function formatYoutubeUrl(url) {
     // Nếu không phải link Youtube, coi như không có video và trả về null
     return null;
 }
+
 //Tránh việc khi bấm vào checkbox mà nó cũng chuyển sang video đó
 const checkboxes = document.querySelectorAll('.lesson-checkbox');
 
@@ -73,27 +74,48 @@ checkboxes.forEach(checkbox => {
         //Như làm việc với bên Servlet
         const lessonId = this.getAttribute('data-lesson-id');
         const isCompleted = this.checked;
+        const enrollmentId = document.getElementById('enrollment-id').value;
+
 
         // Gọi hàm xử lý AJAX ở đây
-        updateProgress(lessonId, isCompleted);
+        updateProgress(lessonId, isCompleted, enrollmentId);
     });
 });
 
-function updateProgress(lessonId, isCompleted) {
-    fetch('my-course/detail', {
+function updateProgress(lessonId, isCompleted, enrollmentId) {
+    fetch('personal/my-course/detail', {
         // Gỉa lập 1 cái form để gửi nó xuống
         method: 'POST',
         headers: {
             //Dùng để nói với Server cái dữ liệu gửi trong Body có định dạng giống hệt như một cái Form HTML truyền thống
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `lessonId=${lessonId}&completed=${isCompleted}`
+        body: `lessonId=${lessonId}&completed=${isCompleted}&enrollmentId=${enrollmentId}`
     })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
                 console.log('Cập nhật tiến độ thành công!');
+                updateCircleProgress(data.newPercent)
             }
         })
         .catch(error => console.error('Lỗi:', error));
+}
+
+function updateCircleProgress(percent) {
+    const circleBar = document.querySelector('.progress-bar');
+    const percentText = document.querySelector('.percent-number');
+
+    if (!circleBar || !percentText) return;
+
+    // Do cho bán kính là 30px và công thức tính chu vi hình tròn là r * Pi * 2
+    const circumference = 188.4;
+
+    //Tính độ dời của vòng tròn xám
+    //Nếu như độ dời bằng 0 thì màu xám không di chuyển mà full xanh
+    //Ngược lại nếu độ dời là 188.4 thì màu xám di chuyển hết và không có màu xanh
+    const offset = circumference - (circumference * percent / 100);
+
+    circleBar.style.strokeDashoffset = offset;
+    percentText.innerText = percent + "%";
 }

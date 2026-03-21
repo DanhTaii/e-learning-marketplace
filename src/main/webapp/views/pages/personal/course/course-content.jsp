@@ -28,6 +28,7 @@
 
                 <div class="course-header-container">
                     <h1 class="course-title">${enrollmentDetail.title}</h1>
+                    <input id="enrollment-id" type="hidden" name="enrollmentId" value="${enrollmentDetail.id}">
 
                     <div class="circular-progress">
                         <svg class="progress-svg" viewBox="0 0 70 70">
@@ -168,7 +169,6 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-
                 </div>
             </div>
             <div class="grid__column-4 column2">
@@ -209,7 +209,7 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
-<form action=""></form>
+<%--<form action=""></form>--%>
 
 </body>
 <script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>

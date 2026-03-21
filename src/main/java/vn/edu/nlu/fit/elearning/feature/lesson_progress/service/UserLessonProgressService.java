@@ -16,5 +16,4 @@ public interface UserLessonProgressService {
 
     void deleteUserLessonProgress(int id);
 
-    void main(String[] args);
 }

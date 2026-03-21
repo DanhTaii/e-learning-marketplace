@@ -12,4 +12,6 @@ public interface EnrollmentService {
     List<EnrollmentCardDTO> getAllEnrollments(int userId);
 
     EnrollmentDetailDto getEnrollmentDetail(int userId, int courseId);
+
+    int getNewPercentComplete(int enrollment);
 }

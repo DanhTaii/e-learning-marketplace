@@ -31,4 +31,8 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public EnrollmentDetailDto getEnrollmentDetail(int userId, int courseId) {
         return ed.findEnrollmentDetail(userId, courseId);
     }
+
+    public int getNewPercentComplete(int enrollmentId){
+        return ed.findNewPercentComplete(enrollmentId);
+    }
 }
