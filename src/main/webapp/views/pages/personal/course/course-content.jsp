@@ -25,6 +25,24 @@
     <div class="web__container">
         <div class="grid layout">
             <div class="grid__column-8 column1">
+
+                <div class="course-header-container">
+                    <h1 class="course-title">${enrollmentDetail.title}</h1>
+                    <input id="enrollment-id" type="hidden" name="enrollmentId" value="${enrollmentDetail.id}">
+
+                    <div class="circular-progress">
+                        <svg class="progress-svg" viewBox="0 0 70 70">
+                            <circle class="progress-bg" cx="35" cy="35" r="30"></circle>
+                            <circle class="progress-bar" cx="35" cy="35" r="30"
+                                    style="stroke-dashoffset: calc(188.4 - (188.4 * ${enrollmentDetail.percentCompleted} / 100));">
+                            </circle>
+                        </svg>
+                        <div class="progress-text">
+                            <span class="percent-number"><fmt:formatNumber value="${enrollmentDetail.percentCompleted}" maxFractionDigits="0"/>%</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="image-container">
                     <div class="image-container imgg">
                         <iframe id="mainVideoPlayer" width="100%" height="500"
@@ -151,7 +169,6 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-
                 </div>
             </div>
             <div class="grid__column-4 column2">
@@ -192,7 +209,7 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
-<form action=""></form>
+<%--<form action=""></form>--%>
 
 </body>
 <script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
