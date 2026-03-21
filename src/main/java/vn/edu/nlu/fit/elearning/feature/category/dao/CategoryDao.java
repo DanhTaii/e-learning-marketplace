@@ -18,7 +18,7 @@ public interface CategoryDao {
 
     List<Category> findByName(String name);
 
-    Category findById(int id);
+//    Category findById(int id);
 
-    CategoryDto getCategoryByCourseId(int courseId);
+    CategoryDto findCategoryByCourseId(int courseId);
 }

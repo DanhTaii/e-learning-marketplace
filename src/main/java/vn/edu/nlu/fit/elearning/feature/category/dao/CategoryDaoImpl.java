@@ -3,7 +3,6 @@ package vn.edu.nlu.fit.elearning.feature.category.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
-
 import java.util.List;
 
 public class CategoryDaoImpl extends BaseDao implements CategoryDao {
@@ -18,7 +17,7 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
     public Category findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT 1 FROM categories WHERE id = :id")
+            return handle.createQuery("SELECT id, name, slug, parent_id, icon_url FROM categories WHERE id = :id")
                     .bind("id", integer)
                     .mapToBean(Category.class)
                     .findFirst()
@@ -66,17 +65,17 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
         });
     }
 
-    @Override
-    public Category findById(int id) {
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT id, name, slug, parent_id, icon_url\n" +
-                    "FROM categories\n" +
-                    "WHERE id = :id;").bind("id", id).mapToBean(Category.class).findFirst().orElse(null);
-        });
-    }
+//    @Override
+//    public Category findById(int id) {
+//        return getJdbi().withHandle(handle -> {
+//            return handle.createQuery("SELECT id, name, slug, parent_id, icon_url\n" +
+//                    "FROM categories\n" +
+//                    "WHERE id = :id;").bind("id", id).mapToBean(Category.class).findFirst().orElse(null);
+//        });
+//    }
 
     @Override
-    public CategoryDto getCategoryByCourseId(int courseId) {
+    public CategoryDto findCategoryByCourseId(int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT c.id AS category_id, c.name, c.slug, c.status, cs.id AS course_id, cs.title AS course_title\n" +
                     "FROM courses cs\n" +

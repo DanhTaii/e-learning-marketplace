@@ -29,6 +29,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public EnrollmentDetailDto getEnrollmentDetail(int userId, int courseId) {
-        return ed.getEnrollmentDetail(userId, courseId);
+        return ed.findEnrollmentDetail(userId, courseId);
     }
 }

@@ -52,15 +52,18 @@ public class EnrollmentDaoImpl extends BaseDao implements EnrollmentDao {
     }
 
     @Override
-    public EnrollmentDetailDto getEnrollmentDetail(int userId, int courseId) {
+    public EnrollmentDetailDto findEnrollmentDetail(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT e.id AS id, c.id AS courseId, c.title AS title, c.author_name AS authorName,\n" +
                             "    (SELECT IFNULL(AVG(r.rating), 0) FROM reviews r WHERE r.course_id = c.id) AS rating,\n" +
                             "    (SELECT IFNULL(SUM(l.duration_minutes), 0) / 60 FROM lessons l WHERE l.course_id = c.id) AS durationHours,\n" +
                             "    (SELECT COUNT(*) FROM enrollments e2 WHERE e2.course_id = c.id) AS studentCount,\n" +
-                            "    (SELECT COUNT(*) FROM reviews r WHERE r.course_id = c.id) AS reviewCount\n" +
+                            "    (SELECT COUNT(*) FROM reviews r WHERE r.course_id = c.id) AS reviewCount, \n" +
+                            "    ROUND(IFNULL(SUM(CASE WHEN ulp.is_completed = 1 THEN 1 ELSE 0 END) / COUNT(l.id) * 100, 0), 2) AS percent_completed\n" +
                             "FROM enrollments e\n" +
                             "JOIN courses c ON e.course_id = c.id\n" +
+                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
+                            "LEFT JOIN user_lesson_progress ulp ON ulp.lesson_id = l.id AND ulp.user_id = e.user_id\n" +
                             "WHERE e.user_id = :userId AND e.course_id = :courseId")
                     .bind("userId", userId)
                     .bind("courseId", courseId)

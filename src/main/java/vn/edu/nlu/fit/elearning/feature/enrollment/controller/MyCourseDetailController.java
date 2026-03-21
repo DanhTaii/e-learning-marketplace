@@ -13,7 +13,7 @@ import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "MyCourseDetailController", value = "/my-course/detail")
+@WebServlet(name = "MyCourseDetailController", value = "/personal/my-course/detail")
 public class MyCourseDetailController extends HttpServlet {
     private EnrollmentService enrollmentService;
     private UserLessonProgressService ulp;

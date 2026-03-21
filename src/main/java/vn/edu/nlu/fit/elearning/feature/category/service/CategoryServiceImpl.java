@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getCategoryByCourseId(int courseId) {
-        return categoryDao.getCategoryByCourseId(courseId);
+        return categoryDao.findCategoryByCourseId(courseId);
     }
 
 

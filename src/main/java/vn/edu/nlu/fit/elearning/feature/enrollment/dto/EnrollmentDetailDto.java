@@ -15,11 +15,12 @@ public class EnrollmentDetailDto implements Serializable {
     private double durationHours;
     private int studentCount;
     private int reviewCount;
+    private int percentCompleted;
     private List<LessonProgressDTO> listLesson;
     private LessonProgressDTO currentLesson;
     private List<ReviewDto> listReviews;
 
-    public EnrollmentDetailDto(int id, int courseId, String title, String authorName, double rating, double durationHours, int studentCount, int reviewCount, List<LessonProgressDTO> listLesson, LessonProgressDTO currentLesson, List<ReviewDto> listReviews) {
+    public EnrollmentDetailDto(int id, int courseId, String title, String authorName, double rating, double durationHours, int studentCount, int reviewCount, int percentCompleted, List<LessonProgressDTO> listLesson, LessonProgressDTO currentLesson, List<ReviewDto> listReviews) {
         this.id = id;
         this.courseId = courseId;
         this.title = title;
@@ -28,6 +29,7 @@ public class EnrollmentDetailDto implements Serializable {
         this.durationHours = durationHours;
         this.studentCount = studentCount;
         this.reviewCount = reviewCount;
+        this.percentCompleted = percentCompleted;
         this.listLesson = listLesson;
         this.currentLesson = currentLesson;
         this.listReviews = listReviews;
@@ -98,6 +100,14 @@ public class EnrollmentDetailDto implements Serializable {
 
     public void setReviewCount(int reviewCount) {
         this.reviewCount = reviewCount;
+    }
+
+    public int getPercentCompleted() {
+        return percentCompleted;
+    }
+
+    public void setPercentCompleted(int percentCompleted) {
+        this.percentCompleted = percentCompleted;
     }
 
     public List<LessonProgressDTO> getListLesson() {
