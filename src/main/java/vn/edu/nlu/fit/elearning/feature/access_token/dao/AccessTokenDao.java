@@ -5,7 +5,7 @@ import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 public interface AccessTokenDao {
     AccessToken findByToken(String token);
 
-    boolean createToken(AccessToken accessToken);
+    int create(AccessToken accessToken);
 
     AccessToken findByUserIdAndToken(int userId, String token);
 

@@ -16,11 +16,13 @@ import java.io.IOException;
 @WebServlet(name = "ForgetPasswordController", value = "/forgot-password")
 public class ForgetPasswordController extends HttpServlet {
     UserService userService;
+    AccessTokenService accessTokenService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.userService = BeanContainer.getBean(UserService.class);
+        this.accessTokenService = BeanContainer.getBean(AccessTokenService.class);
     }
 
     @Override
@@ -43,8 +45,7 @@ public class ForgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
         }
 
-        AccessTokenService AccessTokenService = BeanContainer.getBean(AccessTokenService.class);
-        String token = AccessTokenService.generateToken();
+        String token = accessTokenService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 
 
@@ -53,22 +54,23 @@ public class ForgetPasswordController extends HttpServlet {
 
         AccessToken accessToken = null;
         if (user != null) {
-            accessToken = new AccessToken(user.getId(), token, AccessTokenService.expireDateTime(), false);
+            accessToken = new AccessToken(user.getId(), token, accessTokenService.expireDateTime(), false);
 
         }
 
-        AccessTokenDao tokenDao = new AccessTokenDaoImpl();
-        boolean isCreate = false;
+
+        int isCreate = 0;
         if (accessToken != null) {
-            isCreate = tokenDao.createToken(accessToken);
+            isCreate = accessTokenService.createToken(accessToken);
         }
-        if (!isCreate) {
+
+        if (isCreate == 0) {
             request.setAttribute("error", "Lỗi server");
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
             return;
         }
 
-        boolean isSend = AccessTokenService.sendEmail(email, token, user.getUsername());
+        boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername());
         if (!isSend) {
             request.setAttribute("error", "Gửi không thành công!");
             request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);

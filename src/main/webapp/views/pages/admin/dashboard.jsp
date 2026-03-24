@@ -246,6 +246,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="/views/layouts/toast.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 </html>

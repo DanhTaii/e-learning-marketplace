@@ -22,7 +22,7 @@ public class AccessTokenDaoImpl extends BaseDao implements AccessTokenDao {
     }
 
     @Override
-    public boolean createToken(AccessToken accessToken) {
+    public int create(AccessToken accessToken) {
         String sql = """
                     INSERT INTO token_forget_password (user_id, token, expiry_time, is_used)
                     VALUES (:userId, :token, :expiryTime, :isUsed)
@@ -33,7 +33,9 @@ public class AccessTokenDaoImpl extends BaseDao implements AccessTokenDao {
                         .bind("token", accessToken.getToken())
                         .bind("expiryTime", accessToken.getExpiriTime())
                         .bind("isUsed", accessToken.isUsed())
-                        .execute() > 0
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(Integer.class)
+                        .findFirst().orElse(0)
         );
     }
 

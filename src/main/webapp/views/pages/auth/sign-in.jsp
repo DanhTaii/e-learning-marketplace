@@ -118,6 +118,7 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 <script src="assets/javascript/validation/auth/sign-in.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

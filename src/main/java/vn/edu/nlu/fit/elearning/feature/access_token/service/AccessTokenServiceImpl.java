@@ -42,6 +42,11 @@ public class AccessTokenServiceImpl implements AccessTokenService {
     }
 
     @Override
+    public int createToken(AccessToken token) {
+        return accessTokenDao.create(token);
+    }
+
+    @Override
     public String generateTokenForVerify() {
         return UUID.randomUUID().toString();
     }
