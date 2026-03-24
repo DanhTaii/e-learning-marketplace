@@ -16,11 +16,13 @@ import java.io.IOException;
 @WebServlet(name = "ForgetPasswordController", value = "/forgot-password")
 public class ForgetPasswordController extends HttpServlet {
     UserService userService;
+    AccessTokenService accessTokenService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.userService = BeanContainer.getBean(UserService.class);
+        this.accessTokenService = BeanContainer.getBean(AccessTokenService.class);
     }
 
     @Override
@@ -38,49 +40,60 @@ public class ForgetPasswordController extends HttpServlet {
         User user = userService.getUserByEmail(email);
 //        System.out.println("User tìm được: " + (user == null ? "NULL" : user.getUsername()));
 
-        if (user == null) {
-            request.setAttribute("error", "Email không tồn tại!");
-            request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
-        }
+        try {
 
-        AccessTokenService AccessTokenService = BeanContainer.getBean(AccessTokenService.class);
-        String token = AccessTokenService.generateToken();
+
+            if (user == null) {
+                request.setAttribute("error", "Email không tồn tại!");
+                request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
+                return;
+            }
+
+            String token = accessTokenService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 
 
 //        String tokenReset = "http://localhost:8080/e_learning_war_exploded/check-mail" + token;
 //        System.out.println("Link reset password: " + token);
 
-        AccessToken accessToken = null;
-        if (user != null) {
-            accessToken = new AccessToken(user.getId(), token, AccessTokenService.expireDateTime(), false);
+            AccessToken accessToken = null;
+            if (user != null) {
+                accessToken = new AccessToken(user.getId(), token, accessTokenService.expireDateTime(), false);
 
+            }
+
+
+            int isCreate = 0;
+            if (accessToken != null) {
+                isCreate = accessTokenService.createToken(accessToken);
+            }
+
+            if (isCreate == 0) {
+                request.setAttribute("error", "Lỗi server");
+                request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
+                return;
+            }
+
+            boolean isSend = accessTokenService.sendEmail(email, token, user.getUsername());
+            if (!isSend) {
+                request.setAttribute("error", "Gửi không thành công!");
+                request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
+                return;
+            }
+
+            // Lưu email vào session để dùng ở check-email
+            HttpSession session = request.getSession();
+            session.setAttribute("resetEmail", email);
+            session.setMaxInactiveInterval(10 * 60); // 10 phút
+
+            request.setAttribute("success", "Gửi thành công!");
+            response.sendRedirect(request.getContextPath() + "/check-email");
+        } catch (Exception e) {
+            // In ra log để bạn nhìn thấy trên Render ngay
+            e.printStackTrace(System.err);
+
+            // Ném ra để Tomcat Wrapper bắt được và tạo ra cái log SEVERE [http-nio-8080-exec-...]
+            throw new ServletException("Lỗi tại ForgetPasswordController", e);
         }
-
-        AccessTokenDao tokenDao = new AccessTokenDaoImpl();
-        boolean isCreate = false;
-        if (accessToken != null) {
-            isCreate = tokenDao.createToken(accessToken);
-        }
-        if (!isCreate) {
-            request.setAttribute("error", "Lỗi server");
-            request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
-            return;
-        }
-
-        boolean isSend = AccessTokenService.sendEmail(email, token, user.getUsername());
-        if (!isSend) {
-            request.setAttribute("error", "Gửi không thành công!");
-            request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
-            return;
-        }
-
-        // Lưu email vào session để dùng ở check-email
-        HttpSession session = request.getSession();
-        session.setAttribute("resetEmail", email);
-        session.setMaxInactiveInterval(10 * 60); // 10 phút
-
-        request.setAttribute("success", "Gửi thành công!");
-        response.sendRedirect(request.getContextPath() + "/check-email");
     }
 }

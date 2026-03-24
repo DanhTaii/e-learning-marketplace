@@ -21,8 +21,6 @@ import java.util.UUID;
 public class AccessTokenServiceImpl implements AccessTokenService {
     private AccessTokenDao accessTokenDao;
     private final int LIMIT_MINUTE = 1;
-    String emailFrom = "minh6112005@gmail.com";
-    String password = "zwbo jmsn tlpr mieh";
 
     public AccessTokenServiceImpl(AccessTokenDao accessTokenDao) {
         this.accessTokenDao = accessTokenDao;
@@ -39,6 +37,11 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         }
 
         return token.toString();
+    }
+
+    @Override
+    public int createToken(AccessToken token) {
+        return accessTokenDao.create(token);
     }
 
     @Override
@@ -65,11 +68,16 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         prop.setProperty("mail.smtp.port", "587");
         prop.setProperty("mail.smtp.auth", "true");
         prop.setProperty("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.connectiontimeout", "10000");
+        prop.put("mail.smtp.timeout", "10000");
+        prop.put("mail.smtp.writetimeout", "10000");
+        prop.put("mail.debug", "true");
+
 
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(emailFrom, password);
+                return new PasswordAuthentication(System.getenv("EMAIL_HOST"), System.getenv("EMAIL_PASSWORD"));
             }
         };
 
@@ -78,7 +86,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         try {
             MimeMessage msg = new MimeMessage(session);
             msg.addHeader("Content-Type", "text/html; charset=UTF-8");
-            msg.setFrom(new InternetAddress(emailFrom));
+            msg.setFrom(new InternetAddress(System.getenv("EMAIL_HOST")));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
             msg.setSubject("Mã xác nhận đăng ký", "UTF-8");
 
@@ -100,9 +108,8 @@ public class AccessTokenServiceImpl implements AccessTokenService {
             System.out.println("Sent successfully");
             return true;
         } catch (Exception e) {
-            System.out.println("Sent unsuccessfully");
-            e.printStackTrace();
-            return false;
+            e.printStackTrace(System.err);
+            throw new RuntimeException("Lỗi gửi Email: " + e.getMessage(), e);
         }
     }
 

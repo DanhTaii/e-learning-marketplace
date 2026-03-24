@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
@@ -100,8 +101,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateRole(int userId, String role) {
-        return userDao.updateRole(userId, role);
+    public int updateRole(int userId, String role, BasicStatus status) {
+        return userDao.updateRole(userId, role, status);
     }
 
     @Override

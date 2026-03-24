@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface UserService {
 
     int updateUser(User user);
 
-    int updateRole(int userId, String role);
+    int updateRole(int userId, String role, BasicStatus status);
 
     int deleteUser(int id);
 
