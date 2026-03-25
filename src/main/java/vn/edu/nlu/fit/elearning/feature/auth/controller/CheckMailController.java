@@ -93,6 +93,7 @@ public class CheckMailController extends HttpServlet {
                     session.removeAttribute("signupUsername");
                     session.removeAttribute("signupPassword");
                     request.setAttribute("success", "Xác nhận thành công! Bạn có thể đăng nhập.");
+                    request.getSession().setAttribute("flashSuccess", "Đăng ký thành công!");
                     response.sendRedirect(request.getContextPath() + "/sign-in");
                 } else {
                     request.setAttribute("error", "Không thể tạo tài khoản!");

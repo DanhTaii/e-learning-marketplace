@@ -4,6 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
+import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
@@ -65,9 +67,9 @@ public class SignUpController extends HttpServlet {
                     false
             );
 
-//            if (!tokenDao.createToken(accessToken)) {
-//                throw new RuntimeException("Không thể tạo token xác thực!");
-//            }
+            if (accessTokenService.createToken(accessToken) == 0) {
+                throw new RuntimeException("Không thể tạo token xác thực!");
+            }
 
             // Gửi email chứa mã
             if (!accessTokenService.sendEmail(email, token, username)) {

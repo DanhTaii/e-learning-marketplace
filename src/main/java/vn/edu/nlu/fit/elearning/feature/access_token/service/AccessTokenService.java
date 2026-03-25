@@ -1,9 +1,13 @@
 package vn.edu.nlu.fit.elearning.feature.access_token.service;
 
+import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
+
 import java.sql.Timestamp;
 
 public interface AccessTokenService {
     String generateToken();
+
+    int createToken(AccessToken token);
 
     String generateTokenForVerify();
 

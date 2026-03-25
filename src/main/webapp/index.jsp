@@ -392,21 +392,10 @@
     </div>
     <jsp:include page="views/layouts/footer.jsp"/>
 </div>
-<div id="toast"></div>
+<jsp:include page="views/components/toast.jsp"/>
 
 </body>
 
 <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-assets/css/base/default.css
-    window.flashError = '${sessionScope.flashError}';
-    window.flashSuccess = '${sessionScope.flashSuccess}';
-
-    <%
-        session.removeAttribute("flashError");
-        session.removeAttribute("flashSuccess");
-    %>
-
-</script>
 
 </html>

@@ -20,6 +20,10 @@ function showUserDetail(id) {
             const roleValue = user.role ? user.role.toLowerCase() : 'user';
             roleSelect.value = roleValue;
 
+            const activeSelect = document.getElementById('detail-active');
+            const activeValue = user.status ? user.status.toLowerCase() : 'active';
+            activeSelect.value = activeValue;
+
             if (user.updatedAt) {
                 let updatedAt = new Date(user.updatedAt);
                 document.getElementById('detail-updated').value = updatedAt.toLocaleDateString('vi-VN');
