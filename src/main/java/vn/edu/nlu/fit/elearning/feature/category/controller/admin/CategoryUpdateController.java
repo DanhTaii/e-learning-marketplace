@@ -6,7 +6,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import java.io.IOException;
 
@@ -46,7 +46,7 @@ public class CategoryUpdateController extends HttpServlet {
         String slug = request.getParameter("slug");
         int parentId = Integer.parseInt(request.getParameter("parentId"));
         String icon = request.getParameter("icon");
-        BasicStatus statusEnum = BasicStatus.valueOf(request.getParameter("status"));
+        BaseStatus statusEnum = BaseStatus.valueOf(request.getParameter("status"));
 
         Category cate = new Category();
         cate.setId(id);

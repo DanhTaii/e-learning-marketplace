@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.service;
 
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
@@ -11,15 +12,17 @@ public interface UserService {
 
     User getUserById(int id);
 
+    User getEntityByEmail(String email);
+
     int totalUsers();
 
     int createUser(User user);
 
     List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role);
 
-    User getUserByEmail(String email);
+    UserShortDto getUserByEmail(String email);
 
-    User getUserByUsername(String email);
+    boolean getUserByUsername(String email);
 
     int updateUser(User user);
 

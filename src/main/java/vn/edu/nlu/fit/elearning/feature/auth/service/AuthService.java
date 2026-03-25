@@ -1,11 +1,12 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 
 public interface AuthService {
-    User login(LoginRequestDto loginRequestDto);
+    UserShortDto login(LoginRequestDto loginRequestDto);
 
     User processSocialLogin(GoogleUser googleUser);
 

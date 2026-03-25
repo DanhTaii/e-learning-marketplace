@@ -20,7 +20,7 @@ public interface UserDao extends BaseCrudDao<User, Integer> {
 
     User findUserByEmail(String email);
 
-    User findUserByUsername(String username);
+    boolean findUserByUsername(String username);
 
     List<User> findUsersByFilter(String username, String phone, String dateFrom, String role);
 

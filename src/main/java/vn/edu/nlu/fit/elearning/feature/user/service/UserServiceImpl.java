@@ -2,6 +2,9 @@ package vn.edu.nlu.fit.elearning.feature.user.service;
 
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
+import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
+import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapperImpl;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (isUsernameChanged) {
-            if (userDao.findUserByUsername(newUsername) != null) {
+            if (userDao.findUserByUsername(newUsername)) {
                 throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
             }
         }
@@ -62,6 +65,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getEntityByEmail(String email) {
+        return userDao.findUserByEmail(email);
+    }
+
+    @Override
     public int totalUsers() {
         int result = 0;
 
@@ -85,12 +93,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return userDao.findUserByEmail(email);
+    public UserShortDto getUserByEmail(String email) {
+        User user = userDao.findUserByEmail(email);
+        return UserMapperImpl.toUserShortDto(user);
     }
 
     @Override
-    public User getUserByUsername(String email) {
+    public boolean getUserByUsername(String email) {
         return userDao.findUserByUsername(email);
     }
 

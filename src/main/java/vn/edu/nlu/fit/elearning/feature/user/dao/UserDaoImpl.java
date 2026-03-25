@@ -87,13 +87,14 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public boolean findUserByUsername(String username) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("select u.username from users u where u.username = :username")
+            return handle.createQuery("select 1 from users u where u.username = :username")
                     .bind("username", username)
-                    .mapToBean(User.class)
-                    .findFirst()
-                    .orElse(null);
+                    .mapTo(Integer.class)
+                    .findOne()
+                    .isPresent();
+
         });
     }
 

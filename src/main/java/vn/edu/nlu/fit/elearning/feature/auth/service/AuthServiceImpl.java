@@ -3,6 +3,8 @@ package vn.edu.nlu.fit.elearning.feature.auth.service;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
+import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapperImpl;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
@@ -16,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User login(LoginRequestDto loginRequestDto) {
+    public UserShortDto login(LoginRequestDto loginRequestDto) {
         String email = loginRequestDto.getEmail().trim();
         String password = loginRequestDto.getPassword().trim();
         if (email.isEmpty() || password.isEmpty()) {
@@ -28,17 +30,17 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Tài khoản không tồn tại");
         }
 
-        User user = userService.getUserByEmail(email);
+        User user = userService.getEntityByEmail(email);
         String hash = PasswordUtils.hashpassword(password);
         if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
-            return user;
+            return UserMapperImpl.toUserShortDto(user);
         }
         return null;
     }
 
     @Override
     public User processSocialLogin(GoogleUser googleUser) {
-        User user = userService.getUserByEmail(googleUser.getEmail());
+        User user = userService.getEntityByEmail(googleUser.getEmail());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getGiven_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getFamily_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getName());
@@ -89,7 +91,7 @@ public class AuthServiceImpl implements AuthService {
         if (userService.getUserByEmail(userMail) == null) {
             throw new IllegalArgumentException("Email không tồn tại !!!");
         } else {
-            User user = userService.getUserByEmail(userMail);
+            User user = userService.getEntityByEmail(userMail);
             if (!user.getPassword().equals(oldHash)) {
                 throw new IllegalArgumentException("Mật khẩu cũ không đúng !");
             }

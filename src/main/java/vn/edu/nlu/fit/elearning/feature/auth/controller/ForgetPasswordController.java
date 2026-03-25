@@ -8,6 +8,7 @@ import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 
@@ -35,7 +36,7 @@ public class ForgetPasswordController extends HttpServlet {
         String email = request.getParameter("email");
 //        System.out.println("Email nhận được từ form: " + email);
 
-        User user = userService.getUserByEmail(email);
+        UserShortDto user = userService.getUserByEmail(email);
 //        System.out.println("User tìm được: " + (user == null ? "NULL" : user.getUsername()));
 
         if (user == null) {

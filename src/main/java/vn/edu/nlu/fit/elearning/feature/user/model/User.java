@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.model; // (Giả định package của bạn)
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
 import java.io.Serializable;
@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String password;
     private String phone;
     private Role role;
-    private BasicStatus status;
+    private BaseStatus status;
     private String avatarUrl;
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -23,7 +23,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String email, String password, String phone, Role role, BasicStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
+    public User(Integer id, String firstName, String lastName, String username, String email, String password, String phone, Role role, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -132,11 +132,11 @@ public class User implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public BasicStatus getStatus() {
+    public BaseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BasicStatus status) {
+    public void setStatus(BaseStatus status) {
         this.status = status;
     }
 

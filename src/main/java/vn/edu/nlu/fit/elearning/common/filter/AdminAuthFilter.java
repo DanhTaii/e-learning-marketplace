@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class AdminAuthFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
 
-        User user = (session != null) ? (User) session.getAttribute("userSession") : null;
+        UserShortDto user = (session != null) ? (UserShortDto) session.getAttribute("userSession") : null;
         if (user != null && Role.ADMIN == user.getRole()) {
             chain.doFilter(request, response);
         }else {

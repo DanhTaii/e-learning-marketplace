@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
+import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public class LoginController extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         try {
-            User canLogin = authService.login(new LoginRequestDto(email, pass));
+            UserShortDto canLogin = authService.login(new LoginRequestDto(email, pass));
             if (canLogin != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", canLogin.getId());
