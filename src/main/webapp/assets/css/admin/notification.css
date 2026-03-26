@@ -1,21 +1,25 @@
-/* Copy đoạn này vào CSS của bạn */
 #toast {
     position: fixed;
     top: 32px;
     right: 32px;
     z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.toast {
+#toast .toast {
     display: flex;
     align-items: center;
+    cursor: pointer;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 4px;
     min-width: 400px;
     max-width: 450px;
     border-left: 4px solid;
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
-    transition: all linear 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    padding: 16px 0;
+    transition: all 0.3s ease;
 }
 
 @keyframes slideInLeft {
@@ -35,15 +39,49 @@
     }
 }
 
-/* Các class modifier màu sắc */
-.toast--success { border-left-color: #47d864 !important; }
-.toast--success .toast__icon { color: #47d864; }
+#toast .toast--success { border-left-color: #47d864 !important; }
+#toast .toast--success .toast__icon { color: #47d864; }
 
-.toast--error { border-left-color: #ff623d !important; }
-.toast--error .toast__icon { color: #ff623d; }
+#toast .toast--error { border-left-color: #ff623d !important; }
+#toast .toast--error .toast__icon { color: #ff623d; }
 
-.toast__icon { font-size: 24px; padding: 0 16px; }
-.toast__body { flex-grow: 1; }
-.toast__title { font-size: 16px; font-weight: 600; color: #333; }
-.toast__msg { font-size: 14px; color: #888; margin-top: 6px; line-height: 1.5; }
-.toast__close { font-size: 20px; color: rgba(0, 0, 0, 0.3); padding: 0 16px; cursor: pointer; }
+#toast .toast--warning { border-left-color: #ffc021 !important; }
+#toast .toast--warning .toast__icon { color: #ffc021; }
+
+#toast .toast__icon {
+    font-size: 24px;
+    padding: 0 16px;
+}
+
+#toast .toast__body {
+    flex-grow: 1;
+}
+
+#toast .toast__title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
+}
+
+#toast .toast__msg {
+    font-size: 14px !important;
+    color: #888 !important;
+    margin: 6px 0 0 0 !important;
+    padding: 0 !important;
+    line-height: 1.5 !important;
+}
+
+#toast .toast__close {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.3);
+    padding: 0 16px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#toast .toast__close:hover {
+    color: rgba(0, 0, 0, 0.7);
+}

@@ -33,7 +33,7 @@
                     <div class="shopping-cart">
                         <span class="shopping-cart__title text-big-title h1">Giỏ hàng</span>
                         <span class="shopping-cart__summary summary text-paragraph ">
-                        <span class="text-2xl">Sản phẩm (${sessionScope.cart.totalQuantity})</span>
+                        <span class="text-2xl" id="display-total-selected-qty">Sản phẩm (${sessionScope.cart.totalQuantity})</span>
                     </span>
 
                         <c:choose>
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="scrollable-order-list">
-                                    <form action="update-select" id="cartForm" method="post">
+                                    <form action="cart-manager" id="cartForm" method="post">
                                         <ul>
                                             <c:forEach var="p" items="${sessionScope.cart.list}">
                                                 <li>
@@ -275,8 +275,9 @@
         </div>
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
-</div>
 
+</div>
+<jsp:include page="/views/components/toast.jsp"/>
 <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
 

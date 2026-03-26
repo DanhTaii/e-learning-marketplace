@@ -103,6 +103,7 @@ public class ConfirmController extends HttpServlet {
 
 
         session.setAttribute("cart", ICartService);
+        session.setAttribute("flashSuccess", "Thanh toán thành công! Chúc bạn học tốt.");
         response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + orderId);
     }
 }
