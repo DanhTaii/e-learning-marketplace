@@ -65,7 +65,7 @@ function addToCart(e, courseId) {
                     title: 'Thành công!',
                     message: 'Đã thêm khóa học vào giỏ hàng!',
                     type: 'success',
-                    duration: 3000
+                    duration: 2000
                 });
             }
         })
@@ -75,7 +75,7 @@ function addToCart(e, courseId) {
                 title: 'Thất bại!',
                 message: 'Không thể thêm vào giỏ hàng, vui lòng thử lại.',
                 type: 'error',
-                duration: 3000
+                duration: 2000
             });
         });
 }
