@@ -119,6 +119,7 @@
 </div>
 
 <jsp:include page="/views/layouts/footer.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 
 <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
