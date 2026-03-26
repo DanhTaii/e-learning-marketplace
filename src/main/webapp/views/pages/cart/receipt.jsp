@@ -46,7 +46,7 @@
                         </div>
                         <div class="box__row2">
                             <span class="row2__time text">Ngày:</span>
-                            <span class="number">${order.createdAt}</span>
+                            <span class="number"><fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Giá gốc:</span>
@@ -129,7 +129,7 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
-
+<jsp:include page="/views/components/toast.jsp"/>
 
 </body>
 </html>
