@@ -7,14 +7,14 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+
 import java.io.IOException;
 
 @WebServlet(name = "LoginController", value = "/sign-in")
 public class LoginController extends HttpServlet {
 
-    private AuthService authService;
+    private transient AuthService authService;
 
     @Override
     public void init() throws ServletException {
@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         try {
-            UserShortDto canLogin = authService.login(new LoginRequestDto(email, pass));
+            UserShortResponse canLogin = authService.login(new LoginRequestDto(email, pass));
             if (canLogin != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", canLogin.getId());

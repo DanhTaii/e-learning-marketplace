@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.user.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
@@ -54,12 +55,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         });
     }
     @Override
-    public int updateRole(int userId, String role, BaseStatus status) {
+    public int updateRole(int userId, Role role, BaseStatus status) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE users\n" +
                             "SET role = :role, status = :status, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
-                    .bind("role", role)
+                    .bind("role", role.name())
                     .bind("status", status.name())
                     .bind("id", userId)
                     .execute();

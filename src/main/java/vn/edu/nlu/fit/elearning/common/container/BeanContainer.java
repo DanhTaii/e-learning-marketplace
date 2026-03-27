@@ -84,7 +84,9 @@ public class BeanContainer {
 
         UserDao userDao = new UserDaoImpl();
         beans.put(UserService.class, new UserServiceImpl(userDao));
-        beans.put(AuthService.class, new AuthServiceImpl());
+
+        UserServiceImpl userService = (UserServiceImpl) beans.get(UserService.class);
+        beans.put(AuthService.class, new AuthServiceImpl(userService));
 
         CategoryDao categoryDao = new CategoryDaoImpl();
         beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));

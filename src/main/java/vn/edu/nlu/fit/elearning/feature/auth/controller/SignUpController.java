@@ -4,19 +4,16 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
-import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.UserShortDto;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import java.io.IOException;
 
 @WebServlet(name = "SignUpController", value = "/sign-up")
 public class SignUpController extends HttpServlet {
-    private UserService userService;
-    private AccessTokenService accessTokenService;
+    private transient UserService userService;
+    private transient AccessTokenService accessTokenService;
 
     @Override
     public void init() throws ServletException {
@@ -49,12 +46,12 @@ public class SignUpController extends HttpServlet {
                 throw new IllegalArgumentException("Mật khẩu và mật khẩu xác nhận không khớp!");
             }
 
-            UserShortDto user = null;
+            UserShortResponse user = null;
             if ((user = userService.getUserByEmail(email)) != null) {
                 throw new IllegalArgumentException("Email đã tồn tại!");
             }
 
-            if (userService.getUserByUsername(username)) {
+            if (userService.existsUserByUsername(username)) {
                 throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
             }
 

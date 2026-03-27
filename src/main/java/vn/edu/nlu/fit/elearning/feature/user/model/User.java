@@ -2,7 +2,6 @@ package vn.edu.nlu.fit.elearning.feature.user.model; // (Giả định package c
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 

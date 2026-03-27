@@ -1,18 +1,30 @@
-package vn.edu.nlu.fit.elearning.feature.user.dto;
+package vn.edu.nlu.fit.elearning.feature.user.dto.response;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
 import java.sql.Timestamp;
 
-public class UserTableDto {
+public class UserTableResponse {
     private int id;
     private String username;
     private String email;
     private String phone;
     private Role role;
+    private BaseStatus status;
     private Timestamp createdAt;
 
-    public UserTableDto() {
+    public UserTableResponse() {
+    }
+
+    public UserTableResponse(int id, String username, String email, String phone, Role role, BaseStatus status, Timestamp createdAt) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.role = role;
+        this.status = status;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -53,6 +65,14 @@ public class UserTableDto {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public BaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BaseStatus status) {
+        this.status = status;
     }
 
     public Timestamp getCreatedAt() {

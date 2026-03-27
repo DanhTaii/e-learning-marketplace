@@ -1,9 +1,11 @@
-package vn.edu.nlu.fit.elearning.feature.user.dto;
+package vn.edu.nlu.fit.elearning.feature.user.dto.response;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
-public class UserProfileDto {
+import java.sql.Timestamp;
+
+public class UserDetailResponse {
     private int id;
     private String username;
     private String email;
@@ -11,11 +13,13 @@ public class UserProfileDto {
     private Role role;
     private BaseStatus status;
     private String avatarUrl;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    public UserProfileDto() {
+    public UserDetailResponse() {
     }
 
-    public UserProfileDto(int id, String username, String email, String phone, Role role, BaseStatus status, String avatarUrl) {
+    public UserDetailResponse(int id, String username, String email, String phone, Role role, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -23,6 +27,8 @@ public class UserProfileDto {
         this.role = role;
         this.status = status;
         this.avatarUrl = avatarUrl;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public int getId() {
@@ -79,5 +85,21 @@ public class UserProfileDto {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

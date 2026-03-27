@@ -23,7 +23,6 @@
 <body>
 <div class="web">
     <jsp:include page="/views/layouts/header.jsp"/>
-    <c:set var="user" value="${sessionScope.userSession}"/>
     <div class="user-profile__container grid">
         <div class="grid__row-2">
             <div class="grid__column-3 overall-card">
@@ -33,15 +32,15 @@
                             <div class="fix-image-box">
                                 <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
 
-                                <img src="${not empty user.avatarUrl ? user.avatarUrl : defaultImg}"
+                                <img src="${not empty userProfile.avatarUrl ? userProfile.avatarUrl : defaultImg}"
                                      alt="Avatar"
                                      class="turn-page fix-image"
                                      onerror="this.onerror=null; this.src='${defaultImg}';">
                             </div>
                         </div>
                         <div class="profile-block__info">
-                            <h2 class="profile-block__title">${user.username}</h2>
-                            <p class="profile-block__email">${user.email}</p>
+                            <h2 class="profile-block__title">${userProfile.username}</h2>
+                            <p class="profile-block__email">${userProfile.email}</p>
                         </div>
                     </div>
 
@@ -73,7 +72,7 @@
                                     <span>Lịch sử giao dịch</span>
                                 </a>
                             </li>
-                            <c:if test="${user.role == 'ADMIN'}">
+                            <c:if test="${userProfile.role == 'ADMIN'}">
                                 <li>
                                     <a href="admin/dashboard" class="menu-link">
                                         <i class="fa-solid fa-chart-line"></i>
@@ -101,7 +100,7 @@
 
                             <div class="form-group">
                                 <label class="style__sub-title">Tên người dùng</label>
-                                <input type="text" name="username" id="user_name" value="${user.username}">
+                                <input type="text" name="username" id="user_name" value="${userProfile.username}">
                                 <span id="error_username" class="error-client"></span>
                             </div>
                         </div>
@@ -114,11 +113,11 @@
 
                             <div class="form-group">
                                 <label class="style__sub-title">Địa chỉ Email</label>
-                                <input type="email" name="email" value="${user.email}" placeholder="example@gmail.com">
+                                <input type="email" name="email" value="${userProfile.email}" placeholder="example@gmail.com">
                             </div>
                             <div class="form-group">
                                 <label class="style__sub-title">Số điện thoại</label>
-                                <input type="tel" id="user_phone" name="phone" value="${user.phone}"
+                                <input type="tel" id="user_phone" name="phone" value="${userProfile.phone}"
                                        placeholder="Chưa cập nhật">
                                 <span id="error_phone" class="error-client"></span>
                             </div>
@@ -132,7 +131,7 @@
 
                             <div class="form-group">
                                 <label class="style__sub-title">Link ảnh avatar</label>
-                                <input type="text" name="avatarUrl" value="${user.avatarUrl}" placeholder="Chưa cập nhật" id="user_url">
+                                <input type="text" name="avatarUrl" value="${userProfile.avatarUrl}" placeholder="Chưa cập nhật" id="user_url">
                                 <span id="error_url" class="error-client"></span>
                             </div>
                         </div>

@@ -1,9 +1,9 @@
-package vn.edu.nlu.fit.elearning.feature.user.dto;
+package vn.edu.nlu.fit.elearning.feature.user.dto.response;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
-public class UserShortDto {
+public class UserShortResponse {
     private int id;
     private String username;
     private String email;
@@ -11,10 +11,10 @@ public class UserShortDto {
     private BaseStatus status;
     private Role role;
 
-    public UserShortDto() {
+    public UserShortResponse() {
     }
 
-    public UserShortDto(int id, String username, String email, String avatarUrl, BaseStatus status, Role role) {
+    public UserShortResponse(int id, String username, String email, String avatarUrl, BaseStatus status, Role role) {
         this.id = id;
         this.username = username;
         this.email = email;
