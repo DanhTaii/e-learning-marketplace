@@ -61,12 +61,22 @@ function addToCart(e, courseId) {
             if (window.location.href.includes("cart")) {
                 window.location.reload();
             } else {
-                alert("Đã thêm khóa học vào giỏ hàng!");
+                toast({
+                    title: 'Thành công!',
+                    message: 'Đã thêm khóa học vào giỏ hàng!',
+                    type: 'success',
+                    duration: 2000
+                });
             }
         })
         .catch(error => {
             console.error('Lỗi AJAX:', error);
-            alert("Không thể thêm vào giỏ hàng, vui lòng thử lại.");
+            toast({
+                title: 'Thất bại!',
+                message: 'Không thể thêm vào giỏ hàng, vui lòng thử lại.',
+                type: 'error',
+                duration: 2000
+            });
         });
 }
 function goToCourseContent(e, url) {

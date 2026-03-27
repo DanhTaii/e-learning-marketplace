@@ -393,6 +393,7 @@
     </div>
 
     <jsp:include page="/views/layouts/footer.jsp"/>
+    <jsp:include page="/views/components/toast.jsp"/>
 
 </div>
 

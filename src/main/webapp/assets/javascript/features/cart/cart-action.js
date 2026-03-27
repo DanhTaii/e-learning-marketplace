@@ -1,5 +1,6 @@
 // helper
 function updateCartUI(data) {
+    document.getElementById('display-total-selected-qty').innerText = "Sản phẩm (" + data.totalQuantity + ")";
     document.getElementById('display-selected-qty').innerText = "Tổng cộng (" + data.selectedQuantity + "):";
     document.getElementById('display-final-price').innerText = data.finalPriceTotal;
     document.getElementById('display-total-price').innerText = data.total;
@@ -42,7 +43,7 @@ function handleStateAfterRemoval(data) {
     }
 }
 
-function executeSingleAction(event, url, element) {
+function executeSingleAction(event, url, element,successMessage) {
     event.preventDefault();
     fetch(url, {
         method: 'GET',
@@ -54,16 +55,21 @@ function executeSingleAction(event, url, element) {
             if (listItem) listItem.remove();
 
             handleStateAfterRemoval(data);
+            toast({title: 'Thành công!', message: successMessage, type: 'success', duration: 3000});
         })
-        .catch(error => console.error('Lỗi khi thao tác:', error));
+        .catch(error => {
+            console.error('Lỗi khi thao tác:', error);
+            // Hiện toast thông báo lỗi nếu có
+            toast({title: 'Thất bại!', message: 'Có lỗi xảy ra, vui lòng thử lại sau.', type: 'error', duration: 3000});
+        });
 }
 
-function executeBulkAction(event, url, errorMessage) {
+function executeBulkAction(event, url, errorMessage,successMessage) {
     event.preventDefault();
     const checkedItems = document.querySelectorAll('input[name="itemSelected"]:checked');
 
     if (checkedItems.length === 0) {
-        alert(errorMessage);
+        toast({title: 'Lưu ý!', message: errorMessage, type: 'warning', duration: 3000});
         return;
     }
 
@@ -79,15 +85,20 @@ function executeBulkAction(event, url, errorMessage) {
             });
 
             handleStateAfterRemoval(data);
+
+            toast({title: 'Thành công!', message: successMessage, type: 'success', duration: 3000});
         })
-        .catch(error => console.error('Lỗi thao tác hàng loạt:', error));
+        .catch(error => {
+            console.error('Lỗi thao tác hàng loạt:', error);
+            toast({title: 'Thất bại!', message: 'Có lỗi xảy ra, vui lòng thử lại sau.', type: 'error', duration: 3000});
+        });
 }
 //
 
 function updateSelectionAjax() {
     const form = document.getElementById('cartForm');
 
-    fetch('update-select', {
+    fetch('cart-manager', {
         method: 'POST',
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         body: new URLSearchParams(new FormData(form))
@@ -119,17 +130,17 @@ function handleSelectAll(checkbox) {
 }
 
 function deleteItemAjax(event, courseId, element) {
-    executeSingleAction(event, `cart-manager?action=delete&id=${courseId}`, element);
+    executeSingleAction(event, `cart-manager?action=delete&id=${courseId}`, element, 'Đã xóa khóa học khỏi giỏ hàng!');
 }
 
 function wishlistItemAjax(event, courseId, element) {
-    executeSingleAction(event, `cart-manager?action=moveToWishlist&id=${courseId}`, element);
+    executeSingleAction(event, `cart-manager?action=moveToWishlist&id=${courseId}`, element, 'Đã chuyển khóa học vào Yêu thích!');
 }
 
 function removeSelectedAjax(event) {
-    executeBulkAction(event, 'cart-manager?action=removeSelected', 'Vui lòng chọn ít nhất một khóa học để xóa!');
+    executeBulkAction(event, 'cart-manager?action=removeSelected', 'Vui lòng chọn ít nhất một khóa học để xóa!', 'Đã xóa các khóa học được chọn!');
 }
 
 function wishlistSelectedAjax(event) {
-    executeBulkAction(event, 'cart-manager?action=moveSelectedToWishlist', 'Vui lòng chọn ít nhất một khóa học để thêm vào Yêu thích!');
+    executeBulkAction(event, 'cart-manager?action=moveSelectedToWishlist', 'Vui lòng chọn ít nhất một khóa học để thêm vào Yêu thích!', 'Đã chuyển các khóa học được chọn vào Yêu thích!');
 }

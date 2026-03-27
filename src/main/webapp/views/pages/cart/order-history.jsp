@@ -42,7 +42,7 @@
                                     <li>
                                         <div class="box__content">
                                             <div class="box__row1">
-                                                <span class="time">${order.createdAt}</span>
+                                                <span class="time"><fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
                                             </div>
                                             <div class="box__row2">
                                                 <div class="row2__column1-order">
