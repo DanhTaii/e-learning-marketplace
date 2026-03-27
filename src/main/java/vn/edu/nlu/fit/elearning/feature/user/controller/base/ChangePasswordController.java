@@ -3,7 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.user.controller.base;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
+import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        this.AuthService = new AuthServiceImpl();
+        this.AuthService = BeanContainer.getBean(AuthService.class);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,22 +1,96 @@
 package vn.edu.nlu.fit.elearning.feature.user.service;
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
-import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserProfileRequest;
+import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserRoleStatusRequest;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserProfileResponse;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
+import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
 import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
-    private UserDao userDao;
+    private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
+    //Base Crud
     @Override
-    public boolean updateUserProfile(User currentUser, String newUsername, String newPhone, String avatarUrl) {
+    public int createUser(User user) {
+        return userDao.create(user);
+    }
+
+    @Override
+    public List<UserTableResponse> getAllUsers() {
+        List<User> users = userDao.findAll();
+        return UserMapper.toUserTableDto(users);
+    }
+
+    @Override
+    public UserDetailResponse getUserById(int id) {
+        User user = userDao.findById(id);
+        return UserMapper.toUserDetailDto(user);
+    }
+
+    @Override
+    public int updateUser(int userId, UserProfileRequest req) {
+        User user = userDao.findById(userId);
+        user.setEmail(req.getEmail());
+        user.setPhone(req.getPhone());
+        user.setAvatarUrl(req.getAvatarUrl());
+        return userDao.update(user);
+    }
+
+    @Override
+    public int deleteUser(int id) {
+        return userDao.delete(id);
+    }
+
+    //Lấy thông tin người dùng
+    @Override
+    public User getEntityByEmail(String email) {
+        return userDao.findUserByEmail(email);
+    }
+
+    @Override
+    public List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role) {
+        return userDao.findUsersByFilter(username, phone, createdAt, role);
+    }
+
+    @Override
+    public UserShortResponse getUserByEmail(String email) {
+        User user = userDao.findUserByEmail(email);
+        return UserMapper.toUserShortDto(user);
+    }
+
+    @Override
+    public UserProfileResponse getProfileById(int id) {
+        User user = userDao.findById(id);
+        return UserMapper.toUserProfileDto(user);
+    }
+
+    //Thao tác đến user
+    @Override
+    public int updateRole(int userId, UserRoleStatusRequest req) {
+        Role role = req.getRole();
+        BaseStatus status = req.getStatus();
+        return userDao.updateRole(userId, role, status);
+    }
+
+    @Override
+    public boolean updateUserProfile(int userId, UserProfileRequest req) {
+        String newUsername = req.getUsername();
+        String newPhone = req.getPhone();
+        String avatarUrl = req.getAvatarUrl();
+        User currentUser = userDao.findById(userId);
 
         if (newUsername == null || newUsername.trim().isEmpty()) {
             throw new IllegalArgumentException("Tên hiển thị không được để trống!");
@@ -34,16 +108,12 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
         }
 
-        if (isUsernameChanged) {
-            if (userDao.findUserByUsername(newUsername) != null) {
-                throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
-            }
+        if (isUsernameChanged && userDao.findUserByUsername(newUsername)) {
+            throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
         }
 
-        if (newPhone != null && !newPhone.trim().isEmpty()) {
-            if (!newPhone.matches("\\d{10,11}")) {
-                throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
-            }
+        if (newPhone != null && !newPhone.trim().isEmpty() && !newPhone.matches("\\d{10,11}")) {
+            throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
         }
 
         currentUser.setUsername(newUsername);
@@ -53,66 +123,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userDao.findAll();
-    }
-
-    @Override
-    public User getUserById(int id) {
-        return userDao.findById(id);
-    }
-
-    @Override
-    public int totalUsers() {
-        int result = 0;
-
-        List<User> userList = userDao.findAll();
-        for (User u : userList) {
-            if (u.getRole().equals("user")) {
-                result++;
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public int createUser(User user) {
-        return userDao.create(user);
-    }
-
-    @Override
-    public List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role) {
-        return userDao.findUsersByFilter(username, phone, createdAt, role);
-    }
-
-    @Override
-    public User getUserByEmail(String email) {
-        return userDao.findUserByEmail(email);
-    }
-
-    @Override
-    public User getUserByUsername(String email) {
-        return userDao.findUserByUsername(email);
-    }
-
-    @Override
-    public int updateUser(User user) {
-        return userDao.update(user);
-    }
-
-    @Override
-    public int updateRole(int userId, String role, BasicStatus status) {
-        return userDao.updateRole(userId, role, status);
-    }
-
-    @Override
-    public int deleteUser(int id) {
-        return userDao.delete(id);
-    }
-
-    @Override
     public int changePasswordByEmail(String newPassword, String userMail) {
         return userDao.resetPassword(newPassword, userMail);
+    }
+
+    //Kiểm tra tồn tại của email và username
+    @Override
+    public boolean existsUserByUsername(String username) {
+        return userDao.findUserByUsername(username);
     }
 
     @Override

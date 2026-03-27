@@ -8,9 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
 
 import java.io.IOException;
@@ -53,7 +52,7 @@ public class UserCreateController extends HttpServlet {
         Role userRole = Role.valueOf(role);
         user.setRole(userRole);
         //ÉP kiểu string về ENUM
-        BasicStatus statusEnum = BasicStatus.valueOf(status);
+        BaseStatus statusEnum = BaseStatus.valueOf(status);
         user.setStatus(statusEnum);
 
         if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {

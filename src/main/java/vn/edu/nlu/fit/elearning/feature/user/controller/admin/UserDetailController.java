@@ -7,16 +7,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserRoleStatusRequest;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 
 @WebServlet(name = "UserDetailController", value = "/admin/user/detail")
 public class UserDetailController extends HttpServlet {
-    private UserService userService;
+    private transient UserService userService;
 
     @Override
     public void init() throws ServletException {
@@ -32,7 +33,7 @@ public class UserDetailController extends HttpServlet {
 
         String idStr = request.getParameter("id");
         int id = Integer.parseInt(idStr);
-        User user = userService.getUserById(id);
+        UserDetailResponse user = userService.getUserById(id);
 
         if (user != null) {
             //Đưa dữ liệu người dùng về dạng JSON cho bên JavaScript đọc và hiển thị
@@ -45,20 +46,16 @@ public class UserDetailController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-//        String email = request.getParameter("email");
-//        String username = request.getParameter("username");
+        int userId = Integer.parseInt(request.getParameter("id"));
         String role = request.getParameter("role");
-//        String phone = request.getParameter("phone");
+        String statusStr = request.getParameter("status");
+        BaseStatus status = BaseStatus.valueOf(statusStr.toUpperCase());
 
-        User user = new User();
-        user.setId(id);
-//        user.setUsername(username);
-//        user.setEmail(email);
-//        user.setPhone(phone);
-        user.setRole(Role.valueOf(role));
+        UserRoleStatusRequest req = new UserRoleStatusRequest();
+        req.setRole(Role.valueOf(role));
+        req.setStatus(status);
 
-        if (userService.updateUser(user) > 0) {
+        if (userService.updateRole(userId, req) > 0) {
             response.sendRedirect(request.getContextPath() + "/admin/users");
         }
 

@@ -1,8 +1,5 @@
 package vn.edu.nlu.fit.elearning.feature.auth.dto;
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
-import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-
 public class LoginRequestDto {
     private String email;
     private String password;

@@ -1,17 +1,14 @@
-package vn.edu.nlu.fit.elearning.feature.user.model; // (Giả định package của bạn)
+package vn.edu.nlu.fit.elearning.feature.user.dto.response;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-import java.io.Serializable;
+
 import java.sql.Timestamp;
 
-public class User implements Serializable {
+public class UserDetailResponse {
     private int id;
-    private String firstName;
-    private String lastName;
     private String username;
     private String email;
-    private String password;
     private String phone;
     private Role role;
     private BaseStatus status;
@@ -19,16 +16,13 @@ public class User implements Serializable {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public User() {
+    public UserDetailResponse() {
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String email, String password, String phone, Role role, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
+    public UserDetailResponse(int id, String username, String email, String phone, Role role, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.username = username;
         this.email = email;
-        this.password = password;
         this.phone = phone;
         this.role = role;
         this.status = status;
@@ -37,34 +31,12 @@ public class User implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    // 3. GETTERS VÀ SETTERS (BẮT BUỘC CHO JDBI/BEAN MAPPER)
-
-    // Lưu ý: Các thuộc tính snake_case trong DB (ví dụ: first_name, avatar_url)
-    // đã được chuyển sang camelCase trong Java (ví dụ: firstName, avatarUrl)
-    // để JDBI có thể ánh xạ tự động.
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -83,14 +55,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -105,6 +69,14 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public BaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BaseStatus status) {
+        this.status = status;
     }
 
     public String getAvatarUrl() {
@@ -129,24 +101,5 @@ public class User implements Serializable {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public BaseStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(BaseStatus status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                '}';
     }
 }

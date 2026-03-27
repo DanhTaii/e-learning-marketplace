@@ -1,19 +1,19 @@
 package vn.edu.nlu.fit.elearning.feature.category.dto;
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 
 public class CategoryDto {
     private int id;
     private String name;
     private String slug;
     private int parentId;
-    private BasicStatus status;
+    private BaseStatus status;
     private int courseId;
 
     public CategoryDto() {
     }
 
-    public CategoryDto(int id, String name, String slug, int parentId, BasicStatus status, int courseId) {
+    public CategoryDto(int id, String name, String slug, int parentId, BaseStatus status, int courseId) {
         this.id = id;
         this.name = name;
         this.slug = slug;
@@ -54,11 +54,11 @@ public class CategoryDto {
         this.parentId = parentId;
     }
 
-    public BasicStatus getStatus() {
+    public BaseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BasicStatus status) {
+    public void setStatus(BaseStatus status) {
         this.status = status;
     }
 

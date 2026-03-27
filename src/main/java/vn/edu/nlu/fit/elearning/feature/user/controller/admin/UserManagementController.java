@@ -4,16 +4,15 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "UserManagementController", value = "/admin/users")
 public class UserManagementController extends HttpServlet {
-    private UserService userService;
+    private transient UserService userService;
 
     @Override
     public void init() throws ServletException {
@@ -23,7 +22,7 @@ public class UserManagementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> listUsers = userService.getAllUsers();
+        List<UserTableResponse> listUsers = userService.getAllUsers();
         request.setAttribute("listUsers", listUsers);
         request.setAttribute("currentPage", "users");
         request.getRequestDispatcher("/views/pages/admin/user/users-management.jsp").forward(request, response);
@@ -31,6 +30,6 @@ public class UserManagementController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 }

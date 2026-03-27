@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class PersonalFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
 
-        User user = (session != null) ? (User) session.getAttribute("userSession") : null;
+        UserShortResponse user = (session != null) ? (UserShortResponse) session.getAttribute("userSession") : null;
         if (user != null) {
             chain.doFilter(request, response);
         } else {

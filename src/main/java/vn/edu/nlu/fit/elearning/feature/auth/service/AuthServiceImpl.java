@@ -1,22 +1,23 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
-import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
 
 public class AuthServiceImpl implements AuthService {
-    private UserService userService;
+    private final UserService userService;
 
-    public AuthServiceImpl() {
-        this.userService = BeanContainer.getBean(UserService.class);
+    public AuthServiceImpl(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
-    public User login(LoginRequestDto loginRequestDto) {
+    public UserShortResponse login(LoginRequestDto loginRequestDto) {
         String email = loginRequestDto.getEmail().trim();
         String password = loginRequestDto.getPassword().trim();
         if (email.isEmpty() || password.isEmpty()) {
@@ -28,17 +29,17 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Tài khoản không tồn tại");
         }
 
-        User user = userService.getUserByEmail(email);
+        User user = userService.getEntityByEmail(email);
         String hash = PasswordUtils.hashpassword(password);
         if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
-            return user;
+            return UserMapper.toUserShortDto(user);
         }
         return null;
     }
 
     @Override
     public User processSocialLogin(GoogleUser googleUser) {
-        User user = userService.getUserByEmail(googleUser.getEmail());
+        User user = userService.getEntityByEmail(googleUser.getEmail());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getGiven_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getFamily_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getName());
@@ -59,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
             // 3. Nếu ĐÃ CÓ: Cập nhật lại ảnh đại diện hoặc tên nếu Google có thay đổi
             user.setAvatarUrl(googleUser.getPicture());
             user.setUsername(googleUser.getName());
-            userService.updateUser(user);
+//            userService.updateUser(user);
         }
 
         return user;
@@ -89,7 +90,7 @@ public class AuthServiceImpl implements AuthService {
         if (userService.getUserByEmail(userMail) == null) {
             throw new IllegalArgumentException("Email không tồn tại !!!");
         } else {
-            User user = userService.getUserByEmail(userMail);
+            User user = userService.getEntityByEmail(userMail);
             if (!user.getPassword().equals(oldHash)) {
                 throw new IllegalArgumentException("Mật khẩu cũ không đúng !");
             }

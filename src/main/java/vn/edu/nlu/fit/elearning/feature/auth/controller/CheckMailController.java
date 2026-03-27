@@ -5,9 +5,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
-import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import java.io.IOException;
 
@@ -57,7 +56,7 @@ public class CheckMailController extends HttpServlet {
         // Trường hợp quên mật khẩu
         if (session.getAttribute("resetEmail") != null) {
             String email = (String) session.getAttribute("resetEmail");
-            User user = userService.getUserByEmail(email);
+            UserShortResponse user = userService.getUserByEmail(email);
             if (user == null) {
                 request.setAttribute("error", "Không tìm thấy tài khoản!");
                 request.getRequestDispatcher("/views/pages/auth/check-email.jsp").forward(request, response);

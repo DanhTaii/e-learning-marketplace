@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.category.model;
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -17,7 +17,7 @@ public class Category implements Serializable {
 
     private String iconUrl;
 
-    private BasicStatus status;
+    private BaseStatus status;
 
     private Timestamp createdAt;
 
@@ -67,11 +67,11 @@ public class Category implements Serializable {
         this.iconUrl = iconUrl;
     }
 
-    public BasicStatus getStatus() {
+    public BaseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BasicStatus status) {
+    public void setStatus(BaseStatus status) {
         this.status = status;
     }
 

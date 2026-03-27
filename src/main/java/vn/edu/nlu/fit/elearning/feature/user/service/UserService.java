@@ -1,34 +1,44 @@
 package vn.edu.nlu.fit.elearning.feature.user.service;
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserProfileRequest;
+import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserRoleStatusRequest;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserProfileResponse;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-
 import java.util.List;
 
 public interface UserService {
-    boolean updateUserProfile(User currentUser, String newUsername, String newPhone, String avatarUrl);
-
-    List<User> getAllUsers();
-
-    User getUserById(int id);
-
-    int totalUsers();
-
+    //Base Crud
     int createUser(User user);
 
-    List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role);
-
-    User getUserByEmail(String email);
-
-    User getUserByUsername(String email);
-
-    int updateUser(User user);
-
-    int updateRole(int userId, String role, BasicStatus status);
+    int updateUser(int id, UserProfileRequest user);
 
     int deleteUser(int id);
 
+    List<UserTableResponse> getAllUsers();
+
+    UserDetailResponse getUserById(int id);
+
+    //Lấy thông tin người dùng
+    User getEntityByEmail(String email);
+
+    List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role);
+
+    UserShortResponse getUserByEmail(String email);
+
+    UserProfileResponse getProfileById(int id);
+
+    //Thao tác đến user
+    boolean updateUserProfile(int userId, UserProfileRequest req);
+
+    int updateRole(int userId, UserRoleStatusRequest req);
+
     int changePasswordByEmail(String newPassword, String userMail);
 
+    //Kiểm tra tồn tại của email và username
     boolean existsUserByEmail(String email);
+
+    boolean existsUserByUsername(String username);
 }

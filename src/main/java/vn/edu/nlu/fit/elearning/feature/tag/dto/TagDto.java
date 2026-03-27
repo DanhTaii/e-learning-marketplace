@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.tag.dto;
 
-import vn.edu.nlu.fit.elearning.common.helper.enums.BasicStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 
 import java.io.Serializable;
 
@@ -8,13 +8,13 @@ public class TagDto implements Serializable {
     private int id;
     private String name;
     private String slug;
-    private BasicStatus status;
+    private BaseStatus status;
     private int courseId;
 
     public TagDto() {
     }
 
-    public TagDto(int id, String name, String slug, BasicStatus status, int courseId) {
+    public TagDto(int id, String name, String slug, BaseStatus status, int courseId) {
         this.id = id;
         this.name = name;
         this.slug = slug;
@@ -46,11 +46,11 @@ public class TagDto implements Serializable {
         this.slug = slug;
     }
 
-    public BasicStatus getStatus() {
+    public BaseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BasicStatus status) {
+    public void setStatus(BaseStatus status) {
         this.status = status;
     }
 
