@@ -188,7 +188,7 @@ body.dark-mode .information-card {
 .section-title {
     font-size: var(--text-2xl);
     font-weight: var(--fw-semibold);
-    color: var(--dark-blue);
+    color: var(--text-color);
 }
 
 /*Kiểu chữ*/
@@ -217,6 +217,7 @@ body.dark-mode .information-card {
 .form-group label {
     font-size: var(--text-lg);
     font-weight: var(--fw-medium);
+    color: var(--text-color);
     display: block;
     margin-bottom: 8px;
 }
@@ -228,8 +229,8 @@ body.dark-mode .information-card {
     border: 1px solid var(--border);
     font-size: var(--text-base);
     font-weight: var(--fw-regular);
-    background: #E9ECEF;
-
+    background: var(--sub-background-color);
+    color: var(--text-color);
 }
 
 .form-group input:focus {

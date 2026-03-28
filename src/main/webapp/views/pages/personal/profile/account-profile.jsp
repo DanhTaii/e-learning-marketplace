@@ -138,7 +138,7 @@
 
                         <div class="form-actions">
                             <button type="reset" class="btn-secondary ">Hủy bỏ</button>
-                            <button type="submit" class="btn-primary">Lưu thay đổi</button>
+                            <button type="submit" class="btn-primary dark-button">Lưu thay đổi</button>
                         </div>
                     </form>
                 </div>
