@@ -158,6 +158,7 @@ button {
 .progress__text {
     font-size: var(--text-base);
     margin-top: 1rem;
+    color: var(--text-color);
 }
 
 /* Wishlist rỗng - trạng thái empty */
