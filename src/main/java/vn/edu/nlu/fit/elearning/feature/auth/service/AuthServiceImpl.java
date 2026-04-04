@@ -1,13 +1,14 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.utils.validation.ValidationUtils;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
-import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
+import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
 
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
@@ -73,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Tên người dùng đã tồn tại");
         }
 
-        validatePassword(password);
+        PasswordUtils.validatePassword(password);
 
         User user = new User();
         String hashPass = PasswordUtils.hashpassword(password);
@@ -112,27 +113,9 @@ public class AuthServiceImpl implements AuthService {
 
         String newHashPassword = PasswordUtils.hashpassword(newPassword);
 
-        validatePassword(newPassword);
+        PasswordUtils.validatePassword(newPassword);
 
         return userService.changePasswordByEmail(newHashPassword, userMail) == 1;
     }
 
-    @Override
-    public void validatePassword(String password) {
-        if (password.length() < 8) {
-            throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự");
-        }
-
-        if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ thường và 1 chữ hoa");
-        }
-
-        if (!password.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ số");
-        }
-
-        if (!password.matches(".*[^A-Za-z0-9].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt");
-        }
-    }
 }

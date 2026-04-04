@@ -16,6 +16,4 @@ public interface AuthService {
 
     boolean changePassword(String newPassword, String retypeNewPassword, String userMail);
 
-    void validatePassword(String password);
-
 }

@@ -3,7 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.course.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
+import vn.edu.nlu.fit.elearning.common.utils.validation.ValidationUtils;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
@@ -17,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "CourseDetailController", value = "/admin/course/detail")
-public class CourseDetailController extends HttpServlet {
+public class CourseDetailController extends BaseController {
 
     private CourseService cs;
     private TagService tagService;
@@ -77,11 +80,11 @@ public class CourseDetailController extends HttpServlet {
         String[] tagIdsStr = request.getParameterValues("tags");
 
         String error;
-        if ((error = checkLength(title, "Tên khóa học", 10, 150)) != null) {
+        if ((error = ValidationUtils.checkLength(title, "Tên khóa học", 10, 150)) != null) {
             handleError(request, response, error);
             return;
         }
-        if ((error = checkLength(subtitle, "Phụ đề", 10, 250)) != null) {
+        if ((error = ValidationUtils.checkLength(subtitle, "Phụ đề", 10, 250)) != null) {
             handleError(request, response, error);
             return;
         }
@@ -89,11 +92,11 @@ public class CourseDetailController extends HttpServlet {
             handleError(request, response, "Bạn chưa nhập giá gốc");
             return;
         }
-        if ((error = checkLength(goals, "Mục tiêu", 20, 1000)) != null) {
+        if ((error = ValidationUtils.checkLength(goals, "Mục tiêu", 20, 1000)) != null) {
             handleError(request, response, error);
             return;
         }
-        if ((error = checkLength(description, "Mô tả", 50, 5000)) != null) {
+        if ((error = ValidationUtils.checkLength(description, "Mô tả", 50, 5000)) != null) {
             handleError(request, response, error);
             return;
         }
@@ -103,9 +106,9 @@ public class CourseDetailController extends HttpServlet {
         }
 
         // 3. Ép kiểu dữ liệu (Dùng hàm helper đã viết ở trên)
-        int price = parseIntOrDefault(priceStr, -1);
-        int discountPrice = parseIntOrDefault(discountStr, 0);
-        int categoryId = parseIntOrDefault(categoryIdStr, -1);
+        int price = RequestUtils.getParameterAsIntOrDefault(priceStr, -1);
+        int discountPrice = RequestUtils.getParameterAsIntOrDefault(discountStr, 0);
+        int categoryId = RequestUtils.getParameterAsIntOrDefault(categoryIdStr, -1);
 
         if (price < 0) {
             handleError(request, response, "Giá gốc phải là số dương");
@@ -173,32 +176,4 @@ public class CourseDetailController extends HttpServlet {
         }
     }
 
-    // Hàm 1: Gửi lỗi và dừng cuộc chơi nhanh gọn
-    private void handleError(HttpServletRequest req, HttpServletResponse resp, String msg) throws ServletException, IOException {
-        req.getSession().setAttribute("flashError", msg);
-        doGet(req, resp);
-    }
-
-    //Ép kiểu số an toàn, nếu lỗi hoặc rỗng thì trả về giá trị mặc định
-    private int parseIntOrDefault(String value, int defaultValue) {
-        try {
-            return (value == null || value.isBlank()) ? defaultValue : Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            return defaultValue;
-        }
-    }
-
-    private String checkLength(String value, String label, int min, int max) {
-        if (value == null || value.trim().isEmpty()) {
-            return "Vui lòng nhập " + label;
-        }
-        String trimmedValue = value.trim();
-        if (trimmedValue.length() < min) {
-            return label + " phải có ít nhất " + min + " ký tự";
-        }
-        if (trimmedValue.length() > max) {
-            return label + " không được vượt quá " + max + " ký tự";
-        }
-        return null;
-    }
 }

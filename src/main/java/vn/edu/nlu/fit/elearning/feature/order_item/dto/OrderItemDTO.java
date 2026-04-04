@@ -2,7 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.order_item.dto;
 
 import java.io.Serializable;
 
-import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
 
 public class OrderItemDTO implements Serializable {
     private int id;
