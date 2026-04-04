@@ -1,12 +1,17 @@
-package vn.edu.nlu.fit.elearning.common.utils.objects;
+package vn.edu.nlu.fit.elearning.common.utils.security;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
-public class PasswordUtils {
+public class SecurityUtils {
 
     private static final String SALT = "SECRET";
+
+    public static String generateTokenForVerify() {
+        return UUID.randomUUID().toString();
+    }
 
     public static String hashpassword(String password) {
         try {
@@ -36,4 +41,6 @@ public class PasswordUtils {
             throw new RuntimeException("Lỗi thuật toán MD5", e);
         }
     }
+
+
 }

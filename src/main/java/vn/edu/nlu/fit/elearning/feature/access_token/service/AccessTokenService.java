@@ -5,22 +5,17 @@ import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import java.sql.Timestamp;
 
 public interface AccessTokenService {
-    String generateToken();
 
     int createToken(AccessToken token);
-
-    String generateTokenForVerify();
 
     Timestamp expireDateTime();
 
     boolean isExpireTime(Timestamp expireTime);
-
-    boolean sendEmail(String email, String code, String name);
 
     boolean validateResetToken(int userId, String token);
 
     // Dùng cho đăng ký (không cần userId)
     boolean validateSignupToken(String token);
 
-    boolean markAsUsed(String token);
+    void markAsUsed(String token);
 }

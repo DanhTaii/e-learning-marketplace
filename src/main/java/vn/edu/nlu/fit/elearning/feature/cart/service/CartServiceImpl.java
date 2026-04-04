@@ -6,7 +6,7 @@ import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
 
 public class CartServiceImpl implements CartService {
     Map<Integer, CartItem> data;

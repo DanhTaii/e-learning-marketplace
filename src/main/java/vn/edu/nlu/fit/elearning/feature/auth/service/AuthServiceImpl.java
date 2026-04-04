@@ -1,13 +1,14 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.utils.validation.ValidationUtils;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
-import vn.edu.nlu.fit.elearning.common.utils.objects.PasswordUtils;
+import vn.edu.nlu.fit.elearning.common.utils.security.SecurityUtils;
 
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
@@ -30,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         User user = userService.getEntityByEmail(email);
-        String hash = PasswordUtils.hashpassword(password);
+        String hash = SecurityUtils.hashpassword(password);
         if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
             return UserMapper.toUserShortDto(user);
         }
@@ -73,10 +74,10 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Tên người dùng đã tồn tại");
         }
 
-        validatePassword(password);
+        ValidationUtils.validatePassword(password);
 
         User user = new User();
-        String hashPass = PasswordUtils.hashpassword(password);
+        String hashPass = SecurityUtils.hashpassword(password);
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(hashPass);
@@ -85,7 +86,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
-        String oldHash = PasswordUtils.hashpassword(oldPassword);
+        String oldHash = SecurityUtils.hashpassword(oldPassword);
 
         if (userService.getUserByEmail(userMail) == null) {
             throw new IllegalArgumentException("Email không tồn tại !!!");
@@ -110,29 +111,11 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Mật khẩu mới không khớp !");
         }
 
-        String newHashPassword = PasswordUtils.hashpassword(newPassword);
+        String newHashPassword = SecurityUtils.hashpassword(newPassword);
 
-        validatePassword(newPassword);
+        ValidationUtils.validatePassword(newPassword);
 
         return userService.changePasswordByEmail(newHashPassword, userMail) == 1;
     }
 
-    @Override
-    public void validatePassword(String password) {
-        if (password.length() < 8) {
-            throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự");
-        }
-
-        if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ thường và 1 chữ hoa");
-        }
-
-        if (!password.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ số");
-        }
-
-        if (!password.matches(".*[^A-Za-z0-9].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt");
-        }
-    }
 }

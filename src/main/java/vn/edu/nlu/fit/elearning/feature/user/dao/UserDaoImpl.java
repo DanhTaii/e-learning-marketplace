@@ -54,6 +54,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     .execute();
         });
     }
+
     @Override
     public int updateRole(int userId, Role role, BaseStatus status) {
         return getJdbi().withHandle(handle -> {

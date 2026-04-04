@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
 
 public class CourseDetailDto implements Serializable {
     private int id;

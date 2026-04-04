@@ -2,7 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.order.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
 
 public class OrderDTO implements Serializable {
     private int id;

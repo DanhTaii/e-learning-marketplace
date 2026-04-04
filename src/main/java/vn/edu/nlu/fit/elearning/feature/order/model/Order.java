@@ -5,12 +5,10 @@ import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import static vn.edu.nlu.fit.elearning.common.utils.objects.DataFormatting.formatAndConvert;
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
 
 public class Order implements Serializable {
     private int id;

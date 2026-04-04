@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.external.mail.MailService;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
@@ -56,7 +57,7 @@ public class SignUpController extends HttpServlet {
             }
 
             // Tạo token xác thực
-            String token = accessTokenService.generateToken();
+            String token = MailService.generateToken();
             AccessToken accessToken = new AccessToken(
                     0, // chưa có userId vì chưa tạo user
                     token,
@@ -69,7 +70,7 @@ public class SignUpController extends HttpServlet {
             }
 
             // Gửi email chứa mã
-            if (!accessTokenService.sendEmail(email, token, username)) {
+            if (!MailService.sendEmail(email, token, username)) {
                 throw new RuntimeException("Gửi email xác nhận thất bại!");
             }
 

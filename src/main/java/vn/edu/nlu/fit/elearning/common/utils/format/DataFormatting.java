@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.common.utils.objects;
+package vn.edu.nlu.fit.elearning.common.utils.format;
 
 import java.text.NumberFormat;
 import java.util.Locale;
