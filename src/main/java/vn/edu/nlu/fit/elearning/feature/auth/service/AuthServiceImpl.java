@@ -8,7 +8,7 @@ import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
-import vn.edu.nlu.fit.elearning.common.utils.security.SecurityUtils;
+import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
 
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
@@ -31,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         User user = userService.getEntityByEmail(email);
-        String hash = SecurityUtils.hashpassword(password);
+        String hash = PasswordUtils.hashpassword(password);
         if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
             return UserMapper.toUserShortDto(user);
         }
@@ -74,10 +74,10 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Tên người dùng đã tồn tại");
         }
 
-        ValidationUtils.validatePassword(password);
+        PasswordUtils.validatePassword(password);
 
         User user = new User();
-        String hashPass = SecurityUtils.hashpassword(password);
+        String hashPass = PasswordUtils.hashpassword(password);
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(hashPass);
@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean resetUserPassword(String oldPassword, String newPassword, String retypeNewPassword, String userMail) {
-        String oldHash = SecurityUtils.hashpassword(oldPassword);
+        String oldHash = PasswordUtils.hashpassword(oldPassword);
 
         if (userService.getUserByEmail(userMail) == null) {
             throw new IllegalArgumentException("Email không tồn tại !!!");
@@ -111,9 +111,9 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Mật khẩu mới không khớp !");
         }
 
-        String newHashPassword = SecurityUtils.hashpassword(newPassword);
+        String newHashPassword = PasswordUtils.hashpassword(newPassword);
 
-        ValidationUtils.validatePassword(newPassword);
+        PasswordUtils.validatePassword(newPassword);
 
         return userService.changePasswordByEmail(newHashPassword, userMail) == 1;
     }

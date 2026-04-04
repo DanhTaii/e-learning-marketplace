@@ -1,23 +1,43 @@
 package vn.edu.nlu.fit.elearning.common.utils.validation;
 
+import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
+
 public class ValidationUtils {
 
-    public static void validatePassword(String password) {
-        if (password.length() < 8) {
-            throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự");
+    public static String checkLength(String value, String label, int min, int max) {
+        if (value == null || value.trim().isEmpty()) {
+            return "Vui lòng nhập " + label;
         }
-
-        if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ thường và 1 chữ hoa");
+        String trimmedValue = value.trim();
+        if (trimmedValue.length() < min) {
+            return label + " phải có ít nhất " + min + " ký tự";
         }
-
-        if (!password.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 chữ số");
+        if (trimmedValue.length() > max) {
+            return label + " không được vượt quá " + max + " ký tự";
         }
-
-        if (!password.matches(".*[^A-Za-z0-9].*")) {
-            throw new IllegalArgumentException("Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt");
-        }
+        return null;
     }
+
+    public static boolean isNumeric(String value) {
+        if (StringUtils.isEmpty(value)) {
+            return false;
+        }
+        return value.matches("\\d+");
+    }
+
+    public static boolean isValidEmail(String email) {
+        if (StringUtils.isEmpty(email)) {
+            return false;
+        }
+        return email.matches("^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$");
+    }
+
+    public static boolean isValidPhoneNumber(String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            return false;
+        }
+        return phone.matches("\\d{10,11}");
+    }
+
 
 }

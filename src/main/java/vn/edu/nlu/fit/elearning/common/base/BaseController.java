@@ -28,4 +28,9 @@ public class BaseController extends HttpServlet {
         }
     }
 
+    protected void handleError(HttpServletRequest req, HttpServletResponse resp, String msg) throws ServletException, IOException {
+        req.getSession().setAttribute("flashError", msg);
+        doGet(req, resp);
+    }
+
 }

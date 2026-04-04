@@ -10,7 +10,7 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.common.utils.security.SecurityUtils;
+import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
 
 import java.io.IOException;
 
@@ -44,7 +44,7 @@ public class UserCreateController extends HttpServlet {
         user.setEmail(email);
         user.setUsername(username);
         //Hashpassword
-        String hashpassword = SecurityUtils.hashpassword(password);
+        String hashpassword = PasswordUtils.hashpassword(password);
         user.setPassword(hashpassword);
         user.setFirstName(firstName);
         user.setLastName(lastName);

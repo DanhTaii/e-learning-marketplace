@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.common.utils;
+package vn.edu.nlu.fit.elearning.common.utils.servlet;
 
 import jakarta.servlet.http.HttpServletRequest;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
@@ -6,7 +6,7 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
 public class RequestUtils {
 
-    public static int getParameterAsInt(HttpServletRequest request, String paramNumber) {
+    public static int getParameterAsInt(HttpServletRequest request, String paramNumber, int defaultValue) {
         String value = request.getParameter(paramNumber).trim();
         if (value == null || value.isEmpty()){
             throw new IllegalArgumentException("Parameter " + paramNumber + " is missing");
@@ -16,6 +16,15 @@ public class RequestUtils {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Parameter '" + paramNumber + "' must be a number");
+        }
+    }
+
+    //Ép kiểu số an toàn, nếu lỗi hoặc rỗng thì trả về giá trị mặc định
+    public static int getParameterAsIntOrDefault(String value, int defaultValue) {
+        try {
+            return (value == null || value.isBlank()) ? defaultValue : Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
         }
     }
 
@@ -60,26 +69,6 @@ public class RequestUtils {
             throw new IllegalArgumentException("Parameter " + paramBoolean + " is missing");
         }
         return Boolean.parseBoolean(value);
-    }
-
-    public static Object getCurrentUser(HttpServletRequest request){
-        Object object = request.getSession().getAttribute("userSession");
-        if (object == null){
-            throw new IllegalArgumentException("User not logged in");
-        }
-        return object;
-    }
-
-    public static int getCurrentUserId(HttpServletRequest request){
-        String value = request.getSession().getAttribute("userId").toString();
-        if (value == null || value.isEmpty()){
-            throw new IllegalArgumentException("User not logged in");
-        }
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid user ID in session");
-        }
     }
 
 }
