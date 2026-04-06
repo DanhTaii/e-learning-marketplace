@@ -184,7 +184,7 @@ a {
 }
 
 .container-2__header {
-    background: var(--white-color);
+    /*background: var(--white-color);*/
     height: 8rem;
     width: 100%;
     display: flex;

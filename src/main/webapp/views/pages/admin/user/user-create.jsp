@@ -19,7 +19,7 @@
         <div class="grid">
             <div class="grid__row-2">
 
-                <jsp:include page="/views/layouts/sidebar-admin.jsp"/>
+                <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
