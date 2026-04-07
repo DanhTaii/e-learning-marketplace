@@ -8,14 +8,15 @@
     <meta charset="UTF-8">
     <title>Danh mục</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/course-edit.css">
     <link rel="stylesheet" href="assets/css/admin/notification.css">
-    <link rel="stylesheet" href="assets/css/admin/users-management.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=1.0.1">
 
 </head>
 <body>
@@ -24,7 +25,7 @@
         <div class="grid">
             <div class="grid__row-2">
 
-                <jsp:include page="/views/layouts/sidebar-admin.jsp"/>
+                <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header"></div>

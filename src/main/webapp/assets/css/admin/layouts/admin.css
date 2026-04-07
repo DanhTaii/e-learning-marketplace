@@ -78,100 +78,6 @@
     background-color: #f3f4f6;
     color: #4b5563;
 }
-.container-1 {
-    background: var(--dark-blue);
-    width: 100%;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-}
-
-.container-1__title {
-    color: var(--white-color);
-    font-size: var(--text-5xl);
-    font-weight: var(--fw-bold);
-    margin: 3rem 0;
-    /*margin-bottom: 6rem;*/
-}
-
-/* Logo phần đầu sidebar */
-.container-1__logo {
-    padding: 30px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #fff;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.container-1__logo i {
-    font-size: 2.4rem;
-    color: #4cc9f0;
-}
-
-.container-1__logo span {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.container-1__menu li .fa-books {
-
-}
-
-.container-1__menu {
-    margin-top: 2rem;
-}
-
-.container-1__menu li i {
-    color: var(--white-color);
-    font-size: var(--text-3xl);
-    margin-right: 1rem;
-}
-
-.container-1__menu li {
-    margin: 2rem 0;
-    list-style-type: none;
-}
-
-.container-1__menu ul {
-    padding-left: 0;
-}
-
-.container-1__menu-items a span {
-    font-size: var(--text-xl);
-    font-weight: var(--fw-medium);
-}
-
-a {
-    font-size: var(--text-xl);
-    /*font-weight: var(--fw-medium);*/
-    color: var(--white-color);
-    text-decoration: none;
-}
-
-.student-list:hover {
-    background: var(--bright-blue);
-}
-.student-list {
-    background: var(--bright-blue);
-}
-
-.menu-item__student span{
-    font-size: var(--text-xl);
-}
-.menu-item__student .fa-solid{
-    font-size: var(--text-xl);
-}
-.menu-item__student:hover {
-    background: var(--bright-blue);
-}
-.menu-item__student {
-    width: 100%;
-    height: 100%;
-    border-radius: 3px;
-    padding: 0.5rem;
-}
 
 /*Container 2*/
 .container-2 {
@@ -184,7 +90,7 @@ a {
 }
 
 .container-2__header {
-    background: var(--white-color);
+    /*background: var(--white-color);*/
     height: 8rem;
     width: 100%;
     display: flex;
@@ -551,14 +457,6 @@ td:last-child ,th:last-child{
 }
 
 /* Container chính */
-.user-form-container {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    margin: 20px;
-}
-
 /* Header hiện đại */
 .container-2__header-modern {
     display: flex;
@@ -631,21 +529,6 @@ td:last-child ,th:last-child{
     font-weight: 600;
     color: #555;
     margin-bottom: 8px;
-}
-
-/* Input & Select */
-.input-modern {
-    padding: 12px 16px;
-    border: 1.5px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.3s;
-}
-
-.input-modern:focus {
-    border-color: var(--dark-blue);
-    box-shadow: 0 0 0 3px rgba(14, 98, 133, 0.1);
 }
 
 /* Avatar Upload Box */
@@ -853,18 +736,18 @@ td:last-child ,th:last-child{
         opacity: 1;
     }
 }
-/* --- Header --- */
-.course__header {
-    background: var(--dark-blue);
-    color: var(--white-color);
-    padding: 1.5rem 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/*!* --- Header --- *!*/
+/*.course__header {*/
+/*    background: var(--dark-blue);*/
+/*    color: var(--white-color);*/
+/*    padding: 1.5rem 2.5rem;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
 
-.course__title {
-    font-size: var(--text-3xl); /* Tăng lên 2.4rem cho nổi bật */
-    font-weight: var(--fw-semibold);
-    line-height: 1.5;
-}
+/*.course__title {*/
+/*    font-size: var(--text-3xl); !* Tăng lên 2.4rem cho nổi bật *!*/
+/*    font-weight: var(--fw-semibold);*/
+/*    line-height: 1.5;*/
+/*}*/

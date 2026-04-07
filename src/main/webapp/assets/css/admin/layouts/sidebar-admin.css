@@ -1,0 +1,95 @@
+
+.container-1 {
+    background: var(--dark-blue);
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.container-1__title {
+    color: var(--white-color);
+    font-size: var(--text-5xl);
+    font-weight: var(--fw-bold);
+    margin: 3rem 0;
+    /*margin-bottom: 6rem;*/
+}
+
+/* Logo phần đầu sidebar */
+.container-1__logo {
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.container-1__logo i {
+    font-size: 2.4rem;
+    color: #4cc9f0;
+}
+
+.container-1__logo span {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.container-1__menu li .fa-books {
+
+}
+
+.container-1__menu {
+    margin-top: 2rem;
+}
+
+.container-1__menu li i {
+    color: var(--white-color);
+    font-size: var(--text-3xl);
+    margin-right: 1rem;
+}
+
+.container-1__menu li {
+    margin: 2rem 0;
+    list-style-type: none;
+}
+
+.container-1__menu ul {
+    padding-left: 0;
+}
+
+.container-1__menu-items a span {
+    font-size: var(--text-xl);
+    font-weight: var(--fw-medium);
+}
+
+a {
+    font-size: var(--text-xl);
+    /*font-weight: var(--fw-medium);*/
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+.student-list:hover {
+    background: var(--bright-blue);
+}
+.student-list {
+    background: var(--bright-blue);
+}
+
+.menu-item__student span{
+    font-size: var(--text-xl);
+}
+.menu-item__student .fa-solid{
+    font-size: var(--text-xl);
+}
+.menu-item__student:hover {
+    background: var(--bright-blue);
+}
+.menu-item__student {
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    padding: 0.5rem;
+}

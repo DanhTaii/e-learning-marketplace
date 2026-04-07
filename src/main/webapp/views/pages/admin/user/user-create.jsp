@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <title>Tạo mới người dùng</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
@@ -19,7 +20,7 @@
         <div class="grid">
             <div class="grid__row-2">
 
-                <jsp:include page="/views/layouts/sidebar-admin.jsp"/>
+                <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
@@ -29,7 +30,7 @@
                         </a>
                     </div>
 
-                    <div class="user-form-container">
+                    <div class="form-container">
                         <form action="admin/user/create" method="post" >
 
                             <div class="form-row">

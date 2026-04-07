@@ -1,9 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+
 <div class="grid__column-2 container-1">
     <a href="index">
         <div class="container-1__logo">
@@ -112,5 +109,3 @@
         </div>
     </div>
 </div>
-</body>
-</html>
