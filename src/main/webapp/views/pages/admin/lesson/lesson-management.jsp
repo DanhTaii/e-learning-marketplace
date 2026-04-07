@@ -8,13 +8,16 @@
     <meta charset="UTF-8">
     <title>Lesson Management</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/users-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
 </head>
 <body>
 <div class="web">
@@ -30,62 +33,15 @@
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
                                 <div class="header__title">Bài học</div>
+                                <div class="admin-create__buttons">
+                                    <button type="button" class="dark-button">
+                                        <a href="views/pages/admin/lesson/lesson-create.jsp" class="admin-create-link">
+                                            <i class="fa-solid fa-plus"></i>Tạo mới
+                                        </a>
+                                    </button>
+                                </div>
                             </div>
                             <div class="container-2__body">
-                                <div class="title__admin">Tạo bài học mới</div>
-                                <form action="admin/lessons" method="post" class="form">
-                                    <div class="container-2__create">
-                                        <div class="create__selection">
-                                            <div class="create__selection-input">
-
-                                                <div class="create__selection-items--wide">
-                                                    <div class="create__selection-items">
-                                                        <div class="filter__selection-title filter__item-phone">Tên hoặc ID
-                                                            khóa
-                                                            học:
-                                                        </div>
-                                                        <select class="admin-input__long" name="idCourse">
-                                                            <option class="text-medium" value="0">--- Vui lòng chọn khóa học
-                                                                ---
-                                                            </option>
-                                                            <c:forEach var="c" items="${listCourse}">
-                                                                <option class="text-medium"
-                                                                        value="${c.id}">${c.title}</option>
-
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <div class="create__selection-items">
-                                                        <div class="filter__selection-title filter__item-phone">Tên bài
-                                                            học:
-                                                        </div>
-                                                        <input placeholder="" type="text" class="admin-input__long"
-                                                               name="nameLesson">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="create__selection-input">
-                                                <div class="create__selection-items">
-                                                    <div class="filter__selection-title filter__item-name">Thời lượng:</div>
-                                                    <input placeholder="" type="number" class="admin-input__long"
-                                                           name="duration_minutesLesson">
-                                                </div>
-                                                <div class="create__selection-items--wide">
-                                                    <div class="create__selection-items">
-                                                        <div class="filter__selection-title filter__item-phone">Video URL:
-                                                        </div>
-                                                        <input placeholder="" type="text" class="admin-input__long"
-                                                               name="urlVideo">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="create__btn-create">
-                                                <button type="submit" class="create-btn dark-button">Tạo mới</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
                                 <div class="title__admin">Tất cả bài học (${listLessons.size()})</div>
                                 <form method="get" class="form" action="admin/lesson/search">
                                     <div class="container-2__filter">

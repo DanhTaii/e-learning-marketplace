@@ -1,0 +1,96 @@
+/* Layout chung cho vùng chứa Form */
+
+.form-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin: 20px;
+}
+
+/*.container-2__form {*/
+/*    background: var(--white-color);*/
+/*    border-radius: 0.3rem;*/
+/*    border: 1px solid var(--light-grey);*/
+/*    width: 100%;*/
+/*    margin: 2rem;*/
+/*    padding: 3rem;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/* Style cho các label tiêu đề ô nhập liệu */
+.title-style {
+    font-size: var(--text-xl);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 0.5rem;
+    display: block; /* Đảm bảo luôn nằm trên input */
+    width: 100%;
+}
+
+/* Cấu trúc hàng đầy đủ chiều ngang (dành cho textarea, tags) */
+.style-full-width {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tối ưu hóa textarea dùng chung */
+.textarea-modern {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 16px;
+    line-height: 1.6;
+    resize: vertical;
+    font-family: inherit;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    white-space: pre-wrap;
+}
+
+/* Thông báo lỗi validation */
+.error-client {
+    color: red;
+    font-size: 1.2rem;
+    margin-top: 0.3rem;
+}
+
+/* Preview hình ảnh dùng chung */
+.image-preview-container {
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#image-preview {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: opacity 0.3s ease;
+}
+
+#image-preview[src=""] {
+    display: none;
+}
+
+/* Input & Select */
+.input-modern {
+    padding: 12px 16px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-modern:focus {
+    border-color: var(--dark-blue);
+    box-shadow: 0 0 0 3px rgba(14, 98, 133, 0.1);
+}

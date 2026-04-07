@@ -9,14 +9,15 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <base href="${pageContext.request.contextPath}/">
-    <%--    Mỗi laanf cập nhật cái CSS đều phải thêm đuôi version đằng sau cho Tomcat nhận diện--%>
-    <%--    ?v=1.0.1--%>
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/dashboard.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/dashboard.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -40,10 +41,15 @@
                                         <div class="card-information">
                                             <div class="card-content">
                                                 <div>Doanh thu</div>
-                                                <div class="card-icon"><i class="fa-solid fa-money-check-dollar"></i></i>
+                                                <div class="card-icon"><i
+                                                        class="fa-solid fa-money-check-dollar"></i></i>
                                                 </div>
                                             </div>
-                                            <div class="card-content__number"><fmt:formatNumber value="${revenueTotal}" type="number" pattern="###,###"> </fmt:formatNumber> đ</div>
+                                            <div class="card-content__number"><fmt:formatNumber value="${revenueTotal}"
+                                                                                                type="number"
+                                                                                                pattern="###,###"> </fmt:formatNumber>
+                                                đ
+                                            </div>
                                         </div>
                                     </li>
                                     <li>
@@ -96,7 +102,8 @@
                                                          data-label="${item.orderDate}"
                                                          style="height: ${item.heightPercent}%">
                                                     <span>
-                                                        <fmt:formatNumber value="${item.revenueMillion}" maxFractionDigits="1"/>tr
+                                                        <fmt:formatNumber value="${item.revenueMillion}"
+                                                                          maxFractionDigits="1"/>tr
                                                     </span>
                                                     </div>
                                                     <span class="bar-label">${item.orderDate}</span>

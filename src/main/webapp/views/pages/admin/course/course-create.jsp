@@ -7,12 +7,17 @@
     <meta charset="UTF-8">
     <title>Tạo mới khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+
+<%--    BODY--%>
+    <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -45,7 +50,7 @@
                     </c:if>
 
 
-                    <div class="user-form-container">
+                    <div class="form-container">
                         <form id="courseForm" action="admin/course/detail" method="post">
                             <c:if test="${course != null}">
                                 <input type="hidden" name="courseId" value="${course.id}"/>
@@ -53,7 +58,7 @@
                             <div class="form-row">
                                 <div class="form-column-8">
                                     <div class="form-group">
-                                        <label class="course-create__title-style">Tên khóa học</label>
+                                        <label class="title-style">Tên khóa học</label>
                                         <input name="title" type="text" class="input-modern"
                                                id="courseTitle"
                                                placeholder="Nhập tên khóa học..."
@@ -61,7 +66,7 @@
                                         <span class="error-client" id="error_courseTitle"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label class="course-create__title-style">Phụ đề</label>
+                                        <label class="title-style">Phụ đề</label>
                                         <input id="courseSubtitle" name="subtitle" type="text" class="input-modern"
                                                placeholder="Tóm tắt ngắn gọn nội dung..."
                                                value="${ course != null ? course.subtitle : param.subtitle}">
@@ -70,14 +75,14 @@
 
                                     <c:if test="${course != null}">
                                         <div class="form-group">
-                                            <label class="course-create__title-style">Ngày tạo: </label>
+                                            <label class="title-style">Ngày tạo: </label>
                                             <input name="created_at" type="datetime-local" class="input-modern"
                                                    value="${course != null ? course.createdAt : param.created_at}"
                                                    readonly>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="course-create__title-style">Ngày cập nhật: </label>
+                                            <label class="title-style">Ngày cập nhật: </label>
                                             <input name="updated_at" type="datetime-local" class="input-modern"
                                                    value="${course != null ? course.updatedAt : param.updated_at}"
                                                    readonly>
@@ -87,7 +92,7 @@
                                 </div>
                                 <div class="form-column-4">
                                     <div class="form-group">
-                                        <label class="course-create__title-style">Link ảnh khóa học</label>
+                                        <label class="title-style">Link ảnh khóa học</label>
                                         <input name="thumbnail" type="text" id="thumbnail-input" class="input-modern"
                                                placeholder="Dán link ảnh . . ."
                                                value="${course != null ? course.thumbnailUrl : param.thumbnail}">
@@ -112,7 +117,7 @@
 
                             <div class="form-row mt-4">
                                 <div class="form-group flex-1">
-                                    <label class="course-create__title-style">Giá bán </label>
+                                    <label class="title-style">Giá bán </label>
                                     <input id="coursePrice" name="price" type="number" class="input-modern"
                                            placeholder="Ví dụ: 500000"
                                            value="${course != null ? course.price : param.price}"
@@ -120,7 +125,7 @@
                                     <span class="error-client" id="error_coursePrice"></span>
                                 </div>
                                 <div class="form-group flex-1">
-                                    <label class="course-create__title-style">Giá giảm</label>
+                                    <label class="title-style">Giá giảm</label>
                                     <input id="courseDiscountPrice" name="discount_price" type="number"
                                            class="input-modern"
                                            value="${course != null ? course.discountPrice : param.discount_price}"
@@ -128,7 +133,7 @@
                                     <span class="error-client" id="error_courseDiscount"></span>
                                 </div>
                                 <div class="form-group flex-1">
-                                    <label class="course-create__title-style">Mức độ</label>
+                                    <label class="title-style">Mức độ</label>
                                     <select id="courseLevel" name="level" class="input-modern select-custom">
                                         <option value="">-- Chọn mức độ --</option>
 
@@ -148,7 +153,7 @@
 
                             <div class="form-row mt-4">
                                 <div class="form-group flex-1">
-                                    <label class="course-create__title-style">Danh mục khóa học</label>
+                                    <label class="title-style">Danh mục khóa học</label>
                                     <select name="category_id" id="courseCategory" class="input-modern select-custom"
                                     >
                                         <option value="">-- Chọn danh mục --</option>
@@ -164,7 +169,7 @@
                                 </div>
 
                                 <div class="form-group flex-1">
-                                    <label class="course-create__title-style">Trạng thái</label>
+                                    <label class="title-style">Trạng thái</label>
                                     <select id="courseStatus" name="status" class="input-modern select-custom">
                                         <option value="">-- Chọn trạng thái --</option>
 
@@ -181,7 +186,7 @@
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
-                                    <label class="course-create__title-style">Tag khóa học</label>
+                                    <label class="title-style">Tag khóa học</label>
 
                                     <div class="tag-container">
                                         <c:forEach items="${tags}" var="tag">
@@ -202,7 +207,7 @@
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
-                                    <label class="course-create__title-style">Mục tiêu khóa học</label>
+                                    <label class="title-style">Mục tiêu khóa học</label>
                                     <textarea id="courseGoals" name="goals" class="input-modern textarea-modern"
                                               placeholder="Học viên sẽ đạt được gì sau khóa học?"
                                     >${course != null ? course.goals : param.goals}</textarea>
@@ -212,7 +217,7 @@
 
                             <div class="form-row mt-4">
                                 <div class="form-group style-full-width">
-                                    <label class="course-create__title-style">Mô tả chi tiết</label>
+                                    <label class="title-style">Mô tả chi tiết</label>
                                     <textarea id="courseDescription" name="description"
                                               class="input-modern textarea-modern"
                                               placeholder="Viết mô tả đầy đủ về khóa học tại đây...">${course != null ? course.description : param.description}</textarea>

@@ -1,13 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
-<head>
-    <title>Title</title>
-    <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/header-admin.css?v=<%=System.currentTimeMillis()%>">
-</head>
-<body>
 <header class="admin-header-modern">
     <div class="header-left">
         <nav class="breadcrumb-nav">
@@ -57,5 +50,3 @@
         </div>
     </div>
 </header>
-</body>
-</html>

@@ -1,0 +1,32 @@
+
+/*th, td {*/
+/*    padding: 16px;*/
+/*}*/
+
+/*th {*/
+/*    background: #f8f9fa;*/
+/*    font-weight: var(--fw-bold);*/
+/*    color: #333;*/
+/*    !*font-size: 0.9rem;*!*/
+/*}*/
+
+/*.x__icon {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.fa-x {*/
+/*    !*font-weight: var(--fw-medium);*!*/
+/*    font-size: var(--text-2xl);*/
+/*}*/
+
+/*.course-body {*/
+/*    padding: 2rem;*/
+/*}*/
+
+/*!* PHẦN QUAN TRỌNG NHẤT *!*/
+/*!* Khi modal này là :target (tức là URL là #my-modal) nó sẽ hiện ra *!*/
+/*.modal__course-detail:target {*/
+/*    display: flex; !* Hiện ra *!*/
+/*}*/
