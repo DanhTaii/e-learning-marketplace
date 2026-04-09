@@ -36,15 +36,15 @@
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
-                    <c:if test="${course == null}">
+                    <c:if test="${lesson == null}">
                         <div class="container-2__header-modern">
                             <h2 class="header__title-modern">Tạo mới bài học</h2>
-                            <a href="admin/courses" class="btn-back">
+                            <a href="admin/lessons" class="btn-back">
                                 <i class="fa-solid fa-backward-step"></i> Trở về
                             </a>
                         </div>
                     </c:if>
-                    <c:if test="${course != null}">
+                    <c:if test="${lesson != null}">
                         <div class="container-2__header-modern">
                             <h2 class="header__title-modern">Cập nhật bài học</h2>
                             <a href="admin/lessons" class="btn-back">
@@ -55,7 +55,9 @@
 
 
                     <div class="form-container">
-                        <form action="admin/lessons" method="post" class="form-modern" enctype="multipart/form-data">
+                        <form action="admin/lessons" method="post" class="form-modern"
+<%--                              enctype="multipart/form-data"--%>
+                        >
                             <c:if test="${lesson != null}">
                                 <input type="hidden" name="lessonId" value="${lesson.id}"/>
                             </c:if>
@@ -64,7 +66,7 @@
                                 <div class="form-row">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Khóa học mục tiêu</label>
-                                        <select class="input-modern" name="course_id" id="selectCourse">
+                                        <select class="input-modern" name="idCourse" id="selectCourse">
                                             <option value="0">--- Chọn khóa học ---</option>
                                             <c:forEach var="c" items="${listCourse}">
                                                 <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : ''}>${c.title}</option>
@@ -82,19 +84,19 @@
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Tiêu đề bài học</label>
-                                        <input type="text" name="title" class="input-modern"
+                                        <input type="text" name="nameLesson" class="input-modern"
                                                value="${lesson != null ? lesson.title : ''}"
                                                placeholder="Nhập tiêu đề...">
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thời lượng (Phút)</label>
-                                        <input type="number" name="duration_minutes" class="input-modern"
+                                        <input type="number" name="duration_minutesLesson" class="input-modern"
                                                value="${lesson != null ? lesson.durationMinutes : ''}"
                                                placeholder="Phút">
                                     </div>
                                 </div>
 
-<%--                                <c:if test="${lesson != null}">--%>
+                                <c:if test="${lesson != null}">
                                     <div class="form-row mt-3">
                                         <div class="form-group flex-1">
                                             <label class="label-style">Ngày tạo</label>
@@ -107,7 +109,7 @@
                                                    value="${lesson.updatedAt}" readonly>
                                         </div>
                                     </div>
-<%--                                </c:if>--%>
+                                </c:if>
 
                                 <div class="form-group mt-3">
                                     <label class="label-style">Nguồn Video bài giảng</label>
@@ -122,7 +124,7 @@
 
                                     <div id="videoSourceLink" class="video-input-container active mt-2">
                                         <div class="input-with-icon">
-                                            <input type="text" id="videoUrlInput" name="video_url" class="input-modern"
+                                            <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
                                                    value="${lesson != null ? lesson.videoUrl : ''}"
                                                    placeholder="https://www.youtube.com/watch?v=...">
 <%--                                            <button type="button" class="btn-secondary" onclick="previewVideo()"><i--%>

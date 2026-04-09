@@ -35,7 +35,7 @@
                                 <div class="header__title">Bài học</div>
                                 <div class="admin-create__buttons">
                                     <button type="button" class="dark-button">
-                                        <a href="views/pages/admin/lesson/lesson-create.jsp" class="admin-create-link">
+                                        <a href="admin/lesson/detail" class="admin-create-link">
                                             <i class="fa-solid fa-plus"></i>Tạo mới
                                         </a>
                                     </button>
@@ -121,10 +121,15 @@
                                                 </td>
                                                 <td class="action__button">
                                                     <div class="action-wrapper">
-                                                        <button type="button" onclick="showLessonDetail(${lesson.id})"
-                                                                class="icon-action-btn">
-                                                            <i class="fa-solid fa-pen"></i>
-                                                        </button>
+<%--                                                        <button type="button" onclick="showLessonDetail(${lesson.id})"--%>
+<%--                                                                class="icon-action-btn">--%>
+<%--                                                            <i class="fa-solid fa-pen"></i>--%>
+<%--                                                        </button>--%>
+                                                        <a href="admin/lesson/detail?id=${lesson.id}" class="">
+                                                            <button type="button" class="icon-action-btn">
+                                                                <i class="fa-solid fa-pen"></i>
+                                                            </button>
+                                                        </a>
                                                         <button type="button" class="icon-action-btn"
                                                                 onclick="openConfirmModal(${lesson.id})">
                                                             <i class="fa-solid fa-trash"></i>
@@ -158,80 +163,80 @@
     </div>
 </div>
 <%--SHOW DETAIL INFORMATION--%>
-<div id="lesson-detail" class="modal modal__course-detail">
-    <div class="modal__course-content">
-        <form action="admin/lesson/update" method="post">
+<%--<div id="lesson-detail" class="modal modal__course-detail">--%>
+<%--    <div class="modal__course-content">--%>
+<%--        <form action="admin/lesson/update" method="post">--%>
 
-            <div class="course__header">
-                <div class="course__title">
-                    <i class="fa-solid fa-address-card"></i>
-                    <span id="modal-title"></span>
-                </div>
-                <div class="x__icon" onclick="closeModal('lesson-detail')">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-            </div>
-            <div class="course-body">
-                <div class="user-info-grid">
-                    <%--                                    Tạm lưu id của user để update--%>
-                    <input id="detail-id" type="text" class="input__create" name="id"
-                           style=" display: none ">
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-user"></i> Tên khóa học</label>
-                        <select id="detail-courseId" class="input__create" name="courseId">
-                            <c:forEach var="c" items="${listCourse}">
-                                <option class="text-medium"
-                                        value="${c.id}">${c.title}</option>
+<%--            <div class="course__header">--%>
+<%--                <div class="course__title">--%>
+<%--                    <i class="fa-solid fa-address-card"></i>--%>
+<%--                    <span id="modal-title"></span>--%>
+<%--                </div>--%>
+<%--                <div class="x__icon" onclick="closeModal('lesson-detail')">--%>
+<%--                    <i class="fa-solid fa-xmark"></i>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="course-body">--%>
+<%--                <div class="user-info-grid">--%>
+<%--                    &lt;%&ndash;                                    Tạm lưu id của user để update&ndash;%&gt;--%>
+<%--                    <input id="detail-id" type="text" class="input__create" name="id"--%>
+<%--                           style=" display: none ">--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-user"></i> Tên khóa học</label>--%>
+<%--                        <select id="detail-courseId" class="input__create" name="courseId">--%>
+<%--                            <c:forEach var="c" items="${listCourse}">--%>
+<%--                                <option class="text-medium"--%>
+<%--                                        value="${c.id}">${c.title}</option>--%>
 
-                            </c:forEach>
-                            <input type="hidden" name="oldCourseId" id="old-courseId">
-                        </select>
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-user"></i> Tên bài học</label>
-                        <input id="detail-nameLesson" type="text" class="input__create"
-                               name="nameLesson">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-envelope"></i>Video URL</label>
-                        <input id="detail-videoURL" type="text" class="input__create" name="videoURL">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-envelope"></i>Thời lượng</label>
-                        <input id="detail-durationMinutes" type="number" class="input__create"
-                               name="durationMinutes">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-sort-numeric-down"></i> Số thứ tự</label>
-                        <input id="detail-orderIndex" type="number" min="1" class="input__create"
-                               name="orderIndex" required>
-                        <input id="old-orderIndex" type="hidden" name="oldOrderIndex">
-                    </div>
-                    <input type="hidden" name="currentSearchName" value="${param.searchName}">
-                    <input type="hidden" name="currentCourseId" value="${param.courseId}">
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo bài học</label>
-                        <input id="detail-created" type="text" class="input__create" name="">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
-                        <input id="detail-updated" type="text" class="input__create" name="">
-                    </div>
-                </div>
+<%--                            </c:forEach>--%>
+<%--                            <input type="hidden" name="oldCourseId" id="old-courseId">--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-user"></i> Tên bài học</label>--%>
+<%--                        <input id="detail-nameLesson" type="text" class="input__create"--%>
+<%--                               name="nameLesson">--%>
+<%--                    </div>--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-envelope"></i>Video URL</label>--%>
+<%--                        <input id="detail-videoURL" type="text" class="input__create" name="videoURL">--%>
+<%--                    </div>--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-envelope"></i>Thời lượng</label>--%>
+<%--                        <input id="detail-durationMinutes" type="number" class="input__create"--%>
+<%--                               name="durationMinutes">--%>
+<%--                    </div>--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-sort-numeric-down"></i> Số thứ tự</label>--%>
+<%--                        <input id="detail-orderIndex" type="number" min="1" class="input__create"--%>
+<%--                               name="orderIndex" required>--%>
+<%--                        <input id="old-orderIndex" type="hidden" name="oldOrderIndex">--%>
+<%--                    </div>--%>
+<%--                    <input type="hidden" name="currentSearchName" value="${param.searchName}">--%>
+<%--                    <input type="hidden" name="currentCourseId" value="${param.courseId}">--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo bài học</label>--%>
+<%--                        <input id="detail-created" type="text" class="input__create" name="">--%>
+<%--                    </div>--%>
+<%--                    <div class="info-group">--%>
+<%--                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>--%>
+<%--                        <input id="detail-updated" type="text" class="input__create" name="">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="modal-footer">
-                    <button type="button" class="button btn-cancel"
-                            onclick="closeModal('lesson-detail')"
-                            style="margin-right: 1rem;">Hủy
-                    </button>
-                    <button type="submit" class="button dark-button">Lưu thay
-                        đổi
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="button btn-cancel"--%>
+<%--                            onclick="closeModal('lesson-detail')"--%>
+<%--                            style="margin-right: 1rem;">Hủy--%>
+<%--                    </button>--%>
+<%--                    <button type="submit" class="button dark-button">Lưu thay--%>
+<%--                        đổi--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </form>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <%--COMPONENT CONFIRM FOR DELETE--%>
 <div id="confirm-delete-modal" class="modal"
      style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
@@ -259,6 +264,6 @@
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
 
-<script src="assets/javascript/admin/lesson/admin-lesson-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<%--<script src="assets/javascript/admin/lesson/admin-lesson-detail.js?v=<%=System.currentTimeMillis()%>"></script>--%>
 
 </html>

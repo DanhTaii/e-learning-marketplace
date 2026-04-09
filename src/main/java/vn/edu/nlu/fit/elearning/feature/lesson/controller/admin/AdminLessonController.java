@@ -2,25 +2,22 @@ package vn.edu.nlu.fit.elearning.feature.lesson.controller.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
-import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminLessonController", value = "/admin/lessons")
-public class AdminLessonController extends HttpServlet {
+public class AdminLessonController extends BaseController {
 
-    private LessonService lessonService;
-    private CourseService courseService;
+    private transient LessonService lessonService;
+    private transient CourseService courseService;
 
     @Override
     public void init() throws ServletException {
@@ -33,10 +30,8 @@ public class AdminLessonController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Lesson> listLessons = lessonService.getAllLessons();
         request.setAttribute("listLessons", listLessons);
-        List<Course> listCourses = courseService.getAllCourses();
-        request.setAttribute("listCourse", listCourses);
         request.setAttribute("currentPage", "lessons");
-        request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
+        this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
     }
 
     @Override
@@ -83,7 +78,7 @@ public class AdminLessonController extends HttpServlet {
         int checkCreate = lessonService.createLesson(newLesson);
 
         if (checkCreate == 1) {
-            request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công");
+            request.getSession().setAttribute("flashSuccess", "Tạo bài học thành công");
             response.sendRedirect(request.getContextPath() + "/admin/lessons");
         }
 
