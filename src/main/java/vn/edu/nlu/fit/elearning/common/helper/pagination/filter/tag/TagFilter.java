@@ -1,8 +1,10 @@
-package vn.edu.nlu.fit.elearning.common.utils.search;
+package vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag;
+
+import vn.edu.nlu.fit.elearning.common.helper.pagination.base.BaseSearchFilter;
 
 import java.sql.Timestamp;
 
-public class TagFilter extends BaseSearchFilter{
+public class TagFilter extends BaseSearchFilter {
     private String name;
     private int courseCount;
     private String slug;

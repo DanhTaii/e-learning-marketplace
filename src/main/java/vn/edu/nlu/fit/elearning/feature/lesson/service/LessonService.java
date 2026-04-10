@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
@@ -19,7 +20,9 @@ public interface LessonService {
 
     boolean checkLessonName(String title, int courseId);
 
-    List<Lesson> getSearchLessons(String lessonName, String courseId);
+    List<Lesson> getLessonsByFilter(LessonFilter filter);
+
+    int getCountLessonsByFilter(LessonFilter filter);
 
     boolean updateLessonWithOrdering(Lesson lesson, int oldOrderIndex, int oldCourseId);
 

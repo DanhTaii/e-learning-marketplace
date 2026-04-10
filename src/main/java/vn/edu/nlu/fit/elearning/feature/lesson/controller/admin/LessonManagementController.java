@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
@@ -29,61 +31,38 @@ public class LessonManagementController extends BaseController {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Lesson> listLessons = lessonService.getAllLessons();
-        request.setAttribute("listLessons", listLessons);
-        request.setAttribute("currentPage", "lessons");
+        LessonFilter filter = new LessonFilter();
+
+        //Lấy điều kiện tìm kiếm
+        filter.setTitle(RequestUtils.getParameterAsString(request, "searchName", ""));
+        filter.setCourseId(RequestUtils.getParameterAsInt(request, "courseId", 0));
+
+        //Lấy thông tin phân trang
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
+
+        //Lấy danh sách lesson theo điều kiện tìm kiếm và phân trang
+        List<Lesson> listLessons = lessonService.getLessonsByFilter(filter);
+
+        //Tính toán tổng số trang hiện tại
+        int totalRecords = lessonService.getCountLessonsByFilter(filter);
+        int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
+
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
+
+        request.setAttribute("listLessons", listLessons);
+        request.setAttribute("filter", filter);
+        request.setAttribute("currentPageNumber", filter.getPage());
+        request.setAttribute("currentPage", "lessons");
+        request.setAttribute("totalPages", totalPages);
+
         this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String nameLesson = request.getParameter("nameLesson");
-        String urlVideo = request.getParameter("urlVideo");
-        String idCourseStr = request.getParameter("idCourse");
-        String durationStr = request.getParameter("duration_minutesLesson");
-
-        if (nameLesson.isEmpty() || urlVideo.isEmpty() || idCourseStr.isEmpty() || durationStr.isEmpty()) {
-
-            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
-            request.setAttribute("listLessons", lessonService.getAllLessons());
-            request.setAttribute("listCourse", courseService.getAllCourses());
-            request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
-            return;
-        }
-        int idCourse = Integer.parseInt(idCourseStr);
-        int duration_minutesLesson = Integer.parseInt(durationStr);
-        if (idCourse <= 0) {
-            request.getSession().setAttribute("flashError", "Vui lòng chọn một khóa học cụ thể!");
-            request.setAttribute("listLessons", lessonService.getAllLessons());
-            request.setAttribute("listCourse", courseService.getAllCourses());
-            request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
-            return;
-        }
-
-        boolean duplicate = lessonService.checkLessonName(nameLesson,idCourse);
-        if(duplicate){
-            request.getSession().setAttribute("flashError", "Bài học bị trùng trong hệ thống");
-            request.setAttribute("listLessons", lessonService.getAllLessons());
-            request.setAttribute("listCourse", courseService.getAllCourses());
-            request.getRequestDispatcher("/views/pages/admin/lesson/lesson-management.jsp").forward(request, response);
-            return;
-        }
-
-        Lesson newLesson = new Lesson();
-        newLesson.setCourseId(idCourse);
-        newLesson.setTitle(nameLesson);
-        newLesson.setVideoUrl(urlVideo);
-        newLesson.setDurationMinutes(duration_minutesLesson);
-
-        int checkCreate = lessonService.createLesson(newLesson);
-
-        if (checkCreate == 1) {
-            request.getSession().setAttribute("flashSuccess", "Tạo bài học thành công");
-            response.sendRedirect(request.getContextPath() + "/admin/lessons");
-        }
-
+        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Phương thức POST không được hỗ trợ cho endpoint này");
     }
 }

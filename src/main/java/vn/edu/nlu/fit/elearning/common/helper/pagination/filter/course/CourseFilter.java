@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.common.utils.search;
+package vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course;
 
 public class CourseFilter {
     private Integer categoryId;

@@ -1,11 +1,15 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LessonDaoImpl extends BaseDao implements LessonDao {
+//    =========================================== BASIC CRUD ===========================================
     @Override
     public int create(Lesson entity) {
         String sql = "INSERT INTO lessons (course_id , title, video_url, duration_minutes, order_index) \n" +
@@ -66,6 +70,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         });
     }
 
+//    =========================================== OTHERS METHODS ===========================================
 
     @Override
     public List<Lesson> findByName(String name) {
@@ -90,40 +95,6 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
                     .one() > 0;
 
 
-        });
-    }
-
-    @Override
-    public List<Lesson> findLessonsByFilter(String lessonName, String courseId) {
-        // 1. Khởi tạo câu SQL cơ bản
-        StringBuilder sql = new StringBuilder("SELECT l.id, l.title, l.order_index, l.duration_minutes, l.created_at FROM lessons l WHERE 1=1");
-
-        // 2. Kiểm tra và nối chuỗi điều kiện tìm kiếm theo tên bài học
-        if (lessonName != null && !lessonName.trim().isEmpty()) {
-            sql.append(" AND title LIKE :nameSearch");
-        }
-
-        // 3. Kiểm tra và nối chuỗi điều kiện tìm kiếm theo ID khóa học (từ select)
-        // Lưu ý: Kiểm tra thêm trường hợp value="0" hoặc chuỗi rỗng nếu đó là option mặc định
-        if (courseId != null && !courseId.trim().isEmpty() && !courseId.equals("0")) {
-            sql.append(" AND course_id = :courseIdSearch");
-        }
-
-        return getJdbi().withHandle(handle -> {
-            var query = handle.createQuery(sql.toString());
-
-            // 4. Bind giá trị cho tên bài học (sử dụng % để tìm kiếm LIKE)
-            if (lessonName != null && !lessonName.trim().isEmpty()) {
-                query.bind("nameSearch", "%" + lessonName.trim() + "%");
-            }
-
-            // 5. Bind giá trị cho ID khóa học
-            if (courseId != null && !courseId.trim().isEmpty() && !courseId.equals("0")) {
-                query.bind("courseIdSearch", Integer.parseInt(courseId));
-            }
-
-            // 6. Map kết quả trả về list Lesson object
-            return query.mapToBean(Lesson.class).list();
         });
     }
 
@@ -185,6 +156,54 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
                     "WHERE l.course_id = :courseId\n" +
                     "ORDER BY l.order_index ASC").bind("courseId", courseId).mapToBean(Lesson.class).list();
         });
+    }
+
+    @Override
+    public List<Lesson> findLessonsByFilter(LessonFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildLessonWhereClause(filter, params);
+
+        String sql = "SELECT l.id, l.title, l.order_index, l.duration_minutes, l.created_at FROM lessons l "
+                + whereClause
+                + " ORDER BY l.created_at DESC LIMIT :limit OFFSET :offset";
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+            return query.mapToBean(Lesson.class).list();
+        });
+    }
+
+    @Override
+    public int countLessonsByFilter(LessonFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildLessonWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(*) FROM lessons l" + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildLessonWhereClause(LessonFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        if (filter.getTitle() != null && !filter.getTitle().trim().isEmpty()) {
+            where.append(" AND l.title LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getTitle().trim() + "%");
+        }
+
+        if (filter.getCourseId() > 0) {
+            where.append(" AND l.course_id = :courseIdSearch");
+            params.put("courseIdSearch", filter.getCourseId());
+        }
+
+        return where.toString();
     }
 
 }

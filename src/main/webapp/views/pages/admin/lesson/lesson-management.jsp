@@ -48,7 +48,7 @@
                             </div>
                             <div class="container-2__body">
                                 <div class="title__admin">Tất cả bài học (${listLessons.size()})</div>
-                                <form method="get" class="form" action="admin/lesson/search">
+                                <form method="get" class="form" action="admin/lessons">
                                     <div class="container-2__filter">
                                         <div class="filter__selection">
                                             <div class="filter__selection-input">
@@ -158,6 +158,12 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <jsp:include page="/views/components/pagination-base.jsp">
+                                    <jsp:param name="baseUrl" value="admin/lessons"/>
+                                    <jsp:param name="currentPageNumber" value="${filter.page}"/>
+                                    <jsp:param name="totalPages" value="${totalPages}"/>
+                                </jsp:include>
                             </div>
                         </div>
 

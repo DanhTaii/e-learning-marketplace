@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.common.helper.pagination;
+package vn.edu.nlu.fit.elearning.common.helper.pagination.base;
 
 import java.util.List;
 

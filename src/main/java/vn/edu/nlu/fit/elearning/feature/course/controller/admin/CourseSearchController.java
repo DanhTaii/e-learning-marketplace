@@ -7,8 +7,8 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.common.helper.pagination.PageResponse;
-import vn.edu.nlu.fit.elearning.common.utils.search.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.base.PageResponse;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
 import java.io.IOException;
 import java.util.List;
 

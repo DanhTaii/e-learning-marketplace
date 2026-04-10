@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course_user.service;
 
-import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.AllCourseFilter;
 import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 

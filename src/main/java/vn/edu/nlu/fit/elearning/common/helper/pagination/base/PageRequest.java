@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.common.helper.pagination;
+package vn.edu.nlu.fit.elearning.common.helper.pagination.base;
 
 public class PageRequest {
     private int page = 1;

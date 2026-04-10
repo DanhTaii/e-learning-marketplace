@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.course_user.dao;
 
-import vn.edu.nlu.fit.elearning.common.utils.search.AllCourseFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.AllCourseFilter;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 
 import java.util.List;
