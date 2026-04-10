@@ -692,8 +692,10 @@ body.dark-mode .text-list-item:hover {
 .suggestion__title {
     flex: 1;
     font-size: 1.4rem;
-    color: var(--white-color);
+    color: var(--text-body-color);
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* giá */

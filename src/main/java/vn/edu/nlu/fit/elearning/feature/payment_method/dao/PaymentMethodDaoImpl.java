@@ -26,7 +26,7 @@ public class PaymentMethodDaoImpl extends BaseDao implements PaymentMethodDao {
     public PaymentMethod findById(Integer id) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, created_at, updated_at " +
+                            "SELECT id, name, code, icon_url,status, created_at, updated_at " +
                                     "FROM payment_methods WHERE id = :id")
                     .bind("id", id)
                     .mapToBean(PaymentMethod.class)
@@ -41,7 +41,7 @@ public class PaymentMethodDaoImpl extends BaseDao implements PaymentMethodDao {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
                             "SELECT id, name, code, icon_url, status, created_at, updated_at " +
-                                    "FROM Payment_Methods " +
+                                    "FROM payment_methods " +
                                     "WHERE name LIKE :nameSearch")
                     .bind("nameSearch", nameSearch)
                     .mapToBean(PaymentMethod.class)
@@ -53,9 +53,9 @@ public class PaymentMethodDaoImpl extends BaseDao implements PaymentMethodDao {
     public List<PaymentMethod> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(
-                            "SELECT id, name, code, icon_url, created_at, updated_at " +
+                            "SELECT id, name, code, icon_url,status,created_at, updated_at " +
                                     "FROM payment_methods " +
-                                    "ORDER BY id")
+                                    "ORDER BY status = 'ACTIVE' DESC")
                     .mapToBean(PaymentMethod.class)
                     .list();
         });

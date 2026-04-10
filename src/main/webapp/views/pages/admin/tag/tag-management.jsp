@@ -9,7 +9,7 @@
     <title>Tag Management</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/tag-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
 </head>
 <body>
 <div class="web">
@@ -25,7 +26,8 @@
             <div class="grid__row-2">
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
-                    <div class="container-2__header"></div>
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
+                    <div class="container-2__content-body">
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
                             <div class="header__title">Thẻ</div>
@@ -135,7 +137,7 @@
                                     </c:forEach>
                                     <c:if test="${empty listTags}">
                                         <tr>
-                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                            <td colspan="4"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
                                                 <div class="search-empty-state">
                                                     <i class="fa-solid fa-book-open search-empty-icon"></i>
                                                     <div class="search-empty-title">
@@ -147,9 +149,15 @@
                                     </c:if>
                                     </tbody>
                                 </table>
+                                <jsp:include page="/views/components/pagination-base.jsp">
+                                    <jsp:param name="baseUrl" value="admin/tags"/>
+                                    <jsp:param name="currentPageNumber" value="${filter.page}"/>
+                                    <jsp:param name="totalPages" value="${totalPages}"/>
+                                </jsp:include>
                             </div>
                         </div>
 
+                    </div>
                     </div>
                 </div>
                 <div id="tag-detail" class="modal modal__course-detail">

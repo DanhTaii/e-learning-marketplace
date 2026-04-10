@@ -18,12 +18,11 @@ function showPaymentMethodDetail(id) {
             document.getElementById('detail-iconUrl').value = pm.iconUrl || "";
 
             const statusSelect = document.getElementById('detail-status');
-            if (pm.status === 'ACTIVE') {
+            if (pm.status && pm.status.toUpperCase() === 'ACTIVE') {
                 statusSelect.value = 'ACTIVE';
             } else {
                 statusSelect.value = 'INACTIVE';
             }
-
             if (pm.createdAt) {
                 document.getElementById('detail-created').value = new Date(pm.createdAt).toLocaleString('vi-VN');
             }

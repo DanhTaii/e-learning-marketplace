@@ -11,6 +11,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
@@ -27,39 +28,18 @@
             <div class="grid__row-2">
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
-                    <div class="container-2__header"></div>
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
                             <div class="header__title">Kiểu thanh toán</div>
                         </div>
                         <div class="container-2__body">
-                            <div class="title__admin">Tạo phương thức thanh toán</div>
-                            <div class="container-2__create">
-                                <form action="${pageContext.request.contextPath}/admin/payment-methods" method="post">
-                                    <div class="create__selection">
-                                        <div class="create__selection-input">
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Tên phương
-                                                    thức:
-                                                </div>
-                                                <input type="text" name="name" class="admin-input__long" required>
-                                            </div>
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Icon URL:</div>
-                                                <input type="text" name="iconUrl" class="admin-input__long">
-                                            </div>
-                                        </div>
-                                        <div class="create__btn-create">
-                                            <button type="submit" class="create-btn dark-button">Tạo mới</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+
 
                             <div class="title__admin">Tất cả phương thức thanh toán (${listPaymentMethods.size()})</div>
                             <div class="container-2__filter">
-                                <form action="${pageContext.request.contextPath}/admin/payment-methods/search"
-                                      method="get">
+                                <form action="admin/payment-methods/search"
+                                      method="get" class="form">
                                     <div class="filter__selection">
                                         <div class="filter__selection-input">
                                             <div class="filter__selection-items filter__selection-name">
@@ -71,7 +51,7 @@
                                                         type="text"
                                                         name="searchName"
                                                         class="admin-input__long"
-                                                        value="${param.searchName != null ? param.searchName : ''}">
+                                                        value="${param.searchName}">
                                             </div>
                                         </div>
 
@@ -89,7 +69,8 @@
                                     <thead>
                                     <tr>
                                         <th>Tên phương thức</th>
-                                        <th>Ngày tạo</th>
+                                        <th>Code</th>
+                                        <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                     </thead>
@@ -103,26 +84,31 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="course-row__font-content">
-                                                    <fmt:setLocale value="en_US" scope="page"/>
-
-                                                    <fmt:formatDate value="${pm.createdAt}"
-                                                                    pattern="dd-MM-YYYY"/>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${pm.code}
                                                 </div>
                                             </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${pm.status == 'ACTIVE'}">
+                                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                                            Hoạt động
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="course-row__status course-row__font-content course-row-status-unactive">
+                                                            Không hoạt động
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+
                                             <td class="action__button">
                                                 <button type="button" onclick="showPaymentMethodDetail(${pm.id})"
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-                                                <form action="${pageContext.request.contextPath}/admin/payment-methods/delete"
-                                                      method="post">
-                                                    <input type="hidden" name="id" value="${pm.id}">
-                                                    <button type="submit">
-                                                        <span class="icon-action"><i
-                                                                class="fa-solid fa-trash"></i></span>
-                                                    </button>
-                                                </form>
+
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -163,15 +149,15 @@
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-tag"></i> Tên phương thức</label>
-                                        <input id="detail-name" type="text" class="input__create" name="name">
+                                        <input id="detail-name" type="text" class="input__create" name="name"disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-code"></i> Mã phương thức (Code)</label>
-                                        <input id="detail-code" type="text" class="input__create" name="code">
+                                        <input id="detail-code" type="text" class="input__create" name="code" disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-image"></i> Icon URL</label>
-                                        <input id="detail-iconUrl" type="text" class="input__create" name="iconUrl">
+                                        <input id="detail-iconUrl" type="text" class="input__create" name="iconUrl" disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-power-off"></i> Trạng thái</label>
