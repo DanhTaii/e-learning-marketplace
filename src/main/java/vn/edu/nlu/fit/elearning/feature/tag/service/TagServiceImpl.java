@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.tag.service;
 
+import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
@@ -59,6 +60,16 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<TagDto> getTagsByCourseId(int courseId) {
         return tagDao.findTagsByCourseId(courseId);
+    }
+
+    @Override
+    public List<Tag> searchTags(TagFilter filter) {
+        return tagDao.findTags(filter);
+    }
+
+    @Override
+    public int countTags() {
+        return tagDao.countTags();
     }
 
 }
