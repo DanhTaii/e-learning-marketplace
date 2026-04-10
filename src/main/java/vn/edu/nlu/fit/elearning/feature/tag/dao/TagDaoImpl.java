@@ -1,9 +1,14 @@
 package vn.edu.nlu.fit.elearning.feature.tag.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TagDaoImpl extends BaseDao implements TagDao {
@@ -51,6 +56,35 @@ public class TagDaoImpl extends BaseDao implements TagDao {
                     " GROUP BY t.id;").mapToBean(Tag.class).list();
         });
     }
+
+    @Override
+    public List<Tag> findTags(TagFilter filter) {
+        String sql = "SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
+                "FROM tags t " +
+                "LEFT JOIN course_tags ct ON t.id = ct.tag_id " +
+                "GROUP BY t.id, t.name, t.slug, t.created_at " +
+                "LIMIT :offset, 10";
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("offset", filter.getOffSet())
+                        .mapToBean(Tag.class)
+                        .list()
+        );
+    }
+
+    @Override
+    public int countTags() {
+        String sql = "SELECT COUNT(*) FROM tags";
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
+
+
 
     @Override
     public int update(Tag entity) {

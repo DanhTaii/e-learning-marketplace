@@ -1,14 +1,3 @@
-/**
- * ===============================
- * PAGINATION MODULE (REUSABLE)
- * ===============================
- */
-
-/**
- * Render pagination
- * @param {Object} pageResponse - object từ backend (PageResponse)
- * @param {Function} onPageChange - callback khi đổi trang
- */
 function renderPagination(pageResponse, onPageChange) {
     const list = document.getElementById('admin-pagination-list');
     const tplItem = document.getElementById('tpl-pagination-item');
@@ -23,9 +12,6 @@ function renderPagination(pageResponse, onPageChange) {
     // Clear UI cũ
     list.innerHTML = '';
 
-    // ===============================
-    // 1. Nút PREV
-    // ===============================
     const btnPrev = tplArrow.content.cloneNode(true);
     const prevLink = btnPrev.querySelector('.js-page-arrow');
 
@@ -40,9 +26,7 @@ function renderPagination(pageResponse, onPageChange) {
 
     list.appendChild(btnPrev);
 
-    // ===============================
-    // 2. Danh sách số trang
-    // ===============================
+
     const pages = getPaginationModel(current, total);
 
     pages.forEach(p => {
@@ -65,9 +49,7 @@ function renderPagination(pageResponse, onPageChange) {
         }
     });
 
-    // ===============================
-    // 3. Nút NEXT
-    // ===============================
+
     const btnNext = tplArrow.content.cloneNode(true);
     const nextLink = btnNext.querySelector('.js-page-arrow');
 
@@ -82,9 +64,6 @@ function renderPagination(pageResponse, onPageChange) {
 
     list.appendChild(btnNext);
 
-    // ===============================
-    // 4. (Optional) Text info
-    // ===============================
     const infoText = document.getElementById('pagination-info');
     if (infoText) {
         infoText.textContent =
@@ -92,9 +71,6 @@ function renderPagination(pageResponse, onPageChange) {
     }
 }
 
-/**
- * Tạo danh sách page hiển thị (có ...)
- */
 function getPaginationModel(current, total) {
     const delta = 2;
     const range = [];
