@@ -15,6 +15,7 @@
                     <c:when test="${currentPage == 'tags'}">Thẻ</c:when>
                     <c:when test="${currentPage == 'categories'}">Danh mục</c:when>
                     <c:when test="${currentPage == 'orders'}">Đơn hàng</c:when>
+                    <c:when test="${currentPage == 'payment-methods'}">Kiểu thanh toán</c:when>
                     <c:otherwise>Hệ thống</c:otherwise>
                 </c:choose>
             </span>

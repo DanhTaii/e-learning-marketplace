@@ -11,6 +11,7 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
@@ -27,39 +28,18 @@
             <div class="grid__row-2">
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
-                    <div class="container-2__header"></div>
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
                             <div class="header__title">Kiểu thanh toán</div>
                         </div>
                         <div class="container-2__body">
-                            <div class="title__admin">Tạo phương thức thanh toán</div>
-                            <div class="container-2__create">
-                                <form action="${pageContext.request.contextPath}/admin/payment-methods" method="post">
-                                    <div class="create__selection">
-                                        <div class="create__selection-input">
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Tên phương
-                                                    thức:
-                                                </div>
-                                                <input type="text" name="name" class="admin-input__long" required>
-                                            </div>
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Icon URL:</div>
-                                                <input type="text" name="iconUrl" class="admin-input__long">
-                                            </div>
-                                        </div>
-                                        <div class="create__btn-create">
-                                            <button type="submit" class="create-btn dark-button">Tạo mới</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+
 
                             <div class="title__admin">Tất cả phương thức thanh toán (${listPaymentMethods.size()})</div>
                             <div class="container-2__filter">
-                                <form action="${pageContext.request.contextPath}/admin/payment-methods/search"
-                                      method="get">
+                                <form action="admin/payment-methods/search"
+                                      method="get" class="form">
                                     <div class="filter__selection">
                                         <div class="filter__selection-input">
                                             <div class="filter__selection-items filter__selection-name">
@@ -71,7 +51,7 @@
                                                         type="text"
                                                         name="searchName"
                                                         class="admin-input__long"
-                                                        value="${param.searchName != null ? param.searchName : ''}">
+                                                        value="${param.searchName}">
                                             </div>
                                         </div>
 
