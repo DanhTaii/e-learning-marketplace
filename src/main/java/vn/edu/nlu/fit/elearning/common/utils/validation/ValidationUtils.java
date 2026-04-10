@@ -39,5 +39,8 @@ public class ValidationUtils {
         return phone.matches("\\d{10,11}");
     }
 
+        public static boolean isEmpty(String value) {
+            return value == null || value.trim().isEmpty();
+        }
 
 }

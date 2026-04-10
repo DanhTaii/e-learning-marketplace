@@ -7,15 +7,14 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 public class RequestUtils {
 
     public static int getParameterAsInt(HttpServletRequest request, String paramNumber, int defaultValue) {
-        String value = request.getParameter(paramNumber).trim();
-        if (value == null || value.isEmpty()){
-            throw new IllegalArgumentException("Parameter " + paramNumber + " is missing");
+        String value = request.getParameter(paramNumber);
+        if (value == null || value.trim().isEmpty()){
+            return defaultValue;
         }
-
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Parameter '" + paramNumber + "' must be a number");
+            return defaultValue;
         }
     }
 

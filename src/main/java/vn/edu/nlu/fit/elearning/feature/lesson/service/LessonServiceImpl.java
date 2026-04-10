@@ -2,14 +2,13 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDao;
-import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
 
 public class LessonServiceImpl implements LessonService {
 
-    private LessonDao lessonDao;
+    private final LessonDao lessonDao;
 
     public LessonServiceImpl(LessonDao lessonDao) {
         this.lessonDao = lessonDao;
@@ -17,12 +16,11 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public int createLesson(Lesson lesson) {
-        if (lesson != null) {
-            lessonDao.create(lesson);
-            return 1;
-        };
-
-        return 0;
+        try {
+            return lessonDao.create(lesson);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override

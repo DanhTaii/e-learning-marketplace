@@ -36,30 +36,23 @@
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
-                    <c:if test="${lesson == null}">
-                        <div class="container-2__header-modern">
-                            <h2 class="header__title-modern">Tạo mới bài học</h2>
-                            <a href="admin/lessons" class="btn-back">
-                                <i class="fa-solid fa-backward-step"></i> Trở về
-                            </a>
-                        </div>
-                    </c:if>
-                    <c:if test="${lesson != null}">
-                        <div class="container-2__header-modern">
-                            <h2 class="header__title-modern">Cập nhật bài học</h2>
-                            <a href="admin/lessons" class="btn-back">
-                                <i class="fa-solid fa-backward-step"></i> Trở về
-                            </a>
-                        </div>
-                    </c:if>
-
+                    <div class="container-2__header-modern">
+                        <h2 class="header__title-modern">
+                            ${(not empty lesson and lesson.id > 0) ? 'Cập nhật bài học' : 'Tạo mới bài học'}
+                        </h2>
+                        <a href="admin/lessons" class="btn-back">
+                            <i class="fa-solid fa-backward-step"></i> Trở về
+                        </a>
+                    </div>
 
                     <div class="form-container">
-                        <form action="admin/lessons" method="post" class="form-modern"
-<%--                              enctype="multipart/form-data"--%>
+                        <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
+                        <%--                              enctype="multipart/form-data"--%>
                         >
                             <c:if test="${lesson != null}">
-                                <input type="hidden" name="lessonId" value="${lesson.id}"/>
+                                <input type="hidden" name="id" value="${lesson.id}"/>
+                                <input type="hidden" name="oldOrderIndex" value="${lesson.orderIndex}"/>
+                                <input type="hidden" name="oldCourseId" value="${lesson.courseId}"/>
                             </c:if>
 
                             <div class="lesson-create-card">
@@ -72,12 +65,21 @@
                                                 <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : ''}>${c.title}</option>
                                             </c:forEach>
                                         </select>
+
+                                        <c:if test="${not empty errors.idCourse}">
+                                            <span class="error-client" id="error_idCourse">${errors.idCourse}</span>
+                                        </c:if>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thứ tự bài học</label>
-                                        <input type="number" name="order_index" class="input-modern"
+                                        <input type="number" name="orderIndex" class="input-modern"
                                                value="${lesson != null ? lesson.orderIndex : ''}"
                                                placeholder="Ví dụ: 1">
+                                        <c:if test="${not empty errors.orderIndex}">
+                                            <span class="error-client" id="">
+                                                <i class="fa-solid fa-circle-exclamation"></i> ${errors.orderIndex}
+                                            </span>
+                                        </c:if>
                                     </div>
                                 </div>
 
@@ -87,16 +89,26 @@
                                         <input type="text" name="nameLesson" class="input-modern"
                                                value="${lesson != null ? lesson.title : ''}"
                                                placeholder="Nhập tiêu đề...">
+                                        <c:if test="${not empty errors.nameLesson}">
+                                            <span class="error-client">
+                                                <i class="fa-solid fa-circle-exclamation"></i> ${errors.nameLesson}
+                                            </span>
+                                        </c:if>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thời lượng (Phút)</label>
                                         <input type="number" name="duration_minutesLesson" class="input-modern"
                                                value="${lesson != null ? lesson.durationMinutes : ''}"
                                                placeholder="Phút">
+                                        <c:if test="${not empty errors.durationMinutes}">
+                                            <span class="error-client">
+                                                <i class="fa-solid fa-circle-exclamation"></i> ${errors.durationMinutes}
+                                            </span>
+                                        </c:if>
                                     </div>
                                 </div>
 
-                                <c:if test="${lesson != null}">
+                                <c:if test="${lesson != null and lesson.id > 0}">
                                     <div class="form-row mt-3">
                                         <div class="form-group flex-1">
                                             <label class="label-style">Ngày tạo</label>
@@ -127,9 +139,12 @@
                                             <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
                                                    value="${lesson != null ? lesson.videoUrl : ''}"
                                                    placeholder="https://www.youtube.com/watch?v=...">
-<%--                                            <button type="button" class="btn-secondary" onclick="previewVideo()"><i--%>
-<%--                                                    class="fa-solid fa-eye"></i> Xem thử--%>
-<%--                                            </button>--%>
+                                            <%--                                            <button type="button" class="btn-secondary" onclick="previewVideo()"><i--%>
+                                            <%--                                                    class="fa-solid fa-eye"></i> Xem thử--%>
+                                            <%--                                            </button>--%>
+                                            <c:if test="${not empty errors.urlVideo}">
+                                                <span class="error-client">${errors.urlVideo}</span>
+                                            </c:if>
                                         </div>
                                     </div>
 
@@ -145,17 +160,18 @@
                                     </div>
                                 </div>
 
-<%--                                <div id="videoPreviewContainer" style="display:none;" class="mt-3">--%>
-<%--                                    <div class="preview-header">--%>
-<%--                                        <span><i class="fa-solid fa-play-circle"></i> Xem trước bài giảng</span>--%>
-<%--                                    </div>--%>
-<%--                                    <iframe id="videoIframe" width="100%" height="315" src="" frameborder="0"--%>
-<%--                                            allowfullscreen></iframe>--%>
-<%--                                </div>--%>
+                                <%--                                <div id="videoPreviewContainer" style="display:none;" class="mt-3">--%>
+                                <%--                                    <div class="preview-header">--%>
+                                <%--                                        <span><i class="fa-solid fa-play-circle"></i> Xem trước bài giảng</span>--%>
+                                <%--                                    </div>--%>
+                                <%--                                    <iframe id="videoIframe" width="100%" height="315" src="" frameborder="0"--%>
+                                <%--                                            allowfullscreen></iframe>--%>
+                                <%--                                </div>--%>
 
                                 <div class="form-actions mt-4">
                                     <button type="submit" class="btn-submit-modern w-100">
-                                        <i class="fa-solid fa-floppy-disk"></i> ${lesson == null ? 'Thêm bài học' : 'Lưu cập nhật'}
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                        ${(not empty lesson and lesson.id > 0) ? 'Lưu cập nhật' : 'Thêm bài học'}
                                     </button>
                                 </div>
                             </div>

@@ -14,7 +14,9 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bindBean(entity)
-                    .execute();
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(Integer.class)
+                    .one();
         });
     }
 

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
@@ -13,8 +14,8 @@ import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminLessonController", value = "/admin/lessons")
-public class AdminLessonController extends BaseController {
+@WebServlet(name = "LessonManagementController", value = "/admin/lessons")
+public class LessonManagementController extends BaseController {
 
     private transient LessonService lessonService;
     private transient CourseService courseService;
@@ -31,6 +32,8 @@ public class AdminLessonController extends BaseController {
         List<Lesson> listLessons = lessonService.getAllLessons();
         request.setAttribute("listLessons", listLessons);
         request.setAttribute("currentPage", "lessons");
+        List<Course> listCourses = courseService.getAllCourses();
+        request.setAttribute("listCourse", listCourses);
         this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
     }
 
