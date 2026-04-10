@@ -25,6 +25,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
 
+    <%-- Javascript Validation--%>
+    <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/admin/create-lesson.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </head>
 <body>
 
@@ -66,45 +70,37 @@
                                             </c:forEach>
                                         </select>
 
-                                        <c:if test="${not empty errors.idCourse}">
                                             <span class="error-client" id="error_idCourse">${errors.idCourse}</span>
-                                        </c:if>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thứ tự bài học</label>
-                                        <input type="number" name="orderIndex" class="input-modern"
+                                        <input type="number" name="orderIndex" class="input-modern" id="orderIndex"
                                                value="${lesson != null ? lesson.orderIndex : ''}"
                                                placeholder="Ví dụ: 1">
-                                        <c:if test="${not empty errors.orderIndex}">
-                                            <span class="error-client" id="">
-                                                <i class="fa-solid fa-circle-exclamation"></i> ${errors.orderIndex}
+                                            <span class="error-client" id="error_orderIndex">
+                                                 ${errors.orderIndex}
                                             </span>
-                                        </c:if>
                                     </div>
                                 </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Tiêu đề bài học</label>
-                                        <input type="text" name="nameLesson" class="input-modern"
+                                        <input type="text" name="nameLesson" class="input-modern" id="lessonTitle"
                                                value="${lesson != null ? lesson.title : ''}"
                                                placeholder="Nhập tiêu đề...">
-                                        <c:if test="${not empty errors.nameLesson}">
-                                            <span class="error-client">
-                                                <i class="fa-solid fa-circle-exclamation"></i> ${errors.nameLesson}
+                                            <span class="error-client" id="error_lessonTitle">
+                                                 ${errors.nameLesson}
                                             </span>
-                                        </c:if>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thời lượng (Phút)</label>
-                                        <input type="number" name="duration_minutesLesson" class="input-modern"
+                                        <input type="number" name="duration_minutesLesson" class="input-modern" id="durationMinutes"
                                                value="${lesson != null ? lesson.durationMinutes : ''}"
                                                placeholder="Phút">
-                                        <c:if test="${not empty errors.durationMinutes}">
-                                            <span class="error-client">
-                                                <i class="fa-solid fa-circle-exclamation"></i> ${errors.durationMinutes}
+                                            <span class="error-client" id="error_durationMinutes">
+                                                 ${errors.durationMinutes}
                                             </span>
-                                        </c:if>
                                     </div>
                                 </div>
 
@@ -142,9 +138,7 @@
                                             <%--                                            <button type="button" class="btn-secondary" onclick="previewVideo()"><i--%>
                                             <%--                                                    class="fa-solid fa-eye"></i> Xem thử--%>
                                             <%--                                            </button>--%>
-                                            <c:if test="${not empty errors.urlVideo}">
-                                                <span class="error-client">${errors.urlVideo}</span>
-                                            </c:if>
+                                                <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
                                         </div>
                                     </div>
 
