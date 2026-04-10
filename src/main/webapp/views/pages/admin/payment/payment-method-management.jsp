@@ -69,7 +69,8 @@
                                     <thead>
                                     <tr>
                                         <th>Tên phương thức</th>
-                                        <th>Ngày tạo</th>
+                                        <th>Code</th>
+                                        <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                     </thead>
@@ -83,26 +84,31 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="course-row__font-content">
-                                                    <fmt:setLocale value="en_US" scope="page"/>
-
-                                                    <fmt:formatDate value="${pm.createdAt}"
-                                                                    pattern="dd-MM-YYYY"/>
+                                                <div class="course-row__title title course-row__style-text">
+                                                        ${pm.code}
                                                 </div>
                                             </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${pm.status == 'ACTIVE'}">
+                                                        <div class="course-row__status course-row__font-content course-row__status-public">
+                                                            Hoạt động
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="course-row__status course-row__font-content course-row-status-unactive">
+                                                            Không hoạt động
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+
                                             <td class="action__button">
                                                 <button type="button" onclick="showPaymentMethodDetail(${pm.id})"
                                                         class="icon-action-btn">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-                                                <form action="${pageContext.request.contextPath}/admin/payment-methods/delete"
-                                                      method="post">
-                                                    <input type="hidden" name="id" value="${pm.id}">
-                                                    <button type="submit">
-                                                        <span class="icon-action"><i
-                                                                class="fa-solid fa-trash"></i></span>
-                                                    </button>
-                                                </form>
+
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -143,15 +149,15 @@
 
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-tag"></i> Tên phương thức</label>
-                                        <input id="detail-name" type="text" class="input__create" name="name">
+                                        <input id="detail-name" type="text" class="input__create" name="name"disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-code"></i> Mã phương thức (Code)</label>
-                                        <input id="detail-code" type="text" class="input__create" name="code">
+                                        <input id="detail-code" type="text" class="input__create" name="code" disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-image"></i> Icon URL</label>
-                                        <input id="detail-iconUrl" type="text" class="input__create" name="iconUrl">
+                                        <input id="detail-iconUrl" type="text" class="input__create" name="iconUrl" disabled>
                                     </div>
                                     <div class="info-group">
                                         <label><i class="fa-solid fa-power-off"></i> Trạng thái</label>

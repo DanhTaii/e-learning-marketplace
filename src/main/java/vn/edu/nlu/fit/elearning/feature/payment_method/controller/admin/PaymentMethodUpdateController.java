@@ -30,40 +30,26 @@ public class PaymentMethodUpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getParameter("id");
-        String name = request.getParameter("name");
-        String code = request.getParameter("code");
-        String iconUrl = request.getParameter("iconUrl");
         String status = request.getParameter("status");
 
-        if (idStr == null || idStr.isEmpty() || name == null || name.trim().isEmpty() ||
-                code == null || code.trim().isEmpty()) {
-            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin bắt buộc (ID, Tên, Code)!");
-            response.sendRedirect(request.getContextPath() + "/admin/payment-methods");
-            return;
-        }
 
         try {
             int id = Integer.parseInt(idStr);
 
-            PaymentMethod paymentMethod = new PaymentMethod();
-            paymentMethod.setId(id);
-            paymentMethod.setName(name.trim());
-            paymentMethod.setCode(code.trim());
-            paymentMethod.setIconUrl(iconUrl != null ? iconUrl.trim() : "");
+            PaymentMethod existMethod = paymentMethodService.getPaymentMethodById(id);
 
-            if ("ACTIVE".equals(status)) {
-                paymentMethod.setStatus("ACTIVE");
-            } else {
-                paymentMethod.setStatus("INACTIVE");
+
+            if (existMethod != null) {
+                existMethod.setStatus("ACTIVE".equals(status) ? "ACTIVE" : "INACTIVE");
+                int result = paymentMethodService.updatePaymentMethod(existMethod);
+                if (result > 0) {
+                    request.getSession().setAttribute("flashSuccess", "Cập nhật phương thức thanh toán thành công!");
+                } else {
+                    request.getSession().setAttribute("flashError", "Cập nhật thất bại. Vui lòng thử lại!");
+                }
             }
 
-            int result = paymentMethodService.updatePaymentMethod(paymentMethod);
 
-            if (result > 0) {
-                request.getSession().setAttribute("flashSuccess", "Cập nhật phương thức thanh toán thành công!");
-            } else {
-                request.getSession().setAttribute("flashError", "Cập nhật thất bại. Vui lòng thử lại!");
-            }
         } catch (NumberFormatException e) {
             request.getSession().setAttribute("flashError", "ID không hợp lệ!");
         } catch (Exception e) {
