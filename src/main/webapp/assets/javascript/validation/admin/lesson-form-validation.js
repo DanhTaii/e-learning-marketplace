@@ -10,6 +10,7 @@ $(document).ready(function () {
         const title = $('#lessonTitle').val() || "";
         const durationMinutes = $('#durationMinutes').val() || "";
         const videoUrlInput = $('#videoUrlInput').val() || "";
+        const videoFile = $('#videoFile')[0].files[0]; // Lấy file nếu có
 
         // Kiểm tra Khóa học
         if (courseId === "0" || !courseId) {
@@ -37,8 +38,11 @@ $(document).ready(function () {
             isValid = false;
         }
 
-        if (!videoUrlInput) {
+        if (!videoUrlInput && !videoFile) {
             $('#error_videoUrl').text("Vui lòng nhập URL video");
+            isValid = false;
+        } else if (videoUrlInput && videoFile) {
+            $('#error_videoUrl').text("Chỉ được chọn URL hoặc upload file, không chọn cả hai");
             isValid = false;
         }
 

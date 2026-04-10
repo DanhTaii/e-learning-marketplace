@@ -8,16 +8,21 @@
     <meta charset="UTF-8">
     <title>Lesson Management</title>
     <base href="${pageContext.request.contextPath}/">
+
+    <%-- Admin Layout Css--%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Management Css --%>
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 <div class="web">
@@ -162,81 +167,6 @@
         </div>
     </div>
 </div>
-<%--SHOW DETAIL INFORMATION--%>
-<%--<div id="lesson-detail" class="modal modal__course-detail">--%>
-<%--    <div class="modal__course-content">--%>
-<%--        <form action="admin/lesson/update" method="post">--%>
-
-<%--            <div class="course__header">--%>
-<%--                <div class="course__title">--%>
-<%--                    <i class="fa-solid fa-address-card"></i>--%>
-<%--                    <span id="modal-title"></span>--%>
-<%--                </div>--%>
-<%--                <div class="x__icon" onclick="closeModal('lesson-detail')">--%>
-<%--                    <i class="fa-solid fa-xmark"></i>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="course-body">--%>
-<%--                <div class="user-info-grid">--%>
-<%--                    &lt;%&ndash;                                    Tạm lưu id của user để update&ndash;%&gt;--%>
-<%--                    <input id="detail-id" type="text" class="input__create" name="id"--%>
-<%--                           style=" display: none ">--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-user"></i> Tên khóa học</label>--%>
-<%--                        <select id="detail-courseId" class="input__create" name="courseId">--%>
-<%--                            <c:forEach var="c" items="${listCourse}">--%>
-<%--                                <option class="text-medium"--%>
-<%--                                        value="${c.id}">${c.title}</option>--%>
-
-<%--                            </c:forEach>--%>
-<%--                            <input type="hidden" name="oldCourseId" id="old-courseId">--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-user"></i> Tên bài học</label>--%>
-<%--                        <input id="detail-nameLesson" type="text" class="input__create"--%>
-<%--                               name="nameLesson">--%>
-<%--                    </div>--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-envelope"></i>Video URL</label>--%>
-<%--                        <input id="detail-videoURL" type="text" class="input__create" name="videoURL">--%>
-<%--                    </div>--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-envelope"></i>Thời lượng</label>--%>
-<%--                        <input id="detail-durationMinutes" type="number" class="input__create"--%>
-<%--                               name="durationMinutes">--%>
-<%--                    </div>--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-sort-numeric-down"></i> Số thứ tự</label>--%>
-<%--                        <input id="detail-orderIndex" type="number" min="1" class="input__create"--%>
-<%--                               name="orderIndex" required>--%>
-<%--                        <input id="old-orderIndex" type="hidden" name="oldOrderIndex">--%>
-<%--                    </div>--%>
-<%--                    <input type="hidden" name="currentSearchName" value="${param.searchName}">--%>
-<%--                    <input type="hidden" name="currentCourseId" value="${param.courseId}">--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo bài học</label>--%>
-<%--                        <input id="detail-created" type="text" class="input__create" name="">--%>
-<%--                    </div>--%>
-<%--                    <div class="info-group">--%>
-<%--                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>--%>
-<%--                        <input id="detail-updated" type="text" class="input__create" name="">--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="button btn-cancel"--%>
-<%--                            onclick="closeModal('lesson-detail')"--%>
-<%--                            style="margin-right: 1rem;">Hủy--%>
-<%--                    </button>--%>
-<%--                    <button type="submit" class="button dark-button">Lưu thay--%>
-<%--                        đổi--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </form>--%>
-<%--    </div>--%>
-<%--</div>--%>
 <%--COMPONENT CONFIRM FOR DELETE--%>
 <div id="confirm-delete-modal" class="modal"
      style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
@@ -263,7 +193,4 @@
 </form>
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
-
-<%--<script src="assets/javascript/admin/lesson/admin-lesson-detail.js?v=<%=System.currentTimeMillis()%>"></script>--%>
-
 </html>

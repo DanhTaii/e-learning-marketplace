@@ -24,10 +24,11 @@
     <%-- Javascript --%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
 
     <%-- Javascript Validation--%>
     <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="assets/javascript/validation/admin/create-lesson.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/admin/lesson-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
 <body>
@@ -50,9 +51,7 @@
                     </div>
 
                     <div class="form-container">
-                        <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
-                        <%--                              enctype="multipart/form-data"--%>
-                        >
+                        <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern" enctype="multipart/form-data">
                             <c:if test="${lesson != null}">
                                 <input type="hidden" name="id" value="${lesson.id}"/>
                                 <input type="hidden" name="oldOrderIndex" value="${lesson.orderIndex}"/>
@@ -70,16 +69,16 @@
                                             </c:forEach>
                                         </select>
 
-                                            <span class="error-client" id="error_idCourse">${errors.idCourse}</span>
+                                        <span class="error-client" id="error_idCourse">${errors.idCourse}</span>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thứ tự bài học</label>
                                         <input type="number" name="orderIndex" class="input-modern" id="orderIndex"
                                                value="${lesson != null ? lesson.orderIndex : ''}"
                                                placeholder="Ví dụ: 1">
-                                            <span class="error-client" id="error_orderIndex">
-                                                 ${errors.orderIndex}
-                                            </span>
+                                        <span class="error-client" id="error_orderIndex">
+                                            ${errors.orderIndex}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -89,18 +88,19 @@
                                         <input type="text" name="nameLesson" class="input-modern" id="lessonTitle"
                                                value="${lesson != null ? lesson.title : ''}"
                                                placeholder="Nhập tiêu đề...">
-                                            <span class="error-client" id="error_lessonTitle">
-                                                 ${errors.nameLesson}
-                                            </span>
+                                        <span class="error-client" id="error_lessonTitle">
+                                            ${errors.nameLesson}
+                                        </span>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thời lượng (Phút)</label>
-                                        <input type="number" name="duration_minutesLesson" class="input-modern" id="durationMinutes"
+                                        <input type="number" name="duration_minutesLesson" class="input-modern"
+                                               id="durationMinutes"
                                                value="${lesson != null ? lesson.durationMinutes : ''}"
                                                placeholder="Phút">
-                                            <span class="error-client" id="error_durationMinutes">
-                                                 ${errors.durationMinutes}
-                                            </span>
+                                        <span class="error-client" id="error_durationMinutes">
+                                            ${errors.durationMinutes}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -135,10 +135,7 @@
                                             <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
                                                    value="${lesson != null ? lesson.videoUrl : ''}"
                                                    placeholder="https://www.youtube.com/watch?v=...">
-                                            <%--                                            <button type="button" class="btn-secondary" onclick="previewVideo()"><i--%>
-                                            <%--                                                    class="fa-solid fa-eye"></i> Xem thử--%>
-                                            <%--                                            </button>--%>
-                                                <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
+                                            <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
                                         </div>
                                     </div>
 
@@ -154,13 +151,15 @@
                                     </div>
                                 </div>
 
-                                <%--                                <div id="videoPreviewContainer" style="display:none;" class="mt-3">--%>
-                                <%--                                    <div class="preview-header">--%>
-                                <%--                                        <span><i class="fa-solid fa-play-circle"></i> Xem trước bài giảng</span>--%>
-                                <%--                                    </div>--%>
-                                <%--                                    <iframe id="videoIframe" width="100%" height="315" src="" frameborder="0"--%>
-                                <%--                                            allowfullscreen></iframe>--%>
-                                <%--                                </div>--%>
+                                <div id="videoPreviewContainer" style="display:none;" class="mt-3">
+                                    <iframe id="videoIframe" width="100%" height="500" src="" frameborder="0"
+                                            allowfullscreen style="display:none;"></iframe>
+
+                                    <video id="videoLocalPlayer" width="100%" height="500" controls
+                                           style="display:none;">
+                                        Trình duyệt của bạn không hỗ trợ xem video.
+                                    </video>
+                                </div>
 
                                 <div class="form-actions mt-4">
                                     <button type="submit" class="btn-submit-modern w-100">

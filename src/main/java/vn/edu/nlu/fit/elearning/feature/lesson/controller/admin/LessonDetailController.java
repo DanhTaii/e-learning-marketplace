@@ -1,11 +1,14 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.controller.admin;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.external.cloudinary.CloudinaryService;
 import vn.edu.nlu.fit.elearning.common.helper.validator.lesson.LessonValidator;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
@@ -18,6 +21,11 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "LessonDetailController", value = "/admin/lesson/detail")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024, // 1MB
+        maxFileSize = 150 * 1024 * 1024, // 150MB
+        maxRequestSize = 100 * 1024 * 1024 // 100MB
+)
 public class LessonDetailController extends BaseController {
     private transient LessonService lessonService;
     private transient CourseService courseService;
@@ -60,12 +68,20 @@ public class LessonDetailController extends BaseController {
         int id = RequestUtils.getParameterAsInt(request, "id", -1);
         lesson.setId(id);
         lesson.setTitle(request.getParameter("nameLesson"));
-        lesson.setVideoUrl(request.getParameter("urlVideo"));
+
         lesson.setOrderIndex(RequestUtils.getParameterAsInt(request, "orderIndex", 0));
         lesson.setCourseId(RequestUtils.getParameterAsInt(request, "idCourse", 0));
         lesson.setDurationMinutes(RequestUtils.getParameterAsInt(request, "duration_minutesLesson", 0));
 
         try {
+            Part videoPart = request.getPart("videoFile");
+            if(videoPart != null && videoPart.getSize() > 0) {
+                String uploadedVideoUrl = CloudinaryService.uploadFile(videoPart, "elearning/lessons");
+                lesson.setVideoUrl(uploadedVideoUrl);
+            } else {
+                lesson.setVideoUrl(request.getParameter("urlVideo"));
+            }
+
             //Truyền model vô validator để kiểm tra dữ liệu
             Map<String, String> errors = LessonValidator.validate(lesson);
 
