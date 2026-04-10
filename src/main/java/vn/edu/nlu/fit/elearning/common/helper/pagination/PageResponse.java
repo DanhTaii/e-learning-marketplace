@@ -7,12 +7,21 @@ public class PageResponse<T> {
     private int currentPage;
     private int totalPage;
     private int totalElement;
+    private int pageSize;
 
-    public PageResponse(List<T> data, int currentPage, int totalPage, int totalElement) {
+    public PageResponse(List<T> data, int currentPage, int totalPage, int totalElement, int pageSize) {
         this.data = data;
         this.currentPage = currentPage;
         this.totalPage = totalPage;
         this.totalElement = totalElement;
+        this.pageSize = pageSize;
+    }
+    public boolean isHasNext() {
+        return currentPage < totalPage;
+    }
+
+    public boolean isHasPrev() {
+        return currentPage > 1;
     }
 
     public List<T> getData() {

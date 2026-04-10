@@ -1,89 +1,139 @@
-function renderPagination(current, total, totalElements, callbackName) {
+/**
+ * ===============================
+ * PAGINATION MODULE (REUSABLE)
+ * ===============================
+ */
+
+/**
+ * Render pagination
+ * @param {Object} pageResponse - object từ backend (PageResponse)
+ * @param {Function} onPageChange - callback khi đổi trang
+ */
+function renderPagination(pageResponse, onPageChange) {
     const list = document.getElementById('admin-pagination-list');
     const tplItem = document.getElementById('tpl-pagination-item');
     const tplDots = document.getElementById('tpl-pagination-dots');
     const tplArrow = document.getElementById('tpl-pagination-arrow');
 
-    // Trả về luôn nếu không có phân trnag
     if (!list || !tplItem || !tplDots || !tplArrow) return;
 
-    list.innerHTML = ''; // Xóa sạch thanh cũ
+    const current = pageResponse.currentPage || 1;
+    const total = pageResponse.totalPage || 0;
 
-    // 1. Nút quay lại (Arrow Left)
+    // Clear UI cũ
+    list.innerHTML = '';
+
+    // ===============================
+    // 1. Nút PREV
+    // ===============================
     const btnPrev = tplArrow.content.cloneNode(true);
     const prevLink = btnPrev.querySelector('.js-page-arrow');
+
     btnPrev.querySelector('i').classList.add('fa-chevron-left');
 
     if (current === 1) {
-        btnPrev.querySelector('.pagination-item').classList.add('pagination-item--disabled');
+        btnPrev.querySelector('.pagination-item')
+            .classList.add('pagination-item--disabled');
     } else {
-        // Dùng window[callbackName] để gọi hàm động
-        prevLink.onclick = () => window[callbackName](current - 1);
+        prevLink.onclick = () => onPageChange(current - 1);
     }
+
     list.appendChild(btnPrev);
 
-    // 2. Thuật toán lấy danh sách số trang cần hiển thị
-    const pages = getPaginationModel(current, total)
+    // ===============================
+    // 2. Danh sách số trang
+    // ===============================
+    const pages = getPaginationModel(current, total);
+
     pages.forEach(p => {
         if (p === '...') {
-            const dots = tplDots.content.cloneNode(true);
-            list.appendChild(dots);
+            list.appendChild(tplDots.content.cloneNode(true));
         } else {
             const item = tplItem.content.cloneNode(true);
             const link = item.querySelector('.js-page-number');
-            // Dùng textContent chống XSS tuyệt đối
+
             link.textContent = p;
 
             if (p === current) {
-                item.querySelector('.pagination-item').classList.add('pagination-item--active');
+                item.querySelector('.pagination-item')
+                    .classList.add('pagination-item--active');
             } else {
-                link.onclick = () => window[callbackName](p);
+                link.onclick = () => onPageChange(p);
             }
+
             list.appendChild(item);
         }
-    })
+    });
 
-    // 3. Nút tới (Arrow Right)
+    // ===============================
+    // 3. Nút NEXT
+    // ===============================
     const btnNext = tplArrow.content.cloneNode(true);
     const nextLink = btnNext.querySelector('.js-page-arrow');
+
     btnNext.querySelector('i').classList.add('fa-chevron-right');
 
     if (current === total || total === 0) {
-        btnNext.querySelector('.pagination-item').classList.add('pagination-item--disabled');
+        btnNext.querySelector('.pagination-item')
+            .classList.add('pagination-item--disabled');
     } else {
-        // Gọi hàm động theo tên được truyền vào
-        nextLink.onclick = () => window[callbackName](current + 1);
+        nextLink.onclick = () => onPageChange(current + 1);
     }
+
     list.appendChild(btnNext);
 
-    // // Cập nhật text thông tin
-    // if (infoText) {
-    //     infoText.textContent = `Hiển thị trang ${current}/${total} (Tổng số ${totalElements})`;
-    // }
+    // ===============================
+    // 4. (Optional) Text info
+    // ===============================
+    const infoText = document.getElementById('pagination-info');
+    if (infoText) {
+        infoText.textContent =
+            `Trang ${current}/${total} - Tổng ${pageResponse.totalElement || 0} bản ghi`;
+    }
 }
 
+/**
+ * Tạo danh sách page hiển thị (có ...)
+ */
 function getPaginationModel(current, total) {
     const delta = 2;
     const range = [];
     const rangeWithDots = [];
-    let l;
+    let last;
 
     for (let i = 1; i <= total; i++) {
-        if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
+        if (
+            i === 1 ||
+            i === total ||
+            (i >= current - delta && i <= current + delta)
+        ) {
             range.push(i);
         }
     }
 
     for (let i of range) {
-        if (l) {
-            if (i - l === 2) {
-                rangeWithDots.push(l + 1);
-            } else if (i - l !== 1) {
+        if (last) {
+            if (i - last === 2) {
+                rangeWithDots.push(last + 1);
+            } else if (i - last > 1) {
                 rangeWithDots.push('...');
             }
         }
         rangeWithDots.push(i);
-        l = i;
+        last = i;
     }
+
     return rangeWithDots;
+}
+
+function createPaginationLoader(url, renderData) {
+    return function load(page = 1, size = 10) {
+        fetch(`${url}?page=${page}&size=${size}`)
+            .then(res => res.json())
+            .then(data => {
+                renderData(data.data); // render list
+                renderPagination(data, load); // render pagination
+            })
+            .catch(err => console.error('Pagination load error:', err));
+    };
 }
