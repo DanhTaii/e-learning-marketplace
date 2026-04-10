@@ -38,8 +38,7 @@ public class PaymentMethodSearch extends HttpServlet {
         }
 
         request.setAttribute("listPaymentMethods", listPaymentMethods);
-        // Thay đường dẫn này bằng đúng file JSP của bạn
-        request.getRequestDispatcher("views/pages/admin/payment/payment-method-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/payment/payment-method-management.jsp").forward(request, response);
     }
 
     @Override
