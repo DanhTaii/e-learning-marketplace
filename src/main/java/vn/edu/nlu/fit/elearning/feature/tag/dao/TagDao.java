@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.tag.dao;
 
+import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
@@ -19,4 +20,9 @@ public interface TagDao {
     int delete(Integer tagId);
 
     List<TagDto> findTagsByCourseId(int courseId);
+
+    List<Tag> findTags(TagFilter filter);
+
+    int countTags();
+
 }

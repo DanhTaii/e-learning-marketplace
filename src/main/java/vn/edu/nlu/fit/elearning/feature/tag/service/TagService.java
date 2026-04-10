@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.tag.service;
 
+import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
@@ -21,4 +22,9 @@ public interface TagService {
     boolean deleteTags(int tagId);
 
     List<TagDto> getTagsByCourseId(int courseId);
+
+    List<Tag> searchTags(TagFilter filter);
+
+    int countTags();
+
 }

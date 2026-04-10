@@ -55,7 +55,7 @@ public class CourseSearchController extends HttpServlet {
         int totalCourses = courseServiceImpl.countAllCourseAdmin(courseFilter);
         int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
 
-        PageResponse<Course> result = new PageResponse<>(listCourses, page, totalPages, totalCourses);
+        PageResponse<Course> result = new PageResponse<>(listCourses, page, totalPages, totalCourses, pageSize);
 
         //Đóng gói PageResponse theo dạng JSON
         String json = new Gson().toJson(result);
