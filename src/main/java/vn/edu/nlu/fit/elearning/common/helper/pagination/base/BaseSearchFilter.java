@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.common.utils.search;
+package vn.edu.nlu.fit.elearning.common.helper.pagination.base;
 
 public abstract class BaseSearchFilter {
     protected int page = 1;

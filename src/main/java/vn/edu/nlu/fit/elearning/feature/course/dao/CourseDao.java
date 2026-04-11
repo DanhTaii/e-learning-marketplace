@@ -3,7 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.course.dao;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.common.utils.search.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
 
 import java.util.List;
 

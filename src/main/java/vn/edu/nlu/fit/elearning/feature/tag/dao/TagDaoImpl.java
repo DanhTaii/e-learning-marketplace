@@ -1,14 +1,10 @@
 package vn.edu.nlu.fit.elearning.feature.tag.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
-import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TagDaoImpl extends BaseDao implements TagDao {

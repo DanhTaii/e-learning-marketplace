@@ -7,13 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
-import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonServiceImpl;
 
 import java.io.IOException;
 
 @WebServlet(name = "LessonDeleteController", value = "/admin/lesson/delete")
 public class LessonDeleteController extends HttpServlet {
-    private LessonService lessonService;
+    private transient LessonService lessonService;
 
     @Override
     public void init() throws ServletException {
@@ -23,6 +22,7 @@ public class LessonDeleteController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Phương thức GET không được hỗ trợ cho endpoint này");
     }
 
     @Override

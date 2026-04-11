@@ -1,15 +1,15 @@
 
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDao;
-import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
 
 public class LessonServiceImpl implements LessonService {
 
-    private LessonDao lessonDao;
+    private final LessonDao lessonDao;
 
     public LessonServiceImpl(LessonDao lessonDao) {
         this.lessonDao = lessonDao;
@@ -17,12 +17,11 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public int createLesson(Lesson lesson) {
-        if (lesson != null) {
-            lessonDao.create(lesson);
-            return 1;
-        };
-
-        return 0;
+        try {
+            return lessonDao.create(lesson);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -37,12 +36,12 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public int updateLesson(Lesson lesson) {
-return  lessonDao.update(lesson);
+        return lessonDao.update(lesson);
     }
 
     @Override
     public int deleteLesson(int id) {
-    return lessonDao.delete(id);
+        return lessonDao.delete(id);
     }
 
     @Override
@@ -56,13 +55,19 @@ return  lessonDao.update(lesson);
     }
 
     @Override
-    public List<Lesson> getSearchLessons(String lessonName, String courseId) {
-        return lessonDao.findLessonsByFilter(lessonName,courseId );
+    public List<Lesson> getLessonsByFilter(LessonFilter filter) {
+        return lessonDao.findLessonsByFilter(filter);
     }
+
+    @Override
+    public int getCountLessonsByFilter(LessonFilter filter) {
+        return lessonDao.countLessonsByFilter(filter);
+    }
+
     @Override
     public boolean updateLessonWithOrdering(Lesson lesson, int oldOrderIndex, int oldCourseId) {
 
-        return lessonDao.updateWithReorder(lesson, oldOrderIndex,oldCourseId) > 0;
+        return lessonDao.updateWithReorder(lesson, oldOrderIndex, oldCourseId) > 0;
     }
 
     @Override

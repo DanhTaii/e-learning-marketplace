@@ -12,7 +12,8 @@
     <!-- Nút Previous -->
     <c:if test="${param.currentPageNumber > 1}">
         <li class="pagination-item">
-            <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${param.currentPageNumber - 1}" class="pagination-item__link">
+            <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${param.currentPageNumber - 1}"
+               class="pagination-item__link">
                 <i class="pagination-item__icon fa-solid fa-angle-left"></i>
             </a>
         </li>
@@ -29,10 +30,12 @@
     </c:if>
 
     <!-- Các trang gần currentPageNumber -->
-    <c:forEach var="i" begin="${param.currentPageNumber - 2 < 1 ? 1 : param.currentPageNumber - 2}" end="${param.currentPageNumber + 2}">
+    <c:forEach var="i" begin="${param.currentPageNumber - 2 < 1 ? 1 : param.currentPageNumber - 2}"
+               end="${param.currentPageNumber + 2}">
         <c:if test="${i > 1 && i < param.totalPages}">
             <li class="pagination-item ${i == param.currentPageNumber ? 'pagination-item--active' : ''}">
-                <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${i}" class="pagination-item__link">${i}</a>
+                <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${i}"
+                   class="pagination-item__link">${i}</a>
             </li>
         </c:if>
     </c:forEach>
@@ -45,14 +48,16 @@
     <!-- Trang cuối -->
     <c:if test="${param.totalPages > 1}">
         <li class="pagination-item ${param.currentPageNumber == param.totalPages ? 'pagination-item--active' : ''}">
-            <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${param.totalPages}" class="pagination-item__link">${param.totalPages}</a>
+            <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${param.totalPages}"
+               class="pagination-item__link">${param.totalPages}</a>
         </li>
     </c:if>
 
     <!-- Nút Next -->
     <c:if test="${param.currentPageNumber < param.totalPages}">
         <li class="pagination-item">
-            <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${param.currentPageNumber + 1}" class="pagination-item__link">
+            <a href="${pageContext.request.contextPath}/${param.baseUrl}?page=${param.currentPageNumber + 1}"
+               class="pagination-item__link">
                 <i class="pagination-item__icon fa-solid fa-angle-right"></i>
             </a>
         </li>

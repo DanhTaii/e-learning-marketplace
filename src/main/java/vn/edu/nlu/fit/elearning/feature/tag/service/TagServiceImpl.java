@@ -1,8 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.tag.service;
 
-import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
-import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 

@@ -12,7 +12,7 @@
 
 <%--    BODY--%>
     <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/course/course-edit.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">

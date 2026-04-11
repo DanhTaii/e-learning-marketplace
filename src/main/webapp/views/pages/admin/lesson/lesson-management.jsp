@@ -8,16 +8,21 @@
     <meta charset="UTF-8">
     <title>Lesson Management</title>
     <base href="${pageContext.request.contextPath}/">
+
+    <%-- Admin Layout Css--%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Management Css --%>
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 <div class="web">
@@ -35,7 +40,7 @@
                                 <div class="header__title">Bài học</div>
                                 <div class="admin-create__buttons">
                                     <button type="button" class="dark-button">
-                                        <a href="views/pages/admin/lesson/lesson-create.jsp" class="admin-create-link">
+                                        <a href="admin/lesson/detail" class="admin-create-link">
                                             <i class="fa-solid fa-plus"></i>Tạo mới
                                         </a>
                                     </button>
@@ -43,7 +48,7 @@
                             </div>
                             <div class="container-2__body">
                                 <div class="title__admin">Tất cả bài học (${listLessons.size()})</div>
-                                <form method="get" class="form" action="admin/lesson/search">
+                                <form method="get" class="form" action="admin/lessons">
                                     <div class="container-2__filter">
                                         <div class="filter__selection">
                                             <div class="filter__selection-input">
@@ -121,10 +126,15 @@
                                                 </td>
                                                 <td class="action__button">
                                                     <div class="action-wrapper">
-                                                        <button type="button" onclick="showLessonDetail(${lesson.id})"
-                                                                class="icon-action-btn">
-                                                            <i class="fa-solid fa-pen"></i>
-                                                        </button>
+<%--                                                        <button type="button" onclick="showLessonDetail(${lesson.id})"--%>
+<%--                                                                class="icon-action-btn">--%>
+<%--                                                            <i class="fa-solid fa-pen"></i>--%>
+<%--                                                        </button>--%>
+                                                        <a href="admin/lesson/detail?id=${lesson.id}" class="">
+                                                            <button type="button" class="icon-action-btn">
+                                                                <i class="fa-solid fa-pen"></i>
+                                                            </button>
+                                                        </a>
                                                         <button type="button" class="icon-action-btn"
                                                                 onclick="openConfirmModal(${lesson.id})">
                                                             <i class="fa-solid fa-trash"></i>
@@ -148,6 +158,12 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <jsp:include page="/views/components/pagination-base.jsp">
+                                    <jsp:param name="baseUrl" value="admin/lessons"/>
+                                    <jsp:param name="currentPageNumber" value="${filter.page}"/>
+                                    <jsp:param name="totalPages" value="${totalPages}"/>
+                                </jsp:include>
                             </div>
                         </div>
 
@@ -155,81 +171,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<%--SHOW DETAIL INFORMATION--%>
-<div id="lesson-detail" class="modal modal__course-detail">
-    <div class="modal__course-content">
-        <form action="admin/lesson/update" method="post">
-
-            <div class="course__header">
-                <div class="course__title">
-                    <i class="fa-solid fa-address-card"></i>
-                    <span id="modal-title"></span>
-                </div>
-                <div class="x__icon" onclick="closeModal('lesson-detail')">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-            </div>
-            <div class="course-body">
-                <div class="user-info-grid">
-                    <%--                                    Tạm lưu id của user để update--%>
-                    <input id="detail-id" type="text" class="input__create" name="id"
-                           style=" display: none ">
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-user"></i> Tên khóa học</label>
-                        <select id="detail-courseId" class="input__create" name="courseId">
-                            <c:forEach var="c" items="${listCourse}">
-                                <option class="text-medium"
-                                        value="${c.id}">${c.title}</option>
-
-                            </c:forEach>
-                            <input type="hidden" name="oldCourseId" id="old-courseId">
-                        </select>
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-user"></i> Tên bài học</label>
-                        <input id="detail-nameLesson" type="text" class="input__create"
-                               name="nameLesson">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-envelope"></i>Video URL</label>
-                        <input id="detail-videoURL" type="text" class="input__create" name="videoURL">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-envelope"></i>Thời lượng</label>
-                        <input id="detail-durationMinutes" type="number" class="input__create"
-                               name="durationMinutes">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-sort-numeric-down"></i> Số thứ tự</label>
-                        <input id="detail-orderIndex" type="number" min="1" class="input__create"
-                               name="orderIndex" required>
-                        <input id="old-orderIndex" type="hidden" name="oldOrderIndex">
-                    </div>
-                    <input type="hidden" name="currentSearchName" value="${param.searchName}">
-                    <input type="hidden" name="currentCourseId" value="${param.courseId}">
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-calendar-check"></i> Ngày tạo bài học</label>
-                        <input id="detail-created" type="text" class="input__create" name="">
-                    </div>
-                    <div class="info-group">
-                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
-                        <input id="detail-updated" type="text" class="input__create" name="">
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="button btn-cancel"
-                            onclick="closeModal('lesson-detail')"
-                            style="margin-right: 1rem;">Hủy
-                    </button>
-                    <button type="submit" class="button dark-button">Lưu thay
-                        đổi
-                    </button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 <%--COMPONENT CONFIRM FOR DELETE--%>
@@ -258,7 +199,4 @@
 </form>
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
-
-<script src="assets/javascript/admin/lesson/admin-lesson-detail.js?v=<%=System.currentTimeMillis()%>"></script>
-
 </html>

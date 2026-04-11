@@ -1,4 +1,6 @@
-package vn.edu.nlu.fit.elearning.common.utils.search;
+package vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course;
+
+import vn.edu.nlu.fit.elearning.common.helper.pagination.base.BaseSearchFilter;
 
 public class AllCourseFilter extends BaseSearchFilter {
     private Integer categoryId;

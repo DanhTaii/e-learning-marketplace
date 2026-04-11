@@ -1,0 +1,66 @@
+.video-source-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Tăng kích thước chữ cho các nút chuyển Tab */
+.tab-btn {
+    padding: 10px 20px; /* Tăng padding để nút to hơn */
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: var(--text-base); /* Tăng từ mặc định lên 1.6rem (~16px) */
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--dark-blue);
+    border-bottom: 3px solid var(--dark-blue); /* Làm đường gạch chân dày hơn */
+}
+.upload-video-wrapper {
+    position: relative;
+    width: fit-content; /* hoặc fixed width */
+}
+
+/* Tăng kích thước chữ trong vùng Upload */
+.upload-video-wrapper p {
+    font-size: 1.8rem; /* Chữ "Kéo thả hoặc Click..." to hơn */
+    margin: 10px 0;
+    color: #444;
+}
+
+.upload-video-wrapper small {
+    font-size: 1.4rem; /* Tên file hiển thị rõ hơn */
+    color: var(--dark-blue);
+    display: block;
+    margin-top: 5px;
+}
+
+/* Tăng kích thước icon upload */
+.upload-video-wrapper i {
+    font-size: 4rem; /* Icon to và chuyên nghiệp hơn */
+    color: #4cc9f0;
+}
+
+/* Điều chỉnh lại input và button xem thử */
+.input-with-icon .btn-secondary {
+    padding: 0 20px;
+    font-size: 1.5rem;
+    height: 100%; /* Đảm bảo nút cao bằng ô input */
+}
+
+.file-hidden {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer;
+}
+
+.readonly-field {
+    background-color: #f5f5f5;
+    color: #888;
+    cursor: not-allowed;
+}

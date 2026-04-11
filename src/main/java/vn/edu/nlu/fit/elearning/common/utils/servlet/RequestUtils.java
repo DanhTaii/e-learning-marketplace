@@ -27,20 +27,17 @@ public class RequestUtils {
         }
     }
 
-    public static String getParameterAsString(HttpServletRequest request, String paramString) {
-        String value = request.getParameter(paramString).trim();
-        if (value == null || value.isEmpty()){
-            throw new IllegalArgumentException("Parameter " + paramString + " is missing");
+    public static String getParameterAsString(HttpServletRequest request, String paramString, String defaultValue) {
+        String value = request.getParameter(paramString);
+        if (value == null || value.trim().isEmpty()){
+            return defaultValue;
         }
 
         return value;
     }
 
     public static BaseStatus getParameterAsStatus(HttpServletRequest request, String paramStatus) {
-        String value = request.getParameter(paramStatus).trim();
-        if (value == null || value.isEmpty()){
-            throw new IllegalArgumentException("Parameter " + paramStatus + " is missing");
-        }
+        String value = getParameterAsString(request, paramStatus, "INACTIVE");
 
         try {
             return BaseStatus.valueOf(value.toUpperCase());
@@ -50,11 +47,7 @@ public class RequestUtils {
     }
 
     public static Role getParameterAsRole(HttpServletRequest request, String paramRole) {
-        String value = request.getParameter(paramRole).trim();
-        if (value == null || value.isEmpty()){
-            throw new IllegalArgumentException("Parameter " + paramRole + " is missing");
-        }
-
+        String value = getParameterAsString(request, paramRole, "USER");
         try {
             return Role.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -63,10 +56,7 @@ public class RequestUtils {
     }
 
     public static boolean getParameterAsBoolean(HttpServletRequest request, String paramBoolean) {
-        String value = request.getParameter(paramBoolean).trim();
-        if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("Parameter " + paramBoolean + " is missing");
-        }
+        String value = getParameterAsString(request, paramBoolean, "false");
         return Boolean.parseBoolean(value);
     }
 

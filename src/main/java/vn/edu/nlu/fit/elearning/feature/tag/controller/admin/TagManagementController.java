@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.common.utils.search.TagFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
