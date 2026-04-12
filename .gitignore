@@ -1,9 +1,13 @@
 target/
 out/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
+build/
+.gradle/
+bin/
+.env
+
+# Gradle
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
 ### IntelliJ IDEA ###
 .idea/
