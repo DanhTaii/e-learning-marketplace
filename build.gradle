@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'vn.edu.nlu.fit'
+version = '1.0-SNAPSHOT'
+
+// Cấu hình Java 17 như trong
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Đảm bảo IntelliJ nhận diện đúng cấu trúc Maven cũ
+sourceSets {
+    main {
+        java { srcDirs = ['src/main/java'] }
+        resources { srcDirs = ['src/main/resources'] }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 1. Servlet API (provided scope -> compileOnly)
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+
+    // 2. JSTL (Jakarta)
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.1'
+
+    // 3. Database: JDBI & MySQL Connector & HikariCP
+    implementation 'org.jdbi:jdbi3-core:3.50.0'
+    implementation 'com.mysql:mysql-connector-j:9.5.0'
+    implementation 'com.zaxxer:HikariCP:7.0.2'
+
+    // 4. Utilities: HttpClient, Gson, Mail, Cloudinary
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.14'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+    implementation 'com.cloudinary:cloudinary-http44:1.36.0'
+
+    // 5. Testing
+    testImplementation platform('org.junit:junit-bom:5.13.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+}
+
+// Đóng gói file WAR với tên e-learning.war
+war {
+    archiveFileName = 'e-learning.war'
+}
+
+// Hỗ trợ tiếng Việt khi compile
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Cấu hình để chạy JUnit 5
+test {
+    useJUnitPlatform()
+}
