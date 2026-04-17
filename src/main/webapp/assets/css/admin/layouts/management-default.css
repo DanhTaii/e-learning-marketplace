@@ -156,7 +156,6 @@ table td {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding-bottom: 15px;
     border-bottom: 1px solid transparent;
 }
 
@@ -302,6 +301,7 @@ table td {
 
 .filter-actions {
     margin-top: 20px;
+    margin-bottom: 5px;
     text-align: right;
 }
 
@@ -310,6 +310,23 @@ table td {
     padding: 10px 25px;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.btn-clear {
+    text-decoration: none;
+    color: #666;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: var(--text-base);
+    transition: all 0.3s;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: var(--white-color);
+}
+
+.btn-clear:hover {
+    color: var(--dark-blue);
+    background: var(--hover-color);
 }
 
 /* ======================================== MODERN TABLE ======================================== */

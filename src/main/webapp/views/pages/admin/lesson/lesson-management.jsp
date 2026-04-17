@@ -51,7 +51,7 @@
                                                 Quản lý tất cả bài học trên hệ thống
                                         </span>
                                         <span class="header__count">
-                                                ${listLessons.size()} bài học
+                                                ${totalLessons} bài học
                                         </span>
                                     </div>
                                 </div>
@@ -94,7 +94,14 @@
                                             <div class="filter-group">
                                                 <label>Trạng thái</label>
                                                 <select name="status">
-                                                    <option value="">Tất cả trạng thái</option>
+                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
+                                                    </option>
+                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
+                                                        Hoạt động
+                                                    </option>
+                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
+                                                        Bản nháp
+                                                    </option>
                                                 </select>
                                             </div>
 
@@ -117,12 +124,15 @@
                                                 <label>&nbsp;</label>
                                                 <div class="checkbox-group">
                                                     <label class="checkbox-container">
-                                                        <input type="checkbox" name="missingVideo"> Thiếu Video
+                                                        <input type="checkbox" name="missingVideo" ${param.missingVideo != null ? 'checked' : ''}> Thiếu Video
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="filter-actions">
+                                            <a href="admin/lessons" class="btn-clear">
+                                                <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                            </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
                                         </div>
                                     </div>
@@ -148,7 +158,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="lesson-info">
-                                                            <%--                                                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>--%>
+                                                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
                                                         <div class="lesson-text">
                                                             <div class="lesson-name">${lesson.title}</div>
                                                             <div class="lesson-sub">Chương ${lesson.orderIndex} •

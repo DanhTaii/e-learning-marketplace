@@ -75,4 +75,9 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.findByCourseId(courseId);
     }
 
+    @Override
+    public int getTotalLessons() {
+        return lessonDao.countAllLessons();
+    }
+
 }

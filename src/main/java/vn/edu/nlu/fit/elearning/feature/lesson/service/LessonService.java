@@ -27,4 +27,6 @@ public interface LessonService {
     boolean updateLessonWithOrdering(Lesson lesson, int oldOrderIndex, int oldCourseId);
 
     List<Lesson> getLessonsByCourseId(int courseId);
+
+    int getTotalLessons();
 }

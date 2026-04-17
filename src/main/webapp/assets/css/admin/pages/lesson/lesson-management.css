@@ -27,6 +27,9 @@
 .icon-danger { color: #e74c3c; font-size: 18px; }
 
 .lesson-icon {
+    /* Khóa cứng kích thước không cho co lại */
+    flex-shrink: 0;
+
     width: 35px;
     height: 35px;
     background: #e8f0fe;

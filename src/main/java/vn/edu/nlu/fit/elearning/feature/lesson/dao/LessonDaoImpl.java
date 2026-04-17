@@ -203,7 +203,35 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
             params.put("courseIdSearch", filter.getCourseId());
         }
 
+        if(filter.getFromDate() != null){
+            where.append(" AND l.created_at >= :fromDate");
+            params.put("fromDate", filter.getFromDate());
+        }
+
+        if(filter.getToDate() != null){
+            where.append(" AND l.created_at <= :toDate");
+            params.put("toDate", filter.getToDate());
+        }
+
+        if(filter.getStatus() != null) {
+            where.append(" AND l.status = :status");
+            params.put("status", filter.getStatus());
+        }
+
+        if (filter.isMissingVideo()) {
+            where.append(" AND (l.video_url IS NULL OR TRIM(l.video_url) = '')");
+        }
+
         return where.toString();
+    }
+
+    @Override
+    public int countAllLessons() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM lessons")
+                    .mapTo(Integer.class)
+                    .one();
+        });
     }
 
 }
