@@ -62,8 +62,14 @@ public class LessonManagementController extends BaseController {
         request.setAttribute("currentPage", "lessons");
         request.setAttribute("totalPages", totalPages);
 
-        this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
-
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            // Chỉ render phần nội dung bảng
+            this.forward(request, response, "/views/pages/admin/lesson/lesson-table-body.jsp");
+        } else {
+            // Render toàn bộ trang như cũ
+            this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
+        }
     }
 
     @Override

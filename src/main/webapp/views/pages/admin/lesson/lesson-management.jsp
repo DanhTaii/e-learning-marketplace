@@ -27,8 +27,10 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
     <%-- Javascript --%>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
 <body>
@@ -124,7 +126,9 @@
                                                 <label>&nbsp;</label>
                                                 <div class="checkbox-group">
                                                     <label class="checkbox-container">
-                                                        <input type="checkbox" name="missingVideo" ${param.missingVideo != null ? 'checked' : ''}> Thiếu Video
+                                                        <input type="checkbox"
+                                                               name="missingVideo" ${param.missingVideo != null ? 'checked' : ''}>
+                                                        Thiếu Video
                                                     </label>
                                                 </div>
                                             </div>
@@ -151,58 +155,8 @@
                                             <th>THAO TÁC</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <c:forEach var="lesson" items="${listLessons}">
-                                            <tr>
-                                                <td><input type="checkbox" class="lesson-checkbox" value="${lesson.id}">
-                                                </td>
-                                                <td>
-                                                    <div class="lesson-info">
-                                                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
-                                                        <div class="lesson-text">
-                                                            <div class="lesson-name">${lesson.title}</div>
-                                                            <div class="lesson-sub">Chương ${lesson.orderIndex} •
-                                                                Bài ${lesson.orderIndex}</div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                    <%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
-                                                <td class="text-bold">${lesson.durationMinutes}:00</td>
-                                                <td class="text-light">
-                                                    <fmt:formatDate value="${lesson.createdAt}" pattern="dd/MM/yyyy"/>
-                                                </td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${lesson.videoUrl != null && lesson.videoUrl != ''}">
-                                                            <i class="fa-solid fa-circle-check icon-success"></i>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <i class="fa-solid fa-circle-exclamation icon-danger"></i>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${lesson.status eq 'ACTIVE'}">
-                                                            <span class="badge course-row__status-public">Hoạt động</span>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <span class="badge course-row-status-unactive">Bản nháp</span>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td class="action-btns">
-                                                    <a href="admin/lesson/detail?id=${lesson.id}" class="js-edit-link">
-                                                        <button type="button" class="icon-action-btn"><i
-                                                                class="fa-solid fa-pen"></i></button>
-                                                    </a>
-                                                    <button onclick="openConfirmModal(${lesson.id})"
-                                                            class="icon-action-btn">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                                        <tbody id="lessonTableBody">
+                                            <jsp:include page="/views/pages/admin/lesson/lesson-table-body.jsp"/>
                                         </tbody>
                                     </table>
 
