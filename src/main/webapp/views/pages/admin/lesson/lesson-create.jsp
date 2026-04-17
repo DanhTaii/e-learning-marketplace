@@ -67,7 +67,7 @@
                                         <select class="input-modern" name="idCourse" id="selectCourse">
                                             <option value="0">--- Chọn khóa học ---</option>
                                             <c:forEach var="c" items="${listCourse}">
-                                                <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : param.idCourse}>${c.title}</option>
                                             </c:forEach>
                                         </select>
 
@@ -76,7 +76,7 @@
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thứ tự bài học</label>
                                         <input type="number" name="orderIndex" class="input-modern" id="orderIndex"
-                                               value="${lesson != null ? lesson.orderIndex : ''}"
+                                               value="${lesson != null ? lesson.orderIndex : param.orderIndex}"
                                                placeholder="Ví dụ: 1">
                                         <span class="error-client" id="error_orderIndex">
                                             ${errors.orderIndex}
@@ -88,7 +88,7 @@
                                     <div class="form-group flex-2">
                                         <label class="label-style">Tiêu đề bài học</label>
                                         <input type="text" name="nameLesson" class="input-modern" id="lessonTitle"
-                                               value="${lesson != null ? lesson.title : ''}"
+                                               value="${lesson != null ? lesson.title : param.nameLesson}"
                                                placeholder="Nhập tiêu đề...">
                                         <span class="error-client" id="error_lessonTitle">
                                             ${errors.nameLesson}
@@ -98,7 +98,7 @@
                                         <label class="label-style">Thời lượng (Phút)</label>
                                         <input type="number" name="duration_minutesLesson" class="input-modern"
                                                id="durationMinutes"
-                                               value="${lesson != null ? lesson.durationMinutes : ''}"
+                                               value="${lesson != null ? lesson.durationMinutes : param.duration_minutesLesson}"
                                                placeholder="Phút">
                                         <span class="error-client" id="error_durationMinutes">
                                             ${errors.durationMinutes}
@@ -109,13 +109,11 @@
                                 <div class="form-group mt-3">
                                     <label class="label-style">Trạng thái hiển thị</label>
                                     <select class="input-modern" name="status">
-                                        <option value="" ${empty param.status ? 'selected' : ''}>-- Chọn trạng thái --
-                                        </option>
-                                        <option value="ACTIVE" ${lesson.status == 'ACTIVE' ? 'selected' : ''}>
-                                            Hoạt động - Học viên có thể xem
-                                        </option>
-                                        <option value="INACTIVE" ${lesson.status == 'INACTIVE' ? 'selected' : ''}>
+                                        <option value="INACTIVE" ${(lesson.status == 'INACTIVE' || param.status == 'INACTIVE' ) ? 'selected' : ''}>
                                             Bản nháp - Đang biên soạn
+                                        </option>
+                                        <option value="ACTIVE" ${(lesson.status == 'ACTIVE' || param.status == 'ACTIVE' )? 'selected' : ''}>
+                                            Hoạt động - Học viên có thể xem
                                         </option>
                                     </select>
                                     <span class="error-client" id="error_status">${errors.status}</span>
@@ -150,7 +148,7 @@
                                     <div id="videoSourceLink" class="video-input-container active mt-2">
                                         <div class="input-with-icon">
                                             <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
-                                                   value="${lesson != null ? lesson.videoUrl : ''}"
+                                                   value="${lesson != null ? lesson.videoUrl : param.urlVideo}"
                                                    placeholder="https://www.youtube.com/watch?v=...">
                                             <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
                                         </div>

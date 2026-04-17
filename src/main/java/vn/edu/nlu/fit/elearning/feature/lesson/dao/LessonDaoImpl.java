@@ -12,9 +12,9 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
 //    =========================================== BASIC CRUD ===========================================
     @Override
     public int create(Lesson entity) {
-        String sql = "INSERT INTO lessons (course_id , title, video_url, duration_minutes, order_index) \n" +
+        String sql = "INSERT INTO lessons (course_id , title, video_url, duration_minutes, order_index, status) \n" +
                 "VALUES (:courseId, :title , :videoUrl , :durationMinutes, " +
-                "(SELECT COALESCE(MAX(order_index), 0) + 1 FROM lessons l WHERE l.course_id = :courseId))";
+                "(SELECT COALESCE(MAX(order_index), 0) + 1 FROM lessons l WHERE l.course_id = :courseId), :status)";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bindBean(entity)
@@ -47,16 +47,12 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
     @Override
     public int update(Lesson entity) {
         String sql = "UPDATE lessons \n" +
-                "SET course_id=:courseId ,title= :title , video_url = :videoUrl, duration_minutes = :durationMinutes \n" +
+                "SET course_id=:courseId ,title= :title , video_url = :videoUrl, duration_minutes = :durationMinutes, status=:status \n" +
                 "WHERE id = :id";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
-                    .bind("courseId", entity.getCourseId())
-                    .bind("title", entity.getTitle())
-                    .bind("videoURL", entity.getVideoUrl())
-                    .bind("durationMinutes", entity.getDurationMinutes())
+                    .bindBean(entity)
                     .execute();
-
         });
     }
 
@@ -136,13 +132,14 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
                 }
 
                 // Bước 3: Cập nhật thông tin bài học với finalOrder đã tính toán
-                return h.createUpdate("UPDATE lessons SET course_id = :courseId, title = :title, video_url = :videoUrl, duration_minutes = :durationMinutes, order_index = :orderIndex WHERE id = :id")
+                return h.createUpdate("UPDATE lessons SET course_id = :courseId, title = :title, video_url = :videoUrl, duration_minutes = :durationMinutes, order_index = :orderIndex, status =:status WHERE id = :id")
                         .bind("courseId", newCourseId)
                         .bind("title", lesson.getTitle())
                         .bind("videoUrl", lesson.getVideoUrl())
                         .bind("durationMinutes", lesson.getDurationMinutes())
                         .bind("orderIndex", finalOrder) // Sử dụng số thứ tự cuối cùng nếu đổi khóa
                         .bind("id", currentId)
+                        .bind("status", lesson.getStatus())
                         .execute();
             });
         });
