@@ -21,6 +21,7 @@
     <%--  Admin Component Css  --%>
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -180,30 +181,7 @@
         </div>
     </div>
 </div>
-<%--COMPONENT CONFIRM FOR DELETE--%>
-<div id="confirm-delete-modal" class="modal"
-     style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
-    <div class="modal-content"
-         style="background: white; padding: 25px; border-radius: 8px; width: 350px; text-align: center;">
-        <h3 style="color: #dc3545; font-size:1.8rem "><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
-        <p style="font-size: 1.6rem">Bạn có chắc chắn muốn xóa bài học này không?</p>
-        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel" style="padding: 8px 20px;">
-                Hủy
-            </button>
-            <button id="btn-confirm-delete" class="button dark-button"
-                    style="background-color: #dc3545; padding: 8px 20px;">Xóa ngay
-            </button>
-        </div>
-    </div>
-</div>
-<%--DELETE ACTION--%>
-<form id="delete-form-id" action="admin/lesson/delete"
-      method="POST"
-      class="form"
-      style="display: none">
-    <input id="input-delete-id" type="hidden" name="id">
-</form>
+<jsp:include page="/views/components/confirm-delete.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
 </html>

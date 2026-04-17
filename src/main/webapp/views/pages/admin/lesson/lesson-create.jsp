@@ -16,6 +16,7 @@
     <%-- Base & Notification--%>
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -51,7 +52,8 @@
                     </div>
 
                     <div class="form-container">
-                        <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern" enctype="multipart/form-data">
+                        <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
+                              enctype="multipart/form-data">
                             <c:if test="${lesson != null}">
                                 <input type="hidden" name="id" value="${lesson.id}"/>
                                 <input type="hidden" name="oldOrderIndex" value="${lesson.orderIndex}"/>
@@ -102,6 +104,21 @@
                                             ${errors.durationMinutes}
                                         </span>
                                     </div>
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <label class="label-style">Trạng thái hiển thị</label>
+                                    <select class="input-modern" name="status">
+                                        <option value="" ${empty param.status ? 'selected' : ''}>-- Chọn trạng thái --
+                                        </option>
+                                        <option value="ACTIVE" ${lesson.status == 'ACTIVE' ? 'selected' : ''}>
+                                            Hoạt động - Học viên có thể xem
+                                        </option>
+                                        <option value="INACTIVE" ${lesson.status == 'INACTIVE' ? 'selected' : ''}>
+                                            Bản nháp - Đang biên soạn
+                                        </option>
+                                    </select>
+                                    <span class="error-client" id="error_status">${errors.status}</span>
                                 </div>
 
                                 <c:if test="${lesson != null and lesson.id > 0}">
@@ -162,10 +179,25 @@
                                 </div>
 
                                 <div class="form-actions mt-4">
-                                    <button type="submit" class="btn-submit-modern w-100">
-                                        <i class="fa-solid fa-floppy-disk"></i>
-                                        ${(not empty lesson and lesson.id > 0) ? 'Lưu cập nhật' : 'Thêm bài học'}
-                                    </button>
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/lessons" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
+
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${lesson != null and lesson.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="openConfirmModal(${lesson.id}, 'admin/lesson/delete', 'Bạn có chắc chắn muốn xóa bài học này?')">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa bài học
+                                        </button>
+                                    </c:if>
                                 </div>
                             </div>
                         </form>
@@ -176,6 +208,6 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-
+<jsp:include page="/views/components/confirm-delete.jsp"/>
 </body>
 </html>

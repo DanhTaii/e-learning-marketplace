@@ -94,3 +94,48 @@
     border-color: var(--dark-blue);
     box-shadow: 0 0 0 3px rgba(14, 98, 133, 0.1);
 }
+
+/*================================== NÚT XÓA ==========================*/
+.btn-delete-modern {
+    background-color: #fff;
+    color: #ef4444;
+    border: 1.5px solid #ef4444;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    margin-right: 5px;
+    font-size: var(--text-base);
+}
+
+.btn-delete-modern:hover {
+    background-color: #ef4444;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/*================================== NÚT HỦY ==========================*/
+.btn-cancel-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #f1f5f9; /* Màu xám nhạt */
+    color: #64748b;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid #e2e8f0;
+    font-size: var(--text-base);
+}
+
+.btn-cancel-modern:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+}
