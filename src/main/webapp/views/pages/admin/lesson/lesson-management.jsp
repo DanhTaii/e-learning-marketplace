@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +20,13 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+
+    <script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
 <body>
@@ -37,7 +42,17 @@
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
-                                <div class="header__title">Bài học</div>
+                                <div class="header__title">
+                                    Bài học
+                                    <div class="header__meta">
+                                        <span class="header__subtitle">
+                                                Quản lý tất cả bài học trên hệ thống
+                                        </span>
+                                        <span class="header__count">
+                                                ${listLessons.size()} bài học
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="admin-create__buttons">
                                     <button type="button" class="dark-button">
                                         <a href="admin/lesson/detail" class="admin-create-link">
@@ -47,116 +62,145 @@
                                 </div>
                             </div>
                             <div class="container-2__body">
-                                <div class="title__admin">Tất cả bài học (${listLessons.size()})</div>
-                                <form method="get" class="form" action="admin/lessons">
-                                    <div class="container-2__filter">
-                                        <div class="filter__selection">
-                                            <div class="filter__selection-input">
-                                                <div class="filter__selection-items">
-                                                    <div class="filter__selection-title filter__item-phone">Tên bài học:
-                                                    </div>
-                                                    <input placeholder="" type="text"
-                                                           class="input__font admin-input__long" name="searchName"
-                                                           value="${param.searchName}">
-                                                </div>
-                                                <div class="filter__selection-items">
-                                                    <div class="filter__selection-items-select">
-                                                        <div class="filter__selection-title filter__item-phone">Tên khóa
-                                                            học:
-                                                        </div>
-                                                        <select name="courseId" class="combobox admin-input__short ">
-                                                            <option class="text-medium" value="">--- Vui lòng chọn khóa học
-                                                                ---
-                                                            </option>
-                                                            <c:forEach var="c" items="${listCourse}">
-                                                                <option class="text-medium"
-                                                                        value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
-                                                                        ${c.title}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
+
+                                <form method="get" action="admin/lessons" class="advanced-filter">
+                                    <h2 class="filter-title">Bộ lọc nâng cao</h2>
+
+                                    <div class="filter-grid">
+                                        <div class="filter-group">
+                                            <label>Tìm kiếm bài học</label>
+                                            <div class="input-with-icon">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" name="searchName" value="${param.searchName}"
+                                                       placeholder="Nhập tên bài học...">
                                             </div>
-                                            <div class="filter__button-search">
-                                                <button type="submit" class="admin-search-btn">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                </button>
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Thuộc khóa học</label>
+                                            <select name="courseId">
+                                                <option value="">Tất cả khóa học</option>
+                                                <c:forEach var="c" items="${listCourse}">
+                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Trạng thái</label>
+                                            <select name="status">
+                                                <option value="">Tất cả trạng thái</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Từ ngày</label>
+                                            <input type="date" name="fromDate" value="${param.fromDate}">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Đến ngày</label>
+                                            <input type="date" name="toDate" value="${param.toDate}">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>&nbsp;</label>
+                                            <div class="checkbox-group">
+                                                <label class="checkbox-container">
+                                                    <input type="checkbox" name="missingVideo"> Thiếu Video
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="filter-actions">
+                                        <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
+                                    </div>
                                 </form>
                                 <div class="container-2__list-student">
-                                    <table>
+                                    <table class="modern-table">
                                         <thead>
                                         <tr>
-                                            <th>Tên bài học</th>
-                                            <th>Số thứ tự</th>
-                                            <th>Thời lượng</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Hành động</th>
+                                            <th><input type="checkbox" id="selectAll"></th>
+                                            <th>TÊN BÀI HỌC</th>
+<%--                                            <th>KHÓA HỌC</th>--%>
+                                            <th>THỜI LƯỢNG</th>
+                                            <th>NGÀY TẠO</th>
+                                            <th>VIDEO</th>
+                                            <th>TRẠNG THÁI</th>
+                                            <th>THAO TÁC</th>
                                         </tr>
                                         </thead>
-
                                         <tbody>
                                         <c:forEach var="lesson" items="${listLessons}">
                                             <tr>
-                                                <td>
-                                                    <div class="course-row__title title course-row__style-text">
-                                                            ${lesson.title}
-                                                    </div>
+                                                <td><input type="checkbox" class="lesson-checkbox" value="${lesson.id}">
                                                 </td>
                                                 <td>
-                                                    <div class="course-row__font-content">
-                                                            ${lesson.orderIndex}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="course-row__font-content">
-                                                            ${lesson.durationMinutes} p
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="course-row__created course-row__font-content">
-                                                        <fmt:setLocale value="en_US" scope="page"/>
-
-                                                        <fmt:formatDate
-                                                                value="${lesson.createdAt}"
-                                                                pattern="dd-MM-YYYY"/>
-                                                    </div>
-                                                </td>
-                                                <td class="action__button">
-                                                    <div class="action-wrapper">
-<%--                                                        <button type="button" onclick="showLessonDetail(${lesson.id})"--%>
-<%--                                                                class="icon-action-btn">--%>
-<%--                                                            <i class="fa-solid fa-pen"></i>--%>
-<%--                                                        </button>--%>
-                                                        <a href="admin/lesson/detail?id=${lesson.id}" class="">
-                                                            <button type="button" class="icon-action-btn">
-                                                                <i class="fa-solid fa-pen"></i>
-                                                            </button>
-                                                        </a>
-                                                        <button type="button" class="icon-action-btn"
-                                                                onclick="openConfirmModal(${lesson.id})">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        <c:if test="${empty listLessons}">
-                                            <tr>
-                                                <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                    <div class="search-empty-state">
-                                                        <i class="fa-solid fa-book-open search-empty-icon"></i>
-                                                        <div class="search-empty-title">
-                                                            Không tìm thấy bài học nào
+                                                    <div class="lesson-info">
+<%--                                                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>--%>
+                                                        <div class="lesson-text">
+                                                            <div class="lesson-name">${lesson.title}</div>
+                                                            <div class="lesson-sub">Chương ${lesson.orderIndex} •
+                                                                Bài ${lesson.orderIndex}</div>
                                                         </div>
                                                     </div>
                                                 </td>
+<%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
+                                                <td class="text-bold">${lesson.durationMinutes}:00</td>
+                                                <td class="text-light">
+                                                    <fmt:formatDate value="${lesson.createdAt}" pattern="dd/MM/yyyy"/>
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${not empty lesson.videoUrl}">
+                                                            <i class="fa-solid fa-circle-check icon-success"></i>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <i class="fa-solid fa-circle-exclamation icon-danger"></i>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+<%--                                                    <span class="badge ${lesson.isPublic ? 'badge-blue' : 'badge-gray'}">--%>
+<%--&lt;%&ndash;                                                            ${lesson.isPublic ? 'Công khai' : 'Bản nháp'}&ndash;%&gt;--%>
+<%--                                                    </span>--%>
+                                                </td>
+                                                <td class="action-btns">
+                                                    <a href="" class="js-edit-link">
+                                                        <button type="button" class="icon-action-btn"><i class="fa-solid fa-pen"></i></button>
+                                                    </a>
+                                                    <button onclick="openConfirmModal(${lesson.id})" class="icon-action-btn">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </td>
                                             </tr>
-                                        </c:if>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
+
+                                    <div class="floating-action-bar" id="actionBar">
+                                        <div class="action-info">
+                                            <span class="count-badge" id="selectedCount">0</span>
+                                            <span>Đã chọn bài học</span>
+                                        </div>
+
+                                        <div class="action-buttons">
+                                            <button class="btn-bar" type="button">
+                                                <i class="fa-regular fa-copy"></i> Nhân bản
+                                            </button>
+                                            <button class="btn-bar" type="button">
+                                                <i class="fa-solid fa-arrows-rotate"></i> Đổi trạng thái
+                                            </button>
+                                            <button class="btn-bar btn-bar-danger" type="button">
+                                                <i class="fa-solid fa-trash"></i> Xóa
+                                            </button>
+                                        </div>
+
+                                        <button class="btn-close-bar" type="button" onclick="deselectAll()">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <jsp:include page="/views/components/pagination-base.jsp">

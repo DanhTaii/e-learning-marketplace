@@ -107,10 +107,14 @@
 .admin-create__buttons button {
     background: var(--dark-blue);
     color: var(--white-color);
-    padding: 1rem 2rem;
+    /*padding: 1rem 2rem;*/
     font-size: var(--text-lg);
-    border: solid 1px var(--dark-blue);
-    border-radius: 3px;
+    /*border: solid 1px var(--dark-blue);*/
+    /*border-radius: 3px;*/
+    /*cursor: pointer;*/
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
     cursor: pointer;
 }
 
@@ -129,23 +133,39 @@
     color: var(--dark-blue);
     font-size: var(--text-4xl);
     font-weight: var(--fw-semibold);
-    line-height: 5rem;
+    line-height: 1.2; /* gọn lại cho đẹp */
+}
+
+/* Bọc dòng dưới */
+.header__meta {
+    margin-top: 4px;
+    font-size: var(--text-4xl);
+}
+
+/* Subtitle */
+.header__subtitle {
+    color: #6b7280;
+}
+
+/* Count */
+.header__count {
+    color: #6b7280;
+}
+
+/* Dấu chấm */
+.header__subtitle::after {
+    content: " • ";
+    margin: 0 4px;
+    color: #d1d5db;
 }
 
 .title__admin {
-    /*margin-top: 2rem;*/
     margin-bottom: 1rem;
     font-size: var(--text-3xl);
     font-weight: var(--fw-semibold);
 }
 
-/*.container-2__list-student {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    !*margin-top: 2rem;*!*/
-/*    width: 100%;*/
-/*}*/
+
 /* Đảm bảo danh sách xếp từ trên xuống */
 .container-2__list-student {
     display: flex;
@@ -340,7 +360,6 @@ table {
 
 /*Xử lý thằng đầu cho in đậm và có đường kẻ trên*/
 thead th {
-    border-top: 1px solid var(--light-grey);
     background: #f8f9fa;
     font-weight: var(--fw-bold);
     color: #333;

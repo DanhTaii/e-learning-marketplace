@@ -143,4 +143,217 @@ table td {
     height: 55px;
 }
 
+/* BỘ LỌC NÂNG CAO*/
+.advanced-filter {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: sans-serif;
+}
 
+.filter-title {
+    font-size: var(--text-2xl);
+    margin-bottom: 3rem;
+    font-weight: bold;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Chia 3 cột */
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: #333;
+}
+
+/* Styling cho Input và Select */
+.filter-group input,
+.filter-group select,
+.input-with-icon {
+    background-color: #f0f2f5; /* Màu nền xám nhạt như ảnh */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    outline: none;
+    font-size: var(--text-base);
+}
+
+/* Input có icon kính lúp */
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.input-with-icon i {
+    color: #888;
+    margin-right: 10px;
+}
+
+.input-with-icon input {
+    background: transparent;
+    padding: 12px 0;
+    width: 100%;
+}
+
+/* Custom Checkbox */
+.checkbox-group {
+    justify-content: center;
+    background: #f0f2f5;
+    border-radius: 8px;
+    padding: 12px 15px;
+}
+
+.checkbox-group label {
+    font-size: var(--text-base);
+    color: #333;
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.filter-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-submit {
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+:root {
+    --primary-blue: #3f51b5;
+    --bg-light: #f8f9fa;
+    --text-main: #2d3436;
+    --text-sub: #636e72;
+    --border-color: #edf2f7;
+}
+
+/* Container bảng */
+.container-2__list-student {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* TABLE */
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed; /* giữ layout ổn định */
+    border: none;
+}
+
+/* HEADER */
+.modern-table thead th {
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-size: 12px; /* chọn size nhỏ cho consistency */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 15px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* Định nghĩa width cột */
+.modern-table th:nth-child(1) { width: 50px; }
+.modern-table th:nth-child(2) { width: 35%; }
+.modern-table th:nth-child(3) { width: 15%; }
+.modern-table th:nth-child(4) { width: 15%; }
+.modern-table th:nth-child(5) { width: 10%; }
+.modern-table th:nth-child(6) { width: 15%; }
+.modern-table th:nth-child(7) { width: 100px; }
+
+/* BODY */
+.modern-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Xóa border 2 bên */
+.modern-table td:first-child,
+.modern-table th:first-child,
+.modern-table td:last-child,
+.modern-table th:last-child {
+    border-left: none;
+    border-right: none;
+}
+
+/* Hover */
+.modern-table tbody tr:hover {
+    background-color: #fcfcfd;
+}
+
+/* THÔNG TIN BÀI HỌC  */
+.lesson-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lesson-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 2px;
+    /* Giới hạn dòng nếu tiêu đề quá dài */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lesson-sub {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Icon Video trạng thái */
+.icon-success { color: #2ecc71; font-size: 18px; }
+.icon-danger { color: #e74c3c; font-size: 18px; }
+
+.lesson-icon {
+    width: 35px;
+    height: 35px;
+    background: #e8f0fe;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/*.badge-blue { background: #e3f2fd; color: #1976d2; }*/
+/*.badge-gray { background: #f5f5f5; color: #757575; }*/

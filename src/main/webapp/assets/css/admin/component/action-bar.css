@@ -1,0 +1,102 @@
+/* Thanh chính */
+.floating-action-bar {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* JS sẽ chuyển thành flex */
+    align-items: center;
+    background: #1e293b; /* Màu xanh đen sang trọng */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 99px; /* Bo tròn tuyệt đối */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    gap: 15px;
+    white-space: nowrap; /* Ngăn chặn chữ bị xuống dòng */
+}
+
+/* Phần hiển thị số lượng */
+.action-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    padding-right: 15px;
+    border-right: 1px solid #475569; /* Đường kẻ dọc chia tách */
+}
+
+.count-badge {
+    background: #3b82f6;
+    color: white;
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Nhóm các nút thao tác */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Style chung cho các nút trên thanh bar */
+.btn-bar {
+    background: transparent;
+    border: none;
+    color: #cbd5e0;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.btn-bar:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-bar i {
+    font-size: 16px;
+}
+
+/* Nút xóa đặc biệt (Màu đỏ) */
+.btn-bar-danger {
+    background: #ef4444;
+    color: white;
+    padding: 8px 16px;
+}
+
+.btn-bar-danger:hover {
+    background: #dc2626;
+}
+
+/* Nút đóng (Dấu X) */
+.btn-close-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.btn-close-bar:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
