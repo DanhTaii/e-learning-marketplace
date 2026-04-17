@@ -4,6 +4,7 @@ import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class MailService {
     public static String generateToken() {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder token = new StringBuilder();
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
 
         for (int i = 0; i < 5; i++) {
             token.append(chars.charAt(random.nextInt(chars.length())));
