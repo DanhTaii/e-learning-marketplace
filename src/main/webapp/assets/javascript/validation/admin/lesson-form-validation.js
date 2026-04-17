@@ -10,8 +10,9 @@ $(document).ready(function () {
         const title = $('#lessonTitle').val() || "";
         const durationMinutes = $('#durationMinutes').val() || "";
         const videoUrlInput = $('#videoUrlInput').val() || "";
-        const videoFile = $('#videoFile')[0].files[0]; // Lấy file nếu có
-
+// Cách lấy file an toàn
+        const videoFileInput = $('#videoFile')[0];
+        const videoFile = (videoFileInput && videoFileInput.files) ? videoFileInput.files[0] : null;
         // Kiểm tra Khóa học
         if (courseId === "0" || !courseId) {
             $('#error_idCourse').text("Vui lòng chọn khóa học");

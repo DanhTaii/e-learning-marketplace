@@ -24,10 +24,10 @@
     <%-- Javascript --%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
 
     <%-- Javascript Validation--%>
-    <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/validation/admin/lesson-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>

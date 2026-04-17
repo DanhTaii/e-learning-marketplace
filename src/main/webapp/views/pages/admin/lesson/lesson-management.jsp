@@ -163,7 +163,7 @@
                                                 </td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${not empty lesson.videoUrl}">
+                                                        <c:when test="${lesson.videoUrl != null && lesson.videoUrl != ''}">
                                                             <i class="fa-solid fa-circle-check icon-success"></i>
                                                         </c:when>
                                                         <c:otherwise>
@@ -172,9 +172,14 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>
-                                                        <%--                                                    <span class="badge ${lesson.isPublic ? 'badge-blue' : 'badge-gray'}">--%>
-                                                        <%--&lt;%&ndash;                                                            ${lesson.isPublic ? 'Công khai' : 'Bản nháp'}&ndash;%&gt;--%>
-                                                        <%--                                                    </span>--%>
+                                                    <c:choose>
+                                                        <c:when test="${lesson.status eq 'ACTIVE'}">
+                                                            <span class="badge course-row__status-public">Hoạt động</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge course-row-status-unactive">Bản nháp</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
                                                 <td class="action-btns">
                                                     <a href="admin/lesson/detail?id=${lesson.id}" class="js-edit-link">

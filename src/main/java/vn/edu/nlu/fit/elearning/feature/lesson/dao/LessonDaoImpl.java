@@ -163,7 +163,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         Map<String, Object> params = new HashMap<>();
         String whereClause = buildLessonWhereClause(filter, params);
 
-        String sql = "SELECT l.id, l.title, l.order_index, l.duration_minutes, l.created_at FROM lessons l "
+        String sql = "SELECT l.id, l.title, l.order_index, l.duration_minutes, l.created_at, l.video_url, l.status FROM lessons l "
                 + whereClause
                 + " ORDER BY l.created_at DESC LIMIT :limit OFFSET :offset";
 
