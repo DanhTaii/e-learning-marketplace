@@ -1,20 +1,23 @@
-
+/* ======================================================== TRANG TRÍ CHỮ (BADGE) ======================================================== */
 .course-row__font-content {
     font-size: var(--text-sm);
 }
+
 .course-row__level {
     display: flex;
     align-items: center;
     color: var(--blue-level);
     font-size: var(--text-sm);
 }
+
 .level-dot {
     border-radius: 50%;
     width: 0.4rem;
     height: 0.4rem;
     background: var(--blue-level);
-    margin-right: 0.5rem ;
+    margin-right: 0.5rem;
 }
+
 .course-row__status {
     width: 87px;
     padding: 0.5rem;
@@ -24,6 +27,7 @@
     margin-left: -1rem;
     font-size: var(--text-sm);
 }
+
 .course-row__status-payment {
     padding: 0.5rem;
     border-radius: 1.5rem;
@@ -32,38 +36,47 @@
     margin-left: -1rem;
     font-size: var(--text-sm);
 }
-.course-row__created{
+
+.course-row__created {
     font-size: var(--text-sm);
 }
-.course-row__status-public{
+
+.course-row__status-public {
     background: var(--light-green);
     color: var(--green);
 }
-.course-row-status-unactive{
+
+.course-row-status-unactive {
     background: #FFB3B3;
     color: red;
 }
-.course-row__status-private{
+
+.course-row__status-private {
     background: var(--privacy-light-grey);
     color: var(--privacy-dark-charcoal);
 }
+
 .course-row__duration {
     color: red;
     font-weight: var(--fw-semibold);
     font-size: var(--text-sm);
 }
-.course-row__total__enrollment{
+
+.course-row__total__enrollment {
     font-weight: var(--fw-semibold);
     font-size: var(--text-sm);
 }
+
 .course-row__status-pending {
     background: var(--pending-bg);
     color: var(--pending-text);
 }
+
 .course-row__status-failed {
     background: var(--failed-bg);
     color: var(--failed-text);
 }
+
 .role-admin {
     /*Màu riêng cho admin*/
     background-color: #e0e7ff;
@@ -74,6 +87,7 @@
     padding: 0.5rem;
     margin-left: -1rem;
 }
+
 .role-user {
     background-color: #f3f4f6;
     color: #4b5563;
@@ -90,34 +104,27 @@
 }
 
 .container-2__header {
-    /*background: var(--white-color);*/
     height: 8rem;
     width: 100%;
     display: flex;
-    /*justify-content: center;*/
     align-items: center;
     justify-content: space-between;
 }
 
-.container-2__body{
+.container-2__body {
     margin: 2rem 0;
     width: 100%;
 }
 
+/* ======================================================== HEADER CỦA TRANG DANH SACHS ======================================================== */
 .admin-create__buttons button {
     background: var(--dark-blue);
     color: var(--white-color);
-    padding: 1rem 2rem;
     font-size: var(--text-lg);
-    border: solid 1px var(--dark-blue);
-    border-radius: 3px;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
     cursor: pointer;
-}
-
-.admin-create__buttons {
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
 }
 
 .admin-create__buttons i {
@@ -129,23 +136,89 @@
     color: var(--dark-blue);
     font-size: var(--text-4xl);
     font-weight: var(--fw-semibold);
-    line-height: 5rem;
+    line-height: 1.2; /* gọn lại cho đẹp */
+}
+
+/* Bọc dòng dưới */
+.header__meta {
+    margin-top: 4px;
+    font-size: var(--text-4xl);
+}
+
+/* Subtitle */
+.header__subtitle {
+    color: #6b7280;
+}
+
+/* Count */
+.header__count {
+    color: #6b7280;
+}
+
+/* Dấu chấm */
+.header__subtitle::after {
+    content: " • ";
+    margin: 0 4px;
+    color: #d1d5db;
 }
 
 .title__admin {
-    /*margin-top: 2rem;*/
     margin-bottom: 1rem;
     font-size: var(--text-3xl);
     font-weight: var(--fw-semibold);
 }
 
-/*.container-2__list-student {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    !*margin-top: 2rem;*!*/
-/*    width: 100%;*/
-/*}*/
+/* ======================================================== HEADER CỦA TRANG TẠO ======================================================== */
+.container-2__header-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.header__title-modern {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark-blue);
+}
+
+/* Nút bấm */
+.btn-back {
+    text-decoration: none;
+    background: #fff;
+    color: var(--dark-blue);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--dark-blue);
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: var(--dark-blue);
+    color: #fff;
+}
+
+.btn-submit-modern {
+    background: var(--dark-blue);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--text-base);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(14, 98, 133, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-submit-modern:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+
+/* ======================================================== DANH SÁCH PHÂN TRANG CỦA COURSE (JSON) ======================================================== */
 /* Đảm bảo danh sách xếp từ trên xuống */
 .container-2__list-student {
     display: flex;
@@ -169,27 +242,7 @@
     padding: 20px 0;
 }
 
-/*Filter*/
-.container-2__filter {
-    /*margin-top: 2rem;*/
-    background: var(--white-color);
-    /*height: 6rem;*/
-    display: flex;
-    padding: 2rem;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
-.filter__selection {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/*Phần tạo trong các trang Lesson, Tag bao gồm cả input*/
+/* ======================================================== Phần tạo trong THẲNG trang Lesson, Tag bao gồm cả input ========================================================*/
 .container-2__create {
     /*margin-top: 2rem;*/
     margin-bottom: 2rem;
@@ -198,7 +251,7 @@
     display: flex;
     padding: 2rem;
     width: 100%;
-    }
+}
 
 .create__selection {
     display: flex;
@@ -239,16 +292,8 @@
     padding: 8px 15px;
     font-weight: var(--fw-regular);
 }
-/*Xử lý phần nhận dữ liệu để lọc*/
-/*Chỉnh chung*/
-/*input {*/
-/*    !*width: 100%;*!*/
-/*    border: 1px solid var(--light-grey);*/
-/*    border-radius: 3px;*/
-/*    color: var(--dark-blue);*/
-/*    font-weight: var(--fw-regular);*/
-/*    padding: 0.8rem 1rem;*/
-/*}*/
+
+/* ======================================================= XỬ LÝ STYLE INPUT ======================================================== */
 /*Cài đặt chung cho các thẻ nhận CSS này sẽ có HEIGHT cố định kèm font*/
 .admin-input__long {
     width: 100%;
@@ -256,17 +301,19 @@
     height: 3.5rem;
     padding: 0 1rem;
 }
+
 .admin-input__short {
-    /*width: 100%;*/
     font-size: var(--text-base);
     height: 3.5rem;
     padding: 0 1rem;
 }
+
 /*Xử lý input dạng select*/
 /*Chỉnh cỡ chữ chung cho toàn option của select*/
-select option{
+select option {
     font-size: var(--text-base);
 }
+
 select {
     border: 1px solid var(--light-grey);
     border-radius: 3px;
@@ -275,6 +322,7 @@ select {
     padding: 0.5rem 1rem;
     font-size: var(--text-base);
 }
+
 /*CSS chung cho toàn bộ thẻ div bọc lấy input */
 .filter__selection-items {
     font-size: var(--text-2xl);
@@ -283,12 +331,14 @@ select {
     width: 50%;
     height: 100%;
 }
+
 /*Tên đi kèm với input đó*/
-.filter__selection-title{
+.filter__selection-title {
     font-weight: var(--fw-semibold);
     font-size: var(--text-base);
     margin-bottom: 0.5rem;
 }
+
 /*Do phần input của select quá ngắn nên phải css riêng*/
 .filter__selection-items-select {
     font-size: var(--text-2xl);
@@ -330,7 +380,7 @@ select {
     color: var(--white-color);
 }
 
-/*Danh sách các students*/
+/* ======================================================== ĐỊNH DẠNG TABLE CŨ ========================================================*/
 table {
     /* Gộp các đường viền lại */
     border-collapse: collapse;
@@ -340,7 +390,6 @@ table {
 
 /*Xử lý thằng đầu cho in đậm và có đường kẻ trên*/
 thead th {
-    border-top: 1px solid var(--light-grey);
     background: #f8f9fa;
     font-weight: var(--fw-bold);
     color: #333;
@@ -355,6 +404,7 @@ table, th, td {
     border-bottom: 1px solid var(--light-grey);
     text-align: left;
 }
+
 td .action__button {
     display: flex;
 }
@@ -399,14 +449,16 @@ td a span:hover {
 }
 
 /*Thêm đường kẻ cho các con ở bên trái*/
-td:first-child,th:first-child{
+td:first-child, th:first-child {
     border-left: 1px solid var(--light-grey);
 }
 
 /*Thêm đường kẻ cho các con ở bên phải*/
-td:last-child ,th:last-child{
+td:last-child, th:last-child {
     border-right: 1px solid var(--light-grey);
 }
+
+/* ======================================================== LOG OUT ========================================================*/
 .log-out__container {
     display: flex;
     align-items: center;
@@ -414,18 +466,22 @@ td:last-child ,th:last-child{
     font-weight: var(--fw-semibold);
     padding: 1rem;
 }
-.log-out__container:hover{
+
+.log-out__container:hover {
     background: var(--bright-blue);
     padding: 1rem;
     border-radius: 2rem;
 }
+
 .log-out {
     float: right;
     margin-top: 5rem;
 }
+
 .log-out__content {
     margin-right: 0.5rem;
 }
+
 .admin-create__buttons1 button {
     background: var(--dark-blue);
     color: var(--white-color);
@@ -433,7 +489,7 @@ td:last-child ,th:last-child{
     height: 3.5rem;
     display: flex;
     align-items: center;
-    margin:auto ;
+    margin: auto;
     font-size: var(--text-lg);
     border: solid 1px var(--dark-blue);
     border-radius: 3px;
@@ -442,86 +498,54 @@ td:last-child ,th:last-child{
 
 .admin-create__buttons1 {
     display: flex;
-    /*align-items: center;*/
-    /*justify-content: center;*/
 }
-/*.action__button {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    gap: 10px;*/
-/*}*/
 
 
 :root {
     --border-color: #e0e0e0;
 }
 
-/* Container chính */
-/* Header hiện đại */
-.container-2__header-modern {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    margin-bottom: 20px;
-}
-
-.header__title-modern {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--dark-blue);
-}
-
-/* Nút bấm */
-.btn-back {
-    text-decoration: none;
-    background: #fff;
-    color: var(--dark-blue);
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: 1px solid var(--dark-blue);
-    transition: all 0.3s;
-}
-
-.btn-back:hover {
-    background: var(--dark-blue);
-    color: #fff;
-}
-
-.btn-submit-modern {
-    background: var(--dark-blue);
-    color: white;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(14, 98, 133, 0.3);
-    transition: transform 0.2s;
-}
-
-.btn-submit-modern:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
-/* Layout Form */
+/* ======================================================== Layout Form ======================================================== */
 .form-row {
     display: flex;
     gap: 25px;
 }
 
-.form-column-8 { flex: 2; }
-.form-column-4 { flex: 1; }
-.flex-1 { flex: 1; }
-.flex-2 { flex: 2; }
+.form-column-8 {
+    flex: 2;
+}
 
-.mt-1 { margin-top: 0.5rem !important; }
-.mt-2 { margin-top: 1rem !important; }
-.mt-3 { margin-top: 1.5rem !important; }
-.mt-4 { margin-top: 2rem !important; }
-.mt-5 { margin-top: 4rem; }
+.form-column-4 {
+    flex: 1;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.mt-1 {
+    margin-top: 0.5rem !important;
+}
+
+.mt-2 {
+    margin-top: 1rem !important;
+}
+
+.mt-3 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+.mt-5 {
+    margin-top: 4rem;
+}
 
 .form-group {
     display: flex;
@@ -536,7 +560,7 @@ td:last-child ,th:last-child{
     margin-bottom: 8px;
 }
 
-/* Avatar Upload Box */
+/* ======================================================== Avatar Upload Box ======================================================== */
 .upload-wrapper {
     height: 120px;
     border: 2px dashed #ccc;
@@ -556,13 +580,37 @@ td:last-child ,th:last-child{
     background: #f9f9f9;
 }
 
-.upload-wrapper i { font-size: 30px; margin-bottom: 10px; }
+.upload-wrapper i {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
 .file-hidden {
     position: absolute;
     opacity: 0;
     width: 100%;
     height: 100%;
     cursor: pointer;
+}
+
+/* ======================================================== BỘ LỌC CŨ ======================================================== */
+.container-2__filter {
+    /*margin-top: 2rem;*/
+    background: var(--white-color);
+    /*height: 6rem;*/
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.filter__selection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .form-actions {
@@ -654,21 +702,26 @@ td:last-child ,th:last-child{
     }
 
 }
-.search-empty-state{
+
+/* ======================================================== EMPTY SEARCH ======================================================== */
+.search-empty-state {
     text-align: center;
     padding: 40px 0;
 }
-.search-empty-icon{
+
+.search-empty-icon {
     font-size: 3rem;
     color: #ccc;
 }
-.search-empty-title{
+
+.search-empty-title {
     font-size: 1.8rem;
     font-weight: bold;
     margin-top: 15px;
 }
 
-#confirm-delete-modal{
+/* ======================================================== MODAL ======================================================== */
+#confirm-delete-modal {
     display: none;
     position: fixed;
     z-index: 1001;
@@ -676,34 +729,44 @@ td:last-child ,th:last-child{
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
 }
-.modal-content{
+
+.modal-content {
     background: white;
     padding: 25px;
     border-radius: 8px;
     width: 350px;
     text-align: center;
 }
-.modal-content h3{
+
+.modal-content h3 {
     color: #dc3545;
-    font-size:1.8rem;
+    font-size: 1.8rem;
 }
-.modal-content p{
+
+.modal-content p {
     font-size: 1.6rem;
 }
-.modal-content div{
-    display: flex; justify-content: center; gap: 10px; margin-top: 20px;
+
+.modal-content div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
 }
-.modal-content div .btn-cancel{
+
+.modal-content div .btn-cancel {
     padding: 8px 20px;
 }
-#btn-confirm-delete{
-    background-color: #dc3545; padding: 8px 20px;
+
+#btn-confirm-delete {
+    background-color: #dc3545;
+    padding: 8px 20px;
 }
-/* --- Cấu trúc nền Modal --- */
+
 .modal__course-detail {
     display: none;
     position: fixed;
@@ -717,9 +780,11 @@ td:last-child ,th:last-child{
     justify-content: center;
     backdrop-filter: blur(4px);
 }
-.modal-footer .btn-cancel{
+
+.modal-footer .btn-cancel {
     margin-right: 1rem;
 }
+
 /* --- Nội dung Modal --- */
 .modal__course-content {
     background: var(--white-color);
@@ -741,18 +806,3 @@ td:last-child ,th:last-child{
         opacity: 1;
     }
 }
-/*!* --- Header --- *!*/
-/*.course__header {*/
-/*    background: var(--dark-blue);*/
-/*    color: var(--white-color);*/
-/*    padding: 1.5rem 2.5rem;*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.course__title {*/
-/*    font-size: var(--text-3xl); !* Tăng lên 2.4rem cho nổi bật *!*/
-/*    font-weight: var(--fw-semibold);*/
-/*    line-height: 1.5;*/
-/*}*/

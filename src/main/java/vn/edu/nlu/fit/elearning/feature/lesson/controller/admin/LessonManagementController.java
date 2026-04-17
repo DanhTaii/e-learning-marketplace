@@ -36,6 +36,10 @@ public class LessonManagementController extends BaseController {
         //Lấy điều kiện tìm kiếm
         filter.setTitle(RequestUtils.getParameterAsString(request, "searchName", ""));
         filter.setCourseId(RequestUtils.getParameterAsInt(request, "courseId", 0));
+        filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
+        filter.setStatus(RequestUtils.getParameterAsStatus(request, "status"));
+        filter.setMissingVideo(RequestUtils.getParameterAsBoolean(request, "missingVideo"));
 
         //Lấy thông tin phân trang
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
@@ -52,13 +56,20 @@ public class LessonManagementController extends BaseController {
         request.setAttribute("listCourse", listCourses);
 
         request.setAttribute("listLessons", listLessons);
+        request.setAttribute("totalLessons", lessonService.getTotalLessons());
         request.setAttribute("filter", filter);
         request.setAttribute("currentPageNumber", filter.getPage());
         request.setAttribute("currentPage", "lessons");
         request.setAttribute("totalPages", totalPages);
 
-        this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
-
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            // Chỉ render phần nội dung bảng
+            this.forward(request, response, "/views/pages/admin/lesson/lesson-table-body.jsp");
+        } else {
+            // Render toàn bộ trang như cũ
+            this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");
+        }
     }
 
     @Override

@@ -29,4 +29,6 @@ public interface LessonDao {
 
     int countLessonsByFilter(LessonFilter  filter);
 
+    int countAllLessons();
+
 }

@@ -70,7 +70,7 @@
     gap: 1.5rem;
 }
 
-/* Nút bấm dùng chung biến màu của bạn */
+/* Nút bấm dùng chung biến màu */
 .button {
     padding: 1rem 2rem;
     border-radius: 0.6rem;
@@ -143,4 +143,252 @@ table td {
     height: 55px;
 }
 
+/* ==================================================== BỘ LỌC NÂNG CAO ==================================================== */
+.advanced-filter {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: sans-serif;
+}
+/* Header của bộ lọc */
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+}
+
+/* Căn giữa icon Filter và Text */
+.filter-title {
+    display: flex;
+    align-items: center; /* Căn giữa theo trục dọc */
+    gap: 12px; /* Khoảng cách giữa icon phễu và chữ */
+    margin: 0 !important;
+    font-size: var(--text-2xl);
+    font-weight: bold;
+    line-height: 1; /* Đảm bảo không có khoảng trống dòng thừa */
+}
+
+/* Icon phễu lọc bên trái */
+.filter-title i {
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+
+/* Icon Sliders bên phải */
+.filter-toggle-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: transparent; /* Bỏ màu nền mặc định */
+    color: #4b5563;
+    transition: all 0.3s ease;
+    box-shadow: none !important; /* Bỏ độ bóng mặc định */
+}
+
+/* Hiệu ứng khi Hover vào icon Sliders */
+.filter-toggle-icon:hover {
+    background: #f0f2f5;
+    color: var(--dark-blue);
+    border-radius: 50%;
+}
+
+/* Kích thước icon Sliders bên trong */
+.filter-toggle-icon i {
+    font-size: 20px;
+}
+
+/* Khi form đang mở, có thể cho icon Sliders một chút điểm nhấn */
+.advanced-filter:not(.collapsed) .filter-toggle-icon {
+    color: var(--dark-blue);
+}
+
+/* Phần nội dung lọc */
+.filter-content {
+    overflow: hidden;
+    max-height: 1000px; /* Giá trị lớn để hiệu ứng slide mượt */
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    padding-top: 20px;
+}
+
+/* Class để ẩn bộ lọc */
+.advanced-filter.collapsed .filter-content {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    pointer-events: none; /* Không cho tương tác khi đang ẩn */
+}
+
+/* Xoay ngược icon khi đóng */
+.advanced-filter.collapsed .filter-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.filter-grid {
+    display: grid;
+    /* Cột 1: 1.5 phần, Cột 2: 1.2 phần, Cột 3: 1 phần */
+    grid-template-columns: 1.5fr 1.2fr 1fr;
+    gap: 20px;
+    align-items: flex-end; /* Đảm bảo các ô thẳng hàng dưới đáy */
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: var(--text-lg);
+    color: #333;
+}
+
+/* Styling cho Input và Select */
+.filter-group input,
+.filter-group select,
+.input-with-icon {
+    background-color: #f0f2f5; /* Màu nền xám nhạt như ảnh */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    outline: none;
+    font-size: var(--text-base);
+}
+
+/* Input có icon kính lúp */
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.input-with-icon i {
+    color: #888;
+    margin-right: 10px;
+}
+
+.input-with-icon input {
+    background: transparent;
+    padding: 12px 0;
+    width: 100%;
+}
+
+/* Custom Checkbox */
+.checkbox-group {
+    justify-content: center;
+    background: #f0f2f5;
+    border-radius: 8px;
+    padding: 12px 15px;
+}
+
+.checkbox-group label {
+    font-size: var(--text-base);
+    color: #333;
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.filter-actions {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.btn-submit {
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-clear {
+    text-decoration: none;
+    color: #666;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: var(--text-base);
+    transition: all 0.3s;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: var(--white-color);
+}
+
+.btn-clear:hover {
+    color: var(--dark-blue);
+    background: var(--hover-color);
+}
+
+/* ======================================== MODERN TABLE ======================================== */
+.container-2__list-student {
+    background: var();
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* TABLE */
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed; /* giữ layout ổn định */
+    border: none;
+}
+
+/* HEADER */
+.modern-table thead th {
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-size: 12px; /* chọn size nhỏ cho consistency */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 15px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+/* Định nghĩa width cột */
+.modern-table th:nth-child(1) { width: 50px; }
+.modern-table th:nth-child(2) { width: 35%; }
+.modern-table th:nth-child(3) { width: 15%; }
+.modern-table th:nth-child(4) { width: 15%; }
+.modern-table th:nth-child(5) { width: 10%; }
+.modern-table th:nth-child(6) { width: 15%; }
+.modern-table th:nth-child(7) { width: 100px; }
+
+/* BODY */
+.modern-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Xóa border 2 bên */
+.modern-table td:first-child,
+.modern-table th:first-child,
+.modern-table td:last-child,
+.modern-table th:last-child {
+    border-left: none;
+    border-right: none;
+}
+
+/* Hover */
+.modern-table tbody tr:hover {
+    background-color: #fcfcfd;
+}
 

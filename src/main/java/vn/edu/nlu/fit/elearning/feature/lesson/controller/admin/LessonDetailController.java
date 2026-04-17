@@ -9,6 +9,7 @@ import jakarta.servlet.http.Part;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.external.cloudinary.CloudinaryService;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.validator.lesson.LessonValidator;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
@@ -72,6 +73,10 @@ public class LessonDetailController extends BaseController {
         lesson.setOrderIndex(RequestUtils.getParameterAsInt(request, "orderIndex", 0));
         lesson.setCourseId(RequestUtils.getParameterAsInt(request, "idCourse", 0));
         lesson.setDurationMinutes(RequestUtils.getParameterAsInt(request, "duration_minutesLesson", 0));
+        BaseStatus status = RequestUtils.getParameterAsStatus(request, "status");
+        lesson.setStatus(status);
+//        System.out.println("Received status: " + request.getParameter("status"));
+//        System.out.println("Status Lesson: " + lesson.getStatus());
 
         try {
             Part videoPart = request.getPart("videoFile");
@@ -103,6 +108,9 @@ public class LessonDetailController extends BaseController {
                 lesson.setId(id);
                 lesson.setOrderIndex(orderIndex);
 
+//                System.out.println("Lesson Title: " + lesson.getTitle());
+//                System.out.println("Course ID: " + lesson.getCourseId());
+//                System.out.println("Status: " + lesson.getStatus());
                 boolean success = lessonService.updateLessonWithOrdering(lesson, oldOrderIndex, oldCourseId);
                 if (success) {
                     request.getSession().setAttribute("flashSuccess", "Cập nhật bài học thành công!");
@@ -117,6 +125,9 @@ public class LessonDetailController extends BaseController {
                 }
 
                 //Result này đang trả về id của bài học vừa được tạo ra
+//                System.out.println("Lesson Title: " + lesson.getTitle());
+//                System.out.println("Course ID: " + lesson.getCourseId());
+//                System.out.println("Status: " + lesson.getStatus());
                 int result = lessonService.createLesson(lesson);
                 if (result > 0) {
                     request.getSession().setAttribute("flashSuccess", "Tạo bài học thành công!");

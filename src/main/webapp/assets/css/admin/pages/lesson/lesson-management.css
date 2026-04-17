@@ -1,0 +1,48 @@
+.lesson-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lesson-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 2px;
+    /* Giới hạn dòng nếu tiêu đề quá dài */
+    white-space: normal;       /* Cho phép xuống dòng */
+    word-break: break-word;    /* Ngắt từ nếu từ quá dài */
+    display: block;            /* Trả về hiển thị khối mặc định */
+    overflow: visible;         /* Hiện nội dung tràn */
+    text-overflow: clip;       /* Bỏ dấu ba chấm */
+}
+
+.lesson-sub {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Icon Video trạng thái */
+.icon-success { color: #2ecc71; font-size: 18px; }
+.icon-danger { color: #e74c3c; font-size: 18px; }
+
+.lesson-icon {
+    /* Khóa cứng kích thước không cho co lại */
+    flex-shrink: 0;
+
+    width: 35px;
+    height: 35px;
+    background: #e8f0fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}

@@ -1,11 +1,18 @@
+let currentDeleteId = null;
+let currentDeleteUrl = "";
+
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'flex';
+    if (modal) {
+        modal.classList.add('show'); // Thêm class show
+    }
 }
 
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.classList.remove('show'); // Xóa class show
+    }
 }
 
 window.addEventListener('click', function (event) {
@@ -15,11 +22,16 @@ window.addEventListener('click', function (event) {
     }
 });
 
-let currentDeleteId = null;
-
-function openConfirmModal(id, modalId = 'confirm-delete-modal') {
+function openConfirmModal(id, actionUrl, message = "Bạn có chắc chắn muốn xóa mục này không?", modalId = 'confirm-delete-modal') {
     currentDeleteId = id;
-    document.getElementById('input-delete-id').value = id;
+    currentDeleteUrl = actionUrl;
+    // Nạp ID vào input ẩn
+    const inputId = document.getElementById('input-delete-id');
+    if(inputId) inputId.value = id;
+
+    const msgElem = document.getElementById('confirm-modal-message');
+    if(msgElem) msgElem.innerText = message;
+
     openModal(modalId);
 }
 
@@ -27,9 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirmDeleteBtn = document.getElementById('btn-confirm-delete');
     if (confirmDeleteBtn) {
         confirmDeleteBtn.addEventListener('click', function () {
-            if (currentDeleteId) {
+            if (currentDeleteId && currentDeleteUrl) {
                 const form = document.getElementById('delete-form-id');
-                if (form) form.submit();
+                form.action = currentDeleteUrl;
+                form.submit();
             }
         });
     }

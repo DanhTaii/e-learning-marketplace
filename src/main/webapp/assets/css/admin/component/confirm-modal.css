@@ -1,0 +1,85 @@
+.button {
+    padding: 1rem 2rem;
+    border-radius: 0.6rem;
+    font-size: var(--text-base);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    border: none;
+}
+
+.modal-content div .btn-cancel {
+    padding: 8px 20px;
+}
+
+.btn-cancel {
+    background: var(--privacy-light-grey);
+    color: var(--privacy-dark-charcoal);
+}
+
+.btn-cancel:hover {
+    background: var(--hover-color);
+}
+
+/* assets/css/ui/modal.css */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    /* Thêm hiệu ứng mượt mà */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Class này dùng để kích hoạt hiển thị qua JS */
+.modal.show {
+    display: flex !important;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    /* Hiệu ứng rơi từ trên xuống */
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-title {
+    color: #dc3545;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.modal-message {
+    font-size: 1.6rem;
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-modal-delete {
+    background-color: #dc3545 !important;
+    color: white !important;
+    padding: 8px 20px;
+}
