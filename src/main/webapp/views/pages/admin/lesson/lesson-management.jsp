@@ -15,17 +15,18 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-
-    <%-- Management Css --%>
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">
 
-    <link rel="stylesheet" href="assets/css/admin/notification.css?v=<%=System.currentTimeMillis()%>">
+<%--  Admin Component Css  --%>
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
 
+    <%-- Javascript --%>
     <script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
@@ -123,7 +124,7 @@
                                         <tr>
                                             <th><input type="checkbox" id="selectAll"></th>
                                             <th>TÊN BÀI HỌC</th>
-<%--                                            <th>KHÓA HỌC</th>--%>
+                                            <%--                                            <th>KHÓA HỌC</th>--%>
                                             <th>THỜI LƯỢNG</th>
                                             <th>NGÀY TẠO</th>
                                             <th>VIDEO</th>
@@ -138,7 +139,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="lesson-info">
-<%--                                                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>--%>
+                                                            <%--                                                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>--%>
                                                         <div class="lesson-text">
                                                             <div class="lesson-name">${lesson.title}</div>
                                                             <div class="lesson-sub">Chương ${lesson.orderIndex} •
@@ -146,7 +147,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-<%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
+                                                    <%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
                                                 <td class="text-bold">${lesson.durationMinutes}:00</td>
                                                 <td class="text-light">
                                                     <fmt:formatDate value="${lesson.createdAt}" pattern="dd/MM/yyyy"/>
@@ -162,15 +163,17 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>
-<%--                                                    <span class="badge ${lesson.isPublic ? 'badge-blue' : 'badge-gray'}">--%>
-<%--&lt;%&ndash;                                                            ${lesson.isPublic ? 'Công khai' : 'Bản nháp'}&ndash;%&gt;--%>
-<%--                                                    </span>--%>
+                                                        <%--                                                    <span class="badge ${lesson.isPublic ? 'badge-blue' : 'badge-gray'}">--%>
+                                                        <%--&lt;%&ndash;                                                            ${lesson.isPublic ? 'Công khai' : 'Bản nháp'}&ndash;%&gt;--%>
+                                                        <%--                                                    </span>--%>
                                                 </td>
                                                 <td class="action-btns">
                                                     <a href="" class="js-edit-link">
-                                                        <button type="button" class="icon-action-btn"><i class="fa-solid fa-pen"></i></button>
+                                                        <button type="button" class="icon-action-btn"><i
+                                                                class="fa-solid fa-pen"></i></button>
                                                     </a>
-                                                    <button onclick="openConfirmModal(${lesson.id})" class="icon-action-btn">
+                                                    <button onclick="openConfirmModal(${lesson.id})"
+                                                            class="icon-action-btn">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </td>
@@ -179,28 +182,10 @@
                                         </tbody>
                                     </table>
 
-                                    <div class="floating-action-bar" id="actionBar">
-                                        <div class="action-info">
-                                            <span class="count-badge" id="selectedCount">0</span>
-                                            <span>Đã chọn bài học</span>
-                                        </div>
-
-                                        <div class="action-buttons">
-                                            <button class="btn-bar" type="button">
-                                                <i class="fa-regular fa-copy"></i> Nhân bản
-                                            </button>
-                                            <button class="btn-bar" type="button">
-                                                <i class="fa-solid fa-arrows-rotate"></i> Đổi trạng thái
-                                            </button>
-                                            <button class="btn-bar btn-bar-danger" type="button">
-                                                <i class="fa-solid fa-trash"></i> Xóa
-                                            </button>
-                                        </div>
-
-                                        <button class="btn-close-bar" type="button" onclick="deselectAll()">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </div>
+                                    <jsp:include page="/views/components/bulk-action-bar.jsp">
+                                        <jsp:param name="label" value="bài học" />
+                                        <jsp:param name="showDuplicate" value="true" />
+                                    </jsp:include>
                                 </div>
 
                                 <jsp:include page="/views/components/pagination-base.jsp">
