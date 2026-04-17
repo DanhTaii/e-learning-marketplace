@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.common.utils.validation.ValidationUtils;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
@@ -19,23 +20,27 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserShortResponse login(LoginRequestDto loginRequestDto) {
+
         String email = loginRequestDto.getEmail().trim();
         String password = loginRequestDto.getPassword().trim();
-        if (email.isEmpty() || password.isEmpty()) {
-            throw new IllegalArgumentException("Vui lòng điền thông tin !");
-        }
 
-//        System.out.println(email);
         if (!userService.existsUserByEmail(email)) {
-            throw new IllegalArgumentException("Tài khoản không tồn tại");
+            throw new IllegalArgumentException("Tài khoản không tồn tại!");
         }
 
         User user = userService.getEntityByEmail(email);
-        String hash = PasswordUtils.hashpassword(password);
-        if (email.equals(user.getEmail()) && hash.equals(user.getPassword())) {
-            return UserMapper.toUserShortDto(user);
+
+        if (user.getStatus() == BaseStatus.INACTIVE) {
+            throw new IllegalArgumentException("Tài khoản của bạn đang bị khóa, vui lòng liên hệ quản trị viên!");
         }
-        return null;
+
+        String hash = PasswordUtils.hashpassword(password);
+
+        if (!hash.equals(user.getPassword())) {
+            return null;
+        }
+
+        return UserMapper.toUserShortDto(user);
     }
 
     @Override
@@ -70,7 +75,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean register(String email, String username, String password) {
 
-        if (userService.getUserByEmail(username) != null) {
+        if (userService.existsUserByUsername(username)) {
             throw new IllegalArgumentException("Tên người dùng đã tồn tại");
         }
 
