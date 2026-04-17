@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </head>
 <body>
 <div class="web">
@@ -57,13 +56,14 @@
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
                             <div class="add-to-fix-1">
-                                <span class="add-to-fix-2"> <%= error %> </span>
+<%--                                <span class="add-to-fix-2"> <%= error %> </span>--%>
+                                    <span class="add-to-fix-2"> ${error} </span>
                             </div>
                             <div class="form__input input-1">
                                 <input class="input-text text-big" placeholder="Nhập email của bạn"
                                        id='login_email' name="email"
                                        value="${param.email}">
-                                <span id="error_email" class="error-client"></span>
+                                <span id="error_email" class="error-client">${errors.email}</span>
                             </div>
 
                             <div class="form__input input-2">
@@ -75,7 +75,7 @@
                                     <i class="fa-regular fa-eye" id="togglePassword"></i>
                                 </div>
 
-                                <span id="error_pass" class="error-client"></span>
+                                <span id="error_pass" class="error-client">${errors.password}</span>
                             </div>
                             <div class="form__sign-in-option">
                                 <div class="sign-in-option-1">
@@ -121,4 +121,6 @@
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
 <script src="assets/javascript/validation/auth/sign-in.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

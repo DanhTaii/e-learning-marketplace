@@ -13,8 +13,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public int create(User user) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO users (id, email, username, password, avatar_url) " +
-                    "VALUES (:id, :email, :username, :password, :avatarUrl)").bindBean(user).execute();
+            return handle.createUpdate("INSERT INTO users (id, email, username, password, avatar_url, status) " +
+                    "VALUES (:id, :email, :username, :password, :avatarUrl, :status)")
+                    .bindBean(user)
+                    .bind("status", "ACTIVE")
+                    .execute();
         });
     }
 

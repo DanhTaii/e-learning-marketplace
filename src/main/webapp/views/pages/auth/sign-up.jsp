@@ -17,8 +17,6 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -41,12 +39,12 @@
                             <div class="form__input input-1">
                                 <input  class="input-text text-big" placeholder="Nhập email của bạn"
                                        name="email" value="${param.email}" id="login_email">
-                                <span id="error_email" class="error-client"></span>
+                                <span id="error_email" class="error-client">${errors.email}</span>
                             </div>
                             <div class="form__input input-2">
                                 <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng"
                                        name="username" value="${param.username}" id="name">
-                                <span id="error_username" class="error-client"></span>
+                                <span id="error_username" class="error-client">${errors.username}</span>
                             </div>
                             <div class="form__input input-3">
                                 <div class="password-group">
@@ -54,7 +52,7 @@
                                            name="password" value="${param.password}" id="newPass">
                                     <i class="fa-regular fa-eye toggle-password" data-target="#newPass"></i>
                                 </div>
-                                <span id="error_newPass" class="error-client"></span>
+                                <span id="error_newPass" class="error-client">${errors.password}</span>
                             </div>
                             <div class="form__info text-medium">Mật khẩu phải từ 8 đến 25 ký tự gồm số và chữ cái,
                                 trong đó có ít nhất 1 chữ cái viết hoa, 1 chữ viết thuòng và ký tự đặc biệt!
@@ -66,7 +64,7 @@
                                            value="${param.confirmPassword}" id="reNewPass">
                                     <i class="fa-regular fa-eye toggle-password" data-target="#reNewPass"></i>
                                 </div>
-                                <span id="error_reNewPass" class="error-client"></span>
+                                <span id="error_reNewPass" class="error-client">${errors.confirmPassword}</span>
                             </div>
                             <div class="form__button">
                                 <button class="button button__btn" type="submit">
@@ -83,4 +81,6 @@
 </div>
 </body>
 <script src="assets/javascript/validation/auth/sign-up.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
