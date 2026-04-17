@@ -150,17 +150,92 @@ table td {
     border-radius: 12px;
     font-family: sans-serif;
 }
+/* Header của bộ lọc */
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 15px;
+    border-bottom: 1px solid transparent;
+}
 
+/* Căn giữa icon Filter và Text */
 .filter-title {
+    display: flex;
+    align-items: center; /* Căn giữa theo trục dọc */
+    gap: 12px; /* Khoảng cách giữa icon phễu và chữ */
+    margin: 0 !important;
     font-size: var(--text-2xl);
-    margin-bottom: 3rem;
     font-weight: bold;
+    line-height: 1; /* Đảm bảo không có khoảng trống dòng thừa */
+}
+
+/* Icon phễu lọc bên trái */
+.filter-title i {
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+
+/* Icon Sliders bên phải */
+.filter-toggle-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: transparent; /* Bỏ màu nền mặc định */
+    color: #4b5563;
+    transition: all 0.3s ease;
+    box-shadow: none !important; /* Bỏ độ bóng mặc định */
+}
+
+/* Hiệu ứng khi Hover vào icon Sliders */
+.filter-toggle-icon:hover {
+    background: #f0f2f5;
+    color: var(--dark-blue);
+    border-radius: 50%;
+}
+
+/* Kích thước icon Sliders bên trong */
+.filter-toggle-icon i {
+    font-size: 20px;
+}
+
+/* Khi form đang mở, có thể cho icon Sliders một chút điểm nhấn */
+.advanced-filter:not(.collapsed) .filter-toggle-icon {
+    color: var(--dark-blue);
+}
+
+/* Phần nội dung lọc */
+.filter-content {
+    overflow: hidden;
+    max-height: 1000px; /* Giá trị lớn để hiệu ứng slide mượt */
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    padding-top: 20px;
+}
+
+/* Class để ẩn bộ lọc */
+.advanced-filter.collapsed .filter-content {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    pointer-events: none; /* Không cho tương tác khi đang ẩn */
+}
+
+/* Xoay ngược icon khi đóng */
+.advanced-filter.collapsed .filter-toggle-icon {
+    transform: rotate(180deg);
 }
 
 .filter-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Chia 3 cột */
+    /* Cột 1: 1.5 phần, Cột 2: 1.2 phần, Cột 3: 1 phần */
+    grid-template-columns: 1.5fr 1.2fr 1fr;
     gap: 20px;
+    align-items: flex-end; /* Đảm bảo các ô thẳng hàng dưới đáy */
 }
 
 .filter-group {

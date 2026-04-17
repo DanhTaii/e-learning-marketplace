@@ -10,10 +10,11 @@
     font-size: 14px;
     margin-bottom: 2px;
     /* Giới hạn dòng nếu tiêu đề quá dài */
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    white-space: normal;       /* Cho phép xuống dòng */
+    word-break: break-word;    /* Ngắt từ nếu từ quá dài */
+    display: block;            /* Trả về hiển thị khối mặc định */
+    overflow: visible;         /* Hiện nội dung tràn */
+    text-overflow: clip;       /* Bỏ dấu ba chấm */
 }
 
 .lesson-sub {

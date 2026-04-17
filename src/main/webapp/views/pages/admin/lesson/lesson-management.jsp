@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">
 
-<%--  Admin Component Css  --%>
+    <%--  Admin Component Css  --%>
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
 
@@ -28,6 +28,7 @@
 
     <%-- Javascript --%>
     <script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </head>
 <body>
@@ -63,59 +64,67 @@
                                 </div>
                             </div>
                             <div class="container-2__body">
-
-                                <form method="get" action="admin/lessons" class="advanced-filter">
-                                    <h2 class="filter-title">Bộ lọc nâng cao</h2>
-
-                                    <div class="filter-grid">
-                                        <div class="filter-group">
-                                            <label>Tìm kiếm bài học</label>
-                                            <div class="input-with-icon">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                                <input type="text" name="searchName" value="${param.searchName}"
-                                                       placeholder="Nhập tên bài học...">
-                                            </div>
-                                        </div>
-
-                                        <div class="filter-group">
-                                            <label>Thuộc khóa học</label>
-                                            <select name="courseId">
-                                                <option value="">Tất cả khóa học</option>
-                                                <c:forEach var="c" items="${listCourse}">
-                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-
-                                        <div class="filter-group">
-                                            <label>Trạng thái</label>
-                                            <select name="status">
-                                                <option value="">Tất cả trạng thái</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="filter-group">
-                                            <label>Từ ngày</label>
-                                            <input type="date" name="fromDate" value="${param.fromDate}">
-                                        </div>
-
-                                        <div class="filter-group">
-                                            <label>Đến ngày</label>
-                                            <input type="date" name="toDate" value="${param.toDate}">
-                                        </div>
-
-                                        <div class="filter-group">
-                                            <label>&nbsp;</label>
-                                            <div class="checkbox-group">
-                                                <label class="checkbox-container">
-                                                    <input type="checkbox" name="missingVideo"> Thiếu Video
-                                                </label>
-                                            </div>
+                                <form method="get" action="admin/lessons" class="advanced-filter" id="filterForm">
+                                    <div class="filter-header" onclick="toggleFilter()">
+                                        <h2 class="filter-title">
+                                            <i class="fa-solid fa-filter"></i>
+                                            Bộ lọc nâng cao
+                                        </h2>
+                                        <div class="filter-toggle-icon" id="toggleIcon">
+                                            <i class="fa-solid fa-sliders"></i>
                                         </div>
                                     </div>
 
-                                    <div class="filter-actions">
-                                        <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
+                                    <div class="filter-content" id="filterContent">
+                                        <div class="filter-grid">
+                                            <div class="filter-group">
+                                                <label>Tìm kiếm bài học</label>
+                                                <div class="input-with-icon">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                    <input type="text" name="searchName" value="${param.searchName}"
+                                                           placeholder="Nhập tên bài học...">
+                                                </div>
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Từ ngày</label>
+                                                <input type="date" name="fromDate" value="${param.fromDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Trạng thái</label>
+                                                <select name="status">
+                                                    <option value="">Tất cả trạng thái</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Thuộc khóa học</label>
+                                                <select name="courseId">
+                                                    <option value="">Tất cả khóa học</option>
+                                                    <c:forEach var="c" items="${listCourse}">
+                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date" name="toDate" value="${param.toDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>&nbsp;</label>
+                                                <div class="checkbox-group">
+                                                    <label class="checkbox-container">
+                                                        <input type="checkbox" name="missingVideo"> Thiếu Video
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="filter-actions">
+                                            <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
+                                        </div>
                                     </div>
                                 </form>
                                 <div class="container-2__list-student">
@@ -168,7 +177,7 @@
                                                         <%--                                                    </span>--%>
                                                 </td>
                                                 <td class="action-btns">
-                                                    <a href="" class="js-edit-link">
+                                                    <a href="admin/lesson/detail?id=${lesson.id}" class="js-edit-link">
                                                         <button type="button" class="icon-action-btn"><i
                                                                 class="fa-solid fa-pen"></i></button>
                                                     </a>
@@ -183,8 +192,8 @@
                                     </table>
 
                                     <jsp:include page="/views/components/bulk-action-bar.jsp">
-                                        <jsp:param name="label" value="bài học" />
-                                        <jsp:param name="showDuplicate" value="true" />
+                                        <jsp:param name="label" value="bài học"/>
+                                        <jsp:param name="showDuplicate" value="true"/>
                                     </jsp:include>
                                 </div>
 
