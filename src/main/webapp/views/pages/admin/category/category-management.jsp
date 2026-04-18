@@ -8,15 +8,21 @@
     <meta charset="UTF-8">
     <title>Danh mục</title>
     <base href="${pageContext.request.contextPath}/">
+
+    <%-- Admin layout CSS --%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/course-edit.css">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Admin component CSS --%>
+    <link rel="stylesheet" href="assets/css/admin/notification.css">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/course-edit.css">
-    <link rel="stylesheet" href="assets/css/admin/notification.css">
-    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=1.0.1">
 
 </head>
 <body>
@@ -28,41 +34,31 @@
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
-                    <div class="container-2__header"></div>
-                    <div class="grid__row-2 container-2__grid">
+
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
+
+                    <div class="container-2__content-body">
+                        <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Danh mục</div>
+                            <div class="header__title">Danh mục
+                                <div class="header__meta">
+                                    <span class="header__subtitle">
+                                        Quản lý tất cả danh mục
+                                    </span>
+                                    <span class="header__count">
+                                        ${listCategories.size()} danh mục
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="admin-create__buttons">
+                                <button type="button" class="dark-button">
+                                    <a href="admin/category/detail" class="admin-create-link">
+                                        <i class="fa-solid fa-plus"></i>Tạo mới
+                                    </a>
+                                </button>
+                            </div>
                         </div>
                         <div class="container-2__body">
-                            <div class="title__admin">Tạo danh mục</div>
-                            <form action="admin/categories" class="form" method="post">
-                                <div class="container-2__create">
-                                    <div class="create__selection">
-                                        <div class="create__selection-input">
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Tên danh mục:
-                                                </div>
-                                                <input placeholder="" type="text" class="admin-input__long"
-                                                       name="categoryName" value="${param.categoryName}">
-                                            </div>
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">ID danh mục cha:
-                                                </div>
-                                                <input placeholder="" type="number" class="admin-input__long"
-                                                       name="categoryParentId">
-                                            </div>
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Slug:</div>
-                                                <input placeholder="" type="text" class="admin-input__long"
-                                                       name="categorySlug">
-                                            </div>
-                                        </div>
-                                        <div class="create__btn-create">
-                                            <button type="submit" class="create-btn dark-button">Tạo mới</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                             <div class="title__admin">Tất cả danh mục (${listCategories.size()})</div>
                             <form action="admin/categories/search" class="form" method="get">
                                 <div class="container-2__filter">
@@ -156,6 +152,7 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
 

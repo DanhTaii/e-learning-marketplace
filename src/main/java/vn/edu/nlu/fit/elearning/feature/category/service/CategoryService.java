@@ -19,4 +19,8 @@ public interface CategoryService {
     List<Category> getAllCategoriesByName(String name);
 
     CategoryDto getCategoryByCourseId(int courseId);
+
+    public boolean existsByName(String name);
+
+    public boolean existsBySlug(String slug);
 }

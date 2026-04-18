@@ -21,4 +21,10 @@ public interface CategoryDao {
 //    Category findById(int id);
 
     CategoryDto findCategoryByCourseId(int courseId);
+
+    public Category findBySlug(String slug);
+
+    public boolean existsByName(String name);
+
+    public boolean existsBySlug(String slug);
 }

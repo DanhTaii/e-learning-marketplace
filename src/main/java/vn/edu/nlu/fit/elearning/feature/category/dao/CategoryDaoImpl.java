@@ -8,10 +8,18 @@ import java.util.List;
 public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
     public int create(Category entity) {
-        return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO categories(id, name, slug, icon_url )\n" +
-                    "VALUES ( :id,:name, :slug, :iconUrl )").bindBean(entity).execute();
-        });
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+            INSERT INTO categories(name, slug, parent_id, icon_url, status)
+            VALUES (:name, :slug, :parentId, :iconUrl, :status)
+        """)
+                        .bind("name", entity.getName())
+                        .bind("slug", entity.getSlug())
+                        .bind("parentId", entity.getParentId() == 0 ? null : entity.getParentId()) 
+                        .bind("iconUrl", entity.getIconUrl())
+                        .bind("status", entity.getStatus().name())
+                        .execute()
+        );
     }
 
     @Override
@@ -37,13 +45,14 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     public int update(Category entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE categories\n" +
-                            "SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon \n" +
+                            "SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon, status = :status \n" +
                             "WHERE id = :id")
                     .bind("name", entity.getName())
                     .bind("slug", entity.getSlug())
                     .bind("parentId", entity.getParentId())
                     .bind("icon", entity.getIconUrl())
                     .bind("id", entity.getId())
+                    .bind("status", entity.getStatus())
                     .execute();
         });
     }
@@ -82,6 +91,45 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
                     "JOIN categories c ON cs.category_id = c.id\n" +
                     "WHERE cs.id = :courseId AND c.status = 'ACTIVE';").bind("courseId", courseId).mapToBean(CategoryDto.class).findFirst().orElse(null);
         });
+    }
+
+    @Override
+    public Category findBySlug(String slug) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                SELECT id, name, slug, parent_id, icon_url, status
+                FROM categories
+                WHERE slug = :slug
+            """)
+                        .bind("slug", slug)
+                        .mapToBean(Category.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                SELECT COUNT(*) FROM categories WHERE name = :name
+            """)
+                        .bind("name", name)
+                        .mapTo(int.class)
+                        .one() > 0
+        );
+    }
+
+    @Override
+    public boolean existsBySlug(String slug) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                SELECT COUNT(*) FROM categories WHERE slug = :slug
+            """)
+                        .bind("slug", slug)
+                        .mapTo(int.class)
+                        .one() > 0
+        );
     }
 
 

@@ -16,8 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public int createCategory(Category category) {
         if (category != null) {
-            categoryDao.create(category);
-            return 1;
+            return categoryDao.create(category);
         }
         return 0;
     }
@@ -52,5 +51,16 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.findCategoryByCourseId(courseId);
     }
 
+    @Override
+    public boolean existsByName(String name) {
+        List<Category> list = categoryDao.findByName(name);
+        return list != null && !list.isEmpty();
+    }
+
+    @Override
+    public boolean existsBySlug(String slug) {
+        Category c = categoryDao.findBySlug(slug);
+        return c != null;
+    }
 
 }
