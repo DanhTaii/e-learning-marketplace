@@ -80,7 +80,15 @@ public class LessonManagementController extends BaseController {
         if (action.equals("delete")) {
             int result = lessonService.deleteLessonByids(ids);
             if (result > 0) {
-                handleSuccess(request,response, "Xóa " + result + " bài học thành công", "/admin/lessons");
+                handleSuccess(request, response, "Xóa " + result + " bài học thành công", "/admin/lessons");
+                return;
+            }
+        }
+
+        if (action.equals("duplicate")) {
+            int result = lessonService.bulkDuplicateLessons(ids);
+            if(result > 0){
+                handleSuccess(request, response, "Nhân bản " + result + " bài học thành công", "/admin/lessons");
                 return;
             }
         }

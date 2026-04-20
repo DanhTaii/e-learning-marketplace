@@ -244,5 +244,15 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         });
     }
 
+    @Override
+    public int findMaxOrderIndexByCourseId(int courseId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COALESCE(MAX(l.order_index), 0) FROM lessons l WHERE l.course_id = :courseId")
+                    .bind("courseId", courseId)
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
 }
 

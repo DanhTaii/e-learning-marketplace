@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
+import com.sun.mail.imap.protocol.ListInfo;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
@@ -31,4 +32,8 @@ public interface LessonService {
     int getTotalLessons();
 
     int deleteLessonByids(List<Integer> ids);
+
+    int getMaxOrderIndexByCourseId(int courseId);
+
+    int bulkDuplicateLessons(List<Integer> ids);
 }

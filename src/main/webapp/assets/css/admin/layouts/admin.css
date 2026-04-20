@@ -437,8 +437,8 @@ td .action__button {
 
 /* Hiệu ứng Hover chung */
 .icon-action-btn:hover {
-    background-color: var(--hover-color); /* Sử dụng biến lightgrey của bạn */
-    transform: translateY(-2px); /* Nhảy nhẹ lên trên */
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
 }
 
 td a span:hover {
