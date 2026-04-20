@@ -1,9 +1,12 @@
 package vn.edu.nlu.fit.elearning.feature.category.dao;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface CategoryDao {
     int create(Category entity);
@@ -29,4 +32,8 @@ public interface CategoryDao {
     public boolean existsBySlug(String slug);
 
     public Category findBySlugExcludeId(String slug, int excludeId);
+
+    public List<Category> findCategoriesByFilter(CategoryFilter filter);
+
+    public int countCategoriesByFilter(CategoryFilter filter);
 }

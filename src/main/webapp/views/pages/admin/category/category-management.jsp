@@ -43,14 +43,15 @@
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
-                                <div class="header__title">Danh mục
+                                <div class="header__title">
+                                    Danh mục
                                     <div class="header__meta">
-                                    <span class="header__subtitle">
-                                        Quản lý tất cả danh mục
-                                    </span>
+                                        <span class="header__subtitle">
+                                            Quản lý tất cả danh mục
+                                        </span>
                                         <span class="header__count">
-                                        ${listCategories.size()} danh mục
-                                    </span>
+                                            ${listCategories.size()} danh mục
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="admin-create__buttons">
@@ -63,6 +64,11 @@
                             </div>
                             <div class="container-2__body">
                                 <form method="get" action="admin/categories" class="advanced-filter" id="filterForm">
+                                    <script>
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
                                     <div class="filter-header" onclick="toggleFilter()">
                                         <h2 class="filter-title">
                                             <i class="fa-solid fa-filter"></i>
@@ -79,7 +85,8 @@
                                                 <label>Tìm kiếm danh mục</label>
                                                 <div class="input-with-icon">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="searchName" value="${param.searchName}"
+                                                    <input type="text" name="searchName"
+                                                           value="${param.searchName}"
                                                            placeholder="Nhập tên danh mục...">
                                                 </div>
                                             </div>
@@ -92,21 +99,17 @@
                                             <div class="filter-group">
                                                 <label>Trạng thái</label>
                                                 <select name="status">
-                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
-                                                    </option>
-                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
-                                                        Hoạt động
-                                                    </option>
-                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
-                                                        Không hoạt động
-                                                    </option>
+                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
+                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>Hoạt động</option>
+                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>Không hoạt động</option>
                                                 </select>
                                             </div>
 
                                             <div class="filter-group">
                                                 <label>Tên slug</label>
-                                                <input type="text" name="searchName" value=""
-                                                       placeholder="Nhập tên slug...">
+                                                <input type="text" name="slug"
+                                                       value="${param.slug}"
+                                                       placeholder="Nhập slug...">
                                             </div>
 
                                             <div class="filter-group">
@@ -116,8 +119,8 @@
 
                                             <div class="filter-group">
                                                 <label>Parent ID</label>
-                                                <input type="number" name="parentId" class="input-modern" id="parentId"
-                                                       value="${category != null ? category.parentId : ''}"
+                                                <input type="number" name="parentId"
+                                                       value="${param.parentId}"
                                                        placeholder="Ví dụ: 0" min="0">
                                             </div>
                                         </div>
@@ -125,14 +128,18 @@
                                             <a href="admin/categories" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
-                                            <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
+                                            <button type="submit" class="dark-button btn-submit">
+                                                Áp dụng bộ lọc
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/categories">
-                                <div id="categoryTableContainer">
-                                    <jsp:include page="/views/pages/admin/category/category-fragment.jsp"/>
-                                </div>
+                                    <input type="hidden" name="action" id="bulkActionInput" value="">
+
+                                    <div class="container-2__dynamic-content" id="categoryTableBody">
+                                        <jsp:include page="/views/pages/admin/category/category-fragment.jsp"/>
+                                    </div>
                                 </form>
                             </div>
                         </div>

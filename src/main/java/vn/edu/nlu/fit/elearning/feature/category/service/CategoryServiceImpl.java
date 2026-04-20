@@ -1,8 +1,11 @@
 package vn.edu.nlu.fit.elearning.feature.category.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
 
@@ -69,4 +72,13 @@ public class CategoryServiceImpl implements CategoryService {
         return c != null;
     }
 
+    @Override
+    public List<Category> getCategoriesByFilter(CategoryFilter filter) {
+        return categoryDao.findCategoriesByFilter(filter);
+    }
+
+    @Override
+    public int getCountCategoriesByFilter(CategoryFilter filter) {
+        return categoryDao.countCategoriesByFilter(filter);
+    }
 }

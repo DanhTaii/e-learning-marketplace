@@ -1,18 +1,23 @@
 package vn.edu.nlu.fit.elearning.feature.category.controller.admin;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminCategoryController", value = "/admin/categories")
-public class CategoryManagementController extends HttpServlet {
+public class CategoryManagementController extends BaseController {
 
-    private CategoryService categoryService;
+    private transient CategoryService categoryService;
 
     @Override
     public void init() throws ServletException {
@@ -22,10 +27,45 @@ public class CategoryManagementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> listCategories = categoryService.getAllCategories();
+
+        CategoryFilter filter = new CategoryFilter();
+
+        // 🔍 Map filter từ request
+        filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
+        filter.setSlug(RequestUtils.getParameterAsString(request, "slug", ""));
+        filter.setParentId(RequestUtils.getParameterAsInt(request, "parentId", -1) == -1
+                ? null
+                : RequestUtils.getParameterAsInt(request, "parentId", -1));
+
+        filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
+        filter.setStatus(RequestUtils.getParameterAsStatus(request, "status"));
+
+        // 📄 Pagination
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
+
+        // 📦 Data
+        List<Category> listCategories = categoryService.getCategoriesByFilter(filter);
+
+        int totalRecords = categoryService.getCountCategoriesByFilter(filter);
+        int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
+
+        // 📤 set attribute
         request.setAttribute("listCategories", listCategories);
+        request.setAttribute("totalCategories", totalRecords);
+        request.setAttribute("filter", filter);
+        request.setAttribute("currentPageNumber", filter.getPage());
         request.setAttribute("currentPage", "categories");
-        request.getRequestDispatcher("/views/pages/admin/category/category-management.jsp").forward(request, response);
+        request.setAttribute("totalPages", totalPages);
+
+        // ⚡ AJAX render
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            this.forward(request, response, "/views/pages/admin/category/category-fragment.jsp");
+        } else {
+            this.forward(request, response, "/views/pages/admin/category/category-management.jsp");
+        }
     }
 
     @Override

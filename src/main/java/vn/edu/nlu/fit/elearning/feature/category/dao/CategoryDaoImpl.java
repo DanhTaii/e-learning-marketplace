@@ -1,9 +1,13 @@
 package vn.edu.nlu.fit.elearning.feature.category.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
@@ -147,6 +151,76 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
                         .mapTo(int.class)
                         .one() > 0
         );
+    }
+
+    @Override
+    public List<Category> findCategoriesByFilter(CategoryFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildCategoryWhereClause(filter, params);
+
+        String sql = "SELECT c.id, c.name, c.slug, c.parent_id, c.created_at, c.status " +
+                "FROM categories c "
+                + whereClause +
+                " ORDER BY c.created_at DESC LIMIT :limit OFFSET :offset";
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+            return query.mapToBean(Category.class).list();
+        });
+    }
+
+    @Override
+    public int countCategoriesByFilter(CategoryFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildCategoryWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(*) FROM categories c " + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildCategoryWhereClause(CategoryFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        // 🔍 Tìm theo tên
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            where.append(" AND c.name LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getName().trim() + "%");
+        }
+
+        if (filter.getSlug() != null && !filter.getSlug().trim().isEmpty()) {
+            where.append(" AND c.slug LIKE :slugSearch");
+            params.put("slugSearch", "%" + filter.getSlug().trim() + "%");
+        }
+
+        if (filter.getParentId() != null && filter.getParentId() >= 0) {
+            where.append(" AND c.parent_id = :parentId");
+            params.put("parentId", filter.getParentId());
+        }
+
+        if (filter.getFromDate() != null) {
+            where.append(" AND c.created_at >= :fromDate");
+            params.put("fromDate", filter.getFromDate());
+        }
+
+        if (filter.getToDate() != null) {
+            where.append(" AND c.created_at <= :toDate");
+            params.put("toDate", filter.getToDate());
+        }
+
+        if (filter.getStatus() != null) {
+            where.append(" AND c.status = :status");
+            params.put("status", filter.getStatus().name());
+        }
+
+        return where.toString();
     }
 
 
