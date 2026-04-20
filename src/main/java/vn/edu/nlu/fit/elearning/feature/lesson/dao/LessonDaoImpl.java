@@ -4,12 +4,13 @@ import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LessonDaoImpl extends BaseDao implements LessonDao {
-//    =========================================== BASIC CRUD ===========================================
+    //    =========================================== BASIC CRUD ===========================================
     @Override
     public int create(Lesson entity) {
         String sql = "INSERT INTO lessons (course_id , title, video_url, duration_minutes, order_index, status) \n" +
@@ -200,17 +201,17 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
             params.put("courseIdSearch", filter.getCourseId());
         }
 
-        if(filter.getFromDate() != null){
+        if (filter.getFromDate() != null) {
             where.append(" AND l.created_at >= :fromDate");
             params.put("fromDate", filter.getFromDate());
         }
 
-        if(filter.getToDate() != null){
+        if (filter.getToDate() != null) {
             where.append(" AND l.created_at <= :toDate");
             params.put("toDate", filter.getToDate());
         }
 
-        if(filter.getStatus() != null) {
+        if (filter.getStatus() != null) {
             where.append(" AND l.status = :status");
             params.put("status", filter.getStatus());
         }
@@ -228,6 +229,18 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
             return handle.createQuery("SELECT COUNT(*) FROM lessons")
                     .mapTo(Integer.class)
                     .one();
+        });
+    }
+
+    @Override
+    public int deleteLessonByIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        String sql = "DELETE FROM lessons WHERE id IN (<ids>)";
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bindList("ids", ids)
+                    .execute();
         });
     }
 

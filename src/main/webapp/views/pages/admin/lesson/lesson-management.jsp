@@ -144,9 +144,13 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="container-2__dynamic-content" id="lessonTableBody">
-                                    <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>
-                                </div>
+                                <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <input type="hidden" name="action" id="bulkActionInput" value="">
+
+                                    <div class="container-2__dynamic-content" id="lessonTableBody">
+                                        <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -163,4 +167,5 @@
 <script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

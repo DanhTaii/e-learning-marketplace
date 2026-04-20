@@ -74,6 +74,17 @@ public class LessonManagementController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Phương thức POST không được hỗ trợ cho endpoint này");
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+
+        if (action.equals("delete")) {
+            int result = lessonService.deleteLessonByids(ids);
+            if (result > 0) {
+                handleSuccess(request,response, "Xóa " + result + " bài học thành công", "/admin/lessons");
+                return;
+            }
+        }
+
+        this.redirect(request, response, "/admin/lessons");
     }
 }

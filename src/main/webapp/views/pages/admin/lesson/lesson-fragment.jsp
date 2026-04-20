@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<input type="hidden" id="newTotalCount" value="${totalLessons}">
+
 <div class="container-2__list-student">
     <table class="modern-table">
         <thead>

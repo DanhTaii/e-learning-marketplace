@@ -29,4 +29,6 @@ public interface LessonService {
     List<Lesson> getLessonsByCourseId(int courseId);
 
     int getTotalLessons();
+
+    int deleteLessonByids(List<Integer> ids);
 }

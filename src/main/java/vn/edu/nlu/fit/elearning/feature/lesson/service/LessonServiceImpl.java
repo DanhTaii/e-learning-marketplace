@@ -80,4 +80,9 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.countAllLessons();
     }
 
+    @Override
+    public int deleteLessonByids(List<Integer> ids) {
+        return lessonDao.deleteLessonByIds(ids);
+    }
+
 }

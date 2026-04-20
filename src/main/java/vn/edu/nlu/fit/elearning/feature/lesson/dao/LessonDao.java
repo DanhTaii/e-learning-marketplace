@@ -31,4 +31,6 @@ public interface LessonDao {
 
     int countAllLessons();
 
+    int deleteLessonByIds(List<Integer> ids);
+
 }
