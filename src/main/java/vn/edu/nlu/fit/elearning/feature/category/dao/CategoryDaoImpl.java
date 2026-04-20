@@ -25,7 +25,7 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
     public Category findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT id, name, slug, parent_id, created_at, updated_at " +
+            return handle.createQuery("SELECT id, name, slug, status, parent_id, created_at, updated_at " +
                             "FROM categories WHERE id = :id")
                     .bind("id", integer)
                     .mapToBean(Category.class)
@@ -53,7 +53,7 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
                     .bind("parentId", entity.getParentId())
                     .bind("icon", entity.getIconUrl())
                     .bind("id", entity.getId())
-                    .bind("status", entity.getStatus())
+                    .bind("status", entity.getStatus().name())
                     .execute();
         });
     }

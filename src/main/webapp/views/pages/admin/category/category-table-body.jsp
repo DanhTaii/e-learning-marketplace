@@ -7,7 +7,7 @@
     <c:when test="${not empty listCategories}">
         <c:forEach var="cate" items="${listCategories}">
             <tr>
-                <td><input type="checkbox" class="category-checkbox" value="${cate.id}"></td>
+                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${cate.id}"></td>
 
                 <td>${cate.name}</td>
 

@@ -26,16 +26,49 @@ window.addEventListener('click', function (event) {
     }
 });
 
-function openConfirmModal(id, actionUrl, message = "Bạn có chắc chắn muốn xóa mục này không?", modalId = 'confirm-delete-modal') {
-    isBulkAction = false
+function openConfirmModal(
+    id,
+    actionUrl,
+    message = "Bạn có chắc chắn muốn xóa mục này không?",
+    modalId = 'confirm-delete-modal'
+) {
+    isBulkAction = false;
     currentDeleteId = id;
     currentDeleteUrl = actionUrl;
-    // Nạp ID vào input ẩn
+
+    // input hidden
     const inputId = document.getElementById('input-delete-id');
     if (inputId) inputId.value = id;
 
     const msgElem = document.getElementById('confirm-modal-message');
-    if (msgElem) msgElem.innerText = message;
+    const title = document.getElementById('confirm-modal-title');
+    const confirmButton = document.getElementById('btn-confirm-delete');
+
+    // 🔥 CONFIG giống bulk (delete)
+    const config = {
+        text: 'xóa',
+        textHeader: 'Xóa',
+        btnClass: 'btn-danger',
+        titleClass: 'title-danger',
+        icon: 'fa-trash'
+    };
+
+    // reset class cũ + set màu mới
+    if (confirmButton) {
+        confirmButton.classList.remove('btn-primary', 'btn-dark', 'btn-danger');
+        confirmButton.classList.add(config.btnClass);
+        confirmButton.innerText = `${config.textHeader} ngay`;
+    }
+
+    if (title) {
+        title.classList.remove('title-danger', 'title-primary', 'title-dark');
+        title.classList.add(config.titleClass);
+        title.innerHTML = `<i class="fa-solid ${config.icon}"></i> Xác nhận ${config.text}`;
+    }
+
+    if (msgElem) {
+        msgElem.innerText = message;
+    }
 
     openModal(modalId);
 }
@@ -46,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmDeleteBtn.addEventListener('click', function () {
             if (isBulkAction) {
                 const bulkForm = document.getElementById('bulkActionForm');
-                const bulkInput = document.getElementById('bulkActionInput')
+                const bulkInput = document.getElementById('bulkActionInput');
 
                 if (bulkInput && bulkForm) {
                     bulkInput.value = window.currentBulkAction;
