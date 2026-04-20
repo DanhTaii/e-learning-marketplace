@@ -35,4 +35,6 @@ public interface LessonDao {
 
     int findMaxOrderIndexByCourseId(int courseId);
 
+    int updateLessonsStatusByIds(List<Integer> ids);
+
 }

@@ -254,5 +254,20 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         });
     }
 
+    @Override
+    public int updateLessonsStatusByIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(
+                            "UPDATE lessons " +
+                                    "SET status = CASE WHEN status = 'ACTIVE' THEN 'INACTIVE' " +
+                                    "ELSE 'ACTIVE' END " +
+                                    "WHERE id IN (<ids>)")
+                    .bindList("ids", ids)
+                    .execute();
+        });
+    }
+
 }
 

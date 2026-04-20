@@ -132,4 +132,9 @@ public class LessonServiceImpl implements LessonService {
         return count;
     }
 
+    @Override
+    public int changeLessonsStatusByIds(List<Integer> ids) {
+        return lessonDao.updateLessonsStatusByIds(ids);
+    }
+
 }

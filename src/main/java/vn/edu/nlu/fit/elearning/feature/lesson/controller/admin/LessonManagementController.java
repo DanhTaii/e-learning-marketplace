@@ -93,6 +93,14 @@ public class LessonManagementController extends BaseController {
             }
         }
 
+        if(action.equals("status")) {
+            int result = lessonService.changeLessonsStatusByIds(ids);
+            if (result > 0) {
+                handleSuccess(request, response, "Cập nhật trạng thái " + result + " bài học thành công", "/admin/lessons");
+                return;
+            }
+        }
+
         this.redirect(request, response, "/admin/lessons");
     }
 }

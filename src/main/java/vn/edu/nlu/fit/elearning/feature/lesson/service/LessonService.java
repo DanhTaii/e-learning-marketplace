@@ -36,4 +36,6 @@ public interface LessonService {
     int getMaxOrderIndexByCourseId(int courseId);
 
     int bulkDuplicateLessons(List<Integer> ids);
+
+    int changeLessonsStatusByIds(List<Integer> ids);
 }
