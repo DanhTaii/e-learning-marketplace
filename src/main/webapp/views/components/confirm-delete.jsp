@@ -6,6 +6,7 @@
         <h3 class="modal-title">
             <i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa
         </h3>
+        <%-- CHỖ HIỂN THỊ NỘI DUNG --%>
         <p id="confirm-modal-message" class="modal-message"></p>
 
         <div class="modal-actions">

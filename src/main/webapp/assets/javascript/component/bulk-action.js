@@ -1,3 +1,4 @@
+//============================= XỬ LÝ SỰ KIỆN BULK-ACTION-BAR =============================
 const BulkActionManager = {
     //Dùng để lấy ra danh sách ID các bài học được chọn
     getSelectedIds: function () {
@@ -12,32 +13,75 @@ const BulkActionManager = {
 
     init: function (callbacks) {
         const actionBar = document.getElementById('actionBar');
-        const bulkActionForm = document.getElementById('bulkActionForm')
-        const bulkActionInput = document.getElementById('bulkActionInput')
 
         if (!actionBar) return;
 
         //Lắng nghe nút sẽ được click trên thanh bulk
-        actionBar.addEventListener('click', (e) => {
+        document.addEventListener('click', (e) => {
             //Xác nhận được người dùng bấm rồi thì xác nhận xem đó là hành động nào dựa trên data-action của nút đó
-            const btn = e.target.closest('button[data-action]');
+            const btn = e.target.closest('#actionBar button[data-action]');
             if (!btn) return;
 
             //Lấy data-action của nút đó để gọi dến servlet
             const action = btn.getAttribute('data-action');
             //Lấy ra danh sách ID của đối tượng đó
             const ids = this.getSelectedIds()
-            if (ids.length === 0) {
-                alert("Vui lòng chọn ít nhất 1 mục!");
-                return;
-            }
 
-            if (confirm(`Xác nhận ${action} ${ids.length} mục đã chọn?`)) {
-                bulkActionInput.value = action
-                bulkActionForm.submit()
-            }
-        })
-    }
+            openConfirmBulkAction(action, ids.length)
+
+        });
+
+    },
+
 }
 
 document.addEventListener('DOMContentLoaded', () => BulkActionManager.init());
+
+//============================= XỬ LÝ UI BULK-ACTION-BAR =============================
+
+// Lắng nghe sự kiện change trên toàn bộ trang
+document.addEventListener('change', function (e) {
+    // Xử lý cho các checkbox lẻ (.item-checkbox)
+    if (e.target.classList.contains('item-checkbox')) {
+        updateActionBar();
+
+        // Đồng bộ nút Select All (nếu bỏ chọn 1 cái thì nút tổng cũng bỏ)
+        const selectAll = document.getElementById('selectAll');
+        if (!e.target.checked && selectAll) selectAll.checked = false;
+    }
+
+    //Xử lý cho nút "Chọn tất cả" (#selectAll)
+    if (e.target.id === 'selectAll') {
+        const allCheckboxes = document.querySelectorAll('.item-checkbox');
+        allCheckboxes.forEach(cb => cb.checked = e.target.checked);
+        updateActionBar();
+    }
+});
+
+// Hàm cập nhật trạng thái thanh Bar (Luôn đếm lại từ đầu)
+function updateActionBar() {
+    const actionBar = document.getElementById('actionBar');
+    const selectedCount = document.getElementById('selectedCount');
+    if (!actionBar) return;
+
+    const checkedCount = document.querySelectorAll('.item-checkbox:checked').length;
+
+    if (checkedCount > 0) {
+        actionBar.style.display = 'flex';
+        if (selectedCount) selectedCount.innerText = checkedCount;
+    } else {
+        actionBar.style.display = 'none';
+    }
+}
+
+function deselectAll() {
+    const selectAll = document.getElementById('selectAll');
+    if (selectAll) selectAll.checked = false;
+
+    document.querySelectorAll('.item-checkbox').forEach(cb => {
+        cb.checked = false;
+    });
+
+    const actionBar = document.getElementById('actionBar');
+    if (actionBar) actionBar.style.display = 'none';
+}
