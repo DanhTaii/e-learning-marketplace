@@ -5,12 +5,14 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
 import java.sql.Timestamp;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RequestUtils {
 
     public static int getParameterAsInt(HttpServletRequest request, String paramNumber, int defaultValue) {
         String value = request.getParameter(paramNumber);
-        if (value == null || value.trim().isEmpty()){
+        if (value == null || value.trim().isEmpty()) {
             return defaultValue;
         }
         try {
@@ -31,7 +33,7 @@ public class RequestUtils {
 
     public static String getParameterAsString(HttpServletRequest request, String paramString, String defaultValue) {
         String value = request.getParameter(paramString);
-        if (value == null || value.trim().isEmpty()){
+        if (value == null || value.trim().isEmpty()) {
             return defaultValue;
         }
 
@@ -92,5 +94,28 @@ public class RequestUtils {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid date format for parameter: " + toDate + ". Expected format: yyyy-MM-dd HH:mm:ss");
         }
+    }
+
+    public static List<Integer> getParameterAsListInt(HttpServletRequest request, String paramList) {
+        String[] idsStr = request.getParameterValues(paramList);
+
+        if (idsStr == null) return Collections.emptyList();
+
+        //Chuyển mảng String thành int với stream
+        return Arrays.stream(idsStr)
+                //Lọc những giá trị không có
+                .filter(s -> s != null && !s.isBlank())
+                //Lúc này là chuyển đổi từ số thành int
+                .map(s -> {
+                    try {
+                        return Integer.parseInt(s);
+                    } catch (NumberFormatException e) {
+                        return null;
+                    }
+                })
+                //Lúc này bỏ những giá trị null và giữ lại giá trị số
+                .filter(Objects::nonNull)
+                //trả về list<Int>
+                .collect(Collectors.toList());
     }
 }

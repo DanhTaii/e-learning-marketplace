@@ -24,7 +24,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1001;
+    z-index: 200;
     left: 0;
     top: 0;
     width: 100%;
@@ -60,7 +60,6 @@
 }
 
 .modal-title {
-    color: #dc3545;
     font-size: 1.8rem;
     margin-bottom: 10px;
 }
@@ -82,4 +81,50 @@
     background-color: #dc3545 !important;
     color: white !important;
     padding: 8px 20px;
+}
+
+/*button theo action*/
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.btn-dark {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+/* màu theo action */
+.title-danger {
+    color: #dc3545;
+}
+
+.title-primary {
+    color: var(--blue);
+}
+
+.title-dark {
+    color: var(--dark-blue);
+}
+
+/*icon cho thằng tiêu đề */
+.modal-title i {
+    margin-right: 6px;
+}
+
+.icon-danger {
+    color: #dc3545;
+}
+
+.icon-primary {
+    color: #007bff;
+}
+
+.icon-dark {
+    color: #333;
 }

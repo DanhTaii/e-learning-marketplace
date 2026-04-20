@@ -33,4 +33,9 @@ public class BaseController extends HttpServlet {
         doGet(req, resp);
     }
 
+    protected void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String msg, String redirectUrl) throws ServletException, IOException {
+        req.getSession().setAttribute("flashSuccess", msg);
+        redirect(req,resp, redirectUrl);
+    }
+
 }

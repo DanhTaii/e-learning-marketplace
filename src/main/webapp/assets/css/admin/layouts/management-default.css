@@ -389,6 +389,9 @@ table td {
 
 /* Hover */
 .modern-table tbody tr:hover {
-    background-color: #fcfcfd;
+    background-color: #f7f7f9;
 }
 
+.icon-action-btn, .modern-table a {
+    cursor: auto;
+}

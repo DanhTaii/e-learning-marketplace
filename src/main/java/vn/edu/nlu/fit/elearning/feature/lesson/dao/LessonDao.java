@@ -31,4 +31,10 @@ public interface LessonDao {
 
     int countAllLessons();
 
+    int deleteLessonByIds(List<Integer> ids);
+
+    int findMaxOrderIndexByCourseId(int courseId);
+
+    int updateLessonsStatusByIds(List<Integer> ids);
+
 }

@@ -8,7 +8,7 @@
 
         <c:forEach var="lesson" items="${listLessons}">
             <tr>
-                <td><input type="checkbox" class="lesson-checkbox" value="${lesson.id}">
+                <td><input type="checkbox" name="item-checkbox" class="lesson-checkbox item-checkbox" value="${lesson.id}">
                 </td>
                 <td>
                     <div class="lesson-info">
