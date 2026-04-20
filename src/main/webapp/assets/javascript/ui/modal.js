@@ -62,13 +62,47 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function openConfirmBulkAction(action, count) {
-    const messgae = document.getElementById('confirm-modal-message')
+    const message = document.getElementById('confirm-modal-message')
+    const title = document.getElementById('confirm-modal-title')
+    const confirmButton = document.getElementById('btn-confirm-delete')
 
     isBulkAction = true
 
-    if (messgae) {
-        let actionText = action === 'delete' ? 'xóa' : (action === 'duplicate' ? 'nhân bản' : 'cập nhật');
-        messgae.innerText = `Bạn có chắc muốn ${actionText} ${count} mục này không ?`
+    if (message) {
+        const actionConfig = {
+            delete: {
+                text: 'xóa',
+                textHeader: 'Xóa',
+                btnClass: 'btn-danger',
+                titleClass: 'title-danger',
+                icon: 'fa-trash'
+            },
+            duplicate: {
+                text: 'nhân bản',
+                textHeader: 'Nhân bản',
+                btnClass: 'btn-primary',
+                titleClass: 'title-primary',
+                icon: 'fa-copy'
+            },
+            update: {
+                text: 'cập nhật',
+                textHeader: 'Cập nhật',
+                btnClass: 'btn-dark',
+                titleClass: 'title-dark',
+                icon: 'fa-pen'
+            }
+        };
+
+        const config = actionConfig[action] || actionConfig.update;
+        confirmButton.classList.remove('btn-primary','btn-dark','btn-danger')
+        title.classList.remove('title-danger', 'title-primary', 'title-dark');
+
+        confirmButton.classList.add(config.btnClass)
+        title.classList.add(config.titleClass)
+
+        message.innerText = `Bạn có chắc muốn ${config.text} ${count} mục này không?`;
+        title.innerHTML = `<i class="fa-solid ${config.icon}"></i> Xác nhận ${config.text}`;
+        confirmButton.innerText = `${config.textHeader} ngay`;
     }
 
     window.currentBulkAction = action

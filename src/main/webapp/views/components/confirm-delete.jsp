@@ -3,8 +3,8 @@
 <%--COMPONENT CONFIRM FOR DELETE--%>
 <div id="confirm-delete-modal" class="modal">
     <div class="modal-content">
-        <h3 class="modal-title">
-            <i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa
+        <h3 class="modal-title" id="confirm-modal-title">
+            <i class="fa-solid fa-triangle-exclamation"></i> Xác nhận
         </h3>
         <%-- CHỖ HIỂN THỊ NỘI DUNG --%>
         <p id="confirm-modal-message" class="modal-message"></p>
@@ -13,8 +13,8 @@
             <button type="button" onclick="closeModal('confirm-delete-modal')" class="button btn-cancel">
                 Hủy
             </button>
-            <button type="button" id="btn-confirm-delete" class="button dark-button btn-modal-delete">
-                Xóa ngay
+            <button type="button" id="btn-confirm-delete" class="button">
+                Xác nhận
             </button>
         </div>
     </div>
