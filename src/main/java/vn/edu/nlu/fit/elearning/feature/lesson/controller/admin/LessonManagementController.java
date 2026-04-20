@@ -65,7 +65,7 @@ public class LessonManagementController extends BaseController {
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {
             // Chỉ render phần nội dung bảng
-            this.forward(request, response, "/views/pages/admin/lesson/lesson-table-body.jsp");
+            this.forward(request, response, "/views/pages/admin/lesson/lesson-fragment.jsp");
         } else {
             // Render toàn bộ trang như cũ
             this.forward(request, response, "/views/pages/admin/lesson/lesson-management.jsp");

@@ -27,12 +27,6 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
-    <%-- Javascript --%>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
-
 </head>
 <body>
 <div class="web">
@@ -68,6 +62,14 @@
                             </div>
                             <div class="container-2__body">
                                 <form method="get" action="admin/lessons" class="advanced-filter" id="filterForm">
+                                    <script>
+                                        //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
+                                        //Nó sẽ vô tình trạng đóng mở ngay lập tức
+                                        //Để đoạn script ở đây để nó trong lúc load HTML,CSS có thể load được luôn
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
                                     <div class="filter-header" onclick="toggleFilter()">
                                         <h2 class="filter-title">
                                             <i class="fa-solid fa-filter"></i>
@@ -142,39 +144,11 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="container-2__list-student">
-                                    <table class="modern-table">
-                                        <thead>
-                                        <tr>
-                                            <th><input type="checkbox" id="selectAll"></th>
-                                            <th>TÊN BÀI HỌC</th>
-                                            <%--                                            <th>KHÓA HỌC</th>--%>
-                                            <th>THỜI LƯỢNG</th>
-                                            <th>NGÀY TẠO</th>
-                                            <th>VIDEO</th>
-                                            <th>TRẠNG THÁI</th>
-                                            <th>THAO TÁC</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="lessonTableBody">
-                                            <jsp:include page="/views/pages/admin/lesson/lesson-table-body.jsp"/>
-                                        </tbody>
-                                    </table>
-
-                                    <jsp:include page="/views/components/bulk-action-bar.jsp">
-                                        <jsp:param name="label" value="bài học"/>
-                                        <jsp:param name="showDuplicate" value="true"/>
-                                    </jsp:include>
+                                <div class="container-2__dynamic-content" id="lessonTableBody">
+                                    <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>
                                 </div>
-
-                                <jsp:include page="/views/components/pagination-base.jsp">
-                                    <jsp:param name="baseUrl" value="admin/lessons"/>
-                                    <jsp:param name="currentPageNumber" value="${filter.page}"/>
-                                    <jsp:param name="totalPages" value="${totalPages}"/>
-                                </jsp:include>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -184,4 +158,9 @@
 <jsp:include page="/views/components/confirm-delete.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
+<%-- Javascript --%>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
