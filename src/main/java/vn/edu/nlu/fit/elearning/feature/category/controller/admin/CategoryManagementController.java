@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminCategoryController", value = "/admin/categories")
-public class AdminCategoryController extends HttpServlet {
+public class CategoryManagementController extends HttpServlet {
 
     private CategoryService categoryService;
 

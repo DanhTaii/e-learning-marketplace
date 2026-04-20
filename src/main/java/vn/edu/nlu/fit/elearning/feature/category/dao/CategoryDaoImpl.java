@@ -36,7 +36,7 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
     public List<Category> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT ca.id, ca.name, ca.parent_id, ca.icon_url, ca.created_at\n " +
+            return handle.createQuery("SELECT ca.id, ca.name, ca.slug, ca.parent_id, ca.status, ca.created_at\n " +
                     "FROM categories ca").mapToBean(Category.class).list();
         });
     }

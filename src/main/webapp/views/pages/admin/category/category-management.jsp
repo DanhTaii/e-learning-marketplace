@@ -16,9 +16,13 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/course-edit.css">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/category/category-management.css?v=<%=System.currentTimeMillis()%>">
 
     <%-- Admin component CSS --%>
     <link rel="stylesheet" href="assets/css/admin/notification.css">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -59,86 +63,94 @@
                             </div>
                         </div>
                         <div class="container-2__body">
-                            <div class="title__admin">Tất cả danh mục (${listCategories.size()})</div>
-                            <form action="admin/categories/search" class="form" method="get">
-                                <div class="container-2__filter">
-                                    <div class="filter__selection">
-                                        <div class="filter__selection-input">
-                                            <div class="filter__selection-items filter__selection-name">
-                                                <div class="filter__selection-title filter__item-name">Tên danh mục:
-                                                </div>
-                                                <input placeholder="" type="text" class="admin-input__long"
-                                                       name="searchName" value="${param.searchName}">
-                                            </div>
+                            <form method="get" action="admin/categories" class="advanced-filter" id="filterForm">
+                                <div class="filter-header" onclick="toggleFilter()">
+                                    <h2 class="filter-title">
+                                        <i class="fa-solid fa-filter"></i>
+                                        Bộ lọc nâng cao
+                                    </h2>
+                                    <div class="filter-toggle-icon" id="toggleIcon">
+                                        <i class="fa-solid fa-sliders"></i>
+                                    </div>
+                                </div>
 
-                                        </div>
-
-                                        <div class="filter__button-search">
-                                            <button type="submit" class="admin-search-btn">
+                                <div class="filter-content" id="filterContent">
+                                    <div class="filter-grid">
+                                        <div class="filter-group">
+                                            <label>Tìm kiếm danh mục</label>
+                                            <div class="input-with-icon">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
-                                            </button>
+                                                <input type="text" name="searchName" value="${param.searchName}"
+                                                       placeholder="Nhập tên danh mục...">
+                                            </div>
                                         </div>
+
+                                        <div class="filter-group">
+                                            <label>Từ ngày</label>
+                                            <input type="date" name="fromDate" value="${param.fromDate}">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Trạng thái</label>
+                                            <select name="status">
+                                                <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
+                                                </option>
+                                                <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
+                                                    Hoạt động
+                                                </option>
+                                                <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
+                                                    Không hoạt động
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Tên slug</label>
+                                            <input type="text" name="searchName" value=""
+                                                   placeholder="Nhập tên slug...">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Đến ngày</label>
+                                            <input type="date" name="toDate" value="${param.toDate}">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Parent ID</label>
+                                                <input type="number" name="parentId" class="input-modern" id="parentId"
+                                                       value="${category != null ? category.parentId : ''}"
+                                                       placeholder="Ví dụ: 0" min="0">
+                                        </div>
+                                    </div>
+                                    <div class="filter-actions">
+                                        <a href="admin/categories" class="btn-clear">
+                                            <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                        </a>
+                                        <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
                                     </div>
                                 </div>
                             </form>
 
                             <div class="container-2__list-student">
 
-                                <table>
+                                <table class="modern-table">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Tên danh mục</th>
-                                        <th>ID danh mục cha</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Hành động</th>
+                                        <th><input type="checkbox" id="selectAll"></th>
+                                        <th>TÊN DANH MỤC</th>
+                                        <th>SLUG</th>
+                                        <th>PARENT ID</th>
+                                        <th>NGÀY TẠO</th>
+                                        <th>TRẠNG THÁI</th>
+                                        <th>THAO TÁC</th>
                                     </tr>
                                     </thead>
 
-                                    <tbody>
-                                    <c:forEach var="cate" items="${listCategories}">
-                                        <tr>
-                                            <td>
-                                                <div class="course-row__title title course-row__style-text">
-                                                        ${cate.id}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                        ${cate.name}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                        ${cate.parentId}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                    <fmt:setLocale value="en_US" scope="page"/>
-                                                    <fmt:formatDate value="${cate.createdAt}"
-                                                                    pattern="dd-MM-YYYY"/>
-                                                </div>
-                                            </td>
-                                            <td class="action__button">
-                                                <div class="action-wrapper">
-                                                    <button type="button" onclick="showCategoryDetail(${cate.id})"
-                                                            class="icon-action-btn">
-                                                        <i class="fa-solid fa-pen"></i>
-                                                    </button>
-                                                    <form action="admin/category/delete" method="post" class="form">
-                                                        <input type="hidden" name="id" value="${cate.id}">
-                                                        <button type="submit" class="icon-action-btn">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                    <tbody id="categoryTableBody">
+                                    <jsp:include page="/views/pages/admin/category/category-table-body.jsp"/>
                                     <c:if test="${empty listCategories}">
                                         <tr>
-                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                            <td colspan="7">
                                                 <div class="search-empty-state">
                                                     <i class="fa-solid fa-book-open search-empty-icon"></i>
                                                     <div class="search-empty-title">
@@ -150,6 +162,9 @@
                                     </c:if>
                                     </tbody>
                                 </table>
+                                <jsp:include page="/views/components/bulk-action-bar.jsp">
+                                    <jsp:param name="label" value="danh mục"/>
+                                </jsp:include>
                             </div>
                         </div>
                     </div>
@@ -229,6 +244,8 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <script src="assets/javascript/admin/category/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/category/category-action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 
 </html>
