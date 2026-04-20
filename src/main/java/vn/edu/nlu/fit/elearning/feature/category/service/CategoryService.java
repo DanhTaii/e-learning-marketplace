@@ -23,4 +23,6 @@ public interface CategoryService {
     public boolean existsByName(String name);
 
     public boolean existsBySlug(String slug);
+
+    public boolean existsBySlug(String slug, int excludeId);
 }

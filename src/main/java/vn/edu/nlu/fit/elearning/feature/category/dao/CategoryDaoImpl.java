@@ -25,7 +25,8 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
     public Category findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT id, name, slug, parent_id, icon_url FROM categories WHERE id = :id")
+            return handle.createQuery("SELECT id, name, slug, parent_id, created_at, updated_at " +
+                            "FROM categories WHERE id = :id")
                     .bind("id", integer)
                     .mapToBean(Category.class)
                     .findFirst()
@@ -45,7 +46,7 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     public int update(Category entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE categories\n" +
-                            "SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon, status = :status \n" +
+                            "SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon, status = :status " +
                             "WHERE id = :id")
                     .bind("name", entity.getName())
                     .bind("slug", entity.getSlug())
@@ -102,6 +103,22 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
                 WHERE slug = :slug
             """)
                         .bind("slug", slug)
+                        .mapToBean(Category.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public Category findBySlugExcludeId(String slug, int excludeId) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                SELECT id, name, slug, parent_id, icon_url, status
+                FROM categories
+                WHERE slug = :slug AND id != :id
+            """)
+                        .bind("slug", slug)
+                        .bind("id", excludeId)
                         .mapToBean(Category.class)
                         .findFirst()
                         .orElse(null)

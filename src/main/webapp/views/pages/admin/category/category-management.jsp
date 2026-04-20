@@ -173,7 +173,7 @@
 
                 <div id="category-detail" class="modal__course-detail">
                     <div class="modal__course-content">
-                        <form action="admin/category/update" method="post">
+                        <form action="admin/category/detail" method="post">
 
                             <div class="course__header">
                                 <div class="course__title">
@@ -243,9 +243,7 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-<script src="assets/javascript/admin/category/admin-category-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/category/category-action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
-</body>
-
 </html>

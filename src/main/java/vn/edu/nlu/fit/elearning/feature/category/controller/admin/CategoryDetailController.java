@@ -67,7 +67,7 @@ public class CategoryDetailController extends BaseController {
 
         BaseStatus status = RequestUtils.getParameterAsStatus(request, "status");
         if (status == null) {
-            status = BaseStatus.INACTIVE; // default
+            status = BaseStatus.INACTIVE;
         }
         category.setStatus(status);
 
@@ -77,12 +77,16 @@ public class CategoryDetailController extends BaseController {
             if (!errors.isEmpty()) {
                 request.setAttribute("errors", errors);
                 request.setAttribute("category", category);
-
                 this.forward(request, response, "/views/pages/admin/category/category-create.jsp");
                 return;
             }
 
             if (category.getId() > 0) {
+
+                if (categoryService.existsBySlug(category.getSlug(), category.getId())) {
+                    handleError(request, response, "Slug đã tồn tại!");
+                    return;
+                }
 
                 int result = categoryService.updateCategory(category);
 
@@ -90,28 +94,27 @@ public class CategoryDetailController extends BaseController {
                     request.getSession().setAttribute("flashSuccess", "Cập nhật danh mục thành công!");
                 }
 
-                this.redirect(request, response, "/admin/category/detail?id=" + category.getId());
+                response.sendRedirect(request.getContextPath() + "/admin/categories");
+                return;
+            }
 
+            if (categoryService.existsByName(category.getName())) {
+                handleError(request, response, "Tên danh mục đã tồn tại!");
+                return;
+            }
+
+            if (categoryService.existsBySlug(category.getSlug())) {
+                handleError(request, response, "Slug đã tồn tại!");
+                return;
+            }
+
+            int result = categoryService.createCategory(category);
+
+            if (result > 0) {
+                request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
+                response.sendRedirect(request.getContextPath() + "/admin/categories");
             } else {
-
-                if (categoryService.existsByName(category.getName())) {
-                    handleError(request, response, "Tên danh mục đã tồn tại!");
-                    return;
-                }
-
-                if (categoryService.existsBySlug(category.getSlug())) {
-                    handleError(request, response, "Slug đã tồn tại!");
-                    return;
-                }
-
-                int result = categoryService.createCategory(category);
-
-                if (result > 0) {
-                    request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
-                    response.sendRedirect(request.getContextPath() + "/admin/category/detail");
-                } else {
-                    handleError(request, response, "Lỗi hệ thống khi tạo danh mục!");
-                }
+                handleError(request, response, "Lỗi hệ thống khi tạo danh mục!");
             }
 
         } catch (Exception e) {
@@ -119,7 +122,6 @@ public class CategoryDetailController extends BaseController {
             request.setAttribute("errorMessage", e.getMessage());
             this.forward(request, response, "/views/pages/admin/category/category-create.jsp");
         }
-        System.out.println("NAME: " + request.getParameter("nameCategory"));
-        System.out.println("SLUG: " + request.getParameter("slug"));
+        System.out.println("STATUS PARAM: " + request.getParameter("status"));
     }
 }

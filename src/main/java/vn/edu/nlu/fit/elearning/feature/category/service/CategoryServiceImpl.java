@@ -63,4 +63,10 @@ public class CategoryServiceImpl implements CategoryService {
         return c != null;
     }
 
+    @Override
+    public boolean existsBySlug(String slug, int excludeId) {
+        Category c = categoryDao.findBySlugExcludeId(slug, excludeId);
+        return c != null;
+    }
+
 }

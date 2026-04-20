@@ -83,11 +83,15 @@
                                 <div class="form-group mt-3">
                                     <label class="label-style">Trạng thái hiển thị</label>
                                     <select class="input-modern" name="status" required>
-                                        <option value="INACTIVE" ${(category != null && category.status == 'INACTIVE') ? 'selected' : ''}>
-                                            Không thể sử dụng
+                                        <option value="INACTIVE"
+                                        ${(category != null && category.status.name() == 'INACTIVE')
+                                                || param.status == 'INACTIVE' ? 'selected' : ''}>
+                                            Không hoạt động
                                         </option>
-                                        <option value="ACTIVE" ${(category != null && category.status == 'ACTIVE') ? 'selected' : ''}>
-                                            Có thể sử dụng
+                                        <option value="ACTIVE"
+                                        ${(category != null && category.status.name() == 'ACTIVE')
+                                                || param.status == 'ACTIVE' ? 'selected' : ''}>
+                                            Hoạt động
                                         </option>
                                     </select>
                                     <span class="error-client" id="error_status">${errors.status}</span>
