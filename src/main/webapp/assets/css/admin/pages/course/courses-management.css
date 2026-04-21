@@ -1,23 +1,23 @@
-.container-2__list-student {
-    width: 100%;
-    overflow-x: auto; /* Cho phép cuộn ngang nếu bảng quá rộng */
-}
+/*.container-2__list-student {*/
+/*    width: 100%;*/
+/*    overflow-x: auto; !* Cho phép cuộn ngang nếu bảng quá rộng *!*/
+/*}*/
 
-.modern-table {
-    width: 100%;
-    min-width: 900px; /* Đảm bảo bảng có không gian tối thiểu để hiện đủ 8 cột */
-    table-layout: fixed; /* Hoặc auto tùy bạn, nhưng fixed sẽ giúp kiểm soát width tốt hơn */
-}
+/*.modern-table {*/
+/*    width: 100%;*/
+/*    min-width: 900px; !* Đảm bảo bảng có không gian tối thiểu để hiện đủ 8 cột *!*/
+/*    table-layout: fixed; !* Hoặc auto tùy bạn, nhưng fixed sẽ giúp kiểm soát width tốt hơn *!*/
+/*}*/
 
-/* Trong file CSS của bạn */
-.action__button {
-    min-width: 100px !important; /* Ép nó phải hiện ra ít nhất 100px */
-    width: 120px;
-    text-align: center;
-}
+/*!* Trong file CSS của bạn *!*/
+/*.action__button {*/
+/*    min-width: 100px !important; !* Ép nó phải hiện ra ít nhất 100px *!*/
+/*    width: 120px;*/
+/*    text-align: center;*/
+/*}*/
 
-.action-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-}
+/*.action-wrapper {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    gap: 8px;*/
+/*}*/

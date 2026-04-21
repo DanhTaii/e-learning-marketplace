@@ -132,113 +132,14 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="container-2__list-student">
-                                    <table class="modern-table">
-                                        <thead>
-                                        <tr>
-                                            <th><input type="checkbox" id="selectAll"></th>
-                                            <th>Khóa học</th>
-<%--                                            <th>Thời lượng</th>--%>
-                                            <th>Học viên</th>
-<%--                                            <th>Cấp độ</th>--%>
-                                            <th>Trạng thái</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Hành động</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="course" items="${result.data}">
-                                            <tr class="course-row">
-                                                <td>
-                                                    <input type="checkbox" name="item-checkbox" class="course-checkbox item-checkbox" value="${course.id}">
-                                                </td>
-                                                <td>
-                                                    <div class="content__title">
-                                                            ${course.title}
-                                                    </div>
-                                                    <div class="content__sub-title">Cấp độ: ${course.level.vietnameseName} • ${course.durationText}</div>
-                                                </td>
-<%--                                                <td>--%>
-<%--                                                    <div class="course-row__duration course-row__font-content">--%>
-<%--                                                            ${course.durationText}--%>
-<%--                                                    </div>--%>
-<%--                                                </td>--%>
-                                                <td>
-                                                    <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
-                                                </td>
-<%--                                                <td>--%>
-<%--                                                    <div class="course-row__level course-row__font-content">--%>
-<%--                                                        <div class="level-dot"></div>--%>
-<%--                                                            ${course.level.vietnameseName}--%>
-<%--                                                    </div>--%>
-<%--                                                </td>--%>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${course.isPublic}">
-                                                            <div class="course-row__status course-row__font-content course-row__status-public">
-                                                                Công khai
-                                                            </div>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <div class="course-row__status course-row__font-content course-row__status-private">
-                                                                Riêng tư
-                                                            </div>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td>
-                                                    <div class="course-row__created course-row__font-content">
-                                                        <fmt:setLocale value="en_US" scope="page"/>
 
-                                                        <fmt:formatDate
-                                                                value="${course.createdAt}"
-                                                                pattern="dd-MM-YYYY"/>
-                                                    </div>
-                                                </td>
-                                                <td class="action__button">
-                                                    <div class="action-wrapper">
-                                                        <a href="admin/course/detail?id=${course.id}">
-                                                            <button type="button"
-                                                                    class="icon-action-btn">
-                                                                <i class="fa-solid fa-pen"></i>
-                                                            </button>
-                                                        </a>
-                                                        <button type="button" class="icon-action-btn"
-                                                                onclick="openConfirmModal(${course.id})">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        <c:if test="${empty result.data}">
-                                            <tr>
-                                                <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                    <div class="search-empty-state"
-                                                         style="text-align: center; padding: 40px 0;">
-                                                        <i class="fa-solid fa-book-open search-empty-icon"
-                                                           style="font-size: 3rem; color: #ccc;"></i>
-                                                        <div class="search-empty-title"
-                                                             style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
-                                                            Không tìm thấy khóa học nào
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:if>
-                                        </tbody>
-                                    </table>
-                                    <jsp:include page="/views/components/bulk-action-bar.jsp">
-                                        <jsp:param name="label" value="bài học"/>
-                                        <jsp:param name="showDuplicate" value="true"/>
-                                    </jsp:include>
-                                </div>
+                                <form action="admin/courses" method="POST" id="bulkActionForm">
+                                    <input type="hidden" name="action" id="bulkActionInput" value="">
 
-                                <jsp:include page="/views/components/pagination-base.jsp">
-                                    <jsp:param name="baseUrl" value="admin/courses"/>
-                                    <jsp:param name="currentPageNumber" value="${result.currentPage}"/>
-                                    <jsp:param name="totalPages" value="${result.totalPage}"/>
-                                </jsp:include>
+                                    <div class="container-2__dynamic-content" id="courseTableBody">
+                                        <jsp:include page="/views/pages/admin/course/course-fragment.jsp"/>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -252,6 +153,7 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/admin/course/course-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>

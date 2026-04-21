@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.base.PageResponse;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 
@@ -56,7 +57,13 @@ public class CourseManagementController extends BaseController {
 
         request.setAttribute("result", result);
         request.setAttribute("currentPage", "courses");
-        this.forward(request, response, "/views/pages/admin/course/courses-management.jsp");
+
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            this.forward(request, response, "/views/pages/admin/course/course-fragment.jsp");
+        } else {
+            this.forward(request, response, "/views/pages/admin/course/courses-management.jsp");
+        }
     }
 
     @Override
