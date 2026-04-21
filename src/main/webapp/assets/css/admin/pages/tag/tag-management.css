@@ -1,0 +1,10 @@
+#detail-id{
+    display: none;
+}
+.modern-table th:nth-child(2) {
+    width: 23%; !important;
+}
+
+.modern-table th:nth-child(6) {
+    width: 15%;
+}

@@ -1,23 +1,26 @@
 package vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.base.BaseSearchFilter;
 
 import java.sql.Timestamp;
 
 public class TagFilter extends BaseSearchFilter {
     private String name;
-    private int courseCount;
     private String slug;
-    private Timestamp createdAt;
-
-    public TagFilter(String name, int courseCount, String slug, Timestamp createdAt) {
-        this.name = name;
-        this.courseCount = courseCount;
-        this.slug = slug;
-        this.createdAt = createdAt;
-    }
+    private Timestamp fromDate;
+    private Timestamp toDate;
+    private BaseStatus status;
 
     public TagFilter() {
+    }
+
+    public TagFilter(String name, String slug, Timestamp fromDate, Timestamp toDate, BaseStatus status) {
+        this.name = name;
+        this.slug = slug;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.status = status;
     }
 
     public String getName() {
@@ -28,14 +31,6 @@ public class TagFilter extends BaseSearchFilter {
         this.name = name;
     }
 
-    public int getCourseCount() {
-        return courseCount;
-    }
-
-    public void setCourseCount(int courseCount) {
-        this.courseCount = courseCount;
-    }
-
     public String getSlug() {
         return slug;
     }
@@ -44,11 +39,27 @@ public class TagFilter extends BaseSearchFilter {
         this.slug = slug;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getFromDate() {
+        return fromDate;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setFromDate(Timestamp fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Timestamp getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Timestamp toDate) {
+        this.toDate = toDate;
+    }
+
+    public BaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BaseStatus status) {
+        this.status = status;
     }
 }
