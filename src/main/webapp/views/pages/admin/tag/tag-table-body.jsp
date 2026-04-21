@@ -25,13 +25,13 @@
                     </c:choose>
                 </td>
                 <td class="action-btns">
-                    <a href="admin/tag/detail?id=${tag.id}">
+                    <a href="admin/tag/detail?id=${t.id}">
                         <button type="button" class="icon-action-btn">
                             <i class="fa-solid fa-pen"></i>
                         </button>
                     </a>
                     <button type="button"
-                            onclick="openConfirmModal(${tag.id}, 'admin/tag/delete', 'Bạn có chắc chắn muốn xóa thẻ này?')"
+                            onclick="openConfirmModal(${t.id}, 'admin/tag/delete', 'Bạn có chắc chắn muốn xóa thẻ này?')"
                             class="icon-action-btn">
                         <i class="fa-solid fa-trash"></i>
                     </button>

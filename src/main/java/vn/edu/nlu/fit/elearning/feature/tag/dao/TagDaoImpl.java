@@ -90,17 +90,21 @@ public class TagDaoImpl extends BaseDao implements TagDao {
 
     @Override
     public int update(Tag entity) {
-        String sql = "UPDATE tags \n" +
-                "SET name= :name , slug = :slug \n" +
-                "WHERE id = :id";
-      return  getJdbi().withHandle(handle -> {
-            return handle.createUpdate(sql)
-                    .bind("name",entity.getName())
-                    .bind("slug",entity.getSlug())
-                    .bind("id",entity.getId())
-                    .execute();
-
-        });
+        String sql = """
+        UPDATE tags
+        SET name = :name,
+            slug = :slug,
+            status = :status
+        WHERE id = :id
+    """;
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("name", entity.getName())
+                        .bind("slug", entity.getSlug())
+                        .bind("status", entity.getStatus().name())
+                        .bind("id", entity.getId())
+                        .execute()
+        );
     }
 
     @Override
