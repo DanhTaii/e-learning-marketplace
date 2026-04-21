@@ -29,4 +29,6 @@ public interface CourseService {
     int countAllCourseAdmin(CourseFilter filter);
 
     List<CourseCardDto> getCourseSuggestByTitle(String keyword);
+
+    int getTotalCourses();
 }

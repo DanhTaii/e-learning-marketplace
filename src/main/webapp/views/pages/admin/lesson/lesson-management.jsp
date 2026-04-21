@@ -45,7 +45,7 @@
                                     Bài học
                                     <div class="header__meta">
                                         <span class="header__subtitle">
-                                                Quản lý tất cả bài học trên hệ thống
+                                                Quản lý tất cả bài học
                                         </span>
                                         <span class="header__count">
                                                 ${totalLessons} bài học

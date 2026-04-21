@@ -110,4 +110,9 @@ public class CourseServiceImpl implements CourseService {
         return cd.findCourseSuggestByTitle(keyword);
     }
 
+    @Override
+    public int getTotalCourses() {
+        return cd.countAllCourses();
+    }
+
 }

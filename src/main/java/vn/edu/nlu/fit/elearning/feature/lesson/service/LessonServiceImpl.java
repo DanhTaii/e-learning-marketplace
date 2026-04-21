@@ -85,7 +85,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public int deleteLessonByids(List<Integer> ids) {
+    public int deleteLessonByIds(List<Integer> ids) {
         return lessonDao.deleteLessonByIds(ids);
     }
 

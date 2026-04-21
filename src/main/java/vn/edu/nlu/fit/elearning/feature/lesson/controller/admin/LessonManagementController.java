@@ -78,7 +78,7 @@ public class LessonManagementController extends BaseController {
         List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
 
         if (action.equals("delete")) {
-            int result = lessonService.deleteLessonByids(ids);
+            int result = lessonService.deleteLessonByIds(ids);
             if (result > 0) {
                 handleSuccess(request, response, "Xóa " + result + " bài học thành công", "/admin/lessons");
                 return;

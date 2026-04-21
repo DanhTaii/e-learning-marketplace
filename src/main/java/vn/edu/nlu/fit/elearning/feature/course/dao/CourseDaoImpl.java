@@ -304,4 +304,13 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
         });
     }
 
+    @Override
+    public int countAllCourses() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM courses")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
 }

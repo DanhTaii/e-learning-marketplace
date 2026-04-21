@@ -44,7 +44,17 @@
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
-                                <div class="header__title">Các khóa học</div>
+                                <div class="header__title">
+                                    Khóa học
+                                    <div class="header__meta">
+                                        <span class="header__subtitle">
+                                                Quản lý tất cả khóa học
+                                        </span>
+                                        <span class="header__count">
+                                                ${totalAllCourses} khóa học
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="admin-create__buttons">
                                     <button type="button" class="dark-button">
                                         <a href="admin/course/detail">

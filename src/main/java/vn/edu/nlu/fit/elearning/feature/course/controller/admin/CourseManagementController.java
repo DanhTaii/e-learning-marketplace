@@ -54,8 +54,10 @@ public class CourseManagementController extends BaseController {
         int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
 
         PageResponse<Course> result = new PageResponse<>(listCourses, page, totalPages, totalCourses, pageSize);
+        int totalAllCourses = courseServiceImpl.getTotalCourses();
 
         request.setAttribute("result", result);
+        request.setAttribute("totalAllCourses", totalAllCourses);
         request.setAttribute("currentPage", "courses");
 
         String type = request.getParameter("renderType");
