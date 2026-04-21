@@ -24,7 +24,7 @@ public interface CourseService {
 
     CourseCardDto getCourseCardById(int id, int userId);
 
-    List<Course> getAllCourses(CourseFilter filter, int pageSize, int offset);
+    List<Course> getAllCourses(CourseFilter filter);
 
     int countAllCourseAdmin(CourseFilter filter);
 

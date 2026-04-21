@@ -33,6 +33,6 @@
 
 <jsp:include page="/views/components/pagination-base.jsp">
     <jsp:param name="baseUrl" value="admin/courses"/>
-    <jsp:param name="currentPageNumber" value="${result.currentPage}"/>
-    <jsp:param name="totalPages" value="${result.totalPage}"/>
+    <jsp:param name="currentPageNumber" value="${currentPageNumber}"/>
+    <jsp:param name="totalPages" value="${totalPages}"/>
 </jsp:include>

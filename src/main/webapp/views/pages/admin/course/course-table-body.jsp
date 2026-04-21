@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <fmt:setLocale value="vi_VN"/>
 
-<c:forEach var="course" items="${result.data}">
+<c:forEach var="course" items="${listCourses}">
     <tr class="course-row">
         <td>
             <input type="checkbox" name="item-checkbox" class="course-checkbox item-checkbox" value="${course.id}">
@@ -68,7 +68,7 @@
         </td>
     </tr>
 </c:forEach>
-<c:if test="${empty result.data}">
+<c:if test="${empty listCourses}">
     <tr>
         <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
             <div class="search-empty-state"

@@ -29,7 +29,8 @@ public class CourseManagementController extends BaseController {
         // Xứ lý bộ lọc tìm kiếm
         CourseFilter courseFilter = new CourseFilter();
         courseFilter.setTitle(request.getParameter("courseTitle"));
-        courseFilter.setCreatedAt(request.getParameter("dateFrom"));
+        courseFilter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        courseFilter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
         String isPublicParam = request.getParameter("isPublic");
         if ("public".equals(isPublicParam)) {
             courseFilter.setPublic(true);
@@ -41,24 +42,22 @@ public class CourseManagementController extends BaseController {
         courseFilter.setLevel(request.getParameter("level"));
 
         //Xử lý chia trang
-        //Lấy tổng số trang
-        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-        //1 trang tối đa 16 phần tử
-        int pageSize = 16;
-        //
-        int offset = (page - 1) * pageSize;
-        List<Course> listCourses = courseServiceImpl.getAllCourses(courseFilter, pageSize, offset);
+        courseFilter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        courseFilter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
-        // Tính toán phân trang
-        int totalCourses = courseServiceImpl.countAllCourseAdmin(courseFilter);
-        int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
+        List<Course> listCourses = courseServiceImpl.getAllCourses(courseFilter);
+        //Tính toán tổng số trang hiện tại
+        int totalRecords = courseServiceImpl.countAllCourseAdmin(courseFilter);
+        int totalPages = (int) Math.ceil((double) totalRecords / courseFilter.getSize());
 
-        PageResponse<Course> result = new PageResponse<>(listCourses, page, totalPages, totalCourses, pageSize);
         int totalAllCourses = courseServiceImpl.getTotalCourses();
 
-        request.setAttribute("result", result);
         request.setAttribute("totalAllCourses", totalAllCourses);
         request.setAttribute("currentPage", "courses");
+        request.setAttribute("listCourses", listCourses);
+        request.setAttribute("filter", courseFilter);
+        request.setAttribute("currentPageNumber", courseFilter.getPage());
+        request.setAttribute("totalPages", totalPages);
 
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {

@@ -24,7 +24,7 @@ public interface CourseDao {
 
     CourseCardDto findCourseCardById(int id, int userId);
 
-    List<Course> filterAllCourses(CourseFilter filter, int limit, int offset);
+    List<Course> filterAllCourses(CourseFilter filter);
 
     int countAdminAllCourses(CourseFilter filter);
 

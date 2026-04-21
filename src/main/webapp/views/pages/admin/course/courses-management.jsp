@@ -104,7 +104,7 @@
                                             <div class="filter-group">
                                                 <label>Từ ngày</label>
                                                 <input type="date"
-                                                       name="dateFrom"
+                                                       name="fromDate"
                                                        value="${param.dateFrom}">
                                             </div>
 
@@ -127,6 +127,13 @@
                                                     <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>Trung cấp</option>
                                                     <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>Cao cấp</option>
                                                 </select>
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date"
+                                                       name="toDate"
+                                                       value="${param.dateTo}">
                                             </div>
 
                                         </div>

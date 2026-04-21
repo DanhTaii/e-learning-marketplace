@@ -80,8 +80,8 @@ public class CourseServiceImpl implements CourseService {
 //    }
 
     @Override
-    public List<Course> getAllCourses(CourseFilter filter, int pageSize, int offset) {
-        return cd.filterAllCourses(filter, pageSize, offset);
+    public List<Course> getAllCourses(CourseFilter filter) {
+        return cd.filterAllCourses(filter);
     }
 
     @Override
