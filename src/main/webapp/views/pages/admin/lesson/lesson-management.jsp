@@ -164,7 +164,6 @@
 </body>
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>

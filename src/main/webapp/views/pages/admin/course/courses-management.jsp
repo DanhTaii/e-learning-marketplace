@@ -13,17 +13,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quản lý khóa học</title>
     <base href="${pageContext.request.contextPath}/">
+
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/course/course-management.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-
-    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -51,128 +55,190 @@
                             </div>
 
                             <div class="container-2__body">
-                                <form action="admin/course/search" method="GET">
-                                    <div class="container-2__filter">
-                                        <div class="filter__selection">
-                                            <div class="filter__selection-input">
-                                                <div class="filter__selection-items filter__selection-name">
-                                                    <div class="filter__selection-title  filter__item-label">Tên khóa học:
-                                                    </div>
-                                                    <input placeholder="" type="text" class="admin-input__long"
-                                                           name="courseTitle" value="${param.courseTitle}">
-                                                </div>
-                                                <div class="filter__selection-items">
-                                                    <div class="filter__selection-title">Từ ngày</div>
-                                                    <input placeholder="" type="date" class="admin-input__long"
-                                                           name="dateFrom" value="${param.dateFrom}">
-                                                </div>
-                                                <div class="filter__selection-items-select">
-                                                    <div class="filter__selection-title">Trạng thái:</div>
-                                                    <select name="isPublic" class="combobox admin-input__short">
-                                                        <option value="" ${empty param.isPublic ? 'selected' : ''}>Tất cả
-                                                        </option>
-                                                        <option value="public" ${param.isPublic == 'public' ? 'selected' : ''}>
-                                                            Công khai
-                                                        </option>
-                                                        <option value="private" ${param.isPublic == 'private' ? 'selected' : ''}>
-                                                            Riêng tư
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="filter__selection-items-select">
-                                                    <div class="filter__selection-title">Cấp độ:</div>
-                                                    <select name="level" class="combobox admin-input__short">
-                                                        <option value="" ${empty param.level ? 'selected' : ''}>Tất cả
-                                                        </option>
-                                                        <option value="beginner" ${param.level == 'beginner' ? 'selected' : ''}>
-                                                            Sơ cấp
-                                                        </option>
-                                                        <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>
-                                                            Trung cấp
-                                                        </option>
-                                                        <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>
-                                                            Cao cấp
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="filter__button-search">
-                                                <button type="submit" class="admin-search-btn">
+                                <form action="admin/courses" method="GET" class="advanced-filter" id="filterForm">
+
+                                    <script>
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
+
+                                    <!-- HEADER -->
+                                    <div class="filter-header" onclick="toggleFilter()">
+                                        <h2 class="filter-title">
+                                            <i class="fa-solid fa-filter"></i>
+                                            Bộ lọc nâng cao
+                                        </h2>
+                                        <div class="filter-toggle-icon" id="toggleIcon">
+                                            <i class="fa-solid fa-sliders"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- CONTENT -->
+                                    <div class="filter-content" id="courseFilterContent">
+                                        <div class="filter-grid">
+
+                                            <!-- Tên khóa học -->
+                                            <div class="filter-group">
+                                                <label>Tên khóa học</label>
+                                                <div class="input-with-icon">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                                </button>
+                                                    <input type="text"
+                                                           name="courseTitle"
+                                                           value="${param.courseTitle}"
+                                                           placeholder="Nhập tên khóa học...">
+                                                </div>
                                             </div>
 
+                                            <!-- Từ ngày -->
+                                            <div class="filter-group">
+                                                <label>Từ ngày</label>
+                                                <input type="date"
+                                                       name="dateFrom"
+                                                       value="${param.dateFrom}">
+                                            </div>
 
+                                            <!-- Trạng thái -->
+                                            <div class="filter-group">
+                                                <label>Trạng thái</label>
+                                                <select name="isPublic">
+                                                    <option value="" ${empty param.isPublic ? 'selected' : ''}>Tất cả</option>
+                                                    <option value="public" ${param.isPublic == 'public' ? 'selected' : ''}>Công khai</option>
+                                                    <option value="private" ${param.isPublic == 'private' ? 'selected' : ''}>Riêng tư</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Cấp độ -->
+                                            <div class="filter-group">
+                                                <label>Cấp độ</label>
+                                                <select name="level">
+                                                    <option value="" ${empty param.level ? 'selected' : ''}>Tất cả</option>
+                                                    <option value="beginner" ${param.level == 'beginner' ? 'selected' : ''}>Sơ cấp</option>
+                                                    <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>Trung cấp</option>
+                                                    <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>Cao cấp</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- ACTIONS -->
+                                        <div class="filter-actions">
+                                            <a href="admin/courses" class="btn-clear">
+                                                <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                            </a>
+                                            <button type="submit" class="dark-button btn-submit">
+                                                Áp dụng bộ lọc
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
-
                                 <div class="container-2__list-student">
+                                    <table class="modern-table">
+                                        <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="selectAll"></th>
+                                            <th>Khóa học</th>
+<%--                                            <th>Thời lượng</th>--%>
+                                            <th>Học viên</th>
+<%--                                            <th>Cấp độ</th>--%>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="course" items="${result.data}">
+                                            <tr class="course-row">
+                                                <td>
+                                                    <input type="checkbox" name="item-checkbox" class="course-checkbox item-checkbox" value="${course.id}">
+                                                </td>
+                                                <td>
+                                                    <div class="content__title">
+                                                            ${course.title}
+                                                    </div>
+                                                    <div class="content__sub-title">Cấp độ: ${course.level.vietnameseName} • ${course.durationText}</div>
+                                                </td>
+<%--                                                <td>--%>
+<%--                                                    <div class="course-row__duration course-row__font-content">--%>
+<%--                                                            ${course.durationText}--%>
+<%--                                                    </div>--%>
+<%--                                                </td>--%>
+                                                <td>
+                                                    <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
+                                                </td>
+<%--                                                <td>--%>
+<%--                                                    <div class="course-row__level course-row__font-content">--%>
+<%--                                                        <div class="level-dot"></div>--%>
+<%--                                                            ${course.level.vietnameseName}--%>
+<%--                                                    </div>--%>
+<%--                                                </td>--%>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${course.isPublic}">
+                                                            <div class="course-row__status course-row__font-content course-row__status-public">
+                                                                Công khai
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="course-row__status course-row__font-content course-row__status-private">
+                                                                Riêng tư
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <div class="course-row__created course-row__font-content">
+                                                        <fmt:setLocale value="en_US" scope="page"/>
 
-                                    <div class="admin-table-responsive">
-                                        <table id="admin-course-table">
-                                            <thead>
-                                            <tr>
-                                                <th>Khóa học</th>
-                                                <th>Thời lượng</th>
-                                                <th>Học viên</th>
-                                                <th>Cấp độ</th>
-                                                <th>Trạng thái</th>
-                                                <th>Ngày tạo</th>
-                                                <th>Hành động</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="admin-course-table-body">
-                                            </tbody>
-                                        </table>
-
-                                        <template id="tpl-empty-state">
-                                            <tr>
-                                                <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                    <div class="search-empty-state">
-                                                        <i class="fa-solid fa-book-open search-empty-icon"></i>
-                                                        <div class="search-empty-title">
-                                                            Không tìm thấy khóa học nào
-                                                        </div>
+                                                        <fmt:formatDate
+                                                                value="${course.createdAt}"
+                                                                pattern="dd-MM-YYYY"/>
                                                     </div>
                                                 </td>
-                                            </tr>
-                                        </template>
-
-                                        <template id="course-row-template">
-                                            <tr class="course-row">
-                                                <td><div class="course-row__title title course-row__style-text js-title"></div></td>
-                                                <td><div class="course-row__duration js-duration"></div></td>
-                                                <td><div class="course-row__total__enrollment js-enrollment"></div></td>
-                                                <td><div class="course-row__level js-level"></div></td>
-                                                <td><div class="course-row__status js-status"></div></td>
-                                                <td><div class="course-row__created js-created"></div></td>
                                                 <td class="action__button">
                                                     <div class="action-wrapper">
-                                                        <a href="" class="js-edit-link">
-                                                            <button type="button" class="icon-action-btn"><i class="fa-solid fa-pen"></i></button>
+                                                        <a href="admin/course/detail?id=${course.id}">
+                                                            <button type="button"
+                                                                    class="icon-action-btn">
+                                                                <i class="fa-solid fa-pen"></i>
+                                                            </button>
                                                         </a>
-                                                        <button type="button" class="icon-action-btn js-delete-btn">
+                                                        <button type="button" class="icon-action-btn"
+                                                                onclick="openConfirmModal(${course.id})">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </template>
-
-                                        <jsp:include page="/views/components/pagination.jsp"/>
-                                    </div>
-
-                                    <div class="admin-pagination-container">
-                                        <div class="admin-pagination-wrapper">
-                                            <ul id="admin-pagination-list" class="pagination home-product__pagination">
-                                            </ul>
-                                            <div id="pagination-info-text" class="pagination-info">
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                        </c:forEach>
+                                        <c:if test="${empty result.data}">
+                                            <tr>
+                                                <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
+                                                    <div class="search-empty-state"
+                                                         style="text-align: center; padding: 40px 0;">
+                                                        <i class="fa-solid fa-book-open search-empty-icon"
+                                                           style="font-size: 3rem; color: #ccc;"></i>
+                                                        <div class="search-empty-title"
+                                                             style="font-size: 1.8rem; font-weight: bold; margin-top: 15px;">
+                                                            Không tìm thấy khóa học nào
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                        </tbody>
+                                    </table>
+                                    <jsp:include page="/views/components/bulk-action-bar.jsp">
+                                        <jsp:param name="label" value="bài học"/>
+                                        <jsp:param name="showDuplicate" value="true"/>
+                                    </jsp:include>
                                 </div>
+
+                                <jsp:include page="/views/components/pagination-base.jsp">
+                                    <jsp:param name="baseUrl" value="admin/courses"/>
+                                    <jsp:param name="currentPageNumber" value="${result.currentPage}"/>
+                                    <jsp:param name="totalPages" value="${result.totalPage}"/>
+                                </jsp:include>
                             </div>
                         </div>
                     </div>
@@ -181,30 +247,14 @@
         </div>
     </div>
 </div>
-
-<%--COMPONENT CONFIRM FOR DELETE--%>
-<div id="confirm-delete-modal" class="modal">
-    <div class="modal-content">
-        <h3><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận xóa</h3>
-        <p>Bạn có chắc chắn muốn xóa khóa học này không?</p>
-        <div>
-            <button onclick="closeModal('confirm-delete-modal')" class="button btn-cancel">
-                Hủy
-            </button>
-            <button id="btn-confirm-delete" class="button dark-button">
-                Xóa ngay
-            </button>
-        </div>
-    </div>
-</div>
-<%--DELETE ACTION--%>
-<form id="delete-form-id" action="admin/course/delete" method="post" class="form">
-    <input id="input-delete-id" type="hidden" name="id">
-</form>
+<jsp:include page="/views/components/confirm-delete.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
 
-<script src="assets/javascript/utils/pagination/course/course-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>

@@ -8,15 +8,15 @@
 
         <c:forEach var="lesson" items="${listLessons}">
             <tr>
-                <td><input type="checkbox" name="item-checkbox" class="lesson-checkbox item-checkbox" value="${lesson.id}">
+                <td><input type="checkbox" name="item-checkbox" class="lesson-checkbox item-checkbox"
+                           value="${lesson.id}">
                 </td>
                 <td>
                     <div class="lesson-info">
                         <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
                         <div class="lesson-text">
-                            <div class="lesson-name">${lesson.title}</div>
-                            <div class="lesson-sub">Chương ${lesson.orderIndex} •
-                                Bài ${lesson.orderIndex}</div>
+                            <div class="content__title">${lesson.title}</div>
+                            <div class="content__sub-title">Chương ${lesson.orderIndex} • Bài ${lesson.orderIndex}</div>
                         </div>
                     </div>
                 </td>
