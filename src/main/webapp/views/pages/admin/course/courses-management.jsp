@@ -158,5 +158,6 @@
 <script src="assets/javascript/utils/pagination/base-pagination.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

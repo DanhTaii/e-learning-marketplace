@@ -60,4 +60,5 @@ function setupAutoFilter({formId, tableBodyId, url, deplay = 500}) {
             })
     }
 
+    currentForm.addEventListener('submit', (e) => e.preventDefault())
 }
