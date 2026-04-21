@@ -25,4 +25,8 @@ public interface TagDao {
 
     int countTags();
 
+    Tag findBySlug(String slug);
+
+    Tag findBySlugExcludeId(String slug, int excludeId);
+
 }

@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.tag.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
@@ -10,13 +11,16 @@ import java.util.List;
 public class TagDaoImpl extends BaseDao implements TagDao {
     @Override
     public int create(Tag entity) {
-        String sql = "INSERT INTO tags (name,slug)\n" +
-                "VALUES (:name,:slug)";
-        return getJdbi().withHandle(handle -> {
-            return handle.createUpdate(sql)
-                    .bindBean(entity)
-                    .execute();
-        });
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+            INSERT INTO tags(name, slug, status)
+            VALUES (:name, :slug, :status)
+        """)
+                        .bind("name", entity.getName())
+                        .bind("slug", entity.getSlug())
+                        .bind("status", entity.getStatus().name())
+                        .execute()
+        );
     }
 
     @Override
@@ -35,7 +39,7 @@ public class TagDaoImpl extends BaseDao implements TagDao {
     public List<Tag> findByName(String name) {
         String nameSearch = "%" + name + "%";
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
+            return handle.createQuery("SELECT t.id, t.name, t.slug, t.status, COUNT(ct.course_id) AS course_count, t.created_at " +
                             "FROM tags t " +
                             "LEFT JOIN course_tags ct ON t.id = ct.tag_id " +
                             "WHERE t.name LIKE :nameSearch " +
@@ -47,7 +51,7 @@ public class TagDaoImpl extends BaseDao implements TagDao {
     @Override
     public List<Tag> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT t.id ,t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at" +
+            return handle.createQuery("SELECT t.id ,t.name, t.slug, t.status, COUNT(ct.course_id) AS course_count, t.created_at" +
                     " FROM tags t LEFT JOIN course_tags ct ON t.id = ct.tag_id" +
                     " GROUP BY t.id;").mapToBean(Tag.class).list();
         });
@@ -55,15 +59,17 @@ public class TagDaoImpl extends BaseDao implements TagDao {
 
     @Override
     public List<Tag> findTags(TagFilter filter) {
-        String sql = "SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
+        String sql = "SELECT t.id, t.name, t.slug, t.status, COUNT(ct.course_id) AS course_count, t.created_at " +
                 "FROM tags t " +
                 "LEFT JOIN course_tags ct ON t.id = ct.tag_id " +
-                "GROUP BY t.id, t.name, t.slug, t.created_at " +
-                "LIMIT :offset, 10";
+                "GROUP BY t.id " +
+                "LIMIT :limit OFFSET :offset";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind("offset", filter.getOffSet())
+                        .bind("limit", filter.getSize())
+                        .bind("offset", (filter.getPage() - 1) * filter.getSize())
                         .mapToBean(Tag.class)
                         .list()
         );
@@ -123,6 +129,37 @@ public class TagDaoImpl extends BaseDao implements TagDao {
                         .bind("courseId", courseId)
                         .mapToBean(TagDto.class)
                         .list()
+        );
+    }
+
+    @Override
+    public Tag findBySlug(String slug) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+            SELECT id, name, slug, status
+            FROM tags
+            WHERE slug = :slug
+        """)
+                        .bind("slug", slug)
+                        .mapToBean(Tag.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public Tag findBySlugExcludeId(String slug, int excludeId) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+            SELECT id, name, slug, status
+            FROM tags
+            WHERE slug = :slug AND id != :id
+        """)
+                        .bind("slug", slug)
+                        .bind("id", excludeId)
+                        .mapToBean(Tag.class)
+                        .findFirst()
+                        .orElse(null)
         );
     }
 

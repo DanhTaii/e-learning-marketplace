@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.tag.model;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -13,18 +15,30 @@ public class Tag implements Serializable {
 
     private String slug;
 
+    private BaseStatus status;
+
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
     public Tag() {
     }
 
-    public Tag(int id, String name, int courseCount, String slug, Timestamp createdAt) {
+    public Tag(int id, String name, int courseCount, String slug, BaseStatus status, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.name = name;
         this.courseCount = courseCount;
         this.slug = slug;
+        this.status = status;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public BaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BaseStatus status) {
+        this.status = status;
     }
 
     public int getId() {

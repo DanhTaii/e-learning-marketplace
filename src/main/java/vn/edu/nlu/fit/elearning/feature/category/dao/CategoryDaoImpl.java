@@ -49,15 +49,17 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
     @Override
     public int update(Category entity) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("UPDATE categories\n" +
-                            "SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon, status = :status " +
-                            "WHERE id = :id")
+            return handle.createUpdate("""
+            UPDATE categories
+            SET name = :name, slug = :slug, parent_id = :parentId, icon_url = :icon, status = :status
+            WHERE id = :id
+        """)
                     .bind("name", entity.getName())
                     .bind("slug", entity.getSlug())
-                    .bind("parentId", entity.getParentId())
+                    .bind("parentId", entity.getParentId() == 0 ? null : entity.getParentId())
                     .bind("icon", entity.getIconUrl())
-                    .bind("id", entity.getId())
                     .bind("status", entity.getStatus().name())
+                    .bind("id", entity.getId())
                     .execute();
         });
     }
@@ -126,30 +128,6 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
                         .mapToBean(Category.class)
                         .findFirst()
                         .orElse(null)
-        );
-    }
-
-    @Override
-    public boolean existsByName(String name) {
-        return getJdbi().withHandle(handle ->
-                handle.createQuery("""
-                SELECT COUNT(*) FROM categories WHERE name = :name
-            """)
-                        .bind("name", name)
-                        .mapTo(int.class)
-                        .one() > 0
-        );
-    }
-
-    @Override
-    public boolean existsBySlug(String slug) {
-        return getJdbi().withHandle(handle ->
-                handle.createQuery("""
-                SELECT COUNT(*) FROM categories WHERE slug = :slug
-            """)
-                        .bind("slug", slug)
-                        .mapTo(int.class)
-                        .one() > 0
         );
     }
 

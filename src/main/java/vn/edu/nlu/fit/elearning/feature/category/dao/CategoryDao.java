@@ -27,9 +27,7 @@ public interface CategoryDao {
 
     public Category findBySlug(String slug);
 
-    public boolean existsByName(String name);
 
-    public boolean existsBySlug(String slug);
 
     public Category findBySlugExcludeId(String slug, int excludeId);
 

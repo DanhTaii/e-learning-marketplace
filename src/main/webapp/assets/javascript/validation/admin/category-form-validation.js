@@ -6,7 +6,6 @@ $('#categoryForm').on('submit', function (e) {
     const slug = $('#categorySlug').val().trim();
     const parentId = $('#parentId').val().trim();
 
-    // clear lỗi cũ
     $('#error_categoryTitle').text('');
     $('#error_slug').text('');
     $('#error_parentId').text('');
@@ -29,12 +28,10 @@ $('#categoryForm').on('submit', function (e) {
         }
     }
 
-    // ❗ QUAN TRỌNG
     if (!isValid) {
         e.preventDefault();
         return false;
     }
 
-    // ✅ cho submit
     return true;
 });

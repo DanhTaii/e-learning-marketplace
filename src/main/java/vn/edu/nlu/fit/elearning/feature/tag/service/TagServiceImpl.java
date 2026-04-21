@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.tag.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
@@ -18,8 +19,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public int createTag(Tag tag) {
         if (tag != null) {
-            tagDao.create(tag);
-            return 1;
+            return tagDao.create(tag);
         }
         return 0;
     }
@@ -41,8 +41,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void deleteTag(int tagId) {
-
+    public int deleteTag(int tagId) {
+        return tagDao.delete(tagId);
     }
 
     @Override
@@ -69,6 +69,24 @@ public class TagServiceImpl implements TagService {
     @Override
     public int countTags() {
         return tagDao.countTags();
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        List<Tag> list = tagDao.findByName(name);
+        return list != null && !list.isEmpty();
+    }
+
+    @Override
+    public boolean existsBySlug(String slug) {
+        Tag tag = tagDao.findBySlug(slug);
+        return tag != null;
+    }
+
+    @Override
+    public boolean existsBySlug(String slug, int excludeId) {
+        Tag tag = tagDao.findBySlugExcludeId(slug, excludeId);
+        return tag != null;
     }
 
 }

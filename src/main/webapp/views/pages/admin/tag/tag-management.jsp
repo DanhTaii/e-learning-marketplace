@@ -8,16 +8,24 @@
     <meta charset="UTF-8">
     <title>Tag Management</title>
     <base href="${pageContext.request.contextPath}/">
+
+    <%-- Admin layout CSS --%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/tag/tag-management.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Admin component CSS --%>
+    <link rel="stylesheet" href="assets/css/admin/notification.css">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/tag-management.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 <div class="web">
@@ -30,34 +38,26 @@
                     <div class="container-2__content-body">
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Thẻ</div>
+                            <div class="header__title">
+                                Thẻ
+                                <div class="header__meta">
+                                        <span class="header__subtitle">
+                                            Quản lý tất cả thẻ
+                                        </span>
+                                    <span class="header__count">
+                                            ${listTags.size()} thẻ
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="admin-create__buttons">
+                                <button type="button" class="dark-button">
+                                    <a href="admin/tag/detail" class="admin-create-link">
+                                        <i class="fa-solid fa-plus"></i>Tạo mới
+                                    </a>
+                                </button>
+                            </div>
                         </div>
                         <div class="container-2__body">
-                            <div class="title__admin">Tạo thẻ mới</div>
-                            <form action="admin/tags" class="form" method="post">
-
-                                <div class="container-2__create">
-                                    <div class="create__selection">
-                                        <div class="create__selection-input">
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Tên của thẻ:
-                                                </div>
-                                                <input placeholder="" type="text" class="admin-input__long"
-                                                       name="nameTag" value="${oldName}">
-                                            </div>
-                                            <div class="create__selection-items">
-                                                <div class="filter__selection-title filter__item-name">Slug:</div>
-                                                <input placeholder="" type="text" class="admin-input__long"
-                                                       name="slugTag" value="${oldSlug}">
-                                            </div>
-
-                                        </div>
-                                        <div class="create__btn-create">
-                                            <button type="submit" class="create-btn dark-button">Tạo mới</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
 
                             <div class="title__admin">Tất cả thẻ (${listTags.size()})</div>
                             <form action="admin/tags/search" class="form" method="get">
