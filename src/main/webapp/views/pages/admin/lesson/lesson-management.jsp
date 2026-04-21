@@ -145,7 +145,11 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
+
+                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
+                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="lessonTableBody">
                                         <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>

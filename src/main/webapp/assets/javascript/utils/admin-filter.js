@@ -30,10 +30,20 @@ function setupAutoFilter({formId, tableBodyId, url, deplay = 500}) {
 
             debounceTimer = setTimeout(() => {
                 const formData = new FormData(currentForm)
-                formData.append("renderType", "partial")
-                const params = new URLSearchParams(formData).toString()
-                loadData(params)
-            })
+                const params = new URLSearchParams()
+
+                for (const [key, value] of formData.entries()) {
+                    // Chỉ thêm vào params nếu value không rỗng và không phải chỉ có khoảng trắng
+                    if (value !== null && value.trim() !== '') {
+                        params.append(key, value);
+                    }
+                }
+
+                params.append("renderType", "partial");
+                const queryString = params.toString();
+
+                loadData(queryString)
+            }, deplay)
         }
     })
 
@@ -53,6 +63,22 @@ function setupAutoFilter({formId, tableBodyId, url, deplay = 500}) {
             .then(html => {
                 currentTableBody.innerHTML = html
                 currentTableBody.style.opacity = '1'
+
+                const params = new URLSearchParams(queryString);
+                params.delete("renderType");
+
+                const cleanQuery = params.toString();
+
+                //Đưa lại param mới kèm thằng query
+                const newUrl = window.location.pathname + (cleanQuery ? '?' + cleanQuery : '')
+                window.history.replaceState({path: newUrl}, '', newUrl);
+
+                //Gán giá trị PARAMS cho INPUT HIDDEN để bên server lấy
+                const currentQueryInput = document.getElementById('currentQueryId')
+                if (currentQueryInput) {
+                    currentQueryInput.value = cleanQuery
+                }
+
             })
             .catch(err => {
                 console.log(err)
