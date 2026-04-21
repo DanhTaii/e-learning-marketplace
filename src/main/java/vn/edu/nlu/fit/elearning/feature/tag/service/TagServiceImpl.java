@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.tag.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
@@ -87,6 +88,11 @@ public class TagServiceImpl implements TagService {
     public boolean existsBySlug(String slug, int excludeId) {
         Tag tag = tagDao.findBySlugExcludeId(slug, excludeId);
         return tag != null;
+    }
+
+    @Override
+    public int getCountTagsByFilter(TagFilter filter) {
+        return tagDao.countTagsByFilter(filter);
     }
 
 }

@@ -4,7 +4,9 @@ import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface TagDao {
     int create(Tag entity);
@@ -28,5 +30,7 @@ public interface TagDao {
     Tag findBySlug(String slug);
 
     Tag findBySlugExcludeId(String slug, int excludeId);
+
+    int countTagsByFilter(TagFilter filter);
 
 }

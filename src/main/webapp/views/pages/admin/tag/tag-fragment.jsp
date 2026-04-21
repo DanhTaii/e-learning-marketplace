@@ -28,3 +28,8 @@
     </jsp:include>
 
 </div>
+<jsp:include page="/views/components/pagination-base.jsp">
+    <jsp:param name="baseUrl" value="admin/tags"/>
+    <jsp:param name="currentPageNumber" value="${filter.page}"/>
+    <jsp:param name="totalPages" value="${totalPages}"/>
+</jsp:include>

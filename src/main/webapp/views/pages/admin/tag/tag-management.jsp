@@ -91,9 +91,14 @@
                                             <div class="filter-group">
                                                 <label>Trạng thái</label>
                                                 <select name="status">
-                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
-                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>Hoạt động</option>
-                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>Không hoạt động</option>
+                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
+                                                    </option>
+                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
+                                                        Hoạt động
+                                                    </option>
+                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
+                                                        Không hoạt động
+                                                    </option>
                                                 </select>
                                             </div>
 
@@ -121,10 +126,12 @@
                                     </div>
                                 </form>
 
-                                <div id="tagTableBody">
-                                    <jsp:include page="/views/pages/admin/tag/tag-fragment.jsp"/>
-                                </div>
-
+                                <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <input type="hidden" name="action" id="bulkActionInput" value="">
+                                    <div id="tagTableBody">
+                                        <jsp:include page="/views/pages/admin/tag/tag-fragment.jsp"/>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -140,4 +147,5 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/tag/tag-management.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

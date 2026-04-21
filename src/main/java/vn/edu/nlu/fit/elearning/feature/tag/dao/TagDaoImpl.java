@@ -59,7 +59,6 @@ public class TagDaoImpl extends BaseDao implements TagDao {
         });
     }
 
-    @Override
     public List<Tag> findTags(TagFilter filter) {
 
         StringBuilder sql = new StringBuilder("""
@@ -87,7 +86,7 @@ public class TagDaoImpl extends BaseDao implements TagDao {
             params.put("status", filter.getStatus().name());
         }
 
-        sql.append(" GROUP BY t.id, t.name, t.slug, t.status, t.created_at");
+        sql.append(" GROUP BY t.id");
         sql.append(" ORDER BY t.created_at DESC");
         sql.append(" LIMIT :limit OFFSET :offset");
 
@@ -193,6 +192,58 @@ public class TagDaoImpl extends BaseDao implements TagDao {
                         .findFirst()
                         .orElse(null)
         );
+    }
+
+    @Override
+    public int countTagsByFilter(TagFilter filter) {
+
+        Map<String, Object> params = new HashMap<>();
+        String where = buildTagWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(DISTINCT t.id) FROM tags t " + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildTagWhereClause(TagFilter filter, Map<String, Object> params) {
+
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        // 🔍 Tìm theo tên
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            where.append(" AND t.name LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getName().trim() + "%");
+        }
+
+        // 🔍 Tìm theo slug
+        if (filter.getSlug() != null && !filter.getSlug().trim().isEmpty()) {
+            where.append(" AND t.slug LIKE :slugSearch");
+            params.put("slugSearch", "%" + filter.getSlug().trim() + "%");
+        }
+
+        // 📅 From date
+        if (filter.getFromDate() != null) {
+            where.append(" AND t.created_at >= :fromDate");
+            params.put("fromDate", filter.getFromDate());
+        }
+
+        // 📅 To date
+        if (filter.getToDate() != null) {
+            where.append(" AND t.created_at <= :toDate");
+            params.put("toDate", filter.getToDate());
+        }
+
+        // 🚦 Status
+        if (filter.getStatus() != null) {
+            where.append(" AND t.status = :status");
+            params.put("status", filter.getStatus().name());
+        }
+
+        return where.toString();
     }
 
 }

@@ -35,13 +35,15 @@ public class TagManagementController extends BaseController {
         filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
         filter.setSlug(RequestUtils.getParameterAsString(request, "slug", ""));
         filter.setStatus(RequestUtils.getParameterAsStatus(request, "status"));
+        filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
 
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
         List<Tag> listTags = tagService.searchTags(filter);
 
-        int totalRecords = tagService.countTags(); // (có thể cải tiến theo filter sau)
+        int totalRecords = tagService.getCountTagsByFilter(filter);
         int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
 
         request.setAttribute("listTags", listTags);

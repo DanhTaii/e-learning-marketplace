@@ -34,4 +34,6 @@ public interface TagService {
 
     boolean existsBySlug(String slug, int excludeId);
 
+    public int getCountTagsByFilter(TagFilter filter);
+
 }
