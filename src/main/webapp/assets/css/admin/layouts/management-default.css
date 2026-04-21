@@ -389,9 +389,16 @@ table td {
 
 /* Hover */
 .modern-table tbody tr:hover {
-    background-color: #f7f7f9;
+    background-color: #fcfcfd;
 }
 
 .icon-action-btn, .modern-table a {
     cursor: auto;
 }
+.badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+

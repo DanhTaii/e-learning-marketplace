@@ -1,8 +1,11 @@
 package vn.edu.nlu.fit.elearning.feature.category.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
+import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
 
@@ -16,8 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public int createCategory(Category category) {
         if (category != null) {
-            categoryDao.create(category);
-            return 1;
+            return categoryDao.create(category);
         }
         return 0;
     }
@@ -52,5 +54,31 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.findCategoryByCourseId(courseId);
     }
 
+    @Override
+    public boolean existsByName(String name) {
+        List<Category> list = categoryDao.findByName(name);
+        return list != null && !list.isEmpty();
+    }
 
+    @Override
+    public boolean existsBySlug(String slug) {
+        Category c = categoryDao.findBySlug(slug);
+        return c != null;
+    }
+
+    @Override
+    public boolean existsBySlug(String slug, int excludeId) {
+        Category c = categoryDao.findBySlugExcludeId(slug, excludeId);
+        return c != null;
+    }
+
+    @Override
+    public List<Category> getCategoriesByFilter(CategoryFilter filter) {
+        return categoryDao.findCategoriesByFilter(filter);
+    }
+
+    @Override
+    public int getCountCategoriesByFilter(CategoryFilter filter) {
+        return categoryDao.countCategoriesByFilter(filter);
+    }
 }
