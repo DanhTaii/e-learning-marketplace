@@ -55,29 +55,67 @@
                             </div>
 
                             <div class="container-2__body">
-
                                 <form method="get" action="admin/tags" class="advanced-filter" id="filterForm">
-                                    <div class="filter-header">
+                                    <script>
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
+                                    <div class="filter-header" onclick="toggleFilter()">
                                         <h2 class="filter-title">
                                             <i class="fa-solid fa-filter"></i>
-                                            Bộ lọc
+                                            Bộ lọc nâng cao
                                         </h2>
+                                        <div class="filter-toggle-icon" id="toggleIcon">
+                                            <i class="fa-solid fa-sliders"></i>
+                                        </div>
                                     </div>
 
-                                    <div class="filter-content">
+                                    <div class="filter-content" id="filterContent">
                                         <div class="filter-grid">
                                             <div class="filter-group">
                                                 <label>Tìm kiếm thẻ</label>
-                                                <input type="text" name="searchName"
-                                                       value="${param.searchName}"
-                                                       placeholder="Nhập tên thẻ...">
+                                                <div class="input-with-icon">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                    <input type="text" name="searchName"
+                                                           value="${param.searchName}"
+                                                           placeholder="Nhập tên thẻ...">
+                                                </div>
                                             </div>
-                                        </div>
 
+                                            <div class="filter-group">
+                                                <label>Từ ngày</label>
+                                                <input type="date" name="fromDate" value="${param.fromDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Trạng thái</label>
+                                                <select name="status">
+                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
+                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>Hoạt động</option>
+                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>Không hoạt động</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Tên slug</label>
+                                                <input type="text" name="slug"
+                                                       value="${param.slug}"
+                                                       placeholder="Nhập slug...">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date" name="toDate" value="${param.toDate}">
+                                            </div>
+
+                                        </div>
                                         <div class="filter-actions">
-                                            <a href="admin/tags" class="btn-clear">Đặt lại</a>
+                                            <a href="admin/tags" class="btn-clear">
+                                                <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                            </a>
                                             <button type="submit" class="dark-button btn-submit">
-                                                Áp dụng
+                                                Áp dụng bộ lọc
                                             </button>
                                         </div>
                                     </div>
