@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.tag.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
@@ -15,7 +16,7 @@ public interface TagService {
 
     int updateTag(Tag tag);
 
-    void deleteTag(int tagId);
+    int deleteTag(int tagId);
 
     List<Tag> getAllTagsByName(String name);
 
@@ -26,5 +27,13 @@ public interface TagService {
     List<Tag> searchTags(TagFilter filter);
 
     int countTags();
+
+    boolean existsByName(String name);
+
+    boolean existsBySlug(String slug);
+
+    boolean existsBySlug(String slug, int excludeId);
+
+    public int getCountTagsByFilter(TagFilter filter);
 
 }

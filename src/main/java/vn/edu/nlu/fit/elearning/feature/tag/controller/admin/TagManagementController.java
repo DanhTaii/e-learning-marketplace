@@ -1,11 +1,14 @@
 package vn.edu.nlu.fit.elearning.feature.tag.controller.admin;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 
@@ -13,65 +16,53 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminTagController", value = "/admin/tags")
-public class TagManagementController extends HttpServlet {
+public class TagManagementController extends BaseController {
 
-    private TagService tagService;
+    private transient TagService tagService;
 
     @Override
-    public void init() {
+    public void init() throws ServletException {
+        super.init();
         this.tagService = BeanContainer.getBean(TagService.class);
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         TagFilter filter = new TagFilter();
+
+        filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
+        filter.setSlug(RequestUtils.getParameterAsString(request, "slug", ""));
+        filter.setStatus(RequestUtils.getParameterAsStatus(request, "status"));
+        filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
 
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
         List<Tag> listTags = tagService.searchTags(filter);
 
-        int totalRecords = tagService.countTags();
+        int totalRecords = tagService.getCountTagsByFilter(filter);
         int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
 
         request.setAttribute("listTags", listTags);
+        request.setAttribute("totalTags", totalRecords);
         request.setAttribute("filter", filter);
         request.setAttribute("currentPageNumber", filter.getPage());
         request.setAttribute("currentPage", "tags");
         request.setAttribute("totalPages", totalPages);
 
-        request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            this.forward(request, response, "/views/pages/admin/tag/tag-fragment.jsp");
+        } else {
+            this.forward(request, response, "/views/pages/admin/tag/tag-management.jsp");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nameTag = request.getParameter("nameTag");
-        String slugTag = request.getParameter("slugTag");
-
-        if (nameTag.isEmpty() || slugTag.isEmpty()) {
-            request.getSession().setAttribute("flashError", "Vui lòng nhập đầy đủ thông tin!");
-            request.setAttribute("listTags", tagService.getAllTags());
-            request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
-            return;
-        }
-        try {
-            Tag newTag = new Tag();
-            newTag.setName(nameTag);
-            newTag.setSlug(slugTag);
-            int checkCreate = tagService.createTag(newTag);
-            if (checkCreate == 1) {
-                request.getSession().setAttribute("flashSuccess", "Tạo danh mục thành công!");
-                response.sendRedirect(request.getContextPath() + "/admin/tags");
-
-            }
-        } catch (Exception e) {
-            request.getSession().setAttribute("flashError", "Tên hoặc Slug đã tồn tại trong hệ thống!");
-            request.setAttribute("oldName", nameTag);
-            request.setAttribute("oldSlug", slugTag);
-            request.setAttribute("listTags", tagService.getAllTags());
-            request.getRequestDispatcher("/views/pages/admin/tag/tag-management.jsp").forward(request, response);
-        }
-
+            response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Phương thức POST không được hỗ trợ cho endpoint này");
     }
-
 }

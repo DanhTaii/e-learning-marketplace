@@ -2,21 +2,27 @@ package vn.edu.nlu.fit.elearning.feature.tag.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TagDaoImpl extends BaseDao implements TagDao {
     @Override
     public int create(Tag entity) {
-        String sql = "INSERT INTO tags (name,slug)\n" +
-                "VALUES (:name,:slug)";
-        return getJdbi().withHandle(handle -> {
-            return handle.createUpdate(sql)
-                    .bindBean(entity)
-                    .execute();
-        });
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+            INSERT INTO tags(name, slug, status)
+            VALUES (:name, :slug, :status)
+        """)
+                        .bind("name", entity.getName())
+                        .bind("slug", entity.getSlug())
+                        .bind("status", entity.getStatus().name())
+                        .execute()
+        );
     }
 
     @Override
@@ -35,7 +41,7 @@ public class TagDaoImpl extends BaseDao implements TagDao {
     public List<Tag> findByName(String name) {
         String nameSearch = "%" + name + "%";
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
+            return handle.createQuery("SELECT t.id, t.name, t.slug, t.status, COUNT(ct.course_id) AS course_count, t.created_at " +
                             "FROM tags t " +
                             "LEFT JOIN course_tags ct ON t.id = ct.tag_id " +
                             "WHERE t.name LIKE :nameSearch " +
@@ -47,26 +53,53 @@ public class TagDaoImpl extends BaseDao implements TagDao {
     @Override
     public List<Tag> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT t.id ,t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at" +
+            return handle.createQuery("SELECT t.id ,t.name, t.slug, t.status, COUNT(ct.course_id) AS course_count, t.created_at" +
                     " FROM tags t LEFT JOIN course_tags ct ON t.id = ct.tag_id" +
                     " GROUP BY t.id;").mapToBean(Tag.class).list();
         });
     }
 
-    @Override
     public List<Tag> findTags(TagFilter filter) {
-        String sql = "SELECT t.id, t.name, t.slug, COUNT(ct.course_id) AS course_count, t.created_at " +
-                "FROM tags t " +
-                "LEFT JOIN course_tags ct ON t.id = ct.tag_id " +
-                "GROUP BY t.id, t.name, t.slug, t.created_at " +
-                "LIMIT :offset, 10";
 
-        return getJdbi().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind("offset", filter.getOffSet())
-                        .mapToBean(Tag.class)
-                        .list()
-        );
+        StringBuilder sql = new StringBuilder("""
+        SELECT t.id, t.name, t.slug, t.status,
+               COUNT(ct.course_id) AS course_count, t.created_at
+        FROM tags t
+        LEFT JOIN course_tags ct ON t.id = ct.tag_id
+        WHERE 1=1
+    """);
+
+        Map<String, Object> params = new HashMap<>();
+
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            sql.append(" AND t.name LIKE :name");
+            params.put("name", "%" + filter.getName().trim() + "%");
+        }
+
+        if (filter.getSlug() != null && !filter.getSlug().trim().isEmpty()) {
+            sql.append(" AND t.slug LIKE :slug");
+            params.put("slug", "%" + filter.getSlug().trim() + "%");
+        }
+
+        if (filter.getStatus() != null) {
+            sql.append(" AND t.status = :status");
+            params.put("status", filter.getStatus().name());
+        }
+
+        sql.append(" GROUP BY t.id");
+        sql.append(" ORDER BY t.created_at DESC");
+        sql.append(" LIMIT :limit OFFSET :offset");
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            params.forEach(query::bind);
+
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+
+            return query.mapToBean(Tag.class).list();
+        });
     }
 
     @Override
@@ -84,17 +117,21 @@ public class TagDaoImpl extends BaseDao implements TagDao {
 
     @Override
     public int update(Tag entity) {
-        String sql = "UPDATE tags \n" +
-                "SET name= :name , slug = :slug \n" +
-                "WHERE id = :id";
-      return  getJdbi().withHandle(handle -> {
-            return handle.createUpdate(sql)
-                    .bind("name",entity.getName())
-                    .bind("slug",entity.getSlug())
-                    .bind("id",entity.getId())
-                    .execute();
-
-        });
+        String sql = """
+        UPDATE tags
+        SET name = :name,
+            slug = :slug,
+            status = :status
+        WHERE id = :id
+    """;
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("name", entity.getName())
+                        .bind("slug", entity.getSlug())
+                        .bind("status", entity.getStatus().name())
+                        .bind("id", entity.getId())
+                        .execute()
+        );
     }
 
     @Override
@@ -124,6 +161,89 @@ public class TagDaoImpl extends BaseDao implements TagDao {
                         .mapToBean(TagDto.class)
                         .list()
         );
+    }
+
+    @Override
+    public Tag findBySlug(String slug) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+            SELECT id, name, slug, status
+            FROM tags
+            WHERE slug = :slug
+        """)
+                        .bind("slug", slug)
+                        .mapToBean(Tag.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public Tag findBySlugExcludeId(String slug, int excludeId) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+            SELECT id, name, slug, status
+            FROM tags
+            WHERE slug = :slug AND id != :id
+        """)
+                        .bind("slug", slug)
+                        .bind("id", excludeId)
+                        .mapToBean(Tag.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public int countTagsByFilter(TagFilter filter) {
+
+        Map<String, Object> params = new HashMap<>();
+        String where = buildTagWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(DISTINCT t.id) FROM tags t " + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildTagWhereClause(TagFilter filter, Map<String, Object> params) {
+
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        // 🔍 Tìm theo tên
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            where.append(" AND t.name LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getName().trim() + "%");
+        }
+
+        // 🔍 Tìm theo slug
+        if (filter.getSlug() != null && !filter.getSlug().trim().isEmpty()) {
+            where.append(" AND t.slug LIKE :slugSearch");
+            params.put("slugSearch", "%" + filter.getSlug().trim() + "%");
+        }
+
+        // 📅 From date
+        if (filter.getFromDate() != null) {
+            where.append(" AND t.created_at >= :fromDate");
+            params.put("fromDate", filter.getFromDate());
+        }
+
+        // 📅 To date
+        if (filter.getToDate() != null) {
+            where.append(" AND t.created_at <= :toDate");
+            params.put("toDate", filter.getToDate());
+        }
+
+        // 🚦 Status
+        if (filter.getStatus() != null) {
+            where.append(" AND t.status = :status");
+            params.put("status", filter.getStatus().name());
+        }
+
+        return where.toString();
     }
 
 }
