@@ -1,5 +1,8 @@
 package vn.edu.nlu.fit.elearning.feature.payment.service;
 
+import jakarta.servlet.http.HttpServletRequest;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
+import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 
 import java.util.List;
@@ -14,4 +17,6 @@ public interface PaymentService {
     void updatePayment(Payment payment);
 
     void deletePayment(int id);
+    Order createOrderPending(Integer userId, CartService cart, int paymentMethodId);
+    String generateVNPAYUrl(Order order, HttpServletRequest request);
 }

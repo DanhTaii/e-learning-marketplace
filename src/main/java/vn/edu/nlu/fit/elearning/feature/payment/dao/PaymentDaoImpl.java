@@ -9,9 +9,19 @@ public class PaymentDaoImpl extends BaseDao implements PaymentDao {
 
     @Override
     public int create(Payment entity) {
-        // TODO: Implement create logic
-        return 0;
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+                INSERT INTO payments (order_id, payment_method_id, gateway_transaction_id, amount, status, created_at, update_at)
+                VALUES (:orderId, :paymentMethodId, :gateway_transaction_id, :amount, :status, :createdAt, :updateAt)
+            """)
+                        .bindBean(entity)
+                        .bind("status", entity.getStatus().name())
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(Integer.class)
+                        .one()
+        );
     }
+
 
     @Override
     public Payment findById(Integer id) {
