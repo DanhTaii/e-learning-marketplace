@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lesson Management</title>
+    <title>Lesson Achievement</title>
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Admin Layout Css--%>
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/archive-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">
 
     <%--  Admin Component Css  --%>
@@ -26,45 +27,37 @@
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-
 </head>
 <body>
+
 <div class="web">
     <div class="web__container">
         <div class="grid">
             <div class="grid__row-2">
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
-
-                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
-
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp">
+                        <jsp:param name="baseUrl" value=""/>
+                    </jsp:include>
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
                                 <div class="header__title">
-                                    Bài học
+                                    Lưu trữ bài học
                                     <div class="header__meta">
-                                        <span class="header__subtitle">
-                                                Quản lý tất cả bài học
-                                        </span>
-                                        <span class="header__count">
-                                                ${totalLessons} bài học
-                                        </span>
+                                        <span class="header__subtitle">Quản lý và khôi phục các bài giảng đã tạm ngưng hoặc lỗi thời</span>
                                     </div>
                                 </div>
-                                <div class="admin-create__buttons">
-                                    <a href="admin/lessons/archive" class="outline-button">
-                                        <i class="fa-solid fa-box-archive"></i>
-                                        <span>Kho lưu trữ</span>
-                                    </a>
-                                    <button type="button" class="dark-button">
-                                        <a href="admin/lesson/detail" class="admin-create-link">
-                                            <i class="fa-solid fa-plus"></i>Tạo mới
-                                        </a>
-                                    </button>
 
+                                <div class="archive-summary-card">
+                                    <div class="summary-label">TỔNG LƯU TRỮ</div>
+                                    <div class="summary-value">${totalArchived != null ? totalArchived : 128}</div>
+                                    <div class="summary-footer">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="container-2__body">
                                 <form method="get" action="admin/lessons" class="advanced-filter" id="filterForm">
                                     <script>
@@ -95,50 +88,17 @@
                                                            placeholder="Nhập tên bài học...">
                                                 </div>
                                             </div>
-
                                             <div class="filter-group">
-                                                <label>Từ ngày</label>
-                                                <input type="date" name="fromDate" value="${param.fromDate}">
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Trạng thái</label>
-                                                <select name="status">
-                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
-                                                    </option>
-                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
-                                                        Hoạt động
-                                                    </option>
-                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
-                                                        Bản nháp
-                                                    </option>
-                                                </select>
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Thuộc khóa học</label>
+                                                <label>THEO KHÓA HỌC</label>
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
-                                                    <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
-                                                    </c:forEach>
                                                 </select>
                                             </div>
-
                                             <div class="filter-group">
-                                                <label>Đến ngày</label>
-                                                <input type="date" name="toDate" value="${param.toDate}">
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>&nbsp;</label>
-                                                <div class="checkbox-group">
-                                                    <label class="checkbox-container">
-                                                        <input type="checkbox"
-                                                               name="missingVideo" ${param.missingVideo != null ? 'checked' : ''}>
-                                                        Thiếu Video
-                                                    </label>
-                                                </div>
+                                                <label>THỜI GIAN LƯU TRỮ</label>
+                                                <select name="archiveTime">
+                                                    <option value="">Tất cả thời gian</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="filter-actions">
@@ -149,7 +109,8 @@
                                         </div>
                                     </div>
                                 </form>
-                                <form id="bulkActionForm" method="POST" action="admin/lessons">
+
+                                <form id="archiveBulkForm" method="POST" action="admin/lessons/archive">
                                     <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
@@ -157,25 +118,39 @@
                                     <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="lessonTableBody">
-                                        <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>
+                                        <jsp:include page="/views/pages/admin/lesson/archive/lesson-archive-fragment.jsp"/>
                                     </div>
+
+<%--                                    <div class="archive-action-bar" id="archiveBar">--%>
+<%--                                        <div class="selected-count">--%>
+<%--                                            <span class="count-circle">2</span> Đã chọn bài học--%>
+<%--                                        </div>--%>
+<%--                                        <div class="action-buttons">--%>
+<%--                                            <button type="button" class="btn-restore-bulk">--%>
+<%--                                                <i class="fa-solid fa-rotate-left"></i> Khôi phục hàng loạt--%>
+<%--                                            </button>--%>
+<%--                                            <button type="button" class="btn-delete-permanent">--%>
+<%--                                                <i class="fa-solid fa-trash-can"></i> Xóa vĩnh viễn--%>
+<%--                                            </button>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="close-bar">--%>
+<%--                                            <i class="fa-solid fa-xmark"></i>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
                                 </form>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-<jsp:include page="/views/components/confirm-delete.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
+<jsp:include page="/views/components/confirm-delete.jsp"/>
 </body>
-<%-- Javascript --%>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
-
 </html>

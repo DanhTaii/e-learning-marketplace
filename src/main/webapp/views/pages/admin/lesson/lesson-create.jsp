@@ -22,15 +22,6 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
-    <%-- Javascript --%>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
-
-    <%-- Javascript Validation--%>
-    <script src="assets/javascript/validation/admin/lesson-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
-
 </head>
 <body>
 
@@ -208,4 +199,12 @@
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/confirm-delete.jsp"/>
 </body>
+<%-- Javascript --%>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
+
+<%-- Javascript Validation--%>
+<script src="assets/javascript/validation/admin/lesson-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
