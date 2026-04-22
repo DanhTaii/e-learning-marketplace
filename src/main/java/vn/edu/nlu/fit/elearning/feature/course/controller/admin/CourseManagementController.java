@@ -69,6 +69,38 @@ public class CourseManagementController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
 
+        String query = RequestUtils.getParameterAsString(request, "currentQuery", null);
+        String newUrl = "/admin/courses?" + query;
+
+        int result = 0;
+
+        switch (action) {
+            case "delete":
+                result = courseServiceImpl.deleteCoursesByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Xóa " + result + " khóa học", newUrl);
+                    return;
+                }
+                break;
+
+            case "duplicate":
+                result = courseServiceImpl.bulkDuplicateCourses(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Nhân bản " + result + " khóa học", newUrl);
+                    return;
+                }
+                break;
+
+            case "status":
+                result = courseServiceImpl.changeCoursesStatusByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Cập nhật " + result + " khóa học", newUrl);
+                    return;
+                }
+                break;
+        }
     }
 }

@@ -83,28 +83,30 @@ public class LessonManagementController extends BaseController {
         int result = 0;
         String finalResult = result + " bài học thành công";
 
-        if (action.equals("delete")) {
-            result = lessonService.deleteLessonByIds(ids);
-            if (result > 0) {
-                handleSuccess(request, response, "Xóa " + finalResult, newPath);
-                return;
-            }
-        }
+        switch (action) {
+            case "delete":
+                result = lessonService.deleteLessonByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Xóa " + finalResult, newPath);
+                    return;
+                }
+                break;
 
-        if (action.equals("duplicate")) {
-            result = lessonService.bulkDuplicateLessons(ids);
-            if (result > 0) {
-                handleSuccess(request, response, "Nhân bản " + finalResult, newPath);
-                return;
-            }
-        }
+            case "duplicate":
+                result = lessonService.bulkDuplicateLessons(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Nhân bản " + finalResult, newPath);
+                    return;
+                }
+                break;
 
-        if (action.equals("status")) {
-            result = lessonService.changeLessonsStatusByIds(ids);
-            if (result > 0) {
-                handleSuccess(request, response, "Cập nhật trạng thái " + finalResult, newPath);
-                return;
-            }
+            case "status":
+                result = lessonService.changeLessonsStatusByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Cập nhật trạng thái " + finalResult, newPath);
+                    return;
+                }
+                break;
         }
 
         this.redirect(request, response, newPath);

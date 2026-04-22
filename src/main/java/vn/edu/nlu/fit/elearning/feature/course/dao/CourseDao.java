@@ -31,4 +31,9 @@ public interface CourseDao {
     List<CourseCardDto> findCourseSuggestByTitle(String keyword);
 
     int countAllCourses();
+
+    int deleteCoursesByIds(List<Integer> ids);
+
+    int updateCoursesStatusByIds(List<Integer> ids);
+
 }

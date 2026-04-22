@@ -19,6 +19,8 @@ const BulkActionManager = {
         //Lắng nghe nút sẽ được click trên thanh bulk
         document.addEventListener('click', (e) => {
             //Xác nhận được người dùng bấm rồi thì xác nhận xem đó là hành động nào dựa trên data-action của nút đó
+            //Tìm ra phần tử cha hoặc của chính nó mà gần nhất với selector
+            //dưới này phải tìm là button có data-action và nằm trong #actionBar
             const btn = e.target.closest('#actionBar button[data-action]');
             if (!btn) return;
 

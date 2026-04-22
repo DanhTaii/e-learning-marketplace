@@ -29,9 +29,7 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
     @Override
     public Course findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-                    return handle.createQuery("SELECT c.id, c.title, c.subtitle, c.description, c.goals, c.level, c.price, c.discount_price, c.thumbnail_url, c.is_public, c.category_id, c.author_name, c.created_at, c.updated_at\n" +
-                                    "FROM courses c\n" +
-                                    "WHERE c.id = :id ")
+                    return handle.createQuery("SELECT * FROM courses c WHERE c.id = :id ")
                             .bind("id", integer)
                             .mapToBean(Course.class)
                             .findFirst()
@@ -141,8 +139,8 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
     }
 
     String sql = "SELECT c.id, c.title, c.level, c.price, c.is_public, c.created_at, " +
-            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount,\n" +
-            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS duration_hours \n" +
+            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount, " +
+            "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS duration_hours " +
             "FROM courses c " +
             "LEFT JOIN categories cate ON c.category_id = cate.id ";
 
@@ -234,11 +232,11 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
     public List<CourseCardDto> findCourseSuggestByTitle(String keyword) {
 
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.price, c.discount_price\n" +
-                            "FROM courses c\n" +
-                            "WHERE c.is_public = TRUE\n" +
-                            "AND c.title LIKE :keyword\n" +
-                            "ORDER BY c.title\n" +
+            return handle.createQuery("SELECT c.id, c.title, c.thumbnail_url, c.price, c.discount_price " +
+                            "FROM courses c " +
+                            "WHERE c.is_public = TRUE " +
+                            "AND c.title LIKE :keyword " +
+                            "ORDER BY c.title " +
                             "LIMIT 5")
                     .bind("keyword", "%" + keyword + "%")
                     .mapToBean(CourseCardDto.class)
@@ -252,6 +250,35 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
             return handle.createQuery("SELECT COUNT(*) FROM courses")
                     .mapTo(Integer.class)
                     .one();
+        });
+    }
+
+    @Override
+    public int deleteCoursesByIds(List<Integer> ids) {
+        if(ids == null || ids.isEmpty()){
+            return 0;
+        }
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM courses WHERE id IN (<ids>)")
+                    .bindList("ids", ids)
+                    .execute();
+        });
+    }
+
+    @Override
+    public int updateCoursesStatusByIds(List<Integer> ids) {
+        if(ids == null || ids.isEmpty()){
+            return 0;
+        }
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE courses " +
+                    "SET is_public = CASE WHEN is_public = 1 THEN 0 " +
+                            "ELSE 1 END " +
+                            "WHERE id IN (<ids>) ")
+                    .bindList("ids", ids)
+                    .execute();
         });
     }
 
