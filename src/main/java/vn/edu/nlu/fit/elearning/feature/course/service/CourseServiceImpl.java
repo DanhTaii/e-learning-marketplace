@@ -80,12 +80,12 @@ public class CourseServiceImpl implements CourseService {
 //    }
 
     @Override
-    public List<Course> getAllCourses(CourseFilter filter, int pageSize, int offset) {
-        return cd.filterAllCourses(filter, pageSize, offset);
+    public List<Course> getAllCourses(CourseFilter filter) {
+        return cd.filterAllCourses(filter);
     }
 
     @Override
-    public int countAllCourseAdmin(CourseFilter filter){
+    public int countAllCourseAdmin(CourseFilter filter) {
         return cd.countAdminAllCourses(filter);
     }
 
@@ -108,6 +108,54 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseCardDto> getCourseSuggestByTitle(String keyword) {
         return cd.findCourseSuggestByTitle(keyword);
+    }
+
+    @Override
+    public int getTotalCourses() {
+        return cd.countAllCourses();
+    }
+
+    @Override
+    public int deleteCoursesByIds(List<Integer> ids) {
+        return cd.deleteCoursesByIds(ids);
+    }
+
+    @Override
+    public int bulkDuplicateCourses(List<Integer> ids) {
+        int count = 0;
+        int result = 0;
+
+        for (int id : ids) {
+            Course odinary = this.getCourseById(id);
+
+            if(odinary != null) {
+                Course clone = new Course();
+                clone.setTitle("Bản sao của " + odinary.getTitle());
+                clone.setSubtitle(odinary.getSubtitle());
+                clone.setDescription(odinary.getDescription());
+                clone.setGoals(odinary.getGoals());
+
+                clone.setCategoryId(odinary.getCategoryId());
+
+                clone.setDiscountPrice(odinary.getDiscountPrice());
+                clone.setPrice(odinary.getPrice());
+
+                clone.setIsPublic(false);
+                clone.setLevel(odinary.getLevel());
+                clone.setThumbnailUrl(odinary.getThumbnailUrl());
+
+                result = this.createCourse(clone);
+                if(result > 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public int changeCoursesStatusByIds(List<Integer> ids) {
+        return cd.updateCoursesStatusByIds(ids);
     }
 
 }

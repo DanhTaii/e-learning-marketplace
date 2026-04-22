@@ -24,9 +24,17 @@ public interface CourseService {
 
     CourseCardDto getCourseCardById(int id, int userId);
 
-    List<Course> getAllCourses(CourseFilter filter, int pageSize, int offset);
+    List<Course> getAllCourses(CourseFilter filter);
 
     int countAllCourseAdmin(CourseFilter filter);
 
     List<CourseCardDto> getCourseSuggestByTitle(String keyword);
+
+    int getTotalCourses();
+
+    int deleteCoursesByIds(List<Integer> ids);
+
+    int bulkDuplicateCourses(List<Integer> ids);
+
+    int changeCoursesStatusByIds(List<Integer> ids);
 }

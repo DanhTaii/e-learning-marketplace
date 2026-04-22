@@ -45,7 +45,7 @@
                                     Bài học
                                     <div class="header__meta">
                                         <span class="header__subtitle">
-                                                Quản lý tất cả bài học trên hệ thống
+                                                Quản lý tất cả bài học
                                         </span>
                                         <span class="header__count">
                                                 ${totalLessons} bài học
@@ -145,7 +145,11 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
+
+                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
+                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="lessonTableBody">
                                         <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>
@@ -164,8 +168,9 @@
 </body>
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/admin/lesson/action-bar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>

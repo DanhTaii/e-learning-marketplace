@@ -44,7 +44,6 @@ function openConfirmModal(
     const title = document.getElementById('confirm-modal-title');
     const confirmButton = document.getElementById('btn-confirm-delete');
 
-    // 🔥 CONFIG giống bulk (delete)
     const config = {
         text: 'xóa',
         textHeader: 'Xóa',

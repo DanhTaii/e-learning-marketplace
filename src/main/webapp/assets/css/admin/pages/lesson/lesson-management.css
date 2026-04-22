@@ -4,24 +4,6 @@
     gap: 12px;
 }
 
-.lesson-name {
-    font-weight: 600;
-    color: #333;
-    font-size: 14px;
-    margin-bottom: 2px;
-    /* Giới hạn dòng nếu tiêu đề quá dài */
-    white-space: normal;       /* Cho phép xuống dòng */
-    word-break: break-word;    /* Ngắt từ nếu từ quá dài */
-    display: block;            /* Trả về hiển thị khối mặc định */
-    overflow: visible;         /* Hiện nội dung tràn */
-    text-overflow: clip;       /* Bỏ dấu ba chấm */
-}
-
-.lesson-sub {
-    font-size: 11px;
-    color: #999;
-}
-
 /* Icon Video trạng thái */
 .icon-success { color: #2ecc71; font-size: 18px; }
 .icon-danger { color: #e74c3c; font-size: 18px; }

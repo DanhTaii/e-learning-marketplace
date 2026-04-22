@@ -77,30 +77,38 @@ public class LessonManagementController extends BaseController {
         String action = RequestUtils.getParameterAsString(request, "action", null);
         List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
 
-        if (action.equals("delete")) {
-            int result = lessonService.deleteLessonByids(ids);
-            if (result > 0) {
-                handleSuccess(request, response, "Xóa " + result + " bài học thành công", "/admin/lessons");
-                return;
-            }
+        String query = request.getParameter("currentQuery");
+        String newPath = "/admin/lessons?" + query;
+
+        int result = 0;
+        String finalResult = result + " bài học thành công";
+
+        switch (action) {
+            case "delete":
+                result = lessonService.deleteLessonByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Xóa " + finalResult, newPath);
+                    return;
+                }
+                break;
+
+            case "duplicate":
+                result = lessonService.bulkDuplicateLessons(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Nhân bản " + finalResult, newPath);
+                    return;
+                }
+                break;
+
+            case "status":
+                result = lessonService.changeLessonsStatusByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Cập nhật trạng thái " + finalResult, newPath);
+                    return;
+                }
+                break;
         }
 
-        if (action.equals("duplicate")) {
-            int result = lessonService.bulkDuplicateLessons(ids);
-            if(result > 0){
-                handleSuccess(request, response, "Nhân bản " + result + " bài học thành công", "/admin/lessons");
-                return;
-            }
-        }
-
-        if(action.equals("status")) {
-            int result = lessonService.changeLessonsStatusByIds(ids);
-            if (result > 0) {
-                handleSuccess(request, response, "Cập nhật trạng thái " + result + " bài học thành công", "/admin/lessons");
-                return;
-            }
-        }
-
-        this.redirect(request, response, "/admin/lessons");
+        this.redirect(request, response, newPath);
     }
 }

@@ -31,7 +31,7 @@ public interface LessonService {
 
     int getTotalLessons();
 
-    int deleteLessonByids(List<Integer> ids);
+    int deleteLessonByIds(List<Integer> ids);
 
     int getMaxOrderIndexByCourseId(int courseId);
 

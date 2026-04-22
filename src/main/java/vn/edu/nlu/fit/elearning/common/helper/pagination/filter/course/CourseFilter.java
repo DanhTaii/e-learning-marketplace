@@ -1,6 +1,10 @@
 package vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course;
 
-public class CourseFilter {
+import vn.edu.nlu.fit.elearning.common.helper.pagination.base.BaseSearchFilter;
+
+import java.sql.Timestamp;
+
+public class CourseFilter extends BaseSearchFilter {
     private Integer categoryId;
     private String title;
     private String level;
@@ -9,7 +13,8 @@ public class CourseFilter {
     private String duration;
     private Boolean isPublic;
     private String sortPrice;
-    private String createdAt;
+    private Timestamp fromDate;
+    private Timestamp toDate;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -75,11 +80,19 @@ public class CourseFilter {
         this.sortPrice = sortPrice;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public Timestamp getFromDate() {
+        return fromDate;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setFromDate(Timestamp fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Timestamp getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Timestamp toDate) {
+        this.toDate = toDate;
     }
 }
