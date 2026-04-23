@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.common.external.mail.MailService;
+import vn.edu.nlu.fit.elearning.common.external.mail.SendGridService;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
@@ -48,7 +48,7 @@ public class ForgetPasswordController extends HttpServlet {
                 return;
             }
 
-            String token = MailService.generateToken();
+            String token = SendGridService.generateToken();
 //        System.out.println("Token được tạo: " + token);
 
 
@@ -73,7 +73,7 @@ public class ForgetPasswordController extends HttpServlet {
                 return;
             }
 
-            boolean isSend = MailService.sendEmail(email, token, user.getUsername());
+            boolean isSend = SendGridService.sendEmail(email, token, user.getUsername());
             if (!isSend) {
                 request.setAttribute("error", "Gửi không thành công!");
                 request.getRequestDispatcher("/views/pages/auth/forgot-password.jsp").forward(request, response);
