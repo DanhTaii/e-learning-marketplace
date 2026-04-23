@@ -402,6 +402,12 @@ table td {
     font-weight: 600;
 }
 
+.badge-reason {
+    background: #E6E8EA;
+    color: #55565D;
+}
+
+
 .content__title {
     font-weight: 600;
     color: #333;

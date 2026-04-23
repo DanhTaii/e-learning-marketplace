@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="container-2__body">
-                                <form method="get" action="admin/lessons" class="advanced-filter" id="filterForm">
+                                <form method="get" action="admin/lessons/archive" class="advanced-filter" id="filterForm">
                                     <script>
                                         //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
                                         //Nó sẽ vô tình trạng đóng mở ngay lập tức
@@ -94,12 +94,12 @@
                                                     <option value="">Tất cả khóa học</option>
                                                 </select>
                                             </div>
-                                            <div class="filter-group">
-                                                <label>THỜI GIAN LƯU TRỮ</label>
-                                                <select name="archiveTime">
-                                                    <option value="">Tất cả thời gian</option>
-                                                </select>
-                                            </div>
+<%--                                            <div class="filter-group">--%>
+<%--                                                <label>THỜI GIAN LƯU TRỮ</label>--%>
+<%--                                                <select name="archiveTime">--%>
+<%--                                                    <option value="">Tất cả thời gian</option>--%>
+<%--                                                </select>--%>
+<%--                                            </div>--%>
                                         </div>
                                         <div class="filter-actions">
                                             <a href="admin/lessons" class="btn-clear">

@@ -1,7 +1,9 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
 import com.sun.mail.imap.protocol.ListInfo;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
+import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.List;
@@ -40,4 +42,11 @@ public interface LessonService {
     int changeLessonsStatusByIds(List<Integer> ids);
 
     int archiveLessonsByIds(List<Integer> ids, String deleteReason);
+
+    int getTotalLessonsArchive();
+
+    List<LessonArchive> getArchivedLessonsByFilter(LessonArchiveFilter filter);
+
+    int getCountLessonsArchiveByFilter(LessonArchiveFilter filter);
+
 }

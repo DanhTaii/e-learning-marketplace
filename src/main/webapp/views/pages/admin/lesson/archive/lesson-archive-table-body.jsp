@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:choose>
     <c:when test="${archivedLessons != null}">
@@ -8,18 +8,26 @@
             <tr>
                 <td><input type="checkbox" class="item-checkbox" value="${item.id}"></td>
                 <td>
-                    <div class="lesson-info">
-                        <img src="${item.thumbnailUrl}" class="lesson-thumb-mini">
-                        <span>${item.title}</span>
-                    </div>
+                    <div class="content__title">${item.title}</div>
                 </td>
-                <td>${item.courseName}</td>
-                <td><fmt:formatDate value="${item.archivedAt}"
+                <td>${item.courseTitle}</td>
+                <td><fmt:formatDate value="${item.deletedAt}"
                                     pattern="dd/MM/yyyy"/></td>
                 <td>
-                    <span class="badge badge-reason">${item.reason}</span>
+                    <span class="badge badge-reason">${item.deleteReason}</span>
                 </td>
-                <td class="action-btns"></td>
+                <td class="action-btns">
+                    <button onclick="setupConfirmModal({action: 'restore', ids: ${lesson.id}, url: 'admin/lesson/restore', isBulk: false})"
+                            type="button"
+                            class="icon-action-btn">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                    <button onclick="setupConfirmModal({action: 'delete', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})"
+                            type="button"
+                            class="icon-action-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
             </tr>
         </c:forEach>
     </c:when>

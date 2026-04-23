@@ -1,10 +1,11 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
+import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
 
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -271,6 +272,15 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
     }
 
     @Override
+    public int countAllLessonsArchive() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM lessons WHERE is_deleted = 1")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
+    @Override
     public int archivedLessonsByIds(List<Integer> ids, String deleteReason) {
         if (ids == null || ids.isEmpty()) return 0;
 
@@ -286,6 +296,70 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
                     .execute();
         });
     }
+
+
+    @Override
+    public List<LessonArchive> findArchivedLessonsByFilter(LessonArchiveFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildLessonArchiveWhereClause(filter, params);
+
+        String sql = "SELECT l.title, c.title AS course_title, l.deleted_at, l.delete_reason " +
+                "FROM lessons l LEFT JOIN courses c ON l.course_id = c.id"
+                + whereClause
+                + " ORDER BY l.deleted_at DESC LIMIT :limit OFFSET :offset";
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+            return query.mapToBean(LessonArchive.class).list();
+        });
+
+    }
+
+    @Override
+    public int countLessonsArchiveByFilter(LessonArchiveFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildLessonArchiveWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(*) FROM lessons l" + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildLessonArchiveWhereClause(LessonArchiveFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        if (filter.getTitle() != null && !filter.getTitle().trim().isEmpty()) {
+            where.append(" AND l.title LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getTitle().trim() + "%");
+        }
+
+        if (filter.getCourseId() > 0) {
+            where.append(" AND l.course_id = :courseIdSearch");
+            params.put("courseIdSearch", filter.getCourseId());
+        }
+
+        if (filter.getDeletedFromDate() != null) {
+            where.append(" AND l.deleted_at >= :fromDate");
+            params.put("fromDate", filter.getDeletedFromDate());
+        }
+
+        if (filter.getDeletedToDate() != null) {
+            where.append(" AND l.deleted_at <= :toDate");
+            params.put("toDate", filter.getDeletedToDate());
+        }
+
+        where.append(" AND l.is_deleted = 1");
+
+        return where.toString();
+    }
+
 
 }
 
