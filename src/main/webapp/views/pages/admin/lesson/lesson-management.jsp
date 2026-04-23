@@ -153,6 +153,8 @@
                                     <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
+                                    <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
+
                                     <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
                                     <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 

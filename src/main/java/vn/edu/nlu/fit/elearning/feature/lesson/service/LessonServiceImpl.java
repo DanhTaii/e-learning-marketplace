@@ -137,4 +137,9 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.updateLessonsStatusByIds(ids);
     }
 
+    @Override
+    public int archiveLessonsByIds(List<Integer> ids, String deleteReason) {
+        return lessonDao.archivedLessonsByIds(ids, deleteReason);
+    }
+
 }

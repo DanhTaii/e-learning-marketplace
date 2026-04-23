@@ -44,6 +44,9 @@ function openConfirmModal(
     const title = document.getElementById('confirm-modal-title');
     const confirmButton = document.getElementById('btn-confirm-delete');
 
+    const reasonContainer = document.getElementById('reason-container');
+    reasonContainer.style.display = 'block';
+
     const config = {
         text: 'xóa',
         textHeader: 'Xóa',
@@ -74,17 +77,35 @@ function openConfirmModal(
 
 document.addEventListener('DOMContentLoaded', function () {
     const confirmDeleteBtn = document.getElementById('btn-confirm-delete');
+    const archiveReason = document.getElementById('archive-reason')
+
     if (confirmDeleteBtn) {
         confirmDeleteBtn.addEventListener('click', function () {
             if (isBulkAction) {
                 const bulkForm = document.getElementById('bulkActionForm');
                 const bulkInput = document.getElementById('bulkActionInput');
+                const multipleDeleteReason = document.getElementById('deleteReasonId')
+
+                if (multipleDeleteReason && archiveReason) {
+                    multipleDeleteReason.value = archiveReason.value;
+                }
 
                 if (bulkInput && bulkForm) {
                     bulkInput.value = window.currentBulkAction;
                     bulkForm.submit();
                 }
             } else if (currentDeleteId && currentDeleteUrl) {
+                const singleDeleteType = document.getElementById("input-delete-type")
+                const singleDeleteReason = document.getElementById("input-delete-reason")
+
+                if(singleDeleteReason && archiveReason) {
+                    singleDeleteReason.value = archiveReason.value
+                }
+
+                if(singleDeleteType) {
+                    singleDeleteType.value = 'archive'
+                }
+
                 const form = document.getElementById('delete-form-id');
                 form.action = currentDeleteUrl;
                 form.submit();
@@ -126,7 +147,7 @@ function openConfirmBulkAction(action, count) {
         };
 
         const config = actionConfig[action] || actionConfig.update;
-        confirmButton.classList.remove('btn-primary','btn-dark','btn-danger')
+        confirmButton.classList.remove('btn-primary', 'btn-dark', 'btn-danger')
         title.classList.remove('title-danger', 'title-primary', 'title-dark');
 
         confirmButton.classList.add(config.btnClass)
@@ -135,6 +156,14 @@ function openConfirmBulkAction(action, count) {
         message.innerText = `Bạn có chắc muốn ${config.text} ${count} mục này không?`;
         title.innerHTML = `<i class="fa-solid ${config.icon}"></i> Xác nhận ${config.text}`;
         confirmButton.innerText = `${config.textHeader} ngay`;
+    }
+
+    const reasonContainer = document.getElementById('reason-container');
+    // Nếu action là xóa/lưu trữ thì hiện
+    if (action === 'delete' || action === 'archive') {
+        reasonContainer.style.display = 'block';
+    } else {
+        reasonContainer.style.display = 'none';
     }
 
     window.currentBulkAction = action

@@ -37,4 +37,6 @@ public interface LessonDao {
 
     int updateLessonsStatusByIds(List<Integer> ids);
 
+    int archivedLessonsByIds(List<Integer> ids, String deleteReason);
+
 }

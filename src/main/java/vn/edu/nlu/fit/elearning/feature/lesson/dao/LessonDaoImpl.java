@@ -163,6 +163,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
 
         String sql = "SELECT l.id, l.title, l.order_index, l.duration_minutes, l.created_at, l.video_url, l.status FROM lessons l "
                 + whereClause
+                + " AND l.is_deleted = 0"
                 + " ORDER BY l.created_at DESC LIMIT :limit OFFSET :offset";
 
         return getJdbi().withHandle(handle -> {
@@ -265,6 +266,23 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
                                     "ELSE 'ACTIVE' END " +
                                     "WHERE id IN (<ids>)")
                     .bindList("ids", ids)
+                    .execute();
+        });
+    }
+
+    @Override
+    public int archivedLessonsByIds(List<Integer> ids, String deleteReason) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE lessons " +
+                            "SET deleted_at = CASE WHEN is_deleted = 0 THEN NOW() ELSE NULL END, " +
+                            "is_deleted = 1 - is_deleted, " +
+                            "delete_reason = :deleteReason, " +
+                            "status = 'INACTIVE' " +
+                            "WHERE id IN (<ids>)")
+                    .bindList("ids", ids)
+                    .bind("deleteReason", deleteReason)
                     .execute();
         });
     }

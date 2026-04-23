@@ -38,4 +38,6 @@ public interface LessonService {
     int bulkDuplicateLessons(List<Integer> ids);
 
     int changeLessonsStatusByIds(List<Integer> ids);
+
+    int archiveLessonsByIds(List<Integer> ids, String deleteReason);
 }

@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "LessonDeleteController", value = "/admin/lesson/delete")
 public class LessonDeleteController extends HttpServlet {
@@ -27,17 +29,30 @@ public class LessonDeleteController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String lessonId = request.getParameter("id");
-        if(lessonId != null){
-            int idLesson= Integer.parseInt(lessonId);
-            int success = lessonService.deleteLesson(idLesson);
-            if (success >0) {
-                request.getSession().setAttribute("flashSuccess", "Xóa bài học thành công!");
-            } else {
-                request.getSession().setAttribute("flashError", "Xóa bài học thất bại. Vui lòng thử lại!");
-            }
-            response.sendRedirect(request.getContextPath() + "/admin/lessons");
+        int lessonId = RequestUtils.getParameterAsInt(request, "id", 0);
+        String deleteType = RequestUtils.getParameterAsString(request, "deleteType", null);
+        String deleteReason = RequestUtils.getParameterAsString(request, "deleteReason", null);
+        List<Integer> ids = List.of(lessonId);
 
+        if (deleteType != null) {
+            if ("archive".equals(deleteType)) {
+                int result = lessonService.archiveLessonsByIds(ids, deleteReason);
+
+                if (result > 0) {
+                    request.getSession().setAttribute("flashSuccess", "Xóa bài học thành công!");
+                } else {
+                    request.getSession().setAttribute("flashError", "Xóa bài học thất bại. Vui lòng thử lại!");
+                }
+                response.sendRedirect(request.getContextPath() + "/admin/lessons");
+            } else {
+                int success = lessonService.deleteLesson(lessonId);
+                if (success > 0) {
+                    request.getSession().setAttribute("flashSuccess", "Xóa bài học thành công!");
+                } else {
+                    request.getSession().setAttribute("flashError", "Xóa bài học thất bại. Vui lòng thử lại!");
+                }
+                response.sendRedirect(request.getContextPath() + "/admin/lessons/archive");
+            }
         }
     }
 }

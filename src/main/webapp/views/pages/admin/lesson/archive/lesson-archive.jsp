@@ -121,22 +121,6 @@
                                         <jsp:include page="/views/pages/admin/lesson/archive/lesson-archive-fragment.jsp"/>
                                     </div>
 
-<%--                                    <div class="archive-action-bar" id="archiveBar">--%>
-<%--                                        <div class="selected-count">--%>
-<%--                                            <span class="count-circle">2</span> Đã chọn bài học--%>
-<%--                                        </div>--%>
-<%--                                        <div class="action-buttons">--%>
-<%--                                            <button type="button" class="btn-restore-bulk">--%>
-<%--                                                <i class="fa-solid fa-rotate-left"></i> Khôi phục hàng loạt--%>
-<%--                                            </button>--%>
-<%--                                            <button type="button" class="btn-delete-permanent">--%>
-<%--                                                <i class="fa-solid fa-trash-can"></i> Xóa vĩnh viễn--%>
-<%--                                            </button>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="close-bar">--%>
-<%--                                            <i class="fa-solid fa-xmark"></i>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
                                 </form>
                             </div>
                         </div>
