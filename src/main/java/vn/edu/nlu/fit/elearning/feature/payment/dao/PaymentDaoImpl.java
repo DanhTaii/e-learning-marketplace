@@ -11,7 +11,7 @@ public class PaymentDaoImpl extends BaseDao implements PaymentDao {
     public int create(Payment entity) {
         return getJdbi().withHandle(handle ->
                 handle.createUpdate("""
-                INSERT INTO payments (order_id, payment_method_id, gateway_transaction_id, amount, status, created_at, update_at)
+                INSERT INTO payments (order_id, payment_method_id, gateway_transaction_id, amount, status, created_at, updated_at)
                 VALUES (:orderId, :paymentMethodId, :gateway_transaction_id, :amount, :status, :createdAt, :updateAt)
             """)
                         .bindBean(entity)

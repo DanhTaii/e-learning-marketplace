@@ -9,10 +9,11 @@ import java.util.Map;
 
 public interface OrderService {
     int createOrder(Order order);
-
+    void completeOrder(String orderCode,String transactionNo);
     List<Order> getAllOrders();
 
     Order getOrderById(int orderId);
+    Order getOrderByCode(String orderCode);
 
     Order findOrderPending(Integer userId);
 

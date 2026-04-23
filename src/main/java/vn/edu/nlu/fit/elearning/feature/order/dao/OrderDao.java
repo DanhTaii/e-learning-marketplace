@@ -11,6 +11,7 @@ public interface OrderDao {
     int create(Order entity);
 
     Order findById(Integer orderId);
+    Order findByCode(String orderCode);
 
     Order findOrderPending(Integer userId);
 
