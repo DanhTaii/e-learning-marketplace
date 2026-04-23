@@ -22,11 +22,13 @@ import java.util.List;
 
 @WebServlet(name = "ConfirmController", value = "/confirm-payment")
 public class ConfirmController extends HttpServlet {
+    private transient OrderService orderService;
     private transient PaymentService paymentService;
 
     @Override
     public void init() throws ServletException {
         super.init();
+        this.orderService = BeanContainer.getBean(OrderService.class);
         this.paymentService = BeanContainer.getBean(PaymentService.class);
     }
 
@@ -47,7 +49,7 @@ public class ConfirmController extends HttpServlet {
         }
 
         int paymentMethodId = Integer.parseInt(request.getParameter("payment-method-id"));
-        Order order = paymentService.createOrderPending(userId, cartService, paymentMethodId);
+        Order order = orderService.createOrderPending(userId, cartService, paymentMethodId);
 
         if (paymentMethodId == 2) {
 

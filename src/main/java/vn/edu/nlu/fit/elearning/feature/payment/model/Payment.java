@@ -26,8 +26,8 @@ public class Payment implements Serializable {
         this.gateway_transaction_id = gateway_transaction_id;
         this.amount = amount;
         this.status = status;
-        this.createdAt = createdAt;
-        this.updateAt = updateAt;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.updateAt = new Timestamp(System.currentTimeMillis());
     }
 
     // --- GETTER & SETTER ---

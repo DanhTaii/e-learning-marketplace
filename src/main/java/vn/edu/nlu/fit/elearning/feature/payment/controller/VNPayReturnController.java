@@ -33,7 +33,7 @@ public class VNPayReturnController extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (isValidSignature && "00".equals(responseCode)) {
-            orderService.completeOrder(orderCode, transactionNo);
+            orderService.processPaymentResponse(orderCode, transactionNo, true);
 
             Order order = orderService.getOrderByCode(orderCode);
 
@@ -46,6 +46,7 @@ public class VNPayReturnController extends HttpServlet {
             session.setAttribute("flashSuccess", "Thanh toán thành công! Chúc bạn học tốt.");
             response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + order.getId());
         } else {
+            orderService.processPaymentResponse(orderCode, transactionNo, false);
             Order order = orderService.getOrderByCode(orderCode);
             session.setAttribute("flashError", "Giao dịch thất bại hoặc bạn đã hủy thanh toán.");
             response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + order.getId());

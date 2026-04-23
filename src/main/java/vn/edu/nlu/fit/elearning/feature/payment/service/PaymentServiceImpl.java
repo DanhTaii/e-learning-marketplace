@@ -24,15 +24,13 @@ public class PaymentServiceImpl implements PaymentService {
 
     private PaymentDao pd;
 
-    private OrderService orderService;
+
     private OrderItemService orderItemService;
-    private UserService userService;
+
 
     public PaymentServiceImpl(PaymentDao pd) {
         this.pd = new PaymentDaoImpl();
-        this.orderService = BeanContainer.getBean(OrderService.class);
         this.orderItemService = BeanContainer.getBean(OrderItemService.class);
-        this.userService = BeanContainer.getBean(UserService.class);
     }
 
     @Override
@@ -63,30 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
         // TODO: Implement delete logic
     }
 
-    @Override
-    public Order createOrderPending(Integer userId, CartService cart, int paymentMethodId) {
-        Order order = new Order();
-        order.setOrderCode("ORD" + System.currentTimeMillis());
-        order.setUserId(userId);
-        order.setPaymentMethodId(paymentMethodId);
-        order.setTotalAmount((int) cart.getTotal());
-        order.setDiscountAmount((int) cart.getDiscountPriceTotal());
-        order.setFinalAmount((int) cart.getFinalPriceTotal());
-        order.setStatus(OrderStatus.PENDING);
-        String currentUsername = userService.getUserById(userId).getUsername();
-        order.setUsernameSnapshot(currentUsername);
-        int orderId = orderService.createOrder(order);
-        order.setId(orderId);
 
-        for (CartItem item : cart.getSelectedItems()) {
-            OrderItem oi = new OrderItem();
-            oi.setOrderId(orderId);
-            oi.setCourseId(item.getCourse().getId());
-            oi.setPriceAtPurchase(item.getPrice());
-            orderItemService.createOrderItem(oi);
-        }
-        return order;
-    }
 
     @Override
     public String generateVNPAYUrl(Order order, HttpServletRequest request) {

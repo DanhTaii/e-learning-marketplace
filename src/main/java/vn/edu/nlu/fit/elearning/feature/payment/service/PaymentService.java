@@ -17,6 +17,6 @@ public interface PaymentService {
     void updatePayment(Payment payment);
 
     void deletePayment(int id);
-    Order createOrderPending(Integer userId, CartService cart, int paymentMethodId);
+
     String generateVNPAYUrl(Order order, HttpServletRequest request);
 }
