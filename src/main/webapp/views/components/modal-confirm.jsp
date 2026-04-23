@@ -4,7 +4,7 @@
 <div id="confirm-delete-modal" class="modal">
     <div class="modal-content">
         <h3 class="modal-title" id="confirm-modal-title">
-            <i class="fa-solid fa-triangle-exclamation"></i> Xác nhận
+            <i class="fa-solid fa-triangle-exclamation"></i>
         </h3>
         <%-- CHỖ HIỂN THỊ NỘI DUNG --%>
         <p id="confirm-modal-message" class="modal-message"></p>

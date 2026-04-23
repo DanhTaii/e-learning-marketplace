@@ -84,7 +84,7 @@ public class LessonManagementController extends BaseController {
         int result = 0;
 
         switch (action) {
-            case "delete":
+            case "archive":
                 if (deleteReason == null || deleteReason.isEmpty()) {
                     deleteReason = "Không có lý do cụ thể";
                 }
@@ -103,7 +103,7 @@ public class LessonManagementController extends BaseController {
                 }
                 break;
 
-            case "status":
+            case "update_status":
                 result = lessonService.changeLessonsStatusByIds(ids);
                 if (result > 0) {
                     handleSuccess(request, response, "Cập nhật trạng thái " + result + " bài học thành công", newPath);

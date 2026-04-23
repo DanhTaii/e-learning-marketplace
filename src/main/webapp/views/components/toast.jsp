@@ -23,6 +23,7 @@
 </script>
 
 <script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/ui/modal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/modal/modal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/modal/modal-configs.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

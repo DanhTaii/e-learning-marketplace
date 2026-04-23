@@ -182,7 +182,7 @@
 
                                     <c:if test="${lesson != null and lesson.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="openConfirmModal(${lesson.id}, 'admin/lesson/delete', 'Bạn có chắc chắn muốn xóa bài học này?')">
+                                                onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa bài học
                                         </button>
@@ -197,7 +197,7 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-<jsp:include page="/views/components/confirm-delete.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 </body>
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

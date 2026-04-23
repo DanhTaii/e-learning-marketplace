@@ -132,7 +132,7 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-<jsp:include page="/views/components/confirm-delete.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 </body>
 <%-- Javascript --%>
 <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>

@@ -50,7 +50,7 @@
                         <button type="button" class="icon-action-btn"><i
                                 class="fa-solid fa-pen"></i></button>
                     </a>
-                    <button onclick="openConfirmModal(${lesson.id}, 'admin/lesson/delete', 'Bạn có chắc chắn muốn xóa bài học này?')"
+                    <button onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})"
                             type="button"
                             class="icon-action-btn">
                         <i class="fa-solid fa-trash"></i>

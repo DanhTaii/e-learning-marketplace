@@ -142,7 +142,7 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-<jsp:include page="/views/components/confirm-delete.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>

@@ -14,11 +14,11 @@
             </button>
         </c:if>
 
-        <button class="btn-bar" type="button" data-action="status">
+        <button class="btn-bar" type="button" data-action="update_status">
             <i class="fa-solid fa-arrows-rotate"></i> Đổi trạng thái
         </button>
 
-        <button class="btn-bar btn-bar-danger" type="button" data-action="delete">
+        <button class="btn-bar btn-bar-danger" type="button" data-action="archive">
             <i class="fa-solid fa-trash"></i> Xóa
         </button>
     </div>
