@@ -1,0 +1,75 @@
+package vn.edu.nlu.fit.elearning.common.external.mail;
+
+import com.sendgrid.SendGrid;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.Method;
+
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Email;
+import com.sendgrid.helpers.mail.objects.Content;
+
+import java.io.IOException;
+import java.security.SecureRandom;
+
+public class SendGridService {
+
+    public static final int LIMIT_MINUTE = 1;
+
+    public static String generateToken() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder token = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+
+        for (int i = 0; i < 5; i++) {
+            token.append(chars.charAt(random.nextInt(chars.length())));
+        }
+
+        return token.toString();
+    }
+
+    public static boolean sendEmail(String email, String code, String name) {
+
+        Email from = new Email("no-reply@e-learning.id.vn");
+
+        String subject = "Mã xác nhận đăng ký";
+
+        Email to = new Email(email);
+
+        String htmlContent =
+                "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;'>"
+                        + "<h2 style='color: #4CAF50; text-align: center;'>Xác Thực Tài Khoản Softskill</h2>"
+                        + "<p>Xin chào <b>" + name + "</b>,</p>"
+                        + "<p>Đây là mã xác nhận của bạn:</p>"
+                        + "<div style='text-align: center; margin: 30px 0;'>"
+                        + "<span style='font-size: 24px; font-weight: bold; letter-spacing: 5px; background: #f4f4f4; padding: 10px 20px; border-radius: 5px; border: 1px dashed #4CAF50;'>"
+                        + code + "</span>"
+                        + "</div>"
+                        + "<p style='color: #ff0000;'>Mã sẽ hết hạn sau " + LIMIT_MINUTE + " phút.</p>"
+                        + "</div>";
+
+        Content content = new Content("text/html", htmlContent);
+
+        Mail mail = new Mail(from, subject, to, content);
+
+        // API KEY từ ENV
+        SendGrid sg = new SendGrid(System.getenv("SEND_GRID_KEY"));
+
+        try {
+            Request request = new Request();
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+
+            Response response = sg.api(request);
+
+            System.out.println("Status Code: " + response.getStatusCode());
+
+            return response.getStatusCode() == 202;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Lỗi gửi email SendGrid: " + e.getMessage(), e);
+        }
+    }
+}
