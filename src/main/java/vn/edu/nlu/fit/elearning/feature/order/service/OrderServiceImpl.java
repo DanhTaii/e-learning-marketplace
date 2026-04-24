@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.order.service;
 
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.external.mail.SendGridService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.PaymentStatus;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
@@ -18,6 +19,8 @@ import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
+import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
+import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 
 import java.util.ArrayList;
@@ -184,6 +187,19 @@ public class OrderServiceImpl implements OrderService {
 
 
         savePaymentRecord(order, transactionNo, PaymentStatus.SUCCESS);
+        try {
+            UserDetailResponse user = userService.getUserById(order.getUserId());
+            if (user != null && user.getEmail() != null) {
+
+                String customerName = user.getUsername();
+                new Thread(() -> {
+                    SendGridService.sendPaymentSuccessEmail(user.getEmail(), customerName, order.getOrderCode(), order.getFinalAmount());
+                }).start();
+            }
+        } catch (Exception e) {
+            System.err.println("Lỗi khi tiến hành gửi email hóa đơn: " + e.getMessage());
+        }
+
     }
     private void handleFailure(Order order, String transactionNo) {
         order.setStatus(OrderStatus.FAILED);
