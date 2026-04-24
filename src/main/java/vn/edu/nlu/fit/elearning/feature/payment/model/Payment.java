@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.payment.model;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.PaymentStatus;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -7,22 +9,25 @@ public class Payment implements Serializable {
     private int id;
     private int orderId;
     private int paymentMethodId;
+    private String gateway_transaction_id;
     private double amount;
-    private String transactionId; // Map từ transaction_id
-    private String status;        // ENUM -> String
+
+    private PaymentStatus status;
     private Timestamp createdAt;
+    private Timestamp updateAt;
 
     public Payment() {
     }
 
-    public Payment(int id, int orderId, int paymentMethodId, double amount, String transactionId, String status, Timestamp createdAt) {
+    public Payment(int id, int orderId, int paymentMethodId, String gateway_transaction_id, double amount, PaymentStatus status, Timestamp createdAt, Timestamp updateAt) {
         this.id = id;
         this.orderId = orderId;
         this.paymentMethodId = paymentMethodId;
+        this.gateway_transaction_id = gateway_transaction_id;
         this.amount = amount;
-        this.transactionId = transactionId;
         this.status = status;
-        this.createdAt = createdAt;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.updateAt = new Timestamp(System.currentTimeMillis());
     }
 
     // --- GETTER & SETTER ---
@@ -38,11 +43,24 @@ public class Payment implements Serializable {
     public double getAmount() { return amount; }
     public void setAmount(double amount) { this.amount = amount; }
 
-    public String getTransactionId() { return transactionId; }
-    public void setTransactionId(String transactionId) { this.transactionId = transactionId; }
+    public String getGateway_transaction_id() {
+        return gateway_transaction_id;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setGateway_transaction_id(String gateway_transaction_id) {
+        this.gateway_transaction_id = gateway_transaction_id;
+    }
+
+    public Timestamp getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Timestamp updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public PaymentStatus getStatus() { return status; }
+    public void setStatus(PaymentStatus status) { this.status = status; }
 
     public Timestamp getCreatedAt() { return createdAt; }
     public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }

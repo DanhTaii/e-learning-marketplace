@@ -1,4 +1,8 @@
 /* Lớp nền mờ (ẩn ban đầu) */
+
+.modal-backdrop.show {
+    display: flex !important;
+}
 .modal-backdrop {
     display: none; /* Ẩn đi */
     position: fixed;
