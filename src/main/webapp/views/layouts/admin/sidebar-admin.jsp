@@ -97,6 +97,17 @@
                 </a>
             </li>
             <li>
+                <a href="admin/super/roles">
+                    <div class="menu-item__student ${currentPage == 'roles' ? 'student-list' : ''}">
+                                        <span class="container-1__menu-items menu-item__order">
+
+                                            <i class="fa-solid fa-credit-card"></i>
+                                            <span>Vai trò</span>
+                                        </span>
+                    </div>
+                </a>
+            </li>
+            <li>
                 <a href="admin/super/permissions">
                     <div class="menu-item__student ${currentPage == 'permissions' ? 'student-list' : ''}">
                                         <span class="container-1__menu-items menu-item__order">

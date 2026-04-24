@@ -62,6 +62,10 @@ import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDao;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDao;
+import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.role.service.RoleService;
+import vn.edu.nlu.fit.elearning.feature.role.service.RoleServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
@@ -139,6 +143,9 @@ public class BeanContainer {
 
         PermissionDao permissionDao = new PermissionDaoImpl();
         beans.put(PermissionService.class, new PermissionServiceImpl(permissionDao));
+
+        RoleDao roleDao = new RoleDaoImpl();
+        beans.put(RoleService.class, new RoleServiceImpl(roleDao));
 
     }
 

@@ -14,7 +14,6 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     public int createPermission(Permission permission) {
-        // TODO: Implement creation logic
         return 0;
     }
 
@@ -29,15 +28,12 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     public Permission getPermissionById(int id) {
-        // TODO: Implement getById logic
         return null;
     }
 
     public void updatePermission(Permission permission) {
-        // TODO: Implement update logic
     }
 
     public void deletePermission(int id) {
-        // TODO: Implement delete logic
     }
 }

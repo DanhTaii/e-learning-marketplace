@@ -17,7 +17,6 @@ public class PermissionDaoImpl extends BaseDao implements BaseCrudDao<Permission
 
     @Override
     public Permission findById(Integer id) {
-        // TODO: Implement findById logic
         return null;
     }
 
@@ -34,13 +33,11 @@ public class PermissionDaoImpl extends BaseDao implements BaseCrudDao<Permission
 
     @Override
     public int update(Permission entity) {
-        // TODO: Implement update logic
         return 0;
     }
 
     @Override
     public int delete(Integer id) {
-        // TODO: Implement delete logic
         return 0;
     }
 

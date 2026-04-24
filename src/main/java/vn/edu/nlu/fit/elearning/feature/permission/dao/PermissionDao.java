@@ -5,5 +5,5 @@ import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import java.util.List;
 
 public interface PermissionDao {
-    public List<Permission> findAll();
+    List<Permission> findAll();
 }
