@@ -29,7 +29,8 @@ public class RoleManagementController extends BaseController {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         try {
             RoleFilter filter = new RoleFilter();
@@ -47,19 +48,26 @@ public class RoleManagementController extends BaseController {
             filter.setSize(RequestUtils.getParameterAsInt(request, "size", 10));
 
             List<Role> listRoles = roleService.getRolesByFilter(filter);
-
             List<Permission> listPermissions = permissionService.getAllPermissions();
-            request.setAttribute("listPermissions", listPermissions);
 
             int totalRecords = roleService.countRolesByFilter(filter);
             int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
 
             request.setAttribute("listRoles", listRoles);
+            request.setAttribute("listPermissions", listPermissions);
             request.setAttribute("filter", filter);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("currentPageNumber", filter.getPage());
 
-            this.forward(request, response, "/views/pages/admin/authorization/role/role-management.jsp");
+            String type = request.getParameter("renderType");
+
+            if ("partial".equals(type)) {
+                this.forward(request, response,
+                        "/views/pages/admin/authorization/role/role-fragment.jsp");
+            } else {
+                this.forward(request, response,
+                        "/views/pages/admin/authorization/role/role-management.jsp");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

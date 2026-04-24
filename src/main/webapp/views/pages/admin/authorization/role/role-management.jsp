@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="container-2__body">
-                                <form method="get" action="admin/super/roles" class="advanced-filter">
+                                <form method="get" action="admin/super/roles" class="advanced-filter" id="filterForm">
 
                                     <div class="filter-grid">
 
@@ -110,7 +110,7 @@
                                 <form id="bulkActionForm" method="POST" action="admin/super/roles">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
-                                    <div class="container-2__dynamic-content" id="lessonTableBody">
+                                    <div class="container-2__dynamic-content" id="roleTableBody">
                                         <jsp:include page="/views/pages/admin/authorization/role/role-fragment.jsp"/>
                                     </div>
                                 </form>
@@ -128,8 +128,8 @@
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<%--<script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>--%>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/role/role-management.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

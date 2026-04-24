@@ -26,7 +26,7 @@
 </div>
 
 <jsp:include page="/views/components/pagination-base.jsp">
-    <jsp:param name="baseUrl" value="admin/super/permissions"/>
+    <jsp:param name="baseUrl" value="admin/super/roles"/>
     <jsp:param name="currentPageNumber" value="${filter.page}"/>
     <jsp:param name="totalPages" value="${totalPages}"/>
 </jsp:include>
