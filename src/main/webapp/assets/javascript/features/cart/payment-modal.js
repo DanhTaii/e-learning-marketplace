@@ -1,7 +1,7 @@
     document.addEventListener('DOMContentLoaded', function() {
 
     const payBtn = document.getElementById('pay-btn');
-    const paymentForm = document.querySelector('.payment-layout');
+        const paymentForm = document.getElementById('payment-main-form');
     const confirmPaymentBtn = document.getElementById('btn-confirm-payment');
 
     if (payBtn) {

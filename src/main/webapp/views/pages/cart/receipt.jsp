@@ -31,9 +31,21 @@
                     <div class="box__row2-header">
                         <div><span class="text-small-title">Biên nhận cho Giỏ hàng - <fmt:formatDate value="${order.createdAt}" pattern="dd 'tháng' MM, yyyy" /> </span></div>
                         <div>
-                            <span class="status text-small-title">
-                                <i class="fa-solid fa-circle-check icon-check"></i>
-                                Thành công</span></div>
+                            <c:choose>
+                                <c:when test="${order.status == 'PAID'}">
+                <span class="status text-small-title" style="color: #28a745;">
+                    <i class="fa-solid fa-circle-check icon-check"></i>
+                    Thanh toán thành công
+                </span>
+                                </c:when>
+                                <c:otherwise>
+                <span class="status text-small-title" style="color: #dc3545;">
+                    <i class="fa-solid fa-circle-xmark icon-check"></i>
+                    Thanh toán thất bại
+                </span>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
 
                     </div>
 
@@ -113,11 +125,21 @@
                             <button type="button" class="home-btn dark-button">Trang chủ</button>
                         </div>
                     </a>
-                    <a href="personal/my-courses" class="turn-page">
-                        <div class="header__button button">
-                            <button type="button" class="home-btn button__btn">Khóa học của tôi</button>
-                        </div>
-                    </a>
+                    <c:if test="${order.status == 'PAID'}">
+                        <a href="personal/my-courses" class="turn-page">
+                            <div class="header__button button">
+                                <button type="button" class="home-btn button__btn">Khóa học của tôi</button>
+                            </div>
+                        </a>
+                    </c:if>
+
+                    <c:if test="${order.status != 'PAID'}">
+                        <a href="personal/cart" class="turn-page">
+                            <div class="header__button button">
+                                <button type="button" class="home-btn button__btn" style="background-color: #ff9800;">Quay lại giỏ hàng</button>
+                            </div>
+                        </a>
+                    </c:if>
 
                 </div>
             </div>

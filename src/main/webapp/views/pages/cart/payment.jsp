@@ -11,10 +11,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base/base.css">
-    <link rel="stylesheet" href="assets/css/cart/payment.css?v=1.0.1">
-    <link rel="stylesheet" href="assets/css/base/home.css">
-    <link rel="stylesheet" href="assets/css/base/default.css">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/cart/payment.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -24,13 +24,13 @@
 
 
     <link rel="stylesheet" href="assets/fonts/static/." as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="assets/css/base/modal-notification.css">
+    <link rel="stylesheet" href="assets/css/base/modal-notification.css?v=<%=System.currentTimeMillis()%>">
 </head>
 <body>
 <div class="web">
     <jsp:include page="/views/layouts/header-simple.jsp"/>
     <div class="web__container">
-        <form action="confirm-payment" method="post" class="payment-layout">
+        <form id="payment-main-form" action="confirm-payment" method="post" class="payment-layout">
         <div class="grid">
 
             <div class="payment-layout">

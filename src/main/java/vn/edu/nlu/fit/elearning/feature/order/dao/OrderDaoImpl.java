@@ -14,8 +14,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 
     @Override
     public int create(Order entity) {
-        String sql = "INSERT INTO orders (order_code, user_id, payment_method_id, total_amount, discount_amount, final_amount, status)\n" +
-                "VALUES (:orderCode, :userId, :paymentMethodId, :totalAmount, :discountAmount, :finalAmount, :status)";
+        String sql = "INSERT INTO orders (order_code, user_id, username_snapshot, payment_method_id, total_amount, discount_amount, final_amount, status)\n" +
+                "VALUES (:orderCode, :userId,:usernameSnapshot, :paymentMethodId, :totalAmount, :discountAmount, :finalAmount, :status)";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bindBean(entity)
@@ -51,6 +51,21 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
                             order.setUpdatedAt(rs.getTimestamp("updated_at"));
                             return order;
                         })
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+    public Order findByCode(String orderCode) {
+        String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
+                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.paid_at, o.created_at, o.updated_at " +
+                "FROM orders o " +
+                "WHERE o.order_code = :orderCode";
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("orderCode", orderCode)
+                        .mapToBean(Order.class)
                         .findFirst()
                         .orElse(null)
         );
