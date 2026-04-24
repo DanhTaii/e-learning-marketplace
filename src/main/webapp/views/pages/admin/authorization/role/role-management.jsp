@@ -54,51 +54,58 @@
                                 </div>
                             </div>
                             <div class="container-2__body">
-                                <form method="get" action="admin/super/permissions" class="advanced-filter" id="filterForm">
-                                    <script>
-                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
-                                            document.getElementById('filterForm').classList.add('collapsed');
-                                        }
-                                    </script>
-                                    <div class="filter-header" onclick="toggleFilter()">
-                                        <h2 class="filter-title">
-                                            <i class="fa-solid fa-filter"></i>
-                                            Bộ lọc nâng cao
-                                        </h2>
-                                        <div class="filter-toggle-icon" id="toggleIcon">
-                                            <i class="fa-solid fa-sliders"></i>
+                                <form method="get" action="admin/super/roles" class="advanced-filter">
+
+                                    <div class="filter-grid">
+
+                                        <div class="filter-group">
+                                            <label>Tên Role</label>
+                                            <input type="text" name="searchName"
+                                                   value="${filter.name}"
+                                                   placeholder="Nhập tên role...">
                                         </div>
+
+                                        <div class="filter-group">
+                                            <label>Mô tả</label>
+                                            <input type="text" name="description"
+                                                   value="${filter.description}"
+                                                   placeholder="Nhập mô tả...">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Quyền</label>
+                                            <select name="permissionId">
+                                                <option value="">-- Tất cả --</option>
+                                                <c:forEach var="perm" items="${listPermissions}">
+                                                    <option value="${perm.id}"
+                                                        ${filter.permissionId == perm.id ? 'selected' : ''}>
+                                                            ${perm.name}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Từ ngày</label>
+                                            <input type="date" name="fromDate" value="${param.fromDate}">
+                                        </div>
+
+                                        <div class="filter-group">
+                                            <label>Đến ngày</label>
+                                            <input type="date" name="toDate" value="${param.toDate}">
+                                        </div>
+
                                     </div>
 
-                                    <div class="filter-content" id="filterContent">
-                                        <div class="filter-grid">
-                                            <div class="filter-group">
-                                                <label>Tìm kiếm bài học</label>
-                                                <div class="input-with-icon">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="searchName" value="${param.searchName}"
-                                                           placeholder="Nhập tên bài học...">
-                                                </div>
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Từ ngày</label>
-                                                <input type="date" name="fromDate" value="${param.fromDate}">
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Đến ngày</label>
-                                                <input type="date" name="toDate" value="${param.toDate}">
-                                            </div>
-
-                                        </div>
-                                        <div class="filter-actions">
-                                            <a href="admin/lessons" class="btn-clear">
-                                                <i class="fa-solid fa-rotate-left"></i> Đặt lại
-                                            </a>
-                                            <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
-                                        </div>
+                                    <div class="filter-actions">
+                                        <a href="admin/super/roles" class="btn-clear">
+                                            <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                        </a>
+                                        <button type="submit" class="dark-button btn-submit">
+                                            Áp dụng bộ lọc
+                                        </button>
                                     </div>
+
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/roles">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">

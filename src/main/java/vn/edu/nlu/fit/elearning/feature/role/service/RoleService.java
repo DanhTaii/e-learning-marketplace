@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.role.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.role.RoleFilter;
 import vn.edu.nlu.fit.elearning.feature.role.model.Role;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface RoleService {
     Set<Integer> getPermissionIdsByRoleId(int roleId);
 
     void updateRolePermissions(int roleId, Set<Integer> permissionIds);
+
+    List<Role> getRolesByFilter(RoleFilter filter);
+
+    int countRolesByFilter(RoleFilter filter);
 }

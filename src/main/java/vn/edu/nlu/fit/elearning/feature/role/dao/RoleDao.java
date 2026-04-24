@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.role.dao;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.role.RoleFilter;
 import vn.edu.nlu.fit.elearning.feature.role.model.Role;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface RoleDao {
     void deletePermissionsByRoleId(int roleId);
 
     void insertRolePermissions(int roleId, List<Integer> permissionIds);
+
+    List<Role> findByFilter(RoleFilter filter);
+
+    int countByFilter(RoleFilter filter);
 }

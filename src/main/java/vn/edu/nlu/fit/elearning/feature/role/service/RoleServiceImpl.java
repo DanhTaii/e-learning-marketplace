@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.role.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.role.RoleFilter;
 import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDao;
 import vn.edu.nlu.fit.elearning.feature.role.model.Role;
 
@@ -69,5 +70,15 @@ public class RoleServiceImpl implements RoleService {
         if (permissionIds != null && !permissionIds.isEmpty()) {
             roleDao.insertRolePermissions(roleId, new ArrayList<>(permissionIds));
         }
+    }
+
+    @Override
+    public List<Role> getRolesByFilter(RoleFilter filter) {
+        return roleDao.findByFilter(filter);
+    }
+
+    @Override
+    public int countRolesByFilter(RoleFilter filter) {
+        return roleDao.countByFilter(filter);
     }
 }

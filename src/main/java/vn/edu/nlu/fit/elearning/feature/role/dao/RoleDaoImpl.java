@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.role.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.role.RoleFilter;
 import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import vn.edu.nlu.fit.elearning.feature.role.model.Role;
 
@@ -134,6 +135,128 @@ public class RoleDaoImpl extends BaseDao implements BaseCrudDao<Role, Integer>, 
                         .bind("permissionId", pid)
                         .execute();
             }
+        });
+    }
+
+    @Override
+    public List<Role> findByFilter(RoleFilter filter) {
+
+        StringBuilder sql = new StringBuilder("""
+        SELECT DISTINCT r.id, r.name, r.description, r.created_at
+        FROM roles r
+        LEFT JOIN role_permissions rp ON r.id = rp.role_id
+        WHERE 1=1
+    """);
+
+        if (filter.getName() != null && !filter.getName().isEmpty()) {
+            sql.append(" AND r.name LIKE :name ");
+        }
+
+        if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
+            sql.append(" AND r.description LIKE :description ");
+        }
+
+        if (filter.getPermissionId() != null) {
+            sql.append(" AND rp.permission_id = :permissionId ");
+        }
+
+        if (filter.getFromDate() != null) {
+            sql.append(" AND r.created_at >= :fromDate ");
+        }
+
+        if (filter.getToDate() != null) {
+            sql.append(" AND r.created_at <= :toDate ");
+        }
+
+        sql.append(" ORDER BY r.created_at DESC ");
+        sql.append(" LIMIT :limit OFFSET :offset ");
+
+        return getJdbi().withHandle(handle -> {
+
+            var query = handle.createQuery(sql.toString());
+
+            if (filter.getName() != null && !filter.getName().isEmpty()) {
+                query.bind("name", "%" + filter.getName() + "%");
+            }
+
+            if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
+                query.bind("description", "%" + filter.getDescription() + "%");
+            }
+
+            if (filter.getPermissionId() != null) {
+                query.bind("permissionId", filter.getPermissionId());
+            }
+
+            if (filter.getFromDate() != null) {
+                query.bind("fromDate", filter.getFromDate());
+            }
+
+            if (filter.getToDate() != null) {
+                query.bind("toDate", filter.getToDate());
+            }
+
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+
+            return query.mapToBean(Role.class).list();
+        });
+    }
+
+    @Override
+    public int countByFilter(RoleFilter filter) {
+
+        StringBuilder sql = new StringBuilder("""
+        SELECT COUNT(DISTINCT r.id)
+        FROM roles r
+        LEFT JOIN role_permissions rp ON r.id = rp.role_id
+        WHERE 1=1
+    """);
+
+        if (filter.getName() != null && !filter.getName().isEmpty()) {
+            sql.append(" AND r.name LIKE :name ");
+        }
+
+        if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
+            sql.append(" AND r.description LIKE :description ");
+        }
+
+        if (filter.getPermissionId() != null) {
+            sql.append(" AND rp.permission_id = :permissionId ");
+        }
+
+        if (filter.getFromDate() != null) {
+            sql.append(" AND r.created_at >= :fromDate ");
+        }
+
+        if (filter.getToDate() != null) {
+            sql.append(" AND r.created_at <= :toDate ");
+        }
+
+        return getJdbi().withHandle(handle -> {
+
+            var query = handle.createQuery(sql.toString());
+
+            if (filter.getName() != null && !filter.getName().isEmpty()) {
+                query.bind("name", "%" + filter.getName() + "%");
+            }
+
+            if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
+                query.bind("description", "%" + filter.getDescription() + "%");
+            }
+
+            if (filter.getPermissionId() != null) {
+                query.bind("permissionId", filter.getPermissionId());
+            }
+
+            if (filter.getFromDate() != null) {
+                query.bind("fromDate", filter.getFromDate());
+            }
+
+            if (filter.getToDate() != null) {
+                query.bind("toDate", filter.getToDate());
+            }
+
+            return query.mapTo(Integer.class).one();
         });
     }
 }
