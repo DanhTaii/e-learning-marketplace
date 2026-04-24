@@ -24,6 +24,7 @@ public class VnpayConstants {
     public static String vnp_ReturnUrl = "http://localhost:8080/e_learning_war_exploded/vnpay-return";
     public static String vnp_TmnCode = "NZL7QQA9";
     public static String secretKey = "H5T47UZPE5QOYC3CUJNYTA2RRRL06I7D";
+//    public static String vnp_IpUrl = "https://abcd-1234.ngrok-free.app/e_learning_war_exploded/vnpay-ipn";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
 
