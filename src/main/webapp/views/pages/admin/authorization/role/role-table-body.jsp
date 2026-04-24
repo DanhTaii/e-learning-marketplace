@@ -25,6 +25,13 @@
                 <td class="text-light">
                     <fmt:formatDate value="${role.createdAt}" pattern="dd/MM/yyyy"/>
                 </td>
+                <td class="action-btns">
+                    <a href="admin/super/role/detail?id=${role.id}">
+                        <button type="button" class="icon-action-btn">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                    </a>
+                </td>
             </tr>
         </c:forEach>
     </c:when>

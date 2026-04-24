@@ -11,6 +11,7 @@
             <th>TÊN VAI TRÒ</th>
             <th>MÔ TẢ</th>
             <th>NGÀY TẠO</th>
+            <th>THAO TÁC</th>
         </tr>
         </thead>
         <tbody>

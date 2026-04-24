@@ -3,7 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.role.service;
 import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDao;
 import vn.edu.nlu.fit.elearning.feature.role.model.Role;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RoleServiceImpl implements RoleService {
 
@@ -13,8 +16,9 @@ public class RoleServiceImpl implements RoleService {
         this.roleDao = roleDao;
     }
 
+    @Override
     public int createRole(Role role) {
-        return 0;
+        return roleDao.create(role);
     }
 
     @Override
@@ -27,13 +31,43 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    @Override
     public Role getRoleById(int id) {
-        return null;
+        return roleDao.findById(id);
     }
 
+    @Override
     public void updateRole(Role role) {
+        roleDao.update(role);
     }
 
+    @Override
     public void deleteRole(int id) {
+        roleDao.delete(id);
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return roleDao.existsByName(name);
+    }
+
+    @Override
+    public boolean existsByNameExcludeId(String name, int excludeId) {
+        return roleDao.existsByNameExcludeId(name, excludeId);
+    }
+
+    @Override
+    public Set<Integer> getPermissionIdsByRoleId(int roleId) {
+        return new HashSet<>(roleDao.getPermissionIdsByRoleId(roleId));
+    }
+
+    @Override
+    public void updateRolePermissions(int roleId, Set<Integer> permissionIds) {
+
+        roleDao.deletePermissionsByRoleId(roleId);
+
+        if (permissionIds != null && !permissionIds.isEmpty()) {
+            roleDao.insertRolePermissions(roleId, new ArrayList<>(permissionIds));
+        }
     }
 }
