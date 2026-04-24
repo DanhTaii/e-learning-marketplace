@@ -9,15 +9,24 @@
     <title>User Management</title>
 
     <base href="${pageContext.request.contextPath}/">
+
+    <%-- Admin layout CSS --%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/base/base.css">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet"
+          href="assets/css/admin/pages/user/user-management.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Admin component CSS --%>
+    <link rel="stylesheet" href="assets/css/admin/notification.css">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 </head>
 <body>
@@ -32,10 +41,20 @@
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
-                                <div class="header__title">Người dùng</div>
+                                <div class="header__title">
+                                    Người dùng
+                                    <div class="header__meta">
+                                        <span class="header__subtitle">
+                                            Quản lý tất cả người dùng
+                                        </span>
+                                        <span class="header__count">
+                                            ${listCategories.size()} người dùng
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="admin-create__buttons">
                                     <button type="button" class="dark-button">
-                                        <a href="views/pages/admin/user/user-create.jsp">
+                                        <a href="admin/user/detail" class="admin-create-link">
                                             <i class="fa-solid fa-plus"></i>Tạo mới
                                         </a>
                                     </button>

@@ -96,6 +96,17 @@
                     </div>
                 </a>
             </li>
+            <li>
+                <a href="admin/super/permissions">
+                    <div class="menu-item__student ${currentPage == 'permissions' ? 'student-list' : ''}">
+                                        <span class="container-1__menu-items menu-item__order">
+
+                                            <i class="fa-solid fa-credit-card"></i>
+                                            <span>Quyền</span>
+                                        </span>
+                    </div>
+                </a>
+            </li>
         </ul>
         <div class="log-out">
             <a href="html-authentication/sign-in.jsp">

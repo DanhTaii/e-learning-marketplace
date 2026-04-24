@@ -9,55 +9,70 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
 import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserRoleStatusRequest;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
+import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 
 import java.io.IOException;
 
 @WebServlet(name = "UserDetailController", value = "/admin/user/detail")
 public class UserDetailController extends HttpServlet {
-    private transient UserService userService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userService = BeanContainer.getBean(UserService.class);
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Thiết lập mã hóa đầu ra
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
 
-        String idStr = request.getParameter("id");
-        int id = Integer.parseInt(idStr);
-        UserDetailResponse user = userService.getUserById(id);
-
-        if (user != null) {
-            //Đưa dữ liệu người dùng về dạng JSON cho bên JavaScript đọc và hiển thị
-            String json = new Gson().toJson(user);
-            response.getWriter().write(json);
-        } else {
-            response.setStatus(404); // Không tìm thấy User trong DB
-        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("id"));
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
         String role = request.getParameter("role");
-        String statusStr = request.getParameter("status");
-        BaseStatus status = BaseStatus.valueOf(statusStr.toUpperCase());
+        String status = request.getParameter("status");
+        String phone = request.getParameter("phone");
 
-        UserRoleStatusRequest req = new UserRoleStatusRequest();
-        req.setRole(Role.valueOf(role));
-        req.setStatus(status);
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
+        //Hashpassword
+        String hashpassword = PasswordUtils.hashpassword(password);
+        user.setPassword(hashpassword);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhone(phone);
+        Role userRole = Role.valueOf(role);
+        user.setRole(userRole);
+        //ÉP kiểu string về ENUM
+        BaseStatus statusEnum = BaseStatus.valueOf(status);
+        user.setStatus(statusEnum);
 
-        if (userService.updateRole(userId, req) > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/users");
+        if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin !");
+            request.getRequestDispatcher("/views/pages/auth/sign-up.jsp").forward(request, response);
         }
+
+        try {
+            int check = userService.createUser(user);
+            if (check > 0) {
+                request.getSession().setAttribute("flashSuccess", "Tạo người dùng mới thành công !");
+                response.sendRedirect(request.getContextPath() + "/admin/users");
+            }
+        } catch (IllegalArgumentException iae) {
+            request.setAttribute("flashError", "Lỗi: " + iae.getMessage());
+            request.getRequestDispatcher("/views/pages/admin/user-create.jsp").forward(request, response);
+        }
+
 
     }
 

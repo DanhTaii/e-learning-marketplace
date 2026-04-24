@@ -54,6 +54,10 @@ import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDao;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDao;
+import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionService;
+import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDao;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
@@ -132,6 +136,9 @@ public class BeanContainer {
 
         WishlistDao wishlistDao = new WishlistDaoImpl();
         beans.put(WishlistService.class, new WishlistServiceImpl(wishlistDao));
+
+        PermissionDao permissionDao = new PermissionDaoImpl();
+        beans.put(PermissionService.class, new PermissionServiceImpl(permissionDao));
 
     }
 
