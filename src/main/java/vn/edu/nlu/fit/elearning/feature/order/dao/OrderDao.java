@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.order.dao;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 
@@ -23,11 +24,12 @@ public interface OrderDao {
 
     double calculateRevenueTotal();
 
-    List<Order> getOrderBySearch(String orderCode, String userName, String fromDate, String status);
+    List<Order> getOrderBySearch(OrderFilter filter);
 
     List<Map<String, Object>> findAllWithUserName();
 
     List<Map<String, Object>> searchWithUserAndPayment(String orderCode, String userName, Timestamp fromDate, String status);
 
     List<OrderDTO> getOrderHistoryByUserId(int userId);
+
 }

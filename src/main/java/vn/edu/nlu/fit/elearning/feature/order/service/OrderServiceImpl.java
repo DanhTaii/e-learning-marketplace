@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.external.mail.SendGridService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.PaymentStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.model.Enrollment;
@@ -79,8 +80,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Map<String, Object>> searchOrders(String orderCode, String userName, Timestamp fromDate, String status) {
-        return orderDao.searchWithUserAndPayment(orderCode, userName, fromDate, status);
+    public List<Order> searchOrders(OrderFilter filter) {
+        return orderDao.getOrderBySearch(filter);
     }
 
     @Override

@@ -67,12 +67,12 @@
                                 <div class="filter-content" id="filterContent">
                                     <div class="filter-grid">
                                         <div class="filter-group">
-                                            <label>Tìm kiếm danh mục</label>
+                                            <label>Mã đơn hàng</label>
                                             <div class="input-with-icon">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
-                                                <input type="text" name="searchName"
-                                                       value="${param.searchName}"
-                                                       placeholder="Nhập tên danh mục...">
+                                                <input type="text" name="code"
+                                                       value="${param.code}"
+                                                       placeholder="Nhập mã đơn hàng...">
                                             </div>
                                         </div>
 
@@ -85,16 +85,17 @@
                                             <label>Trạng thái</label>
                                             <select name="status">
                                                 <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
-                                                <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>Hoạt động</option>
-                                                <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>Không hoạt động</option>
+                                                <option value="ACTIVE" ${param.status == 'PAID' ? 'selected' : ''}>Thanh toán thành công</option>
+                                                <option value="FAILED" ${param.status == 'FAILED' ? 'selected' : ''}>Thanh toán thất bại</option>
+                                                <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>Đang thanh toán</option>
                                             </select>
                                         </div>
 
                                         <div class="filter-group">
-                                            <label>Tên slug</label>
-                                            <input type="text" name="slug"
-                                                   value="${param.slug}"
-                                                   placeholder="Nhập slug...">
+                                            <label>Tên người dùng</label>
+                                            <input type="text" name="searchName"
+                                                   value="${param.searchName}"
+                                                   placeholder="Nhập tên người dùng...">
                                         </div>
 
                                         <div class="filter-group">
@@ -103,10 +104,13 @@
                                         </div>
 
                                         <div class="filter-group">
-                                            <label>Parent ID</label>
-                                            <input type="number" name="parentId"
-                                                   value="${param.parentId}"
-                                                   placeholder="Ví dụ: 0" min="0">
+                                            <label>Thuộc khóa học</label>
+                                            <select name="courseId">
+                                                <option value="">Tất cả khóa học</option>
+                                                <c:forEach var="c" items="${listCourse}">
+                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="filter-actions">

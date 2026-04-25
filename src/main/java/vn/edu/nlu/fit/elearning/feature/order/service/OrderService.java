@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.order.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
@@ -23,7 +24,7 @@ public interface OrderService {
 
     Order findOrderPending(Integer userId);
 
-    List<Map<String, Object>> searchOrders(String orderCode, String userName, Timestamp fromDate, String status);
+    List<Order> searchOrders(OrderFilter filter);
 
     int updateOrder(Order order);
 
