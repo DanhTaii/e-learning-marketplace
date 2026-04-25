@@ -14,6 +14,7 @@ public class Order implements Serializable {
     private int id;
     private String orderCode;
     private int userId;
+    private String usernameSnapshot;
     private Integer paymentMethodId;
     private int totalAmount;
     private int discountAmount;
@@ -67,7 +68,15 @@ public class Order implements Serializable {
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
 
-  public String getFormatTotal(){
+    public String getUsernameSnapshot() {
+        return usernameSnapshot;
+    }
+
+    public void setUsernameSnapshot(String usernameSnapshot) {
+        this.usernameSnapshot = usernameSnapshot;
+    }
+
+    public String getFormatTotal(){
         return formatAndConvert(this.totalAmount);
   }
     public String getFormatDiscount(){

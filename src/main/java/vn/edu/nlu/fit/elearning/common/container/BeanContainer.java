@@ -50,6 +50,10 @@ import vn.edu.nlu.fit.elearning.feature.order_item.dao.OrderItemDao;
 import vn.edu.nlu.fit.elearning.feature.order_item.dao.OrderItemDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDao;
+import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
+import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDao;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
@@ -120,6 +124,9 @@ public class BeanContainer {
 
         PaymentMethodDao paymentMethodDao = new PaymentMethodDaoImpl();
         beans.put(PaymentMethodService.class, new PaymentMethodServiceImpl(paymentMethodDao));
+
+        PaymentDao paymentDao = new PaymentDaoImpl();
+        beans.put(PaymentService.class, new PaymentServiceImpl(paymentDao));
 
         ReviewDao reviewDao = new ReviewDaoImpl();
         beans.put(ReviewService.class, new ReviewServiceImpl(reviewDao));
