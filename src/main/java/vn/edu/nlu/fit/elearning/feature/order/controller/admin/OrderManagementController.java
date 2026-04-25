@@ -38,6 +38,8 @@ private CourseService courseService;
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
         filter.setStatus(RequestUtils.getParameterAsOrderStatus(request, "status"));
 
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
         List<Order> listOrders = orderService.searchOrders(filter);
         List<Course> listCourses = courseService.getAllCourses();

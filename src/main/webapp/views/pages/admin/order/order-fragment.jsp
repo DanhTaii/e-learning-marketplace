@@ -23,9 +23,8 @@
         </tbody>
     </table>
 
-    <jsp:include page="/views/components/bulk-action-bar.jsp">
+    <jsp:include page="/views/components/order-action-bar.jsp">
         <jsp:param name="label" value="đơn hàng"/>
-        <jsp:param name="showDuplicate" value="true"/>
     </jsp:include>
 
 </div>

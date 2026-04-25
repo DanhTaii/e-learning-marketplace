@@ -9,7 +9,8 @@
         <c:forEach var="order" items="${listOrders}">
 
             <tr>
-                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${order.id}"></td>
+                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${order.id}" data-amount="${order.finalAmount}"
+                           data-status="${order.status}"></td>
                 <td>
                     <div class="course-row__title title course-row__style-text">
                             ${order.orderCode}
