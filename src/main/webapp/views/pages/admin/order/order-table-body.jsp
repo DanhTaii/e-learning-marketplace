@@ -18,7 +18,7 @@
                 </td>
                 <td>
                     <div class="course-row__font-content">
-                            ${userName}
+                            ${order.usernameSnapshot}
                     </div>
                 </td>
                 <td>
@@ -43,7 +43,7 @@
                         <fmt:setLocale value="en_US" scope="page"/>
 
                         <fmt:formatDate value="${order.createdAt}"
-                                        pattern="dd-MM-YYYY"/>
+                                        pattern="yyyy-MM-dd"/>
                     </div>
                 </td>
                 <td class="action__button">

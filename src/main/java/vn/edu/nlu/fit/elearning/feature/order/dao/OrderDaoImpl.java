@@ -29,28 +29,14 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     public Order findById(Integer orderId) {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
-                "o.paid_at, o.created_at, o.updated_at " +
+                "o.paid_at, o.created_at, o.updated_at,  o.username_snapshot " +
                 "FROM orders o " +
                 "WHERE o.id = :id";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind("id", orderId)
-                        .map((rs, ctx) -> {
-                            Order order = new Order();
-                            order.setId(rs.getInt("id"));
-                            order.setOrderCode(rs.getString("order_code"));
-                            order.setUserId(rs.getInt("user_id"));
-                            order.setPaymentMethodId(rs.getInt("payment_method_id"));
-                            order.setTotalAmount(rs.getInt("total_amount"));
-                            order.setDiscountAmount(rs.getInt("discount_amount"));
-                            order.setFinalAmount(rs.getInt("final_amount"));
-                            order.setStatus(OrderStatus.valueOf(rs.getString("status")));
-                            order.setPaidAt(rs.getTimestamp("paid_at"));
-                            order.setCreatedAt(rs.getTimestamp("created_at"));
-                            order.setUpdatedAt(rs.getTimestamp("updated_at"));
-                            return order;
-                        })
+                        .mapToBean(Order.class)
                         .findFirst()
                         .orElse(null)
         );
