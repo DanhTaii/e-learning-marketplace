@@ -58,10 +58,18 @@ import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDao;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDao;
+import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionService;
+import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDao;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDao;
+import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.role.service.RoleService;
+import vn.edu.nlu.fit.elearning.feature.role.service.RoleServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
@@ -139,6 +147,12 @@ public class BeanContainer {
 
         WishlistDao wishlistDao = new WishlistDaoImpl();
         beans.put(WishlistService.class, new WishlistServiceImpl(wishlistDao));
+
+        PermissionDao permissionDao = new PermissionDaoImpl();
+        beans.put(PermissionService.class, new PermissionServiceImpl(permissionDao));
+
+        RoleDao roleDao = new RoleDaoImpl();
+        beans.put(RoleService.class, new RoleServiceImpl(roleDao));
 
     }
 
