@@ -1,7 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.order.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
-import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
@@ -166,6 +165,19 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
             return query.mapToBean(Order.class).list();
         });
     }
+    @Override
+    public int countOrdersByFilter(OrderFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildOrderWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(*) FROM orders o" + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
     private String buildOrderWhereClause(OrderFilter filter, Map<String, Object> params) {
         StringBuilder where = new StringBuilder(" WHERE 1=1");
 
@@ -175,7 +187,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         }
         if (filter.getCode() != null && !filter.getCode().trim().isEmpty()) {
             where.append(" AND o.order_code LIKE :code");
-            params.put("nameSearch", "%" + filter.getCode().trim() + "%");
+            params.put("code", "%" + filter.getCode().trim() + "%");
         }
 
         if (filter.getCourseId() > 0) {
@@ -200,7 +212,14 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 
         return where.toString();
     }
-
+    @Override
+    public int countAllOrder() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM orders")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
     @Override
     public List<Map<String, Object>> findAllWithUserName() {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +

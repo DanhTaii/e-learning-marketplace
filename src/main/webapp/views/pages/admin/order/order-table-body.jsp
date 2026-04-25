@@ -5,9 +5,8 @@
 
 <c:choose>
     <c:when test="${not empty listOrders}">
-        <c:forEach var="row" items="${listOrders}">
-            <c:set var="order" value="${row.order}" />
-            <c:set var="userName" value="${row.userName}" />
+
+        <c:forEach var="order" items="${listOrders}">
 
             <tr>
                 <td><input type="checkbox" class="category-checkbox item-checkbox" value="${order.id}"></td>

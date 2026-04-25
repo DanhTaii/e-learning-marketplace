@@ -42,7 +42,7 @@
                                             Quản lý tất cả đơn hàng
                                         </span>
                                     <span class="header__count">
-                                            ${listOrders.size()} đơn hàng
+                                            ${totalOrders} đơn hàng
                                         </span>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                             <label>Trạng thái</label>
                                             <select name="status">
                                                 <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
-                                                <option value="ACTIVE" ${param.status == 'PAID' ? 'selected' : ''}>Thanh toán thành công</option>
+                                                <option value="PAID" ${param.status == 'PAID' ? 'selected' : ''}>Thanh toán thành công</option>
                                                 <option value="FAILED" ${param.status == 'FAILED' ? 'selected' : ''}>Thanh toán thất bại</option>
                                                 <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>Đang thanh toán</option>
                                             </select>

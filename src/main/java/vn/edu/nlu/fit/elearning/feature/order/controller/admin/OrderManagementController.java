@@ -42,9 +42,17 @@ private CourseService courseService;
         List<Order> listOrders = orderService.searchOrders(filter);
         List<Course> listCourses = courseService.getAllCourses();
         request.setAttribute("listOrders", listOrders);
+        request.setAttribute("totalOrders", orderService.getTotalOrders());
         request.setAttribute("filter", filter);
         request.setAttribute("listCourse", listCourses);
+
+
+        int totalRecords = orderService.getCountOrdersByFilter(filter);
+        int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
+
+        request.setAttribute("currentPageNumber", filter.getPage());
         request.setAttribute("currentPage", "orders");
+        request.setAttribute("totalPages", totalPages);
 
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {

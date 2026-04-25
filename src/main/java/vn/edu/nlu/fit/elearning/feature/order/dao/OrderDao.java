@@ -26,6 +26,10 @@ public interface OrderDao {
 
     List<Order> getOrderBySearch(OrderFilter filter);
 
+    int countOrdersByFilter(OrderFilter filter);
+
+    int countAllOrder();
+
     List<Map<String, Object>> findAllWithUserName();
 
     List<Map<String, Object>> searchWithUserAndPayment(String orderCode, String userName, Timestamp fromDate, String status);

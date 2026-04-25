@@ -21,13 +21,11 @@ import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.sql.Timestamp;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -83,6 +81,11 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> searchOrders(OrderFilter filter) {
         return orderDao.getOrderBySearch(filter);
     }
+    @Override
+    public int getCountOrdersByFilter(OrderFilter filter) {
+        return orderDao.countOrdersByFilter(filter);
+    }
+
 
     @Override
     public int updateOrder(Order order) {
@@ -113,6 +116,11 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> getOrderHistoryByUserId(int userId){
         List<OrderDTO> list = orderDao.getOrderHistoryByUserId(userId);
         return list;
+    }
+
+    @Override
+    public int getTotalOrders() {
+        return orderDao.countAllOrder();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.order.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
@@ -26,6 +27,9 @@ public interface OrderService {
 
     List<Order> searchOrders(OrderFilter filter);
 
+
+    int getCountOrdersByFilter(OrderFilter filter);
+
     int updateOrder(Order order);
 
     boolean deleteOrder(int orderId);
@@ -35,4 +39,6 @@ public interface OrderService {
     double getRevenueTotal();
 
     List<OrderDTO> getOrderHistoryByUserId(int userId);
+
+    int getTotalOrders();
 }
