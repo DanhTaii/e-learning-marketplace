@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.common.utils.servlet;
 
 import jakarta.servlet.http.HttpServletRequest;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 
 import java.sql.Timestamp;
@@ -49,6 +50,19 @@ public class RequestUtils {
 
         try {
             return BaseStatus.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+    public static OrderStatus getParameterAsOrderStatus(HttpServletRequest request, String paramStatus) {
+        String value = request.getParameter(paramStatus);
+
+        if (value == null || value.trim().isEmpty()) {
+            return null;
+        }
+
+        try {
+            return OrderStatus.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
             return null;
         }

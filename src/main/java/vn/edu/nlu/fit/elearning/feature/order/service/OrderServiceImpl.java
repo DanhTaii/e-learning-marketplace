@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.external.mail.SendGridService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.PaymentStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.model.Enrollment;
@@ -20,13 +21,11 @@ import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.sql.Timestamp;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -79,9 +78,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Map<String, Object>> searchOrders(String orderCode, String userName, Timestamp fromDate, String status) {
-        return orderDao.searchWithUserAndPayment(orderCode, userName, fromDate, status);
+    public List<Order> searchOrders(OrderFilter filter) {
+        return orderDao.getOrderBySearch(filter);
     }
+    @Override
+    public int getCountOrdersByFilter(OrderFilter filter) {
+        return orderDao.countOrdersByFilter(filter);
+    }
+
 
     @Override
     public int updateOrder(Order order) {
@@ -112,6 +116,11 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> getOrderHistoryByUserId(int userId){
         List<OrderDTO> list = orderDao.getOrderHistoryByUserId(userId);
         return list;
+    }
+
+    @Override
+    public int getTotalOrders() {
+        return orderDao.countAllOrder();
     }
 
     @Override

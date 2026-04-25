@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.order.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
@@ -29,28 +30,14 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     public Order findById(Integer orderId) {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
-                "o.paid_at, o.created_at, o.updated_at " +
+                "o.paid_at, o.created_at, o.updated_at,  o.username_snapshot " +
                 "FROM orders o " +
                 "WHERE o.id = :id";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind("id", orderId)
-                        .map((rs, ctx) -> {
-                            Order order = new Order();
-                            order.setId(rs.getInt("id"));
-                            order.setOrderCode(rs.getString("order_code"));
-                            order.setUserId(rs.getInt("user_id"));
-                            order.setPaymentMethodId(rs.getInt("payment_method_id"));
-                            order.setTotalAmount(rs.getInt("total_amount"));
-                            order.setDiscountAmount(rs.getInt("discount_amount"));
-                            order.setFinalAmount(rs.getInt("final_amount"));
-                            order.setStatus(OrderStatus.valueOf(rs.getString("status")));
-                            order.setPaidAt(rs.getTimestamp("paid_at"));
-                            order.setCreatedAt(rs.getTimestamp("created_at"));
-                            order.setUpdatedAt(rs.getTimestamp("updated_at"));
-                            return order;
-                        })
+                        .mapToBean(Order.class)
                         .findFirst()
                         .orElse(null)
         );
@@ -157,65 +144,88 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrderBySearch(String orderCode, String userName, String fromDate, String status) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT o.id, o.order_code AS orderCode, ")
-                .append("o.user_id AS userId, ")
-                .append("o.payment_method_id AS paymentMethodId, ")
-                .append("o.total_amount AS totalAmount, ")
-                .append("o.discount_amount AS discountAmount, ")
-                .append("o.final_amount AS finalAmount, ")
-                .append("o.status, ")
-                .append("o.paid_at AS paidAt, ")
-                .append("o.created_at AS createdAt, ")
-                .append("o.updated_at AS updatedAt, ")
-                .append("u.username AS username ")  // Lấy username để hiển thị
-                .append("FROM orders o ")
-                .append("LEFT JOIN users u ON o.user_id = u.id ")
-                .append("WHERE 1=1 ");
-
-        if (orderCode != null && !orderCode.trim().isEmpty()) {
-            sql.append("AND o.order_code LIKE :orderCode ");
-        }
-        if (userName != null && !userName.trim().isEmpty()) {
-            sql.append("AND u.username LIKE :userName ");
-        }
-        if (fromDate != null && !fromDate.trim().isEmpty()) {
-            sql.append("AND DATE(o.created_at) >= :fromDate ");
-        }
-        if (status != null && !status.trim().isEmpty()) {
-            sql.append("AND o.status = :status ");
-        }
-
-        sql.append("ORDER BY o.created_at DESC");
+    public List<Order> getOrderBySearch(OrderFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildOrderWhereClause(filter, params);
+        String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
+                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.paid_at, o.created_at, o.updated_at, o.username_snapshot " +
+                "FROM orders o "
+                + whereClause
+                + " ORDER BY o.created_at DESC LIMIT :limit OFFSET :offset";
 
         return getJdbi().withHandle(handle -> {
-            var query = handle.createQuery(sql.toString());
+            var query = handle.createQuery(sql);
 
-            if (orderCode != null && !orderCode.trim().isEmpty()) {
-                query.bind("orderCode", "%" + orderCode.trim() + "%");
-            }
-            if (userName != null && !userName.trim().isEmpty()) {
-                query.bind("userName", "%" + userName.trim() + "%");
-            }
-            if (fromDate != null && !fromDate.trim().isEmpty()) {
-                query.bind("fromDate", fromDate);
-            }
-            if (status != null && !status.trim().isEmpty()) {
-                query.bind("status", status);
-            }
+            params.forEach(query::bind);
+
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
 
             return query.mapToBean(Order.class).list();
         });
     }
+    @Override
+    public int countOrdersByFilter(OrderFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildOrderWhereClause(filter, params);
 
+        String sql = "SELECT COUNT(*) FROM orders o" + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+    private String buildOrderWhereClause(OrderFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            where.append(" AND o.username_snapshot LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getName().trim() + "%");
+        }
+        if (filter.getCode() != null && !filter.getCode().trim().isEmpty()) {
+            where.append(" AND o.order_code LIKE :code");
+            params.put("code", "%" + filter.getCode().trim() + "%");
+        }
+
+        if (filter.getCourseId() > 0) {
+            where.append(" AND EXISTS (SELECT 1 FROM order_items oi WHERE oi.order_id = o.id AND oi.course_id = :courseIdSearch)");
+            params.put("courseIdSearch", filter.getCourseId());
+        }
+
+        if (filter.getFromDate() != null) {
+            where.append(" AND o.created_at >= :fromDate");
+            params.put("fromDate", filter.getFromDate());
+        }
+
+        if (filter.getToDate() != null) {
+            where.append(" AND o.created_at <= :toDate");
+            params.put("toDate", filter.getToDate());
+        }
+
+        if (filter.getStatus() != null) {
+            where.append(" AND o.status = :status");
+            params.put("status", filter.getStatus());
+        }
+
+        return where.toString();
+    }
+    @Override
+    public int countAllOrder() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM orders")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
     @Override
     public List<Map<String, Object>> findAllWithUserName() {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
-                "o.paid_at, o.created_at, o.updated_at, u.username AS userName " +
+                "o.paid_at, o.created_at, o.updated_at, o.username_snapshot " +
                 "FROM orders o " +
-                "LEFT JOIN users u ON o.user_id = u.id " +
                 "ORDER BY o.created_at DESC";
 
         return getJdbi().withHandle(handle ->
@@ -234,9 +244,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
                             order.setPaidAt(rs.getTimestamp("paid_at"));
                             order.setCreatedAt(rs.getTimestamp("created_at"));
                             order.setUpdatedAt(rs.getTimestamp("updated_at"));
-
+                              order.setUsernameSnapshot(rs.getString("username_snapshot"));
                             row.put("order", order);
-                            row.put("userName", rs.getString("userName"));
                             return row;
                         })
                         .list()
