@@ -72,3 +72,15 @@
     color: #018d4a;
 }
 
+.modern-table th:nth-child(2)  {
+    width: 20% !important;
+}
+.modern-table th:nth-child(3) {
+    width: 17% !important;
+}
+.modern-table th:nth-child(4) {
+    width: 14% !important;
+}
+.modern-table th:first-child {
+    width: 3% !important;
+}
