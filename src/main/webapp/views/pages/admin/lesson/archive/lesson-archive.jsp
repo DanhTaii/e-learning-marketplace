@@ -60,7 +60,8 @@
                             </div>
 
                             <div class="container-2__body">
-                                <form method="get" action="admin/lessons/archive" class="advanced-filter" id="filterForm">
+                                <form method="get" action="admin/lessons/archive" class="advanced-filter"
+                                      id="filterForm">
                                     <script>
                                         //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
                                         //Nó sẽ vô tình trạng đóng mở ngay lập tức
@@ -89,21 +90,30 @@
                                                            placeholder="Nhập tên bài học...">
                                                 </div>
                                             </div>
+
                                             <div class="filter-group">
-                                                <label>THEO KHÓA HỌC</label>
+                                                <label>Thuộc khóa học</label>
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
+                                                    <c:forEach var="c" items="${listCourse}">
+                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
-<%--                                            <div class="filter-group">--%>
-<%--                                                <label>THỜI GIAN LƯU TRỮ</label>--%>
-<%--                                                <select name="archiveTime">--%>
-<%--                                                    <option value="">Tất cả thời gian</option>--%>
-<%--                                                </select>--%>
-<%--                                            </div>--%>
+
+                                            <div class="filter-group">
+                                                <label>Từ ngày</label>
+                                                <input type="date" name="deletedFromDate" value="${param.deletedFromDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date" name="deletedToDate" value="${param.deletedToDate}">
+                                            </div>
+
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/lessons" class="btn-clear">
+                                            <a href="admin/lessons/archive" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
@@ -116,10 +126,12 @@
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
                                     <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
-                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
+                                    <input id="currentQueryId" type="hidden" name="currentQuery"
+                                           value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="lessonTableBody">
-                                        <jsp:include page="/views/pages/admin/lesson/archive/lesson-archive-fragment.jsp"/>
+                                        <jsp:include
+                                                page="/views/pages/admin/lesson/archive/lesson-archive-fragment.jsp"/>
                                     </div>
 
                                 </form>
@@ -138,4 +150,6 @@
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/lesson/lesson-archive.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>
