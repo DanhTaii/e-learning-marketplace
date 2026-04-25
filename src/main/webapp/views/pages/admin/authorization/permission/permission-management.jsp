@@ -52,20 +52,10 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="admin-create__buttons">
-<%--                                    <button type="button" class="dark-button">--%>
-<%--&lt;%&ndash;                                        <a href="admin/lesson/detail" class="admin-create-link">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <i class="fa-solid fa-plus"></i>Tạo mới&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        </a>&ndash;%&gt;--%>
-<%--                                    </button>--%>
-                                </div>
                             </div>
                             <div class="container-2__body">
                                 <form method="get" action="admin/super/permissions" class="advanced-filter" id="filterForm">
                                     <script>
-                                        //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
-                                        //Nó sẽ vô tình trạng đóng mở ngay lập tức
-                                        //Để đoạn script ở đây để nó trong lúc load HTML,CSS có thể load được luôn
                                         if (localStorage.getItem('admin_filter_status') === 'closed') {
                                             document.getElementById('filterForm').classList.add('collapsed');
                                         }
@@ -133,7 +123,7 @@
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/permissions">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
-                                    <div class="container-2__dynamic-content" id="lessonTableBody">
+                                    <div class="container-2__dynamic-content" id="permissionTableBody">
                                         <jsp:include page="/views/pages/admin/authorization/permission/permission-fragment.jsp"/>
                                     </div>
                                 </form>
@@ -151,7 +141,7 @@
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<%--<script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>--%>
+<script src="assets/javascript/admin/permission/permission-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 
