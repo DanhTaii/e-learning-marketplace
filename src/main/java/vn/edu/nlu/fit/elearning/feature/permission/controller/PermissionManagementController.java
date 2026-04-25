@@ -5,6 +5,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.permission.PermissionFilter;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionService;
@@ -24,18 +26,40 @@ public class PermissionManagementController extends BaseController {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-            List<Permission> permissions = permissionService.getAllPermissions();
+        PermissionFilter filter = new PermissionFilter();
 
-            request.setAttribute("listPermissions", permissions);
-            request.setAttribute("currentPage", "permissions");
-            this.forward(request, response, "/views/pages/admin/authorization/permission/permission-management.jsp");
+        List<String> groups = permissionService.getAllGroupNames();
 
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        filter.setName(request.getParameter("searchName"));
+        filter.setDescription(request.getParameter("description"));
+        filter.setGroupName(request.getParameter("groupName"));
+
+        filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
+
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
+
+        List<Permission> permissions = permissionService.getPermissionsByFilter(filter);
+        int totalRecords = permissionService.countPermissionsByFilter(filter);
+
+        int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
+
+        request.setAttribute("listPermissionGroups", groups);
+        request.setAttribute("listPermissions", permissions);
+        request.setAttribute("filter", filter);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("currentPageNumber", filter.getPage());
+        request.setAttribute("currentPage", "permissions");
+
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            forward(request, response, "/views/pages/admin/authorization/permission/permission-fragment.jsp");
+        } else {
+            forward(request, response, "/views/pages/admin/authorization/permission/permission-management.jsp");
         }
     }
 

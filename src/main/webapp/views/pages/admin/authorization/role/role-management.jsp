@@ -59,10 +59,10 @@
                                     <div class="filter-grid">
 
                                         <div class="filter-group">
-                                            <label>Tên Role</label>
+                                            <label>Tên vai trò</label>
                                             <input type="text" name="searchName"
                                                    value="${filter.name}"
-                                                   placeholder="Nhập tên role...">
+                                                   placeholder="Nhập tên vai trò...">
                                         </div>
 
                                         <div class="filter-group">
