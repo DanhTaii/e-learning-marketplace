@@ -17,12 +17,12 @@
                     <span class="badge badge-reason">${item.deleteReason}</span>
                 </td>
                 <td class="action-btns">
-                    <button onclick="setupConfirmModal({action: 'restore', ids: ${lesson.id}, url: 'admin/lesson/restore', isBulk: false})"
+                    <button onclick="setupConfirmModal({action: 'restore', ids: ${item.id}, url: 'admin/lessons/archive', isBulk: false})"
                             type="button"
                             class="icon-action-btn">
                         <i class="fa-solid fa-rotate-left"></i>
                     </button>
-                    <button onclick="setupConfirmModal({action: 'delete', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})"
+                    <button onclick="setupConfirmModal({action: 'delete', ids: ${item.id}, url: 'admin/lesson/delete', isBulk: false})"
                             type="button"
                             class="icon-action-btn">
                         <i class="fa-solid fa-trash"></i>

@@ -303,7 +303,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         Map<String, Object> params = new HashMap<>();
         String whereClause = buildLessonArchiveWhereClause(filter, params);
 
-        String sql = "SELECT l.title, c.title AS course_title, l.deleted_at, l.delete_reason " +
+        String sql = "SELECT l.id, l.title, c.title AS course_title, l.deleted_at, l.delete_reason " +
                 "FROM lessons l LEFT JOIN courses c ON l.course_id = c.id"
                 + whereClause
                 + " ORDER BY l.deleted_at DESC LIMIT :limit OFFSET :offset";
@@ -358,6 +358,16 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         where.append(" AND l.is_deleted = 1");
 
         return where.toString();
+    }
+
+
+    @Override
+    public int restoreLessonsByIds(List<Integer> ids) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE lessons SET is_deleted = 0 WHERE id IN (<ids>)")
+                    .bindList("ids", ids)
+                    .execute();
+        });
     }
 
 

@@ -159,4 +159,9 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.countLessonsArchiveByFilter(filter);
     }
 
+    @Override
+    public int restoreLessonsByIds(List<Integer> ids) {
+        return lessonDao.restoreLessonsByIds(ids);
+    }
+
 }

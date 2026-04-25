@@ -44,8 +44,9 @@ public class LessonDeleteController extends HttpServlet {
                     request.getSession().setAttribute("flashError", "Xóa bài học thất bại. Vui lòng thử lại!");
                 }
                 response.sendRedirect(request.getContextPath() + "/admin/lessons");
-            } else {
-                int success = lessonService.deleteLesson(lessonId);
+            }
+            if ("delete".equals(deleteType)) {
+                int success = lessonService.deleteLessonByIds(ids);
                 if (success > 0) {
                     request.getSession().setAttribute("flashSuccess", "Xóa bài học thành công!");
                 } else {

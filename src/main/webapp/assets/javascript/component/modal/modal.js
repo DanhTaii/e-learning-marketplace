@@ -1,4 +1,3 @@
-
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -52,21 +51,37 @@ function setupConfirmModal(options) {
 
 }
 
-document.getElementById('btn-confirm-delete').addEventListener('click', function () {
-    const currentReason = document.getElementById('archive-reason').value
+document.addEventListener('DOMContentLoaded', function () {
+    const confirmBtn = document.getElementById('btn-confirm-delete');
 
-    if (modalState.isBulk) {
-        submitBulkForm(modalState.action, currentReason)
-    } else {
-        submitSingleForm(modalState.action, modalState.url, currentReason)
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function () {
+            const currentReason = document.getElementById('archive-reason').value
+
+            if (modalState.isBulk) {
+                submitBulkForm(modalState.action, currentReason)
+            } else {
+                submitSingleForm(modalState.action, modalState.url, currentReason)
+            }
+        })
     }
+
 })
 
 function submitBulkForm(action, reason) {
     const form = document.getElementById('bulkActionForm')
+    const archiveForm = document.getElementById('archiveBulkForm')
+
     document.getElementById('bulkActionInput').value = action
-    document.getElementById('deleteReasonId').value = reason
-    form.submit();
+
+    if (form) {
+        document.getElementById('deleteReasonId').value = reason
+        form.submit();
+    }
+
+    if (archiveForm) {
+        archiveForm.submit();
+    }
 }
 
 function submitSingleForm(action, url, reason) {
@@ -75,7 +90,7 @@ function submitSingleForm(action, url, reason) {
     const itemDeleteId = document.getElementById('input-delete-id')
     const typeAction = document.getElementById('input-delete-type')
 
-    if(singleDeleteReason) {
+    if (singleDeleteReason) {
         singleDeleteReason.value = reason
     }
 

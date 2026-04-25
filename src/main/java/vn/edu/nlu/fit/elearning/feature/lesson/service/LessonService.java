@@ -49,4 +49,6 @@ public interface LessonService {
 
     int getCountLessonsArchiveByFilter(LessonArchiveFilter filter);
 
+    int restoreLessonsByIds(List<Integer> ids);
+
 }

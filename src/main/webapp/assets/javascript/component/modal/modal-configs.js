@@ -38,5 +38,15 @@ const MODAL_CONFIGS = {
         titleClass: 'title-dark',
         icon: 'fa-pen',
         showReason: false
+    },
+    restore: {
+        title: 'khôi phục',
+        message: 'Hệ thống sẽ khôi phục mục này',
+        btnText: 'Khôi phục ngay',
+
+        btnClass: 'btn-primary',
+        titleClass: 'title-primary',
+        icon: 'fa-rotate-left',
+        showReason: false
     }
 };

@@ -47,4 +47,6 @@ public interface LessonDao {
 
     int countLessonsArchiveByFilter(LessonArchiveFilter filter);
 
+    int restoreLessonsByIds(List<Integer> ids);
+
 }

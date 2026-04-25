@@ -19,7 +19,11 @@
     </table>
     <jsp:include page="/views/components/bulk-action-bar.jsp">
         <jsp:param name="label" value="bài học"/>
-        <jsp:param name="showDuplicate" value="true"/>
+        <jsp:param name="showDuplicate" value="false"/>
+        <jsp:param name="showUpdateStatus" value="false"/>
+        <jsp:param name="showArchive" value="false"/>
+        <jsp:param name="showRestore" value="true"/>
+        <jsp:param name="showDelete" value="true"/>
     </jsp:include>
 </div>
 
