@@ -82,13 +82,34 @@
 
                                     <div class="filter-content" id="filterContent">
                                         <div class="filter-grid">
+
                                             <div class="filter-group">
-                                                <label>Tìm kiếm bài học</label>
-                                                <div class="input-with-icon">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="searchName" value="${param.searchName}"
-                                                           placeholder="Nhập tên bài học...">
-                                                </div>
+                                                <label>Tên quền</label>
+                                                <input type="text" name="searchName"
+                                                       value="${filter.name}"
+                                                       placeholder="Nhập tên quyền...">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Mô tả</label>
+                                                <input type="text" name="description"
+                                                       value="${filter.description}"
+                                                       placeholder="Nhập mô tả...">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Nhóm</label>
+                                                <select name="groupName">
+                                                    <option value="">-- Tất cả --</option>
+
+                                                    <c:forEach var="group" items="${listPermissionGroups}">
+                                                        <option value="${group}"
+                                                            ${param.groupName == group ? 'selected' : ''}>
+                                                                ${group}
+                                                        </option>
+                                                    </c:forEach>
+
+                                                </select>
                                             </div>
 
                                             <div class="filter-group">
@@ -103,7 +124,7 @@
 
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/lessons" class="btn-clear">
+                                            <a href="admin/super/permissions" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
@@ -111,12 +132,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/permissions">
-                                    <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
-
-                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
-<%--                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">--%>
-
                                     <div class="container-2__dynamic-content" id="lessonTableBody">
                                         <jsp:include page="/views/pages/admin/authorization/permission/permission-fragment.jsp"/>
                                     </div>

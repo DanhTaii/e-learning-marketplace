@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.permission.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.permission.PermissionFilter;
 import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDao;
 import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 
@@ -35,5 +36,20 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     public void deletePermission(int id) {
+    }
+
+    @Override
+    public List<Permission> getPermissionsByFilter(PermissionFilter filter) {
+        return permissionDao.findPermissionsByFilter(filter);
+    }
+
+    @Override
+    public int countPermissionsByFilter(PermissionFilter filter) {
+        return permissionDao.countPermissionsByFilter(filter);
+    }
+
+    @Override
+    public List<String> getAllGroupNames() {
+        return permissionDao.findAllGroupNames();
     }
 }
