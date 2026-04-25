@@ -9,13 +9,21 @@
     <title>Order Management</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet"
+          href="assets/css/admin/pages/order/order-management.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Admin component CSS --%>
+    <link rel="stylesheet" href="assets/css/admin/notification.css">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/order-management.css?v=<%=System.currentTimeMillis()%>">
-
 </head>
 <body>
 <div class="web">
@@ -24,125 +32,104 @@
             <div class="grid__row-2">
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
-                    <div class="container-2__header"></div>
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
                     <div class="grid__row-2 container-2__grid">
                         <div class="container-2__header">
-                            <div class="header__title">Đơn hàng</div>
-                        </div>
-                        <div class="container-2__body">
-                            <form action="${pageContext.request.contextPath}/admin/orders/search" method="get">
-                            <div class="container-2__filter">
-                                <div class="filter__selection">
-
-                                        <div class="filter__selection-input">
-                                            <div class="filter__selection-items filter__selection-name">
-                                                <div class="filter__selection-title filter__item-name">Mã:</div>
-                                                <input name="orderCode" placeholder="" type="text" class="admin-input__long">
-                                            </div>
-                                            <div class="filter__selection-items">
-                                                <div class="filter__selection-title filter__item-phone">Tên người dùng:</div>
-                                                <input name="userName" placeholder="" type="text" class="admin-input__long">
-                                            </div>
-                                            <div class="filter__selection-items">
-                                                <div class="filter__selection-title filter__item-phone">Từ ngày:</div>
-                                                <input name="fromDate" placeholder="" type="datetime-local" class="admin-input__long">
-                                            </div>
-
-                                        </div>
-
-                                        <div class="filter__button-search">
-                                            <button type="submit" class="admin-search-btn">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </button>
-                                        </div>
-
+                            <div class="header__title">
+                                Đơn hàng
+                                <div class="header__meta">
+                                        <span class="header__subtitle">
+                                            Quản lý tất cả đơn hàng
+                                        </span>
+                                    <span class="header__count">
+                                            ${totalOrders} đơn hàng
+                                        </span>
                                 </div>
                             </div>
-                    </form>
-                            <div class="container-2__list-student">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>Mã đơn hàng</th>
-                                        <th>Tên người dùng</th>
-                                        <th>Thành tiền</th>
-                                        <th>Kiểu thanh toán</th>
-                                        <th>Trạng thái</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                    </thead>
+                        </div>
+                        <div class="container-2__body">
+                            <form method="get" action="admin/orders" class="advanced-filter" id="filterForm">
+                                <script>
+                                    if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                        document.getElementById('filterForm').classList.add('collapsed');
+                                    }
+                                </script>
+                                <div class="filter-header" onclick="toggleFilter()">
+                                    <h2 class="filter-title">
+                                        <i class="fa-solid fa-filter"></i>
+                                        Bộ lọc nâng cao
+                                    </h2>
+                                    <div class="filter-toggle-icon" id="toggleIcon">
+                                        <i class="fa-solid fa-sliders"></i>
+                                    </div>
+                                </div>
 
-                                    <tbody>
-                                    <c:forEach var="row" items="${listOrders}">
-                                        <c:set var="order" value="${row.order}" />
-                                        <c:set var="userName" value="${row.userName}" />
+                                <div class="filter-content" id="filterContent">
+                                    <div class="filter-grid">
+                                        <div class="filter-group">
+                                            <label>Mã đơn hàng</label>
+                                            <div class="input-with-icon">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                                <input type="text" name="code"
+                                                       value="${param.code}"
+                                                       placeholder="Nhập mã đơn hàng...">
+                                            </div>
+                                        </div>
 
-                                        <tr>
-                                            <td>
-                                                <div class="course-row__title title course-row__style-text">
-                                                        ${order.orderCode}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                        ${userName}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                        ${order.finalAmount}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content">
-                                                        ${order.paymentMethodId == 1 ? 'Momo' :
-                                                                (order.paymentMethodId == 2 ? 'VNPAY' :
-                                                                        (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__font-content course-row__status ">
-                                                        ${order.status}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__created course-row__font-content">
-                                                        <fmt:setLocale value="en_US" scope="page"/>
+                                        <div class="filter-group">
+                                            <label>Từ ngày</label>
+                                            <input type="date" name="fromDate" value="${param.fromDate}">
+                                        </div>
 
-                                                    <fmt:formatDate value="${order.createdAt}"
-                                                                    pattern="dd-MM-YYYY"/>
-                                                </div>
-                                            </td>
-                                            <td class="action__button">
-                                                <a href="admin/order/detail?id=${order.id}" class="turn-page">
-                                                    <button type="button"
-                                                            class="icon-action-btn">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                    </button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                        <div class="filter-group">
+                                            <label>Trạng thái</label>
+                                            <select name="status">
+                                                <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
+                                                <option value="PAID" ${param.status == 'PAID' ? 'selected' : ''}>Thanh toán thành công</option>
+                                                <option value="FAILED" ${param.status == 'FAILED' ? 'selected' : ''}>Thanh toán thất bại</option>
+                                                <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>Đang thanh toán</option>
+                                            </select>
+                                        </div>
 
+                                        <div class="filter-group">
+                                            <label>Tên người dùng</label>
+                                            <input type="text" name="searchName"
+                                                   value="${param.searchName}"
+                                                   placeholder="Nhập tên người dùng...">
+                                        </div>
 
+                                        <div class="filter-group">
+                                            <label>Đến ngày</label>
+                                            <input type="date" name="toDate" value="${param.toDate}">
+                                        </div>
 
-                                    <c:if test="${empty listOrders}">
-                                        <tr>
-                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                <div class="search-empty-state">
-                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
-                                                    <div class="search-empty-title">
-                                                        Không tìm thấy đơn hàng nào
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                    </tbody>
+                                        <div class="filter-group">
+                                            <label>Thuộc khóa học</label>
+                                            <select name="courseId">
+                                                <option value="">Tất cả khóa học</option>
+                                                <c:forEach var="c" items="${listCourse}">
+                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="filter-actions">
+                                        <a href="admin/categories" class="btn-clear">
+                                            <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                        </a>
+                                        <button type="submit" class="dark-button btn-submit">
+                                            Áp dụng bộ lọc
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form id="bulkActionForm" method="POST" action="admin/orders">
+                                <input type="hidden" name="action" id="bulkActionInput" value="">
 
-                                </table>
-                            </div>
+                                <div class="container-2__dynamic-content" id="orderTableBody">
+                                    <jsp:include page="/views/pages/admin/order/order-fragment.jsp"/>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -151,5 +138,11 @@
         </div>
     </div>
 </div>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/order/order-management.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

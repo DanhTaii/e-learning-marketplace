@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Thanh hành động hàng loạt (Bulk Action Bar) - Dùng chung cho toàn hệ thống
+   ========================================================================== */
+
 /* Thanh chính */
 .floating-action-bar {
     position: fixed;
@@ -16,14 +20,15 @@
     white-space: nowrap; /* Ngăn chặn chữ bị xuống dòng */
 }
 
-/* Phần hiển thị số lượng */
+/* Phần hiển thị số lượng và thông tin phụ (Đã gộp) */
 .action-info {
     display: flex;
     align-items: center;
     font-size: 14px;
     font-weight: 500;
     padding-right: 15px;
-    border-right: 1px solid #475569; /* Đường kẻ dọc chia tách */
+    border-right: 1px solid #475569; /* Đường kẻ dọc chia tách với nhóm nút */
+    gap: 10px; /* Tạo khoảng cách đều giữa các phần tử bên trong */
 }
 
 .count-badge {
@@ -35,10 +40,31 @@
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    margin-right: 10px;
     font-weight: bold;
     font-size: 13px;
 }
+
+/* ==============================================================
+   PHẦN BỔ SUNG DÀNH RIÊNG CHO TRANG ĐƠN HÀNG (Tính tổng tiền)
+   ============================================================== */
+.revenue-info {
+    padding-left: 15px;
+    border-left: 1px solid #475569; /* Dùng chung màu border của hệ thống */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.revenue-highlight {
+    font-weight: bold;
+    color: #ffd700;
+    font-size: 12px;
+}
+
+.revenue-amount {
+    font-size: 16px; /* Chữ số to hơn một chút */
+}
+/* ============================================================== */
 
 /* Nhóm các nút thao tác */
 .action-buttons {

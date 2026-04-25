@@ -50,21 +50,23 @@
                             <div class="order-info-grid">
                                 <div class="info-item">
                                     <label>Khách hàng</label>
-                                    <%--                                    <p>${order.userName}</p>--%>
+                                                                        <p>${order.usernameSnapshot}</p>
                                 </div>
                                 <div class="info-item">
                                     <label>Phương thức thanh toán</label>
-                                    <%--                                    <p>${order.paymentMethodName}</p>--%>
+                                                                        <p> ${order.paymentMethodId == 1 ? 'Momo' :
+                                                                                (order.paymentMethodId == 2 ? 'VNPAY' :
+                                                                                        (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}</p>
                                 </div>
                                 <div class="info-item">
                                     <label>Thời gian tạo</label>
                                     <p><fmt:formatDate value="${order.createdAt}"
-                                                       pattern="dd-MM-YYYY"/>
+                                                       pattern="yyyy-MM-dd HH:mm:ss"/>
                                     </p>
                                 </div>
                                 <div class="info-item">
                                     <label>Thời gian thanh toán</label>
-                                    <p>${order.paidAt != null ? '<fmt:formatDate value="${order.paidAt}" pattern="dd-MM-YYYY"/>' : 'Chưa thanh toán'}</p>
+                                    <p><fmt:formatDate value="${order.paidAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
                                 </div>
                             </div>
 

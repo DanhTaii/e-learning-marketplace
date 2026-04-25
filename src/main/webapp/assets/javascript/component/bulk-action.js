@@ -71,11 +71,28 @@ function updateActionBar() {
     const selectedCount = document.getElementById('selectedCount');
     if (!actionBar) return;
 
-    const checkedCount = document.querySelectorAll('.item-checkbox:checked').length;
+    const checkedBoxes = document.querySelectorAll('.item-checkbox:checked');
+    const checkedCount = checkedBoxes.length;
 
     if (checkedCount > 0) {
         actionBar.style.display = 'flex';
         if (selectedCount) selectedCount.innerText = checkedCount;
+        const revenueEl = document.getElementById('selected-revenue-total');
+        if (revenueEl) {
+            let totalRevenue = 0;
+
+            checkedBoxes.forEach(box => {
+                const status = (box.getAttribute('data-status') || '').trim().toUpperCase();
+                const amount = parseFloat(box.getAttribute('data-amount')) || 0;
+
+                if (status === 'PAID') {
+                    totalRevenue += amount;
+                }
+            });
+
+            // Format ra tiền Việt Nam và hiển thị
+            revenueEl.innerText = new Intl.NumberFormat('vi-VN').format(totalRevenue);
+        }
     } else {
         actionBar.style.display = 'none';
     }
