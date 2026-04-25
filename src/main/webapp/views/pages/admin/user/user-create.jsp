@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -7,12 +7,22 @@
     <meta charset="UTF-8">
     <title>Tạo mới người dùng</title>
     <base href="${pageContext.request.contextPath}/">
+
+    <%-- Layout Admin --%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/category/category-create.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+
+    <%-- Base & Notification--%>
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 <div class="web">
@@ -24,83 +34,101 @@
 
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
-                        <h2 class="header__title-modern">Thêm người dùng mới</h2>
-                        <a href="admin/users" class="btn-back">
-                            <i class="fa-solid fa-arrow-left"></i> Danh sách
+                        <h2 class="header__title-modern">
+                            ${(not empty category and category.id > 0) ? 'Cập nhật người dùng' : 'Tạo mới người dùng'}
+                        </h2>
+                        <a href="admin/categories" class="btn-back">
+                            <i class="fa-solid fa-backward-step"></i> Trở về
                         </a>
                     </div>
 
                     <div class="form-container">
-                        <form action="admin/user/create" method="post" >
+                        <form id="categoryForm" action="admin/user/detail" method="post" class="form-modern">
+                            <input type="hidden" name="id" value="${category != null ? category.id : ''}" />
+                            <div class="category-create-card">
 
-                            <div class="form-row">
-                                <div class="form-column-8">
-                                    <div class="form-group">
-                                        <label class="label-style">Họ và tên đệm</label>
-                                        <input name="firstName" type="text" class="input-modern"
-                                               placeholder="VD: Nguyễn Văn" required>
+                                <div class="form-row mt-3">
+                                    <div class="form-group flex-2">
+                                        <label class="label-style">Tên người dùng</label>
+                                        <input type="text" name="nameCategory" class="input-modern" id="categoryTitle"
+                                               value="${not empty category.name ? category.name : param.nameCategory}"
+                                               placeholder="Nhập tiêu đề..." minlength="3" maxlength="255" required>
+                                        <span class="error-client" id="error_categoryTitle">
+                                            ${errors.nameCategory}
+                                        </span>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="label-style">Tên</label>
-                                        <input name="lastName" type="text" class="input-modern" placeholder="VD: An"
-                                               required>
+                                    <div class="form-group flex-1">
+                                        <label class="label-style">Parent ID</label>
+                                        <input type="number" name="parentId" class="input-modern" id="parentId"
+                                               value="${category != null ? category.parentId : ''}"
+                                               placeholder="Ví dụ: 0" min="0" required>
+                                        <span class="error-client" id="error_parentId">${errors.parentId}</span>
                                     </div>
                                 </div>
-<%--                                <div class="form-column-4">--%>
-<%--                                    <div class="avatar-upload-box">--%>
-<%--                                        <label class="label-style">Avatar</label>--%>
-<%--                                        <div class="upload-wrapper">--%>
-<%--                                            <i class="fa-solid fa-cloud-arrow-up"></i>--%>
-<%--                                            <span>Tải ảnh lên</span>--%>
-<%--                                            <input name="avatar" type="file" class="file-hidden">--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-                            </div>
 
-                            <div class="form-row mt-4">
-                                <div class="form-group flex-1">
-                                    <label class="label-style">Tên người dùng</label>
-                                    <input name="username" type="text" class="input-modern" placeholder="username123"
-                                           required>
+                                <div class="form-row mt-3">
+                                    <div class="form-group flex-2">
+                                        <label class="label-style">Tiêu đề slug</label>
+                                        <input type="text" name="slug" class="input-modern" id="categorySlug"
+                                               value="${not empty category.slug ? category.slug : param.slug}"
+                                               placeholder="Nhập tên slug..." minlength="3" maxlength="255" required>
+                                        <span class="error-client" id="error_slug">${errors.slug}</span>
+                                    </div>
                                 </div>
-                                <div class="form-group flex-1">
-                                    <label class="label-style">Email</label>
-                                    <input name="email" type="email" class="input-modern"
-                                           placeholder="example@gmail.com" required>
-                                </div>
-                                <div class="form-group flex-1">
-                                    <label class="label-style">Mật khẩu</label>
-                                    <input name="password" type="password" class="input-modern" placeholder="••••••••"
-                                           required>
-                                </div>
-                            </div>
 
-                            <div class="form-row mt-4">
-                                <div class="form-group flex-1">
-                                    <label class="label-style">Số điện thoại</label>
-                                    <input name="phone" type="text" class="input-modern" placeholder="0987xxxxxx">
-                                </div>
-                                <div class="form-group flex-1">
-                                    <label class="label-style">Vai trò</label>
-                                    <select name="role" class="input-modern select-custom">
-                                        <option value="user">Người dùng</option>
-                                        <option value="admin">Quản trị viên</option>
+                                <div class="form-group mt-3">
+                                    <label class="label-style">Trạng thái hiển thị</label>
+                                    <select class="input-modern" name="status" required>
+                                        <option value="INACTIVE"
+                                        ${(category != null && category.status.name() == 'INACTIVE')
+                                                || param.status == 'INACTIVE' ? 'selected' : ''}>
+                                            Không hoạt động
+                                        </option>
+                                        <option value="ACTIVE"
+                                        ${(category != null && category.status.name() == 'ACTIVE')
+                                                || param.status == 'ACTIVE' ? 'selected' : ''}>
+                                            Hoạt động
+                                        </option>
                                     </select>
+                                    <span class="error-client" id="error_status">${errors.status}</span>
                                 </div>
-                                <div class="form-group flex-1">
-                                    <label class="label-style">Trạng thái</label>
-                                    <select name="status" class="input-modern select-custom">
-                                        <option value="ACTIVE">Hoạt động</option>
-                                        <option value="INACTIVE">Bị khóa</option>
-                                    </select>
-                                </div>
-                            </div>
 
-                            <div class="form-actions mt-5">
-                                <button type="submit" class="btn-submit-modern">
-                                    <i class="fa-solid fa-circle-check"></i> Lưu người dùng
-                                </button>
+                                <c:if test="${category != null and category.id > 0}">
+                                    <div class="form-row mt-3">
+                                        <div class="form-group flex-1">
+                                            <label class="label-style">Ngày tạo</label>
+                                            <input type="text" class="input-modern readonly-field"
+                                                   value="${category.createdAt}" readonly>
+                                        </div>
+                                        <div class="form-group flex-1">
+                                            <label class="label-style">Cập nhật lần cuối</label>
+                                            <input type="text" class="input-modern readonly-field"
+                                                   value="${category.updatedAt}" readonly>
+                                        </div>
+                                    </div>
+                                </c:if>
+
+                                <div class="form-actions mt-4">
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/categories" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
+
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            ${(not empty category and category.id > 0) ? 'Cập nhật' : 'Thêm danh mục'}
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${category != null and category.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="openConfirmModal(${category.id}, 'admin/category/delete', 'Bạn có chắc chắn muốn xóa danh mục này?')">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa danh mục
+                                        </button>
+                                    </c:if>
+                                </div>
                             </div>
                         </form>
                     </div>

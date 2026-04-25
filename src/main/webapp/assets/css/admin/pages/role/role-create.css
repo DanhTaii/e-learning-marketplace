@@ -1,0 +1,20 @@
+.permission-group-title{
+    font-size: var(--text-xl);
+}
+.permission-item{
+    font-size: var(--text-lg);
+    margin-right: 2rem;
+}
+.permission-list{
+    display: flex;
+    align-items: center;
+}
+
+.form-actions.mt-4.fix{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-submit-modern{
+    margin-left: 2rem;
+}
