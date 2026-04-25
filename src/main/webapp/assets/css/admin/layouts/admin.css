@@ -139,10 +139,29 @@
     line-height: 1.2; /* gọn lại cho đẹp */
 }
 
+/* bọc icon lại thành inline-flex để canh giữa */
+.header__title a {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* icon */
+.header__title a i {
+    font-size: var(--text-3xl);
+    color: var(--dark-blue);
+    line-height: 1;
+}
+
+.header__title a:hover i {
+    background: var(--light-grey);
+    border-radius: 4px;
+}
+
 /* Bọc dòng dưới */
 .header__meta {
     margin-top: 4px;
     font-size: var(--text-4xl);
+    display: block;
 }
 
 /* Subtitle */

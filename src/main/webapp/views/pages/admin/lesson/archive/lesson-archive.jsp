@@ -44,6 +44,9 @@
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
                                 <div class="header__title">
+                                    <a href="admin/lessons">
+                                        <i class="fa-solid fa-chevron-left bc-separator"></i>
+                                    </a>
                                     Lưu trữ bài học
                                     <div class="header__meta">
                                         <span class="header__subtitle">Quản lý và khôi phục các bài giảng đã tạm ngưng hoặc lỗi thời</span>

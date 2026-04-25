@@ -19,6 +19,19 @@
                     <c:otherwise>Hệ thống</c:otherwise>
                 </c:choose>
             </span>
+
+            <c:if test="${currentPageArchive != null}">
+                <i class="fa-solid fa-chevron-right bc-separator"></i>
+                <span class="bc-current">
+                <c:choose>
+                    <c:when test="${currentPageArchive == 'courses'}">Lưu trữ khóa học</c:when>
+                    <c:when test="${currentPageArchive == 'lessons'}">Lưu trữ Bài học</c:when>
+                    <c:when test="${currentPageArchive == 'tags'}">Lưu trữ Thẻ</c:when>
+                    <c:when test="${currentPageArchive == 'categories'}">Lưu trữ Danh mục</c:when>
+                    <c:otherwise>Hệ thống</c:otherwise>
+                </c:choose>
+            </span>
+            </c:if>
         </nav>
     </div>
 

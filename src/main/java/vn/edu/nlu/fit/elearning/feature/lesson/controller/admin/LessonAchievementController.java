@@ -60,6 +60,7 @@ public class LessonAchievementController extends BaseController {
             request.setAttribute("filter", filter);
             request.setAttribute("currentPageNumber", filter.getPage());
             request.setAttribute("currentPage", "lessons");
+            request.setAttribute("currentPageArchive", "lessons");
             request.setAttribute("totalPages", totalPages);
 
             String type = request.getParameter("renderType");
