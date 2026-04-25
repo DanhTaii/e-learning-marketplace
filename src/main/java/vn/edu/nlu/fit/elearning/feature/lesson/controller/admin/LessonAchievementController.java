@@ -80,8 +80,12 @@ public class LessonAchievementController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = RequestUtils.getParameterAsString(request, "action", null);
         List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        int singleId = RequestUtils.getParameterAsInt(request, "id", 0);
+        if(singleId > 0){
+            ids = List.of(singleId);
+        }
 
         String query = request.getParameter("currentQuery");
         String newPath = "/admin/lessons/archive?" + query;
@@ -92,6 +96,7 @@ public class LessonAchievementController extends BaseController {
         switch (action) {
             case "delete":
                 result = lessonService.deleteLessonByIds(ids);
+                System.out.println(result);
                 if (result > 0) {
                     handleSuccess(request, response, "Xóa " + result + " bài học thành công", newPath);
                     System.out.println(result + "của delete");
@@ -101,6 +106,7 @@ public class LessonAchievementController extends BaseController {
 
             case "restore":
                 result = lessonService.restoreLessonsByIds(ids);
+                System.out.println(result);
                 if (result > 0) {
                     handleSuccess(request, response, "Khôi phục " + result + " bài học thành công", newPath);
                     System.out.println(result + "của restore");
@@ -109,6 +115,7 @@ public class LessonAchievementController extends BaseController {
                 break;
 
             default:
+                handleError(request, response, "Thao tác thực hiện thất bại ! ");
                 break;
         }
 

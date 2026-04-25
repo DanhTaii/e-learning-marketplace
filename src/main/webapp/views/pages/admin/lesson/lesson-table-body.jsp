@@ -50,7 +50,7 @@
                         <button type="button" class="icon-action-btn"><i
                                 class="fa-solid fa-pen"></i></button>
                     </a>
-                    <button onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})"
+                    <button onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/action', isBulk: false})"
                             type="button"
                             class="icon-action-btn">
                         <i class="fa-solid fa-trash"></i>
