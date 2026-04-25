@@ -52,20 +52,10 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="admin-create__buttons">
-<%--                                    <button type="button" class="dark-button">--%>
-<%--&lt;%&ndash;                                        <a href="admin/lesson/detail" class="admin-create-link">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <i class="fa-solid fa-plus"></i>Tạo mới&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                        </a>&ndash;%&gt;--%>
-<%--                                    </button>--%>
-                                </div>
                             </div>
                             <div class="container-2__body">
                                 <form method="get" action="admin/super/permissions" class="advanced-filter" id="filterForm">
                                     <script>
-                                        //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
-                                        //Nó sẽ vô tình trạng đóng mở ngay lập tức
-                                        //Để đoạn script ở đây để nó trong lúc load HTML,CSS có thể load được luôn
                                         if (localStorage.getItem('admin_filter_status') === 'closed') {
                                             document.getElementById('filterForm').classList.add('collapsed');
                                         }
@@ -82,13 +72,34 @@
 
                                     <div class="filter-content" id="filterContent">
                                         <div class="filter-grid">
+
                                             <div class="filter-group">
-                                                <label>Tìm kiếm bài học</label>
-                                                <div class="input-with-icon">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="searchName" value="${param.searchName}"
-                                                           placeholder="Nhập tên bài học...">
-                                                </div>
+                                                <label>Tên quền</label>
+                                                <input type="text" name="searchName"
+                                                       value="${filter.name}"
+                                                       placeholder="Nhập tên quyền...">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Mô tả</label>
+                                                <input type="text" name="description"
+                                                       value="${filter.description}"
+                                                       placeholder="Nhập mô tả...">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Nhóm</label>
+                                                <select name="groupName">
+                                                    <option value="">-- Tất cả --</option>
+
+                                                    <c:forEach var="group" items="${listPermissionGroups}">
+                                                        <option value="${group}"
+                                                            ${param.groupName == group ? 'selected' : ''}>
+                                                                ${group}
+                                                        </option>
+                                                    </c:forEach>
+
+                                                </select>
                                             </div>
 
                                             <div class="filter-group">
@@ -103,7 +114,7 @@
 
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/lessons" class="btn-clear">
+                                            <a href="admin/super/permissions" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
@@ -111,13 +122,8 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/permissions">
-                                    <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
-
-                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
-<%--                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">--%>
-
-                                    <div class="container-2__dynamic-content" id="lessonTableBody">
+                                    <div class="container-2__dynamic-content" id="permissionTableBody">
                                         <jsp:include page="/views/pages/admin/authorization/permission/permission-fragment.jsp"/>
                                     </div>
                                 </form>
@@ -135,7 +141,7 @@
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<%--<script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>--%>
+<script src="assets/javascript/admin/permission/permission-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 
