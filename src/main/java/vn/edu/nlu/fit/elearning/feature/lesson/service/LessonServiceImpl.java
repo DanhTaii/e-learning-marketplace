@@ -2,9 +2,11 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
 import vn.edu.nlu.fit.elearning.feature.lesson.dao.LessonDao;
+import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
 import java.util.HashMap;
@@ -135,6 +137,31 @@ public class LessonServiceImpl implements LessonService {
     @Override
     public int changeLessonsStatusByIds(List<Integer> ids) {
         return lessonDao.updateLessonsStatusByIds(ids);
+    }
+
+    @Override
+    public int archiveLessonsByIds(List<Integer> ids, String deleteReason) {
+        return lessonDao.archivedLessonsByIds(ids, deleteReason);
+    }
+
+    @Override
+    public int getTotalLessonsArchive() {
+        return lessonDao.countAllLessonsArchive();
+    }
+
+    @Override
+    public List<LessonArchive> getArchivedLessonsByFilter(LessonArchiveFilter filter) {
+        return lessonDao.findArchivedLessonsByFilter(filter);
+    }
+
+    @Override
+    public int getCountLessonsArchiveByFilter(LessonArchiveFilter filter) {
+        return lessonDao.countLessonsArchiveByFilter(filter);
+    }
+
+    @Override
+    public int restoreLessonsByIds(List<Integer> ids) {
+        return lessonDao.restoreLessonsByIds(ids);
     }
 
 }

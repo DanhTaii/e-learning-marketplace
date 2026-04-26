@@ -29,7 +29,12 @@ const BulkActionManager = {
             //Lấy ra danh sách ID của đối tượng đó
             const ids = this.getSelectedIds()
 
-            openConfirmBulkAction(action, ids.length)
+            setupConfirmModal({
+                action: action,
+                ids: ids,
+                isBulk: true,
+                count: ids.length
+            });
 
         });
 

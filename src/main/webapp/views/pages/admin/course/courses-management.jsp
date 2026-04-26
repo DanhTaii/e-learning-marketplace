@@ -165,7 +165,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="/views/components/confirm-delete.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
 </body>
 

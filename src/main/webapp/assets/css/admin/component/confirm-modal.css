@@ -128,3 +128,68 @@
 .icon-dark {
     color: #333;
 }
+
+/* Container chứa lý do */
+#reason-container {
+    margin: 20px 0;
+    text-align: left;
+}
+
+#reason-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4a4a4a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Tùy chỉnh cái Select box */
+.modal-select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    appearance: none; /* Bỏ icon mũi tên mặc định của trình duyệt */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi click vào hoặc hover */
+.modal-select:hover {
+    border-color: #cbd5e0;
+    background-color: #fff;
+}
+
+.modal-select:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    background-color: #fff;
+}
+
+/* Tùy chỉnh các nút bấm để cân đối hơn */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.button {
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 120px;
+}

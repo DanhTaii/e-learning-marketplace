@@ -1,10 +1,11 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.dao;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
+import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
 
 import java.util.List;
-import java.util.Map;
 
 public interface LessonDao {
     int create(Lesson entity);
@@ -36,5 +37,16 @@ public interface LessonDao {
     int findMaxOrderIndexByCourseId(int courseId);
 
     int updateLessonsStatusByIds(List<Integer> ids);
+
+//    =================== ARCHIVE FUNCTION ========================
+    int countAllLessonsArchive();
+
+    int archivedLessonsByIds(List<Integer> ids, String deleteReason);
+
+    List<LessonArchive> findArchivedLessonsByFilter(LessonArchiveFilter filter);
+
+    int countLessonsArchiveByFilter(LessonArchiveFilter filter);
+
+    int restoreLessonsByIds(List<Integer> ids);
 
 }

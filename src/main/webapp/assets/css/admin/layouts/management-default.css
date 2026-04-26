@@ -402,6 +402,12 @@ table td {
     font-weight: 600;
 }
 
+.badge-reason {
+    background: #E6E8EA;
+    color: #55565D;
+}
+
+
 .content__title {
     font-weight: 600;
     color: #333;
@@ -419,4 +425,72 @@ table td {
     font-size: 11px;
     color: #999;
     margin-top: 2px;
+}
+
+/* Thẻ tổng lưu trữ bên phải */
+.archive-summary-card {
+    background: #f8f9fa;
+    padding: 15px 25px;
+    border-radius: 8px;
+    text-align: left;
+    border: 1px solid #eee;
+}
+
+.summary-label {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.summary-value {
+    font-size: var(--text-4xl);
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.summary-footer {
+    color: #d9534f; /* Màu đỏ cảnh báo */
+    font-size: var(--text-sm);
+    margin-top: 10px;
+    font-weight: var(--fw-semibold);
+}
+
+.outline-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 20px;
+    border-radius: 6px;
+
+    background-color: var(--white-color);
+    color: #111827;
+
+    border: 1px solid #d1d5db;
+
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-semibold);
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+    margin-right: 2rem;
+}
+
+/* Icon to hơn */
+.outline-button i {
+    font-size: var(--text-base);
+}
+
+/* Hover cho rõ hơn */
+.outline-button:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+    transform: translateY(-1px);
+}
+
+/* Active */
+.outline-button:active {
+    transform: scale(0.97);
 }

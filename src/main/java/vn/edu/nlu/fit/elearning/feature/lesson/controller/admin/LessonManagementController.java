@@ -76,18 +76,21 @@ public class LessonManagementController extends BaseController {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = RequestUtils.getParameterAsString(request, "action", null);
         List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+        String deleteReason = RequestUtils.getParameterAsString(request,"deleteReason", null);
 
         String query = request.getParameter("currentQuery");
         String newPath = "/admin/lessons?" + query;
 
         int result = 0;
-        String finalResult = result + " bài học thành công";
 
         switch (action) {
-            case "delete":
-                result = lessonService.deleteLessonByIds(ids);
+            case "archive":
+                if (deleteReason == null || deleteReason.isEmpty()) {
+                    deleteReason = "Không có lý do cụ thể";
+                }
+                result = lessonService.archiveLessonsByIds(ids, deleteReason);
                 if (result > 0) {
-                    handleSuccess(request, response, "Xóa " + finalResult, newPath);
+                    handleSuccess(request, response, "Xóa " + result + " bài học thành công", newPath);
                     return;
                 }
                 break;
@@ -95,15 +98,15 @@ public class LessonManagementController extends BaseController {
             case "duplicate":
                 result = lessonService.bulkDuplicateLessons(ids);
                 if (result > 0) {
-                    handleSuccess(request, response, "Nhân bản " + finalResult, newPath);
+                    handleSuccess(request, response, "Nhân bản " + result + " bài học thành công", newPath);
                     return;
                 }
                 break;
 
-            case "status":
+            case "update_status":
                 result = lessonService.changeLessonsStatusByIds(ids);
                 if (result > 0) {
-                    handleSuccess(request, response, "Cập nhật trạng thái " + finalResult, newPath);
+                    handleSuccess(request, response, "Cập nhật trạng thái " + result + " bài học thành công", newPath);
                     return;
                 }
                 break;

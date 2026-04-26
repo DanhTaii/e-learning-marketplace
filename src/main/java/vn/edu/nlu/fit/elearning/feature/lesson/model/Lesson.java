@@ -25,6 +25,13 @@ public class Lesson implements Serializable {
 
     private Timestamp updatedAt;
 
+    private boolean isDeleted;
+
+    private Timestamp deletedAt;
+
+    private String deleteReason;
+
+
     public Lesson() {
     }
 
@@ -110,5 +117,29 @@ public class Lesson implements Serializable {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public String getDeleteReason() {
+        return deleteReason;
+    }
+
+    public void setDeleteReason(String deleteReason) {
+        this.deleteReason = deleteReason;
     }
 }

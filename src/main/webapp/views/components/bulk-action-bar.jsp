@@ -14,13 +14,30 @@
             </button>
         </c:if>
 
-        <button class="btn-bar" type="button" data-action="status">
-            <i class="fa-solid fa-arrows-rotate"></i> Đổi trạng thái
-        </button>
+        <c:if test="${param.showUpdateStatus == 'true'}">
+            <button class="btn-bar" type="button" data-action="update_status">
+                <i class="fa-solid fa-arrows-rotate"></i> Đổi trạng thái
+            </button>
+        </c:if>
 
-        <button class="btn-bar btn-bar-danger" type="button" data-action="delete">
-            <i class="fa-solid fa-trash"></i> Xóa
-        </button>
+        <c:if test="${param.showArchive == 'true'}">
+            <button class="btn-bar btn-bar-danger" type="button" data-action="archive">
+                <i class="fa-solid fa-trash"></i> Xóa
+            </button>
+        </c:if>
+
+        <c:if test="${param.showRestore == 'true'}">
+            <button class="btn-bar" type="button" data-action="restore">
+                <i class="fa-solid fa-rotate-left"></i> Khôi phục
+            </button>
+        </c:if>
+
+        <c:if test="${param.showDelete == 'true'}">
+            <button class="btn-bar btn-bar-danger" type="button" data-action="delete">
+                <i class="fa-solid fa-trash"></i> Xóa
+            </button>
+        </c:if>
+
     </div>
 
     <button class="btn-close-bar" type="button" onclick="deselectAll()">
