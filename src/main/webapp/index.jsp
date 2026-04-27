@@ -390,12 +390,14 @@
             </div>
         </div>
     </div>
+    <jsp:include page="/views/components/contact-button.jsp" />
     <jsp:include page="views/layouts/footer.jsp"/>
 </div>
 <jsp:include page="views/components/toast.jsp"/>
-
+<jsp:include page="views/layouts/contact-form.jsp"/>
 </body>
 
 <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/contact-form.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

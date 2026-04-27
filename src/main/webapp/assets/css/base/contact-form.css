@@ -1,0 +1,140 @@
+.contact-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: none;
+}
+
+.contact-modal.active {
+    display: block;
+}
+
+.contact-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.contact-modal__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    width: 550px;
+    max-width: 95%;
+
+    background: var(--sub-background-color);
+    border-radius: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    animation: contactFadeIn 0.25s ease forwards;
+}
+
+@keyframes contactFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.contact-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--hover-color);
+}
+
+.contact-modal__title {
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-semibold);
+    color: var(--text-body-color);
+}
+
+.contact-modal__close {
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-body-color);
+}
+
+.contact-modal__close:hover {
+    color: red;
+}
+
+.contact-form {
+    padding: 20px;
+}
+
+.contact-form__group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form__group label {
+    font-size: var(--text-base);
+    font-weight: var(--fw-medium);
+    margin-bottom: 5px;
+    color: var(--text-body-color);
+}
+
+.contact-form__textarea {
+    resize: none;
+    min-height: 140px;
+}
+
+.contact-form__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.contact-form__cancel {
+    padding: 8px 14px;
+    border: 1px solid var(--light-grey);
+    background: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: var(--text-lg);
+}
+
+.contact-form__cancel:hover {
+    background: var(--hover-color);
+}
+
+.contact-form__submit {
+    padding: 10px 18px;
+    font-size: var(--text-lg);
+}
+
+body.dark-mode .contact-modal__content {
+    background: var(--sub-background-color);
+}
+
+body.dark-mode .contact-modal__overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.contact-form .input-style {
+    font-size: 1.6rem;
+    padding: 10px 12px;
+}
+
+.contact-form select {
+    font-size: 1.6rem;
+}
+
+.contact-form select option {
+    font-size: 1.6rem;
+}
