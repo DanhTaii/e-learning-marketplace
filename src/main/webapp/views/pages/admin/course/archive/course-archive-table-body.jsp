@@ -3,14 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:choose>
-    <c:when test="${archivedLessons != null}">
-        <c:forEach var="item" items="${archivedLessons}">
+    <c:when test="${archivedCourses != null}">
+        <c:forEach var="item" items="${archivedCourses}">
             <tr>
                 <td><input type="checkbox" name="item-checkbox" class="item-checkbox" value="${item.id}"></td>
                 <td>
                     <div class="content__title">${item.title}</div>
                 </td>
-                <td>${item.courseTitle}</td>
+                <td>${item.categoryName}</td>
                 <td><fmt:formatDate value="${item.deletedAt}"
                                     pattern="dd/MM/yyyy"/></td>
                 <td>

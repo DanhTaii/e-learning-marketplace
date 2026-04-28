@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.category.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
+import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryOptionDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface CategoryService {
     public List<Category> getCategoriesByFilter(CategoryFilter filter);
 
     public int getCountCategoriesByFilter(CategoryFilter filter);
+
+    public List<CategoryOptionDto> getCategoriesIdAndName();
 }

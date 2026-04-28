@@ -28,7 +28,7 @@
 </div>
 
 <jsp:include page="/views/components/pagination-base.jsp">
-    <jsp:param name="baseUrl" value="admin/course/archive"/>
+    <jsp:param name="baseUrl" value="admin/courses/archive"/>
     <jsp:param name="currentPageNumber" value="${filter.page}"/>
     <jsp:param name="totalPages" value="${totalPages}"/>
 </jsp:include>

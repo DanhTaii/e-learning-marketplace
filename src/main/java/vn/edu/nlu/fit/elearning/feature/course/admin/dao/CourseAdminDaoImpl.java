@@ -2,7 +2,9 @@ package vn.edu.nlu.fit.elearning.feature.course.admin.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
@@ -263,13 +265,64 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
     }
 
     @Override
-    public List<LessonArchive> findArchivedByFilter(CourseArchivedFilter filter) {
-        return List.of();
+    public List<CourseArchive> findArchivedByFilter(CourseArchivedFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildArchivedWhereClause(filter, params);
+
+        String sqlArchived = "SELECT c.id, c.title, cate.name AS category_name, c.deleted_at, c.delete_reason " +
+                "FROM courses c LEFT JOIN categories cate ON cate.id = c.category_id"
+                + whereClause
+                + " ORDER BY c.deleted_at DESC LIMIT :limit OFFSET :offset";
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sqlArchived);
+            params.forEach(query::bind);
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+            return query.mapToBean(CourseArchive.class).list();
+        });
     }
 
     @Override
     public int countArchivedByFilter(CourseArchivedFilter filter) {
-        return 0;
+        Map<String, Object> params = new HashMap<>();
+        String where = buildArchivedWhereClause(filter, params);
+
+        String sqlCountArchived = "SELECT COUNT(*) FROM courses c" + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sqlCountArchived);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildArchivedWhereClause(CourseArchivedFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        if (filter.getTitle() != null && !filter.getTitle().trim().isEmpty()) {
+            where.append(" AND c.title LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getTitle().trim() + "%");
+        }
+
+        if (filter.getCategoryId() > 0) {
+            where.append(" AND c.category_id = :categoryIdSearch");
+            params.put("categoryIdSearch", filter.getCategoryId());
+        }
+
+        if (filter.getDeletedFromDate() != null) {
+            where.append(" AND c.deleted_at >= :fromDate");
+            params.put("fromDate", filter.getDeletedFromDate());
+        }
+
+        if (filter.getDeletedToDate() != null) {
+            where.append(" AND c.deleted_at <= :toDate");
+            params.put("toDate", filter.getDeletedToDate());
+        }
+
+        where.append(" AND c.is_deleted = 1");
+
+        return where.toString();
     }
 
     @Override

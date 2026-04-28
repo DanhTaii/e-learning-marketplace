@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lesson Achievement</title>
+    <title>Course Achieve</title>
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Admin Layout Css--%>
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/archive-default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-archive.css?v=<%=System.currentTimeMillis()%>">
+<%--    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">--%>
+    <link rel="stylesheet" href="assets/css/admin/pages/course/course-archive.css?v=<%=System.currentTimeMillis()%>">
 
     <%--  Admin Component Css  --%>
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
@@ -55,7 +55,7 @@
 
                                 <div class="archive-summary-card">
                                     <div class="summary-label">TỔNG LƯU TRỮ</div>
-                                    <div class="summary-value">${totalArchived != null ? totalArchived : 128}</div>
+                                    <div class="summary-value">${totalArchived != null ? totalArchived : 0}</div>
                                     <div class="summary-footer">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
                                     </div>
@@ -96,10 +96,10 @@
 
                                             <div class="filter-group">
                                                 <label>Thuộc danh mục</label>
-                                                <select name="courseId">
-                                                    <option value="">Tất cả khóa học</option>
-                                                    <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                <select name="categoryId">
+                                                    <option value="">Tất cả danh mục</option>
+                                                    <c:forEach var="c" items="${listCategories}">
+                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}>${c.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

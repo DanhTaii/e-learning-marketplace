@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.course.admin.dao;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
@@ -39,7 +40,7 @@ public interface CourseAdminDao {
 
     int countArchived();
 
-    List<LessonArchive> findArchivedByFilter(CourseArchivedFilter filter);
+    List<CourseArchive> findArchivedByFilter(CourseArchivedFilter filter);
 
     int countArchivedByFilter(CourseArchivedFilter filter);
 

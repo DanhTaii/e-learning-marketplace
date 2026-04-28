@@ -1,7 +1,9 @@
 package vn.edu.nlu.fit.elearning.feature.course.admin.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
@@ -126,17 +128,17 @@ public class CourseAdminServiceImpl implements CourseAdminService {
 
     @Override
     public int getTotalArchivedCourses() {
-        return 0;
+        return cd.countArchived();
     }
 
     @Override
-    public List<LessonArchive> getArchivedCourses(LessonArchiveFilter filter) {
-        return List.of();
+    public List<CourseArchive> getArchivedCourses(CourseArchivedFilter filter) {
+        return cd.findArchivedByFilter(filter);
     }
 
     @Override
-    public int countArchivedCourses(LessonArchiveFilter filter) {
-        return 0;
+    public int countArchivedCourses(CourseArchivedFilter filter) {
+        return cd.countArchivedByFilter(filter);
     }
 
 }

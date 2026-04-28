@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.feature.course.admin.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
@@ -47,9 +49,9 @@ public interface CourseAdminService {
 
     int getTotalArchivedCourses();
 
-    List<LessonArchive> getArchivedCourses(LessonArchiveFilter filter);
+    List<CourseArchive> getArchivedCourses(CourseArchivedFilter filter);
 
-    int countArchivedCourses(LessonArchiveFilter filter);
+    int countArchivedCourses(CourseArchivedFilter filter);
 
 
 }
