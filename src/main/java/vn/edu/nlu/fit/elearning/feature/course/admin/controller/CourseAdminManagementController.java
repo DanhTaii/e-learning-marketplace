@@ -3,6 +3,8 @@ package vn.edu.nlu.fit.elearning.feature.course.admin.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
@@ -16,6 +18,7 @@ import java.util.List;
 @WebServlet(name = "AdminCourseController", value = "/admin/courses")
 public class CourseAdminManagementController extends BaseController {
     private transient CourseAdminService courseAdminServiceImpl;
+    private static final Logger logger = LoggerFactory.getLogger(CourseAdminManagementController.class);
 
     @Override
     public void init() throws ServletException {
@@ -77,43 +80,38 @@ public class CourseAdminManagementController extends BaseController {
         String mainContent = " khóa học";
 
         int result = 0;
+        try {
+            switch (action) {
+                case "archive":
+                    result = courseAdminServiceImpl.archiveCoursesByIds(ids, deleteReason);
+                    if (result > 0) {
+                        handleSuccess(request, response, "Lưu trữ " + result + mainContent, newUrl);
+                        return;
+                    }
+                    break;
 
-        switch (action) {
-            case "archive":
-                result = courseAdminServiceImpl.archiveCoursesByIds(ids, deleteReason);
-                if (result > 0) {
-                    handleSuccess(request, response, "Lưu trữ " + result + mainContent, newUrl);
-                    return;
+                case "duplicate":
+                    result = courseAdminServiceImpl.duplicateCoursesByIds(ids);
+                    if (result > 0) {
+                        handleSuccess(request, response, "Nhân bản " + result + mainContent, newUrl);
+                        return;
+                    }
+                    break;
+
+                case "update_status":
+                    result = courseAdminServiceImpl.updateCoursesStatusByIds(ids);
+                    if (result > 0) {
+                        handleSuccess(request, response, "Cập nhật " + result + mainContent, newUrl);
+                        return;
+                    }
+                    break;
+
+                default: {
+                    request.getSession().setAttribute("flashError", "Thao tác với khóa học thất bại. Vui lòng thử lại!");
                 }
-                break;
-
-            case "delete":
-                result = courseAdminServiceImpl.deleteCoursesByIds(ids);
-                if (result > 0) {
-                    handleSuccess(request, response, "Xóa " + result + mainContent, newUrl);
-                    return;
-                }
-                break;
-
-            case "duplicate":
-                result = courseAdminServiceImpl.duplicateCoursesByIds(ids);
-                if (result > 0) {
-                    handleSuccess(request, response, "Nhân bản " + result + mainContent, newUrl);
-                    return;
-                }
-                break;
-
-            case "status":
-                result = courseAdminServiceImpl.updateCoursesStatusByIds(ids);
-                if (result > 0) {
-                    handleSuccess(request, response, "Cập nhật " + result + mainContent, newUrl);
-                    return;
-                }
-                break;
-
-            default: {
-                request.getSession().setAttribute("flashError", "Thao tác với khóa học thất bại. Vui lòng thử lại!");
             }
+        } catch (Exception e) {
+            logger.error("Error processing action '{}' for courseId={}", action, ids, e);
         }
     }
 }

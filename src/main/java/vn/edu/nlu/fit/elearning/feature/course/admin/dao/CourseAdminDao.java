@@ -18,7 +18,7 @@ public interface CourseAdminDao {
 
     int update(Course entity);
 
-    int delete(Integer integer);
+    int deleteById(Integer integer);
 
     int deleteByIds(List<Integer> ids);
 

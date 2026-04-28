@@ -3,15 +3,18 @@ package vn.edu.nlu.fit.elearning.feature.course.admin.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 
 import java.io.IOException;
 
-@WebServlet(name = "CourseDeleteController", value = "/admin/course/action")
+@WebServlet(name = "CourseAdminActionController", value = "/admin/course/action")
 public class CourseAdminActionController extends HttpServlet {
     private transient CourseAdminService courseAdminServiceImpl;
+    private static final Logger logger = LoggerFactory.getLogger(CourseAdminActionController.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -30,28 +33,42 @@ public class CourseAdminActionController extends HttpServlet {
         String actionType = RequestUtils.getParameterAsString(request, "actionType", null);
         String deleteReason = RequestUtils.getParameterAsString(request, "deleteReason", null);
 
-        String mainContent = " khóa học thành công !";
-        int result = 0;
+        if (courseId <= 0 || actionType == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
-        if (deleteReason != null) {
+        String contentResult = "";
+        String subContent = "khóa học thành công !";
+        try {
+            int result = 0;
+
             switch (actionType) {
-                case "delete": {
-                    result = courseAdminServiceImpl.deleteCourse(courseId);
-                    if (result > 0) {
-                        request.getSession().setAttribute("flashSuccess", "Xóa khóa học thành công!");
-                    }
-                    response.sendRedirect(request.getContextPath() + "/admin/courses");
+                case "delete":
+                    result = courseAdminServiceImpl.deleteCourseById(courseId);
+                    contentResult = "Xóa " + result + subContent;
                     break;
-                }
-                case "archive": {
-//                    result = courseServiceImpl.ar
+
+                case "archive":
+                    result = courseAdminServiceImpl.archiveCourseById(courseId, deleteReason);
+                    contentResult = "Lưu trữ " + result + subContent;
                     break;
-                }
-                default: {
-                    request.getSession().setAttribute("flashError", "Xóa khóa học thất bại. Vui lòng thử lại!");
-                }
+
+                default:
+                    request.getSession().setAttribute("flashError", "Thao tác thất bại. Vui lòng thử lại!");
+                    return;
             }
 
+            if (result > 0) {
+                request.getSession().setAttribute("flashSuccess", contentResult);
+            } else {
+                request.getSession().setAttribute("flashError", "Thao tác thất bại. Vui lòng thử lại!");
+            }
+
+            response.sendRedirect(request.getContextPath() + "/admin/courses");
+
+        } catch (Exception e) {
+            logger.error("Error processing action '{}' for courseId={}", actionType, courseId, e);
         }
     }
 }

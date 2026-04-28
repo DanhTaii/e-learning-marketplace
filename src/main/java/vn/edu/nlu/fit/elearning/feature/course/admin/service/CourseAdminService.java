@@ -16,11 +16,9 @@ public interface CourseAdminService {
 
     int updateCourse(Course entity);
 
-    int deleteCourse(int id);
+    int deleteCourseById(int id);
 
     List<Course> getAllCourses();
-
-    double getAverageRating();
 
     CourseDetailDto getCourseDetail(int id, int userId);
 

@@ -32,30 +32,14 @@ public class CourseAdminServiceImpl implements CourseAdminService {
     }
 
     @Override
-    public int deleteCourse(int id) {
-        return cd.delete(id);
+    public int deleteCourseById(int id) {
+        return cd.deleteById(id);
     }
 
     @Override
     public List<Course> getAllCourses() {
         return cd.findAll();
     }
-
-    @Override
-    public double getAverageRating() {
-        double result = 0.0;
-        int count = 0;
-        double sum = 0.0;
-        List<Course> courseList = cd.findAll();
-        for (Course c : courseList) {
-            sum += c.getRating();
-            count++;
-        }
-        result += sum / count;
-        // làm tròn 1 chữ số sau dấu phẩy
-        return Math.round(result * 10.0) / 10.0;
-    }
-
 
     @Override
     public CourseDetailDto getCourseDetail(int id, int userId) {
@@ -122,7 +106,7 @@ public class CourseAdminServiceImpl implements CourseAdminService {
 
     @Override
     public int archiveCourseById(int id, String deleteReason) {
-        return 0;
+        return archiveCoursesByIds(List.of(id), deleteReason);
     }
 
     @Override

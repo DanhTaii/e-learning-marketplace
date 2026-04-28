@@ -29,6 +29,12 @@ public class CourseAdminArchiveController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+//        case "delete":
+//        result = courseAdminServiceImpl.deleteCoursesByIds(ids);
+//        if (result > 0) {
+//            handleSuccess(request, response, "Xóa " + result + mainContent, newUrl);
+//            return;
+//        }
+//        break;
     }
 }

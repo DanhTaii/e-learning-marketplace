@@ -75,7 +75,7 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
     }
 
     @Override
-    public int delete(Integer integer) {
+    public int deleteById(Integer integer) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("DELETE FROM courses WHERE id = :id")
                     .bind("id", integer)
@@ -196,6 +196,8 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
 //            }
 //        }
 
+        conditionalSentence.append(" AND c.is_deleted = 0");
+
         return conditionalSentence.toString();
     }
 
@@ -239,12 +241,25 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
 
     @Override
     public int countArchived() {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM courses WHERE is_deleted = 1")
+                    .mapTo(Integer.class)
+                    .one();
+        });
     }
 
     @Override
     public int archiveByIds(List<Integer> ids, String deleteReason) {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE courses " +
+                            "SET deleted_at = CASE WHEN is_deleted = 0 THEN NOW() ELSE NULL END, " +
+                            "is_deleted = 1 - is_deleted, " +
+                            "delete_reason = :deleteReason " +
+                            "WHERE id IN (<ids>)")
+                    .bindList("ids", ids)
+                    .bind("deleteReason", deleteReason)
+                    .execute();
+        });
     }
 
     @Override
