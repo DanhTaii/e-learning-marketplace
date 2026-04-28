@@ -28,7 +28,7 @@ public class CourseAdminArchiveController extends BaseController {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
-        this.categoryService  =BeanContainer.getBean(CategoryService.class);
+        this.categoryService = BeanContainer.getBean(CategoryService.class);
     }
 
     @Override
@@ -82,12 +82,45 @@ public class CourseAdminArchiveController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        case "delete":
-//        result = courseAdminServiceImpl.deleteCoursesByIds(ids);
-//        if (result > 0) {
-//            handleSuccess(request, response, "Xóa " + result + mainContent, newUrl);
-//            return;
-//        }
-//        break;
+        List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        int singleId = RequestUtils.getParameterAsInt(request, "id", 0);
+        if (singleId > 0) {
+            ids = List.of(singleId);
+        }
+
+        String query = request.getParameter("currentQuery");
+        String newPath = "/admin/courses/archive?" + query;
+        String contentResult = "";
+        String subContent = " khóa học thành công !";
+
+        try {
+            int result = 0;
+            switch (action) {
+                case "delete":
+                    result = courseAdminService.deleteCoursesByIds(ids);
+                    contentResult = "Xóa " + result + subContent;
+                    break;
+
+                case "restore":
+                    result = courseAdminService.restoreCoursesByIds(ids);
+                    contentResult = "Khôi phục " + result + subContent;
+                    break;
+
+                default:
+                    handleError(request, response, "Thao tác thực hiện thất bại ! ");
+                    break;
+            }
+            if (result > 0) {
+                request.getSession().setAttribute("flashSuccess", contentResult);
+            } else {
+                request.getSession().setAttribute("flashError", "Thao tác thất bại. Vui lòng thử lại!");
+            }
+
+            this.redirect(request, response, newPath);
+        } catch (Exception e) {
+            logger.error("Error processing: ", e);
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -327,7 +327,15 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
 
     @Override
     public int restoreByIds(List<Integer> ids) {
-        return 0;
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE courses " +
+                            "SET is_deleted = 0," +
+                            "delete_reason = NULL," +
+                            "deleted_at = NULL " +
+                            "WHERE id IN (<ids>)")
+                    .bindList("ids", ids)
+                    .execute();
+        });
     }
 
 }

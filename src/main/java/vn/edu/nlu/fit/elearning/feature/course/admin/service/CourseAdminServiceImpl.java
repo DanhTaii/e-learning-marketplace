@@ -117,13 +117,13 @@ public class CourseAdminServiceImpl implements CourseAdminService {
     }
 
     @Override
-    public int restoreCourseById(List<Integer> ids) {
-        return 0;
+    public int restoreCourseById(int id) {
+        return this.restoreCoursesByIds(List.of(id));
     }
 
     @Override
     public int restoreCoursesByIds(List<Integer> ids) {
-        return 0;
+        return cd.restoreByIds(ids);
     }
 
     @Override

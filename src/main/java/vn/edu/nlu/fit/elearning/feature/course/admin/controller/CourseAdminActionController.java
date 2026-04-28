@@ -39,7 +39,9 @@ public class CourseAdminActionController extends HttpServlet {
         }
 
         String contentResult = "";
-        String subContent = "khóa học thành công !";
+        String subContent = " khóa học thành công !";
+        String redirectUrl = "/admin/courses";
+
         try {
             int result = 0;
 
@@ -54,6 +56,12 @@ public class CourseAdminActionController extends HttpServlet {
                     contentResult = "Lưu trữ " + result + subContent;
                     break;
 
+                case "restore":
+                    result = courseAdminServiceImpl.restoreCourseById(courseId);
+                    contentResult = "Khôi phục " + result + subContent;
+                    redirectUrl = "/admin/courses/archive";
+                    break;
+
                 default:
                     request.getSession().setAttribute("flashError", "Thao tác thất bại. Vui lòng thử lại!");
                     return;
@@ -65,7 +73,7 @@ public class CourseAdminActionController extends HttpServlet {
                 request.getSession().setAttribute("flashError", "Thao tác thất bại. Vui lòng thử lại!");
             }
 
-            response.sendRedirect(request.getContextPath() + "/admin/courses");
+            response.sendRedirect(request.getContextPath() + redirectUrl);
 
         } catch (Exception e) {
             logger.error("Error processing action '{}' for courseId={}", actionType, courseId, e);

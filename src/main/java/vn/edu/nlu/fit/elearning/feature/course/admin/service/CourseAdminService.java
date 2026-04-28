@@ -43,7 +43,7 @@ public interface CourseAdminService {
 
     int archiveCoursesByIds(List<Integer> ids, String deleteReason);
 
-    int restoreCourseById(List<Integer> ids);
+    int restoreCourseById(int ids);
 
     int restoreCoursesByIds(List<Integer> ids);
 
