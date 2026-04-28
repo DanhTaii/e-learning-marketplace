@@ -6,19 +6,17 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
-import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
-import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "LessonAchievementController", value = "/admin/lessons/archive")
-public class LessonAchievementController extends BaseController {
+public class LessonArchiveController extends BaseController {
 
     private transient LessonService lessonService;
     private transient CourseService courseService;

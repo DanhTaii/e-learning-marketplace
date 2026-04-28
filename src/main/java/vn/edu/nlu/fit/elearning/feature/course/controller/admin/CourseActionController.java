@@ -8,7 +8,7 @@ import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 import java.io.IOException;
 
 @WebServlet(name = "CourseDeleteController", value = "/admin/course/delete")
-public class CourseDeleteController extends HttpServlet {
+public class CourseActionController extends HttpServlet {
     private CourseService courseServiceImpl;
 
     @Override

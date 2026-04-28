@@ -56,6 +56,10 @@
                                     </div>
                                 </div>
                                 <div class="admin-create__buttons">
+                                    <a href="admin/courses/archive" class="outline-button">
+                                        <i class="fa-solid fa-box-archive"></i>
+                                        <span>Kho lưu trữ</span>
+                                    </a>
                                     <button type="button" class="dark-button">
                                         <a href="admin/course/detail">
                                             <i class="fa-solid fa-plus"></i>Tạo mới

@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lesson Management</title>
+    <title>Lesson Achievement</title>
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Admin Layout Css--%>
@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/archive-default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-archive.css?v=<%=System.currentTimeMillis()%>">
 
     <%--  Admin Component Css  --%>
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
@@ -26,46 +28,43 @@
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-
 </head>
 <body>
+
 <div class="web">
     <div class="web__container">
         <div class="grid">
             <div class="grid__row-2">
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
-
-                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
-
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp">
+                        <jsp:param name="baseUrl" value=""/>
+                    </jsp:include>
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
                             <div class="container-2__header">
                                 <div class="header__title">
-                                    Bài học
+                                    <a href="admin/courses">
+                                        <i class="fa-solid fa-chevron-left bc-separator"></i>
+                                    </a>
+                                    Lưu trữ khóa học
                                     <div class="header__meta">
-                                        <span class="header__subtitle">
-                                                Quản lý tất cả bài học
-                                        </span>
-                                        <span class="header__count">
-                                                ${totalLessons} bài học
-                                        </span>
+                                        <span class="header__subtitle">Quản lý và khôi phục các khóa học đã tạm ngưng hoặc lỗi thời</span>
                                     </div>
                                 </div>
-                                <div class="admin-create__buttons">
-                                    <a href="admin/lessons/archive" class="outline-button">
-                                        <i class="fa-solid fa-box-archive"></i>
-                                        <span>Kho lưu trữ</span>
-                                    </a>
-                                    <button type="button" class="dark-button">
-                                        <a href="admin/lesson/detail" class="admin-create-link">
-                                            <i class="fa-solid fa-plus"></i>Tạo mới
-                                        </a>
-                                    </button>
+
+                                <div class="archive-summary-card">
+                                    <div class="summary-label">TỔNG LƯU TRỮ</div>
+                                    <div class="summary-value">${totalArchived != null ? totalArchived : 128}</div>
+                                    <div class="summary-footer">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="container-2__body">
-                                <form method="get" action="admin/lessons" class="advanced-filter" id="filterForm">
+                                <form method="get" action="admin/courses/archive" class="advanced-filter"
+                                      id="filterForm">
                                     <script>
                                         //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
                                         //Nó sẽ vô tình trạng đóng mở ngay lập tức
@@ -96,26 +95,7 @@
                                             </div>
 
                                             <div class="filter-group">
-                                                <label>Từ ngày</label>
-                                                <input type="date" name="fromDate" value="${param.fromDate}">
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Trạng thái</label>
-                                                <select name="status">
-                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
-                                                    </option>
-                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
-                                                        Hoạt động
-                                                    </option>
-                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
-                                                        Bản nháp
-                                                    </option>
-                                                </select>
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Thuộc khóa học</label>
+                                                <label>Thuộc danh mục</label>
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
                                                     <c:forEach var="c" items="${listCourse}">
@@ -125,58 +105,54 @@
                                             </div>
 
                                             <div class="filter-group">
-                                                <label>Đến ngày</label>
-                                                <input type="date" name="toDate" value="${param.toDate}">
+                                                <label>Từ ngày</label>
+                                                <input type="date" name="deletedFromDate" value="${param.deletedFromDate}">
                                             </div>
 
                                             <div class="filter-group">
-                                                <label>&nbsp;</label>
-                                                <div class="checkbox-group">
-                                                    <label class="checkbox-container">
-                                                        <input type="checkbox"
-                                                               name="missingVideo" ${param.missingVideo != null ? 'checked' : ''}>
-                                                        Thiếu Video
-                                                    </label>
-                                                </div>
+                                                <label>Đến ngày</label>
+                                                <input type="date" name="deletedToDate" value="${param.deletedToDate}">
                                             </div>
+
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/lessons" class="btn-clear">
+                                            <a href="admin/courses/archive" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
                                         </div>
                                     </div>
                                 </form>
-                                <form id="bulkActionForm" method="POST" action="admin/lessons">
+
+                                <form id="archiveBulkForm" method="POST" action="admin/courses/archive">
                                     <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
-                                    <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
-
                                     <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
-                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
+                                    <input id="currentQueryId" type="hidden" name="currentQuery"
+                                           value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="lessonTableBody">
-                                        <jsp:include page="/views/pages/admin/lesson/lesson-fragment.jsp"/>
+                                        <jsp:include
+                                                page="/views/pages/admin/course/archive/course-archive-fragment.jsp"/>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-<jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 </body>
-<%-- Javascript --%>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/lesson/lesson-archive.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>
