@@ -61,7 +61,7 @@
                     </button>
                 </a>
                 <button type="button" class="icon-action-btn"
-                        onclick="openConfirmModal(${course.id})">
+                        onclick="setupConfirmModal({action: 'archive', ids: ${course.id}, url: 'admin/course/action', isBulk: false})">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>

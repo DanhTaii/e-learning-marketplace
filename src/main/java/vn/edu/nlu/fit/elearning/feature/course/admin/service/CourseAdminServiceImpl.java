@@ -1,0 +1,158 @@
+package vn.edu.nlu.fit.elearning.feature.course.admin.service;
+
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
+import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
+import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
+import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
+
+import java.util.List;
+
+public class CourseAdminServiceImpl implements CourseAdminService {
+    private final CourseAdminDao cd;
+
+    public CourseAdminServiceImpl(CourseAdminDao courseAdminDao) {
+        this.cd = courseAdminDao;
+    }
+
+    @Override
+    public int createCourse(Course course) {
+        return cd.create(course);
+    }
+
+    @Override
+    public Course getCourseById(int id) {
+        return cd.findById(id);
+    }
+
+    @Override
+    public int updateCourse(Course entity) {
+        return this.cd.update(entity);
+    }
+
+    @Override
+    public int deleteCourse(int id) {
+        return cd.delete(id);
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return cd.findAll();
+    }
+
+    @Override
+    public double getAverageRating() {
+        double result = 0.0;
+        int count = 0;
+        double sum = 0.0;
+        List<Course> courseList = cd.findAll();
+        for (Course c : courseList) {
+            sum += c.getRating();
+            count++;
+        }
+        result += sum / count;
+        // làm tròn 1 chữ số sau dấu phẩy
+        return Math.round(result * 10.0) / 10.0;
+    }
+
+
+    @Override
+    public CourseDetailDto getCourseDetail(int id, int userId) {
+        return cd.findCourseByIdForDetail(id, userId);
+    }
+
+    @Override
+    public List<Course> getCourses(CourseFilter filter) {
+        return cd.findByFilter(filter);
+    }
+
+    @Override
+    public int countCourses(CourseFilter filter) {
+        return cd.countByFilter(filter);
+    }
+
+    @Override
+    public int getTotalCourses() {
+        return cd.countAll();
+    }
+
+    @Override
+    public int deleteCoursesByIds(List<Integer> ids) {
+        return cd.deleteByIds(ids);
+    }
+
+    @Override
+    public int duplicateCoursesByIds(List<Integer> ids) {
+        int count = 0;
+        int result = 0;
+
+        for (int id : ids) {
+            Course odinary = this.getCourseById(id);
+
+            if(odinary != null) {
+                Course clone = new Course();
+                clone.setTitle("Bản sao của " + odinary.getTitle());
+                clone.setSubtitle(odinary.getSubtitle());
+                clone.setDescription(odinary.getDescription());
+                clone.setGoals(odinary.getGoals());
+
+                clone.setCategoryId(odinary.getCategoryId());
+
+                clone.setDiscountPrice(odinary.getDiscountPrice());
+                clone.setPrice(odinary.getPrice());
+
+                clone.setIsPublic(false);
+                clone.setLevel(odinary.getLevel());
+                clone.setThumbnailUrl(odinary.getThumbnailUrl());
+
+                result = this.createCourse(clone);
+                if(result > 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public int updateCoursesStatusByIds(List<Integer> ids) {
+        return cd.updateStatusByIds(ids);
+    }
+
+    @Override
+    public int archiveCourseById(int id, String deleteReason) {
+        return 0;
+    }
+
+    @Override
+    public int archiveCoursesByIds(List<Integer> ids, String deleteReason) {
+        return cd.archiveByIds(ids, deleteReason);
+    }
+
+    @Override
+    public int restoreCourseById(List<Integer> ids) {
+        return 0;
+    }
+
+    @Override
+    public int restoreCoursesByIds(List<Integer> ids) {
+        return 0;
+    }
+
+    @Override
+    public int getTotalArchivedCourses() {
+        return 0;
+    }
+
+    @Override
+    public List<LessonArchive> getArchivedCourses(LessonArchiveFilter filter) {
+        return List.of();
+    }
+
+    @Override
+    public int countArchivedCourses(LessonArchiveFilter filter) {
+        return 0;
+    }
+
+}

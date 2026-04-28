@@ -157,6 +157,11 @@
                                 <form action="admin/courses" method="POST" id="bulkActionForm">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
+                                    <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
+
+                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
+                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
+
                                     <div class="container-2__dynamic-content" id="courseTableBody">
                                         <jsp:include page="/views/pages/admin/course/course-fragment.jsp"/>
                                     </div>

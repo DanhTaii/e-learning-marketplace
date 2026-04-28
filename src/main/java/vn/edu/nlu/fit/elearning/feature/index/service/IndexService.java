@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.index.service;
 
-import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 
 import java.util.List;
 

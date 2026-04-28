@@ -4,12 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.CourseRankingDto;
 import vn.edu.nlu.fit.elearning.feature.dashboard.service.DashboardService;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.RevenueDto;
-import vn.edu.nlu.fit.elearning.feature.course.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
 import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
@@ -21,7 +21,7 @@ import java.util.List;
 public class DashboardController extends HttpServlet {
     private UserService userService;
     private OrderService orderService;
-    private CourseService courseServiceImpl;
+    private CourseAdminService courseAdminServiceImpl;
     private DashboardService dashboardService;
 
     @Override
@@ -29,7 +29,7 @@ public class DashboardController extends HttpServlet {
         super.init();
         this.userService =BeanContainer.getBean(UserService.class);
         this.orderService = BeanContainer.getBean(OrderService.class);
-        this.courseServiceImpl = BeanContainer.getBean(CourseService.class);
+        this.courseAdminServiceImpl = BeanContainer.getBean(CourseAdminService.class);
         this.dashboardService = BeanContainer.getBean(DashboardService.class);
     }
 
@@ -37,7 +37,7 @@ public class DashboardController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Order> orderTotal = orderService.getAllOrders();
         List<UserTableResponse> userTotal = userService.getAllUsers();
-        List<Course> courseTotal = courseServiceImpl.getAllCourses();
+        List<Course> courseTotal = courseAdminServiceImpl.getAllCourses();
         double revenueSum = orderService.getRevenueTotal();
         List<CourseRankingDto> popularCourses = dashboardService.getTopSixCourses();
         List<RevenueDto> revenues = dashboardService.getRevenueChartData();

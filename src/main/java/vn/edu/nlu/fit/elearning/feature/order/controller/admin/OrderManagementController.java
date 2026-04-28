@@ -8,25 +8,24 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
-import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "OrderManagementController", value = "/admin/orders")
 public class OrderManagementController extends BaseController {
 
     private OrderService orderService;
-private CourseService courseService;
+private CourseAdminService courseAdminService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.orderService = BeanContainer.getBean(OrderService.class);
-        this.courseService = BeanContainer.getBean(CourseService.class);
+        this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,7 +41,7 @@ private CourseService courseService;
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
         List<Order> listOrders = orderService.searchOrders(filter);
-        List<Course> listCourses = courseService.getAllCourses();
+        List<Course> listCourses = courseAdminService.getAllCourses();
         request.setAttribute("listOrders", listOrders);
         request.setAttribute("totalOrders", orderService.getTotalOrders());
         request.setAttribute("filter", filter);
