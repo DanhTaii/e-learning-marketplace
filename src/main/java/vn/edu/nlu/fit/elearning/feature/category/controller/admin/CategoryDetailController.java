@@ -10,10 +10,6 @@ import vn.edu.nlu.fit.elearning.common.helper.validator.category.CategoryValidat
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
-import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
-import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 
 import java.io.IOException;
 import java.util.List;

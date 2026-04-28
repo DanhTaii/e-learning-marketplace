@@ -10,14 +10,14 @@ import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
-import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
-import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
-import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course.student.dao.CourseDao;
+import vn.edu.nlu.fit.elearning.feature.course.student.dao.CourseDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDao;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
@@ -103,11 +103,11 @@ public class BeanContainer {
         CategoryDao categoryDao = new CategoryDaoImpl();
         beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
 
+        CourseAdminDao courseAdminDao = new CourseAdminDaoImpl();
+        beans.put(CourseAdminService.class, new CourseAdminServiceImpl(courseAdminDao));
+
         CourseDao courseDao = new CourseDaoImpl();
         beans.put(CourseService.class, new CourseServiceImpl(courseDao));
-
-        CourseSearchDao courseSearchDao = new CourseSearchDaoImpl();
-        beans.put(CourseSearchService.class, new CourseSearchServiceImpl(courseSearchDao));
 
         CourseTagDao courseTagDao = new CourseTagDaoImpl();
         beans.put(CourseTagService.class, new CourseTagServiceImpl(courseTagDao));

@@ -12,8 +12,8 @@ import vn.edu.nlu.fit.elearning.common.external.cloudinary.CloudinaryService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.validator.lesson.LessonValidator;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
-import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 
@@ -29,19 +29,19 @@ import java.util.Map;
 )
 public class LessonDetailController extends BaseController {
     private transient LessonService lessonService;
-    private transient CourseService courseService;
+    private transient CourseAdminService courseAdminService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.lessonService = BeanContainer.getBean(LessonService.class);
-        this.courseService = BeanContainer.getBean(CourseService.class);
+        this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            List<Course> listCourses = courseService.getAllCourses();
+            List<Course> listCourses = courseAdminService.getAllCourses();
             request.setAttribute("listCourse", listCourses);
             String idStr = request.getParameter("id");
 

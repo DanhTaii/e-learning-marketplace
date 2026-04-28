@@ -35,7 +35,11 @@ function setupConfirmModal(options) {
     title.classList.remove('title-danger', 'title-primary', 'title-dark');
 
     // THÊM NỘI DUNG THÔNG ĐIỆP ĐÃ CẤU HÌNH SẴN
-    message.innerText = `Bạn có chắc muốn ${config.title.toLowerCase()} ${count} mục này không?`;
+    const total = count ?? 1;
+
+    message.innerText = total === 1
+        ? `Bạn có chắc muốn ${config.title.toLowerCase()} mục này không?`
+        : `Bạn có chắc muốn ${config.title.toLowerCase()} ${total} mục không?`;
 
     //THÊM CSS, NỘI DUNG TITLE ĐÃ CẤU HÌNH SẴN
     title.classList.add(config.titleClass)
