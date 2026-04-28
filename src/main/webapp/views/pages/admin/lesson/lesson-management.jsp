@@ -62,7 +62,6 @@
                                             <i class="fa-solid fa-plus"></i>Tạo mới
                                         </a>
                                     </button>
-
                                 </div>
                             </div>
                             <div class="container-2__body">

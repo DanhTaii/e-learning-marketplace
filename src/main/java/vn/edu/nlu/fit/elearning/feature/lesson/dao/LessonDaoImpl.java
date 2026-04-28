@@ -301,7 +301,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
     @Override
     public List<LessonArchive> findArchivedLessonsByFilter(LessonArchiveFilter filter) {
         Map<String, Object> params = new HashMap<>();
-        String whereClause = buildLessonArchiveWhereClause(filter, params);
+        String whereClause = buildArchivedLessonWhereClause(filter, params);
 
         String sql = "SELECT l.id, l.title, c.title AS course_title, l.deleted_at, l.delete_reason " +
                 "FROM lessons l LEFT JOIN courses c ON l.course_id = c.id"
@@ -321,7 +321,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
     @Override
     public int countLessonsArchiveByFilter(LessonArchiveFilter filter) {
         Map<String, Object> params = new HashMap<>();
-        String where = buildLessonArchiveWhereClause(filter, params);
+        String where = buildArchivedLessonWhereClause(filter, params);
 
         String sql = "SELECT COUNT(*) FROM lessons l" + where;
 
@@ -332,7 +332,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
         });
     }
 
-    private String buildLessonArchiveWhereClause(LessonArchiveFilter filter, Map<String, Object> params) {
+    private String buildArchivedLessonWhereClause(LessonArchiveFilter filter, Map<String, Object> params) {
         StringBuilder where = new StringBuilder(" WHERE 1=1");
 
         if (filter.getTitle() != null && !filter.getTitle().trim().isEmpty()) {

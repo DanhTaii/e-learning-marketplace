@@ -8,8 +8,8 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
-import vn.edu.nlu.fit.elearning.feature.course.model.Course;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 
@@ -20,13 +20,13 @@ import java.util.List;
 public class LessonManagementController extends BaseController {
 
     private transient LessonService lessonService;
-    private transient CourseService courseService;
+    private transient CourseAdminService courseAdminService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.lessonService = BeanContainer.getBean(LessonService.class);
-        this.courseService = BeanContainer.getBean(CourseService.class);
+        this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class LessonManagementController extends BaseController {
         int totalRecords = lessonService.getCountLessonsByFilter(filter);
         int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
 
-        List<Course> listCourses = courseService.getAllCourses();
+        List<Course> listCourses = courseAdminService.getAllCourses();
         request.setAttribute("listCourse", listCourses);
 
         request.setAttribute("listLessons", listLessons);

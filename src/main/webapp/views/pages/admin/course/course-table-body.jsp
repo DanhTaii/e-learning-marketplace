@@ -15,11 +15,13 @@
             </div>
             <div class="content__sub-title">Cấp độ: ${course.level.vietnameseName} • ${course.durationText}</div>
         </td>
-            <%--                                                <td>--%>
-            <%--                                                    <div class="course-row__duration course-row__font-content">--%>
-            <%--                                                            ${course.durationText}--%>
-            <%--                                                    </div>--%>
-            <%--                                                </td>--%>
+
+        <td>
+            <div class="content__title">
+                    ${course.categoryName}
+            </div>
+        </td>
+
         <td>
             <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
         </td>
@@ -61,7 +63,7 @@
                     </button>
                 </a>
                 <button type="button" class="icon-action-btn"
-                        onclick="openConfirmModal(${course.id})">
+                        onclick="setupConfirmModal({action: 'archive', ids: ${course.id}, url: 'admin/course/action', isBulk: false})">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>

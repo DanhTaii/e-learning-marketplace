@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.category.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.CategoryFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
+import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryOptionDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 
 import java.util.HashMap;
@@ -199,6 +200,15 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
         }
 
         return where.toString();
+    }
+
+    @Override
+    public List<CategoryOptionDto> findIdAndName() {
+        return getJdbi().withHandle(handle ->  {
+            return handle.createQuery("SELECT id, name FROM categories")
+                    .mapToBean(CategoryOptionDto.class)
+                    .list();
+        });
     }
 
 

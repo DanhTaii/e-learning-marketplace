@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.category.Categor
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonFilter;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryDto;
+import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryOptionDto;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
 
@@ -81,4 +82,11 @@ public class CategoryServiceImpl implements CategoryService {
     public int getCountCategoriesByFilter(CategoryFilter filter) {
         return categoryDao.countCategoriesByFilter(filter);
     }
+
+    @Override
+    public List<CategoryOptionDto> getCategoriesIdAndName() {
+        return categoryDao.findIdAndName();
+    }
+
+
 }
