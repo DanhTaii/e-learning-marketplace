@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/contact-button.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/contact-form.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+
 </head>
 <body>
 <div class="contact-modal" id="contactModal">
@@ -23,16 +26,19 @@
             </button>
         </div>
 
-        <form class="contact-form">
+        <form class="contact-form"
+              action="${pageContext.request.contextPath}/api/contact"
+              method="post">
 
             <div class="contact-form__group">
                 <label>Email</label>
-                <input type="email" class="input-style" placeholder="Nhập email của bạn..." required>
+                <input type="email" name="email" class="input-style" value="${sessionScope.userSession.email}"
+                    ${sessionScope.userSession != null ? "readonly" : ""} required>
             </div>
 
             <div class="contact-form__group">
                 <label>Lý do</label>
-                <select class="input-style">
+                <select name="subject" class="input-style" required>
                     <option value="">-- Chọn lý do --</option>
                     <option value="ACCOUNT">Vấn đề tài khoản</option>
                     <option value="BUG">Lỗi hệ thống</option>
@@ -43,17 +49,12 @@
 
             <div class="contact-form__group">
                 <label>Nội dung</label>
-                <textarea class="input-style contact-form__textarea" rows="5"
-                          placeholder="Nhập nội dung chi tiết..."></textarea>
+                <textarea name="message" class="input-style contact-form__textarea"></textarea>
             </div>
 
             <div class="contact-form__actions">
-                <button type="button" class="contact-form__cancel" id="cancelContact">
-                    Hủy
-                </button>
-                <button type="submit" class="dark-button contact-form__submit">
-                    Gửi
-                </button>
+                <button type="button" id="cancelContact">Hủy</button>
+                <button type="submit" class="dark-button">Gửi</button>
             </div>
 
         </form>

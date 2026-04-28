@@ -10,6 +10,9 @@
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/contact-button.css?v=<%=System.currentTimeMillis()%>">
+
+    <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 </head>
 <body>
 <div class="contact-admin">

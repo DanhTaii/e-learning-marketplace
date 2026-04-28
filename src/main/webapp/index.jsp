@@ -17,9 +17,7 @@
     <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
 
-    <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 </head>
