@@ -153,6 +153,6 @@
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/lesson/lesson-archive.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/course/course-archive.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

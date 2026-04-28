@@ -9,21 +9,26 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
+import vn.edu.nlu.fit.elearning.feature.category.dto.CategoryOptionDto;
+import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseAdminDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminCourseController", value = "/admin/courses")
+@WebServlet(name = "CourseAdminManagementController", value = "/admin/courses")
 public class CourseAdminManagementController extends BaseController {
     private transient CourseAdminService courseAdminServiceImpl;
+    private transient CategoryService categoryService;
     private static final Logger logger = LoggerFactory.getLogger(CourseAdminManagementController.class);
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.courseAdminServiceImpl = BeanContainer.getBean(CourseAdminService.class);
+        this.categoryService = BeanContainer.getBean(CategoryService.class);
     }
 
     @Override
@@ -33,6 +38,7 @@ public class CourseAdminManagementController extends BaseController {
         courseFilter.setTitle(request.getParameter("courseTitle"));
         courseFilter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
         courseFilter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
+        courseFilter.setCategoryId(RequestUtils.getParameterAsInt(request, "categoryId", 0));
         String isPublicParam = request.getParameter("isPublic");
         if ("public".equals(isPublicParam)) {
             courseFilter.setPublic(true);
@@ -47,26 +53,35 @@ public class CourseAdminManagementController extends BaseController {
         courseFilter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         courseFilter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
-        List<Course> listCourses = courseAdminServiceImpl.getCourses(courseFilter);
-        //Tính toán tổng số trang hiện tại
-        int totalRecords = courseAdminServiceImpl.countCourses(courseFilter);
-        int totalPages = (int) Math.ceil((double) totalRecords / courseFilter.getSize());
+        try {
+            List<CourseAdminDto> listCourses = courseAdminServiceImpl.getCourses(courseFilter);
+            //Tính toán tổng số trang hiện tại
+            int totalRecords = courseAdminServiceImpl.countCourses(courseFilter);
+            int totalPages = (int) Math.ceil((double) totalRecords / courseFilter.getSize());
 
-        int totalAllCourses = courseAdminServiceImpl.getTotalCourses();
+            int totalAllCourses = courseAdminServiceImpl.getTotalCourses();
 
-        request.setAttribute("totalAllCourses", totalAllCourses);
-        request.setAttribute("currentPage", "courses");
-        request.setAttribute("listCourses", listCourses);
-        request.setAttribute("filter", courseFilter);
-        request.setAttribute("currentPageNumber", courseFilter.getPage());
-        request.setAttribute("totalPages", totalPages);
+            List<CategoryOptionDto> listCategories = categoryService.getCategoriesIdAndName();
+            request.setAttribute("listCategories", listCategories);
+            System.out.println(listCourses);
 
-        String type = request.getParameter("renderType");
-        if ("partial".equals(type)) {
-            this.forward(request, response, "/views/pages/admin/course/course-fragment.jsp");
-        } else {
-            this.forward(request, response, "/views/pages/admin/course/courses-management.jsp");
+            request.setAttribute("totalAllCourses", totalAllCourses);
+            request.setAttribute("currentPage", "courses");
+            request.setAttribute("listCourses", listCourses);
+            request.setAttribute("filter", courseFilter);
+            request.setAttribute("currentPageNumber", courseFilter.getPage());
+            request.setAttribute("totalPages", totalPages);
+
+            String type = request.getParameter("renderType");
+            if ("partial".equals(type)) {
+                this.forward(request, response, "/views/pages/admin/course/course-fragment.jsp");
+            } else {
+                this.forward(request, response, "/views/pages/admin/course/courses-management.jsp");
+            }
+        } catch (Exception e) {
+            logger.error("Error: " + e);
         }
+
     }
 
     @Override

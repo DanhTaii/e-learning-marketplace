@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.course.admin.service;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseAdminDto;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
@@ -49,7 +50,7 @@ public class CourseAdminServiceImpl implements CourseAdminService {
     }
 
     @Override
-    public List<Course> getCourses(CourseFilter filter) {
+    public List<CourseAdminDto> getCourses(CourseFilter filter) {
         return cd.findByFilter(filter);
     }
 

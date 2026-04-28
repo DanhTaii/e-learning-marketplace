@@ -11,13 +11,14 @@
         <thead>
         <tr>
             <th><input type="checkbox" id="selectAll"></th>
-            <th>Khóa học</th>
+            <th>TÊN KHÓA HỌC</th>
             <%--                                            <th>Thời lượng</th>--%>
-            <th>Học viên</th>
+            <th>DANH MỤC</th>
+            <th>HỌC VIÊN</th>
             <%--                                            <th>Cấp độ</th>--%>
-            <th>Trạng thái</th>
-            <th>Ngày tạo</th>
-            <th>Hành động</th>
+            <th>TRẠNG THÁI</th>
+            <th>NGÀY TẠO</th>
+            <th>THAO TÁC</th>
         </tr>
         </thead>
         <tbody>

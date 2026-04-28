@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseAdminDto;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
@@ -112,14 +113,14 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
         });
     }
 
-    String sql = "SELECT c.id, c.title, c.level, c.price, c.is_public, c.created_at, " +
+    String sql = "SELECT c.id, c.title, c.level, c.price, c.is_public, c.created_at, cate.name AS categoryName, " +
             "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount, " +
             "COALESCE((SELECT SUM(duration_minutes) FROM lessons WHERE course_id = c.id),0) / 60.0 AS duration_hours " +
             "FROM courses c " +
             "LEFT JOIN categories cate ON c.category_id = cate.id ";
 
     @Override
-    public List<Course> findByFilter(CourseFilter filter) {
+    public List<CourseAdminDto> findByFilter(CourseFilter filter) {
         Map<String, Object> params = new HashMap<>();
         String whereClause = bulidWhereClause(filter, params);
 
@@ -132,7 +133,7 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
             query.bind("limit", filter.getLimit());
             query.bind("offset", filter.getOffSet());
 
-            return query.mapToBean(Course.class).list();
+            return query.mapToBean(CourseAdminDto.class).list();
         });
     }
 
@@ -159,7 +160,7 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
         }
 
         // Danh mục
-        if (filter.getCategoryId() != null) {
+        if (filter.getCategoryId() != null && filter.getCategoryId() > 0) {
             conditionalSentence.append(" AND c.category_id = :catId");
             params.put("catId", filter.getCategoryId());
         }
@@ -206,7 +207,7 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
     @Override
     public int countAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT COUNT(*) FROM courses")
+            return handle.createQuery("SELECT COUNT(*) FROM courses WHERE is_deleted = 0")
                     .mapTo(Integer.class)
                     .one();
         });

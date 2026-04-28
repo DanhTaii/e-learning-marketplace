@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/course/course-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/course/courses-management.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
@@ -122,6 +122,25 @@
                                                 </select>
                                             </div>
 
+                                            <!-- Danh mục -->
+                                            <div class="filter-group">
+                                                <label>Thuộc danh mục</label>
+                                                <select name="categoryId">
+                                                    <option value="">Tất cả danh mục</option>
+                                                    <c:forEach var="c" items="${listCategories}">
+                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}>${c.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <!-- Đến ngày -->
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date"
+                                                       name="toDate"
+                                                       value="${param.dateTo}">
+                                            </div>
+
                                             <!-- Cấp độ -->
                                             <div class="filter-group">
                                                 <label>Cấp độ</label>
@@ -132,14 +151,6 @@
                                                     <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>Cao cấp</option>
                                                 </select>
                                             </div>
-
-                                            <div class="filter-group">
-                                                <label>Đến ngày</label>
-                                                <input type="date"
-                                                       name="toDate"
-                                                       value="${param.dateTo}">
-                                            </div>
-
                                         </div>
 
                                         <!-- ACTIONS -->
