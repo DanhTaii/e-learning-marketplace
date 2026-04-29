@@ -139,6 +139,7 @@
     font-size: var(--text-2xl);
     line-height: 3rem;
     font-weight: var(--fw-semibold);
+    margin-bottom: 1rem;
 }
 
 .bar-chart {
@@ -152,6 +153,7 @@
     overflow: visible;
     /* Tạo khoảng không cho các label */
     margin-bottom: 3rem;
+    margin-top: 2.5rem;
 }
 
 .bar-chart__grid {
@@ -202,11 +204,10 @@
 /*VÙNG CHỨA và xử lys các cột*/
 /*Phạm vi và các quy ước chung của cột*/
 .bar-chart__bar {
-    /*Để VÙNG CHỨA nằm lên trên thk cha là bar-chart__grid */
     position: absolute;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
     width: 100%;
     padding: 0 2rem;
@@ -258,7 +259,14 @@
     animation: grow 0.7s ease-out forwards;
     transform-origin: bottom;
 }
-
+.column-chart span {
+    position: absolute;
+    bottom: 100%; /* Đẩy lên trên mép cột */
+    margin-bottom: 5px; /* Cách mép cột 1 chút */
+    color: var(--dark-blue); /* Đổi màu chữ tối lại vì nền phía trên là màu trắng */
+    font-size: 14px;
+    font-weight: bold;
+}
 .column-chart:hover {
     transform: translateY(-5px) scale(1.05);
     transition: 0.25s ease;
@@ -292,4 +300,53 @@
         transform: scaleY(1);
         opacity: 1;
     }
+}
+.dashboard-header {
+    display: flex;
+    justify-content: flex-end; /* Đẩy bộ lọc sang góc phải */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.time-filter {
+    /* Mượn style từ .outline-button của bạn */
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 40px 10px 20px; /* Chừa khoảng trống 40px bên phải cho mũi tên */
+    border-radius: 6px;
+    background-color: var(--white-color);
+    color: #111827;
+    border: 1px solid #d1d5db;
+
+    /* Dùng text-base (chữ thường) thay vì text-3xl để vừa vặn với dropdown */
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+
+    /* Xóa giao diện mũi tên mặc định xấu xí của trình duyệt */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Tự vẽ icon mũi tên (SVG) giống chuẩn UI/UX hiện đại */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center; /* Đặt mũi tên cách lề phải 15px */
+}
+
+/* Hiệu ứng Hover giống outline-button của bạn */
+.time-filter:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+/* Hiệu ứng Focus (Khi click vào) giống .input__create của bạn */
+.time-filter:focus {
+    border-color: var(--blue);
+    background-color: var(--white-color);
+    box-shadow: 0 0 0 3px rgba(55, 34, 211, 0.1);
 }

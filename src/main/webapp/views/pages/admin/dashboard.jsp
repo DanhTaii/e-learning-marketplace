@@ -34,7 +34,17 @@
 
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
-
+                            <div class="dashboard-header">
+                                <form action="" method="GET" class="filter-form">
+                                    <select name="timeRange" class="time-filter" onchange="this.form.submit()">
+                                        <option value="today" ${param.timeRange == 'today' ? 'selected' : ''}>Hôm nay</option>
+                                        <option value="7days" ${empty param.timeRange || param.timeRange == '7days' ? 'selected' : ''}>7 ngày qua</option>
+                                        <option value="month" ${param.timeRange == 'month' ? 'selected' : ''}>Tháng này</option>
+                                        <option value="year" ${param.timeRange == 'year' ? 'selected' : ''}>Năm nay</option>
+                                        <option value="all" ${param.timeRange == 'all' ? 'selected' : ''}>Toàn thời gian</option>
+                                    </select>
+                                </form>
+                            </div>
                             <div class="list-card">
                                 <ul>
                                     <li>
