@@ -350,3 +350,70 @@
     background-color: var(--white-color);
     box-shadow: 0 0 0 3px rgba(55, 34, 211, 0.1);
 }
+/* ======================================== MODERN TOP COURSE TABLE ======================================== */
+
+/* Khung bọc ngoài */
+.top-course {
+    background: #ffffff; /* Đã sửa lỗi var() rỗng */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* TABLE CHÍNH */
+.top-course-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed; /* giữ layout ổn định */
+    border: none;
+}
+
+/* HEADER STYLE */
+.top-course-table thead th {
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 15px;
+    border-bottom: 1px solid #edf2f7;
+    text-align: left; /* Mặc định căn trái */
+}
+
+/* Xử lý riêng cái Tiêu đề gộp cột để nó không bị ảnh hưởng bởi size nhỏ */
+.top-course-table th.top-course__title {
+    font-size: 14px;
+    color: #374151;
+    text-align: center;
+}
+
+/* ĐỊNH NGHĨA WIDTH CỘT (Chỉ 3 cột) */
+.top-course-table th:nth-child(1) { width: 15%; text-align: center; } /* Cột STT */
+.top-course-table th:nth-child(2) { width: 65%; }                     /* Cột Tên khóa học */
+.top-course-table th:nth-child(3) { width: 20%; text-align: center; } /* Cột Học viên */
+
+/* BODY STYLE */
+.top-course-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Căn giữa text cho body (STT và Học viên) khớp với Header */
+.top-course-table tbody td:nth-child(1),
+.top-course-table tbody td:nth-child(3) {
+    text-align: center;
+}
+
+/* Xóa border 2 bên để nhìn "thoáng" hơn */
+.top-course-table td:first-child,
+.top-course-table th:first-child,
+.top-course-table td:last-child,
+.top-course-table th:last-child {
+    border-left: none;
+    border-right: none;
+}

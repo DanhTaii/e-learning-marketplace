@@ -132,10 +132,9 @@
                                 </div>
 
                                 <div class="top-course">
-                                    <table>
+                                    <table class="top-course-table">
                                         <thead>
                                         <tr>
-                                            <!-- Thay vì div riêng, đưa vào th với colspan -->
                                             <th colspan="3" class="top-course__title">
                                                 TOP 6 KHÓA HỌC BÁN CHẠY NHẤT
                                             </th>
