@@ -35,6 +35,6 @@
       class="form"
       style="display: none">
     <input id="input-delete-id" type="hidden" name="id">
-    <input id="input-delete-type" type="hidden" name="deleteType">
+    <input id="input-delete-type" type="hidden" name="actionType">
     <input id="input-delete-reason" type="hidden" name="deleteReason">
 </form>

@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.feature.course_user.dto.CourseCardDto;
+import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
 import java.io.IOException;
 import java.util.List;

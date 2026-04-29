@@ -10,6 +10,18 @@ import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
+import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course.student.dao.CourseDao;
+import vn.edu.nlu.fit.elearning.feature.course.student.dao.CourseDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
+import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDao;
+import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.contact.service.ContactService;
+import vn.edu.nlu.fit.elearning.feature.contact.service.ContactServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
 import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
@@ -103,6 +115,9 @@ public class BeanContainer {
         CategoryDao categoryDao = new CategoryDaoImpl();
         beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
 
+        CourseAdminDao courseAdminDao = new CourseAdminDaoImpl();
+        beans.put(CourseAdminService.class, new CourseAdminServiceImpl(courseAdminDao));
+
         CourseDao courseDao = new CourseDaoImpl();
         beans.put(CourseService.class, new CourseServiceImpl(courseDao));
 
@@ -153,6 +168,9 @@ public class BeanContainer {
 
         RoleDao roleDao = new RoleDaoImpl();
         beans.put(RoleService.class, new RoleServiceImpl(roleDao));
+
+        ContactDao contactDao = new ContactDaoImpl();
+        beans.put(ContactService.class, new ContactServiceImpl(contactDao));
 
     }
 

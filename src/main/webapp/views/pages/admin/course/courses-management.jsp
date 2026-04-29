@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/course/course-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/course/courses-management.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
@@ -56,6 +56,10 @@
                                     </div>
                                 </div>
                                 <div class="admin-create__buttons">
+                                    <a href="admin/courses/archive" class="outline-button">
+                                        <i class="fa-solid fa-box-archive"></i>
+                                        <span>Kho lưu trữ</span>
+                                    </a>
                                     <button type="button" class="dark-button">
                                         <a href="admin/course/detail">
                                             <i class="fa-solid fa-plus"></i>Tạo mới
@@ -118,6 +122,25 @@
                                                 </select>
                                             </div>
 
+                                            <!-- Danh mục -->
+                                            <div class="filter-group">
+                                                <label>Thuộc danh mục</label>
+                                                <select name="categoryId">
+                                                    <option value="">Tất cả danh mục</option>
+                                                    <c:forEach var="c" items="${listCategories}">
+                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}>${c.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <!-- Đến ngày -->
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date"
+                                                       name="toDate"
+                                                       value="${param.dateTo}">
+                                            </div>
+
                                             <!-- Cấp độ -->
                                             <div class="filter-group">
                                                 <label>Cấp độ</label>
@@ -128,14 +151,6 @@
                                                     <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>Cao cấp</option>
                                                 </select>
                                             </div>
-
-                                            <div class="filter-group">
-                                                <label>Đến ngày</label>
-                                                <input type="date"
-                                                       name="toDate"
-                                                       value="${param.dateTo}">
-                                            </div>
-
                                         </div>
 
                                         <!-- ACTIONS -->
@@ -152,6 +167,11 @@
 
                                 <form action="admin/courses" method="POST" id="bulkActionForm">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
+
+                                    <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
+
+                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
+                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="courseTableBody">
                                         <jsp:include page="/views/pages/admin/course/course-fragment.jsp"/>
