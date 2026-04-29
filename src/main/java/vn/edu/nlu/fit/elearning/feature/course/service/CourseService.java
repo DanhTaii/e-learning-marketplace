@@ -37,4 +37,6 @@ public interface CourseService {
     int bulkDuplicateCourses(List<Integer> ids);
 
     int changeCoursesStatusByIds(List<Integer> ids);
+
+    int countCoursesByTimeRange(String timeRange);
 }

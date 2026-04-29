@@ -157,5 +157,8 @@ public class CourseServiceImpl implements CourseService {
     public int changeCoursesStatusByIds(List<Integer> ids) {
         return cd.updateCoursesStatusByIds(ids);
     }
-
+    @Override
+    public int countCoursesByTimeRange(String timeRange){
+        return  cd.countCoursesByTimeRange(timeRange);
+    }
 }

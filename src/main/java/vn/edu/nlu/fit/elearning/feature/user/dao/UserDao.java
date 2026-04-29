@@ -20,4 +20,6 @@ public interface UserDao extends BaseCrudDao<User, Integer> {
     int resetPassword(String newPassword, String userMail);
 
     boolean existsUserByEmail(String email);
+
+    int countUsersByTimeRange(String timeRange);
 }

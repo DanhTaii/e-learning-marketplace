@@ -35,10 +35,6 @@ public class DashboardController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Order> orderTotal = orderService.getAllOrders();
-        List<UserTableResponse> userTotal = userService.getAllUsers();
-        List<Course> courseTotal = courseServiceImpl.getAllCourses();
-        double revenueSum = orderService.getRevenueTotal();
         List<CourseRankingDto> popularCourses = dashboardService.getTopSixCourses();
 
         String timeRange = request.getParameter("timeRange");
@@ -47,10 +43,10 @@ public class DashboardController extends HttpServlet {
         }
         List<RevenueDto> revenues = dashboardService.getRevenueChartData(timeRange);
 
-        request.setAttribute("userCount", userTotal.size());
-        request.setAttribute("orderCount", orderTotal.size());
-        request.setAttribute("courseCount", courseTotal.size());
-        request.setAttribute("revenueTotal", revenueSum);
+        request.setAttribute("userCount", userService.countUsersByTimeRange("all"));
+        request.setAttribute("orderCount", orderService.countOrdersByTimeRange(timeRange));
+        request.setAttribute("courseCount", courseServiceImpl.countCoursesByTimeRange("all"));
+        request.setAttribute("revenueTotal", orderService.getRevenueTotalByTimeRange(timeRange));
         request.setAttribute("popularCourses", popularCourses);
         request.setAttribute("chartData", revenues);
 

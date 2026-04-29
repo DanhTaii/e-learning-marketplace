@@ -281,5 +281,16 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
                     .execute();
         });
     }
+    @Override
+    public int countCoursesByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM courses WHERE " + timeCondition;
 
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
 }

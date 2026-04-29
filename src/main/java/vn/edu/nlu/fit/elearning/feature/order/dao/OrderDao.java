@@ -36,4 +36,9 @@ public interface OrderDao {
 
     List<OrderDTO> getOrderHistoryByUserId(int userId);
 
+    int countOrdersByTimeRange(String timeRange);
+
+    double getRevenueTotalByTimeRange(String timeRange);
+
+    int countUsersByTimeRange(String timeRange);
 }

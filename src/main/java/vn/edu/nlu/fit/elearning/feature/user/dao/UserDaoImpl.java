@@ -177,4 +177,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     .one() > 0;
         });
     }
+    @Override
+    public int countUsersByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM users WHERE " + timeCondition;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
 }

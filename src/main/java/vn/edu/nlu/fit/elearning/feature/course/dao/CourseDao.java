@@ -36,4 +36,5 @@ public interface CourseDao {
 
     int updateCoursesStatusByIds(List<Integer> ids);
 
+    int countCoursesByTimeRange(String timeRange);
 }
