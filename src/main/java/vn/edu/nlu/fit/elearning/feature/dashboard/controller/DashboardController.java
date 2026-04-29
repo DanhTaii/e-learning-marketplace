@@ -40,7 +40,12 @@ public class DashboardController extends HttpServlet {
         List<Course> courseTotal = courseServiceImpl.getAllCourses();
         double revenueSum = orderService.getRevenueTotal();
         List<CourseRankingDto> popularCourses = dashboardService.getTopSixCourses();
-        List<RevenueDto> revenues = dashboardService.getRevenueChartData();
+
+        String timeRange = request.getParameter("timeRange");
+        if (timeRange == null || timeRange.trim().isEmpty()) {
+            timeRange = "7days";
+        }
+        List<RevenueDto> revenues = dashboardService.getRevenueChartData(timeRange);
 
         request.setAttribute("userCount", userTotal.size());
         request.setAttribute("orderCount", orderTotal.size());

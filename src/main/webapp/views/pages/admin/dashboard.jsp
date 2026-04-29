@@ -94,7 +94,15 @@
 
                             <div class="visualization">
                                 <div class="chart">
-                                    <div class="chart__title">DOANH THU 7 NGÀY QUA</div>
+                                    <div class="chart__title">
+                                        <c:choose>
+                                            <c:when test="${param.timeRange == 'today'}">DOANH THU HÔM NAY</c:when>
+                                            <c:when test="${param.timeRange == 'month'}">DOANH THU THÁNG NÀY</c:when>
+                                            <c:when test="${param.timeRange == 'year'}">DOANH THU NĂM NAY</c:when>
+                                            <c:when test="${param.timeRange == 'all'}">DOANH THU TOÀN THỜI GIAN</c:when>
+                                            <c:otherwise>DOANH THU 7 NGÀY QUA</c:otherwise>
+                                        </c:choose>
+                                    </div>
                                     <div class="bar-chart">
                                         <div class="bar-chart__grid">
                                             <div class="vertical-axis"></div>

@@ -15,18 +15,17 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public List<RevenueDto> getRevenueChartData() {
-        List<RevenueDto> list = dashboardDao.findSevenDaysRevenue();
+    public List<RevenueDto> getRevenueChartData(String timeRange) {
+        List<RevenueDto> list = dashboardDao.findRevenueByTimeRange(timeRange);
 
         if (list.isEmpty()) return list;
 
-        // 1. Tìm doanh thu lớn nhất trong 7 ngày
         double maxRevenue = list.stream()
                 .mapToDouble(RevenueDto::getDailyRevenue)
                 .max()
                 .orElse(1.0);
 
-        // Tính % chiều cao cho từng ngày
+        // Tính % chiều cao cho từng phần tử
         for (RevenueDto item : list) {
             double percent = (item.getDailyRevenue() / maxRevenue) * 100;
             item.setHeightPercent(percent);
