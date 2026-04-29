@@ -312,5 +312,42 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
                         .list()
         );
     }
+    @Override
+    public int countOrdersByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
 
+        String sql = "SELECT COUNT(id) FROM orders WHERE " + timeCondition;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
+    @Override
+    public double getRevenueTotalByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
+
+        String sql = "SELECT COALESCE(SUM(final_amount), 0) FROM orders WHERE status = 'PAID' AND " + timeCondition;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Double.class)
+                    .findFirst()
+                    .orElse(0.0);
+        });
+    }
+    @Override
+    public int countUsersByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM users WHERE " + timeCondition;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
 }

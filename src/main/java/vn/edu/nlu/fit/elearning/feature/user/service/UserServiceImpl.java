@@ -137,5 +137,8 @@ public class UserServiceImpl implements UserService {
     public boolean existsUserByEmail(String email) {
         return userDao.existsUserByEmail(email);
     }
-
+@Override
+public int countUsersByTimeRange(String timeRange){
+        return userDao.countUsersByTimeRange(timeRange);
+}
 }

@@ -34,5 +34,21 @@ public abstract class BaseDao {
         HikariDataSource ds = new HikariDataSource(config);
         jdbi = Jdbi.create(ds);
     }
+    protected String buildTimeCondition(String timeRange,String columnName) {
+        if (timeRange == null) return "1 = 1";
 
+        switch (timeRange) {
+            case "today":
+                return "DATE(created_at) = CURDATE()";
+            case "7days":
+                return "created_at >= CURDATE() - INTERVAL 6 DAY AND created_at < CURDATE() + INTERVAL 1 DAY";
+            case "month":
+                return "MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())";
+            case "year":
+                return "YEAR(created_at) = YEAR(CURDATE())";
+            case "all":
+            default:
+                return "1 = 1";
+        }
+    }
 }

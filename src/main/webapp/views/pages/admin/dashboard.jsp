@@ -34,7 +34,17 @@
 
                     <div class="container-2__content-body">
                         <div class="grid__row-2 container-2__grid">
-
+                            <div class="dashboard-header">
+                                <form action="" method="GET" class="filter-form">
+                                    <select name="timeRange" class="time-filter" onchange="this.form.submit()">
+                                        <option value="today" ${param.timeRange == 'today' ? 'selected' : ''}>Hôm nay</option>
+                                        <option value="7days" ${empty param.timeRange || param.timeRange == '7days' ? 'selected' : ''}>7 ngày qua</option>
+                                        <option value="month" ${param.timeRange == 'month' ? 'selected' : ''}>Tháng này</option>
+                                        <option value="year" ${param.timeRange == 'year' ? 'selected' : ''}>Năm nay</option>
+                                        <option value="all" ${param.timeRange == 'all' ? 'selected' : ''}>Toàn thời gian</option>
+                                    </select>
+                                </form>
+                            </div>
                             <div class="list-card">
                                 <ul>
                                     <li>
@@ -84,7 +94,15 @@
 
                             <div class="visualization">
                                 <div class="chart">
-                                    <div class="chart__title">DOANH THU 7 NGÀY QUA</div>
+                                    <div class="chart__title">
+                                        <c:choose>
+                                            <c:when test="${param.timeRange == 'today'}">DOANH THU HÔM NAY</c:when>
+                                            <c:when test="${param.timeRange == 'month'}">DOANH THU THÁNG NÀY</c:when>
+                                            <c:when test="${param.timeRange == 'year'}">DOANH THU NĂM NAY</c:when>
+                                            <c:when test="${param.timeRange == 'all'}">DOANH THU TOÀN THỜI GIAN</c:when>
+                                            <c:otherwise>DOANH THU 7 NGÀY QUA</c:otherwise>
+                                        </c:choose>
+                                    </div>
                                     <div class="bar-chart">
                                         <div class="bar-chart__grid">
                                             <div class="vertical-axis"></div>
@@ -114,10 +132,9 @@
                                 </div>
 
                                 <div class="top-course">
-                                    <table>
+                                    <table class="top-course-table">
                                         <thead>
                                         <tr>
-                                            <!-- Thay vì div riêng, đưa vào th với colspan -->
                                             <th colspan="3" class="top-course__title">
                                                 TOP 6 KHÓA HỌC BÁN CHẠY NHẤT
                                             </th>

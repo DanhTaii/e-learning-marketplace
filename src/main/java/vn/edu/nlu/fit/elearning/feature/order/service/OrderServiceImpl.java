@@ -227,5 +227,13 @@ public class OrderServiceImpl implements OrderService {
         payment.setStatus(status);
         paymentService.createPayment(payment);
     }
+    @Override
+    public int countOrdersByTimeRange(String timeRange) {
+        return orderDao.countOrdersByTimeRange(timeRange);
+    }
 
+    @Override
+    public double getRevenueTotalByTimeRange(String timeRange) {
+        return orderDao.getRevenueTotalByTimeRange(timeRange);
+    }
 }

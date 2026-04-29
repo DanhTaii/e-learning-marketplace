@@ -139,6 +139,7 @@
     font-size: var(--text-2xl);
     line-height: 3rem;
     font-weight: var(--fw-semibold);
+    margin-bottom: 1rem;
 }
 
 .bar-chart {
@@ -152,6 +153,7 @@
     overflow: visible;
     /* Tạo khoảng không cho các label */
     margin-bottom: 3rem;
+    margin-top: 2.5rem;
 }
 
 .bar-chart__grid {
@@ -202,11 +204,10 @@
 /*VÙNG CHỨA và xử lys các cột*/
 /*Phạm vi và các quy ước chung của cột*/
 .bar-chart__bar {
-    /*Để VÙNG CHỨA nằm lên trên thk cha là bar-chart__grid */
     position: absolute;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
     width: 100%;
     padding: 0 2rem;
@@ -258,7 +259,14 @@
     animation: grow 0.7s ease-out forwards;
     transform-origin: bottom;
 }
-
+.column-chart span {
+    position: absolute;
+    bottom: 100%; /* Đẩy lên trên mép cột */
+    margin-bottom: 5px; /* Cách mép cột 1 chút */
+    color: var(--dark-blue); /* Đổi màu chữ tối lại vì nền phía trên là màu trắng */
+    font-size: 14px;
+    font-weight: bold;
+}
 .column-chart:hover {
     transform: translateY(-5px) scale(1.05);
     transition: 0.25s ease;
@@ -292,4 +300,120 @@
         transform: scaleY(1);
         opacity: 1;
     }
+}
+.dashboard-header {
+    display: flex;
+    justify-content: flex-end; /* Đẩy bộ lọc sang góc phải */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.time-filter {
+    /* Mượn style từ .outline-button của bạn */
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 40px 10px 20px; /* Chừa khoảng trống 40px bên phải cho mũi tên */
+    border-radius: 6px;
+    background-color: var(--white-color);
+    color: #111827;
+    border: 1px solid #d1d5db;
+
+    /* Dùng text-base (chữ thường) thay vì text-3xl để vừa vặn với dropdown */
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+
+    /* Xóa giao diện mũi tên mặc định xấu xí của trình duyệt */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Tự vẽ icon mũi tên (SVG) giống chuẩn UI/UX hiện đại */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center; /* Đặt mũi tên cách lề phải 15px */
+}
+
+/* Hiệu ứng Hover giống outline-button của bạn */
+.time-filter:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+/* Hiệu ứng Focus (Khi click vào) giống .input__create của bạn */
+.time-filter:focus {
+    border-color: var(--blue);
+    background-color: var(--white-color);
+    box-shadow: 0 0 0 3px rgba(55, 34, 211, 0.1);
+}
+/* ======================================== MODERN TOP COURSE TABLE ======================================== */
+
+/* Khung bọc ngoài */
+.top-course {
+    background: #ffffff; /* Đã sửa lỗi var() rỗng */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* TABLE CHÍNH */
+.top-course-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed; /* giữ layout ổn định */
+    border: none;
+}
+
+/* HEADER STYLE */
+.top-course-table thead th {
+    background-color: #f9fafb;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 15px;
+    border-bottom: 1px solid #edf2f7;
+    text-align: left; /* Mặc định căn trái */
+}
+
+/* Xử lý riêng cái Tiêu đề gộp cột để nó không bị ảnh hưởng bởi size nhỏ */
+.top-course-table th.top-course__title {
+    font-size: 14px;
+    color: #374151;
+    text-align: center;
+}
+
+/* ĐỊNH NGHĨA WIDTH CỘT (Chỉ 3 cột) */
+.top-course-table th:nth-child(1) { width: 15%; text-align: center; } /* Cột STT */
+.top-course-table th:nth-child(2) { width: 65%; }                     /* Cột Tên khóa học */
+.top-course-table th:nth-child(3) { width: 20%; text-align: center; } /* Cột Học viên */
+
+/* BODY STYLE */
+.top-course-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Căn giữa text cho body (STT và Học viên) khớp với Header */
+.top-course-table tbody td:nth-child(1),
+.top-course-table tbody td:nth-child(3) {
+    text-align: center;
+}
+
+/* Xóa border 2 bên để nhìn "thoáng" hơn */
+.top-course-table td:first-child,
+.top-course-table th:first-child,
+.top-course-table td:last-child,
+.top-course-table th:last-child {
+    border-left: none;
+    border-right: none;
 }

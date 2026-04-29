@@ -2,15 +2,12 @@ package vn.edu.nlu.fit.elearning.feature.course.admin.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
-import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.lesson.LessonArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseAdminDto;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
-import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
-import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
 
 import java.util.HashMap;
 import java.util.List;
@@ -338,5 +335,16 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
                     .execute();
         });
     }
+    @Override
+    public int countCoursesByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM courses WHERE " + timeCondition;
 
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
 }

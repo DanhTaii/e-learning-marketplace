@@ -55,4 +55,5 @@ public interface CourseAdminService {
     int countArchivedCourses(CourseArchivedFilter filter);
 
 
+    int countCoursesByTimeRange(String timeRange);
 }

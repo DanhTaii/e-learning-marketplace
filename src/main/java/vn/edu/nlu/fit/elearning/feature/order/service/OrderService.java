@@ -41,4 +41,8 @@ public interface OrderService {
     List<OrderDTO> getOrderHistoryByUserId(int userId);
 
     int getTotalOrders();
+
+    int countOrdersByTimeRange(String timeRange);
+
+    double getRevenueTotalByTimeRange(String timeRange);
 }
