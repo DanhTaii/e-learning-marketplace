@@ -11,6 +11,8 @@ import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
 
+import java.util.Set;
+
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
 
@@ -122,5 +124,16 @@ public class AuthServiceImpl implements AuthService {
 
         return userService.changePasswordByEmail(newHashPassword, userMail) == 1;
     }
+
+    @Override
+    public Set<String> getUserPermissions(Integer userId){
+        return userService.getPermissionsByUserId(userId);
+    }
+
+    @Override
+    public Set<String> getUserRoles(Integer userId){
+        return userService.getRolesByUserId(userId);
+    }
+
 
 }

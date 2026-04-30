@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.user.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
 import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserProfileRequest;
 import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserRoleStatusRequest;
@@ -14,6 +15,7 @@ import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
@@ -141,4 +143,15 @@ public class UserServiceImpl implements UserService {
 public int countUsersByTimeRange(String timeRange){
         return userDao.countUsersByTimeRange(timeRange);
 }
+
+    @Override
+    public Set<String> getPermissionsByUserId(Integer userId) {
+        return userDao.findPermissionsByUserId(userId);
+    }
+
+    @Override
+    public Set<String> getRolesByUserId(Integer userId) {
+        return userDao.findRolesByUserId(userId);
+    }
+
 }

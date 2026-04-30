@@ -3,9 +3,11 @@ package vn.edu.nlu.fit.elearning.feature.user.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserDao extends BaseCrudDao<User, Integer> {
 
@@ -22,4 +24,9 @@ public interface UserDao extends BaseCrudDao<User, Integer> {
     boolean existsUserByEmail(String email);
 
     int countUsersByTimeRange(String timeRange);
+
+    Set<String> findPermissionsByUserId(Integer userId);
+
+    Set<String> findRolesByUserId(Integer userId);
+
 }

@@ -3,9 +3,12 @@ package vn.edu.nlu.fit.elearning.feature.user.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
 
@@ -189,4 +192,40 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     .orElse(0);
         });
     }
+
+    @Override
+    public Set<String> findRolesByUserId(Integer userId) {
+        return getJdbi().withHandle(handle ->
+                new HashSet<>(handle.createQuery(
+                                "SELECT DISTINCT r.name " +
+                                        "FROM users u " +
+                                        "JOIN user_roles ur ON u.id = ur.user_id " +
+                                        "JOIN roles r ON ur.role_id = r.id " +
+                                        "WHERE u.id = :userId")
+                        .bind("userId", userId)
+                        .mapTo(String.class)
+                        .list())
+        );
+    }
+
+
+    @Override
+    public Set<String> findPermissionsByUserId(Integer userId) {
+        return getJdbi().withHandle(handle ->
+                new HashSet<>(handle.createQuery(
+                                "SELECT DISTINCT p.name " +
+                                        "FROM users u " +
+                                        "JOIN user_roles ur ON u.id = ur.user_id " +
+                                        "JOIN role_permissions rp ON ur.role_id = rp.role_id " +
+                                        "JOIN permissions p ON rp.permission_id = p.id " +
+                                        "WHERE u.id = :userId")
+                        .bind("userId", userId)
+                        .mapTo(String.class)
+                        .list())
+        );
+    }
+
+
+
+
 }

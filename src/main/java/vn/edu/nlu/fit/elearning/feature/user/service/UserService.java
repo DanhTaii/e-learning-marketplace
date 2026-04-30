@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.user.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
 import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserProfileRequest;
 import vn.edu.nlu.fit.elearning.feature.user.dto.request.UserRoleStatusRequest;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
@@ -8,6 +10,7 @@ import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
 import vn.edu.nlu.fit.elearning.feature.user.model.User;
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     //Base Crud
@@ -43,4 +46,8 @@ public interface UserService {
     boolean existsUserByUsername(String username);
 
     int countUsersByTimeRange(String timeRange);
+
+    Set<String> getPermissionsByUserId(Integer userId);
+
+    Set<String> getRolesByUserId(Integer userId);
 }
