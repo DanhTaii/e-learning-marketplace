@@ -1,8 +1,8 @@
-package vn.edu.nlu.fit.elearning.feature.role.service;
+package vn.edu.nlu.fit.elearning.feature.authorization.role.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.role.RoleFilter;
-import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDao;
-import vn.edu.nlu.fit.elearning.feature.role.model.Role;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.dao.RoleDao;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.model.Role;
 
 import java.util.ArrayList;
 import java.util.HashSet;

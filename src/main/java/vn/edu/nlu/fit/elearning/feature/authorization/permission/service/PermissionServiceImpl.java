@@ -1,8 +1,8 @@
-package vn.edu.nlu.fit.elearning.feature.permission.service;
+package vn.edu.nlu.fit.elearning.feature.authorization.permission.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.permission.PermissionFilter;
-import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDao;
-import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.dao.PermissionDao;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.model.Permission;
 
 import java.util.List;
 

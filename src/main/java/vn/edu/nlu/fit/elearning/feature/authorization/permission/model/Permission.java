@@ -1,22 +1,24 @@
-package vn.edu.nlu.fit.elearning.feature.role.model;
+package vn.edu.nlu.fit.elearning.feature.authorization.permission.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Role implements Serializable {
+public class Permission implements Serializable {
     private int id;
     private String name;
     private String description;
     private Timestamp createdAt;
+    private String groupName;
 
-    public Role() {
+    public Permission() {
     }
 
-    public Role(int id, String name, String description, Timestamp createdAt) {
+    public Permission(int id, String name, String description, Timestamp createdAt, String groupName) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
+        this.groupName = groupName;
     }
 
     public int getId() {
@@ -51,13 +53,22 @@ public class Role implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
     @Override
     public String toString() {
-        return "Role{" +
+        return "Permission{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
+                ", groupName='" + groupName + '\'' +
                 '}';
     }
 }

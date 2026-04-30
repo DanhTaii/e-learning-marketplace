@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.permission.controller;
+package vn.edu.nlu.fit.elearning.feature.authorization.permission.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,9 +7,8 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.permission.PermissionFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
-import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
-import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
-import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionService;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.model.Permission;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.service.PermissionService;
 
 import java.io.IOException;
 import java.util.List;

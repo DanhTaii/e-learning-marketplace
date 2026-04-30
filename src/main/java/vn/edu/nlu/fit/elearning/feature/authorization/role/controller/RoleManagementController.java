@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.role.controller;
+package vn.edu.nlu.fit.elearning.feature.authorization.role.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -7,10 +7,10 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.role.RoleFilter;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
-import vn.edu.nlu.fit.elearning.feature.permission.model.Permission;
-import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionService;
-import vn.edu.nlu.fit.elearning.feature.role.model.Role;
-import vn.edu.nlu.fit.elearning.feature.role.service.RoleService;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.model.Permission;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.service.PermissionService;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.model.Role;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.service.RoleService;
 
 import java.io.IOException;
 import java.util.List;

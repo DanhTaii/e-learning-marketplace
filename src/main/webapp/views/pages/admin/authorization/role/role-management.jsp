@@ -56,6 +56,22 @@
                             <div class="container-2__body">
                                 <form method="get" action="admin/super/roles" class="advanced-filter" id="filterForm">
 
+                                    <script>
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
+                                    <div class="filter-header" onclick="toggleFilter()">
+                                        <h2 class="filter-title">
+                                            <i class="fa-solid fa-filter"></i>
+                                            Bộ lọc nâng cao
+                                        </h2>
+                                        <div class="filter-toggle-icon" id="toggleIcon">
+                                            <i class="fa-solid fa-sliders"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-content" id="filterContent">
                                     <div class="filter-grid">
 
                                         <div class="filter-group">
@@ -105,7 +121,7 @@
                                             Áp dụng bộ lọc
                                         </button>
                                     </div>
-
+                                    </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/roles">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
