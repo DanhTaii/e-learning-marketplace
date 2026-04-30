@@ -8,10 +8,8 @@ import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-import vn.edu.nlu.fit.elearning.feature.auth.controller.LoginController;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 
 import java.io.IOException;
 import java.util.Set;

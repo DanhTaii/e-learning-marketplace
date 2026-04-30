@@ -2,18 +2,12 @@ package vn.edu.nlu.fit.elearning.feature.payment.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
-import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
-import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
-import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
-import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDao;
 import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment_method.vnpay.VnpayConstants;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

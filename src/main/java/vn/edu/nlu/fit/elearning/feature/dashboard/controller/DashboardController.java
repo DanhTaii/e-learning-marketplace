@@ -9,10 +9,7 @@ import vn.edu.nlu.fit.elearning.feature.dashboard.dto.CourseRankingDto;
 import vn.edu.nlu.fit.elearning.feature.dashboard.service.DashboardService;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 import vn.edu.nlu.fit.elearning.feature.dashboard.dto.RevenueDto;
-import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
-import vn.edu.nlu.fit.elearning.feature.order.model.Order;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 
 import java.io.IOException;
 import java.util.List;

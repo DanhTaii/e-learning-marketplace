@@ -5,8 +5,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 
 import java.io.IOException;
 

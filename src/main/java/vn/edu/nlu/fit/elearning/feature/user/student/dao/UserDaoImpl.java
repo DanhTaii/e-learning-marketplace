@@ -1,0 +1,122 @@
+package vn.edu.nlu.fit.elearning.feature.user.student.dao;
+
+import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class UserDaoImpl extends BaseDao implements UserDao {
+
+    @Override
+    public User findById(Integer integer) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.status, u.created_at AS createdAt, u.updated_at AS updatedAt " +
+                            "FROM users u where u.id = :id")
+                    .bind("id", integer)
+                    .mapToBean(User.class)
+                    .findFirst()
+                    .orElse(null);
+        });
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return getJdbi().withHandle(handle -> {
+//            Với hàm cũ là :handle.createQuery("select * from users u where u.email = :email").bind("email", email).mapToBean(User.class).one();
+//            Sẽ lỗi do nếu email KHÔNG tồn tại (không có kết quả nào),
+//            .one() sẽ ném ra ngoại lệ IllegalStateException: Expected one element, but found none,
+//            dẫn đến lỗi HTTP 500.
+            return handle.createQuery("select * from users u where u.email = :email")
+                    .bind("email", email.trim())
+                    .mapToBean(User.class)
+                    .findFirst()
+                    .orElse(null);
+        });
+    }
+
+    @Override
+    public boolean findUserByUsername(String username) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("select 1 from users u where u.username = :username")
+                    .bind("username", username)
+                    .mapTo(Integer.class)
+                    .findOne()
+                    .isPresent();
+
+        });
+    }
+
+    @Override
+    public int resetPassword(String newPassword, String userMail) {
+//        Do là với withHandle thì nó sẽ trả về kiểu dữ liệu và có đủ CRUD nene có thể return về chính nó luôn
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(
+                            "UPDATE users\n" +
+                                    "SET password =  :newPassword, updated_at = CURRENT_TIMESTAMP\n" +
+                                    "WHERE email = :userMail")
+                    .bind("userMail", userMail)
+                    .bind("newPassword", newPassword)
+                    .execute();
+        });
+    }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(id) FROM users WHERE email = :email")
+                    .bind("email", email)
+                    .mapTo(Integer.class)
+                    .one() > 0;
+        });
+    }
+    @Override
+    public int countUsersByTimeRange(String timeRange) {
+        String timeCondition = buildTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM users WHERE " + timeCondition;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .mapTo(Integer.class)
+                    .findFirst()
+                    .orElse(0);
+        });
+    }
+
+    @Override
+    public Set<String> findRolesByUserId(Integer userId) {
+        return getJdbi().withHandle(handle ->
+                new HashSet<>(handle.createQuery(
+                                "SELECT DISTINCT r.name " +
+                                        "FROM users u " +
+                                        "JOIN user_roles ur ON u.id = ur.user_id " +
+                                        "JOIN roles r ON ur.role_id = r.id " +
+                                        "WHERE u.id = :userId")
+                        .bind("userId", userId)
+                        .mapTo(String.class)
+                        .list())
+        );
+    }
+
+
+    @Override
+    public Set<String> findPermissionsByUserId(Integer userId) {
+        return getJdbi().withHandle(handle ->
+                new HashSet<>(handle.createQuery(
+                                "SELECT DISTINCT p.name " +
+                                        "FROM users u " +
+                                        "JOIN user_roles ur ON u.id = ur.user_id " +
+                                        "JOIN role_permissions rp ON ur.role_id = rp.role_id " +
+                                        "JOIN permissions p ON rp.permission_id = p.id " +
+                                        "WHERE u.id = :userId")
+                        .bind("userId", userId)
+                        .mapTo(String.class)
+                        .list())
+        );
+    }
+
+
+}

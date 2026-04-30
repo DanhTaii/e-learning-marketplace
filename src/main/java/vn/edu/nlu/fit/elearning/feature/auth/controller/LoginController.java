@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.validator.login.SignInValidator;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 
 import java.io.IOException;
 import java.util.Map;

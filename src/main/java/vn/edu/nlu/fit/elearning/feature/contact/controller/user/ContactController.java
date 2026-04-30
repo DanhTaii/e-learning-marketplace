@@ -8,8 +8,7 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.contact.model.Contact;
 import vn.edu.nlu.fit.elearning.feature.contact.service.ContactService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 
 import java.io.IOException;
 

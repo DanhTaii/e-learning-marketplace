@@ -1,0 +1,49 @@
+package vn.edu.nlu.fit.elearning.feature.user.admin.service;
+
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
+import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusRequest;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserTableResponse;
+
+import java.util.List;
+
+public class UserAdminServiceImpl implements UserAdminService {
+
+    private final UserAdminDao userAdminDao;
+
+    public UserAdminServiceImpl(UserAdminDao userAdminDao) {
+        this.userAdminDao = userAdminDao;
+    }
+
+    @Override
+    public List<UserTableResponse> getAllUsers() {
+        List<User> users = userAdminDao.findAll();
+        return UserMapper.toUserTableDto(users);
+    }
+
+    @Override
+    public List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role) {
+        return userAdminDao.findUsersByFilter(username, phone, createdAt, role);
+    }
+
+    @Override
+    public int deleteUser(int id) {
+        return userAdminDao.delete(id);
+    }
+
+    @Override
+    public int createUser(User user) {
+        return userAdminDao.create(user);
+    }
+
+    @Override
+    public int updateRole(int userId, UserRoleStatusRequest req) {
+        Role role = req.getRole();
+        BaseStatus status = req.getStatus();
+        return userAdminDao.updateRole(userId, role, status);
+    }
+
+}

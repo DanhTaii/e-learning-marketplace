@@ -20,8 +20,8 @@ import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserDetailResponse;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

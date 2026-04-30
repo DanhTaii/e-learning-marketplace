@@ -4,14 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
-import vn.edu.nlu.fit.elearning.common.external.mail.MailService;
 import vn.edu.nlu.fit.elearning.common.external.mail.SendGridService;
 import vn.edu.nlu.fit.elearning.common.helper.validator.sign_up.SignUpValidator;
 import vn.edu.nlu.fit.elearning.feature.access_token.model.AccessToken;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 import java.io.IOException;
 import java.util.Map;
 

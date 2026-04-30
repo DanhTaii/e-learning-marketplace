@@ -86,10 +86,14 @@ import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
-import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
+import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDao;
+import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDao;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
@@ -107,10 +111,15 @@ public class BeanContainer {
         beans.put(AccessTokenService.class, new AccessTokenServiceImpl(accessTokenDao));
 
         UserDao userDao = new UserDaoImpl();
-        beans.put(UserService.class, new UserServiceImpl(userDao));
+        UserAdminDao userAdminDao = new UserAdminDaoImpl();
+
+        UserAdminService userAdminService = new UserAdminServiceImpl(userAdminDao);
+        beans.put(UserAdminService.class, userAdminService);
+
+        beans.put(UserService.class, new UserServiceImpl(userDao, userAdminDao));
 
         UserServiceImpl userService = (UserServiceImpl) beans.get(UserService.class);
-        beans.put(AuthService.class, new AuthServiceImpl(userService));
+        beans.put(AuthService.class, new AuthServiceImpl(userService, userAdminService));
 
         CategoryDao categoryDao = new CategoryDaoImpl();
         beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
@@ -171,6 +180,8 @@ public class BeanContainer {
 
         ContactDao contactDao = new ContactDaoImpl();
         beans.put(ContactService.class, new ContactServiceImpl(contactDao));
+
+        beans.put(UserAdminService.class, new UserAdminServiceImpl(userAdminDao));
 
     }
 

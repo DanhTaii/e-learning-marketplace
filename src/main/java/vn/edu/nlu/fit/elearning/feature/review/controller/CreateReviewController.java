@@ -6,8 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 
 import java.io.IOException;
 
