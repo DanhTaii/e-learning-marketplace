@@ -49,8 +49,16 @@
                                                 Quản lý tất cả vai trò
                                         </span>
                                         <span class="header__count">
+                                            ${listRoles.size()} vai trò
                                         </span>
                                     </div>
+                                </div>
+                                <div class="admin-create__buttons">
+                                    <button type="button" class="dark-button">
+                                        <a href="admin/super/role/detail" class="admin-create-link">
+                                            <i class="fa-solid fa-plus"></i>Tạo mới
+                                        </a>
+                                    </button>
                                 </div>
                             </div>
                             <div class="container-2__body">

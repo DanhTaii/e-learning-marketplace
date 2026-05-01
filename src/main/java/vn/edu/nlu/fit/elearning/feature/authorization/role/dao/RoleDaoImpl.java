@@ -7,17 +7,16 @@ import vn.edu.nlu.fit.elearning.feature.authorization.role.model.Role;
 
 import java.util.List;
 
-public class RoleDaoImpl extends BaseDao implements BaseCrudDao<Role, Integer>, RoleDao {
-
+public class RoleDaoImpl extends BaseDao implements RoleDao {
 
     @Override
-    public int create(Role entity) {
-        String sql = "INSERT INTO roles (name, description) VALUES (:name, :description)";
+    public int create(Role role) {
+        String sql = "INSERT INTO roles(name, description) VALUES (:name, :description)";
 
         return getJdbi().withHandle(handle ->
                 handle.createUpdate(sql)
-                        .bind("name", entity.getName())
-                        .bind("description", entity.getDescription())
+                        .bind("name", role.getName())
+                        .bind("description", role.getDescription())
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(Integer.class)
                         .one()
@@ -25,7 +24,7 @@ public class RoleDaoImpl extends BaseDao implements BaseCrudDao<Role, Integer>, 
     }
 
     @Override
-    public Role findById(Integer id) {
+    public Role findById(int id) {
         String sql = "SELECT id, name, description, created_at FROM roles WHERE id = :id";
 
         return getJdbi().withHandle(handle ->
@@ -39,7 +38,7 @@ public class RoleDaoImpl extends BaseDao implements BaseCrudDao<Role, Integer>, 
 
     @Override
     public List<Role> findAll() {
-        String sql = "SELECT id, name, description, created_at FROM roles";
+        String sql = "SELECT id, name, description, created_at FROM roles ORDER BY created_at DESC";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
@@ -49,20 +48,20 @@ public class RoleDaoImpl extends BaseDao implements BaseCrudDao<Role, Integer>, 
     }
 
     @Override
-    public int update(Role entity) {
+    public int update(Role role) {
         String sql = "UPDATE roles SET name = :name, description = :description WHERE id = :id";
 
         return getJdbi().withHandle(handle ->
                 handle.createUpdate(sql)
-                        .bind("id", entity.getId())
-                        .bind("name", entity.getName())
-                        .bind("description", entity.getDescription())
+                        .bind("id", role.getId())
+                        .bind("name", role.getName())
+                        .bind("description", role.getDescription())
                         .execute()
         );
     }
 
     @Override
-    public int delete(Integer id) {
+    public int delete(int id) {
         String sql = "DELETE FROM roles WHERE id = :id";
 
         return getJdbi().withHandle(handle ->
@@ -124,8 +123,7 @@ public class RoleDaoImpl extends BaseDao implements BaseCrudDao<Role, Integer>, 
 
     @Override
     public void insertRolePermissions(int roleId, List<Integer> permissionIds) {
-
-        String sql = "INSERT INTO role_permissions (role_id, permission_id) VALUES (:roleId, :permissionId)";
+        String sql = "INSERT INTO role_permissions(role_id, permission_id) VALUES (:roleId, :permissionId)";
 
         getJdbi().useHandle(handle -> {
             for (Integer pid : permissionIds) {

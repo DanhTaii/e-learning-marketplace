@@ -48,7 +48,7 @@
 
                     <!-- FORM -->
                     <div class="form-container">
-                        <form action="admin/role/detail" method="post" class="form-modern">
+                        <form action="admin/super/role/detail" method="post" class="form-modern">
 
                             <input type="hidden" name="id"
                                    value="${role != null ? role.id : ''}"/>
@@ -64,7 +64,9 @@
                                            placeholder="Ví dụ: ADMIN, MODERATOR"
                                            required>
 
-                                    <span class="error-client">${errors.name}</span>
+                                    <span class="error-client" id="error_name">
+                                        ${errors.name}
+                                    </span>
                                 </div>
 
                                 <div class="form-group mt-3">
@@ -73,6 +75,9 @@
                                               class="input-modern"
                                               rows="3"
                                               placeholder="Nhập mô tả...">${role != null ? role.description : ''}</textarea>
+                                    <span class="error-client" id="error_description">
+                                        ${errors.description}
+                                    </span>
                                 </div>
 
                                 <div class="form-group mt-4">
@@ -141,4 +146,8 @@
 </div>
 
 </body>
+<script src="assets/javascript/admin/role/role-create.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/validation/admin/category-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

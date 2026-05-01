@@ -23,21 +23,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        try {
-            return roleDao.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return List.of();
-        }
-    }
-
-    @Override
-    public Role getRoleById(int id) {
-        return roleDao.findById(id);
-    }
-
-    @Override
     public void updateRole(Role role) {
         roleDao.update(role);
     }
@@ -48,13 +33,23 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Role getRoleById(int id) {
+        return roleDao.findById(id);
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleDao.findAll();
+    }
+
+    @Override
     public boolean existsByName(String name) {
         return roleDao.existsByName(name);
     }
 
     @Override
-    public boolean existsByNameExcludeId(String name, int excludeId) {
-        return roleDao.existsByNameExcludeId(name, excludeId);
+    public boolean existsByNameExcludeId(String name, int id) {
+        return roleDao.existsByNameExcludeId(name, id);
     }
 
     @Override
@@ -65,8 +60,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void updateRolePermissions(int roleId, Set<Integer> permissionIds) {
 
+        // xóa hết cũ
         roleDao.deletePermissionsByRoleId(roleId);
 
+        // thêm lại
         if (permissionIds != null && !permissionIds.isEmpty()) {
             roleDao.insertRolePermissions(roleId, new ArrayList<>(permissionIds));
         }

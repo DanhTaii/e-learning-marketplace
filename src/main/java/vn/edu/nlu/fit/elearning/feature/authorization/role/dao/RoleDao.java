@@ -9,13 +9,13 @@ public interface RoleDao {
 
     int create(Role role);
 
-    Role findById(Integer id);
+    Role findById(int id);
 
     List<Role> findAll();
 
     int update(Role role);
 
-    int delete(Integer id);
+    int delete(int id);
 
     boolean existsByName(String name);
 

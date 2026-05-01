@@ -10,17 +10,17 @@ public interface RoleService {
 
     int createRole(Role role);
 
-    Role getRoleById(int id);
-
-    List<Role> getAllRoles();
-
     void updateRole(Role role);
 
     void deleteRole(int id);
 
+    Role getRoleById(int id);
+
+    List<Role> getAllRoles();
+
     boolean existsByName(String name);
 
-    boolean existsByNameExcludeId(String name, int excludeId);
+    boolean existsByNameExcludeId(String name, int id);
 
     Set<Integer> getPermissionIdsByRoleId(int roleId);
 
