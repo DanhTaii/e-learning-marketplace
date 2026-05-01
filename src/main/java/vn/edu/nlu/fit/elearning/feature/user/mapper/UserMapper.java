@@ -1,10 +1,10 @@
 package vn.edu.nlu.fit.elearning.feature.user.mapper;
 
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserDetailResponse;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserProfileResponse;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserTableResponse;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserDetailResponse;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserProfileResponse;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserTableResponse;
+import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

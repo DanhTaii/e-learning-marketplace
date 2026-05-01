@@ -2,20 +2,25 @@ package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-import vn.edu.nlu.fit.elearning.common.utils.validation.ValidationUtils;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
-import vn.edu.nlu.fit.elearning.feature.user.dto.response.UserShortResponse;
+import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
+import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
-import vn.edu.nlu.fit.elearning.feature.user.model.User;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
 import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
 
+import java.util.Set;
+
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
+    private final UserAdminService userAdminService;
 
-    public AuthServiceImpl(UserService userService) {
+    public AuthServiceImpl(UserService userService, UserAdminService userAdminService) {
         this.userService = userService;
+        this.userAdminService = userAdminService;
     }
 
     @Override
@@ -61,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
             user.setPassword("");
 
             // Lưu vào database và lấy lại ID vừa tạo
-            userService.createUser(user);
+            userAdminService.createUser(user);
         } else {
             // 3. Nếu ĐÃ CÓ: Cập nhật lại ảnh đại diện hoặc tên nếu Google có thay đổi
             user.setAvatarUrl(googleUser.getPicture());
@@ -86,7 +91,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(hashPass);
-        return userService.createUser(user) > 0;
+        return userAdminService.createUser(user) > 0;
     }
 
     @Override
@@ -122,5 +127,16 @@ public class AuthServiceImpl implements AuthService {
 
         return userService.changePasswordByEmail(newHashPassword, userMail) == 1;
     }
+
+    @Override
+    public Set<String> getUserPermissions(Integer userId){
+        return userService.getPermissionsByUserId(userId);
+    }
+
+    @Override
+    public Set<String> getUserRoles(Integer userId){
+        return userService.getRolesByUserId(userId);
+    }
+
 
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tạo / Cập nhật Role</title>
+    <title>Tạo / Cập nhật vai trò</title>
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Layout Admin --%>
@@ -38,7 +38,7 @@
                     <!-- HEADER -->
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            ${(not empty role and role.id > 0) ? 'Cập nhật Role' : 'Tạo mới Role'}
+                            ${(not empty role and role.id > 0) ? 'Cập nhật vai trò' : 'Tạo mới vai trò'}
                         </h2>
 
                         <a href="admin/super/roles" class="btn-back">
@@ -48,7 +48,7 @@
 
                     <!-- FORM -->
                     <div class="form-container">
-                        <form action="admin/role/detail" method="post" class="form-modern">
+                        <form action="admin/super/role/detail" method="post" class="form-modern">
 
                             <input type="hidden" name="id"
                                    value="${role != null ? role.id : ''}"/>
@@ -64,7 +64,9 @@
                                            placeholder="Ví dụ: ADMIN, MODERATOR"
                                            required>
 
-                                    <span class="error-client">${errors.name}</span>
+                                    <span class="error-client" id="error_name">
+                                        ${errors.name}
+                                    </span>
                                 </div>
 
                                 <div class="form-group mt-3">
@@ -73,42 +75,49 @@
                                               class="input-modern"
                                               rows="3"
                                               placeholder="Nhập mô tả...">${role != null ? role.description : ''}</textarea>
+                                    <span class="error-client" id="error_description">
+                                        ${errors.description}
+                                    </span>
                                 </div>
 
                                 <div class="form-group mt-4">
-                                    <label class="label-style text-big">Phân quyền</label>
+                                    <label class="label-style text-big">Tất cả quyền</label>
 
-                                    <div class="permission-group-wrapper">
+                                    <div class="permission-grid">
 
                                         <c:forEach var="group" items="${permissionGroups}">
+                                            <div class="permission-card">
 
-                                            <div class="permission-group">
+                                                <div class="permission-card-header">
+                                                    <span class="permission-card-title">${group.key}</span>
+                                                    <a href="#" class="select-all">Select All</a>
+                                                </div>
 
-                                                <h4 class="permission-group-title">
-                                                        ${group.key}
-                                                </h4>
-
-                                                <div class="permission-list">
+                                                <div class="permission-card-body">
 
                                                     <c:forEach var="perm" items="${group.value}">
-                                                        <label class="permission-item">
+                                                        <label class="permission-row">
+
+                                                            <div class="permission-info">
+                                                                <span class="permission-name">${perm.name}</span>
+                                                                <span class="permission-desc">${perm.description}</span>
+                                                            </div>
 
                                                             <input type="checkbox"
                                                                    name="permissionIds"
                                                                    value="${perm.id}"
-
+                                                                   class="permission-checkbox"
                                                                     <c:if test="${selectedPermissions.contains(perm.id)}">
                                                                         checked
                                                                     </c:if>
                                                             />
 
-                                                                ${perm.name}
                                                         </label>
                                                     </c:forEach>
 
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </c:forEach>
 
                                     </div>
@@ -137,4 +146,8 @@
 </div>
 
 </body>
+<script src="assets/javascript/admin/role/role-create.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/validation/admin/category-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

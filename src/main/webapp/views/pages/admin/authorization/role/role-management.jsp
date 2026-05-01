@@ -49,13 +49,37 @@
                                                 Quản lý tất cả vai trò
                                         </span>
                                         <span class="header__count">
+                                            ${listRoles.size()} vai trò
                                         </span>
                                     </div>
+                                </div>
+                                <div class="admin-create__buttons">
+                                    <button type="button" class="dark-button">
+                                        <a href="admin/super/role/detail" class="admin-create-link">
+                                            <i class="fa-solid fa-plus"></i>Tạo mới
+                                        </a>
+                                    </button>
                                 </div>
                             </div>
                             <div class="container-2__body">
                                 <form method="get" action="admin/super/roles" class="advanced-filter" id="filterForm">
 
+                                    <script>
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
+                                    <div class="filter-header" onclick="toggleFilter()">
+                                        <h2 class="filter-title">
+                                            <i class="fa-solid fa-filter"></i>
+                                            Bộ lọc nâng cao
+                                        </h2>
+                                        <div class="filter-toggle-icon" id="toggleIcon">
+                                            <i class="fa-solid fa-sliders"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter-content" id="filterContent">
                                     <div class="filter-grid">
 
                                         <div class="filter-group">
@@ -105,7 +129,7 @@
                                             Áp dụng bộ lọc
                                         </button>
                                     </div>
-
+                                    </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/roles">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">

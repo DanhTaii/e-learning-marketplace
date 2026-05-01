@@ -101,7 +101,7 @@
                     <div class="menu-item__student ${currentPage == 'roles' ? 'student-list' : ''}">
                                         <span class="container-1__menu-items menu-item__order">
 
-                                            <i class="fa-solid fa-credit-card"></i>
+                                            <i class="fa-solid fa-user-shield"></i>
                                             <span>Vai trò</span>
                                         </span>
                     </div>

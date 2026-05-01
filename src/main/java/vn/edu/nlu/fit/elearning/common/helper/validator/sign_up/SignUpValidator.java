@@ -1,6 +1,6 @@
 package vn.edu.nlu.fit.elearning.common.helper.validator.sign_up;
 
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;

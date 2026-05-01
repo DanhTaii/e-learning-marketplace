@@ -22,14 +22,14 @@ import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDao;
 import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.contact.service.ContactService;
 import vn.edu.nlu.fit.elearning.feature.contact.service.ContactServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
-import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
-import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
-import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
-import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
+//import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDao;
+//import vn.edu.nlu.fit.elearning.feature.course.dao.CourseDaoImpl;
+//import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDao;
+//import vn.edu.nlu.fit.elearning.feature.course_user.dao.CourseSearchDaoImpl;
+//import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchService;
+//import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchServiceImpl;
+//import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
+//import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDao;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
@@ -70,26 +70,30 @@ import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDao;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDao;
-import vn.edu.nlu.fit.elearning.feature.permission.dao.PermissionDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionService;
-import vn.edu.nlu.fit.elearning.feature.permission.service.PermissionServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.dao.PermissionDao;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.dao.PermissionDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.service.PermissionService;
+import vn.edu.nlu.fit.elearning.feature.authorization.permission.service.PermissionServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDao;
 import vn.edu.nlu.fit.elearning.feature.review.dao.ReviewDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDao;
-import vn.edu.nlu.fit.elearning.feature.role.dao.RoleDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.role.service.RoleService;
-import vn.edu.nlu.fit.elearning.feature.role.service.RoleServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.dao.RoleDao;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.dao.RoleDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.service.RoleService;
+import vn.edu.nlu.fit.elearning.feature.authorization.role.service.RoleServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
 import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.user.dao.UserDao;
-import vn.edu.nlu.fit.elearning.feature.user.dao.UserDaoImpl;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserService;
-import vn.edu.nlu.fit.elearning.feature.user.service.UserServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
+import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDao;
+import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.user.student.service.UserServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDao;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
@@ -107,10 +111,15 @@ public class BeanContainer {
         beans.put(AccessTokenService.class, new AccessTokenServiceImpl(accessTokenDao));
 
         UserDao userDao = new UserDaoImpl();
-        beans.put(UserService.class, new UserServiceImpl(userDao));
+        UserAdminDao userAdminDao = new UserAdminDaoImpl();
+
+        UserAdminService userAdminService = new UserAdminServiceImpl(userAdminDao);
+        beans.put(UserAdminService.class, userAdminService);
+
+        beans.put(UserService.class, new UserServiceImpl(userDao, userAdminDao));
 
         UserServiceImpl userService = (UserServiceImpl) beans.get(UserService.class);
-        beans.put(AuthService.class, new AuthServiceImpl(userService));
+        beans.put(AuthService.class, new AuthServiceImpl(userService, userAdminService));
 
         CategoryDao categoryDao = new CategoryDaoImpl();
         beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
@@ -121,8 +130,8 @@ public class BeanContainer {
         CourseDao courseDao = new CourseDaoImpl();
         beans.put(CourseService.class, new CourseServiceImpl(courseDao));
 
-        CourseSearchDao courseSearchDao = new CourseSearchDaoImpl();
-        beans.put(CourseSearchService.class, new CourseSearchServiceImpl(courseSearchDao));
+//        CourseSearchDao courseSearchDao = new CourseSearchDaoImpl();
+//        beans.put(CourseSearchService.class, new CourseSearchServiceImpl(courseSearchDao));
 
         CourseTagDao courseTagDao = new CourseTagDaoImpl();
         beans.put(CourseTagService.class, new CourseTagServiceImpl(courseTagDao));
@@ -171,6 +180,8 @@ public class BeanContainer {
 
         ContactDao contactDao = new ContactDaoImpl();
         beans.put(ContactService.class, new ContactServiceImpl(contactDao));
+
+        beans.put(UserAdminService.class, new UserAdminServiceImpl(userAdminDao));
 
     }
 

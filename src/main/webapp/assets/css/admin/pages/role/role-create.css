@@ -1,20 +1,72 @@
-.permission-group-title{
-    font-size: var(--text-xl);
+.permission-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
-.permission-item{
+
+.permission-card{
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.permission-card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.permission-card-title{
     font-size: var(--text-lg);
+    font-weight: 600;
+}
+
+.select-all{
+    font-size: var(--text-sm);
+    color: #3b82f6;
+    cursor: pointer;
+}
+
+.permission-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+
+    background: #f8fafc;
+    cursor: pointer;
+}
+
+.permission-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.permission-name{
+    font-size: var(--text-base);
+    font-weight: 500;
+}
+
+.permission-desc{
+    font-size: var(--text-sm);
+    color: #888;
+}
+
+.permission-checkbox{
+    width: 18px;
+    height: 18px;
+}
+
+.btn-cancel-modern {
     margin-right: 2rem;
 }
-.permission-list{
-    display: flex;
-    align-items: center;
-}
 
-.form-actions.mt-4.fix{
+.form-actions{
     display: flex;
-    justify-content: flex-start;
-}
-
-.btn-submit-modern{
-    margin-left: 2rem;
+    justify-content: flex-start; !important;
 }
