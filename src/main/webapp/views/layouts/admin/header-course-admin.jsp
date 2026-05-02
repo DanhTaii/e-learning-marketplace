@@ -8,7 +8,7 @@
 
         <a href="admin/courses">
             <div class="brand">
-                <span class="brand-name">KHÓA HỌC</span>
+                <span class="brand-name">Intellect</span>
             </div>
         </a>
 
