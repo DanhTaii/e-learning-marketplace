@@ -43,3 +43,11 @@
     margin-top: 2rem;
     gap: 5rem;
 }
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
