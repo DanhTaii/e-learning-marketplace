@@ -228,7 +228,7 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
     @Override
     public int countAllLessons() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT COUNT(*) FROM lessons")
+            return handle.createQuery("SELECT COUNT(*) FROM lessons WHERE is_deleted = 0")
                     .mapTo(Integer.class)
                     .one();
         });

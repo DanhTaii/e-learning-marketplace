@@ -174,11 +174,13 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
             params.put("level", filter.getLevel());
         }
 
+        //Bắt đầu từ ngày
         if (filter.getFromDate() != null) {
             conditionalSentence.append(" AND c.created_at >= :fromDate");
             params.put("fromDate", filter.getFromDate());
         }
 
+        //Đến ngày
         if (filter.getToDate() != null) {
             conditionalSentence.append(" AND c.created_at <= :toDate");
             params.put("toDate", filter.getToDate());
@@ -188,13 +190,6 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
         if ("under500".equals(filter.getPriceRange())) {
             conditionalSentence.append(" AND (c.price - COALESCE(c.discount_price, 0)) < 500000");
         }
-
-        // Thời lượng (Sử dụng HAVING vì duration_hours là hàm tổng hợp)
-//        if (filter.getDuration() != null && !filter.getDuration().isEmpty()) {
-//            if ("short".equals(filter.getDuration())) {
-//                conditionalSentence.append(" HAVING duration_hours < 5");
-//            }
-//        }
 
         conditionalSentence.append(" AND c.is_deleted = 0");
 
@@ -250,15 +245,25 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
 
     @Override
     public int archiveByIds(List<Integer> ids, String deleteReason) {
-        return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("UPDATE courses " +
-                            "SET deleted_at = CASE WHEN is_deleted = 0 THEN NOW() ELSE NULL END, " +
-                            "is_deleted = 1 - is_deleted, " +
-                            "delete_reason = :deleteReason " +
-                            "WHERE id IN (<ids>)")
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().inTransaction(handle -> {
+            int updatedCount = handle.createUpdate(
+                            "UPDATE courses SET is_deleted = 1, deleted_at = NOW(), delete_reason = :reason " +
+                                    "WHERE id IN (<ids>) AND is_deleted = 0")
                     .bindList("ids", ids)
-                    .bind("deleteReason", deleteReason)
+                    .bind("reason", deleteReason)
                     .execute();
+
+            if (updatedCount > 0) {
+                handle.createUpdate(
+                                "UPDATE lessons SET is_deleted = 1, deleted_at = NOW(), delete_reason = :reason " +
+                                        "WHERE course_id IN (<ids>) AND is_deleted = 0")
+                        .bindList("ids", ids)
+                        .bind("reason", deleteReason)
+                        .execute();
+            }
+            return updatedCount;
         });
     }
 

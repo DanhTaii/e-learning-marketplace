@@ -1,3 +1,230 @@
+/* ===== GLOBAL ===== */
+body {
+    background: #f5f7fb;
+    font-size: 14px;
+    color: #1c1d1f;
+}
+
+h2, h3, h4 {
+    margin: 0;
+}
+
+/* ===== HEADER ===== */
+.course-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 10px;
+}
+
+.course-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #6a6f73;
+}
+
+/* BUTTON */
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-draft {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid #d1d7dc;
+    background: #fff;
+    cursor: pointer;
+}
+
+.btn-publish {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    background: #1c1d1f;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ===== LAYOUT ===== */
+.course-editor-body {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+/* ===== SIDEBAR ===== */
+.curriculum-sidebar {
+    width: 300px;
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #e4e6eb;
+}
+
+.curriculum-sidebar h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.section-item {
+    margin-bottom: 15px;
+}
+
+.section-header {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.lesson-list {
+    margin-left: 10px;
+}
+
+.lesson-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.lesson-item:hover {
+    background: #f0f4ff;
+}
+
+.lesson-item.active {
+    background: #e7f0ff;
+    color: #0b5cff;
+    font-weight: 600;
+}
+
+/* ADD BUTTON */
+.btn-add {
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+    border: 1px dashed #c0c4cc;
+    background: #fafafa;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-add:hover {
+    background: #f0f0f0;
+}
+
+/* ===== EDITOR ===== */
+.lesson-editor {
+    flex: 1;
+    border: 1px solid #e4e6eb;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* HEADER EDITOR */
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.editor-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* SWITCH */
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+/* ===== FORM ===== */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #6a6f73;
+}
+
+/* INPUT */
+.input-modern {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d7dc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.input-modern:focus {
+    border-color: #5624d0;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(86, 36, 208, 0.1);
+}
+
+/* TEXTAREA */
+.textarea-large {
+    min-height: 120px;
+    padding: 10px;
+}
+
+/* VIDEO */
+.video-preview iframe {
+    width: 100%;
+    height: 320px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* ===== ACTION ===== */
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit-modern {
+    background: #002333;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-submit-modern:hover {
+    background: #004e64;
+}
+
 .video-source-tabs {
     display: flex;
     gap: 10px;

@@ -1,0 +1,124 @@
+/* --- TỔNG THỂ HEADER --- */
+.admin-header-modern {
+    height: 64px;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+/* --- PHẦN BÊN TRÁI (LOGO & TABS) --- */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    height: 100%;
+}
+
+.brand-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+/* --- MENU TABS --- */
+.header-tabs {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    height: 100%;
+}
+
+.tab-item {
+    font-size: var(--text-3xl);
+    color: #4b5563;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 4px;
+    height: 100%;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* Icon cân đối với chữ */
+.tab-item svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.tab-item:hover {
+    color: #2563eb;
+}
+
+/* Trạng thái Active */
+.tab-item.active {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+/* Thanh line xanh dưới chân khi active */
+.tab-item.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 3px;
+    background: #2563eb;
+    border-radius: 4px 4px 0 0;
+}
+
+/* --- PHẦN BÊN PHẢI (NOTIF, AVATAR) --- */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Icon thông báo */
+.header-icon {
+    position: relative;
+    font-size: 20px;
+    color: #6b7280;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.notif-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+/* Avatar */
+.profile-avatar-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+}
+
+.profile-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
