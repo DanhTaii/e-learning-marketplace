@@ -40,6 +40,7 @@ h2, h3, h4 {
     gap: 8px;
     font-size: 13px;
     color: #6b7280;
+    margin-bottom: 8px;
 }
 
 .breadcrumb-current-tab {
@@ -47,7 +48,8 @@ h2, h3, h4 {
 }
 
 .breadcrumb a {
-    color: #6b7280;
+    color: var(--text-color);
+    font-weight: var(--fw-regular);
     text-decoration: none;
 }
 
@@ -121,22 +123,30 @@ h2, h3, h4 {
 }
 
 .lesson-item {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 8px;
-    padding: 7px 10px;
+    padding: 15px 0;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: var(--text-base);
     cursor: pointer;
+    color: #333333;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.lesson-item i {
+    font-size: 12px;
 }
 
 .lesson-item:hover {
     background: #f0f4ff;
+    color: #0b5cff;
 }
 
 .lesson-item.active {
     background: #e7f0ff;
-    color: #0b5cff;
+    color: #0b5cff !important;
     font-weight: 600;
 }
 

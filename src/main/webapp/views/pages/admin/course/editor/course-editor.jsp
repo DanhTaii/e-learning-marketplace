@@ -31,7 +31,7 @@
         <div class="grid">
             <jsp:include page="/views/layouts/admin/header-course-admin.jsp"/>
 
-            <form class="body__container">
+            <div class="body__container">
                 <div class="course-editor-header">
                     <div class="sub-header-left">
                         <div class="breadcrumb">
@@ -56,15 +56,15 @@
                                 <i class="fa-solid fa-floppy-disk"></i>
                                 ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
                             </button>
-                        </div>
 
-                        <c:if test="${lesson != null and lesson.id > 0}">
-                            <button type="button" class="btn-delete-modern"
-                                    onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Xóa bài học
-                            </button>
-                        </c:if>
+                            <c:if test="${lesson != null and lesson.id > 0}">
+                                <button type="button" class="btn-delete-modern"
+                                        onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    Xóa bài học
+                                </button>
+                            </c:if>
+                        </div>
                     </div>
                 </div>
 
@@ -82,7 +82,7 @@
                         <jsp:include page="/views/pages/admin/course/editor/setting.jsp"/>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -93,4 +93,7 @@
 <script src="assets/javascript/validation/form-create-course-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/admin/create-course-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/course/course-editor.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </html>

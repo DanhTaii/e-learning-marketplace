@@ -7,24 +7,18 @@
     <div class="curriculum-sidebar">
         <h4>Course Content</h4>
 
-        <c:forEach var="section" items="${sections}">
-            <div class="section-item">
-                <div class="section-header">
-                    <span>${section.title}</span>
-                </div>
+        <div class="lesson-list">
+            <c:forEach var="l" items="${lessons}">
+                <!-- Đã bỏ style inline -->
+                <a href="admin/course/detail?id=${course.id}&lessonId=${l.id}"
+                   class="lesson-item ${lesson != null && lesson.id == l.id ? 'active' : ''}">
+                    <i class="fa-solid fa-play"></i>
+                        ${l.title}
+                </a>
+            </c:forEach>
+        </div>
 
-                <div class="lesson-list">
-                    <c:forEach var="l" items="${section.lessons}">
-                        <div class="lesson-item ${lesson.id == l.id ? 'active' : ''}">
-                            <i class="fa-solid fa-play"></i>
-                                ${l.title}
-                        </div>
-                    </c:forEach>
-                </div>
-            </div>
-        </c:forEach>
-
-        <button class="btn-add">+ Add Section</button>
+        <button class="btn-add">+ Thêm bài học</button>
     </div>
 
     <!-- RIGHT: LESSON EDITOR -->
@@ -32,6 +26,10 @@
 
         <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
               enctype="multipart/form-data">
+
+            <input type="hidden" name="courseId" value="${course.id}">
+            <input type="hidden" name="lessonId" value="${lesson.id}">
+
             <c:if test="${lesson != null}">
                 <input type="hidden" name="id" value="${lesson.id}"/>
                 <input type="hidden" name="oldOrderIndex" value="${lesson.orderIndex}"/>
@@ -39,29 +37,6 @@
             </c:if>
 
             <div class="lesson-create-card">
-                <div class="form-row">
-                    <div class="form-group flex-2">
-                        <label class="label-style">Khóa học mục tiêu</label>
-                        <select class="input-modern" name="idCourse" id="selectCourse">
-                            <option value="0">--- Chọn khóa học ---</option>
-                            <c:forEach var="c" items="${listCourse}">
-                                <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : param.idCourse}>${c.title}</option>
-                            </c:forEach>
-                        </select>
-
-                        <span class="error-client" id="error_idCourse">${errors.idCourse}</span>
-                    </div>
-                    <div class="form-group flex-1">
-                        <label class="label-style">Thứ tự bài học</label>
-                        <input type="number" name="orderIndex" class="input-modern" id="orderIndex"
-                               value="${lesson != null ? lesson.orderIndex : param.orderIndex}"
-                               placeholder="Ví dụ: 1">
-                        <span class="error-client" id="error_orderIndex">
-                            ${errors.orderIndex}
-                        </span>
-                    </div>
-                </div>
-
                 <div class="form-row mt-3">
                     <div class="form-group flex-2">
                         <label class="label-style">Tiêu đề bài học</label>

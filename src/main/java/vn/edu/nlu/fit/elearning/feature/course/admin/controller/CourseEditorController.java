@@ -12,21 +12,25 @@ import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
+import vn.edu.nlu.fit.elearning.feature.lesson.model.Lesson;
+import vn.edu.nlu.fit.elearning.feature.lesson.service.LessonService;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.tag.service.TagService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 @WebServlet(name = "CourseEditorController", value = "/admin/course/editor")
 public class CourseEditorController extends BaseController {
-
     private CourseAdminService cs;
     private TagService tagService;
     private CategoryService ICategoryService;
     private CourseTagService courseTagService;
     private CourseAdminService courseAdminServiceImpl;
+    private transient LessonService lessonService;
+    private static final Logger logger = Logger.getLogger(CourseAdminDetailController.class.getName());
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -36,34 +40,44 @@ public class CourseEditorController extends BaseController {
         this.tagService = BeanContainer.getBean(TagService.class);
         this.courseTagService = BeanContainer.getBean(CourseTagService.class);
         this.courseAdminServiceImpl = BeanContainer.getBean(CourseAdminService.class);
+        this.lessonService = BeanContainer.getBean(LessonService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idStr = request.getParameter("id");
-        // Luôn lấy Categories và Tags để hiển thị danh sách lựa chọn (Dù tạo hay sửa)
-        List<Category> categoryList = ICategoryService.getAllCategories();
-        List<Tag> tagList = tagService.getAllTags();
+        try {
+            // Luôn lấy Categories và Tags để hiển thị danh sách lựa chọn (Dù tạo hay sửa)
+            List<Category> categoryList = ICategoryService.getAllCategories();
+            List<Tag> tagList = tagService.getAllTags();
 
-        request.setAttribute("categories", categoryList);
-        request.setAttribute("tags", tagList);
+            request.setAttribute("categories", categoryList);
+            request.setAttribute("tags", tagList);
 
-        if (idStr != null && !idStr.trim().isEmpty()) {
-            try {
-                int id = Integer.parseInt(idStr);
-                Course c = cs.getCourseById(id);
-                // Lấy thêm danh sách ID các tag mà khóa học này ĐÃ CÓ (để check vào checkbox)
-                List<Integer> tagIdList = courseTagService.getAllTagIdByCourseId(id);
+            int id = RequestUtils.getParameterAsInt(request, "id", 0);
+            Course c = cs.getCourseById(id);
+            // Lấy thêm danh sách ID các tag mà khóa học này ĐÃ CÓ (để check vào checkbox)
+            List<Integer> tagIdList = courseTagService.getAllTagIdByCourseId(id);
+            List<Lesson> lessons = lessonService.getLessonsByCourseId(id);
 
-                request.setAttribute("course", c);
-                request.setAttribute("courseTagIdList", tagIdList);
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            int lessonId = RequestUtils.getParameterAsInt(request, "lessonId", 0);
+            Lesson currentLesson = null;
+            if (lessonId > 0) {
+                currentLesson = lessonService.getLessonById(lessonId);
+            } else if (!lessons.isEmpty()) {
+                currentLesson = lessons.getFirst();
             }
+
+            request.setAttribute("lessons", lessons);
+            request.setAttribute("lesson", currentLesson);
+            request.setAttribute("course", c);
+            request.setAttribute("courseTagIdList", tagIdList);
+
+            request.getRequestDispatcher("/views/pages/admin/course/editor/course-editor.jsp").forward(request, response);
+        } catch (Exception e) {
+            logger.severe("Error in CourseAdminDetailController: " + e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request.");
+            return;
         }
-        request.setAttribute("activeTab", "overview");
-        request.getRequestDispatcher("/views/pages/admin/course/editor/course-editor.jsp").forward(request, response);
     }
 
     @Override
