@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<input type="hidden" id="newTotalCount" >
+<input type="hidden" id="newTotalCount">
 
 <div class="container-2__list-student">
     <table class="modern-table">
@@ -10,6 +10,10 @@
             <th><input type="checkbox" id="selectAll"></th>
             <th>TÊN VAI TRÒ</th>
             <th>MÔ TẢ</th>
+            <th style=".modern-table th:nth-child(4) {
+    width: 15%;
+}">TRẠNG THÁI
+            </th>
             <th>NGÀY TẠO</th>
             <th>THAO TÁC</th>
         </tr>

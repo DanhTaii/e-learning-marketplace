@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.validator.role.RoleValidator;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 
@@ -79,6 +80,11 @@ public class RoleDetailController extends BaseController {
             role.setName(request.getParameter("name"));
             role.setDescription(request.getParameter("description"));
             String[] permissionIdsRaw = request.getParameterValues("permissionIds");
+            BaseStatus status = RequestUtils.getParameterAsStatus(request, "status");
+            if (status == null) {
+                status = BaseStatus.INACTIVE;
+            }
+            role.setStatus(status);
             Set<Integer> permissionIds = new HashSet<>();
             if (permissionIdsRaw != null) {
                 for (String pid : permissionIdsRaw) {

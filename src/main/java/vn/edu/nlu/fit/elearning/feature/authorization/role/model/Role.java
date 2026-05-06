@@ -11,16 +11,18 @@ public class Role implements Serializable {
     private String description;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private BaseStatus status;
 
     public Role() {
     }
 
-    public Role(int id, String name, String description, Timestamp createdAt, Timestamp updatedAt) {
+    public Role(int id, String name, String description, Timestamp createdAt, Timestamp updatedAt, BaseStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.status = status;
     }
 
     public int getId() {
@@ -61,6 +63,14 @@ public class Role implements Serializable {
 
     public void setUpdatedAt(Timestamp updateddAt) {
         this.updatedAt = updateddAt;
+    }
+
+    public BaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BaseStatus status) {
+        this.status = status;
     }
 
     @Override

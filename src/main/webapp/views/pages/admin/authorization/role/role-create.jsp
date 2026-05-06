@@ -92,6 +92,23 @@
                                     </span>
                                 </div>
 
+                                <div class="form-group mt-3">
+                                    <label class="label-style">Trạng thái hiển thị</label>
+                                    <select class="input-modern" name="status" required>
+                                        <option value="INACTIVE"
+                                        ${(role != null && role.status.name() == 'INACTIVE')
+                                                || param.status == 'INACTIVE' ? 'selected' : ''}>
+                                            Không hoạt động
+                                        </option>
+                                        <option value="ACTIVE"
+                                        ${(role != null && role.status.name() == 'ACTIVE')
+                                                || param.status == 'ACTIVE' ? 'selected' : ''}>
+                                            Hoạt động
+                                        </option>
+                                    </select>
+                                    <span class="error-client" id="error_status">${errors.status}</span>
+                                </div>
+
                                 <c:if test="${role != null and role.id > 0}">
                                     <div class="form-row mt-3">
                                         <div class="form-group flex-1">
