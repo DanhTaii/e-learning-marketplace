@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.authorization.role.model;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -8,15 +10,19 @@ public class Role implements Serializable {
     private String name;
     private String description;
     private Timestamp createdAt;
+    private Timestamp updatedAt;
+    private BaseStatus status;
 
     public Role() {
     }
 
-    public Role(int id, String name, String description, Timestamp createdAt) {
+    public Role(int id, String name, String description, Timestamp createdAt, Timestamp updatedAt, BaseStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
     }
 
     public int getId() {
@@ -49,6 +55,22 @@ public class Role implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updateddAt) {
+        this.updatedAt = updateddAt;
+    }
+
+    public BaseStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BaseStatus status) {
+        this.status = status;
     }
 
     @Override

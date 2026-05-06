@@ -22,6 +22,16 @@
                 <td class="text-light">
                     ${role.description}
                 </td>
+                <td>
+                    <c:choose>
+                        <c:when test="${role.status.name() == 'ACTIVE'}">
+                            <span class="badge course-row__status-public">Hoạt động</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="badge course-row-status-unactive">Không hoạt đông</span>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td class="text-light">
                     <fmt:formatDate value="${role.createdAt}" pattern="dd/MM/yyyy"/>
                 </td>
