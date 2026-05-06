@@ -25,7 +25,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 
     @Override
     public Role findById(int id) {
-        String sql = "SELECT id, name, description, created_at FROM roles WHERE id = :id";
+        String sql = "SELECT id, name, description, created_at, updated_at FROM roles WHERE id = :id";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
@@ -38,7 +38,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
 
     @Override
     public List<Role> findAll() {
-        String sql = "SELECT id, name, description, created_at FROM roles ORDER BY created_at DESC";
+        String sql = "SELECT id, name, description, created_at, updated_at FROM roles ORDER BY created_at DESC";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
@@ -139,7 +139,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
     public List<Role> findByFilter(RoleFilter filter) {
 
         StringBuilder sql = new StringBuilder("""
-        SELECT DISTINCT r.id, r.name, r.description, r.created_at
+        SELECT DISTINCT r.id, r.name, r.description, r.created_at, r.updated_at
         FROM roles r
         LEFT JOIN role_permissions rp ON r.id = rp.role_id
         WHERE 1=1

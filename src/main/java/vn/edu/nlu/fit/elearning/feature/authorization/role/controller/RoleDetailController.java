@@ -3,9 +3,12 @@ package vn.edu.nlu.fit.elearning.feature.authorization.role.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.validator.role.RoleValidator;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
+
 import vn.edu.nlu.fit.elearning.feature.authorization.role.model.Role;
 import vn.edu.nlu.fit.elearning.feature.authorization.role.service.RoleService;
 import vn.edu.nlu.fit.elearning.feature.authorization.permission.model.Permission;
@@ -40,22 +43,39 @@ public class RoleDetailController extends BaseController {
 
             request.setAttribute("permissionGroups", permissionGroups);
 
-            this.forward(request, response,
-                    "/views/pages/admin/authorization/role/role-create.jsp");
+            String idStr = request.getParameter("id");
+
+            if (idStr != null && !idStr.trim().isEmpty()) {
+
+                int id = RequestUtils.getParameterAsInt(request, "id", -1);
+                Role role = roleService.getRoleById(id);
+                if (role == null) {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy role!");
+                    return;
+                }
+
+                request.setAttribute("role", role);
+                Set<Integer> selectedPermissions =
+                        roleService.getPermissionIdsByRoleId(id);
+                request.setAttribute("selectedPermissions", selectedPermissions);
+            }
+
+            this.forward(request, response, "/views/pages/admin/authorization/role/role-create.jsp");
 
         } catch (Exception e) {
-            log("Error GET RoleCreate", e);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            log("Error GET RoleDetail", e);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi hệ thống");
         }
     }
 
-    // ===================== POST =====================
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
             Role role = new Role();
+
+            int id = RequestUtils.getParameterAsInt(request, "id", -1);
+            role.setId(id);
             role.setName(request.getParameter("name"));
             role.setDescription(request.getParameter("description"));
             String[] permissionIdsRaw = request.getParameterValues("permissionIds");
@@ -66,13 +86,10 @@ public class RoleDetailController extends BaseController {
                 }
             }
 
+            // Validate
             Map<String, String> errors = RoleValidator.validate(role);
 
-            if (role.getName() == null || role.getName().trim().isEmpty()) {
-                errors.put("name", "Tên role không được để trống!");
-            }
             if (!errors.isEmpty()) {
-
                 request.setAttribute("errors", errors);
                 request.setAttribute("role", role);
 
@@ -88,6 +105,19 @@ public class RoleDetailController extends BaseController {
                 return;
             }
 
+            if (role.getId() > 0) {
+                if (roleService.existsByNameExcludeId(role.getName(), role.getId())) {
+                    handleError(request, response, "Tên role đã tồn tại!");
+                    return;
+                }
+
+                roleService.updateRole(role);
+                roleService.updateRolePermissions(role.getId(), permissionIds);
+                request.getSession().setAttribute("flashSuccess", "Cập nhật vai trò thành công!");
+                response.sendRedirect(request.getContextPath() + "/admin/super/roles");
+                return;
+            }
+
             if (roleService.existsByName(role.getName())) {
                 handleError(request, response, "Tên role đã tồn tại!");
                 return;
@@ -96,10 +126,11 @@ public class RoleDetailController extends BaseController {
             int newRoleId = roleService.createRole(role);
             if (newRoleId > 0) {
                 roleService.updateRolePermissions(newRoleId, permissionIds);
-                request.getSession().setAttribute("flashSuccess", "Tạo role thành công!");
+
+                request.getSession().setAttribute("flashSuccess", "Tạo vai trò thành công!");
                 response.sendRedirect(request.getContextPath() + "/admin/super/roles");
             } else {
-                handleError(request, response, "Không thể tạo role!");
+                handleError(request, response, "Không thể tạo vai trò!");
             }
 
         } catch (Exception e) {

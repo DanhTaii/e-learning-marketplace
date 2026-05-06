@@ -55,6 +55,18 @@
 
                             <div class="category-create-card">
 
+                                <div class="form-actions mt-4 fix" style="display: flex; justify-content: flex-end">
+
+                                    <a href="admin/super/roles" class="btn-cancel-modern">
+                                        Hủy
+                                    </a>
+
+                                    <button type="submit" class="btn-submit-modern">
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                        ${(role != null && role.id > 0) ? 'Cập nhật' : 'Tạo Role'}
+                                    </button>
+                                </div>
+
                                 <!-- NAME -->
                                 <div class="form-group mt-3">
                                     <label class="label-style">Tên Role</label>
@@ -79,6 +91,21 @@
                                         ${errors.description}
                                     </span>
                                 </div>
+
+                                <c:if test="${role != null and role.id > 0}">
+                                    <div class="form-row mt-3">
+                                        <div class="form-group flex-1">
+                                            <label class="label-style">Ngày tạo</label>
+                                            <input type="text" class="input-modern readonly-field"
+                                                   value="${role.createdAt}" readonly>
+                                        </div>
+                                        <div class="form-group flex-1">
+                                            <label class="label-style">Cập nhật lần cuối</label>
+                                            <input type="text" class="input-modern readonly-field"
+                                                   value="${role.updatedAt}" readonly>
+                                        </div>
+                                    </div>
+                                </c:if>
 
                                 <div class="form-group mt-4">
                                     <label class="label-style text-big">Tất cả quyền</label>
