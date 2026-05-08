@@ -54,6 +54,8 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 Set<String> userRoles = authService.getUserRoles(canLogin.getId());
                 Set<String> userPermissions = authService.getUserPermissions(canLogin.getId());
+                session.setAttribute("userRoles", userRoles);
+                System.out.println("PERMISSIONS = " + userPermissions);
                 session.setAttribute("userPermissions", userPermissions);
                 session.setAttribute("userId", canLogin.getId());
                 session.setAttribute("userSession", canLogin);
