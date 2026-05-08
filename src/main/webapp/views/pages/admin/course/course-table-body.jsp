@@ -56,7 +56,7 @@
         </td>
         <td class="action__button">
             <div class="action-wrapper">
-                <a href="admin/course/detail?id=${course.id}">
+                <a href="admin/course/editor?id=${course.id}">
                     <button type="button"
                             class="icon-action-btn">
                         <i class="fa-solid fa-pen"></i>

@@ -142,4 +142,22 @@ public class Lesson implements Serializable {
     public void setDeleteReason(String deleteReason) {
         this.deleteReason = deleteReason;
     }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", courseId=" + courseId +
+                ", title='" + title + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", durationMinutes=" + durationMinutes +
+                ", orderIndex=" + orderIndex +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", isDeleted=" + isDeleted +
+                ", deletedAt=" + deletedAt +
+                ", deleteReason='" + deleteReason + '\'' +
+                '}';
+    }
 }

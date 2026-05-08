@@ -43,3 +43,30 @@
     margin-top: 2rem;
     gap: 5rem;
 }
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.btn-back-course {
+    text-decoration: none;
+    background: #fff;
+    color: var(--dark-blue);
+     padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-weight: var(--fw-bold);
+}
+
+.btn-back-course i {
+    font-size: 16px;
+}
+
+.btn-back-course:hover {
+    background: var(--dark-blue);
+    color: #fff;
+}

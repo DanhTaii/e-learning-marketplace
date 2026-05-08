@@ -61,7 +61,7 @@
                                         <span>Kho lưu trữ</span>
                                     </a>
                                     <button type="button" class="dark-button">
-                                        <a href="admin/course/detail">
+                                        <a href="admin/course/editor">
                                             <i class="fa-solid fa-plus"></i>Tạo mới
                                         </a>
                                     </button>

@@ -166,7 +166,6 @@
                                         Trình duyệt của bạn không hỗ trợ xem video.
                                     </video>
                                 </div>
-
                                 <div class="form-actions mt-4">
                                     <div style="display: flex; gap: 10px; flex: 1;">
                                         <a href="admin/lessons" class="btn-cancel-modern"
@@ -182,7 +181,7 @@
 
                                     <c:if test="${lesson != null and lesson.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
+                                                onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/action', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa bài học
                                         </button>
