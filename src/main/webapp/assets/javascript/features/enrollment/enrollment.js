@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
             titleDisplay.innerText = lessonTitle + (finalUrl ? "" : " (Chưa có video)");
 
             // Hiệu ứng Active
-            lessonItems.forEach(li => li.style.background = 'var(--dark-blue)');
-            this.style.background = '#3d5a80';
+            lessonItems.forEach(li => li.classList.remove('active-lesson'));
+            this.classList.add('active-lesson');
         });
     });
 

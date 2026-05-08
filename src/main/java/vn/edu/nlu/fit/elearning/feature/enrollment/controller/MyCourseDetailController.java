@@ -47,7 +47,7 @@ public class MyCourseDetailController extends HttpServlet {
         enrollmentDetail.setListLesson(listLessons);
 
         request.setAttribute("enrollmentDetail", enrollmentDetail);
-        request.getRequestDispatcher("/views/pages/personal/course/course-content.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/personal/course/enrollment/id/course-content.jsp").forward(request, response);
     }
 
     @Override
