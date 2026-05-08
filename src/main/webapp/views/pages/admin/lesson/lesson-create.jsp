@@ -8,14 +8,13 @@
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Layout Admin --%>
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/header-course-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-create.css?v=<%=System.currentTimeMillis()%>">
 
     <%-- Base & Notification--%>
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
 
@@ -29,75 +28,21 @@
 <div class="web">
     <div class="web__container">
         <div class="grid">
-            <jsp:include page="/views/layouts/admin/header-course-admin.jsp"/>
+            <div class="grid__row-2">
 
-            <div class="body__container">
-                <!-- HEADER -->
-                <div class="course-editor-header">
-                    <div class="sub-header-left">
-                        <div class="breadcrumb">
-                            <a href="#">Quản lý khóa học</a>
-                            <i class="fa-solid fa-chevron-right"></i>
-                            <span class="breadcrumb-current-tab">Chỉnh sửa nội dung</span>
-                        </div>
+                <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
-                        <h2 class="course-title">
-                            Strategic Emotional Intelligence
+                <div class="grid__column-10 container-2">
+                    <div class="container-2__header-modern">
+                        <h2 class="header__title-modern">
+                            ${(not empty lesson and lesson.id > 0) ? 'Cập nhật bài học' : 'Tạo mới bài học'}
                         </h2>
+                        <a href="admin/lessons" class="btn-back">
+                            <i class="fa-solid fa-backward-step"></i> Trở về
+                        </a>
                     </div>
 
-                    <div class="form-actions mt-4">
-                        <div style="display: flex; gap: 10px; flex: 1;">
-                            <a href="admin/lessons" class="btn-cancel-modern"
-                               style="text-decoration: none;">
-                                Hủy bỏ
-                            </a>
-
-                            <button type="submit" class="btn-submit-modern w-100">
-                                <i class="fa-solid fa-floppy-disk"></i>
-                                ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
-                            </button>
-                        </div>
-
-                        <c:if test="${lesson != null and lesson.id > 0}">
-                            <button type="button" class="btn-delete-modern"
-                                    onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Xóa bài học
-                            </button>
-                        </c:if>
-                    </div>
-                </div>
-
-                <div class="course-editor-body">
-
-                    <!-- LEFT: CURRICULUM -->
-                    <div class="curriculum-sidebar">
-                        <h4>Course Content</h4>
-
-                        <c:forEach var="section" items="${sections}">
-                            <div class="section-item">
-                                <div class="section-header">
-                                    <span>${section.title}</span>
-                                </div>
-
-                                <div class="lesson-list">
-                                    <c:forEach var="l" items="${section.lessons}">
-                                        <div class="lesson-item ${lesson.id == l.id ? 'active' : ''}">
-                                            <i class="fa-solid fa-play"></i>
-                                                ${l.title}
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </c:forEach>
-
-                        <button class="btn-add">+ Add Section</button>
-                    </div>
-
-                    <!-- RIGHT: LESSON EDITOR -->
-                    <div class="lesson-editor no-shadow">
-
+                    <div class="form-container">
                         <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
                               enctype="multipart/form-data">
                             <c:if test="${lesson != null}">
@@ -221,36 +166,37 @@
                                         Trình duyệt của bạn không hỗ trợ xem video.
                                     </video>
                                 </div>
-                            </div>
-                            <div class="form-actions mt-4">
-                                <div style="display: flex; gap: 10px; flex: 1;">
-                                    <a href="admin/lessons" class="btn-cancel-modern"
-                                       style="text-decoration: none;">
-                                        Hủy bỏ
-                                    </a>
+                                <div class="form-actions mt-4">
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/lessons" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
 
-                                    <button type="submit" class="btn-submit-modern w-100">
-                                        <i class="fa-solid fa-floppy-disk"></i>
-                                        ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
-                                    </button>
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${lesson != null and lesson.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/action', isBulk: false})">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa bài học
+                                        </button>
+                                    </c:if>
                                 </div>
-
-                                <c:if test="${lesson != null and lesson.id > 0}">
-                                    <button type="button" class="btn-delete-modern"
-                                            onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                        Xóa bài học
-                                    </button>
-                                </c:if>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
-        <jsp:include page="/views/components/toast.jsp"/>
-        <jsp:include page="/views/components/modal-confirm.jsp"/>
+    </div>
+</div>
+<jsp:include page="/views/components/toast.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 </body>
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

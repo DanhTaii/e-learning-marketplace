@@ -3,7 +3,7 @@
 
 
 <div class="form-container">
-    <form id="courseForm" action="admin/course/detail" method="post">
+    <form id="courseForm" action="admin/course/editor" method="post">
         <c:if test="${course != null}">
             <input type="hidden" name="courseId" value="${course.id}"/>
         </c:if>
@@ -178,17 +178,25 @@
         </div>
 
         <div class="form-actions mt-5">
-            <c:if test="${course == null}">
-                <button type="submit" class="btn-submit-modern">
-                    <i class="fa-solid fa-floppy-disk"></i> Tạo khóa học
-                </button>
-            </c:if>
-            <c:if test="${course != null}">
-                <button type="submit" class="btn-submit-modern">
-                    <i class="fa-solid fa-floppy-disk"></i> Cập nhật khóa học
-                </button>
-            </c:if>
+            <div style="display: flex; gap: 10px; flex: 1;">
+                <a href="admin/courses" class="btn-cancel-modern"
+                   style="text-decoration: none;">
+                    Hủy bỏ
+                </a>
 
+                <button type="submit" class="btn-submit-modern w-100">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    ${(not empty course and course.id > 0) ? 'Cập nhật' : 'Thêm khóa học'}
+                </button>
+            </div>
+
+            <c:if test="${course != null and course.id > 0}">
+                <button type="button" class="btn-delete-modern"
+                        onclick="setupConfirmModal({action: 'archive', ids: ${course.id}, url: 'admin/course/action', isBulk: false})">
+                    <i class="fa-solid fa-trash-can"></i>
+                    Xóa khóa học
+                </button>
+            </c:if>
         </div>
     </form>
 </div>

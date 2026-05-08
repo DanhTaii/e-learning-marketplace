@@ -5,26 +5,26 @@ $(document).ready(function () {
         let isValid = true;
 
         // 1. Lấy giá trị
-        const courseId = $('#selectCourse').val() || "";
-        const orderIndex = $('#orderIndex').val() || "";
+        // const courseId = $('#selectCourse').val() || "";
+        // const orderIndex = $('#orderIndex').val() || "";
         const title = $('#lessonTitle').val() || "";
         const durationMinutes = $('#durationMinutes').val() || "";
         const videoUrlInput = $('#videoUrlInput').val() || "";
 // Cách lấy file an toàn
         const videoFileInput = $('#videoFile')[0];
         const videoFile = (videoFileInput && videoFileInput.files) ? videoFileInput.files[0] : null;
-        // Kiểm tra Khóa học
-        if (courseId === "0" || !courseId) {
-            $('#error_idCourse').text("Vui lòng chọn khóa học");
-            isValid = false;
-        }
-
-        // Kiểm tra Thứ tự
-        const orderIndexErr = BaseValidator.checkPositiveInteger(orderIndex, "Thứ tự");
-        if(orderIndexErr) {
-            $('#error_orderIndex').text(orderIndexErr);
-            isValid = false;
-        }
+        // // Kiểm tra Khóa học
+        // if (courseId === "0" || !courseId) {
+        //     $('#error_idCourse').text("Vui lòng chọn khóa học");
+        //     isValid = false;
+        // }
+        //
+        // // Kiểm tra Thứ tự
+        // const orderIndexErr = BaseValidator.checkPositiveInteger(orderIndex, "Thứ tự");
+        // if(orderIndexErr) {
+        //     $('#error_orderIndex').text(orderIndexErr);
+        //     isValid = false;
+        // }
 
         const titleErr = BaseValidator.checkLength(title, 5, 255, "Tiêu đề bài học");
         if(titleErr) {

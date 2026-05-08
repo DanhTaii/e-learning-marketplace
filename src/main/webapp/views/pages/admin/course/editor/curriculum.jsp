@@ -5,12 +5,11 @@
 
     <!-- LEFT: CURRICULUM -->
     <div class="curriculum-sidebar">
-        <h4>Course Content</h4>
+        <h4>Danh sách bài học</h4>
 
         <div class="lesson-list">
             <c:forEach var="l" items="${lessons}">
-                <!-- Đã bỏ style inline -->
-                <a href="admin/course/detail?id=${course.id}&lessonId=${l.id}"
+                <a href="admin/course/editor?id=${course.id}&lessonId=${l.id}"
                    class="lesson-item ${lesson != null && lesson.id == l.id ? 'active' : ''}">
                     <i class="fa-solid fa-play"></i>
                         ${l.title}
@@ -18,13 +17,17 @@
             </c:forEach>
         </div>
 
-        <button class="btn-add">+ Thêm bài học</button>
+        <hr>
+        <!-- Nút Thêm bài học đã được bọc bằng thẻ a và truyền lessonId=0 -->
+        <a href="admin/course/editor?id=${course.id}&lessonId=0" class="btn-add">
+            <i class="fa-solid fa-plus"></i> Thêm bài học
+        </a>
     </div>
 
     <!-- RIGHT: LESSON EDITOR -->
     <div class="lesson-editor no-shadow">
 
-        <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
+        <form id="lessonForm" action="admin/course/curriculum" method="post" class="form-modern"
               enctype="multipart/form-data">
 
             <input type="hidden" name="courseId" value="${course.id}">
@@ -37,21 +40,34 @@
             </c:if>
 
             <div class="lesson-create-card">
-                <div class="form-row mt-3">
+
+                <div class="form-row">
                     <div class="form-group flex-2">
                         <label class="label-style">Tiêu đề bài học</label>
                         <input type="text" name="nameLesson" class="input-modern" id="lessonTitle"
-                               value="${lesson != null ? lesson.title : param.nameLesson}"
+                               value="${not empty param.nameLesson ? param.nameLesson : (lesson != null ? lesson.title : '')}"
                                placeholder="Nhập tiêu đề...">
                         <span class="error-client" id="error_lessonTitle">
                             ${errors.nameLesson}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-row mt-3">
+                    <div class="form-group flex-1">
+                        <label class="label-style">Thứ tự bài học</label>
+                        <input type="number" name="orderIndex" class="input-modern" id="orderIndex"
+                               value="${lesson != null ? lesson.orderIndex : param.orderIndex}"
+                               placeholder="Ví dụ: 1">
+                        <span class="error-client" id="error_orderIndex">
+                            ${errors.orderIndex}
                         </span>
                     </div>
                     <div class="form-group flex-1">
                         <label class="label-style">Thời lượng (Phút)</label>
                         <input type="number" name="duration_minutesLesson" class="input-modern"
                                id="durationMinutes"
-                               value="${lesson != null ? lesson.durationMinutes : param.duration_minutesLesson}"
+                               value="${not empty param.duration_minutesLesson ? param.duration_minutesLesson : (lesson != null ? lesson.durationMinutes : '')}"
                                placeholder="Phút">
                         <span class="error-client" id="error_durationMinutes">
                             ${errors.durationMinutes}
@@ -101,7 +117,7 @@
                     <div id="videoSourceLink" class="video-input-container active mt-2">
                         <div class="input-with-icon">
                             <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
-                                   value="${lesson != null ? lesson.videoUrl : param.urlVideo}"
+                                   value="${not empty param.urlVideo ? param.urlVideo : (lesson != null ? lesson.videoUrl : '')}"
                                    placeholder="https://www.youtube.com/watch?v=...">
                             <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
                         </div>
@@ -144,7 +160,7 @@
 
                 <c:if test="${lesson != null and lesson.id > 0}">
                     <button type="button" class="btn-delete-modern"
-                            onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/delete', isBulk: false})">
+                            onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/course/curriculum/action', isBulk: false})">
                         <i class="fa-solid fa-trash-can"></i>
                         Xóa bài học
                     </button>

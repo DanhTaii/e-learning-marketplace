@@ -89,23 +89,24 @@ h2, h3, h4 {
 /* ===== LAYOUT ===== */
 .course-editor-body {
     display: flex;
-    gap: 25px;
+    gap: 15px;
     align-items: flex-start;
 }
 
 /* ===== SIDEBAR ===== */
 .curriculum-sidebar {
-    width: 300px;
-    background: #fff;
+    width: 330px;
+    background: var(--sub-background-color);
     padding: 18px;
     border-radius: 10px;
-    border: 1px solid #e4e6eb;
+    border: 1px solid var(--privacy-light-grey);
 }
 
 .curriculum-sidebar h4 {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
     margin-bottom: 12px;
+    color: var(--dark-blue);
 }
 
 .section-item {
@@ -113,26 +114,28 @@ h2, h3, h4 {
 }
 
 .section-header {
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: var(--fw-semibold);
+    font-size: var(--text-base);
     margin-bottom: 6px;
+    color: var(--text-color);
 }
 
 .lesson-list {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .lesson-item {
     display: flex !important;
     align-items: center;
     gap: 8px;
-    padding: 15px 0;
+    padding: 10px;
     border-radius: 6px;
     font-size: var(--text-base);
     cursor: pointer;
-    color: #333333;
+    color: var(--text-body-color);
     text-decoration: none;
     transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
 }
 
 .lesson-item i {
@@ -140,40 +143,53 @@ h2, h3, h4 {
 }
 
 .lesson-item:hover {
-    background: #f0f4ff;
-    color: #0b5cff;
+    background: var(--privacy-light-grey);
+    color: var(--blue);
 }
 
 .lesson-item.active {
-    background: #e7f0ff;
-    color: #0b5cff !important;
-    font-weight: 600;
+    background: var(--dark-blue);
+    color: var(--bright-green) !important;
+    font-weight: var(--fw-bold);
 }
 
 /* ADD BUTTON */
 .btn-add {
-    margin-top: 10px;
-    padding: 8px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 15px;
+    padding: 10px;
     width: 100%;
-    border: 1px dashed #c0c4cc;
-    background: #fafafa;
-    border-radius: 6px;
+    box-sizing: border-box;
+    border: 2px dashed var(--dark-blue);
+    background: transparent;
+    color: var(--dark-blue);
+    border-radius: 8px;
+    font-size: var(--text-base);
+    font-weight: var(--fw-medium);
     cursor: pointer;
-    font-size: 13px;
+    transition: all 0.3s ease;
 }
 
 .btn-add:hover {
-    background: #f0f0f0;
+    background: var(--dark-blue);
+    border-color: var(--dark-blue);
+    color: var(--bright-green);
+}
+
+.btn-add i {
+    margin-right: 5px;
 }
 
 /* ===== EDITOR ===== */
 .lesson-editor {
     flex: 1;
-    border: 1px solid #e4e6eb;
-    background: #ffffff;
+    border: 1px solid var(--privacy-light-grey);
+    background: var(--sub-background-color);
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(0, 35, 51, 0.08);
 }
 
 /* HEADER EDITOR */
@@ -218,8 +234,8 @@ h2, h3, h4 {
 
 /* INPUT */
 .input-modern {
-    height: 40px;
-    padding: 0 12px;
+    /*height: 40px;*/
+    padding: 12px 16px;
     border-radius: 6px;
     border: 1px solid #d1d7dc;
     font-size: 14px;

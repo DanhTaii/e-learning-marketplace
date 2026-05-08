@@ -150,9 +150,9 @@ public class LessonDaoImpl extends BaseDao implements LessonDao {
     @Override
     public List<Lesson> findByCourseId(int courseId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT l.id, l.course_id, l.title, l.video_url, l.duration_minutes, l.order_index\n" +
-                    "FROM lessons l\n" +
-                    "WHERE l.course_id = :courseId\n" +
+            return handle.createQuery("SELECT l.id, l.course_id, l.title, l.video_url, l.duration_minutes, l.order_index " +
+                    "FROM lessons l " +
+                    "WHERE l.course_id = :courseId AND l.is_deleted = 0 " +
                     "ORDER BY l.order_index ASC").bind("courseId", courseId).mapToBean(Lesson.class).list();
         });
     }
