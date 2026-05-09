@@ -311,20 +311,36 @@
                     <input type="text" id="manualVoucherCode" placeholder="Nhập mã giảm giá...">
                     <button onclick="applyManualVoucher()">Áp dụng</button>
                 </div>
-
+<c:forEach var="v" items="${listVoucher}">
                 <div class="voucher-list">
                     <div class="voucher-item">
-                        <div class="voucher-icon"><i class="fa-solid fa-percent"></i></div>
+                        <div class="voucher-icon">
+                            <div class="voucher-title">${v.code}</div></div>
                         <div class="voucher-info">
-                            <div class="voucher-title">Giảm 10% khóa học</div>
-                            <div class="voucher-desc">Đơn tối thiểu 200k. Giảm tối đa 50k.</div>
-                            <div class="voucher-exp">HSD: 30/05/2026</div>
+                            <div class="voucher-title">${v.title}</div>
+                            <div class="voucher-desc">${v.description}</div>
+                            <div class="voucher-exp">HSD:  <fmt:formatDate value="${v.endDate}" pattern="dd-MM-yyyy" /> </div>
+                            <c:if test="${not empty v.usageLimit and v.usageLimit > 0}">
+                                <div class="voucher-usage-wrapper">
+                                    <div class="voucher-usage-bar">
+                                        <div class="voucher-usage-progress" style="width: ${(v.usedCount / v.usageLimit) * 100}%;"></div>
+                                    </div>
+                                    <div class="voucher-usage-text">
+                                        <span>Đã dùng: ${v.usedCount} / ${v.usageLimit}</span>
+
+                                        <c:if test="${(v.usedCount / v.usageLimit) > 0.8}">
+                                            <span style="color: #dc3545; font-weight: 600;">Sắp hết!</span>
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </c:if>
                         </div>
                         <div>
                             <button class="btn-select-voucher" onclick="selectVoucher('SALE10')">Dùng</button>
                         </div>
                     </div>
                 </div>
+</c:forEach>
             </div>
         </div>
     </div>
