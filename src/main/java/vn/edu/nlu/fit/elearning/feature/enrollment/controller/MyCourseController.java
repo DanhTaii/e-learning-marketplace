@@ -32,7 +32,7 @@ public class MyCourseController extends HttpServlet {
         List<EnrollmentCardDTO> enrollmentList = enrollmentService.getAllEnrollments(userId);
 
         request.setAttribute("listEnrollments", enrollmentList);
-        request.getRequestDispatcher("/views/pages/personal/course/my-course.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/personal/course/enrollment/my-course.jsp").forward(request, response);
 
     }
 
