@@ -24,15 +24,15 @@ public class EnrollmentDaoImpl extends BaseDao implements EnrollmentDao {
     @Override
     public List<EnrollmentCardDTO> findAllCoursesCard(int userId) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT c.id AS course_id, c.title, c.author_name, c.thumbnail_url ,\n" +
-                            "ROUND(IFNULL(SUM(CASE WHEN ulp.is_completed = 1 THEN 1 ELSE 0 END) / COUNT(l.id) * 100, 0), 2) AS percent_completed,\n" +
+            return handle.createQuery("SELECT c.id AS course_id, c.title, c.author_name, c.thumbnail_url , " +
+                            "ROUND(IFNULL(SUM(CASE WHEN ulp.is_completed = 1 THEN 1 ELSE 0 END) / COUNT(l.id) * 100, 0), 2) AS percent_completed, " +
                             "COALESCE(AVG(r.rating)) AS rating " +
                             "FROM enrollments e " +
-                            "LEFT JOIN courses c ON e.course_id = c.id \n" +
-                            "LEFT JOIN lessons l ON l.course_id = c.id\n" +
-                            "LEFT JOIN reviews r ON r.course_id = c.id\n" +
-                            "LEFT JOIN user_lesson_progress ulp ON ulp.lesson_id = l.id AND ulp.user_id = e.user_id\n" +
-                            "WHERE e.user_id = :userId\n" +
+                            "LEFT JOIN courses c ON e.course_id = c.id " +
+                            "LEFT JOIN lessons l ON l.course_id = c.id " +
+                            "LEFT JOIN reviews r ON r.course_id = c.id " +
+                            "LEFT JOIN user_lesson_progress ulp ON ulp.lesson_id = l.id AND ulp.user_id = e.user_id " +
+                            "WHERE e.user_id = :userId " +
                             "GROUP BY c.id, c.title")
                     .bind("userId", userId)
                     .mapToBean(EnrollmentCardDTO.class)
@@ -87,4 +87,15 @@ public class EnrollmentDaoImpl extends BaseDao implements EnrollmentDao {
                     .orElse(0);
         });
     }
+
+    @Override
+    public int findCourseIdById(int enrollmentId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT e.course_id FROM enrollments e WHERE e.id = :enrollmentId")
+                    .bind("enrollmentId", enrollmentId)
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
 }

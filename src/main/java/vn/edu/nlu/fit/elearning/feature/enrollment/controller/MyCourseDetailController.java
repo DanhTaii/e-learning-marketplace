@@ -3,13 +3,18 @@ package vn.edu.nlu.fit.elearning.feature.enrollment.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
+import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.dto.LessonProgressDTO;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.service.UserLessonProgressService;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,6 +24,8 @@ public class MyCourseDetailController extends HttpServlet {
     private EnrollmentService enrollmentService;
     private UserLessonProgressService ulp;
     private ReviewService reviewService;
+    private CertificateService certificateService;
+    private static final Logger logger = LoggerFactory.getLogger(MyCourseDetailController.class);
 
     @Override
     public void init() throws ServletException {
@@ -26,6 +33,7 @@ public class MyCourseDetailController extends HttpServlet {
         this.enrollmentService = BeanContainer.getBean(EnrollmentService.class);
         this.ulp = BeanContainer.getBean(UserLessonProgressService.class);
         this.reviewService = BeanContainer.getBean(ReviewService.class);
+        this.certificateService = BeanContainer.getBean(CertificateService.class);
     }
 
     @Override
@@ -46,28 +54,56 @@ public class MyCourseDetailController extends HttpServlet {
         List<LessonProgressDTO> listLessons = ulp.getAllUserLessonProgresss(userId, courseId);
         enrollmentDetail.setListLesson(listLessons);
 
+        boolean hasCertificate = certificateService.hasCertificate(userId, courseId);
+
+        request.setAttribute("hasCertificate", hasCertificate);
         request.setAttribute("enrollmentDetail", enrollmentDetail);
         request.getRequestDispatcher("/views/pages/personal/course/enrollment/id/course-content.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String lessonIdStr = request.getParameter("lessonId");
-        String isCompletedStr = request.getParameter("completed");
-        String enrollmentIdString = request.getParameter("enrollmentId");
+        try {
+            HttpSession session = request.getSession();
+            int userId = 0;
+            if (session.getAttribute("userId") != null) {
+                userId = (Integer) session.getAttribute("userId");
+            }
 
-        int id = Integer.parseInt(lessonIdStr);
-        boolean isCompleted = Boolean.parseBoolean(isCompletedStr);
+            String lessonIdStr = request.getParameter("lessonId");
+            String isCompletedStr = request.getParameter("completed");
+            String enrollmentIdString = request.getParameter("enrollmentId");
 
-        ulp.updateUserLessonProgress(id, isCompleted);
+            int id = Integer.parseInt(lessonIdStr);
+            boolean isCompleted = Boolean.parseBoolean(isCompletedStr);
 
-        int enrollmentId = Integer.parseInt(enrollmentIdString);
-        int newPercent = enrollmentService.getNewPercentComplete(enrollmentId);
+            ulp.updateUserLessonProgress(id, isCompleted);
 
-        response.setContentType("application/json");
-        PrintWriter result = response.getWriter();
-        result.write("{\"status\" : \"success\", \"newPercent\":" + newPercent +"}");
-        result.flush();
+            int enrollmentId = Integer.parseInt(enrollmentIdString);
+            int newPercent = enrollmentService.getNewPercentComplete(enrollmentId);
 
+            int certId = 0;
+
+            if (newPercent == 100 && userId > 0) {
+                int courseId = enrollmentService.getCourseIdById(enrollmentId);
+                boolean hasCertificate = certificateService.hasCertificate(userId, courseId);
+
+                if (!hasCertificate) {
+                    Certificate cert = new Certificate();
+                    cert.setCourseId(courseId);
+                    cert.setUserId(userId);
+
+                    certId = certificateService.createCertificate(cert);
+                }
+
+            }
+            response.setContentType("application/json");
+            PrintWriter result = response.getWriter();
+            result.write("{\"status\" : \"success\", \"newPercent\":" + newPercent + ", \"certId\":" + certId + "}");
+            result.flush();
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
     }
 }

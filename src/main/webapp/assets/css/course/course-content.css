@@ -173,9 +173,19 @@
     line-height: 1.8;
 }
 
+.description__content {
+    line-height: 2.5rem;
+}
+
 .btn-certificate {
     padding: 5px;
     text-decoration: none;
+}
+
+.btn-certificate.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
 /* ========================= Phan review ======================== */

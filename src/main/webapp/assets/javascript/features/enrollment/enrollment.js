@@ -95,8 +95,11 @@ function updateProgress(lessonId, isCompleted, enrollmentId) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                console.log('Cập nhật tiến độ thành công!');
+                // console.log("THÀNH CÔNG")
                 updateCircleProgress(data.newPercent)
+                if (data.certId > 0) {
+                    switchBtnGetCertificate(data.certId)
+                }
             }
         })
         .catch(error => console.error('Lỗi:', error));
@@ -118,4 +121,17 @@ function updateCircleProgress(percent) {
 
     circleBar.style.strokeDashoffset = offset;
     percentText.innerText = percent + "%";
+}
+
+function switchBtnGetCertificate(certId) {
+    const btn = document.getElementById("btn-cert");
+
+    if (certId > 0) {
+        btn.classList.remove("disabled");
+        btn.href = "personal/my-course/certificate";
+    } else {
+        btn.classList.add("disabled");
+        btn.href("javascript:void(0)");
+    }
+
 }
