@@ -170,7 +170,6 @@
 
                                     <div id="applied-voucher-info" class="applied-voucher-box">
                                         <div class="applied-voucher-box-left">
-                                            <i class="fa-solid fa-circle-check"></i>
                                             <span id="applied-voucher-code" class="applied-voucher-code"></span>
                                         </div>
                                         <a href="#" onclick="removeVoucher(event)" class="btn-remove-voucher">Bỏ chọn</a>
@@ -347,6 +346,7 @@
     <jsp:include page="/views/components/toast.jsp"/>
     <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="assets/javascript/features/cart/voucher.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/component/modal/modal.js?v=<%=System.currentTimeMillis()%>"></script>
     </body>
 
