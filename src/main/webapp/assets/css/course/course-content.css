@@ -76,6 +76,7 @@
     border-radius: 7px;
 }
 
+/* =============================================== OVERVIEW =============================================== */
 /*Phan box chua title*/
 .content-container {
     margin-top: 10px;
@@ -86,15 +87,12 @@
 
 .container__title-video {
     font-size: var(--text-5xl);
-    margin-bottom: 13px;
-    padding: 20px;
     color: var(--text-color);
 }
 
 /*phan box chua rating,student,duration*/
 .container__sub-header {
     display: flex;
-    padding: 0 0 20px 20px;
 }
 
 .container__sub-header span {
@@ -133,7 +131,44 @@
     padding-left: 1rem;
 }
 
-/*Phan review*/
+.container__overview {
+    padding: 20px;
+}
+
+.container__description {
+    color: var(--text-color);
+}
+
+.course-info {
+    width: 100%;
+}
+
+.info-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+
+    padding: 24px 0;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.info-label {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.info-content {
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+.btn-certificate {
+    padding: 5px;
+}
+
+/* ========================= Phan review ======================== */
 .review-box__header {
     padding: 20px 20px 0 20px;
 
