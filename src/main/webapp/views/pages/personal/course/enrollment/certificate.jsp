@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Chứng nhận hoàn thành khóa học</title>
@@ -33,8 +33,8 @@
                         <div class="cert-border">
                             <!-- Logo / Brand -->
                             <div class="cert-brand">
-                                <h2 class="brand-name">E-LEARNING ACADEMY</h2>
-                                <p class="brand-sub">OFFICIAL CERTIFICATION</p>
+                                <h2 class="brand-name">HỌC VIỆN E-LEARNING</h2>
+                                <p class="brand-sub">CHỨNG NHẬN CHÍNH THỨC</p>
                             </div>
 
                             <!-- Badge -->
@@ -44,37 +44,41 @@
 
                             <!-- Content -->
                             <div class="cert-content">
-                                <p class="cert-intro">THIS IS TO CERTIFY THAT</p>
+                                <p class="cert-intro">CHỨNG NHẬN RẰNG</p>
                                 <!-- Tên học viên lấy từ DB -->
-                                <h1 class="cert-student-name">${not empty sessionScope.user.lastName ? sessionScope.user.lastName += ' ' += sessionScope.user.firstName : 'Nguyễn Văn A'}</h1>
+                                <h1 class="cert-student-name">${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName)  : 'Nguyễn Văn A'}</h1>
 
-                                <p class="cert-desc">has successfully mastered the curriculum and examinations for</p>
+                                <p class="cert-desc">đã hoàn thành xuất sắc chương trình học và bài kiểm tra của khóa học</p>
                                 <!-- Tên khóa học -->
-                                <h2 class="cert-course-name">${not empty enrollmentDetail.title ? enrollmentDetail.title : 'Mastering Executive Communication'}</h2>
-                                <p class="cert-platform">Achieved with distinction through the E-Learning Workspace platform</p>
+                                <h2 class="cert-course-name">${not empty certificateDetail.courseTitle ? certificateDetail.courseTitle : 'Kỹ năng Giao tiếp Chuyên nghiệp'}</h2>
+                                <p class="cert-platform">Được chứng nhận thông qua nền tảng đào tạo E-Learning Workspace</p>
                             </div>
 
                             <!-- Footer của chứng chỉ (Chữ ký, ngày tháng, ID) -->
                             <div class="cert-footer">
                                 <div class="footer-item">
-                                    <span class="footer-label">DATE OF ISSUE</span>
+                                    <span class="footer-label">NGÀY CẤP</span>
                                     <span class="footer-value">
-                                        <fmt:formatDate value="${enrollmentDetail.completedAt}" pattern="MMMM dd, yyyy" />
+                                        <c:if test="${not empty certificateDetail.issueDate}">
+                                            <fmt:formatDate
+                                                    value="${certificateDetail.issueDate}"
+                                                    pattern="yyyy-MM-dd" />
+                                        </c:if>
                                     </span>
                                 </div>
                                 <div class="footer-item signature-box">
-                                    <img src="assets/image/signature.png" alt="Signature" class="signature-img">
-                                    <span class="footer-label">REGISTRAR</span>
+                                    <img src="assets/image/signature.png" alt="Chữ ký" class="signature-img">
+                                    <span class="footer-label">GIÁM ĐỐC ĐÀO TẠO</span>
                                 </div>
                                 <div class="footer-item align-right">
-                                    <span class="footer-label">CREDENTIAL ID</span>
-                                    <span class="footer-value">AW-${enrollmentDetail.courseId}X-${enrollmentDetail.orderId}</span>
+                                    <span class="footer-label">MÃ CHỨNG CHỈ</span>
+                                    <span class="footer-value">${certificateDetail.certificateCode}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="cert-ledger-note">
-                        <i class="fa-solid fa-shield-check"></i> This certificate is verified and permanently recorded on the E-Learning Academy ledger.
+                        <i class="fa-solid fa-shield-check"></i> Chứng chỉ này đã được xác thực và lưu trữ vĩnh viễn trên hệ thống của Học viện E-Learning.
                     </div>
                 </div>
             </div>
@@ -83,21 +87,21 @@
             <div class="grid__column-4 column2">
                 <!-- Box Quản lý chứng chỉ -->
                 <div class="action-panel-card">
-                    <h3 class="text-2xl bold mb-2">Manage Credential</h3>
-                    <p class="text-base text-gray mb-4 ">Export your certificate in high resolution for print or digital display.</p>
+                    <h3 class="text-2xl bold mb-2">Quản lý Chứng chỉ</h3>
+                    <p class="text-base text-gray mb-4 ">Xuất chứng chỉ ở độ phân giải cao để in ấn hoặc chia sẻ trực tuyến.</p>
 
                     <!-- Nút chức năng -->
                     <div class="cert-actions mb-4">
-                        <a href="student/certificate/download?courseId=${enrollmentDetail.courseId}" class="btn btn-primary w-100 mb-3">
-                            <i class="fa-solid fa-file-pdf"></i> Download Certificate (PDF)
+                        <a href="student/certificate/download?courseId=${certificateDetail.courseId}" class="btn btn-primary w-100 mb-3">
+                            <i class="fa-solid fa-file-pdf"></i> Tải Bản PDF
                         </a>
 
                         <div class="action-row">
                             <button class="btn btn-secondary flex-1">
-                                <i class="fa-regular fa-image"></i> Image (PNG)
+                                <i class="fa-regular fa-image"></i> Lưu Ảnh (PNG)
                             </button>
                             <button class="btn btn-linkedin flex-1">
-                                <i class="fa-brands fa-linkedin"></i> LinkedIn
+                                <i class="fa-brands fa-linkedin"></i> Thêm vào LinkedIn
                             </button>
                         </div>
                     </div>
@@ -108,11 +112,11 @@
                     <ul class="cert-info-list">
                         <li>
                             <span class="info-label">Học viên</span>
-                            <span class="info-value bold">${not empty sessionScope.user.lastName ? sessionScope.user.lastName += ' ' += sessionScope.user.firstName : 'Nguyễn Văn A'}</span>
+                            <span class="info-value bold">${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName) : 'Nguyễn Văn A'}</span>
                         </li>
                         <li>
-                            <span class="info-label">Course Credit</span>
-                            <span class="info-value">${enrollmentDetail.durationText}</span>
+                            <span class="info-label">Thời lượng học</span>
+                            <span class="info-value">${certificateDetail.durationText}</span>
                         </li>
                     </ul>
                 </div>

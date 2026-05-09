@@ -44,26 +44,28 @@
     background-color: #ffffff;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    position: relative;
-    aspect-ratio: 1.414 / 1; /* Tỉ lệ chuẩn của giấy A4 ngang */
+    aspect-ratio: 1.414 / 1;
+    width: 100%;
+    max-width: 1100px;
     display: flex;
 }
 
 .cert-border {
-    border: 8px solid #f0f2f5; /* Khung viền ngoài cùng */
-    padding: 40px;
+    border: 8px solid #f0f2f5;
+    padding: 32px;
     width: 100%;
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* Kéo Footer xuống sát đáy viền */
+    position: relative; /* BẮT BUỘC: Giữ chân thằng Badge không cho bay ra ngoài */
+    overflow: hidden;
 }
 
 /* Badge góc phải trên */
 .cert-badge {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: 15px;
+    right: 15px;
     width: 60px;
     height: 60px;
     background-color: #111827;
@@ -77,7 +79,6 @@
 
 /* Header chứng chỉ */
 .brand-name {
-    font-family: 'Arial', sans-serif;
     font-size: 20px;
     font-weight: 800;
     letter-spacing: 2px;
@@ -95,28 +96,29 @@
 /* Nội dung chính (Giữa) */
 .cert-content {
     text-align: center;
-    margin-top: 20px;
+    flex: 1; /* Chiếm toàn bộ khoảng trống ở giữa Header và Footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa theo chiều dọc */
 }
 
 .cert-intro {
-    font-family: 'Times New Roman', serif;
     font-size: 14px;
     letter-spacing: 3px;
     color: #6b7280;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .cert-student-name {
-    font-family: 'Arial', sans-serif;
-    font-size: 52px;
-    font-weight: 800;
-    color: #111827;
-    margin: 0 0 40px 0;
-    border-bottom: 1px solid #e5e7eb;
-    display: inline-block;
-    padding-bottom: 10px;
-    min-width: 60%;
+    font-size: clamp(36px, 4vw, 52px);
+
+    line-height: 1.15;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    max-width: 100%;
+    margin: 0 0 20px 0;
 }
 
 .cert-desc {
@@ -126,11 +128,16 @@
 }
 
 .cert-course-name {
-    font-family: 'Arial', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #0056d2; /* Màu xanh nổi bật */
-    margin: 0 0 15px 0;
+    color: #0056d2;
+    font-size: clamp(20px, 2.5vw, 32px);
+
+    line-height: 1.25;
+
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    max-width: 100%;
+    margin: 0;
 }
 
 .cert-platform {
@@ -145,7 +152,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-top: 40px;
+    margin-top: 18px;
 }
 
 .footer-item {
@@ -193,7 +200,7 @@
 
 /* ================= PANEL BÊN PHẢI ================= */
 .action-panel-card {
-    padding: 24px;
+    padding: 24px 24px 0 24px;
 }
 
 .bg-light-blue {

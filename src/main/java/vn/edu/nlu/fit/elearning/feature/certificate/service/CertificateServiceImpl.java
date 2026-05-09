@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.certificate.service;
 
 import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDao;
+import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
 
 import java.time.Year;
@@ -33,5 +34,10 @@ public class CertificateServiceImpl implements CertificateService {
         int currentYear = Year.now().getValue();
 
         return String.format("CERT-C%d-U%d-%s-%d", courseId, userId, randomPart, currentYear);
+    }
+
+    @Override
+    public CertificateDetailDto getCertificateByUserIdAndCourseId(int userId, int courseId) {
+        return certificateDao.findByUserIdAndCourseId(userId, courseId);
     }
 }

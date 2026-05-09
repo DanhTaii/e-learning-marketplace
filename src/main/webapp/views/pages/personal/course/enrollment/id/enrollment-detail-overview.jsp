@@ -57,7 +57,7 @@
                     Hoàn thành khóa học để lấy chứng chỉ
                 </div>
 
-                <a href="javascript:void(0)" class="dark-button mt-2 btn-certificate ${hasCertificate == true ? '' : 'disabled'}" id="btn-cert">
+                <a href="personal/my-course/certificate?courseId=${enrollmentDetail.courseId}" class="dark-button mt-2 btn-certificate ${hasCertificate == true ? '' : 'disabled'}" id="btn-cert">
                     Lấy chứng chỉ
                 </a>
             </div>

@@ -14,4 +14,16 @@ public class DataFormatting {
         }
         return nf.format(finalPrice);
     }
+
+    public static String formatDuration(double durationHours) {
+        int hours = (int) durationHours;
+        int minutes = (int) ((durationHours - hours) * 60);
+        if (hours == 0) {
+            return minutes + "p";
+        } else if (minutes == 0) {
+            return hours + "h ";
+        } else {
+            return hours + "h " + minutes + "p";
+        }
+    }
 }
