@@ -1,0 +1,293 @@
+/* ================= GLOBAL & LAYOUT ================= */
+.cert-header {
+    margin: 40px 0 20px 0;
+}
+
+.text-dark {
+    color: #1a1a1a;
+}
+
+.text-gray {
+    color: #6e7278;
+}
+
+.text-blue {
+    color: #0056d2;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.light {
+    font-weight: 400;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* ================= CHỨNG CHỈ LỚN (BÊN TRÁI) ================= */
+.certificate-preview-container {
+    width: 100%;
+}
+
+.cert-paper {
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    aspect-ratio: 1.414 / 1; /* Tỉ lệ chuẩn của giấy A4 ngang */
+    display: flex;
+}
+
+.cert-border {
+    border: 8px solid #f0f2f5; /* Khung viền ngoài cùng */
+    padding: 40px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Badge góc phải trên */
+.cert-badge {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: #111827;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+}
+
+/* Header chứng chỉ */
+.brand-name {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #111827;
+    margin: 0 0 5px 0;
+}
+
+.brand-sub {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #9ca3af;
+    margin: 0;
+}
+
+/* Nội dung chính (Giữa) */
+.cert-content {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cert-intro {
+    font-family: 'Times New Roman', serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.cert-student-name {
+    font-family: 'Arial', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 40px 0;
+    border-bottom: 1px solid #e5e7eb;
+    display: inline-block;
+    padding-bottom: 10px;
+    min-width: 60%;
+}
+
+.cert-desc {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 15px;
+}
+
+.cert-course-name {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0056d2; /* Màu xanh nổi bật */
+    margin: 0 0 15px 0;
+}
+
+.cert-platform {
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #4b5563;
+}
+
+/* Footer chứng chỉ */
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 40px;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.footer-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.footer-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.signature-box {
+    align-items: center;
+}
+
+.signature-img {
+    height: 40px;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+/* Ghi chú ledger dưới cùng */
+.cert-ledger-note {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ================= PANEL BÊN PHẢI ================= */
+.action-panel-card {
+    padding: 24px;
+}
+
+.bg-light-blue {
+    background-color: #f0f7ff;
+    border: none;
+}
+
+.icon-top {
+    width: 32px;
+    height: 32px;
+    background: #e0f2fe;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+/* Các nút bấm */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #111827;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #374151;
+}
+
+.action-row {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-linkedin {
+    background-color: #f0f4f8;
+    color: #0a66c2;
+}
+
+.btn-linkedin:hover {
+    background-color: #e2edf6;
+}
+
+/* Thông tin chi tiết */
+.card-divider {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 20px 0;
+}
+
+.cert-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cert-info-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.info-label {
+    color: #6b7280;
+    font-size: 1.6rem;
+}
+
+.info-value {
+    color: #111827;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: var(--fw-semibold);
+}

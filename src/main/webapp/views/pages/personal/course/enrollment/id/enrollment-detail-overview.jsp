@@ -56,7 +56,7 @@
                 <div class="text-lg mb-4">
                     Hoàn thành khóa học để lấy chứng chỉ
                 </div>
-                <a class="dark-button mt-2 btn-certificate">
+                <a href="personal/my-course/certificate" class="dark-button mt-2 btn-certificate">
                     Lấy chứng chỉ
                 </a>
             </div>
