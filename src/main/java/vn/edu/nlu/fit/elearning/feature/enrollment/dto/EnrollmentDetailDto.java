@@ -19,21 +19,8 @@ public class EnrollmentDetailDto implements Serializable {
     private List<LessonProgressDTO> listLesson;
     private LessonProgressDTO currentLesson;
     private List<ReviewDto> listReviews;
-
-    public EnrollmentDetailDto(int id, int courseId, String title, String authorName, double rating, double durationHours, int studentCount, int reviewCount, int percentCompleted, List<LessonProgressDTO> listLesson, LessonProgressDTO currentLesson, List<ReviewDto> listReviews) {
-        this.id = id;
-        this.courseId = courseId;
-        this.title = title;
-        this.authorName = authorName;
-        this.rating = rating;
-        this.durationHours = durationHours;
-        this.studentCount = studentCount;
-        this.reviewCount = reviewCount;
-        this.percentCompleted = percentCompleted;
-        this.listLesson = listLesson;
-        this.currentLesson = currentLesson;
-        this.listReviews = listReviews;
-    }
+    private String description;
+    private String goals;
 
     public EnrollmentDetailDto() {
     }
@@ -132,6 +119,22 @@ public class EnrollmentDetailDto implements Serializable {
 
     public void setListReviews(List<ReviewDto> listReviews) {
         this.listReviews = listReviews;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getGoals() {
+        return goals;
+    }
+
+    public void setGoals(String goals) {
+        this.goals = goals;
     }
 
     public String getDurationText() {

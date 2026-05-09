@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const lessonItems = document.querySelectorAll('.lesson-item');
     const videoPlayer = document.getElementById('mainVideoPlayer');
-    const titleDisplay = document.getElementById('mainLessonTitle');
+    // const titleDisplay = document.getElementById('mainLessonTitle');
     const placeholder = document.getElementById('videoPlaceholder');
 
     lessonItems.forEach(item => {
@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            titleDisplay.innerText = lessonTitle + (finalUrl ? "" : " (Chưa có video)");
+            // titleDisplay.innerText = lessonTitle + (finalUrl ? "" : " (Chưa có video)");
 
             // Hiệu ứng Active
-            lessonItems.forEach(li => li.style.background = 'var(--dark-blue)');
-            this.style.background = '#3d5a80';
+            lessonItems.forEach(li => li.classList.remove('active-lesson'));
+            this.classList.add('active-lesson');
         });
     });
 
