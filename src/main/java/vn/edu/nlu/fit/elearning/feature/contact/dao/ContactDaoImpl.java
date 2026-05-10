@@ -1,7 +1,10 @@
 package vn.edu.nlu.fit.elearning.feature.contact.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.contact.model.Contact;
+
+import java.util.List;
 
 public class ContactDaoImpl extends BaseDao implements ContactDao {
 
@@ -20,5 +23,13 @@ public class ContactDaoImpl extends BaseDao implements ContactDao {
                         .bind("trackingToken", contact.getTrackingToken())
                         .execute()
         );
+    }
+
+    @Override
+    public List<Contact> findAll() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT sr.id, sr.email, sr.subject, sr.message, sr.status, sr.created_at\n " +
+                    "FROM support_requests sr").mapToBean(Contact.class).list();
+        });
     }
 }

@@ -1,8 +1,11 @@
 package vn.edu.nlu.fit.elearning.feature.contact.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.ContactStatus;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDao;
 import vn.edu.nlu.fit.elearning.feature.contact.model.Contact;
+
+import java.util.List;
 
 public class ContactServiceImpl implements ContactService {
 
@@ -22,6 +25,11 @@ public class ContactServiceImpl implements ContactService {
             return contactDao.create(contact);
         }
         return 0;
+    }
+
+    @Override
+    public List<Contact> getAllContacts() {
+        return contactDao.findAll();
     }
 
 
