@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.feature.contact.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.ContactStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user_request.RequestFilter;
 import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDao;
 import vn.edu.nlu.fit.elearning.feature.contact.model.Contact;
@@ -31,6 +33,12 @@ public class ContactServiceImpl implements ContactService {
     public List<Contact> getAllContacts() {
         return contactDao.findAll();
     }
+
+    @Override
+    public List<Contact> getContactsByFilter(RequestFilter filter) {
+        return contactDao.findContactsByFilter(filter);
+    }
+
 
 
 }

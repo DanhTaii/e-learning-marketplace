@@ -21,12 +21,31 @@
 
                 <td>
                     <c:choose>
-                        <c:when test="${request.status.name() == 'ACTIVE'}">
-                            <span class="badge course-row__status-public">Đã xử lý</span>
+
+                        <c:when test="${request.status.name() == 'PENDING'}">
+        <span class="badge course-row-status-unactive">
+            Chờ xử lý
+        </span>
                         </c:when>
+
+                        <c:when test="${request.status.name() == 'IN_PROGRESS'}">
+        <span class="badge course-row__status-public">
+            Đang xử lý
+        </span>
+                        </c:when>
+
+                        <c:when test="${request.status.name() == 'RESOLVED'}">
+        <span class="badge course-row__status-public">
+            Đã xử lý
+        </span>
+                        </c:when>
+
                         <c:otherwise>
-                            <span class="badge course-row-status-unactive">Chưa xử lý</span>
+        <span class="badge course-row-status-unactive">
+            Từ chối
+        </span>
                         </c:otherwise>
+
                     </c:choose>
                 </td>
 

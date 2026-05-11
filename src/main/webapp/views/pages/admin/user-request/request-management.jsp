@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Danh mục</title>
+    <title>Yêu cầu</title>
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Admin layout CSS --%>
@@ -73,64 +73,101 @@
                                     </div>
 
                                     <div class="filter-content" id="filterContent">
+
                                         <div class="filter-grid">
+
                                             <div class="filter-group">
-                                                <label>Tìm kiếm danh mục</label>
+                                                <label>Email</label>
+
                                                 <div class="input-with-icon">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="searchName"
-                                                           value="${param.searchName}"
-                                                           placeholder="Nhập tên danh mục...">
+
+                                                    <input type="text"
+                                                           name="email"
+                                                           value="${param.email}"
+                                                           placeholder="Nhập email...">
                                                 </div>
                                             </div>
 
                                             <div class="filter-group">
+                                                <label>Tiêu đề</label>
+
+                                                <input type="text"
+                                                       name="subject"
+                                                       value="${param.subject}"
+                                                       placeholder="Nhập tiêu đề...">
+                                            </div>
+
+                                            <div class="filter-group">
                                                 <label>Từ ngày</label>
-                                                <input type="date" name="fromDate" value="${param.fromDate}">
-                                            </div>
 
-                                            <div class="filter-group">
-                                                <label>Trạng thái</label>
-                                                <select name="status">
-                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
-                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>Đã xử lý</option>
-                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>Chưa xử lý</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Tên slug</label>
-                                                <input type="text" name="slug"
-                                                       value="${param.slug}"
-                                                       placeholder="Nhập slug...">
+                                                <input type="date"
+                                                       name="fromDate"
+                                                       value="${param.fromDate}">
                                             </div>
 
                                             <div class="filter-group">
                                                 <label>Đến ngày</label>
-                                                <input type="date" name="toDate" value="${param.toDate}">
+
+                                                <input type="date"
+                                                       name="toDate"
+                                                       value="${param.toDate}">
                                             </div>
 
                                             <div class="filter-group">
-                                                <label>Parent ID</label>
-                                                <input type="number" name="parentId"
-                                                       value="${param.parentId}"
-                                                       placeholder="Ví dụ: 0" min="0">
+                                                <label>Trạng thái</label>
+
+                                                <select name="status">
+
+                                                    <option value=""
+                                                    ${empty param.status ? 'selected' : ''}>
+                                                        Tất cả
+                                                    </option>
+
+                                                    <option value="PENDING"
+                                                    ${param.status == 'PENDING' ? 'selected' : ''}>
+                                                        Chờ xử lý
+                                                    </option>
+
+                                                    <option value="IN_PROGRESS"
+                                                    ${param.status == 'IN_PROGRESS' ? 'selected' : ''}>
+                                                        Đang xử lý
+                                                    </option>
+
+                                                    <option value="RESOLVED"
+                                                    ${param.status == 'RESOLVED' ? 'selected' : ''}>
+                                                        Đã xử lý
+                                                    </option>
+
+                                                    <option value="REJECTED"
+                                                    ${param.status == 'REJECTED' ? 'selected' : ''}>
+                                                        Từ chối
+                                                    </option>
+
+                                                </select>
                                             </div>
+
                                         </div>
+
                                         <div class="filter-actions">
-                                            <a href="admin/categories" class="btn-clear">
-                                                <i class="fa-solid fa-rotate-left"></i> Đặt lại
+
+                                            <a href="admin/requests" class="btn-clear">
+                                                <i class="fa-solid fa-rotate-left"></i>
+                                                Đặt lại
                                             </a>
+
                                             <button type="submit" class="dark-button btn-submit">
                                                 Áp dụng bộ lọc
                                             </button>
+
                                         </div>
+
                                     </div>
                                 </form>
-                                <form id="bulkActionForm" method="POST" action="admin/categories">
+                                <form id="bulkActionForm" method="POST" action="admin/requests">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
-                                    <div class="container-2__dynamic-content" id="categoryTableBody">
+                                    <div class="container-2__dynamic-content" id="requestTableBody">
                                         <jsp:include page="/views/pages/admin/user-request/request-fragment.jsp"/>
                                     </div>
                                 </form>
@@ -149,6 +186,5 @@
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/category/category-management.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>
