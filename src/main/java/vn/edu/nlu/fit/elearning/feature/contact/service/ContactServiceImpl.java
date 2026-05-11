@@ -49,4 +49,14 @@ public class ContactServiceImpl implements ContactService {
         return contactDao.findById(id);
     }
 
+    @Override
+    public int updateContact(Contact contact) {
+        return contactDao.update(contact);
+    }
+
+    @Override
+    public Contact findById(int id) {
+        return contactDao.findById(id);
+    }
+
 }

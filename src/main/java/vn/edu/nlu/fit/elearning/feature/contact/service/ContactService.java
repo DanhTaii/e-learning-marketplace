@@ -18,4 +18,8 @@ public interface ContactService {
 
     Contact getContactById(int id);
 
+    int updateContact(Contact contact);
+
+    Contact findById(int id);
+
 }

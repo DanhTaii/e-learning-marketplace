@@ -19,4 +19,6 @@ public interface ContactDao {
 
     Contact findById(Integer id);
 
+    int update(Contact contact);
+
 }

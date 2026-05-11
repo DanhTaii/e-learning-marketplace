@@ -171,5 +171,30 @@ public class ContactDaoImpl extends BaseDao implements ContactDao {
         );
     }
 
+    @Override
+    public int update(Contact contact) {
+
+        String sql = """
+        UPDATE support_requests
+        SET status = :status,
+            admin_reply = :adminReply,
+            updated_at = CURRENT_TIMESTAMP,
+            resolved_at =
+                CASE
+                    WHEN :status = 'RESOLVED'
+                    THEN CURRENT_TIMESTAMP
+                    ELSE resolved_at
+                END
+        WHERE id = :id
+    """;
+
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("status", contact.getStatus().name())
+                        .bind("adminReply", contact.getAdminReply())
+                        .bind("id", contact.getId())
+                        .execute()
+        );
+    }
 
 }
