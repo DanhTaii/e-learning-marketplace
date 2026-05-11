@@ -17,4 +17,6 @@ public interface ContactDao {
 
     int countContactsByFilter(RequestFilter filter);
 
+    Contact findById(Integer id);
+
 }

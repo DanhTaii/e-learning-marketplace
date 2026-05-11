@@ -156,5 +156,20 @@ public class ContactDaoImpl extends BaseDao implements ContactDao {
         });
     }
 
+    @Override
+    public Contact findById(Integer id) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                SELECT sr.id, sr.user_id, sr.email, sr.subject, sr.message, sr.status, sr.admin_reply, sr.tracking_token, sr.created_at, sr.updated_at, sr.resolved_at
+                FROM support_requests sr
+                WHERE sr.id = :id
+                """)
+                        .bind("id", id)
+                        .mapToBean(Contact.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
 
 }

@@ -16,4 +16,6 @@ public interface ContactService {
 
     int countContactsByFilter(RequestFilter filter);
 
+    Contact getContactById(int id);
+
 }
