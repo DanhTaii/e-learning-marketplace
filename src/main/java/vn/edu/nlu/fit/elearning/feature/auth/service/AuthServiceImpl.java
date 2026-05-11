@@ -62,7 +62,6 @@ public class AuthServiceImpl implements AuthService {
             user.setUsername(googleUser.getName());
             user.setAvatarUrl(googleUser.getPicture());
 
-            user.setRole(Role.USER);
             user.setPassword("");
 
             // Lưu vào database và lấy lại ID vừa tạo

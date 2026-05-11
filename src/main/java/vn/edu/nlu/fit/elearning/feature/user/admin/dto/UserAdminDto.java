@@ -1,15 +1,15 @@
-package vn.edu.nlu.fit.elearning.feature.user.common.model; // (Giả định package của bạn)
+package vn.edu.nlu.fit.elearning.feature.user.admin.dto;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
-import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
-import java.io.Serializable;
+
 import java.sql.Timestamp;
 
-public class User implements Serializable {
+public class UserAdminDto {
     private int id;
     private String firstName;
     private String lastName;
     private String username;
+    private String roleName;
     private String email;
     private String password;
     private String phone;
@@ -18,14 +18,15 @@ public class User implements Serializable {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public User() {
+    public UserAdminDto() {
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String email, String password, String phone, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
+    public UserAdminDto(Integer id, String firstName, String lastName, String username, String roleName, String email, String password, String phone, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
+        this.roleName = roleName;
         this.email = email;
         this.password = password;
         this.phone = phone;
@@ -35,11 +36,13 @@ public class User implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    // 3. GETTERS VÀ SETTERS (BẮT BUỘC CHO JDBI/BEAN MAPPER)
+    public String getRoleName() {
+        return roleName;
+    }
 
-    // Lưu ý: Các thuộc tính snake_case trong DB (ví dụ: first_name, avatar_url)
-    // đã được chuyển sang camelCase trong Java (ví dụ: firstName, avatarUrl)
-    // để JDBI có thể ánh xạ tự động.
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public int getId() {
         return id;

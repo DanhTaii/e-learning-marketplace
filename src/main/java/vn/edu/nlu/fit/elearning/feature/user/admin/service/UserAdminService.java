@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.admin.service;
 
+import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserProfileRequest;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusRequest;
@@ -15,7 +16,7 @@ public interface UserAdminService {
 
     int deleteUser(int id);
 
-    List<UserTableResponse> getAllUsers();
+    List<UserAdminDto> getAllUsers();
 
     List<User> getAllUsersByFilter(String username, String phone, String createdAt, String role);
 

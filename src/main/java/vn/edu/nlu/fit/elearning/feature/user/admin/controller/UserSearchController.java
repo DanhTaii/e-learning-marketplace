@@ -29,7 +29,7 @@ public class UserSearchController extends HttpServlet {
 
         List<User> searchUsers = userAdminService.getAllUsersByFilter(username, phone, dateFrom, role);
         request.setAttribute("listUsers", searchUsers);
-        request.getRequestDispatcher("/views/pages/admin/users-management.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin/user-management.jsp").forward(request, response);
     }
 
     @Override

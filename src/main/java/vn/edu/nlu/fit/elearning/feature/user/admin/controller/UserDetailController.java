@@ -50,7 +50,6 @@ public class UserDetailController extends HttpServlet {
         user.setLastName(lastName);
         user.setPhone(phone);
         Role userRole = Role.valueOf(role);
-        user.setRole(userRole);
         //ÉP kiểu string về ENUM
         BaseStatus statusEnum = BaseStatus.valueOf(status);
         user.setStatus(statusEnum);

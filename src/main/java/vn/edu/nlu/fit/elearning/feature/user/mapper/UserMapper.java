@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.mapper;
 
+import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserDetailResponse;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserProfileResponse;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
@@ -21,7 +22,6 @@ public class UserMapper {
         dto.setPhone(entity.getPhone());
         dto.setAvatarUrl(entity.getAvatarUrl());
         dto.setStatus(entity.getStatus());
-        dto.setRole(entity.getRole());
 
         return dto;
     }
@@ -36,7 +36,6 @@ public class UserMapper {
         dto.setPhone(entity.getPhone());
         dto.setAvatarUrl(entity.getAvatarUrl());
         dto.setStatus(entity.getStatus());
-        dto.setRole(entity.getRole());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
 
@@ -51,19 +50,18 @@ public class UserMapper {
         dto.setEmail(entity.getEmail());
         dto.setAvatarUrl(entity.getAvatarUrl());
         dto.setStatus(entity.getStatus());
-        dto.setRole(entity.getRole());
 
         return dto;
 
     }
 
-    public static List<UserTableResponse> toUserTableDto(List<User> entity) {
+    public static List<UserTableResponse> toUserTableDto(List<UserAdminDto> entity) {
         List<UserTableResponse> result = new ArrayList<>();
         if (entity == null) return result;
 
-        for (User u : entity) {
+        for (UserAdminDto u : entity) {
             if (u == null) continue;
-            result.add(new UserTableResponse(u.getId(), u.getUsername(), u.getEmail(), u.getPhone(), u.getRole(), u.getStatus(), u.getCreatedAt()));
+            result.add(new UserTableResponse(u.getId(), u.getUsername(), u.getEmail(), u.getPhone(), u.getStatus(), u.getCreatedAt()));
         }
 
         return result;

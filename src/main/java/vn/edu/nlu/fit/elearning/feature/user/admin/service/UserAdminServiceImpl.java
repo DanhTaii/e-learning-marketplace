@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.service;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusRequest;
@@ -19,9 +20,9 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public List<UserTableResponse> getAllUsers() {
-        List<User> users = userAdminDao.findAll();
-        return UserMapper.toUserTableDto(users);
+    public List<UserAdminDto> getAllUsers() {
+        return userAdminDao.findAll();
+//        return UserMapper.toUserTableDto(users);
     }
 
     @Override

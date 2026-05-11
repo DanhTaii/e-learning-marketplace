@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 
 import java.util.List;
@@ -19,38 +20,34 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         });
     }
 
-    public List<User> findAll() {
-        return getJdbi().withHandle(h -> {
-            return h.createQuery("SELECT u.id, u.username, u.email, u.phone, u.role, u.status, u.created_at AS createdAt FROM users u")
-                    .mapToBean(User.class)
-                    .list();
-        });
+    @Override
+    public List<UserAdminDto> findAll() {
+        String sql = """
+        SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.username,
+            u.email, u.phone, u.status,
+            u.avatar_url AS avatarUrl, u.created_at AS createdAt, u.updated_at AS updatedAt, r.name AS roleName
+        FROM users u
+        LEFT JOIN user_roles ur ON u.id = ur.user_id
+        LEFT JOIN roles r ON ur.role_id = r.id
+        ORDER BY u.created_at DESC
+    """;
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapToBean(UserAdminDto.class)
+                        .list()
+        );
     }
 
     public int update(User entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("UPDATE users\n" +
-                            "SET role = :role, username = :username, avatar_url = :avatarUrl, phone = :phone, updated_at = CURRENT_TIMESTAMP\n" +
+                            "SET username = :username, avatar_url = :avatarUrl, phone = :phone, updated_at = CURRENT_TIMESTAMP\n" +
                             "WHERE id = :id")
                     .bind("phone", entity.getPhone())
                     .bind("username", entity.getUsername())
                     .bind("avatarUrl", entity.getAvatarUrl())
-                    .bind("role", entity.getRole())
 //                    .bind("status", entity.getStatus())
                     .bind("id", entity.getId())
-                    .execute();
-        });
-    }
-
-    @Override
-    public int updateRole(int userId, Role role, BaseStatus status) {
-        return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("UPDATE users\n" +
-                            "SET role = :role, status = :status, updated_at = CURRENT_TIMESTAMP\n" +
-                            "WHERE id = :id")
-                    .bind("role", role.name())
-                    .bind("status", status.name())
-                    .bind("id", userId)
                     .execute();
         });
     }
@@ -63,8 +60,13 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
     }
 
     @Override
+    public int updateRole(int userId, Role role, BaseStatus status) {
+        return 0;
+    }
+
+    @Override
     public List<User> findUsersByFilter(String username, String phone, String dateFrom, String role) {
-        StringBuilder sql = new StringBuilder("SELECT u.id, u.username, u.email, u.phone, u.role, u.created_at AS createdAt FROM users u WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT u.id, u.username, u.email, u.phone, u.created_at AS createdAt FROM users u WHERE 1=1");
 
 //      Phải có lúc username.trim().isEmpty() vì có thể sẽ không nhập tên nhưng để khoảng trắng thì DB nó sẽ kiếm khoảng trắng đó
         if (username != null && !username.trim().isEmpty()) {
@@ -73,9 +75,6 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         }
         if (phone != null && !phone.trim().isEmpty()) {
             sql.append(" AND u.phone LIKE :phoneSearch");
-        }
-        if (role != null && !role.trim().isEmpty()) {
-            sql.append(" AND u.role = :roleSearch");
         }
         if (dateFrom != null && !dateFrom.trim().isEmpty()) {
             sql.append(" AND u.created_at >= :dateFromSearch");
@@ -99,9 +98,6 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
 
                 String phoneSearch = "%" + processedPhone.trim() + "%";
                 query.bind("phoneSearch", phoneSearch);
-            }
-            if (role != null && !role.trim().isEmpty()) {
-                query.bind("roleSearch", role);
             }
             if (dateFrom != null && !dateFrom.trim().isEmpty()) {
                 query.bind("dateFromSearch", dateFrom);
