@@ -1,8 +1,13 @@
 package vn.edu.nlu.fit.elearning.feature.contact.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.ContactStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user_request.RequestFilter;
+import vn.edu.nlu.fit.elearning.feature.category.model.Category;
 import vn.edu.nlu.fit.elearning.feature.contact.dao.ContactDao;
 import vn.edu.nlu.fit.elearning.feature.contact.model.Contact;
+
+import java.util.List;
 
 public class ContactServiceImpl implements ContactService {
 
@@ -24,5 +29,34 @@ public class ContactServiceImpl implements ContactService {
         return 0;
     }
 
+    @Override
+    public List<Contact> getAllContacts() {
+        return contactDao.findAll();
+    }
+
+    @Override
+    public List<Contact> getContactsByFilter(RequestFilter filter) {
+        return contactDao.findContactsByFilter(filter);
+    }
+
+    @Override
+    public int countContactsByFilter(RequestFilter filter) {
+        return contactDao.countContactsByFilter(filter);
+    }
+
+    @Override
+    public Contact getContactById(int id) {
+        return contactDao.findById(id);
+    }
+
+    @Override
+    public int updateContact(Contact contact) {
+        return contactDao.update(contact);
+    }
+
+    @Override
+    public Contact findById(int id) {
+        return contactDao.findById(id);
+    }
 
 }

@@ -1,5 +1,5 @@
 package vn.edu.nlu.fit.elearning.common.helper.enums;
 
 public enum ContactStatus {
-    PENDING, RESOLVED;
+    PENDING, RESOLVED, IN_PROGRESS, REJECTED;
 }
