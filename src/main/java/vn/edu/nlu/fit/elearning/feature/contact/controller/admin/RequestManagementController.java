@@ -39,14 +39,27 @@ public class RequestManagementController extends BaseController {
 
         String statusParam = request.getParameter("status");
 
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 10));
+
         if (statusParam != null && !statusParam.isBlank()) {
             filter.setStatus(ContactStatus.valueOf(statusParam));
         }
 
         List<Contact> listRequests = contactService.getContactsByFilter(filter);
 
+        int totalRecords = contactService.countContactsByFilter(filter);
+
+        int totalPages = (int) Math.ceil(
+                (double) totalRecords / filter.getSize()
+        );
+
         request.setAttribute("filter", filter);
         request.setAttribute("listRequests", listRequests);
+
+        request.setAttribute("totalRequests", totalRecords);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("currentPageNumber", filter.getPage());
 
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {

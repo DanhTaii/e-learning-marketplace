@@ -15,5 +15,6 @@ public interface ContactDao {
 
     List<Contact> findContactsByFilter(RequestFilter filter);
 
+    int countContactsByFilter(RequestFilter filter);
 
 }

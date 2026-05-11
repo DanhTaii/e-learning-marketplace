@@ -186,5 +186,6 @@
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/user_request/request-management.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

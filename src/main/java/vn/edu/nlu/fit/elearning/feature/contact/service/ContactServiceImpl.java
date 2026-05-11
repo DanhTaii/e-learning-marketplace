@@ -39,6 +39,9 @@ public class ContactServiceImpl implements ContactService {
         return contactDao.findContactsByFilter(filter);
     }
 
-
+    @Override
+    public int countContactsByFilter(RequestFilter filter) {
+        return contactDao.countContactsByFilter(filter);
+    }
 
 }

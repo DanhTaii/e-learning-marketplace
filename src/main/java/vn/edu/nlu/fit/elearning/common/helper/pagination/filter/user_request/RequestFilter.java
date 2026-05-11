@@ -1,10 +1,11 @@
 package vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user_request;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.ContactStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.base.BaseSearchFilter;
 
 import java.sql.Timestamp;
 
-public class RequestFilter {
+public class RequestFilter extends BaseSearchFilter {
 
     private String email;
     private String subject;

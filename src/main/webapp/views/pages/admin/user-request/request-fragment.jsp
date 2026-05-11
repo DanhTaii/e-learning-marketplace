@@ -23,8 +23,13 @@
     </table>
 
     <jsp:include page="/views/components/bulk-action-bar.jsp">
-        <jsp:param name="label" value="danh mục"/>
+        <jsp:param name="label" value="yêu cầu"/>
         <jsp:param name="showDuplicate" value="true"/>
     </jsp:include>
 
 </div>
+<jsp:include page="/views/components/pagination-base.jsp">
+    <jsp:param name="baseUrl" value="admin/requests"/>
+    <jsp:param name="currentPageNumber" value="${filter.page}"/>
+    <jsp:param name="totalPages" value="${totalPages}"/>
+</jsp:include>

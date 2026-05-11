@@ -45,22 +45,28 @@ public class ContactDaoImpl extends BaseDao implements ContactDao {
         String whereClause = buildRequestWhereClause(filter, params);
 
         String sql = """
-            SELECT sr.id,
-                   sr.email,
-                   sr.subject,
-                   sr.message,
-                   sr.status,
-                   sr.created_at
-            FROM support_requests sr
-            """
+        SELECT sr.id,
+               sr.email,
+               sr.subject,
+               sr.message,
+               sr.status,
+               sr.created_at
+        FROM support_requests sr
+        """
                 + whereClause +
-                " ORDER BY sr.created_at DESC";
+                " ORDER BY sr.created_at DESC\n" +
+                "LIMIT :limit OFFSET :offset";
 
         return getJdbi().withHandle(handle -> {
 
             var query = handle.createQuery(sql);
 
             params.forEach(query::bind);
+
+            query.bind("limit", filter.getSize());
+
+            query.bind("offset",
+                    (filter.getPage() - 1) * filter.getSize());
 
             return query.mapToBean(Contact.class).list();
         });
@@ -125,6 +131,29 @@ public class ContactDaoImpl extends BaseDao implements ContactDao {
         }
 
         return where.toString();
+    }
+
+    @Override
+    public int countContactsByFilter(RequestFilter filter) {
+
+        Map<String, Object> params = new HashMap<>();
+
+        String whereClause = buildRequestWhereClause(filter, params);
+
+        String sql = """
+        SELECT COUNT(*)
+        FROM support_requests sr
+        """
+                + whereClause;
+
+        return getJdbi().withHandle(handle -> {
+
+            var query = handle.createQuery(sql);
+
+            params.forEach(query::bind);
+
+            return query.mapTo(Integer.class).one();
+        });
     }
 
 
