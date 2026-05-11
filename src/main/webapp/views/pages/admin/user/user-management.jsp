@@ -80,48 +80,68 @@
 
                                     <div class="filter-content" id="filterContent">
                                         <div class="filter-grid">
+
                                             <div class="filter-group">
-                                                <label>Tìm kiếm danh mục</label>
-                                                <div class="input-with-icon">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="searchName"
-                                                           value="${param.searchName}"
-                                                           placeholder="Nhập tên danh mục...">
-                                                </div>
+                                                <label>Tên người dùng</label>
+
+                                                <input type="text"
+                                                       name="username"
+                                                       value="${param.username}"
+                                                       placeholder="Nhập username...">
                                             </div>
 
                                             <div class="filter-group">
-                                                <label>Từ ngày</label>
-                                                <input type="date" name="fromDate" value="${param.fromDate}">
+                                                <label>Email</label>
+
+                                                <input type="text"
+                                                       name="email"
+                                                       value="${param.email}"
+                                                       placeholder="Nhập email...">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Vai trò</label>
+                                                <select name="roleName">
+                                                    <option value="">Tất cả</option>
+                                                    <option value="SUPER_ADMIN"
+                                                    ${param.roleName == 'SUPER_ADMIN' ? 'selected' : ''}>
+                                                        Super Admin
+                                                    </option>
+                                                    <option value="ADMIN_USER"
+                                                    ${param.roleName == 'ADMIN_USER' ? 'selected' : ''}>
+                                                        Quản trị người dùng
+                                                    </option>
+                                                    <option value="ADMIN_COURSE"
+                                                    ${param.roleName == 'ADMIN_COURSE' ? 'selected' : ''}>
+                                                        Quản trị khóa học
+                                                    </option>
+
+                                                    <option value="ADMIN_ORDER"
+                                                    ${param.roleName == 'ADMIN_ORDER' ? 'selected' : ''}>
+                                                        Quản trị đơn hàng
+                                                    </option>
+                                                    <option value="USER"
+                                                    ${param.roleName == 'USER' ? 'selected' : ''}>
+                                                        Người dùng
+                                                    </option>
+                                                </select>
                                             </div>
 
                                             <div class="filter-group">
                                                 <label>Trạng thái</label>
                                                 <select name="status">
-                                                    <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
-                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>Hoạt động</option>
-                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>Không hoạt động</option>
+                                                    <option value="">Tất cả</option>
+                                                    <option value="ACTIVE"
+                                                    ${param.status == 'ACTIVE' ? 'selected' : ''}>
+                                                        Hoạt động
+                                                    </option>
+                                                    <option value="INACTIVE"
+                                                    ${param.status == 'INACTIVE' ? 'selected' : ''}>
+                                                        Bị khóa
+                                                    </option>
                                                 </select>
                                             </div>
 
-                                            <div class="filter-group">
-                                                <label>Tên slug</label>
-                                                <input type="text" name="slug"
-                                                       value="${param.slug}"
-                                                       placeholder="Nhập slug...">
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Đến ngày</label>
-                                                <input type="date" name="toDate" value="${param.toDate}">
-                                            </div>
-
-                                            <div class="filter-group">
-                                                <label>Parent ID</label>
-                                                <input type="number" name="parentId"
-                                                       value="${param.parentId}"
-                                                       placeholder="Ví dụ: 0" min="0">
-                                            </div>
                                         </div>
                                         <div class="filter-actions">
                                             <a href="admin/categories" class="btn-clear">

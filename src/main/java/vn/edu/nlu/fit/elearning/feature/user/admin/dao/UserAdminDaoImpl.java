@@ -3,10 +3,13 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
 
@@ -104,6 +107,139 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
             }
             return query.mapToBean(User.class).list();
         });
+    }
+
+    @Override
+    public List<UserAdminDto> findUsersByFilter(UserFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildUserWhereClause(filter, params);
+        String sql = """
+        SELECT u.id, u.first_name AS firstName, u.last_name AS lastName,
+            u.username, u.email, u.phone, u.status, u.avatar_url AS avatarUrl, u.created_at AS createdAt,
+            u.updated_at AS updatedAt, r.name AS roleName
+        FROM users u
+        LEFT JOIN user_roles ur ON u.id = ur.user_id
+        LEFT JOIN roles r ON ur.role_id = r.id
+    """
+                + whereClause +
+                """
+                ORDER BY u.created_at DESC
+                LIMIT :limit OFFSET :offset
+                """;
+
+        return getJdbi().withHandle(handle -> {
+
+            var query = handle.createQuery(sql);
+
+            params.forEach(query::bind);
+
+            query.bind("limit", filter.getSize());
+
+            query.bind(
+                    "offset",
+                    (filter.getPage() - 1) * filter.getSize()
+            );
+
+            return query.mapToBean(UserAdminDto.class).list();
+        });
+    }
+
+    @Override
+    public int countUsersByFilter(UserFilter filter) {
+
+        Map<String, Object> params = new HashMap<>();
+
+        String whereClause = buildUserWhereClause(filter, params);
+
+        String sql = """
+        SELECT COUNT(DISTINCT u.id)
+        FROM users u
+        LEFT JOIN user_roles ur ON u.id = ur.user_id
+        LEFT JOIN roles r ON ur.role_id = r.id
+    """
+                + whereClause;
+
+        return getJdbi().withHandle(handle -> {
+
+            var query = handle.createQuery(sql);
+
+            params.forEach(query::bind);
+
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildUserWhereClause(
+            UserFilter filter,
+            Map<String, Object> params
+    ) {
+
+        StringBuilder where = new StringBuilder(" WHERE 1=1 ");
+
+        // username
+        if (filter.getUsername() != null &&
+                !filter.getUsername().trim().isEmpty()) {
+
+            where.append(" AND u.username LIKE :username ");
+
+            params.put(
+                    "username",
+                    "%" + filter.getUsername().trim() + "%"
+            );
+        }
+
+        // email
+        if (filter.getEmail() != null &&
+                !filter.getEmail().trim().isEmpty()) {
+
+            where.append(" AND u.email LIKE :email ");
+
+            params.put(
+                    "email",
+                    "%" + filter.getEmail().trim() + "%"
+            );
+        }
+
+        // role
+        if (filter.getRoleName() != null &&
+                !filter.getRoleName().trim().isEmpty()) {
+
+            where.append(" AND r.name = :roleName ");
+
+            params.put(
+                    "roleName",
+                    filter.getRoleName()
+            );
+        }
+
+        // status
+        if (filter.getStatus() != null) {
+
+            where.append(" AND u.status = :status ");
+
+            params.put(
+                    "status",
+                    filter.getStatus().name()
+            );
+        }
+
+        // from date
+        if (filter.getFromDate() != null) {
+
+            where.append(" AND u.created_at >= :fromDate ");
+
+            params.put("fromDate", filter.getFromDate());
+        }
+
+        // to date
+        if (filter.getToDate() != null) {
+
+            where.append(" AND u.created_at <= :toDate ");
+
+            params.put("toDate", filter.getToDate());
+        }
+
+        return where.toString();
     }
 
 }

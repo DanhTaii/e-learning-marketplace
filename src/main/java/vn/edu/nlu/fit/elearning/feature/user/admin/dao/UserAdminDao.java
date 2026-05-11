@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 
@@ -21,6 +22,10 @@ public interface UserAdminDao {
     int update(User entity);
 
     int delete(Integer integer);
+
+    List<UserAdminDto> findUsersByFilter(UserFilter filter);
+
+    int countUsersByFilter(UserFilter filter);
 
 
 }

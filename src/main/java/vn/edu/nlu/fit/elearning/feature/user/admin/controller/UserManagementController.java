@@ -4,6 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserTableResponse;
@@ -23,12 +25,33 @@ public class UserManagementController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        List<UserTableResponse> listUsers = userAdminService.getAllUsers();
-        List<UserAdminDto> listUsers = userAdminService.getAllUsers();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        UserFilter filter = new UserFilter();
+
+        filter.setUsername(request.getParameter("username"));
+
+        filter.setEmail(request.getParameter("email"));
+
+        filter.setRoleName(request.getParameter("roleName"));
+
+        String status = request.getParameter("status");
+
+        if (status != null && !status.isEmpty()) {
+            filter.setStatus(BaseStatus.valueOf(status));
+        }
+
+        List<UserAdminDto> listUsers =
+                userAdminService.getUsersByFilter(filter);
+
         request.setAttribute("listUsers", listUsers);
+
         request.setAttribute("currentPage", "users");
-        request.getRequestDispatcher("/views/pages/admin/user/user-management.jsp").forward(request, response);
+
+        request.getRequestDispatcher(
+                "/views/pages/admin/user/user-management.jsp"
+        ).forward(request, response);
     }
 
     @Override

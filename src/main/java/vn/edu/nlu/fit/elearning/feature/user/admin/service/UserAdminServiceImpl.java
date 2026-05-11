@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
@@ -45,6 +46,16 @@ public class UserAdminServiceImpl implements UserAdminService {
         Role role = req.getRole();
         BaseStatus status = req.getStatus();
         return userAdminDao.updateRole(userId, role, status);
+    }
+
+    @Override
+    public List<UserAdminDto> getUsersByFilter(UserFilter filter) {
+        return userAdminDao.findUsersByFilter(filter);
+    }
+
+    @Override
+    public int countUsersByFilter(UserFilter filter) {
+        return userAdminDao.countUsersByFilter(filter);
     }
 
 }
