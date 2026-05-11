@@ -98,6 +98,10 @@ import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDao;
 import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.user.student.service.UserServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.voucher.dao.VoucherDao;
+import vn.edu.nlu.fit.elearning.feature.voucher.dao.VoucherDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDao;
 import vn.edu.nlu.fit.elearning.feature.wishlist.dao.WishlistDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
@@ -184,6 +188,9 @@ public class BeanContainer {
 
         ContactDao contactDao = new ContactDaoImpl();
         beans.put(ContactService.class, new ContactServiceImpl(contactDao));
+
+        VoucherDao voucherDao = new VoucherDaoImpl();
+        beans.put(VoucherService.class, new VoucherServiceImpl(voucherDao));
 
         beans.put(UserAdminService.class, new UserAdminServiceImpl(userAdminDao));
 

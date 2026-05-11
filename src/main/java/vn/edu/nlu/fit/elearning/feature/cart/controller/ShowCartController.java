@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.index.service.IndexService;
+import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -16,10 +19,12 @@ import java.util.List;
 
 public class ShowCartController extends HttpServlet {
     private IndexService indexService;
+    private VoucherService voucherService;
 
     @Override
     public void init() {
         this.indexService = BeanContainer.getBean(IndexService.class);
+        this.voucherService = BeanContainer.getBean(VoucherService.class);
     }
 
     @Override
@@ -32,7 +37,9 @@ public class ShowCartController extends HttpServlet {
         }
 
         List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
+        List<Voucher> vouchers = voucherService.findValidVouchers();
         request.setAttribute("coursesLastest", coursesLastest);
+        request.setAttribute("listVoucher", vouchers);
 
         request.getRequestDispatcher("/views/pages/cart/cart.jsp").forward(request, response);
     }
