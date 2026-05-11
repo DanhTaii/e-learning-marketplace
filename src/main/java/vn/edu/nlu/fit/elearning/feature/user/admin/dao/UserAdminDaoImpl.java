@@ -176,66 +176,39 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
 
         StringBuilder where = new StringBuilder(" WHERE 1=1 ");
 
-        // username
-        if (filter.getUsername() != null &&
-                !filter.getUsername().trim().isEmpty()) {
-
+        if (filter.getUsername() != null && !filter.getUsername().trim().isEmpty()) {
             where.append(" AND u.username LIKE :username ");
-
-            params.put(
-                    "username",
-                    "%" + filter.getUsername().trim() + "%"
+            params.put("username", "%" + filter.getUsername().trim() + "%"
             );
         }
 
-        // email
-        if (filter.getEmail() != null &&
-                !filter.getEmail().trim().isEmpty()) {
-
+        if (filter.getEmail() != null && !filter.getEmail().trim().isEmpty()) {
             where.append(" AND u.email LIKE :email ");
-
-            params.put(
-                    "email",
-                    "%" + filter.getEmail().trim() + "%"
+            params.put("email", "%" + filter.getEmail().trim() + "%"
             );
         }
 
-        // role
-        if (filter.getRoleName() != null &&
-                !filter.getRoleName().trim().isEmpty()) {
-
-            where.append(" AND r.name = :roleName ");
-
-            params.put(
-                    "roleName",
-                    filter.getRoleName()
-            );
+        if (filter.getRoleName() != null && !filter.getRoleName().trim().isEmpty()) {
+            where.append(" AND LOWER(r.name) = :roleName ");
+            params.put("roleName", filter.getRoleName().trim().toLowerCase());
         }
 
-        // status
+
         if (filter.getStatus() != null) {
-
             where.append(" AND u.status = :status ");
-
-            params.put(
-                    "status",
-                    filter.getStatus().name()
+            params.put("status", filter.getStatus().name()
             );
         }
 
         // from date
         if (filter.getFromDate() != null) {
-
             where.append(" AND u.created_at >= :fromDate ");
-
             params.put("fromDate", filter.getFromDate());
         }
 
         // to date
         if (filter.getToDate() != null) {
-
             where.append(" AND u.created_at <= :toDate ");
-
             params.put("toDate", filter.getToDate());
         }
 

@@ -120,8 +120,8 @@
                                                     ${param.roleName == 'ADMIN_ORDER' ? 'selected' : ''}>
                                                         Quản trị đơn hàng
                                                     </option>
-                                                    <option value="USER"
-                                                    ${param.roleName == 'USER' ? 'selected' : ''}>
+                                                    <option value="STUDENT"
+                                                    ${param.roleName == 'STUDENT' ? 'selected' : ''}>
                                                         Người dùng
                                                     </option>
                                                 </select>
@@ -171,10 +171,9 @@
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 </body>
-<script src="assets/javascript/admin/user/admin-user-detail.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
-<%--<script src="assets/javascript/admin/user/user-management.js?v=<%=System.currentTimeMillis()%>"></script>--%>
+<script src="assets/javascript/admin/user/user-management.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
