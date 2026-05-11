@@ -1,6 +1,9 @@
 package vn.edu.nlu.fit.elearning.common.utils.format;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
 public class DataFormatting {
@@ -25,5 +28,10 @@ public class DataFormatting {
         } else {
             return hours + "h " + minutes + "p";
         }
+    }
+
+    public static String formatTimestamp(Timestamp ts) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return ts.toLocalDateTime().format(formatter);
     }
 }
