@@ -4,6 +4,8 @@ import vn.edu.nlu.fit.elearning.common.database.BaseCrudDao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 
 import java.util.List;
@@ -15,11 +17,20 @@ public interface UserAdminDao {
 
     int create(User user);
 
-    List<User> findAll();
+    List<UserAdminDto> findAll();
 
     int update(User entity);
 
     int delete(Integer integer);
 
+    List<UserAdminDto> findUsersByFilter(UserFilter filter);
+
+    int countUsersByFilter(UserFilter filter);
+
+    UserAdminDto findById(int id);
+
+    int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status);
+
+    int create(UserAdminDto user);
 
 }

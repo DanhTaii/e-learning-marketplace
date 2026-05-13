@@ -2,7 +2,9 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
+import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusRequest;
@@ -19,9 +21,9 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public List<UserTableResponse> getAllUsers() {
-        List<User> users = userAdminDao.findAll();
-        return UserMapper.toUserTableDto(users);
+    public List<UserAdminDto> getAllUsers() {
+        return userAdminDao.findAll();
+//        return UserMapper.toUserTableDto(users);
     }
 
     @Override
@@ -44,6 +46,31 @@ public class UserAdminServiceImpl implements UserAdminService {
         Role role = req.getRole();
         BaseStatus status = req.getStatus();
         return userAdminDao.updateRole(userId, role, status);
+    }
+
+    @Override
+    public List<UserAdminDto> getUsersByFilter(UserFilter filter) {
+        return userAdminDao.findUsersByFilter(filter);
+    }
+
+    @Override
+    public int countUsersByFilter(UserFilter filter) {
+        return userAdminDao.countUsersByFilter(filter);
+    }
+
+    @Override
+    public UserAdminDto getUserById(int id) {
+        return userAdminDao.findById(id);
+    }
+
+    @Override
+    public int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status) {
+        return userAdminDao.updateUserRoleAndStatus(userId, roleId, status);
+    }
+
+    @Override
+    public int createUser(UserAdminDto user) {
+        return userAdminDao.create(user);
     }
 
 }
