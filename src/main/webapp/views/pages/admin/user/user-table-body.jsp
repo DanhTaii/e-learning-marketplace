@@ -78,10 +78,11 @@
                 </td>
                 <td class="action__button">
                     <div class="action-wrapper">
-                        <button type="button" onclick="showUserDetail(${user.id})"
-                                class="icon-action-btn">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
+                        <a href="admin/user/detail?id=${user.id}">
+                            <button type="button" class="icon-action-btn">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
                     </div>
                 </td>
             </tr>

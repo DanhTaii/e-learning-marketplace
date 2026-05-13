@@ -215,4 +215,34 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         return where.toString();
     }
 
+    @Override
+    public UserAdminDto findById(int id) {
+
+        String sql = """
+        SELECT u.id,
+               u.first_name AS firstName,
+               u.last_name AS lastName,
+               u.username,
+               u.email,
+               u.phone,
+               u.status,
+               u.avatar_url AS avatarUrl,
+               u.created_at AS createdAt,
+               u.updated_at AS updatedAt,
+               r.name AS roleName
+        FROM users u
+        LEFT JOIN user_roles ur ON u.id = ur.user_id
+        LEFT JOIN roles r ON ur.role_id = r.id
+        WHERE u.id = :id
+    """;
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("id", id)
+                        .mapToBean(UserAdminDto.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
 }

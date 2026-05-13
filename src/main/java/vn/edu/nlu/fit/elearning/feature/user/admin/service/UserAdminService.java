@@ -25,4 +25,6 @@ public interface UserAdminService {
 
     int countUsersByFilter(UserFilter filter);
 
+    UserAdminDto getUserById(int id);
+
 }

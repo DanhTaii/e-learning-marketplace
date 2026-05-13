@@ -58,4 +58,9 @@ public class UserAdminServiceImpl implements UserAdminService {
         return userAdminDao.countUsersByFilter(filter);
     }
 
+    @Override
+    public UserAdminDto getUserById(int id) {
+        return userAdminDao.findById(id);
+    }
+
 }

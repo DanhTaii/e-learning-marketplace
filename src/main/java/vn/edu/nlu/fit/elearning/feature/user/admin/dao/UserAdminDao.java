@@ -27,5 +27,7 @@ public interface UserAdminDao {
 
     int countUsersByFilter(UserFilter filter);
 
+    UserAdminDto findById(int id);
+
 
 }
