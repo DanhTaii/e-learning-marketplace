@@ -68,4 +68,9 @@ public class UserAdminServiceImpl implements UserAdminService {
         return userAdminDao.updateUserRoleAndStatus(userId, roleId, status);
     }
 
+    @Override
+    public int createUser(UserAdminDto user) {
+        return userAdminDao.create(user);
+    }
+
 }

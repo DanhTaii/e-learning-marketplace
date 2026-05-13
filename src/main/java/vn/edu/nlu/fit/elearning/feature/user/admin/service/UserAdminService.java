@@ -30,4 +30,6 @@ public interface UserAdminService {
 
     int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status);
 
+    int createUser(UserAdminDto user);
+
 }

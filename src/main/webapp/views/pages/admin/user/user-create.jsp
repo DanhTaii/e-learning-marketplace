@@ -5,8 +5,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>
-        ${(not empty user and user.id > 0) ? 'Cập nhật người dùng' : 'Tạo mới người dùng'}
+        ${(not empty user and user.id > 0)
+                ? 'Cập nhật người dùng'
+                : 'Tạo mới người dùng'}
     </title>
 
     <base href="${pageContext.request.contextPath}/">
@@ -51,99 +54,131 @@
                     </div>
 
                     <div class="form-container">
-                        <form action="admin/user/detail" method="post" class="form-modern">
-                            <input type="hidden" name="id"
-                                   value="${user != null ? user.id : ''}"/>
+                        <form id="userForm" action="admin/user/detail" method="post" class="form-modern">
+                            <input type="hidden" name="id" value="${user != null ? user.id : ''}"/>
 
                             <div class="category-create-card">
-                                <%-- Họ --%>
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
                                         <label class="label-style">Họ</label>
-                                        <input type="text" class="input-modern readonly-field"
-                                               value="${user.firstName}" readonly>
+                                        <input type="text" name="firstName" class="input-modern
+                                               ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
+                                               value="${not empty user.firstName ? user.firstName : param.firstName}"
+                                               placeholder="Nhập họ..."
+                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+
+                                        <span class="error-client">${errors.firstName}</span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Tên</label>
 
-                                        <input type="text" class="input-modern readonly-field"
-                                               value="${user.lastName}" readonly>
+                                        <input type="text" name="lastName" class="input-modern
+                                               ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
+                                               value="${not empty user.lastName ? user.lastName : param.lastName}"
+                                               placeholder="Nhập tên..."
+                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+
+                                        <span class="error-client">${errors.lastName}</span>
                                     </div>
                                 </div>
 
-                                <%-- Username --%>
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Username</label>
-                                        <input type="text" class="input-modern readonly-field"
-                                               value="${user.username}" readonly>
+                                        <input type="text" name="username" class="input-modern
+                                               ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
+                                               value="${not empty user.username ? user.username : param.username}"
+                                               placeholder="Nhập username..."
+                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <span class="error-client">${errors.username}</span>
                                     </div>
                                 </div>
 
-                                <%-- Email & Phone --%>
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
                                         <label class="label-style">Email</label>
-                                        <input type="text" class="input-modern readonly-field"
-                                               value="${user.email}" readonly>
+                                        <input type="email" name="email" class="input-modern
+                                               ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
+                                               value="${not empty user.email ? user.email : param.email}"
+                                               placeholder="Nhập email..."
+                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <span class="error-client">
+                                            ${errors.email}
+                                        </span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Số điện thoại</label>
-                                        <input type="text" class="input-modern readonly-field"
-                                               value="${user.phone}" readonly>
-                                    </div>
+                                        <input type="text" name="phone" class="input-modern
+                                               ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
+                                               value="${not empty user.phone ? user.phone : param.phone}"
+                                               placeholder="Nhập số điện thoại..."
+                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
+                                        <span class="error-client">${errors.phone}</span>
+                                    </div>
                                 </div>
 
-                                <%-- Vai trò --%>
+                                <c:if test="${empty user or user.id <= 0}">
+                                    <div class="form-row mt-3">
+                                        <div class="form-group flex-1">
+                                            <label class="label-style">Mật khẩu</label>
+                                            <input type="password" name="password" id="password"
+                                                   class="input-modern" placeholder="Nhập mật khẩu...">
+                                            <span class="error-client" id="error_password">${errors.password}</span>
+                                        </div>
+
+                                        <div class="form-group flex-1">
+                                            <label class="label-style">Xác nhận mật khẩu</label>
+                                            <input type="password" name="confirmPassword" id="confirmPassword"
+                                                   class="input-modern" placeholder="Nhập lại mật khẩu...">
+                                            <span class="error-client" id="error_confirmPassword">${errors.confirmPassword}</span>
+                                        </div>
+                                    </div>
+                                </c:if>
+
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
-                                            <label class="label-style">Vai trò</label>
-
-                                            <select class="input-modern" name="roleId">
-
-                                                <option value="1"
-                                                ${user.roleId == 1 ? 'selected' : ''}>
-                                                    Super Admin
-                                                </option>
-
-                                                <option value="2"
-                                                ${user.roleId == 2 ? 'selected' : ''}>
-                                                    Quản trị người dùng
-                                                </option>
-
-                                                <option value="3"
-                                                ${user.roleId == 3 ? 'selected' : ''}>
-                                                    Quản trị khóa học
-                                                </option>
-
-                                                <option value="4"
-                                                ${user.roleId == 4 ? 'selected' : ''}>
-                                                    Quản trị đơn hàng
-                                                </option>
-
-                                                <option value="5"
-                                                ${user.roleId == 5 ? 'selected' : ''}>
-                                                    Người dùng
-                                                </option>
-
-                                            </select>
+                                        <label class="label-style">Vai trò</label>
+                                        <select class="input-modern" name="roleId">
+                                            <option value="1"
+                                            ${(user.roleId == 1 || param.roleId == '1') ? 'selected' : ''}>
+                                                Super Admin
+                                            </option>
+                                            <option value="2"
+                                            ${(user.roleId == 2 || param.roleId == '2') ? 'selected' : ''}>
+                                                Quản trị người dùng
+                                            </option>
+                                            <option value="3"
+                                            ${(user.roleId == 3 || param.roleId == '3') ? 'selected' : ''}>
+                                                Quản trị khóa học
+                                            </option>
+                                            <option value="4"
+                                            ${(user.roleId == 4 || param.roleId == '4') ? 'selected' : ''}>
+                                                Quản trị đơn hàng
+                                            </option>
+                                            <option value="5"
+                                            ${(user.roleId == 5 || param.roleId == '5') ? 'selected' : ''}>
+                                                Người dùng
+                                            </option>
+                                        </select>
+                                        <span class="error-client">${errors.roleId}</span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Trạng thái</label>
                                         <select class="input-modern" name="status">
                                             <option value="ACTIVE"
-                                            ${user.status.name() == 'ACTIVE' ? 'selected' : ''}>
+                                            ${(user.status.name() == 'ACTIVE') || param.status == 'ACTIVE' ? 'selected' : ''}>
                                                 Hoạt động
                                             </option>
                                             <option value="INACTIVE"
-                                            ${user.status.name() == 'INACTIVE' ? 'selected' : ''}>
+                                            ${(user.status.name() == 'INACTIVE') || param.status == 'INACTIVE' ? 'selected' : ''}>
                                                 Bị khóa
                                             </option>
                                         </select>
+                                        <span class="error-client">${errors.status}</span>
                                     </div>
                                 </div>
 
@@ -154,7 +189,8 @@
                                         <div style="margin-top: 10px;">
                                             <img src="${user.avatarUrl}"
                                                  alt="avatar"
-                                                 style="width: 120px; height: 120px; border-radius: 12px; object-fit: cover; border: 1px solid #ddd;">
+                                                 style=" width: 120px; height: 120px; border-radius: 12px;
+                                                    object-fit: cover; border: 1px solid #ddd;">
                                         </div>
                                     </div>
                                 </c:if>
@@ -163,48 +199,32 @@
                                     <div class="form-row mt-3">
                                         <div class="form-group flex-1">
                                             <label class="label-style">Ngày tạo</label>
-                                            <input type="text" class="input-modern readonly-field" value="${user.createdAt}" readonly>
+                                            <input type="text" class="input-modern readonly-field"
+                                                   value="${user.createdAt}" readonly>
                                         </div>
 
                                         <div class="form-group flex-1">
                                             <label class="label-style">Cập nhật lần cuối</label>
-                                            <input type="text" class="input-modern readonly-field" value="${user.updatedAt}" readonly>
+                                            <input type="text" class="input-modern readonly-field"
+                                                   value="${user.updatedAt}" readonly>
                                         </div>
-
                                     </div>
                                 </c:if>
 
                                 <%-- Action --%>
                                 <div class="form-actions mt-4">
                                     <div style="display: flex; gap: 10px; flex: 1;">
-                                        <a href="admin/users" class="btn-cancel-modern" style="text-decoration: none;">
+                                        <a href="admin/users" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
                                             Hủy bỏ
                                         </a>
+
                                         <button type="submit" class="btn-submit-modern w-100">
                                             <i class="fa-solid fa-floppy-disk"></i>
                                             ${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}
                                         </button>
                                     </div>
-
-                                    <c:if test="${user != null and user.id > 0}">
-
-                                        <button type="button"
-                                                class="btn-delete-modern"
-                                                onclick="openConfirmModal(
-                                                    ${user.id},
-                                                        'admin/user/delete',
-                                                        'Bạn có chắc chắn muốn xóa người dùng này?'
-                                                        )">
-
-                                            <i class="fa-solid fa-trash-can"></i>
-                                            Xóa người dùng
-
-                                        </button>
-
-                                    </c:if>
-
                                 </div>
-
                             </div>
                         </form>
 

@@ -258,4 +258,49 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         });
     }
 
+    @Override
+    public int create(UserAdminDto user) {
+
+        return getJdbi().inTransaction(handle -> {
+
+            int userId = handle.createUpdate("""
+            INSERT INTO users (
+                first_name,
+                last_name,
+                username,
+                email,
+                password,
+                phone,
+                avatar_url,
+                status
+            )
+            VALUES (
+                :firstName,
+                :lastName,
+                :username,
+                :email,
+                :password,
+                :phone,
+                :avatarUrl,
+                :status
+            )
+        """)
+                    .bindBean(user)
+                    .bind("status", user.getStatus().name())
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(Integer.class)
+                    .one();
+
+            handle.createUpdate("""
+            INSERT INTO user_roles(user_id, role_id)
+            VALUES(:userId, :roleId)
+        """)
+                    .bind("userId", userId)
+                    .bind("roleId", user.getRoleId())
+                    .execute();
+
+            return userId;
+        });
+    }
+
 }

@@ -31,5 +31,6 @@ public interface UserAdminDao {
 
     int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status);
 
+    int create(UserAdminDto user);
 
 }
