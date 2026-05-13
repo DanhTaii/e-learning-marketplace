@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
@@ -51,6 +52,24 @@ public class UserDetailController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int roleId = Integer.parseInt(request.getParameter("roleId"));
+            BaseStatus status = BaseStatus.valueOf(request.getParameter("status"));
+            int result = userAdminService.updateUserRoleAndStatus(id, roleId, status);
 
+            if (result > 0) {
+                request.getSession().setAttribute("flashSuccess", "Cập nhật người dùng thành công!");
+
+            } else {
+                request.getSession().setAttribute("flashError", "Cập nhật thất bại!");
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute("flashError", "Lỗi hệ thống!");
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+        }
     }
 }

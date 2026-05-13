@@ -9,6 +9,7 @@ public class UserAdminDto {
     private String firstName;
     private String lastName;
     private String username;
+    private int roleId;
     private String roleName;
     private String email;
     private String password;
@@ -21,11 +22,12 @@ public class UserAdminDto {
     public UserAdminDto() {
     }
 
-    public UserAdminDto(Integer id, String firstName, String lastName, String username, String roleName, String email, String password, String phone, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
+    public UserAdminDto(Integer id, String firstName, String lastName, String username, int roleId, String roleName, String email, String password, String phone, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
+        this.roleId = roleId;
         this.roleName = roleName;
         this.email = email;
         this.password = password;
@@ -34,6 +36,14 @@ public class UserAdminDto {
         this.avatarUrl = avatarUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {

@@ -217,19 +217,10 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
 
     @Override
     public UserAdminDto findById(int id) {
-
         String sql = """
-        SELECT u.id,
-               u.first_name AS firstName,
-               u.last_name AS lastName,
-               u.username,
-               u.email,
-               u.phone,
-               u.status,
-               u.avatar_url AS avatarUrl,
-               u.created_at AS createdAt,
-               u.updated_at AS updatedAt,
-               r.name AS roleName
+        SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.username, u.email,
+               u.phone, u.status, u.avatar_url AS avatarUrl, u.created_at AS createdAt, u.updated_at AS updatedAt,
+               r.id AS roleId,  r.name AS roleName
         FROM users u
         LEFT JOIN user_roles ur ON u.id = ur.user_id
         LEFT JOIN roles r ON ur.role_id = r.id
@@ -243,6 +234,28 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
                         .findFirst()
                         .orElse(null)
         );
+    }
+
+    @Override
+    public int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status) {
+        return getJdbi().inTransaction(handle -> {
+            handle.createUpdate("""
+            UPDATE users
+            SET status = :status
+            WHERE id = :userId
+        """).bind("status", status.name())
+            .bind("userId", userId)
+            .execute();
+
+            handle.createUpdate("""
+            UPDATE user_roles
+            SET role_id = :roleId
+            WHERE user_id = :userId
+        """).bind("roleId", roleId)
+            .bind("userId", userId)
+            .execute();
+            return 1;
+        });
     }
 
 }

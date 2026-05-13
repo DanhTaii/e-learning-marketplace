@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.user.admin.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
@@ -26,5 +27,7 @@ public interface UserAdminService {
     int countUsersByFilter(UserFilter filter);
 
     UserAdminDto getUserById(int id);
+
+    int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status);
 
 }

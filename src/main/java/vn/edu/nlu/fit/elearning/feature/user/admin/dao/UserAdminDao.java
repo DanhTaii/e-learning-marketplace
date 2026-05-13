@@ -29,5 +29,7 @@ public interface UserAdminDao {
 
     UserAdminDto findById(int id);
 
+    int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status);
+
 
 }

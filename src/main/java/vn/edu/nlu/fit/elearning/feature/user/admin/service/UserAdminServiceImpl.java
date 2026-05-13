@@ -63,4 +63,9 @@ public class UserAdminServiceImpl implements UserAdminService {
         return userAdminDao.findById(id);
     }
 
+    @Override
+    public int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status) {
+        return userAdminDao.updateUserRoleAndStatus(userId, roleId, status);
+    }
+
 }

@@ -100,21 +100,47 @@
                                 <%-- Vai trò --%>
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
-                                        <label class="label-style">Vai trò</label>
+                                            <label class="label-style">Vai trò</label>
 
-                                        <input type="text" class="input-modern readonly-field"
-                                               value="${empty user.roleName ? 'Chưa có vai trò' : user.roleName}" readonly>
+                                            <select class="input-modern" name="roleId">
+
+                                                <option value="1"
+                                                ${user.roleId == 1 ? 'selected' : ''}>
+                                                    Super Admin
+                                                </option>
+
+                                                <option value="2"
+                                                ${user.roleId == 2 ? 'selected' : ''}>
+                                                    Quản trị người dùng
+                                                </option>
+
+                                                <option value="3"
+                                                ${user.roleId == 3 ? 'selected' : ''}>
+                                                    Quản trị khóa học
+                                                </option>
+
+                                                <option value="4"
+                                                ${user.roleId == 4 ? 'selected' : ''}>
+                                                    Quản trị đơn hàng
+                                                </option>
+
+                                                <option value="5"
+                                                ${user.roleId == 5 ? 'selected' : ''}>
+                                                    Người dùng
+                                                </option>
+
+                                            </select>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Trạng thái</label>
-                                        <select class="input-modern"name="status">
+                                        <select class="input-modern" name="status">
                                             <option value="ACTIVE"
-                                            ${(user.status.name() == 'ACTIVE') ? 'selected' : ''}>
+                                            ${user.status.name() == 'ACTIVE' ? 'selected' : ''}>
                                                 Hoạt động
                                             </option>
                                             <option value="INACTIVE"
-                                            ${(user.status.name() == 'INACTIVE') ? 'selected' : ''}>
+                                            ${user.status.name() == 'INACTIVE' ? 'selected' : ''}>
                                                 Bị khóa
                                             </option>
                                         </select>
