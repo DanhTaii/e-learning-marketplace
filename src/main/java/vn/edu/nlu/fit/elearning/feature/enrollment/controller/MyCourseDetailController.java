@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
 import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentDetailDto;
@@ -17,14 +18,15 @@ import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.List;
 
 @WebServlet(name = "MyCourseDetailController", value = "/personal/my-course/detail")
 public class MyCourseDetailController extends HttpServlet {
-    private EnrollmentService enrollmentService;
-    private UserLessonProgressService ulp;
-    private ReviewService reviewService;
-    private CertificateService certificateService;
+    private transient EnrollmentService enrollmentService;
+    private transient UserLessonProgressService ulp;
+    private transient ReviewService reviewService;
+    private transient CertificateService certificateService;
     private static final Logger logger = LoggerFactory.getLogger(MyCourseDetailController.class);
 
     @Override
@@ -64,11 +66,7 @@ public class MyCourseDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
-            int userId = 0;
-            if (session.getAttribute("userId") != null) {
-                userId = (Integer) session.getAttribute("userId");
-            }
+            int userId = SessionUtils.getCurrentUserId(request);
 
             String lessonIdStr = request.getParameter("lessonId");
             String isCompletedStr = request.getParameter("completed");
@@ -92,8 +90,11 @@ public class MyCourseDetailController extends HttpServlet {
                     Certificate cert = new Certificate();
                     cert.setCourseId(courseId);
                     cert.setUserId(userId);
+                    cert.setIssueDate(new Timestamp(System.currentTimeMillis()));
 
-                    certId = certificateService.createCertificate(cert);
+                    String realPath = request.getServletContext().getRealPath("");
+
+                    certId = certificateService.processAndGenerateCertificate(cert, realPath);
                 }
 
             }

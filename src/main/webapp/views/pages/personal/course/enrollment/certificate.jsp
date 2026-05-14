@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
     <link rel="stylesheet" href="assets/css/course/certificate.css?v=<%=System.currentTimeMillis()%>">
+
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 
@@ -48,10 +51,12 @@
                                 <!-- Tên học viên lấy từ DB -->
                                 <h1 class="cert-student-name">${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName)  : 'Nguyễn Văn A'}</h1>
 
-                                <p class="cert-desc">đã hoàn thành xuất sắc chương trình học và bài kiểm tra của khóa học</p>
+                                <p class="cert-desc">đã hoàn thành xuất sắc chương trình học và bài kiểm tra của khóa
+                                    học</p>
                                 <!-- Tên khóa học -->
                                 <h2 class="cert-course-name">${not empty certificateDetail.courseTitle ? certificateDetail.courseTitle : 'Kỹ năng Giao tiếp Chuyên nghiệp'}</h2>
-                                <p class="cert-platform">Được chứng nhận thông qua nền tảng đào tạo E-Learning Workspace</p>
+                                <p class="cert-platform">Được chứng nhận thông qua nền tảng đào tạo E-Learning
+                                    Workspace</p>
                             </div>
 
                             <!-- Footer của chứng chỉ (Chữ ký, ngày tháng, ID) -->
@@ -62,7 +67,7 @@
                                         <c:if test="${not empty certificateDetail.issueDate}">
                                             <fmt:formatDate
                                                     value="${certificateDetail.issueDate}"
-                                                    pattern="yyyy-MM-dd" />
+                                                    pattern="yyyy-MM-dd"/>
                                         </c:if>
                                     </span>
                                 </div>
@@ -78,7 +83,8 @@
                         </div>
                     </div>
                     <div class="cert-ledger-note">
-                        <i class="fa-solid fa-shield-check"></i> Chứng chỉ này đã được xác thực và lưu trữ vĩnh viễn trên hệ thống của Học viện E-Learning.
+                        <i class="fa-solid fa-shield-check"></i> Chứng chỉ này đã được xác thực và lưu trữ vĩnh viễn
+                        trên hệ thống của Học viện E-Learning.
                     </div>
                 </div>
             </div>
@@ -88,11 +94,13 @@
                 <!-- Box Quản lý chứng chỉ -->
                 <div class="action-panel-card">
                     <h3 class="text-2xl bold mb-2">Quản lý Chứng chỉ</h3>
-                    <p class="text-base text-gray mb-4 ">Xuất chứng chỉ ở độ phân giải cao để in ấn hoặc chia sẻ trực tuyến.</p>
+                    <p class="text-base text-gray mb-4 ">Xuất chứng chỉ ở độ phân giải cao để in ấn hoặc chia sẻ trực
+                        tuyến.</p>
 
                     <!-- Nút chức năng -->
                     <div class="cert-actions mb-4">
-                        <a href="student/certificate/download?courseId=${certificateDetail.courseId}" class="btn btn-primary w-100 mb-3">
+                        <a href="personal/my-course/certificate/download?courseId=${certificateDetail.courseId}&action=download"
+                           class="btn btn-primary w-100 mb-3">
                             <i class="fa-solid fa-file-pdf"></i> Tải Bản PDF
                         </a>
 
@@ -126,5 +134,6 @@
 
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 </html>

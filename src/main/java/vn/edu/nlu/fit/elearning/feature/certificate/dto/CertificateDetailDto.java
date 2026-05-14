@@ -13,6 +13,7 @@ public class CertificateDetailDto {
     private Timestamp issueDate;
     private String certificateCode;
     private double durationHours;
+    private String pdfUrl;
 
     public CertificateDetailDto() {
     }
@@ -83,6 +84,14 @@ public class CertificateDetailDto {
 
     public String getDurationText() {
         return DataFormatting.formatDuration(this.durationHours);
+    }
+
+    public String getPdfUrl() {
+        return pdfUrl;
+    }
+
+    public void setPdfUrl(String pdfUrl) {
+        this.pdfUrl = pdfUrl;
     }
 
     @Override

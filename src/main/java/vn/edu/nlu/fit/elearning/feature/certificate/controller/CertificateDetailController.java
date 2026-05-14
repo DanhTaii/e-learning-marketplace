@@ -8,10 +8,9 @@ import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
-import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDaoImp;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
 import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
-import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateServiceImpl;
 
 import java.io.IOException;
 
@@ -29,11 +28,7 @@ public class CertificateDetailController extends BaseController {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
-            int userId = 0;
-            if (session.getAttribute("userId") != null) {
-                userId = (Integer) session.getAttribute("userId");
-            }
+            int userId = SessionUtils.getCurrentUserId(request);
             int courseId = RequestUtils.getParameterAsInt(request, "courseId", 0);
             CertificateDetailDto certificateDetailDto = certificateService.getCertificateByUserIdAndCourseId(userId, courseId);
 
@@ -46,7 +41,7 @@ public class CertificateDetailController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendError(HttpServletResponse.SC_FORBIDDEN, "PHƯƠNG THỨC POST KHÔNG ĐƯỢC HỖ TRỢ !");
     }
 
     public static void main(String[] args) {

@@ -11,4 +11,6 @@ public interface CertificateService {
     String generateUniqueCertificateCode(int userId, int courseId);
 
     CertificateDetailDto getCertificateByUserIdAndCourseId(int userId, int courseId);
+
+    public int processAndGenerateCertificate(Certificate cert, String realPath);
 }

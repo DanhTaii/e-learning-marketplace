@@ -56,7 +56,7 @@ public class CertificateDaoImp extends BaseDao implements CertificateDao {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT cert.id AS id, c.id AS courseId, c.title AS courseTitle, u.first_name, u.last_name, " +
                             "(SELECT IFNULL(SUM(l.duration_minutes), 0) / 60 FROM lessons l WHERE l.course_id = c.id) AS durationHours, " +
-                            "cert.certificate_code, cert.issue_date " +
+                            "cert.certificate_code, cert.issue_date, cert.pdf_url " +
                             "FROM certificates cert " +
                             "JOIN courses c ON cert.course_id = c.id " +
                             "JOIN users u ON u.id = cert.user_id " +
