@@ -1,4 +1,7 @@
 /*phan font chu*/
+.text-2xl {
+    font-size: var(--text-2xl);
+}
 .text-4xl {
     font-size: var(--text-4xl);
 }
@@ -13,6 +16,10 @@
 
 .text-sm {
     font-size: var(--text-sm);
+}
+
+.text-base {
+    font-size: var(--text-base);
 }
 
 .bold {
@@ -73,7 +80,9 @@
     top: 0;
     align-self: flex-start;
     margin-bottom: 6rem;
-    border-radius: 7px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #f3f4f6;
 }
 
 /* =============================================== OVERVIEW =============================================== */
@@ -164,8 +173,19 @@
     line-height: 1.8;
 }
 
+.description__content {
+    line-height: 2.5rem;
+}
+
 .btn-certificate {
     padding: 5px;
+    text-decoration: none;
+}
+
+.btn-certificate.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
 /* ========================= Phan review ======================== */

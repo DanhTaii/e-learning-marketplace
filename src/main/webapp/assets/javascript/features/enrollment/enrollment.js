@@ -75,14 +75,15 @@ checkboxes.forEach(checkbox => {
         const lessonId = this.getAttribute('data-lesson-id');
         const isCompleted = this.checked;
         const enrollmentId = document.getElementById('enrollment-id').value;
+        const courseId = document.getElementById("course-id").value;
 
 
         // Gọi hàm xử lý AJAX ở đây
-        updateProgress(lessonId, isCompleted, enrollmentId);
+        updateProgress(lessonId, isCompleted, enrollmentId, courseId);
     });
 });
 
-function updateProgress(lessonId, isCompleted, enrollmentId) {
+function updateProgress(lessonId, isCompleted, enrollmentId, courseId) {
     fetch('personal/my-course/detail', {
         // Gỉa lập 1 cái form để gửi nó xuống
         method: 'POST',
@@ -95,8 +96,11 @@ function updateProgress(lessonId, isCompleted, enrollmentId) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                console.log('Cập nhật tiến độ thành công!');
+                // console.log("THÀNH CÔNG")
                 updateCircleProgress(data.newPercent)
+                if (data.certId > 0) {
+                    switchBtnGetCertificate(data.certId, courseId)
+                }
             }
         })
         .catch(error => console.error('Lỗi:', error));
@@ -118,4 +122,17 @@ function updateCircleProgress(percent) {
 
     circleBar.style.strokeDashoffset = offset;
     percentText.innerText = percent + "%";
+}
+
+function switchBtnGetCertificate(certId, courseId) {
+    const btn = document.getElementById("btn-cert");
+
+    if (certId > 0) {
+        btn.classList.remove("disabled");
+        btn.href = `personal/my-course/certificate?courseId=${courseId}`;
+    } else {
+        btn.classList.add("disabled");
+        btn.href("javascript:void(0)");
+    }
+
 }

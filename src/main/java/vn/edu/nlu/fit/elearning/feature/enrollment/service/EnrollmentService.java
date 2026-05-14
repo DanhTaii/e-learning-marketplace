@@ -14,4 +14,6 @@ public interface EnrollmentService {
     EnrollmentDetailDto getEnrollmentDetail(int userId, int courseId);
 
     int getNewPercentComplete(int enrollment);
+
+    int getCourseIdById(int enrollmentId);
 }

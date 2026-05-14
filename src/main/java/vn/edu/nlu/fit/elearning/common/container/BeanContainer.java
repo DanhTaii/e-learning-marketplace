@@ -10,6 +10,10 @@ import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDao;
+import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDaoImp;
+import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
+import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course.student.dao.CourseDao;
@@ -189,6 +193,9 @@ public class BeanContainer {
         beans.put(VoucherService.class, new VoucherServiceImpl(voucherDao));
 
         beans.put(UserAdminService.class, new UserAdminServiceImpl(userAdminDao));
+
+        CertificateDao certificateDao = new CertificateDaoImp();
+        beans.put(CertificateService.class, new CertificateServiceImpl(certificateDao));
 
     }
 

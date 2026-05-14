@@ -14,7 +14,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public User findById(Integer integer) {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("select u.id, u.username, u.avatar_url, u.email, u.phone, u.role, u.status, u.created_at AS createdAt, u.updated_at AS updatedAt " +
+            return handle.createQuery("select u.id, u.username, u.first_name AS firstName, u.last_name AS lastName, u.avatar_url, u.email, u.phone, u.role, u.status, u.created_at AS createdAt, u.updated_at AS updatedAt " +
                             "FROM users u where u.id = :id")
                     .bind("id", integer)
                     .mapToBean(User.class)

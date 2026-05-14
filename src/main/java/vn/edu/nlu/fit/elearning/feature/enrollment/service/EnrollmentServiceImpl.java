@@ -18,7 +18,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public int createEnrollment(Enrollment enrollment) {
-        // TODO: Implement creation logic
         return ed.createEnrollment(enrollment);
     }
 
@@ -32,7 +31,20 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return ed.findEnrollmentDetail(userId, courseId);
     }
 
-    public int getNewPercentComplete(int enrollmentId){
+    public int getNewPercentComplete(int enrollmentId) {
         return ed.findNewPercentComplete(enrollmentId);
+    }
+
+    @Override
+    public int getCourseIdById(int enrollmentId) {
+        return ed.findCourseIdById(enrollmentId);
+    }
+
+    public static void main(String[] args) {
+//        EnrollmentDao edtest = new EnrollmentDaoImpl();
+//        int id = edtest.findCourseIdById(41);
+//
+//        System.out.println(id);
+
     }
 }

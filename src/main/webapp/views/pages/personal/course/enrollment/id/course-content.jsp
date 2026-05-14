@@ -28,6 +28,7 @@
                 <div class="course-header-container">
                     <h1 class="course-title">${enrollmentDetail.title}</h1>
                     <input id="enrollment-id" type="hidden" name="enrollmentId" value="${enrollmentDetail.id}">
+                    <input id="course-id" type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
 
                     <div class="circular-progress">
                         <svg class="progress-svg" viewBox="0 0 70 70">

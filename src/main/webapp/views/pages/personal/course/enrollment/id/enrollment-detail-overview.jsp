@@ -56,7 +56,8 @@
                 <div class="text-lg mb-4">
                     Hoàn thành khóa học để lấy chứng chỉ
                 </div>
-                <a class="dark-button mt-2 btn-certificate">
+
+                <a href="personal/my-course/certificate?courseId=${enrollmentDetail.courseId}" class="dark-button mt-2 btn-certificate ${hasCertificate == true ? '' : 'disabled'}" id="btn-cert">
                     Lấy chứng chỉ
                 </a>
             </div>
@@ -68,7 +69,7 @@
             </div>
 
             <div class="info-content">
-                <div class="text-lg">
+                <div class="text-lg description__content">
                     ${enrollmentDetail.description}
                 </div>
             </div>
