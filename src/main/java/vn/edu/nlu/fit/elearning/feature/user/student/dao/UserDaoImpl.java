@@ -117,6 +117,63 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                         .list())
         );
     }
+    @Override
+    public int increaseFailedAttempts(String email) {
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+                UPDATE users
+                SET failed_attempts = failed_attempts + 1,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE email = :email
+            """)
+                        .bind("email", email)
+                        .execute()
+        );
+    }
+
+    @Override
+    public int resetFailedAttempts(String email) {
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+                UPDATE users
+                SET failed_attempts = 0,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE email = :email
+            """)
+                        .bind("email", email)
+                        .execute()
+        );
+    }
+
+    @Override
+    public int lockUserAccount(String email) {
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+                UPDATE users
+                SET status = 'INACTIVE',
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE email = :email
+            """)
+                        .bind("email", email)
+                        .execute()
+        );
+    }
+
+    @Override
+    public int getFailedAttemptsByEmail(String email) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                SELECT failed_attempts
+                FROM users
+                WHERE email = :email
+            """)
+                        .bind("email", email)
+                        .mapTo(Integer.class)
+                        .findFirst()
+                        .orElse(0)
+        );
+    }
+
 
 
 }

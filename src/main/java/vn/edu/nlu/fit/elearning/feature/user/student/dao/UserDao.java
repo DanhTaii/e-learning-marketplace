@@ -26,4 +26,13 @@ public interface UserDao {
 
     Set<String> findRolesByUserId(Integer userId);
 
+    // này là làm cho đăng nhập sai mật khẩu 5 lần là tài khoản sẽ bị khóa
+    int increaseFailedAttempts(String email);
+
+    int resetFailedAttempts(String email);
+
+    int lockUserAccount(String email);
+
+    int getFailedAttemptsByEmail(String email);
+
 }

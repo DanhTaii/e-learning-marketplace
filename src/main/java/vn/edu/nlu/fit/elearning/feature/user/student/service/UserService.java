@@ -39,4 +39,12 @@ public interface UserService {
     Set<String> getRolesByUserId(Integer userId);
 
     int updateUser(int id, UserProfileRequest user);
+
+    int increaseFailedAttempts(String email);
+
+    int resetFailedAttempts(String email);
+
+    int lockUserAccount(String email);
+
+    int getFailedAttemptsByEmail(String email);
 }
