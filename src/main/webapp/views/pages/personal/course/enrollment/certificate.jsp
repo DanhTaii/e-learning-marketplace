@@ -32,7 +32,7 @@
             <!-- CỘT TRÁI: BẢN PREVIEW CHỨNG CHỈ -->
             <div class="grid__column-8 column1">
                 <div class="certificate-preview-container">
-                    <div class="cert-paper">
+                    <div class="cert-paper" id="certificate-preview">
                         <div class="cert-border">
                             <!-- Logo / Brand -->
                             <div class="cert-brand">
@@ -105,7 +105,8 @@
                         </a>
 
                         <div class="action-row">
-                            <button class="btn btn-secondary flex-1">
+                            <button type="button" id="btn-download-img" class="btn btn-secondary flex-1"
+                                    data-cert-code="${certificateDetail.certificateCode}">
                                 <i class="fa-regular fa-image"></i> Lưu Ảnh (PNG)
                             </button>
                             <a href="https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${certificateDetail.courseTitle}&organizationName=Học Viện E-Learning Workspace&issueYear=${issueYear}&issueMonth=${issueMonth}&certId=${certificateDetail.certificateCode}"
@@ -138,5 +139,9 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="assets/javascript/features/certificate/certificate.js?v=<%=System.currentTimeMillis()%>"></script>
+
 </body>
 </html>
