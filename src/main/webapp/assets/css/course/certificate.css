@@ -111,14 +111,16 @@
 }
 
 .cert-student-name {
-    font-size: clamp(36px, 4vw, 52px);
+    font-size: clamp(36px, 4vw, 37px);
 
     line-height: 1.15;
     overflow-wrap: break-word;
     word-break: break-word;
 
     max-width: 100%;
-    margin: 0 0 20px 0;
+    margin: 20px 0 20px 0;
+
+    font-weight: var(--fw-semibold);
 }
 
 .cert-desc {
@@ -129,7 +131,7 @@
 
 .cert-course-name {
     color: #0056d2;
-    font-size: clamp(20px, 2.5vw, 32px);
+    font-size: clamp(20px, 2.5vw, 26px);
 
     line-height: 1.25;
 
@@ -137,11 +139,11 @@
     word-break: break-word;
 
     max-width: 100%;
-    margin: 0;
+    margin: 20px;
 }
 
 .cert-platform {
-    font-family: 'Times New Roman', serif;
+    /*font-family: 'Times New Roman', serif;*/
     font-style: italic;
     font-size: 15px;
     color: #4b5563;
@@ -240,6 +242,10 @@
     color: #ffffff;
 }
 
+.btn-primary i {
+    font-size: 16px;
+}
+
 .btn-primary:hover {
     background-color: #374151;
 }
@@ -254,6 +260,10 @@
     color: #374151;
 }
 
+.btn-secondary i {
+    font-size: 3rem;
+}
+
 .btn-secondary:hover {
     background-color: #e5e7eb;
 }
@@ -261,6 +271,10 @@
 .btn-linkedin {
     background-color: #f0f4f8;
     color: #0a66c2;
+}
+
+.btn-linkedin i {
+    font-size: 3rem;
 }
 
 .btn-linkedin:hover {

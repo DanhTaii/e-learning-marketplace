@@ -108,9 +108,12 @@
                             <button class="btn btn-secondary flex-1">
                                 <i class="fa-regular fa-image"></i> Lưu Ảnh (PNG)
                             </button>
-                            <button class="btn btn-linkedin flex-1">
-                                <i class="fa-brands fa-linkedin"></i> Thêm vào LinkedIn
-                            </button>
+                            <a href="https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${certificateDetail.courseTitle}&organizationName=Học Viện E-Learning Workspace&issueYear=${issueYear}&issueMonth=${issueMonth}&certId=${certificateDetail.certificateCode}"
+                               target="_blank"
+                               class="btn btn-linkedin flex-1"
+                               style="text-decoration: none; display: flex; justify-content: center; align-items: center;">
+                                <i class="fa-brands fa-linkedin" style="margin-right: 8px;"></i> Thêm vào LinkedIn
+                            </a>
                         </div>
                     </div>
 

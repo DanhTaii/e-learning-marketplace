@@ -9,10 +9,15 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
+import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDaoImp;
 import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
+import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateServiceImpl;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @WebServlet(name = "CertificateDetailController", value = "/personal/my-course/certificate")
 public class CertificateDetailController extends BaseController {
@@ -32,6 +37,10 @@ public class CertificateDetailController extends BaseController {
             int courseId = RequestUtils.getParameterAsInt(request, "courseId", 0);
             CertificateDetailDto certificateDetailDto = certificateService.getCertificateByUserIdAndCourseId(userId, courseId);
 
+            LocalDateTime issueDate = certificateDetailDto.getIssueDate().toLocalDateTime();
+
+            request.setAttribute("issueYear", issueDate.getYear());
+            request.setAttribute("issueMonth", issueDate.getMonthValue());
             request.setAttribute("certificateDetail", certificateDetailDto);
             this.forward(request, response, "/views/pages/personal/course/enrollment/certificate.jsp");
         } catch (Exception e) {
@@ -47,6 +56,9 @@ public class CertificateDetailController extends BaseController {
     public static void main(String[] args) {
 //        CertificateService service = new CertificateServiceImpl(new CertificateDaoImp());
 //        CertificateDetailDto certificateDetailDto = service.getCertificateByUserIdAndCourseId(73, 7);
+//        LocalDateTime issueDate = certificateDetailDto.getIssueDate().toLocalDateTime();
+//        System.out.println(issueDate.getYear());
+//        System.out.println(issueDate.getMonthValue());
 //        System.out.println(certificateDetailDto.toString());
     }
 }
