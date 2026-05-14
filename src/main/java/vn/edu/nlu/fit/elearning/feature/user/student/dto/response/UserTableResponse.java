@@ -10,19 +10,17 @@ public class UserTableResponse {
     private String username;
     private String email;
     private String phone;
-    private Role role;
     private BaseStatus status;
     private Timestamp createdAt;
 
     public UserTableResponse() {
     }
 
-    public UserTableResponse(int id, String username, String email, String phone, Role role, BaseStatus status, Timestamp createdAt) {
+    public UserTableResponse(int id, String username, String email, String phone, BaseStatus status, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.phone = phone;
-        this.role = role;
         this.status = status;
         this.createdAt = createdAt;
     }
@@ -57,14 +55,6 @@ public class UserTableResponse {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public BaseStatus getStatus() {

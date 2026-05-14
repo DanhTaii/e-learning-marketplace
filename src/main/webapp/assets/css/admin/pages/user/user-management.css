@@ -1,0 +1,12 @@
+.modern-table th:nth-child(2) {
+    width: 21%; !important;
+}
+.modern-table th:nth-child(3) {
+    width: 21%; !important;
+}
+.modern-table th:nth-child(5) {
+    width: 13%; !important;
+}
+.modern-table th:nth-child(6) {
+    width: 10%; !important;
+}
