@@ -42,8 +42,22 @@ public class AuthServiceImpl implements AuthService {
         String hash = PasswordUtils.hashpassword(password);
 
         if (!hash.equals(user.getPassword())) {
-            return null;
+
+            userService.increaseFailedAttempts(email);
+
+            int failedAttempts = userService.getFailedAttemptsByEmail(email);
+
+            if (failedAttempts >= 5) {
+                userService.lockUserAccount(email);
+                throw new IllegalArgumentException("Tài khoản đã bị khóa do nhập sai mật khẩu quá 5 lần!");
+            }
+
+            throw new IllegalArgumentException("Bạn đã nhập sai mật khẩu " + failedAttempts + "/5 lần. Sai 5 lần tài khoản sẽ bị khóa!"
+            );
         }
+
+        // đăng nhập đúng -> reset lại số lần sai
+        userService.resetFailedAttempts(email);
 
         return UserMapper.toUserShortDto(user);
     }
