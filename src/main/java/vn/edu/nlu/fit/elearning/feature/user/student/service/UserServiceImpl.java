@@ -130,4 +130,24 @@ public int countUsersByTimeRange(String timeRange){
         return userDao.findRolesByUserId(userId);
     }
 
+    @Override
+    public int increaseFailedAttempts(String email) {
+        return userDao.increaseFailedAttempts(email);
+    }
+
+    @Override
+    public int resetFailedAttempts(String email) {
+        return userDao.resetFailedAttempts(email);
+    }
+
+    @Override
+    public int lockUserAccount(String email) {
+        return userDao.lockUserAccount(email);
+    }
+
+    @Override
+    public int getFailedAttemptsByEmail(String email) {
+        return userDao.getFailedAttemptsByEmail(email);
+    }
+
 }
