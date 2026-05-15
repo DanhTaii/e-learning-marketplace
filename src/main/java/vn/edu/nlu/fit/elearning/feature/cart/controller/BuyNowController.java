@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartSyncService;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
@@ -20,11 +21,13 @@ import java.io.IOException;
 public class BuyNowController extends HttpServlet {
 
     private CourseService courseService;
+    private CartSyncService cartSyncService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.courseService = BeanContainer.getBean(CourseService.class);
+        this.cartSyncService = BeanContainer.getBean(CartSyncService.class);
     }
 
     @Override
@@ -45,7 +48,10 @@ public class BuyNowController extends HttpServlet {
         c.addCourse(course);
         c.selectOnly(course.getId());
         session.setAttribute("cart", c);
-
+        Integer sessionUserId = (Integer) session.getAttribute("userId");
+        if (sessionUserId != null) {
+            cartSyncService.saveSessionToDatabase(sessionUserId, (CartServiceImpl) c);
+        }
         response.sendRedirect(request.getContextPath() + "/payment");
 
     }

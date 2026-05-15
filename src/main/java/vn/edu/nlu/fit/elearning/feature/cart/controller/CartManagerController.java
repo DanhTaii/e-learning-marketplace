@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartSyncService;
 import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,11 +21,12 @@ import java.util.List;
 
 public class CartManagerController extends HttpServlet {
     private WishlistService ws;
-
+    private CartSyncService cartSyncService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.ws = BeanContainer.getBean(WishlistService.class);
+        this.cartSyncService = BeanContainer.getBean(CartSyncService.class);
     }
     private void sendJsonResponse(HttpServletResponse response, CartService cartService) throws IOException {
         response.setContentType("application/json");
@@ -44,16 +47,19 @@ public class CartManagerController extends HttpServlet {
         CartService ICartService = (CartService) session.getAttribute("cart");
 
         if (ICartService != null && action != null) {
+            boolean isCartModified = false;
             switch (action) {
                 case "delete":
                     int id = Integer.parseInt(request.getParameter("id"));
                     ICartService.deleteCourse(id);
+                    isCartModified = true;
                     break;
 
                 case "moveToWishlist":
                     int courseId = Integer.parseInt(request.getParameter("id"));
                     ws.addCourseToWishlist(userId, courseId);
                     ICartService.deleteCourse(courseId);
+                    isCartModified = true;
                     break;
 
                 case "moveSelectedToWishlist":
@@ -61,16 +67,21 @@ public class CartManagerController extends HttpServlet {
                         ws.addCourseToWishlist(userId, item.getCourse().getId());
                     });
                     ICartService.removeSelected();
+                    isCartModified = true;
                     break;
 
                 case "removeSelected":
                     ICartService.removeSelected();
+                    isCartModified = true;
                     break;
 
                 case "selectAll":
                     boolean status = Boolean.parseBoolean(request.getParameter("status"));
                     ICartService.selectAll(status);
                     break;
+            }
+            if (isCartModified && userId != null) {
+                cartSyncService.saveSessionToDatabase(userId, (CartServiceImpl) ICartService);
             }
             sendJsonResponse(response, ICartService);
             return ;
