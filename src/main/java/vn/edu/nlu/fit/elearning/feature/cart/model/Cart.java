@@ -10,7 +10,7 @@ public class Cart implements Serializable {
     private int userId;
     private String cartHash;
     private Timestamp updatedAt;
-    private List<CartItem> items;
+    private List<CartItemEntity> items;
     public Cart() {
         this.items = new ArrayList<>();
     }
@@ -55,11 +55,11 @@ public class Cart implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<CartItem> getItems() {
+    public List<CartItemEntity> getItems() {
         return items;
     }
 
-    public void setItems(List<CartItem> items) {
+    public void setItems(List<CartItemEntity> items) {
         this.items = items;
     }
 }

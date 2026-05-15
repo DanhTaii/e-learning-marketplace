@@ -10,10 +10,6 @@ public class CartItem {
     private CourseCardDto course;
     private int price;
     private boolean selected;
-    private int id;
-    private int cartId;
-    private int courseId;
-    private Timestamp createdAt;
 
     public CartItem(CourseCardDto course, int price, boolean selected) {
         this.course = course;
@@ -21,15 +17,6 @@ public class CartItem {
         this.selected = selected;
     }
 
-    public CartItem(CourseCardDto course, int price, boolean selected, int id, int cartId, int courseId, Timestamp createdAt) {
-        this.course = course;
-        this.price = price;
-        this.selected = selected;
-        this.id = id;
-        this.cartId = cartId;
-        this.courseId = courseId;
-        this.createdAt = createdAt;
-    }
 
     public CourseCardDto getCourse() {
         return course;

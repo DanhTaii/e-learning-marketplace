@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.cart.dao.CartDao;
 import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
+import vn.edu.nlu.fit.elearning.feature.cart.model.CartItemEntity;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseService;
 
@@ -73,10 +74,10 @@ public class CartSyncService {
     private CartServiceImpl loadDatabaseToSession(Cart dbCart, int userId) {
         CartServiceImpl newSessionCart = new CartServiceImpl();
 
-        List<CartItem> dbItems = dbCart.getItems();
-        for (CartItem item : dbItems) {
+        List<CartItemEntity> dbItems = dbCart.getItems();
+        for (CartItemEntity item : dbItems) {
 
-            CourseCardDto courseCard = courseService.getCourseCardById(item.getCourse().getId(), userId);
+            CourseCardDto courseCard = courseService.getCourseCardById(item.getId(), userId);
 
             if (courseCard != null) {
                 newSessionCart.addCourse(courseCard);

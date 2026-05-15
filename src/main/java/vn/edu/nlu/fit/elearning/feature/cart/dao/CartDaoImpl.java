@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.cart.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
+import vn.edu.nlu.fit.elearning.feature.cart.model.CartItemEntity;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -24,7 +25,7 @@ public class CartDaoImpl extends BaseDao implements CartDao {
 
 
             if (cart != null) {
-                List<CartItem> items = getCartItemsByCartId(cart.getId());
+                List<CartItemEntity> items = getCartItemsByCartId(cart.getId());
                 cart.setItems(items);
             }
             return cart;
@@ -32,7 +33,7 @@ public class CartDaoImpl extends BaseDao implements CartDao {
     }
 
     @Override
-    public List<CartItem> getCartItemsByCartId(int cartId) {
+    public List<CartItemEntity> getCartItemsByCartId(int cartId) {
         return getJdbi().withHandle(handle ->
                 handle.createQuery("""
                     SELECT id, cart_id AS cartId, course_id AS courseId, created_at AS createdAt 
@@ -40,7 +41,7 @@ public class CartDaoImpl extends BaseDao implements CartDao {
                     WHERE cart_id = :cartId
                 """)
                         .bind("cartId", cartId)
-                        .mapToBean(CartItem.class)
+                        .mapToBean(CartItemEntity.class)
                         .list()
         );
     }

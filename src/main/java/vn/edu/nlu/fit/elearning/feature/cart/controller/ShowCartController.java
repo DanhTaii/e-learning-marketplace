@@ -15,7 +15,7 @@ import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ShowCartController", value = "/personal/cart")
+@WebServlet(name = "ShowCartController", value = "/cart")
 
 public class ShowCartController extends HttpServlet {
     private IndexService indexService;

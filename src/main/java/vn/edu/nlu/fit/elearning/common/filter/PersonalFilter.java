@@ -9,7 +9,7 @@ import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortRespo
 
 import java.io.IOException;
 
-@WebFilter(filterName = "PersonalFilter", urlPatterns = {"/personal/*", "/add-cart", "/buy-now"})
+@WebFilter(filterName = "PersonalFilter", urlPatterns = {"/personal/*", "/buy-now"})
 public class PersonalFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
