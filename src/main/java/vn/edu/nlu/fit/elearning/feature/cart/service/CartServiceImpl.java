@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.cart.service;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -10,9 +11,12 @@ import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.format
 
 public class CartServiceImpl implements CartService {
     Map<Integer, CartItem> data;
-
+    private String cartHash;
+    private Timestamp updatedAt;
     public CartServiceImpl() {
         data = new HashMap<>();
+        this.cartHash = "";
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
     }
 
 
