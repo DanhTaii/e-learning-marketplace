@@ -21,8 +21,6 @@ public class PaginationAllCoursesController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Filter cho AllCourse
-        AllCourseFilter allCourseFilter = new AllCourseFilter();
 
         HttpSession session = request.getSession();
         int userId = 0;
@@ -30,62 +28,104 @@ public class PaginationAllCoursesController extends HttpServlet {
             userId = (Integer) session.getAttribute("userId");
         }
 
-        // Lấy tất cả các tham số filter
-        String pageStr = request.getParameter("page");
-        String categoryStr = request.getParameter("category");
-        String sortPrice = request.getParameter("sortPrice");
-        String popularStr = request.getParameter("popular");
-        boolean popular = (popularStr != null) ? Boolean.parseBoolean(popularStr) : false;
-        String newestStr = request.getParameter("newest");
-        boolean newest = (newestStr != null) ? Boolean.parseBoolean(newestStr) : false;
-
+        AllCourseFilter allCourseFilter = new AllCourseFilter();
         int page = 1;
         try {
-            if (pageStr != null) page = Integer.parseInt(pageStr);
-            if (page < 1) page = 1;
-        } catch (Exception e) {
-            page = 1;
-        }
-
-        // Chuyển đổi category
-        Integer categoryId = null;
-        if (categoryStr != null && !categoryStr.trim().isEmpty()) {
-            try {
-                categoryId = Integer.parseInt(categoryStr);
-            } catch (NumberFormatException ignored) {
+            String pageStr = request.getParameter("page");
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
             }
+
+            if (page < 1) {
+                page = 1;
+            }
+
+        } catch (Exception ignored) {
         }
 
-        List<CourseCardDto> listCourse;
-        int totalCourses;
-        allCourseFilter.setCategoryId(categoryId);
-        allCourseFilter.setSortPrice(sortPrice);
-        allCourseFilter.setPopular(popular);
-        allCourseFilter.setNewest(newest);
-        allCourseFilter.setUserId(userId);
-        allCourseFilter.setSize(16);
+        Integer categoryId = null;
+
+        try {
+
+            String categoryStr = request.getParameter("category");
+            if (categoryStr != null && !categoryStr.trim().isEmpty()) {
+                categoryId = Integer.parseInt(categoryStr);
+            }
+
+        } catch (Exception ignored) {
+        }
+
         allCourseFilter.setPage(page);
-
-        // Dùng filter thống nhất cho mọi trường hợp
-        listCourse = courseServiceImpl.filterCoursesForAllCourses(allCourseFilter);
-
-        totalCourses = courseServiceImpl.countFilteredCourses(
-                categoryId, null, null, sortPrice, null, null, null, null, popularStr
+        allCourseFilter.setSize(16);
+        allCourseFilter.setUserId(userId);
+        allCourseFilter.setCategoryId(categoryId);
+        allCourseFilter.setTagId(request.getParameter("tag") != null
+                        ? Integer.parseInt(request.getParameter("tag"))
+                        : null
         );
+
+        allCourseFilter.setKeyword(request.getParameter("keyword"));
+
+        allCourseFilter.setSortPrice(request.getParameter("sortPrice"));
+
+        allCourseFilter.setPopular(Boolean.parseBoolean(request.getParameter("popular")));
+
+        allCourseFilter.setNewest(Boolean.parseBoolean(request.getParameter("newest")));
+        allCourseFilter.setLevel(request.getParameter("level"));
+        allCourseFilter.setRating(request.getParameter("rating"));
+        allCourseFilter.setDuration(request.getParameter("duration"));
+        allCourseFilter.setPriceRange(request.getParameter("priceRange"));
+
+
+        List<CourseCardDto> listCourse = courseServiceImpl.filterCourses(allCourseFilter);
+        int totalCourses = courseServiceImpl.countFilterCourses(allCourseFilter);
 
         int totalPages = (int) Math.ceil((double) totalCourses / allCourseFilter.getSize());
 
-        // Set attributes
+        StringBuilder queryParams = new StringBuilder();
+
+        if (categoryId != null) {
+            queryParams.append("&category=").append(categoryId);
+        }
+
+        if (allCourseFilter.getSortPrice() != null) {
+            queryParams.append("&sortPrice=").append(allCourseFilter.getSortPrice());
+        }
+
+        if (allCourseFilter.isPopular()) {
+            queryParams.append("&popular=true");
+        }
+
+        if (allCourseFilter.isNewest()) {
+            queryParams.append("&newest=true");
+        }
+
+        if (allCourseFilter.getLevel() != null) {
+            queryParams.append("&level=").append(allCourseFilter.getLevel());
+        }
+
+        if (allCourseFilter.getRating() != null) {
+            queryParams.append("&rating=").append(allCourseFilter.getRating());
+        }
+
+        if (allCourseFilter.getDuration() != null) {
+            queryParams.append("&duration=").append(allCourseFilter.getDuration());
+        }
+
+        if (allCourseFilter.getPriceRange() != null) {
+            queryParams.append("&priceRange=").append(allCourseFilter.getPriceRange());
+        }
+
+        if (allCourseFilter.getKeyword() != null) {
+            queryParams.append("&keyword=").append(allCourseFilter.getKeyword());
+        }
+
         request.setAttribute("listCourse", listCourse);
         request.setAttribute("currentPage", allCourseFilter.getPage());
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("totalCourses", totalCourses);
-
-        // Giữ trạng thái filter cho JSP
-        request.setAttribute("category", categoryStr);
-        request.setAttribute("sortPrice", sortPrice);
-        request.setAttribute("popular", popular);
-
+        request.setAttribute("queryParams", queryParams.toString());
+        request.setAttribute("filter", allCourseFilter);
         request.getRequestDispatcher("views/pages/partial/all-course.jsp").forward(request, response);
     }
 }

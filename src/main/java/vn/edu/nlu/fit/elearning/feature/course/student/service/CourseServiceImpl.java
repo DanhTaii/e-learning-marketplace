@@ -203,4 +203,14 @@ public class CourseServiceImpl implements CourseService {
         return courseDao.findCourseSuggestByTitle(keyword);
     }
 
+    @Override
+    public List<CourseCardDto> filterCourses(AllCourseFilter filter) {
+        return courseDao.filterCourses(filter);
+    }
+
+    @Override
+    public int countFilterCourses(AllCourseFilter filter) {
+        return courseDao.countFilterCourses(filter);
+    }
+
 }

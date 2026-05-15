@@ -27,4 +27,8 @@ public interface CourseDao {
     CourseCardDto findCourseCardById(int id, int userId);
 
     List<CourseCardDto> findCourseSuggestByTitle(String keyword);
+
+    List<CourseCardDto> filterCourses(AllCourseFilter filter);
+
+    int countFilterCourses(AllCourseFilter filter);
 }

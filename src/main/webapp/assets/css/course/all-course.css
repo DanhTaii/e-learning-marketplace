@@ -195,3 +195,12 @@
 .fix{
     font-size: 1.5rem;
 }
+
+.filter-active {
+    background-color: #1677ff;
+    color: white;
+}
+
+.filter-active a {
+    color: white !important;
+}
