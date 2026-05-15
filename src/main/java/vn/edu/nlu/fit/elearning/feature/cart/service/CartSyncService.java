@@ -77,7 +77,7 @@ public class CartSyncService {
         List<CartItemEntity> dbItems = dbCart.getItems();
         for (CartItemEntity item : dbItems) {
 
-            CourseCardDto courseCard = courseService.getCourseCardById(item.getId(), userId);
+            CourseCardDto courseCard = courseService.getCourseCardById(item.getCourseId(), userId);
 
             if (courseCard != null) {
                 newSessionCart.addCourse(courseCard);

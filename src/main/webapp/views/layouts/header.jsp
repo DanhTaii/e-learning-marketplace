@@ -181,7 +181,7 @@
             <c:if test="${not loginSession}">
                 <div class="header__button-box">
                     <div class="header__cart">
-                        <a href="cart" class="turn-page text-header cart-link">
+                        <a href="cart" class="turn-page text-header cart-link" style="margin-right: 1.5rem">
                             <div class="cart-icon-wrapper">
                                 <i class="text-header fa-solid fa-cart-shopping"></i>
                                 <span id="cart-count" class="cart-badge">
