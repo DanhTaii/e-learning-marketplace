@@ -91,5 +91,9 @@ public interface CourseService {
 
     List<CourseCardDto> getCourseSuggestByTitle(String keyword);
 
+    List<CourseCardDto> filterCourses(AllCourseFilter filter);
+
+    int countFilterCourses(AllCourseFilter filter);
+
 
 }

@@ -1,8 +1,10 @@
 package vn.edu.nlu.fit.elearning.feature.cart.service;
 
+import vn.edu.nlu.fit.elearning.common.utils.security.HashUtils;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -10,11 +12,21 @@ import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.format
 
 public class CartServiceImpl implements CartService {
     Map<Integer, CartItem> data;
-
+    private String cartHash;
+    private Timestamp updatedAt;
     public CartServiceImpl() {
         data = new HashMap<>();
+        this.cartHash = "";
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
     }
+    private void updateMetadata() {
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
 
+        List<Integer> courseIds = new ArrayList<>(data.keySet());
+        Collections.sort(courseIds);
+
+        this.cartHash = HashUtils.md5(courseIds.toString());
+    }
 
     @Override
     public void addCourse(CourseCardDto c) {
@@ -26,16 +38,24 @@ public class CartServiceImpl implements CartService {
         } else {
             data.put(c.getId(), new CartItem(c, c.getPrice(), true));
         }
+        updateMetadata();
     }
 
     @Override
     public CartItem deleteCourse(int id) {
-        return data.remove(id);
+        CartItem removed = data.remove(id);
+        if (removed != null) {
+            updateMetadata();
+        }
+        return removed;
     }
 
     @Override
     public void removeSelected() {
-        data.entrySet().removeIf(entry -> entry.getValue().isSelected());
+        boolean isRemoved = data.entrySet().removeIf(entry -> entry.getValue().isSelected());
+        if (isRemoved) {
+            updateMetadata();
+        }
     }
 
     @Override
@@ -136,4 +156,9 @@ public class CartServiceImpl implements CartService {
         }
         return count;
     }
+    public String getCartHash() { return cartHash; }
+    public void setCartHash(String cartHash) { this.cartHash = cartHash; }
+    public Timestamp getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Timestamp updatedAt) { this.updatedAt = updatedAt; }
+    public void setData(Map<Integer, CartItem> data) { this.data = data; }
 }

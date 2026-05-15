@@ -2,6 +2,8 @@ package vn.edu.nlu.fit.elearning.feature.cart.model;
 
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 
+import java.sql.Timestamp;
+
 import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
 
 public class CartItem {
@@ -14,6 +16,7 @@ public class CartItem {
         this.price = course.getPrice()-course.getDiscountPrice();
         this.selected = selected;
     }
+
 
     public CourseCardDto getCourse() {
         return course;

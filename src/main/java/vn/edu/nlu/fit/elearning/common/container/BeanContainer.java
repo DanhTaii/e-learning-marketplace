@@ -6,6 +6,9 @@ import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.cart.dao.CartDao;
+import vn.edu.nlu.fit.elearning.feature.cart.dao.CartDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartSyncService;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
@@ -197,6 +200,10 @@ public class BeanContainer {
         CertificateDao certificateDao = new CertificateDaoImp();
         beans.put(CertificateService.class, new CertificateServiceImpl(certificateDao));
 
+        CartDao cartDao = new CartDaoImpl();
+        beans.put(CartDao.class, cartDao);
+
+        beans.put(CartSyncService.class, new CartSyncService());
     }
 
     public static <T> T getBean(Class<T> clazz){

@@ -60,7 +60,7 @@ function executeSingleAction(event, url, element,successMessage) {
         .catch(error => {
             console.error('Lỗi khi thao tác:', error);
             // Hiện toast thông báo lỗi nếu có
-            toast({title: 'Thất bại!', message: 'Có lỗi xảy ra, vui lòng thử lại sau.', type: 'error', duration: 3000});
+            toast({title: 'Thất bại!', message: 'Vui lòng đăng nhập để sử dụng tính năng này', type: 'error', duration: 3000});
         });
 }
 
@@ -90,10 +90,9 @@ function executeBulkAction(event, url, errorMessage,successMessage) {
         })
         .catch(error => {
             console.error('Lỗi thao tác hàng loạt:', error);
-            toast({title: 'Thất bại!', message: 'Có lỗi xảy ra, vui lòng thử lại sau.', type: 'error', duration: 3000});
+            toast({title: 'Thất bại!', message: 'Vui lòng đăng nhập để dùng tính năng này ', type: 'error', duration: 3000});
         });
 }
-//
 
 function updateSelectionAjax() {
     const form = document.getElementById('cartForm');

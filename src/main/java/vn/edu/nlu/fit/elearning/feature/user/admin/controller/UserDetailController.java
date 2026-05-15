@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
-import vn.edu.nlu.fit.elearning.common.utils.security.PasswordUtils;
+import vn.edu.nlu.fit.elearning.common.utils.security.HashUtils;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
@@ -84,7 +84,7 @@ public class UserDetailController extends BaseController {
             user.setEmail(request.getParameter("email"));
             user.setPhone(request.getParameter("phone"));
 
-            user.setPassword(PasswordUtils.hashpassword(request.getParameter("password")));
+            user.setPassword(HashUtils.hashpassword(request.getParameter("password")));
             user.setConfirmPassword(request.getParameter("confirmPassword"));
 
             user.setRoleId(Integer.parseInt(request.getParameter("roleId")));

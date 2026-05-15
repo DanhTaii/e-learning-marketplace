@@ -9,6 +9,8 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.validator.login.SignInValidator;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartSyncService;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 
 import java.io.IOException;
@@ -19,12 +21,14 @@ import java.util.Set;
 public class LoginController extends HttpServlet {
 
     private transient AuthService authService;
+    private transient CartSyncService cartSyncService;
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.authService = BeanContainer.getBean(AuthService.class);
+        this.cartSyncService = BeanContainer.getBean(CartSyncService.class);
     }
 
     @Override
@@ -59,6 +63,10 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("userPermissions", userPermissions);
                 session.setAttribute("userId", canLogin.getId());
                 session.setAttribute("userSession", canLogin);
+
+                CartServiceImpl currentSessionCart = (CartServiceImpl) session.getAttribute("cart");
+                CartServiceImpl syncedCart = cartSyncService.syncCartOnLogin(canLogin.getId(), currentSessionCart);
+                session.setAttribute("cart", syncedCart);
 
                 request.getSession().setAttribute("flashSuccess", "Đăng nhập thành công!");
 
