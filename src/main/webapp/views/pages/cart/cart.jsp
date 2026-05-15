@@ -335,7 +335,7 @@
                             </c:if>
                         </div>
                         <div>
-                            <button class="btn-select-voucher" onclick="selectVoucher('SALE10')">Dùng</button>
+                            <button class="btn-select-voucher" onclick="selectVoucher('${v.code}')">Dùng</button>
                         </div>
                     </div>
                 </div>

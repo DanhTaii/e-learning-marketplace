@@ -25,8 +25,8 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
     public List<Voucher> findValidVouchers() {
         return getJdbi().withHandle(handle -> {
             String sql = "SELECT * FROM vouchers " +
-                    "WHERE is_active = 1 " +
-                    "AND end_date >= NOW() " + // Chưa hết hạn
+                    "WHERE status = 'ACTIVE' " +
+                    "AND end_date >= NOW() " +
                     "AND (usage_limit IS NULL OR used_count < usage_limit) " +
                     "ORDER BY created_at DESC";
 
