@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
@@ -54,14 +55,14 @@ public class ApplyVoucherController extends BaseController {
             }
 
             VoucherResultDTO result = voucherService.applyVoucher(code, c.getFinalPriceTotal());
-
+            String formattedFinalTotal = DataFormatting.formatAndConvert(result.getFinalTotal());
             session.setAttribute("appliedVoucher", result.getVoucher());
             session.setAttribute("discountAmount", result.getDiscountAmount());
 
             jsonResponse.addProperty("status", "success");
             jsonResponse.addProperty("message", "Áp dụng mã thành công!");
             jsonResponse.addProperty("discountAmount", result.getDiscountAmount());
-            jsonResponse.addProperty("finalTotal", result.getFinalTotal());
+            jsonResponse.addProperty("finalTotalFormatted", formattedFinalTotal);
             jsonResponse.addProperty("code", result.getVoucher().getCode());
 
         } catch (Exception e) {

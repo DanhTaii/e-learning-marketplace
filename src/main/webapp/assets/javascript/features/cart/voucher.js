@@ -19,7 +19,7 @@ function selectVoucher(code) {
 
                 const finalPriceEl = document.getElementById('display-final-price');
                 if(finalPriceEl) {
-                    finalPriceEl.innerText = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.finalTotal);
+                    finalPriceEl.innerText = data.finalTotalFormatted;
                 }
 
                 toast({title: 'Áp dụng thành công!', message: successMessage, type: 'success', duration: 3000});
@@ -40,12 +40,21 @@ function applyManualVoucher() {
 
 // Khi bấm nút "Bỏ chọn" mã
 function removeVoucher(e) {
-    e.preventDefault();
-    document.getElementById('applied-voucher-info').style.display = 'none';
+        if(e) e.preventDefault();
 
-    const manualInput = document.getElementById('manualVoucherCode');
-    if (manualInput) manualInput.value = '';
+        fetch('remove-voucher', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('applied-voucher-info').style.display = 'none';
 
-    // TODO: Gọi AJAX hủy mã ở đây để backend tính lại giá gốc
-    // removeDiscountAjax();
+                    const manualInput = document.getElementById('manualVoucherCode');
+                    if (manualInput) manualInput.value = '';
+
+                    const finalPriceEl = document.getElementById('display-final-price');
+                    if (finalPriceEl) {
+                        finalPriceEl.innerText = data.originalTotalFormatted;
+                    }
+                }
+            });
 }
