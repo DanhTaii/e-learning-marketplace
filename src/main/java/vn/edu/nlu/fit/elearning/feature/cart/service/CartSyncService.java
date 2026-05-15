@@ -10,6 +10,7 @@ import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseService;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 public class CartSyncService {
     private CartDao cartDao;
@@ -20,38 +21,55 @@ public class CartSyncService {
     }
     public CartServiceImpl syncCartOnLogin(int userId, CartServiceImpl sessionCart) {
         Cart dbCart = cartDao.getCartByUserId(userId);
+        Set<Integer> ownedIds = cartDao.getEnrolledCourseIdsByUserId(userId);
 
         if (dbCart == null) {
             if (sessionCart != null && sessionCart.getTotalQuantity() > 0) {
-                saveSessionToDatabase(userId, sessionCart);
+                CartServiceImpl filtered = filterOwned(sessionCart, ownedIds);
+                saveSessionToDatabase(userId, filtered);
+                return filtered;
             }
             return sessionCart;
         }
 
         if (sessionCart == null || sessionCart.getTotalQuantity() == 0) {
-            return loadDatabaseToSession(dbCart, userId);
+            return loadDatabaseToSession(dbCart, userId, ownedIds);
         }
 
 
-        String hashA = sessionCart.getCartHash();
-        String hashB = dbCart.getCartHash();
-
-        if (hashA != null && hashA.equals(hashB)) {
-            return sessionCart;
+        if (sessionCart.getCartHash().equals(dbCart.getCartHash())) {
+            return filterOwned(sessionCart, ownedIds);
         }
 
-        Timestamp timeA = sessionCart.getUpdatedAt();
-        Timestamp timeB = dbCart.getUpdatedAt();
+        Timestamp timeSession = sessionCart.getUpdatedAt();
+        Timestamp timeDB = dbCart.getUpdatedAt();
 
-        if (timeA != null && (timeB == null || timeA.after(timeB))) {
-            saveSessionToDatabase(userId, sessionCart);
-            return sessionCart;
-        }
-        else {
-            return loadDatabaseToSession(dbCart, userId);
+        if (timeSession != null && timeDB != null && timeSession.after(timeDB)) {
+            return mergeAndSave(userId, dbCart, sessionCart, ownedIds);
+        } else {
+            return loadDatabaseToSession(dbCart, userId, ownedIds);
         }
     }
+    private CartServiceImpl mergeAndSave(int userId, Cart dbCart, CartServiceImpl sessionCart,Set<Integer> ownedIds) {
+        CartServiceImpl mergedCart = new CartServiceImpl();
 
+        for (CartItemEntity dbItem : dbCart.getItems()) {
+            if (!ownedIds.contains(dbItem.getCourseId())) {
+                CourseCardDto course = courseService.getCourseCardById(dbItem.getCourseId(), userId);
+                if (course != null) mergedCart.addCourse(course);
+            }
+        }
+
+        for (CartItem sessionItem : sessionCart.getList()) {
+            int sId = sessionItem.getCourse().getId();
+            if (!ownedIds.contains(sId)) {
+                mergedCart.addCourse(sessionItem.getCourse());
+            }
+        }
+        saveSessionToDatabase(userId, mergedCart);
+
+        return mergedCart;
+    }
     public void saveSessionToDatabase(int userId, CartServiceImpl sessionCart) {
         Cart dbCart = cartDao.getCartByUserId(userId);
         int cartId;
@@ -71,22 +89,31 @@ public class CartSyncService {
     }
 
 
-    private CartServiceImpl loadDatabaseToSession(Cart dbCart, int userId) {
+    private CartServiceImpl loadDatabaseToSession(Cart dbCart, int userId,Set<Integer> ownedIds) {
         CartServiceImpl newSessionCart = new CartServiceImpl();
 
         List<CartItemEntity> dbItems = dbCart.getItems();
         for (CartItemEntity item : dbItems) {
+            if (!ownedIds.contains(item.getCourseId())) {
+                CourseCardDto courseCard = courseService.getCourseCardById(item.getCourseId(), userId);
 
-            CourseCardDto courseCard = courseService.getCourseCardById(item.getCourseId(), userId);
-
-            if (courseCard != null) {
-                newSessionCart.addCourse(courseCard);
+                if (courseCard != null) {
+                    newSessionCart.addCourse(courseCard);
+                }
             }
         }
-
         newSessionCart.setCartHash(dbCart.getCartHash());
         newSessionCart.setUpdatedAt(dbCart.getUpdatedAt());
 
         return newSessionCart;
+    }
+    private CartServiceImpl filterOwned(CartServiceImpl cart, Set<Integer> ownedIds) {
+        CartServiceImpl result = new CartServiceImpl();
+        for (CartItem item : cart.getList()) {
+            if (!ownedIds.contains(item.getCourse().getId())) {
+                result.addCourse(item.getCourse());
+            }
+        }
+        return result;
     }
 }

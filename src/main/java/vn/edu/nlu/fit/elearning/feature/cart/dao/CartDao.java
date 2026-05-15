@@ -7,6 +7,7 @@ import vn.edu.nlu.fit.elearning.feature.cart.model.CartItemEntity;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 public interface CartDao {
 
@@ -21,4 +22,6 @@ public interface CartDao {
     boolean insertCartItem(int cartId, int courseId);
 
     boolean clearCartItems(int cartId);
+
+    Set<Integer> getEnrolledCourseIdsByUserId(int userId);
 }

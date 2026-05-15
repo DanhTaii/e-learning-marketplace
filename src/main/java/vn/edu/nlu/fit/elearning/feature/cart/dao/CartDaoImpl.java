@@ -2,17 +2,17 @@ package vn.edu.nlu.fit.elearning.feature.cart.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
-import vn.edu.nlu.fit.elearning.feature.cart.model.CartItem;
 import vn.edu.nlu.fit.elearning.feature.cart.model.CartItemEntity;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CartDaoImpl extends BaseDao implements CartDao {
     @Override
     public Cart getCartByUserId(int userId) {
         return getJdbi().withHandle(handle -> {
-            // 1. Lấy thông tin Cart
             Cart cart = handle.createQuery("""
                     SELECT id, user_id AS userId, cart_hash AS cartHash, updated_at AS updatedAt 
                     FROM carts 
@@ -99,6 +99,18 @@ public class CartDaoImpl extends BaseDao implements CartDao {
                     .bind("cartId", cartId)
                     .execute();
             return true;
+        });
+    }
+    @Override
+    public Set<Integer> getEnrolledCourseIdsByUserId(int userId) {
+        String sql = "SELECT course_id FROM enrollments WHERE user_id = ?";
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(sql)
+                    .bind(0, userId)
+                    .mapTo(Integer.class)
+                    .stream()
+                    .collect(Collectors.toSet());
         });
     }
 }
