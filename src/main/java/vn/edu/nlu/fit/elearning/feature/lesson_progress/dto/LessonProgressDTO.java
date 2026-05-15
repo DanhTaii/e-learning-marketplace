@@ -9,9 +9,13 @@ public class LessonProgressDTO implements Serializable {
     private int lessonId;
     private int orderIndex;
     private String lessonTitle;
+    private int lastWatchedTime;
     private boolean isCompleted;
     private int durationMinutes;
     private String videoUrl;
+
+    public LessonProgressDTO() {
+    }
 
     public int getId() {
         return id;
@@ -75,6 +79,18 @@ public class LessonProgressDTO implements Serializable {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public int getLastWatchedTime() {
+        return lastWatchedTime;
+    }
+
+    public void setLastWatchedTime(int lastWatchedTime) {
+        this.lastWatchedTime = lastWatchedTime;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     @Override

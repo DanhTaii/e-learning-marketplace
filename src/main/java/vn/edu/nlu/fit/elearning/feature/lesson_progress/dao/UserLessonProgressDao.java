@@ -13,4 +13,11 @@ public interface UserLessonProgressDao {
     int createUserLessonProgress(List<UserLessonProgress> lessonProgressList);
 
     int updateLessonProgress(int id, boolean isCompleted);
+
+    int updateLastWatchedTime(int userId, int lessonId ,int lastWatchedTime);
+
+    int findDurationMinutesByLessonId(int lessonId);
+
+    int findLastWatchedTimeById(int userId, int lessonId);
+
 }

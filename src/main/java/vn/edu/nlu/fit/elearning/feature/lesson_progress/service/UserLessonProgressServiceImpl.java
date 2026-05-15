@@ -17,17 +17,16 @@ public class UserLessonProgressServiceImpl implements UserLessonProgressService 
 
     @Override
     public int createUserLessonProgress(List<UserLessonProgress> userLessonProgress) {
-       return ulpd.createUserLessonProgress(userLessonProgress);
+        return ulpd.createUserLessonProgress(userLessonProgress);
     }
 
     @Override
-    public List<LessonProgressDTO> getAllUserLessonProgresss(int userId, int courseId) {
+    public List<LessonProgressDTO> getAllUserLessonProgresses(int userId, int courseId) {
         return ulpd.findAllLessonProgress(userId, courseId);
     }
 
     @Override
     public UserLessonProgress getUserLessonProgressById(int id) {
-        // TODO: Implement getById logic
         return null;
     }
 
@@ -38,13 +37,49 @@ public class UserLessonProgressServiceImpl implements UserLessonProgressService 
 
     @Override
     public void deleteUserLessonProgress(int id) {
-        // TODO: Implement delete logic
     }
 
-//    @Override
-//    public void main(String[] args) {
-////        List<LessonProgressDTO> result = this.getAllUserLessonProgresss(7,7);
-//        System.out.println(this.getAllUserLessonProgresss(3, 1));
-//    }
+    @Override
+    public int updateUserLessonProgressLastWatchedTime(int userId, int lessonId, int lastWatchedTime) {
+        int lessonDuration = this.getLessonDurationMinutesById(lessonId);
+
+        if (lessonDuration <= 0) {
+            return 0;
+        }
+
+        //Do lúc lưu thời gian xem cuối thì JS lấy ra giây chứ không lấy theo phút
+        //Mà lesson đang lưu phút nên phải nhân cho 60s
+        int lessonDurationInSecond = lessonDuration * 60;
+
+        if (lastWatchedTime > lessonDurationInSecond) {
+            lastWatchedTime = lessonDurationInSecond;
+        }
+
+        return this.ulpd.updateLastWatchedTime(userId, lessonId, lastWatchedTime);
+    }
+
+    @Override
+    public int getLessonDurationMinutesById(int lessonId) {
+        return ulpd.findDurationMinutesByLessonId(lessonId);
+    }
+
+    @Override
+    public int getUserLessonProgressLastWatchedTime(int userId, int lessonId) {
+        return ulpd.findLastWatchedTimeById(userId, lessonId);
+    }
+
+    public static void main(String[] args) {
+        try {
+            UserLessonProgressServiceImpl userLessonProgressService = new UserLessonProgressServiceImpl(new UserLessonProgressDaoImpl());
+
+            System.out.println(userLessonProgressService.getLessonDurationMinutesById(6));
+
+            userLessonProgressService.updateUserLessonProgressLastWatchedTime(73, 6, 15 * 60);
+
+            System.out.println(userLessonProgressService.getLessonDurationMinutesById(2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

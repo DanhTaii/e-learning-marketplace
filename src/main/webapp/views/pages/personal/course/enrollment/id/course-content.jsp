@@ -52,7 +52,15 @@
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen
-                                style="display: none;"></iframe>
+                                style="display: none;">
+                        </iframe>
+
+                        <video id="cloudinaryPlayer" width="100%" height="500"
+                               controls controlsList="nodownload"
+                               style="display: none; background-color: #000;">
+                            Trình duyệt không hỗ trợ thẻ phát video.
+                        </video>
+
                         <div id="videoPlaceholder" class="placeholder-video">
                             <img src="assets/image/video-not-found.png" alt="No video available" class="imgg1">
                             <p class="text-xl">Bài học này hiện đang được cập nhật video...</p>
@@ -97,10 +105,13 @@
                     </div>
                     <hr>
                     <div class="content__box">
+                        <%-- CÁI LIST LESSON Ở ĐÂY ĐANG LÀ TABLE LESSON PROGRESS KHÔNG PHẢI LESSON --%>
                         <c:forEach var="l" items="${enrollmentDetail.listLesson}">
+                            <%-- Truyền vào các giá trị cần thiết của video --%>
                             <div class="box__content lesson-item"
-                                 data-video-url="${l.videoUrl}"
-                                 data-title="Bài ${l.orderIndex}: ${l.lessonTitle}">
+                                 data-lesson-id="${l.lessonId}" data-video-url="${l.videoUrl}"
+                                 data-title="Bài ${l.orderIndex}: ${l.lessonTitle}"
+                                 data-last-time="${l.lastWatchedTime != null ? l.lastWatchedTime : 0}">
 
                                 <div class="box__column1">
                                     <div class="column1__tick">
@@ -137,5 +148,6 @@
 <script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/personal/course/rating-star.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/enrollment/enrollment-detail-navbar.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

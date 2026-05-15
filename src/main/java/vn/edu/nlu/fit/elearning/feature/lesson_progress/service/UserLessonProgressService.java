@@ -8,12 +8,18 @@ import java.util.List;
 public interface UserLessonProgressService {
     int createUserLessonProgress(List<UserLessonProgress> userLessonProgress);
 
-    List<LessonProgressDTO> getAllUserLessonProgresss(int userId, int courseId);
+    List<LessonProgressDTO> getAllUserLessonProgresses(int userId, int courseId);
 
     UserLessonProgress getUserLessonProgressById(int id);
 
     int updateUserLessonProgress(int id, boolean isCompleted);
 
     void deleteUserLessonProgress(int id);
+
+    int updateUserLessonProgressLastWatchedTime(int userId, int lessonId, int lastWatchedTime);
+
+    int getLessonDurationMinutesById(int lessonId);
+
+    int getUserLessonProgressLastWatchedTime(int userId, int lessonId);
 
 }
