@@ -37,6 +37,10 @@ import vn.edu.nlu.fit.elearning.feature.contact.service.ContactServiceImpl;
 //import vn.edu.nlu.fit.elearning.feature.course_user.service.CourseSearchServiceImpl;
 //import vn.edu.nlu.fit.elearning.feature.course.service.CourseService;
 //import vn.edu.nlu.fit.elearning.feature.course.service.CourseServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.course_note.dao.CourseNoteDao;
+import vn.edu.nlu.fit.elearning.feature.course_note.dao.CourseNoteDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.course_note.service.CourseNoteService;
+import vn.edu.nlu.fit.elearning.feature.course_note.service.CourseNoteServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDao;
 import vn.edu.nlu.fit.elearning.feature.course_tag.dao.CourseTagDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course_tag.service.CourseTagService;
@@ -204,6 +208,10 @@ public class BeanContainer {
         beans.put(CartDao.class, cartDao);
 
         beans.put(CartSyncService.class, new CartSyncService());
+
+        CourseNoteDao courseNoteDao = new CourseNoteDaoImpl();
+        beans.put(CourseNoteService.class, new CourseNoteServiceImpl(courseNoteDao));
+
     }
 
     public static <T> T getBean(Class<T> clazz){
