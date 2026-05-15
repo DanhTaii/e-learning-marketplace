@@ -22,7 +22,7 @@ public class UserLessonProgressDaoImpl extends BaseDao implements UserLessonProg
     public List<LessonProgressDTO> findAllLessonProgress(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, " +
-                            "l.order_index, usp.is_completed, l.duration_minutes, l.video_url, l.last_watched_time " +
+                            "l.order_index, usp.is_completed, l.duration_minutes, l.video_url, usp.last_watched_time " +
                             "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id " +
                             "where l.course_id = :courseId AND usp.user_id = :userId " +
                             "ORDER BY l.order_index ASC")

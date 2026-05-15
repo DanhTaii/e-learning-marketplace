@@ -40,27 +40,26 @@ public class MyCourseDetailController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        int userId = 0;
+        try {
+            int userId = SessionUtils.getCurrentUserId(request);
 
-        if (session != null && session.getAttribute("userId") != null) {
-            userId = (Integer) session.getAttribute("userId");
+            int courseId = Integer.parseInt(request.getParameter("courseId"));
+
+            EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId, courseId);
+            List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(courseId);
+            enrollmentDetail.setListReviews(reviewDtos);
+
+            List<LessonProgressDTO> listLessons = ulp.getAllUserLessonProgresses(userId, courseId);
+            enrollmentDetail.setListLesson(listLessons);
+
+            boolean hasCertificate = certificateService.hasCertificate(userId, courseId);
+
+            request.setAttribute("hasCertificate", hasCertificate);
+            request.setAttribute("enrollmentDetail", enrollmentDetail);
+            request.getRequestDispatcher("/views/pages/personal/course/enrollment/id/course-content.jsp").forward(request, response);
+        } catch (Exception e) {
+            logger.error("Lỗi tải thông tin khóa học đăng ký: " + e.getMessage());
         }
-
-        int courseId = Integer.parseInt(request.getParameter("courseId"));
-
-        EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId, courseId);
-        List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(courseId);
-        enrollmentDetail.setListReviews(reviewDtos);
-
-        List<LessonProgressDTO> listLessons = ulp.getAllUserLessonProgresses(userId, courseId);
-        enrollmentDetail.setListLesson(listLessons);
-
-        boolean hasCertificate = certificateService.hasCertificate(userId, courseId);
-
-        request.setAttribute("hasCertificate", hasCertificate);
-        request.setAttribute("enrollmentDetail", enrollmentDetail);
-        request.getRequestDispatcher("/views/pages/personal/course/enrollment/id/course-content.jsp").forward(request, response);
     }
 
     @Override

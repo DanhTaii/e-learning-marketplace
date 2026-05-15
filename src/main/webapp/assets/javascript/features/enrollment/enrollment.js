@@ -1,68 +1,141 @@
+const PlayerState = {
+    currentLessonId: null,
+    currentVideoType: null // 'youtube', 'cloudinary', 'none'
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+    // Lấy ra tất cả bài học hay thẻ div có class là lesson-item
     const lessonItems = document.querySelectorAll('.lesson-item');
-    const videoPlayer = document.getElementById('mainVideoPlayer');
-    // const titleDisplay = document.getElementById('mainLessonTitle');
+    // Lấy ra thẻ iframe để nhúng video youtube
+    const youtubePlayer = document.getElementById('mainVideoPlayer');
+    // Lấy ra thẻ video để chứa video từ cloudinary
+    const cloudinaryPlayer = document.getElementById("cloudinaryPlayer")
+    // Lấy ra thẻ div hiển thị video trôống
     const placeholder = document.getElementById('videoPlaceholder');
 
+    // Kiểm tra nếu video đang hiển thị là cloudinary mà pause hoặc ended thì cập nhật thời gian xem mới
+    if (cloudinaryPlayer) {
+        cloudinaryPlayer.addEventListener("pause", saveVideoLastWatched)
+        cloudinaryPlayer.addEventListener("ended", saveVideoLastWatched)
+    }
+
+    // Tạo vòng lặp quét toàn bộ các bài học đã lấy ở trên
     lessonItems.forEach(item => {
+        // Lắng nghe xem nếu nó đựợc bấm (click)
         item.addEventListener('click', function () {
+
+            // Lưu lại thời gian coi cuối của video hiện tại trước khi chuyển sang video khasc
+            if (PlayerState.currentVideoType === 'cloudinary') {
+                saveVideoLastWatched()
+            }
+
+            // Lấy ra đường dẫn URL từ trong thẻ div bài học đó
             const rawUrl = this.getAttribute('data-video-url');
-            const lessonTitle = this.getAttribute('data-title');
+            // Lấy ra thời gian xem cuối được truyền bên JSP
+            const lastTime = parseInt(this.getAttribute('data-last-time')) || 0;
+            // Gán lesson id cho PlayerState để lúc cập nhật video có thể lấy xài
+            PlayerState.currentLessonId = this.getAttribute('data-lesson-id')
 
-            let finalUrl = formatYoutubeUrl(rawUrl);
+            let finalUrl = VideoHelper.formatVideoUrl(rawUrl);
 
-            if (finalUrl) {
-                // Hiển thị Video
-                if (videoPlayer) {
-                    videoPlayer.src = finalUrl;
-                    videoPlayer.style.display = 'block';
-                }
-                if (placeholder) {
-                    placeholder.style.display = 'none';
-                }
-            } else {
+            if (!finalUrl) {
                 // Hiển thị Placeholder (Thông báo không có video)
-                if (videoPlayer) {
-                    videoPlayer.style.display = 'none';
-                    videoPlayer.src = ""; // Xóa src cũ để tránh tiếng video vẫn phát ngầm
+                if (youtubePlayer) {
+                    youtubePlayer.style.display = 'none';
+                    youtubePlayer.src = ""; // Xóa src cũ để tránh tiếng video vẫn phát ngầm
+                }
+                // Hiển thị Video
+                if (cloudinaryPlayer) {
+                    cloudinaryPlayer.src = "";
+                    cloudinaryPlayer.style.display = 'none';
                 }
                 if (placeholder) {
                     placeholder.style.display = 'flex';
                 }
+
+            } else if (VideoHelper.isEmbedSource(rawUrl)) {
+                PlayerState.currentVideoType = 'youtube'
+                // Hiển thị Video
+                if (youtubePlayer) {
+                    youtubePlayer.src = finalUrl;
+                    youtubePlayer.style.display = 'block';
+                }
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
+                if (cloudinaryPlayer) {
+                    cloudinaryPlayer.src = "";
+                    cloudinaryPlayer.style.display = 'none';
+                }
+            } else {
+                PlayerState.currentVideoType = 'cloudinary'
+                // Ẩn đi video youtuber
+                if (youtubePlayer) {
+                    youtubePlayer.src = "";
+                    youtubePlayer.style.display = 'none';
+                }
+                // Hiển thị Video Cloudinary
+                if (cloudinaryPlayer) {
+                    cloudinaryPlayer.src = finalUrl;
+                    cloudinaryPlayer.style.display = 'block';
+                    // Đưa thời gian xem hiện tại của video thành thời gian xem cuối đã được truyền bên JSP
+                    cloudinaryPlayer.onloadedmetadata = function () {
+                        if (lastTime > 0) cloudinaryPlayer.currentTime = lastTime;
+                        cloudinaryPlayer.play();
+                    };
+                }
+                // Ẩn ảnh video mặc định
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
             }
 
-            // titleDisplay.innerText = lessonTitle + (finalUrl ? "" : " (Chưa có video)");
-
-            // Hiệu ứng Active
+            // Loại bỏ active-lesson cho toàn bộ bài học
             lessonItems.forEach(li => li.classList.remove('active-lesson'));
+            // Gán active-lesson cho bài học hiện tại
             this.classList.add('active-lesson');
         });
     });
 
+    // Luôn lấy ra video đầu tiên
     if (lessonItems.length > 0) {
         lessonItems[0].click();
     }
 });
 
-function formatYoutubeUrl(url) {
-    if (!url || url === "null" || url.trim() === "") return null;
+// ======================== LƯU THỜI GIAN XEM CUỐI CUÙNG =============================
+function saveVideoLastWatched() {
+    // Lấy ra thẻ chứa video từ cloudinary
+    const cloudinaryPlayer = document.getElementById("cloudinaryPlayer");
+    // Lấy ra thời gian hiện tại và làm tròn từ video của cloudinary
+    const currentTime = Math.floor(cloudinaryPlayer.currentTime);
+    // Lấy ra id của lesson hiện tại đang phát (được lưu ở trên)
+    const currentLessonId = PlayerState.currentLessonId
 
-    // Kiểm tra xem nó có thực sự là link Youtube không
-    const isYoutube = url.includes('youtube.com') || url.includes('youtu.be');
-
-    if (isYoutube) {
-        if (url.includes('watch?v=')) {
-            return url.replace('watch?v=', 'embed/').split('&')[0];
-        } else if (url.includes('youtu.be/')) {
-            return url.replace('youtu.be/', 'www.youtube.com/embed/');
-        }
-        return url; // Nếu là link embed sẵn
+    // Đảm bảo loại là cloudinary, có thẻ video và currentLessonId
+    if (PlayerState.currentVideoType === 'cloudinary' && cloudinaryPlayer && currentLessonId) {
+        // Bắt đầu fetch dữ liệu
+        fetch('personal/my-course/update-time', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `lessonId=${currentLessonId}&lastWatchedTime=${currentTime}`
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                // Nếu trả về là thành công
+                if (data.status === 'success') {
+                    const activeItem = document.querySelector(`.lesson-item[data-lesson-id="${currentLessonId}"]`);
+                    // Cập nhật thời gian cuối cùng vô attribute là data-last-time
+                    if (activeItem) activeItem.setAttribute('data-last-time', currentTime);
+                }
+            })
+            .catch(err => console.error("--- LỖI FETCH (Sai URL hoặc mạng):", err));
     }
-
-    // Nếu không phải link Youtube, coi như không có video và trả về null
-    return null;
 }
 
+// ======================= XỬ LÝ CLICK CHỌN VIDEO & TÍCH XONG BÀI HỌC ===================================
 //Tránh việc khi bấm vào checkbox mà nó cũng chuyển sang video đó
 const checkboxes = document.querySelectorAll('.lesson-checkbox');
 
@@ -83,6 +156,7 @@ checkboxes.forEach(checkbox => {
     });
 });
 
+// ============================= CẬP NHẬT TIẾN ĐỘ HOÀN THÀNH KHÓA HỌC ========================================
 function updateProgress(lessonId, isCompleted, enrollmentId, courseId) {
     fetch('personal/my-course/detail', {
         // Gỉa lập 1 cái form để gửi nó xuống
@@ -123,7 +197,7 @@ function updateCircleProgress(percent) {
     circleBar.style.strokeDashoffset = offset;
     percentText.innerText = percent + "%";
 }
-
+// ========================= HIỆN NÚT LÂẤY CHỨNG CHỈ KHI HOÀN THÀNH KHÓA HỌC ========================
 function switchBtnGetCertificate(certId, courseId) {
     const btn = document.getElementById("btn-cert");
 
