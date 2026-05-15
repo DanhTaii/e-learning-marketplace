@@ -32,55 +32,151 @@
                         <span>Sắp xếp theo:</span>
                     </div>
                     <div class="filter__button">
-                        <button class="btn">
+                        <button class="btn ${filter.popular ? 'filter-active' : ''}">
                             <a class="turn-page text-big" href="pagination-all-courses?popular=true&page=1">Phổ biến</a>
                         </button>
                     </div>
                     <div class="filter__button">
-                        <button class="btn">
+                        <button class="btn ${filter.newest ? 'filter-active' : ''}">
                             <a class="turn-page text-big" href="pagination-all-courses?newest=true&page=1">Mới nhất</a>
                         </button>
                     </div>
                     <div class="filter__price">
+
                         <div class="price__text">
-                            <span class="text-big">Giá</span>
+
+        <span class="text-big">
+
+            <c:choose>
+
+                <c:when test="${filter.sortPrice == 'asc'}">
+                    Giá thấp đến cao
+                </c:when>
+
+                <c:when test="${filter.sortPrice == 'desc'}">
+                    Giá cao đến thấp
+                </c:when>
+
+                <c:otherwise>
+                    Giá
+                </c:otherwise>
+
+            </c:choose>
+
+        </span>
+
                         </div>
+
                         <div class="price__icon">
                             <i class="fa-solid fa-angle-down"></i>
                         </div>
+
                         <div class="price__list-box">
+
                             <ul class="price__list">
-                                <li class="price__list-item">
-                                    <a class="turn-page text-big" href="pagination-all-courses?sortPrice=asc&page=1">Giá thấp đến cao</a>
+
+                                <li class="price__list-item
+            ${filter.sortPrice == 'asc' ? 'selected-filter' : ''}">
+
+                                    <a class="turn-page text-big"
+                                       href="pagination-all-courses?page=1&sortPrice=asc">
+
+                                        Giá thấp đến cao
+
+                                    </a>
+
                                 </li>
-                                <li class="price__list-item">
-                                    <a class="turn-page text-big" href="pagination-all-courses?sortPrice=desc&page=1">Giá cao đến thấp</a>
+
+                                <li class="price__list-item
+            ${filter.sortPrice == 'desc' ? 'selected-filter' : ''}">
+
+                                    <a class="turn-page text-big"
+                                       href="pagination-all-courses?page=1&sortPrice=desc">
+
+                                        Giá cao đến thấp
+
+                                    </a>
+
                                 </li>
+
                             </ul>
+
                         </div>
+
                     </div>
 
                     <!-- Danh mục -->
+
                     <div class="filter__category">
-                        <div class="category__text">Tất cả khóa học</div>
+
+                        <div class="category__text">
+
+                            <c:choose>
+
+                                <c:when test="${filter.categoryId == null}">
+                                    Tất cả khóa học
+                                </c:when>
+
+                                <c:otherwise>
+
+                                    <c:forEach var="cate" items="${categories}">
+
+                                        <c:if test="${cate.id == filter.categoryId}">
+                                            ${cate.name}
+                                        </c:if>
+
+                                    </c:forEach>
+
+                                </c:otherwise>
+
+                            </c:choose>
+
+                        </div>
+
                         <div class="category__icon">
                             <i class="text-big fa-solid fa-angle-down"></i>
                         </div>
+
                         <div class="category__list-box">
+
                             <ul class="category__list">
-                                <!-- Mục cố định: Tất cả khóa học -->
-                                <li class="category__list-item">
-                                    <a class="turn-page text-big" href="pagination-all-courses?page=1">Tất cả khóa học</a>
+
+                                <!-- Tất cả khóa học -->
+
+                                <li class="category__list-item
+            ${filter.categoryId == null ? 'selected-filter' : ''}">
+
+                                    <a class="turn-page text-big"
+                                       href="pagination-all-courses?page=1">
+
+                                        Tất cả khóa học
+
+                                    </a>
+
                                 </li>
+
+                                <!-- Category -->
+
                                 <c:forEach var="cate" items="${categories}">
-                                    <li class="category__list-item">
-                                        <a class="turn-page text-big" href="pagination-all-courses?category=${cate.id}&page=1">
+
+                                    <li class="category__list-item
+                ${cate.id == filter.categoryId ? 'selected-filter' : ''}">
+
+                                        <a class="turn-page text-big"
+                                           href="pagination-all-courses?page=1&category=${cate.id}">
+
                                                 ${cate.name}
+
                                         </a>
+
                                     </li>
+
                                 </c:forEach>
+
                             </ul>
+
                         </div>
+
                     </div>
                 </div>
                 <div class="product__small">

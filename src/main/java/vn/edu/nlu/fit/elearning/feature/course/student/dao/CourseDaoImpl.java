@@ -288,4 +288,185 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
         });
     }
 
+    @Override
+    public List<CourseCardDto> filterCourses(AllCourseFilter filter) {
+
+        return getJdbi().withHandle(handle -> {
+
+            StringBuilder sql = new StringBuilder(
+                    "SELECT c.id, c.title, c.subtitle, c.level, " +
+                            "c.price, c.discount_price, c.author_name, " +
+                            "c.thumbnail_url, " +
+                            "cate.id AS category_id, " +
+                            "cate.name AS category_name, " +
+
+                            "(SELECT COUNT(*) FROM enrollments WHERE course_id = c.id) AS studentCount, " +
+
+                            "COALESCE(AVG(r.rating),0) AS avgRating, " +
+
+                            "(CASE WHEN :userId IS NOT NULL AND w.course_id IS NOT NULL " +
+                            "THEN TRUE ELSE FALSE END) as inWishlist, " +
+
+                            "(CASE WHEN :userId IS NOT NULL AND e.course_id IS NOT NULL " +
+                            "THEN TRUE ELSE FALSE END) as enrolled, " +
+
+                            "COALESCE((SELECT SUM(duration_minutes) " +
+                            "FROM lessons WHERE course_id = c.id),0) / 60.0 AS durationHours " +
+
+                            "FROM courses c " +
+
+                            "LEFT JOIN categories cate ON c.category_id = cate.id " +
+                            "LEFT JOIN course_tags ct ON c.id = ct.course_id " +
+                            "LEFT JOIN tags t ON ct.tag_id = t.id " +
+                            "LEFT JOIN reviews r ON r.course_id = c.id " +
+                            "LEFT JOIN wishlist w ON w.course_id = c.id AND w.user_id = :userId " +
+                            "LEFT JOIN enrollments e ON e.course_id = c.id AND e.user_id = :userId " +
+
+                            "WHERE c.is_public = TRUE "
+            );
+
+            // CATEGORY
+            if (filter.getCategoryId() != null) {
+                sql.append(" AND cate.id = :categoryId ");
+            }
+
+            // TAG
+            if (filter.getTagId() != null) {
+                sql.append(" AND t.id = :tagId ");
+            }
+
+            // KEYWORD
+            if (filter.getKeyword() != null &&
+                    !filter.getKeyword().trim().isEmpty()) {
+
+                sql.append(" AND c.title LIKE :keyword ");
+            }
+
+            // LEVEL
+            if (filter.getLevel() != null &&
+                    !filter.getLevel().isEmpty()) {
+
+                sql.append(" AND c.level = :level ");
+            }
+
+            // PRICE RANGE
+            if ("under500".equals(filter.getPriceRange())) {
+                sql.append(" AND (c.price - c.discount_price) < 500000 ");
+            }
+
+            if ("under1500".equals(filter.getPriceRange())) {
+                sql.append(" AND (c.price - c.discount_price) < 1500000 ");
+            }
+
+            if ("over1500".equals(filter.getPriceRange())) {
+                sql.append(" AND (c.price - c.discount_price) >= 1500000 ");
+            }
+
+            sql.append(" GROUP BY c.id, cate.id ");
+
+            List<String> havingConditions = new ArrayList<>();
+
+            // DURATION
+            if ("short".equals(filter.getDuration())) {
+                havingConditions.add("durationHours < 5");
+            }
+
+            if ("medium".equals(filter.getDuration())) {
+                havingConditions.add("durationHours BETWEEN 5 AND 10");
+            }
+
+            if ("long".equals(filter.getDuration())) {
+                havingConditions.add("durationHours > 10");
+            }
+
+            // RATING
+            if ("low".equals(filter.getRating())) {
+                havingConditions.add("COALESCE(AVG(r.rating),0) < 3");
+            }
+
+            if ("high".equals(filter.getRating())) {
+                havingConditions.add("COALESCE(AVG(r.rating),0) >= 3");
+            }
+
+            if (!havingConditions.isEmpty()) {
+                sql.append(" HAVING ");
+                sql.append(String.join(" AND ", havingConditions));
+            }
+
+            // ORDER BY
+            List<String> orderBy = new ArrayList<>();
+
+            if (filter.isPopular()) {
+                orderBy.add("studentCount DESC");
+            }
+
+            if ("asc".equals(filter.getSortPrice())) {
+                orderBy.add("(c.price - c.discount_price) ASC");
+            }
+
+            if ("desc".equals(filter.getSortPrice())) {
+                orderBy.add("(c.price - c.discount_price) DESC");
+            }
+
+            if (filter.isNewest()) {
+                orderBy.add("c.id DESC");
+            }
+
+            if (orderBy.isEmpty()) {
+                orderBy.add("c.id DESC");
+            }
+
+            sql.append(" ORDER BY ");
+            sql.append(String.join(", ", orderBy));
+
+            sql.append(" LIMIT :limit OFFSET :offset ");
+
+            var query = handle.createQuery(sql.toString());
+
+            // BIND
+            query.bind("userId", filter.getUserId());
+
+            query.bind("limit", filter.getLimit());
+
+            query.bind("offset", filter.getOffSet());
+
+            if (filter.getCategoryId() != null) {
+                query.bind("categoryId", filter.getCategoryId());
+            }
+
+            if (filter.getTagId() != null) {
+                query.bind("tagId", filter.getTagId());
+            }
+
+            if (filter.getKeyword() != null &&
+                    !filter.getKeyword().trim().isEmpty()) {
+
+                query.bind("keyword", "%" + filter.getKeyword() + "%");
+            }
+
+            if (filter.getLevel() != null &&
+                    !filter.getLevel().isEmpty()) {
+
+                query.bind("level", filter.getLevel());
+            }
+
+            return query.mapToBean(CourseCardDto.class).list();
+        });
+    }
+
+    @Override
+    public int countFilterCourses(AllCourseFilter filter) {
+        return countFilteredCourses(
+                filter.getCategoryId(),
+                filter.getTagId(),
+                filter.getKeyword(),
+                filter.getSortPrice(),
+                filter.getLevel(),
+                filter.getPriceRange(),
+                filter.getRating(),
+                filter.getDuration(),
+                filter.isPopular() ? "true" : null
+        );
+    }
+
 }
