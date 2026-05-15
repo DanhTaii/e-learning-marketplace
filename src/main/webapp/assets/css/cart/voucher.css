@@ -280,3 +280,39 @@
     display: flex;
     justify-content: space-between;
 }
+/* Container thông báo yêu cầu đăng nhập */
+.auth-required-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Icon ổ khóa */
+.auth-required-state .auth-icon-wrapper {
+    margin-bottom: 20px;
+}
+
+.auth-required-state .auth-icon-wrapper i {
+    font-size: 60px;
+    color: #e0e0e0;
+}
+
+/* Tiêu đề và văn bản */
+.auth-required-state .auth-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.auth-required-state .auth-desc {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Nút đăng nhập (tận dụng class btn-select-voucher của bạn) */
+.auth-required-state .btn-login-now {
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    /* Nếu btn-select-voucher chưa có style sẵn thì thêm vào đây */
+}
