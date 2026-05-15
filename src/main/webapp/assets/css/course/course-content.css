@@ -598,3 +598,77 @@ form {
 .tab-pane.active {
     display: block;
 }
+
+/* ================== TRANG TRÍ TAB GHI CHÚ ========================*/
+.note-editor-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.note-editor-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    background-color: #fcfcfc;
+}
+
+.note-time-indicator {
+    color: #6b7280;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    background-color: #f3f4f6;
+    border-radius: 4px;
+    font-size: 2rem;
+}
+
+.note-editor-body {
+    padding: 15px;
+}
+
+.note-textarea {
+    width: 100%;
+    min-height: 80px;
+    border: none;
+    resize: vertical; /* Cho phép người dùng kéo giãn chiều dọc nếu muốn */
+    outline: none;
+    font-size: 2rem;
+    color: #374151;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.note-textarea::placeholder {
+    color: #9ca3af;
+}
+
+.note-editor-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-save-note {
+    background-color: #0f172a; /* Màu tối giống trong ảnh */
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    font-size: var(--text-lg);
+}
+
+.btn-save-note:hover {
+    background-color: #1e293b;
+}

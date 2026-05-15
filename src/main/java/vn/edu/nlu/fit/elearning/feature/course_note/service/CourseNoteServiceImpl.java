@@ -20,7 +20,7 @@ public class CourseNoteServiceImpl implements CourseNoteService {
 
     @Override
     public List<CourseNote> getNotesByUserIdAndLessonId(int userId, int lessonId) {
-        return courseNoteDao.findByLessonIdAndUserId(userId, lessonId);
+        return courseNoteDao.findByUserIdAndLessonId(userId, lessonId);
     }
 
     @Override

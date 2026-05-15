@@ -77,6 +77,10 @@
                         <button class="tab-item" data-tab="reviews">
                             Đánh giá
                         </button>
+
+                        <button class="tab-item" data-tab="notes">
+                            Ghi chú
+                        </button>
                     </nav>
 
                     <div class="tab-content">
@@ -88,6 +92,11 @@
                         <div class="tab-pane" id="reviews">
                             <jsp:include
                                     page="/views/pages/personal/course/enrollment/id/enrollment-detail-reviews.jsp"/>
+                        </div>
+
+                        <div class="tab-pane" id="notes">
+                            <jsp:include
+                                    page="/views/pages/personal/course/enrollment/id/enrollment-detail-notes.jsp"/>
                         </div>
                     </div>
                 </div>
@@ -149,5 +158,6 @@
 <script src="assets/javascript/validation/personal/course/rating-star.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/enrollment/enrollment-detail-navbar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/enrollment/enrollment-note.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

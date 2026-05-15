@@ -63,14 +63,19 @@ public class MyCourseNoteController extends BaseController {
 
             int result = courseNoteService.createCourseNotes(note);
 
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
             if (result > 0) {
-                SessionUtils.setFlashSuccess(request, "Tạo thành công ghi chú !");
-                this.redirect(request, response, "");
-                return;
+                response.getWriter().write("{\"status\":\"success\"}");
+            } else {
+                response.getWriter().write("{\"status\":\"error\"}");
             }
 
         } catch (Exception e) {
             logger.error(e.getMessage());
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"status\":\"error\"}");
         }
     }
 }
