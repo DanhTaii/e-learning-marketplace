@@ -11,9 +11,9 @@ public class UserLessonProgressDaoImpl extends BaseDao implements UserLessonProg
     @Override
     public List<UserLessonProgress> findAll() {
         return getJdbi().withHandle(handle -> {
-            return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, L.order_index, usp.is_completed, l.duration_minutes \n" +
-                    "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id\n" +
-                    "where l.course_id = 1 AND usp.user_id = 7\n" +
+            return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, L.order_index, usp.is_completed, l.duration_minutes  " +
+                    "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id " +
+                    "where l.course_id = 1 AND usp.user_id = 7 " +
                     "ORDER BY l.order_index ASC").mapToBean(UserLessonProgress.class).list();
         });
     }
@@ -22,9 +22,9 @@ public class UserLessonProgressDaoImpl extends BaseDao implements UserLessonProg
     public List<LessonProgressDTO> findAllLessonProgress(int userId, int courseId) {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT usp.id, usp.user_id AS user_id ,l.id AS lesson_id, l.title AS lesson_title, " +
-                            "l.order_index, usp.is_completed, l.duration_minutes, l.video_url \n" +
-                            "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id\n" +
-                            "where l.course_id = :courseId AND usp.user_id = :userId\n" +
+                            "l.order_index, usp.is_completed, l.duration_minutes, l.video_url, l.last_watched_time " +
+                            "FROM lessons l JOIN user_lesson_progress usp ON l.id = usp.lesson_id " +
+                            "where l.course_id = :courseId AND usp.user_id = :userId " +
                             "ORDER BY l.order_index ASC")
                     .bind("userId", userId)
                     .bind("courseId", courseId)
@@ -56,5 +56,42 @@ public class UserLessonProgressDaoImpl extends BaseDao implements UserLessonProg
                     .execute();
         });
     }
+
+    @Override
+    public int updateLastWatchedTime(int userId, int lessonId, int lastWatchedTime) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE user_lesson_progress " +
+                            "SET last_watched_time = :lastWatchedTime " +
+                            "WHERE user_id = :userId AND lesson_id = :lessonId ")
+                    .bind("lastWatchedTime", lastWatchedTime)
+                    .bind("userId", userId)
+                    .bind("lessonId", lessonId)
+                    .execute();
+        });
+    }
+
+    @Override
+    public int findLastWatchedTimeById(int userId, int lessonId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT last_watched_time " +
+                            "FROM user_lesson_progress " +
+                            "WHERE user_id = :userId AND lesson_id = :lessonId")
+                    .bind("userId", userId)
+                    .bind("lessonId", lessonId)
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
+    @Override
+    public int findDurationMinutesByLessonId(int lessonId) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT duration_minutes FROM lessons WHERE id = :id")
+                    .bind("id", lessonId)
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
 
 }

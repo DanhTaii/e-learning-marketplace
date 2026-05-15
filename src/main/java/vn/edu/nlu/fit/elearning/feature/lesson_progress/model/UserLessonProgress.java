@@ -7,6 +7,7 @@ public class UserLessonProgress implements Serializable {
     private int id;
     private int userId;
     private int lessonId;
+    private int lastWatchedTime;
     private boolean completed; // Map từ is_completed
     private Timestamp completedAt;
 
@@ -32,6 +33,14 @@ public class UserLessonProgress implements Serializable {
 
     public int getLessonId() { return lessonId; }
     public void setLessonId(int lessonId) { this.lessonId = lessonId; }
+
+    public int getLastWatchedTime() {
+        return lastWatchedTime;
+    }
+
+    public void setLastWatchedTime(int lastWatchedTime) {
+        this.lastWatchedTime = lastWatchedTime;
+    }
 
     // Getter cho boolean thường đặt là is...
     public boolean isCompleted() { return completed; }

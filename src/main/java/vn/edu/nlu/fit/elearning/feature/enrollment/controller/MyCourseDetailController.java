@@ -53,7 +53,7 @@ public class MyCourseDetailController extends HttpServlet {
         List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(courseId);
         enrollmentDetail.setListReviews(reviewDtos);
 
-        List<LessonProgressDTO> listLessons = ulp.getAllUserLessonProgresss(userId, courseId);
+        List<LessonProgressDTO> listLessons = ulp.getAllUserLessonProgresses(userId, courseId);
         enrollmentDetail.setListLesson(listLessons);
 
         boolean hasCertificate = certificateService.hasCertificate(userId, courseId);
