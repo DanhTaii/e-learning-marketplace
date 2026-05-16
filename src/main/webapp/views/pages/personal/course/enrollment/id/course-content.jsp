@@ -17,6 +17,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 <div class="web">
@@ -148,9 +151,8 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
-
-<%--<form action=""></form>--%>
-
+<jsp:include page="/views/components/modal-confirm.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>

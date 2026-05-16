@@ -25,6 +25,6 @@ public class CourseNoteServiceImpl implements CourseNoteService {
 
     @Override
     public int deleteCourseNotes(int id) {
-        return 0;
+        return courseNoteDao.delete(id);
     }
 }

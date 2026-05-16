@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cloudinaryPlayer = document.getElementById('cloudinaryPlayer')
     const currentTimeDisplay = document.getElementById('current-video-time-display');
     const noteInput = document.getElementById('note-content-input');
+    const noteContainer = document.getElementById('notes-list-container');
 
     // LIÊN TỤC CẬP NHẬT THỜI GIAN
     initVideoTimer({cloudinaryPlayer, currentTimeDisplay})
@@ -12,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnSaveNote) {
         initSaveNoteButton({btnSaveNote, noteInput, cloudinaryPlayer})
     }
+
+    initNoteAction({noteContainer})
 
 })
 
@@ -107,19 +110,21 @@ function loadLessonNotes(lessonId) {
 function renderNoteCard(container, note) {
     // Tạo ra 1 note-card và lấy dữ liệu từ note hiện tại truyền vào
     const noteHtml = `
-                    <div class="note-card" onclick="seekToTime(${note.noteTime})">
+                    <div class="note-card" data-note-id="${note.id}">
                         <div class="note-card-header">
-                            <div class="note-time-badge-saved">
+                            <div class="note-time-badge-saved" onclick="seekToTime(${note.noteTime})">
                                 <i class="fa-regular fa-clock"></i> ${formatTime(note.noteTime)}
                             </div>
                             
                             <div class="note-actions">
-                                <span class="note-action-btn edit" title="Sửa ghi chú">
+                                <button class="note-action-btn edit" title="Sửa ghi chú" 
+                                        data-edit-id="${note.id}" data-action="edit">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                </span>
-                                <span class="note-action-btn delete" title="Xóa ghi chú">
+                                </button>
+                                <button class="note-action-btn delete" title="Xóa ghi chú" 
+                                        data-delete-id="${note.id}" data-action="delete">
                                     <i class="fa-solid fa-trash-can"></i>
-                                </span>
+                                </button>
                             </div>
                         </div>
                         <div class="note-card-content">${note.content}</div>
@@ -140,4 +145,42 @@ function seekToTime(seconds) {
         // Cuộn màn hình lên đầu video để xem cho tiện
         window.scrollTo({top: 100, behavior: 'smooth'});
     }
+}
+
+function initNoteAction({noteContainer}) {
+    if (!noteContainer) return;
+
+    noteContainer.addEventListener('click', (event) => {
+
+        const deleteBtn = event.target.closest('[data-delete-id]');
+
+        if (deleteBtn) {
+            event.stopPropagation();
+            // data-delete-id thì lúc lấy ra laf dataset.deleteId và luôn là String
+            const noteId = Number(deleteBtn.dataset.deleteId)
+            deleteNote(noteId);
+        }
+
+    })
+}
+
+function deleteNote(noteId) {
+    setupConfirmModal({
+        action: 'delete_note',
+
+        mode: 'ajax',
+
+        url: 'personal/my-course/note/action',
+
+        body: {
+            action: 'delete',
+            noteId: noteId
+        },
+
+        onSuccess: () => {
+            loadLessonNotes(
+                PlayerState.currentLessonId
+            );
+        }
+    })
 }
