@@ -15,6 +15,7 @@ import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
+import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,13 +44,15 @@ public class ConfirmController extends HttpServlet {
         Integer userId = (Integer) session.getAttribute("userId");
         CartService cartService = (CartService) session.getAttribute("cart");
 
+        Voucher sessionVoucher = (Voucher) session.getAttribute("appliedVoucher");
+
         if (userId == null || cartService == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
         int paymentMethodId = Integer.parseInt(request.getParameter("payment-method-id"));
-        Order order = orderService.createOrderPending(userId, cartService, paymentMethodId);
+        Order order = orderService.createOrderPending(userId, cartService, paymentMethodId, sessionVoucher);
 
         if (paymentMethodId == 2) {
 
