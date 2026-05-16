@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.enrollment.controller;
 
+import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -35,10 +36,12 @@ public class MyCourseNoteController extends BaseController {
 
             int lessonId = RequestUtils.getParameterAsInt(request, "lessonId", 0);
 
-            List<CourseNote> listNotes = courseNoteService.getNotesByUserIdAndLessonId(userId, lessonId);
+            List<CourseNote> notes = courseNoteService.getNotesByUserIdAndLessonId(userId, lessonId);
+            String json = new Gson().toJson(notes);
 
-            request.setAttribute("listNotes", listNotes);
-            this.redirect(request, response, "");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

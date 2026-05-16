@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<div class="section-7__review section__space">
+<div class="section-8__notes section__space">
 
     <div class="review-box__header style__sub-title">
         <span>Ghi chú cá nhân</span>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div id="notes-list-container" style="display: flex; flex-direction: column; gap: 15px;">
+    <div id="notes-list-container" class="notes-list-container">
         <div class="empty-state" id="empty-note-state">
             <i class="fa-solid fa-pen-to-square empty-icon"></i>
             <div class="empty-title">Chưa có ghi chú nào</div>

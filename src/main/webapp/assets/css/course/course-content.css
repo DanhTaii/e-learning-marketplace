@@ -2,6 +2,7 @@
 .text-2xl {
     font-size: var(--text-2xl);
 }
+
 .text-4xl {
     font-size: var(--text-4xl);
 }
@@ -81,7 +82,7 @@
     align-self: flex-start;
     margin-bottom: 6rem;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid #f3f4f6;
 }
 
@@ -354,9 +355,10 @@
 }
 
 .lesson-item.active-lesson .column2__header .text-lg.regular.header,
-.lesson-item.active-lesson .column2__duration .text-lg.light  {
+.lesson-item.active-lesson .column2__duration .text-lg.light {
     color: white;
 }
+
 .column2__header {
     margin-bottom: 1rem;
 }
@@ -638,7 +640,7 @@ form {
     border: none;
     resize: vertical; /* Cho phép người dùng kéo giãn chiều dọc nếu muốn */
     outline: none;
-    font-size: 2rem;
+    font-size: var(--text-lg);
     color: #374151;
     font-family: inherit;
     line-height: 1.5;
@@ -671,4 +673,105 @@ form {
 
 .btn-save-note:hover {
     background-color: #1e293b;
+}
+
+.section-8__notes {
+    padding-bottom: 0.5rem;
+}
+
+/* ============================= CSS CHO DANH SÁCH GHI CHÚ ĐÃ LƯU ======================= */
+.notes-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 2rem;
+}
+
+.header-note-list-container {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+}
+
+.saved-notes-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8; /* Màu xám nhạt giống ảnh */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+.note-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.note-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.note-card-header {
+    display: flex;
+    justify-content: space-between; /* Đẩy thời gian sang trái, nút bấm sang phải */
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.note-time-badge-saved {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: var(--text-base);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.note-time-badge-saved:hover {
+    background-color: #e2e8f0;
+}
+
+.note-actions {
+    display: flex;
+    gap: 16px;
+    color: #cbd5e1;
+    font-size: 1rem;
+}
+
+.note-action-btn {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.note-action-btn.edit:hover {
+    color: #3b82f6;
+}
+
+.note-action-btn.delete:hover {
+    color: #ef4444;
+}
+
+.note-card-content {
+    color: #475569;
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    /*Giúp giữ lại các dấu xuống dòng khi user gõ phím Enter */
+    white-space: pre-wrap;
+}
+
+.note-action-btn.edit {
+    font-size: var(--text-3xl);
+}
+
+.note-action-btn.delete {
+    font-size: var(--text-3xl);
 }

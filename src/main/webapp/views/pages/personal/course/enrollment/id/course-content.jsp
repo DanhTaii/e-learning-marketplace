@@ -159,5 +159,6 @@
 <script src="assets/javascript/features/enrollment/enrollment-detail-navbar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/enrollment/enrollment-note.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>
