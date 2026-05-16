@@ -306,40 +306,67 @@
                 <button class="btn-close-modal" onclick="closeModal('voucherModal')">&times;</button>
             </div>
             <div class="voucher-modal-body">
-                <div class="voucher-input-group">
-                    <input type="text" id="manualVoucherCode" placeholder="Nhập mã giảm giá...">
-                    <button onclick="applyManualVoucher()">Áp dụng</button>
-                </div>
-<c:forEach var="v" items="${listVoucher}">
-                <div class="voucher-list">
-                    <div class="voucher-item">
-                        <div class="voucher-icon">
-                            <div class="voucher-title">${v.code}</div></div>
-                        <div class="voucher-info">
-                            <div class="voucher-title">${v.title}</div>
-                            <div class="voucher-desc">${v.description}</div>
-                            <div class="voucher-exp">HSD:  <fmt:formatDate value="${v.endDate}" pattern="dd-MM-yyyy" /> </div>
-                            <c:if test="${not empty v.usageLimit and v.usageLimit > 0}">
-                                <div class="voucher-usage-wrapper">
-                                    <div class="voucher-usage-bar">
-                                        <div class="voucher-usage-progress" style="width: ${(v.usedCount / v.usageLimit) * 100}%;"></div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.userId}">
+                        <div class="voucher-input-group">
+                            <input type="text" id="manualVoucherCode" placeholder="Nhập mã giảm giá...">
+                            <button onclick="applyManualVoucher()">Áp dụng</button>
+                        </div>
+                        <input type="hidden" id="savedVoucherCode" value="${not empty sessionScope.appliedVoucher ? sessionScope.appliedVoucher.code : ''}">
+                        <div class="voucher-list">
+                            <c:forEach var="v" items="${listVoucher}">
+                                <div class="voucher-item">
+                                    <div class="voucher-icon">
+                                        <div class="voucher-title">${v.code}</div>
                                     </div>
-                                    <div class="voucher-usage-text">
-                                        <span>Đã dùng: ${v.usedCount} / ${v.usageLimit}</span>
+                                    <div class="voucher-info">
+                                        <div class="voucher-title">${v.title}</div>
+                                        <div class="voucher-desc">${v.description}</div>
+                                        <div class="voucher-exp">
+                                            HSD: <fmt:formatDate value="${v.endDate}" pattern="dd-MM-yyyy" />
+                                        </div>
 
-                                        <c:if test="${(v.usedCount / v.usageLimit) > 0.8}">
-                                            <span style="color: #dc3545; font-weight: 600;">Sắp hết!</span>
+                                        <c:if test="${not empty v.usageLimit and v.usageLimit > 0}">
+                                            <div class="voucher-usage-wrapper">
+                                                <div class="voucher-usage-bar">
+                                                    <div class="voucher-usage-progress" style="width: ${(v.usedCount / v.usageLimit) * 100}%;"></div>
+                                                </div>
+                                                <div class="voucher-usage-text">
+                                                    <span>Đã dùng: ${v.usedCount} / ${v.usageLimit}</span>
+                                                    <c:if test="${(v.usedCount / v.usageLimit) > 0.8}">
+                                                        <span style="color: #dc3545; font-weight: 600;">Sắp hết!</span>
+                                                    </c:if>
+                                                </div>
+                                            </div>
                                         </c:if>
                                     </div>
+                                    <div>
+                                        <button class="btn-select-voucher" onclick="selectVoucher('${v.code}')">Dùng</button>
+                                    </div>
                                 </div>
+                            </c:forEach>
+
+                            <c:if test="${empty listVoucher}">
+                                <p style="text-align: center; padding: 20px; color: #888;">Hiện không có mã giảm giá nào khả dụng.</p>
                             </c:if>
                         </div>
-                        <div>
-                            <button class="btn-select-voucher" onclick="selectVoucher('SALE10')">Dùng</button>
+                    </c:when>
+
+                    <c:otherwise>
+                        <div class="auth-required-state">
+                            <div class="auth-icon-wrapper">
+                                <i class="fa-solid fa-user-lock"></i>
+                            </div>
+                            <h4 class="auth-title">Bạn chưa đăng nhập</h4>
+                            <p class="auth-desc">
+                                Vui lòng đăng nhập để xem các mã giảm giá dành riêng cho thành viên.
+                            </p>
+                            <a href="sign-in" class="btn-select-voucher btn-login-now">
+                                Đăng nhập ngay
+                            </a>
                         </div>
-                    </div>
-                </div>
-</c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

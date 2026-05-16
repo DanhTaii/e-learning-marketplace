@@ -5,6 +5,7 @@ import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilte
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
+import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
 public interface OrderService {
     int createOrder(Order order);
 
-    Order createOrderPending(Integer userId, CartService cart, int paymentMethodId);
+    Order createOrderPending(Integer userId, CartService cart, int paymentMethodId , Voucher voucher);
 
     void processPaymentResponse(String orderCode, String transactionNo, boolean isSuccess);
 

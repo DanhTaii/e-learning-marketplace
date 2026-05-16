@@ -2,12 +2,16 @@ package vn.edu.nlu.fit.elearning.feature.payment.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
 import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDao;
 import vn.edu.nlu.fit.elearning.feature.payment.dao.PaymentDaoImpl;
+import vn.edu.nlu.fit.elearning.feature.payment.dto.PaymentSummaryDTO;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment_method.vnpay.VnpayConstants;
+import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -19,12 +23,8 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentDao pd;
 
 
-    private OrderItemService orderItemService;
-
-
     public PaymentServiceImpl(PaymentDao pd) {
         this.pd = new PaymentDaoImpl();
-        this.orderItemService = BeanContainer.getBean(OrderItemService.class);
     }
 
     @Override
@@ -105,4 +105,32 @@ public class PaymentServiceImpl implements PaymentService {
         String vnpSecureHash = VnpayConstants.hmacSHA512(VnpayConstants.secretKey, hashData.toString());
         return VnpayConstants.vnp_PayUrl + "?" + queryUrl + "&vnp_SecureHash=" + vnpSecureHash;
     }
+    @Override
+    public PaymentSummaryDTO calculatePaymentSummary(CartService cart, Voucher voucher) {
+        double subTotal = cart.getFinalPriceTotal();
+        double discountAmount = 0;
+        double finalTotal = subTotal;
+
+        if (voucher != null) {
+            try {
+                VoucherService vService = BeanContainer.getBean(VoucherService.class);
+
+                if (vService != null) {
+                    var result = vService.applyVoucher(voucher.getCode(), subTotal);
+                    discountAmount = result.getDiscountAmount();
+                    finalTotal = result.getFinalTotal();
+                } else {
+                    System.out.println("Lỗi: BeanContainer vẫn không tìm thấy VoucherService!");
+                    voucher = null;
+                }
+            } catch (Exception e) {
+                // Lỗi áp mã
+                voucher = null;
+            }
+        }
+        return new PaymentSummaryDTO(subTotal, discountAmount, finalTotal, voucher);
+        }
+
+
     }
+

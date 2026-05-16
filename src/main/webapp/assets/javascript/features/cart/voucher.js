@@ -1,22 +1,38 @@
 // Khi bấm nút "Dùng" ở một Voucher
-function selectVoucher(code) {
-    // 1. Tận dụng hàm closeModal của bạn để đóng popup
+function selectVoucher(code,isReload = false) {
+
     closeModal('voucherModal');
 
-    // 2. Hiển thị UI đã chọn mã ở ngoài Giỏ hàng
-    const infoBox = document.getElementById('applied-voucher-info');
-    const codeSpan = document.getElementById('applied-voucher-code');
+    fetch('apply-voucher', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'code=' + encodeURIComponent(code)
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                closeModal('voucherModal');
 
-    if (infoBox && codeSpan) {
-        infoBox.style.display = 'flex';
-        codeSpan.innerText = "Mã: " + code;
-    }
+                // Hiện box báo đã chọn mã
+                document.getElementById('applied-voucher-info').style.display = 'flex';
+                document.getElementById('applied-voucher-code').innerText = "Mã: " + data.code;
 
-    // 3. TODO: Gọi AJAX gửi 'code' xuống server để tính lại tổng tiền
-    // applyDiscountAjax(code);
+                const finalPriceEl = document.getElementById('display-final-price');
+                if(finalPriceEl) {
+                    finalPriceEl.innerText = data.finalTotalFormatted;
+                }
+
+                if (!isReload) {
+                    toast({title: 'Áp dụng thành công!', message: 'Mã giảm giá đã được áp dụng', type: 'success', duration: 3000});
+                }
+            } else {
+                if (!isReload) {
+                    alert(data.message);
+                }
+            }
+        });
 }
 
-// Khi nhập mã thủ công và bấm Áp dụng
 function applyManualVoucher() {
     const codeInput = document.getElementById('manualVoucherCode');
     const code = codeInput ? codeInput.value.trim() : '';
@@ -28,12 +44,33 @@ function applyManualVoucher() {
 
 // Khi bấm nút "Bỏ chọn" mã
 function removeVoucher(e) {
-    e.preventDefault();
-    document.getElementById('applied-voucher-info').style.display = 'none';
+        if(e) e.preventDefault();
 
-    const manualInput = document.getElementById('manualVoucherCode');
-    if (manualInput) manualInput.value = '';
+        fetch('remove-voucher', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('applied-voucher-info').style.display = 'none';
 
-    // TODO: Gọi AJAX hủy mã ở đây để backend tính lại giá gốc
-    // removeDiscountAjax();
+                    const manualInput = document.getElementById('manualVoucherCode');
+                    if (manualInput) manualInput.value = '';
+
+                    const finalPriceEl = document.getElementById('display-final-price');
+                    if (finalPriceEl) {
+                        finalPriceEl.innerText = data.originalTotalFormatted;
+                    }
+                }
+            });
+
 }
+window.addEventListener('pageshow', function(event) {
+    const hiddenInput = document.getElementById('savedVoucherCode');
+
+    if (hiddenInput && hiddenInput.value.trim() !== '') {
+        const savedCode = hiddenInput.value.trim();
+
+        if (typeof selectVoucher === 'function') {
+            selectVoucher(savedCode, true);
+        }
+    }
+});

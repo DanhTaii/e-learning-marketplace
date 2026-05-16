@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.model;
 
+import vn.edu.nlu.fit.elearning.common.helper.enums.VoucherStatus;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -23,7 +25,7 @@ public class Voucher implements Serializable {
 
     private Integer usageLimit;
     private Integer usedCount;
-    private Boolean isActive;
+    private VoucherStatus isActive;
 
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -31,7 +33,7 @@ public class Voucher implements Serializable {
     public Voucher() {
     }
 
-    public Voucher(Integer id, String code, String title, String description, String discountType, BigDecimal discountValue, BigDecimal minOrderValue, BigDecimal maxDiscountValue, Timestamp startDate, Timestamp endDate, Integer usageLimit, Integer usedCount, Boolean isActive, Timestamp createdAt, Timestamp updatedAt) {
+    public Voucher(Integer id, String code, String title, String description, String discountType, BigDecimal discountValue, BigDecimal minOrderValue, BigDecimal maxDiscountValue, Timestamp startDate, Timestamp endDate, Integer usageLimit, Integer usedCount, VoucherStatus isActive, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.code = code;
         this.title = title;
@@ -161,11 +163,11 @@ public class Voucher implements Serializable {
         this.usedCount = usedCount;
     }
 
-    public Boolean getActive() {
+    public VoucherStatus getActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(VoucherStatus active) {
         isActive = active;
     }
 

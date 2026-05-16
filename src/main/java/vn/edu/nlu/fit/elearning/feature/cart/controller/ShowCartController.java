@@ -30,10 +30,13 @@ public class ShowCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int userId = 0;
+        Integer userId = (Integer) session.getAttribute("userId");
 
-        if (session != null && session.getAttribute("userId") != null) {
-            userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            List<Voucher> vouchers = voucherService.findValidVouchers();
+            request.setAttribute("listVoucher", vouchers);
+        } else {
+            request.setAttribute("listVoucher", null);
         }
 
         List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);

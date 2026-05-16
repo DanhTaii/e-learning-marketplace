@@ -409,3 +409,18 @@ ul {
     color: #3722D3;
     font-weight: bold;
 }
+/* --- STYLE CHO DÒNG VOUCHER --- */
+.voucher-row {
+    margin-top: 5px;
+}
+
+.voucher-label {
+    color: #ffffff; /* Đổi màu chữ thành trắng */
+    display: flex;
+    align-items: center; /* Căn giữa icon và text theo chiều dọc */
+    gap: 6px; /* Khoảng cách vừa phải giữa icon và chữ */
+}
+
+.voucher-amount {
+    color: #ffffff; /* Đổi màu tiền thành trắng */
+}
