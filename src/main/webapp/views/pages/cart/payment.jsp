@@ -31,147 +31,159 @@
     <jsp:include page="/views/layouts/header-simple.jsp"/>
     <div class="web__container">
         <form id="payment-main-form" action="confirm-payment" method="post" class="payment-layout">
-        <div class="grid">
+            <div class="grid">
 
-            <div class="payment-layout">
+                <div class="payment-layout">
 
-                <div class="grid__column-8">
-                    <div class="main-payment-wrapper">
+                    <div class="grid__column-8">
+                        <div class="main-payment-wrapper">
 
-                        <div class="payment-section">
-                            <h2 class="section-title">Chọn phương thức thanh toán</h2>
-                            <div class="payment-options-grid">
+                            <div class="payment-section">
+                                <h2 class="section-title">Chọn phương thức thanh toán</h2>
+                                <div class="payment-options-grid">
 
-                                <c:forEach var="method" items="${paymentMethod}" varStatus="status">
-                                    <label class="payment-item">
-                                        <input type="radio" name="payment-method-id" value="${method.id}"${status.first ? 'checked' : ''} >
+                                    <c:forEach var="method" items="${paymentMethod}" varStatus="status">
+                                        <label class="payment-item">
+                                            <input type="radio" name="payment-method-id"
+                                                   value="${method.id}"${status.first ? 'checked' : ''} >
 
-                                        <div class="payment-item__content">
-                                            <img src="${method.iconUrl}" alt="${method.name}">
-                                            <span>${method.name}</span>
+                                            <div class="payment-item__content">
+                                                <img src="${method.iconUrl}" alt="${method.name}">
+                                                <span>${method.name}</span>
 
-                                            <div class="select-badge"><i class="fa-solid fa-circle-check"></i></div>
-                                        </div>
-                                    </label>
-                                </c:forEach>
-
-                            </div>
-                        </div>
-
-                        <hr class="divider">
-
-                        <div class="order-section">
-                            <h2 class="section-title">Hóa đơn chi tiết</h2>
-                            <div class="title__2">
-
-                                <div id="items">Sản phẩm</div>
-
-                                <div class=" price-header">
-
-                                    <span id="price">Giá</span>
+                                                <div class="select-badge"><i class="fa-solid fa-circle-check"></i></div>
+                                            </div>
+                                        </label>
+                                    </c:forEach>
 
                                 </div>
                             </div>
-                            <div class="scrollable-order-list">
-                                <ul>
-                                    <c:forEach var="p" items="${sessionScope.cart.selectedItems}">
-                                        <li>
-                                            <div class="order-item-row">
-                                                <div class="order-item__info">
-                                                    <div class="content__image">
 
-                                                        <img srcset="${p.course.thumbnailUrl}"
+                            <hr class="divider">
 
-                                                             alt="" class="image">
+                            <div class="order-section">
+                                <h2 class="section-title">Hóa đơn chi tiết</h2>
+                                <div class="title__2">
 
+                                    <div id="items">Sản phẩm</div>
+
+                                    <div class=" price-header">
+
+                                        <span id="price">Giá</span>
+
+                                    </div>
+                                </div>
+                                <div class="scrollable-order-list">
+                                    <ul>
+                                        <c:forEach var="p" items="${sessionScope.cart.selectedItems}">
+                                            <li>
+                                                <div class="order-item-row">
+                                                    <div class="order-item__info">
+                                                        <div class="content__image">
+
+                                                            <img srcset="${p.course.thumbnailUrl}"
+
+                                                                 alt="" class="image">
+
+                                                        </div>
+                                                        <div class="content__name">
+
+                                                            <p class="items__name ">${p.course.title}</p>
+
+                                                        </div>
                                                     </div>
-                                                    <div class="content__name">
-
-                                                        <p class="items__name ">${p.course.title}</p>
-
-                                                    </div>
-                                                </div>
-                                                <div class="order-item__price">
+                                                    <div class="order-item__price">
                                                     <span class="amount-discounted">${p.priceFormat} <i
                                                             class="fa-solid fa-tag price-icon"></i></span>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="grid__column-4">
-                    <div class="invoice">
-                        <div class="invoice__info">
-                            <div class="info__detail info">
-                                <span class="detail__title ">Tóm tắt hóa đơn</span>
-                                <div class="detail__price">
-                                    <div class="price__original">
-                                        <span class="price__original text-medium original">Giá gốc: </span>
-                                        <span class="price__original text-medium amount">${sessionScope.cart.formatedTotal}</span>
-                                    </div>
-                                    <div class="price__discount">
-                                        <span class="price__discount text-medium discount">Số tiền giảm: </span>
-                                        <span class="price__discount text-medium amount">- ${sessionScope.cart.formatedDiscountPriceTotal}</span>
-
-                                    </div>
-                                    <div class="price__total index">
-                                        <span class="price__total ">Tổng cộng (${sessionScope.cart.selectedQuantity}): </span>
-                                        <span class="price__total text-medium amount">${sessionScope.cart.formatedFinalPriceTotal}</span>
-                                    </div>
-
-
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="grid__column-4">
+                        <div class="invoice">
+                            <div class="invoice__info">
+                                <div class="info__detail info">
+                                    <span class="detail__title ">Tóm tắt hóa đơn</span>
+                                    <div class="detail__price">
+                                        <div class="price__original">
+                                            <span class="price__original text-medium original">Giá gốc: </span>
+                                            <span class="price__original text-medium amount">${sessionScope.cart.formatedTotal}</span>
+                                        </div>
+                                        <div class="price__discount">
+                                            <span class="price__discount text-medium discount">Số tiền giảm: </span>
+                                            <span class="price__discount text-medium amount">- ${sessionScope.cart.formatedDiscountPriceTotal}</span>
+
+                                        </div>
+                                        <c:if test="${not empty summary.appliedVoucher}">
+                                            <div class="price__discount voucher-row">
+                                                <span class="price__discount text-medium discount voucher-label">
+                                                    <i class="fa-solid fa-ticket"></i> Voucher (${summary.appliedVoucher.code}):
+                                                </span>
+                                                <span class="price__discount text-medium amount voucher-amount"> - ${summary.discountStr} </span>
+                                            </div>
+                                        </c:if>
+                                        <div class="price__total index">
+                                            <span class="price__total ">Tổng cộng (${sessionScope.cart.selectedQuantity}): </span>
+                                            <span class="price__total text-medium amount">${summary.totalToPayStr}</span>
+                                        </div>
+
+
+                                    </div>
 
 
                                     <div class="invoice__pay-btn header__button index-btn">
                                         <button type="submit" id="pay-btn" class="button__btn pay-btn"><i
                                                 class="fa-solid fa-bag-shopping shop-icon"
-                                                ></i> Thanh toán
+                                        ></i> Thanh toán
                                         </button>
                                     </div>
 
-                                <div class="detail__policy">
-                                    <span class="text-big main-text">Đảm bảo hoàn tiền trong 30 ngày</span>
-                                    <span class="text-medium sub-text">Không hài lòng? Nhận lại đủ tiền trong vòng 30 ngày. Đơn giản và dễ dàng!</span>
+                                    <div class="detail__policy">
+                                        <span class="text-big main-text">Đảm bảo hoàn tiền trong 30 ngày</span>
+                                        <span class="text-medium sub-text">Không hài lòng? Nhận lại đủ tiền trong vòng 30 ngày. Đơn giản và dễ dàng!</span>
+                                    </div>
+
+
                                 </div>
-
-
                             </div>
+
                         </div>
 
+
                     </div>
 
+                </div>
 
             </div>
-
-            </div>
-
-        </div>
         </form>
-        <div id="popup__add-payment-confirm-black" class="modal-backdrop modal"> <div class="modal-content">
-            <div class="modal-header">
-                <div class="header-content modal-title">THÔNG BÁO</div>
-            </div>
-            <div class="course-body">
-                <div class="body-title-black">BẠN CÓ XÁC NHẬN THANH TOÁN?</div>
-                <div class="body-icon"><i class="fa-solid fa-receipt check-popup-black"></i></div>
-                <div class="body-content">Bạn có chắc chắn muốn thanh toán? Hành động này không thể hoàn tác</div>
-                <div class="body-selection">
-                    <div class="body-selection__item x__icon">
-                        <button type="button" class="dark-button dark-button-2" onclick="closeModal('popup__add-payment-confirm-black')">Hủy</button>
-                    </div>
-                    <div class="body-selection__item x__icon">
-                        <button type="button" id="btn-confirm-payment" class="button__btn">Xác nhận</button>
+        <div id="popup__add-payment-confirm-black" class="modal-backdrop modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content modal-title">THÔNG BÁO</div>
+                </div>
+                <div class="course-body">
+                    <div class="body-title-black">BẠN CÓ XÁC NHẬN THANH TOÁN?</div>
+                    <div class="body-icon"><i class="fa-solid fa-receipt check-popup-black"></i></div>
+                    <div class="body-content">Bạn có chắc chắn muốn thanh toán? Hành động này không thể hoàn tác</div>
+                    <div class="body-selection">
+                        <div class="body-selection__item x__icon">
+                            <button type="button" class="dark-button dark-button-2"
+                                    onclick="closeModal('popup__add-payment-confirm-black')">Hủy
+                            </button>
+                        </div>
+                        <div class="body-selection__item x__icon">
+                            <button type="button" id="btn-confirm-payment" class="button__btn">Xác nhận</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>

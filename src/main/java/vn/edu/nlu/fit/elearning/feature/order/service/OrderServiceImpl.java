@@ -18,10 +18,12 @@ import vn.edu.nlu.fit.elearning.feature.order.dto.OrderDTO;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order_item.model.OrderItem;
 import vn.edu.nlu.fit.elearning.feature.order_item.service.OrderItemService;
+import vn.edu.nlu.fit.elearning.feature.payment.dto.PaymentSummaryDTO;
 import vn.edu.nlu.fit.elearning.feature.payment.model.Payment;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserDetailResponse;
 import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
+import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,15 +126,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrderPending(Integer userId, CartService cart, int paymentMethodId) {
+    public Order createOrderPending(Integer userId, CartService cart, int paymentMethodId, Voucher voucher) {
         ensureServices();
+        PaymentSummaryDTO summary = paymentService.calculatePaymentSummary(cart, voucher);
         Order order = new Order();
         order.setOrderCode("ORD" + System.currentTimeMillis());
         order.setUserId(userId);
         order.setPaymentMethodId(paymentMethodId);
         order.setTotalAmount((int) cart.getTotal());
-        order.setDiscountAmount((int) cart.getDiscountPriceTotal());
-        order.setFinalAmount((int) cart.getFinalPriceTotal());
+        int totalDiscount = (int) cart.getDiscountPriceTotal() + (int) summary.getDiscountAmount();
+        order.setDiscountAmount(totalDiscount);
+        order.setFinalAmount((int) summary.getFinalTotal());
         order.setStatus(OrderStatus.PENDING);
         String currentUsername = userService.getUserById(userId).getUsername();
         order.setUsernameSnapshot(currentUsername);

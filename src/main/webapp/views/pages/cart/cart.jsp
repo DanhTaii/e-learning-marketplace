@@ -312,7 +312,7 @@
                             <input type="text" id="manualVoucherCode" placeholder="Nhập mã giảm giá...">
                             <button onclick="applyManualVoucher()">Áp dụng</button>
                         </div>
-
+                        <input type="hidden" id="savedVoucherCode" value="${not empty sessionScope.appliedVoucher ? sessionScope.appliedVoucher.code : ''}">
                         <div class="voucher-list">
                             <c:forEach var="v" items="${listVoucher}">
                                 <div class="voucher-item">
