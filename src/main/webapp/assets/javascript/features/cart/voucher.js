@@ -1,5 +1,5 @@
 // Khi bấm nút "Dùng" ở một Voucher
-function selectVoucher(code) {
+function selectVoucher(code,isReload = false) {
 
     closeModal('voucherModal');
 
@@ -22,9 +22,13 @@ function selectVoucher(code) {
                     finalPriceEl.innerText = data.finalTotalFormatted;
                 }
 
-                toast({title: 'Áp dụng thành công!', message: successMessage, type: 'success', duration: 3000});
+                if (!isReload) {
+                    toast({title: 'Áp dụng thành công!', message: 'Mã giảm giá đã được áp dụng', type: 'success', duration: 3000});
+                }
             } else {
-                alert(data.message);
+                if (!isReload) {
+                    alert(data.message);
+                }
             }
         });
 }
@@ -57,4 +61,16 @@ function removeVoucher(e) {
                     }
                 }
             });
+
 }
+window.addEventListener('pageshow', function(event) {
+    const hiddenInput = document.getElementById('savedVoucherCode');
+
+    if (hiddenInput && hiddenInput.value.trim() !== '') {
+        const savedCode = hiddenInput.value.trim();
+
+        if (typeof selectVoucher === 'function') {
+            selectVoucher(savedCode, true);
+        }
+    }
+});
