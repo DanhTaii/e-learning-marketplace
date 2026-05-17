@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CourseNoteDao extends BaseCrudDao<CourseNote, Integer> {
     List<CourseNote> findByUserIdAndLessonId(int userId, int lessonId);
+
+    int updateContentById(int id, String content);
 }

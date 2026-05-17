@@ -46,6 +46,15 @@ public class MyCourseNoteActionController extends HttpServlet {
                         response.getWriter().write("{\"status\":\"error\", \"message\":\"Không tìm thấy ghi chú để xóa\"}");
                     }
                     break;
+                case "update":
+                    String content = RequestUtils.getParameterAsString(request, "content", null);
+                    result = courseNoteService.editNoteContentById(noteId, content);
+                    if (result > 0) {
+                        response.getWriter().write("{\"status\":\"success\"}");
+                    } else {
+                        response.getWriter().write("{\"status\":\"error\", \"message\":\"Không tìm thấy ghi chú để xóa\"}");
+                    }
+                    break;
                 default:
                     response.getWriter().write("{\"status\":\"error\"}");
                     break;

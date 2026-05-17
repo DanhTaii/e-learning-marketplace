@@ -27,4 +27,9 @@ public class CourseNoteServiceImpl implements CourseNoteService {
     public int deleteCourseNotes(int id) {
         return courseNoteDao.delete(id);
     }
+
+    @Override
+    public int editNoteContentById(int id, String content) {
+        return courseNoteDao.updateContentById(id, content);
+    }
 }

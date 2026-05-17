@@ -657,10 +657,10 @@ form {
 }
 
 .btn-save-note {
-    background-color: #0f172a; /* Màu tối giống trong ảnh */
+    background-color: var(--dark-blue);
     color: white;
     border: none;
-    padding: 12px 16px;
+    padding: 10px 10px;
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
@@ -668,7 +668,7 @@ form {
     align-items: center;
     gap: 8px;
     transition: background-color 0.2s;
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
 }
 
 .btn-save-note:hover {
@@ -748,24 +748,30 @@ form {
 }
 
 .note-action-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+    color: var(--light-grey);
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s ease-in-out, transform 0.1s;
 }
 
 .note-action-btn.edit:hover {
     color: #3b82f6;
+    transform: scale(1.1);
 }
 
 .note-action-btn.delete:hover {
     color: #ef4444;
+    transform: scale(1.1);
 }
 
 .note-card-content {
     color: #475569;
     font-size: var(--text-lg);
     line-height: 1.6;
-    /*Giúp giữ lại các dấu xuống dòng khi user gõ phím Enter */
-    white-space: pre-wrap;
 }
 
 .note-action-btn.edit {
@@ -774,4 +780,59 @@ form {
 
 .note-action-btn.delete {
     font-size: var(--text-3xl);
+}
+
+/* ==================== FORM EDIT INLINE NOTE ==================== */
+.edit-note-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.edit-note-textarea:focus {
+    border-color: #94a3b8;
+}
+
+.edit-note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-edit-note {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: var(--text-base);
+}
+
+.btn-cancel-edit {
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+    transition: all 0.2s;
+}
+
+.btn-cancel-edit:hover {
+    background: #e2e8f0;
+}
+
+.btn-save-edit {
+    border: none;
+    background: #0f172a;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.btn-save-edit:hover {
+    background: #1e293b;
 }

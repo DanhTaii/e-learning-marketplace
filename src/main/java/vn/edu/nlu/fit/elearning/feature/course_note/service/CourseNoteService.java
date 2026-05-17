@@ -11,4 +11,6 @@ public interface CourseNoteService {
     List<CourseNote> getNotesByUserIdAndLessonId(int userId, int lessonId);
 
     int deleteCourseNotes(int id);
+
+    int editNoteContentById(int id, String content);
 }

@@ -37,7 +37,7 @@
 
     <div id="notes-list-container" class="notes-list-container">
         <div class="empty-state" id="empty-note-state">
-            <i class="fa-solid fa-pen-to-square empty-icon"></i>
+            <i class= "fa-solid fa-pen-to-square empty-icon"></i>
             <div class="empty-title">Chưa có ghi chú nào</div>
             <div class="empty-description">
                 Ghi chú giúp bạn lưu lại những kiến thức quan trọng. Hãy bấm lưu để tạo ghi chú đầu tiên!

@@ -61,4 +61,14 @@ public class CourseNoteDaoImpl extends BaseDao implements CourseNoteDao {
                         .list()
         );
     }
+
+    @Override
+    public int updateContentById(int id, String content) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE course_notes SET content = :content WHERE id = :id")
+                    .bind("id", id)
+                    .bind("content", content)
+                    .execute();
+        });
+    }
 }
