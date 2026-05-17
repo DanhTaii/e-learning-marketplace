@@ -17,6 +17,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+
 </head>
 <body>
 <div class="web">
@@ -77,6 +80,10 @@
                         <button class="tab-item" data-tab="reviews">
                             Đánh giá
                         </button>
+
+                        <button class="tab-item" data-tab="notes">
+                            Ghi chú
+                        </button>
                     </nav>
 
                     <div class="tab-content">
@@ -88,6 +95,11 @@
                         <div class="tab-pane" id="reviews">
                             <jsp:include
                                     page="/views/pages/personal/course/enrollment/id/enrollment-detail-reviews.jsp"/>
+                        </div>
+
+                        <div class="tab-pane" id="notes">
+                            <jsp:include
+                                    page="/views/pages/personal/course/enrollment/id/enrollment-detail-notes.jsp"/>
                         </div>
                     </div>
                 </div>
@@ -139,9 +151,8 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
-
-<%--<form action=""></form>--%>
-
+<jsp:include page="/views/components/modal-confirm.jsp"/>
+<jsp:include page="/views/components/toast.jsp"/>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
@@ -149,5 +160,7 @@
 <script src="assets/javascript/validation/personal/course/rating-star.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/enrollment/enrollment-detail-navbar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/enrollment/enrollment-note.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </html>

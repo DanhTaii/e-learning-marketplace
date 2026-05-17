@@ -2,6 +2,7 @@
 .text-2xl {
     font-size: var(--text-2xl);
 }
+
 .text-4xl {
     font-size: var(--text-4xl);
 }
@@ -81,7 +82,7 @@
     align-self: flex-start;
     margin-bottom: 6rem;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid #f3f4f6;
 }
 
@@ -354,9 +355,10 @@
 }
 
 .lesson-item.active-lesson .column2__header .text-lg.regular.header,
-.lesson-item.active-lesson .column2__duration .text-lg.light  {
+.lesson-item.active-lesson .column2__duration .text-lg.light {
     color: white;
 }
+
 .column2__header {
     margin-bottom: 1rem;
 }
@@ -597,4 +599,240 @@ form {
 
 .tab-pane.active {
     display: block;
+}
+
+/* ================== TRANG TRÍ TAB GHI CHÚ ========================*/
+.note-editor-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.note-editor-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    background-color: #fcfcfc;
+}
+
+.note-time-indicator {
+    color: #6b7280;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    background-color: #f3f4f6;
+    border-radius: 4px;
+    font-size: 2rem;
+}
+
+.note-editor-body {
+    padding: 15px;
+}
+
+.note-textarea {
+    width: 100%;
+    min-height: 80px;
+    border: none;
+    resize: vertical; /* Cho phép người dùng kéo giãn chiều dọc nếu muốn */
+    outline: none;
+    font-size: var(--text-lg);
+    color: #374151;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.note-textarea::placeholder {
+    color: #9ca3af;
+}
+
+.note-editor-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-save-note {
+    background-color: var(--dark-blue);
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    font-size: var(--text-base);
+}
+
+.btn-save-note:hover {
+    background-color: #1e293b;
+}
+
+.section-8__notes {
+    padding-bottom: 0.5rem;
+}
+
+/* ============================= CSS CHO DANH SÁCH GHI CHÚ ĐÃ LƯU ======================= */
+.notes-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 2rem;
+}
+
+.header-note-list-container {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+}
+
+.saved-notes-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8; /* Màu xám nhạt giống ảnh */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+.note-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.note-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.note-card-header {
+    display: flex;
+    justify-content: space-between; /* Đẩy thời gian sang trái, nút bấm sang phải */
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.note-time-badge-saved {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: var(--text-base);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.note-time-badge-saved:hover {
+    background-color: #e2e8f0;
+}
+
+.note-actions {
+    display: flex;
+    gap: 16px;
+    color: #cbd5e1;
+    font-size: 1rem;
+}
+
+.note-action-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+    color: var(--light-grey);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out, transform 0.1s;
+}
+
+.note-action-btn.edit:hover {
+    color: #3b82f6;
+    transform: scale(1.1);
+}
+
+.note-action-btn.delete:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+.note-card-content {
+    color: #475569;
+    font-size: var(--text-lg);
+    line-height: 1.6;
+}
+
+.note-action-btn.edit {
+    font-size: var(--text-3xl);
+}
+
+.note-action-btn.delete {
+    font-size: var(--text-3xl);
+}
+
+/* ==================== FORM EDIT INLINE NOTE ==================== */
+.edit-note-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.edit-note-textarea:focus {
+    border-color: #94a3b8;
+}
+
+.edit-note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-edit-note {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: var(--text-base);
+}
+
+.btn-cancel-edit {
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+    transition: all 0.2s;
+}
+
+.btn-cancel-edit:hover {
+    background: #e2e8f0;
+}
+
+.btn-save-edit {
+    border: none;
+    background: #0f172a;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.btn-save-edit:hover {
+    background: #1e293b;
 }

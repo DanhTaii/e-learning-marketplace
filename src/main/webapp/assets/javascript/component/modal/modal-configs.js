@@ -48,5 +48,15 @@ const MODAL_CONFIGS = {
         titleClass: 'title-primary',
         icon: 'fa-rotate-left',
         showReason: false
+    },
+    delete_note: {
+        title: 'xóa ghi chú',
+        message: 'Ghi chú sẽ bị xóa vĩnh viễn!',
+        btnText: 'Xóa ghi chú',
+
+        btnClass: 'btn-danger',
+        titleClass: 'title-danger',
+        icon: 'fa-trash',
+        showReason: false
     }
 };

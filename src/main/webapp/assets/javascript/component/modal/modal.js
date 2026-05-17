@@ -16,14 +16,19 @@ let modalState = {
     ids: [],
     action: '',
     url: '',
-    isBulk: false
+    isBulk: false,
+
+    mode: 'form',
+    method: 'POST',
+    body: {},
+    onSuccess: null
 }
 
 function setupConfirmModal(options) {
-    const {action, ids, url, isBulk, count} = options;
+    const {action, ids, url, isBulk, count, mode, method, body, onSuccess} = options;
     const config = MODAL_CONFIGS[action];
 
-    modalState = {ids, action, url, isBulk};
+    modalState = {ids, action, url, isBulk, mode, method, body, onSuccess};
 
     const message = document.getElementById('confirm-modal-message')
     const title = document.getElementById('confirm-modal-title')
@@ -59,10 +64,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmBtn = document.getElementById('btn-confirm-delete');
 
     if (confirmBtn) {
-        confirmBtn.addEventListener('click', function () {
+        confirmBtn.addEventListener('click', async function () {
             const currentReason = document.getElementById('archive-reason').value
-
-            if (modalState.isBulk) {
+            if (modalState.mode === 'ajax') {
+                await executeAjaxAction({
+                    url: modalState.url,
+                    method: modalState.method,
+                    body: modalState.body,
+                    onSuccess: modalState.onSuccess
+                })
+            } else if (modalState.isBulk) {
                 submitBulkForm(modalState.action, currentReason)
             } else {
                 submitSingleForm(modalState.action, modalState.url, currentReason)
@@ -109,4 +120,33 @@ function submitSingleForm(action, url, reason) {
     form.action = url
     form.submit();
 
+}
+
+async function executeAjaxAction({url, method = 'POST', body = {}, onSuccess = null}) {
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(body)
+        })
+
+        if (!response.ok) {
+            throw new Error(
+                `HTTP Error ${response.status}`
+            );
+        }
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            if (onSuccess) {
+                await onSuccess();
+            }
+            closeModal('confirm-delete-modal');
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }

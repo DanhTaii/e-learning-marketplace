@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const lastTime = parseInt(this.getAttribute('data-last-time')) || 0;
             // Gán lesson id cho PlayerState để lúc cập nhật video có thể lấy xài
             PlayerState.currentLessonId = this.getAttribute('data-lesson-id')
+            loadLessonNotes(PlayerState.currentLessonId);
 
             let finalUrl = VideoHelper.formatVideoUrl(rawUrl);
 
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Đưa thời gian xem hiện tại của video thành thời gian xem cuối đã được truyền bên JSP
                     cloudinaryPlayer.onloadedmetadata = function () {
                         if (lastTime > 0) cloudinaryPlayer.currentTime = lastTime;
-                        cloudinaryPlayer.play();
+                        cloudinaryPlayer.pause()
                     };
                 }
                 // Ẩn ảnh video mặc định
@@ -128,7 +129,9 @@ function saveVideoLastWatched() {
                 if (data.status === 'success') {
                     const activeItem = document.querySelector(`.lesson-item[data-lesson-id="${currentLessonId}"]`);
                     // Cập nhật thời gian cuối cùng vô attribute là data-last-time
-                    if (activeItem) activeItem.setAttribute('data-last-time', currentTime);
+                    if (activeItem) {
+                        activeItem.setAttribute('data-last-time', currentTime);
+                    }
                 }
             })
             .catch(err => console.error("--- LỖI FETCH (Sai URL hoặc mạng):", err));
