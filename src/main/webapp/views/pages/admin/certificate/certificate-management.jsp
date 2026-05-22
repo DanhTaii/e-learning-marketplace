@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
-    <%-- <link rel="stylesheet" href="assets/css/admin/pages/certificate/certificate-management.css?v=<%=System.currentTimeMillis()%>"> --%>
+    <link rel="stylesheet"
+          href="assets/css/admin/pages/certificate/certificate-management.css?v=<%=System.currentTimeMillis()%>">
 
     <%--  Admin Component Css  --%>
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
@@ -128,7 +129,8 @@
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/certificates">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
-                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
+                                    <input id="currentQueryId" type="hidden" name="currentQuery"
+                                           value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="certificateTableBody">
                                         <jsp:include page="/views/pages/admin/certificate/certificate-fragment.jsp"/>

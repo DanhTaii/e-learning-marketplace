@@ -1,10 +1,10 @@
-package vn.edu.nlu.fit.elearning.feature.certificate.service;
+package vn.edu.nlu.fit.elearning.feature.certificate.student.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.helper.PdfHelper;
-import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDao;
-import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dao.CertificateDao;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDaoImpl;

@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.certificate.dto;
+package vn.edu.nlu.fit.elearning.feature.certificate.student.dto;
 
 import vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting;
 

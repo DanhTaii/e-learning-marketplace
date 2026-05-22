@@ -13,10 +13,15 @@ import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDao;
 import vn.edu.nlu.fit.elearning.feature.category.dao.CategoryDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDao;
-import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDaoImp;
-import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
-import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.dao.AdminCertificateDao;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.dao.AdminCertificateDaoImp;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.dto.CertificateAdminDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.service.AdminCertificateService;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.service.AdminCertificateServiceImp;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dao.CertificateDao;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dao.CertificateDaoImp;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.service.CertificateService;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.service.CertificateServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course.student.dao.CourseDao;
@@ -212,6 +217,8 @@ public class BeanContainer {
         CourseNoteDao courseNoteDao = new CourseNoteDaoImpl();
         beans.put(CourseNoteService.class, new CourseNoteServiceImpl(courseNoteDao));
 
+        AdminCertificateDao adminCertificateDao = new AdminCertificateDaoImp();
+        beans.put(AdminCertificateService.class, new AdminCertificateServiceImp(adminCertificateDao));
     }
 
     public static <T> T getBean(Class<T> clazz){

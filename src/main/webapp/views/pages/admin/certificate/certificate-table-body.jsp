@@ -12,22 +12,20 @@
                            value="${cert.id}">
                 </td>
                 <td>
-                    <div class="text-bold">${cert.certificateCode}</div>
+                    <div class="cert-code content__title text-bold">${cert.certificateCode}</div>
                 </td>
                 <td>
-                    <div class="user-info">
-                        <%-- Assuming user object is nested in certificate --%>
-                        <div class="user-name">${cert.user.fullName}</div>
-                        <div class="user-email">${cert.user.email}</div>
-                    </div>
+                    <div class="user-name content__title">${cert.username}</div>
                 </td>
-                <td class="course-name">${cert.course.title}</td>
+                <td>
+                    <div class="content__title">${cert.courseTitle}</div>
+                </td>
                 <td class="text-light">
                     <fmt:formatDate value="${cert.issueDate}" pattern="dd/MM/yyyy"/>
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${cert.status eq 'VALID'}">
+                        <c:when test="${cert.status eq 'ACTIVE'}">
                             <span class="badge course-row__status-public">Hợp lệ</span>
                         </c:when>
                         <c:otherwise>
@@ -36,7 +34,7 @@
                     </c:choose>
                 </td>
                 <td class="action-btns">
-                    <a href="admin/certificate/preview?id=${cert.id}" class="icon-action-btn">
+                    <a href="admin/certificate/detail?id=${cert.id}" class="icon-action-btn">
                         <i class="fa-solid fa-eye"></i>
                     </a>
                     <button onclick="setupConfirmModal({action: 'revoke', ids: ${cert.id}, url: 'admin/certificate/action', isBulk: false})"

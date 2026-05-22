@@ -1,9 +1,8 @@
-package vn.edu.nlu.fit.elearning.feature.certificate.dao;
+package vn.edu.nlu.fit.elearning.feature.certificate.student.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
-import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
-import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentDetailDto;
 
 import java.util.List;
 
