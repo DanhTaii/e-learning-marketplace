@@ -73,62 +73,60 @@
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
                                         <label class="label-style">Họ</label>
-                                        <input type="text" name="firstName" class="input-modern
+                                        <input type="text" id="firstName" name="firstName" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.firstName ? user.firstName : param.firstName}"
                                                placeholder="Nhập họ..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
-                                        <span class="error-client">${errors.firstName}</span>
+                                        <span class="error-client" id="error_firstName"></span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Tên</label>
 
-                                        <input type="text" name="lastName" class="input-modern
+                                        <input type="text" id="lastName" name="lastName" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.lastName ? user.lastName : param.lastName}"
                                                placeholder="Nhập tên..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
-                                        <span class="error-client">${errors.lastName}</span>
+                                        <span class="error-client" id="error_lastName"></span>
                                     </div>
                                 </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Username</label>
-                                        <input type="text" name="username" class="input-modern
+                                        <input type="text" id="username" name="username" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.username ? user.username : param.username}"
                                                placeholder="Nhập username..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
-                                        <span class="error-client">${errors.username}</span>
+                                        <span class="error-client" id="error_username"></span>
                                     </div>
                                 </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
                                         <label class="label-style">Email</label>
-                                        <input type="email" name="email" class="input-modern
+                                        <input type="email" id="email" name="email" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.email ? user.email : param.email}"
                                                placeholder="Nhập email..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
-                                        <span class="error-client">
-                                            ${errors.email}
-                                        </span>
+                                        <span class="error-client" id="error_email"></span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Số điện thoại</label>
-                                        <input type="text" name="phone" class="input-modern
+                                        <input type="text" id="phone" name="phone" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.phone ? user.phone : param.phone}"
                                                placeholder="Nhập số điện thoại..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
-                                        <span class="error-client">${errors.phone}</span>
+                                        <span class="error-client" id="error_phone"></span>
                                     </div>
                                 </div>
 
@@ -154,6 +152,10 @@
                                     <div class="form-group flex-1">
                                         <label class="label-style">Vai trò</label>
                                         <select class="input-modern" name="roleId">
+                                            <option value="5"
+                                            ${(user.roleId == 5 || param.roleId == '5') ? 'selected' : ''}>
+                                                Người dùng
+                                            </option>
                                             <option value="1"
                                             ${(user.roleId == 1 || param.roleId == '1') ? 'selected' : ''}>
                                                 Super Admin
@@ -169,10 +171,6 @@
                                             <option value="4"
                                             ${(user.roleId == 4 || param.roleId == '4') ? 'selected' : ''}>
                                                 Quản trị đơn hàng
-                                            </option>
-                                            <option value="5"
-                                            ${(user.roleId == 5 || param.roleId == '5') ? 'selected' : ''}>
-                                                Người dùng
                                             </option>
                                         </select>
                                         <span class="error-client">${errors.roleId}</span>
