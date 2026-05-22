@@ -9,6 +9,7 @@ import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.utils.security.HashUtils;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
+import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseService;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
 
@@ -18,11 +19,13 @@ import java.io.IOException;
 public class UserDetailController extends BaseController {
 
     private UserAdminService userAdminService;
+    private CourseService courseService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.userAdminService = BeanContainer.getBean(UserAdminService.class);
+        this.courseService = BeanContainer.getBean(CourseService.class);
     }
 
     @Override
@@ -34,6 +37,7 @@ public class UserDetailController extends BaseController {
                 int id = RequestUtils.getParameterAsInt(request, "id", -1);
                 UserAdminDto user = userAdminService.getUserById(id);
                 if (user != null) {
+                    user.setCourses(courseService.getCoursesByUserId(id));
                     request.setAttribute("user", user);
                 } else {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy người dùng!");

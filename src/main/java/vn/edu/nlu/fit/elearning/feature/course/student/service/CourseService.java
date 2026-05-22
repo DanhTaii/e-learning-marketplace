@@ -95,5 +95,6 @@ public interface CourseService {
 
     int countFilterCourses(AllCourseFilter filter);
 
+    List<CourseCardDto> getCoursesByUserId(int userId);
 
 }

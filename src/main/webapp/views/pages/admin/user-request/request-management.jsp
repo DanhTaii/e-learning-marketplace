@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet"
           href="assets/css/admin/pages/category/category-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/user-request/request.css?v=<%=System.currentTimeMillis()%>">
 
     <%-- Admin component CSS --%>
     <link rel="stylesheet" href="assets/css/admin/notification.css">
@@ -49,10 +50,7 @@
                                         <span class="header__subtitle">
                                             Quản lý tất cả yêu cầu
                                         </span>
-                                        <span class="header__count">
-                                            ${listRequests.size()} yêu cầu
-                                        </span>
-                                    </div>
+                                    </div>sáng
                                 </div>
                             </div>
                             <div class="container-2__body">

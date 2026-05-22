@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
-
-    <%-- CSS Page --%>
-    <link rel="stylesheet" href="assets/css/admin/pages/category/category-create.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/user/user-create.css?v=<%=System.currentTimeMillis()%>">
 
     <%-- Base & Component --%>
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
@@ -54,6 +53,19 @@
                     </div>
 
                     <div class="form-container">
+                        <div class="form-actions mt-4">
+                            <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end !important;">
+                                <a href="admin/users" class="btn-cancel-modern"
+                                   style="text-decoration: none;">
+                                    Hủy bỏ
+                                </a>
+
+                                <button type="submit" class="btn-submit-modern w-100">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    ${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}
+                                </button>
+                            </div>
+                        </div>
                         <form id="userForm" action="admin/user/detail" method="post" class="form-modern">
                             <input type="hidden" name="id" value="${user != null ? user.id : ''}"/>
 
@@ -61,62 +73,60 @@
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
                                         <label class="label-style">Họ</label>
-                                        <input type="text" name="firstName" class="input-modern
+                                        <input type="text" id="firstName" name="firstName" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.firstName ? user.firstName : param.firstName}"
                                                placeholder="Nhập họ..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
-                                        <span class="error-client">${errors.firstName}</span>
+                                        <span class="error-client" id="error_firstName"></span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Tên</label>
 
-                                        <input type="text" name="lastName" class="input-modern
+                                        <input type="text" id="lastName" name="lastName" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.lastName ? user.lastName : param.lastName}"
                                                placeholder="Nhập tên..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
-                                        <span class="error-client">${errors.lastName}</span>
+                                        <span class="error-client" id="error_lastName"></span>
                                     </div>
                                 </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Username</label>
-                                        <input type="text" name="username" class="input-modern
+                                        <input type="text" id="username" name="username" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.username ? user.username : param.username}"
                                                placeholder="Nhập username..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
-                                        <span class="error-client">${errors.username}</span>
+                                        <span class="error-client" id="error_username"></span>
                                     </div>
                                 </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-1">
                                         <label class="label-style">Email</label>
-                                        <input type="email" name="email" class="input-modern
+                                        <input type="email" id="email" name="email" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.email ? user.email : param.email}"
                                                placeholder="Nhập email..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
-                                        <span class="error-client">
-                                            ${errors.email}
-                                        </span>
+                                        <span class="error-client" id="error_email"></span>
                                     </div>
 
                                     <div class="form-group flex-1">
                                         <label class="label-style">Số điện thoại</label>
-                                        <input type="text" name="phone" class="input-modern
+                                        <input type="text" id="phone" name="phone" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
                                                value="${not empty user.phone ? user.phone : param.phone}"
                                                placeholder="Nhập số điện thoại..."
                                         ${(not empty user and user.id > 0) ? 'readonly' : ''}>
 
-                                        <span class="error-client">${errors.phone}</span>
+                                        <span class="error-client" id="error_phone"></span>
                                     </div>
                                 </div>
 
@@ -142,6 +152,10 @@
                                     <div class="form-group flex-1">
                                         <label class="label-style">Vai trò</label>
                                         <select class="input-modern" name="roleId">
+                                            <option value="5"
+                                            ${(user.roleId == 5 || param.roleId == '5') ? 'selected' : ''}>
+                                                Người dùng
+                                            </option>
                                             <option value="1"
                                             ${(user.roleId == 1 || param.roleId == '1') ? 'selected' : ''}>
                                                 Super Admin
@@ -157,10 +171,6 @@
                                             <option value="4"
                                             ${(user.roleId == 4 || param.roleId == '4') ? 'selected' : ''}>
                                                 Quản trị đơn hàng
-                                            </option>
-                                            <option value="5"
-                                            ${(user.roleId == 5 || param.roleId == '5') ? 'selected' : ''}>
-                                                Người dùng
                                             </option>
                                         </select>
                                         <span class="error-client">${errors.roleId}</span>
@@ -208,6 +218,99 @@
                                             <input type="text" class="input-modern readonly-field"
                                                    value="${user.updatedAt}" readonly>
                                         </div>
+                                    </div>
+                                </c:if>
+                                <%-- Danh sách khóa học của người dùng --%>
+                                <c:if test="${not empty user and user.id > 0}">
+                                    <div class="user-course-section mt-4">
+                                        <div class="container-2__header-modern">
+                                            <h2 class="header__title-modern">
+                                                Khóa học đã đăng ký
+                                            </h2>
+                                        </div>
+                                        <c:choose>
+                                            <c:when test="${not empty user.courses}">
+                                                <div class="user-course-list">
+                                                    <c:forEach items="${user.courses}" var="c">
+                                                        <div class="user-course-item product-card-container">
+                                                            <a href="course-detail?id=${c.id}" class="turn-page">
+                                                                <div class="product__small-advertisement">
+                                                                    <div class="small-advertisement__image">
+                                                                        <img src="${c.thumbnailUrl}"
+                                                                             alt="${c.title}"
+                                                                             class="img-2">
+                                                                    </div>
+                                                                    <div class="small-advertisement__content">
+                                                                        <div class="content__top">
+                                                                            <div class="content__author-name text-medium content__author-name-2">
+                                                                                    ${c.authorName}
+                                                                            </div>
+                                                                            <div class="content__rate content__rate-2">
+
+                                                                                <div class="rate__icon">
+                                                                                    <i class="text-medium fa-regular fa-star"></i>
+                                                                                </div>
+                                                                                <div class="text-medium rate__number">
+                                                                                        ${c.avgRating}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-paragraph test-text">
+                                                                            <p>${c.title}</p>
+                                                                        </div>
+                                                                        <div class="content__quick-info">
+
+                                                                            <div class="quick-info__level">
+                                                                                <div class="level__icon icon">
+                                                                                    <i class="text-medium fa-solid fa-signal"></i>
+                                                                                </div>
+                                                                                <div class="level__text text-medium">
+                                                                                        ${c.level.vietnameseName}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="quick-info__users">
+                                                                                <div class="users__icon icon">
+                                                                                    <i class="text-medium fa-solid fa-users"></i>
+                                                                                </div>
+                                                                                <div class="users__text text-medium">
+                                                                                        ${c.studentCount}
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="quick-info__time">
+                                                                                <div class="time__icon icon">
+                                                                                    <i class="text-medium fa-regular fa-clock"></i>
+                                                                                </div>
+                                                                                <div class="time__text text text-medium">
+                                                                                        ${c.durationText}
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="content__price">
+                                                                            <div class="price__new">
+                                                                                    ${c.discountedPrice}
+                                                                            </div>
+                                                                            <div class="price__old">
+                                                                                    ${c.originPrice}
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="search-empty-state">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                                    <div class="search-empty-title">Người dùng chưa sở hữu khóa học nào</div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </c:if>
 

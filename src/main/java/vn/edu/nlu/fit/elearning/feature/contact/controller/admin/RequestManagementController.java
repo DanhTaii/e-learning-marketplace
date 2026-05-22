@@ -60,14 +60,13 @@ public class RequestManagementController extends BaseController {
         request.setAttribute("totalRequests", totalRecords);
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("currentPageNumber", filter.getPage());
+        request.setAttribute("currentPage", "requests");
 
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {
-            this.forward(request, response,
-                    "/views/pages/admin/user-request/request-fragment.jsp");
+            this.forward(request, response, "/views/pages/admin/user-request/request-fragment.jsp");
         } else {
-            this.forward(request, response,
-                    "/views/pages/admin/user-request/request-management.jsp");
+            this.forward(request, response, "/views/pages/admin/user-request/request-management.jsp");
         }
     }
 
