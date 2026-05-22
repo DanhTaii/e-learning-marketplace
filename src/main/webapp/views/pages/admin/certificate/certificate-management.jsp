@@ -80,7 +80,7 @@
                                                 <label>Tìm kiếm chứng chỉ</label>
                                                 <div class="input-with-icon">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                                    <input type="text" name="search" value="${param.search}"
+                                                    <input type="text" name="searchName" value="${param.searchName}"
                                                            placeholder="Nhập mã chứng chỉ, tên học viên...">
                                                 </div>
                                             </div>
@@ -95,10 +95,10 @@
                                                 <select name="status">
                                                     <option value="" ${empty param.status ? 'selected' : ''}>Tất cả
                                                     </option>
-                                                    <option value="VALID" ${param.status == 'VALID' ? 'selected' : ''}>
+                                                    <option value="ACTIVE" ${param.status == 'ACTIVE' ? 'selected' : ''}>
                                                         Hợp lệ
                                                     </option>
-                                                    <option value="REVOKED" ${param.status == 'REVOKED' ? 'selected' : ''}>
+                                                    <option value="INACTIVE" ${param.status == 'INACTIVE' ? 'selected' : ''}>
                                                         Đã thu hồi
                                                     </option>
                                                 </select>
@@ -150,7 +150,7 @@
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<%-- <script src="assets/javascript/admin/certificate/certificate-management.js?v=<%=System.currentTimeMillis()%>"></script> --%>
+<script src="assets/javascript/admin/certificate/certificate-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 

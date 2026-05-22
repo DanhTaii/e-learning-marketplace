@@ -8,7 +8,6 @@ import vn.edu.nlu.fit.elearning.feature.certificate.admin.dto.CertificateAdminDt
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class AdminCertificateDaoImp extends BaseDao implements AdminCertificateDao {
 
@@ -54,22 +53,24 @@ public class AdminCertificateDaoImp extends BaseDao implements AdminCertificateD
         });
     }
 
+    @Override
+    public int countTotal() {
+        return getJdbi().withHandle(handle -> {
+            String sql = "SELECT COUNT(id) FROM certificates";
+            return handle.createQuery(sql).mapTo(Integer.class).one();
+        });
+    }
+
     private String buildWhereClause(CertificateFilter filter, Map<String, Object> params) {
         StringBuilder conditionalSentence = new StringBuilder(" WHERE 1=1");
 
         // Tìm kiếm theo mã chứng chỉ hoặc tên học viên
-        if (filter.getCertificateCode() != null && !filter.getCertificateCode().trim().isEmpty()) {
-            conditionalSentence.append(" AND (cert.certificate_code LIKE :search LIKE :search)");
-            params.put("search", "%" + StringUtils.escapeLikeWildcards(filter.getCertificateCode().trim()) + "%");
+        if (filter.getSearchName() != null && !filter.getSearchName().trim().isEmpty()) {
+            conditionalSentence.append(" AND (cert.certificate_code LIKE :search OR CONCAT(u.first_name, ' ', u.last_name) LIKE :search)");
+            params.put("search", "%" + StringUtils.escapeLikeWildcards(filter.getSearchName().trim()) + "%");
         }
 
-        // Tìm kiếm theo tên học viên
-        if (filter.getUserName() != null && !filter.getUserName().trim().isEmpty()) {
-            conditionalSentence.append(" AND (CONCAT(u.first_name, ' ', u.last_name) LIKE :username)");
-            params.put("username", "%" + StringUtils.escapeLikeWildcards(filter.getUserName().trim()) + "%");
-        }
-
-        // Lọc theo trạng thái (VALID / REVOKED)
+        // Lọc theo trạng thái
         if (filter.getStatus() != null) {
             conditionalSentence.append(" AND cert.status = :status");
             params.put("status", filter.getStatus());

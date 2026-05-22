@@ -11,5 +11,6 @@ public interface AdminCertificateDao {
 
     int countByFilter(CertificateFilter filter);
 
+    int countTotal();
 
 }

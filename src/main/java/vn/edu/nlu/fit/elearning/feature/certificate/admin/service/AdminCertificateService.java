@@ -12,5 +12,6 @@ public interface AdminCertificateService {
 
     int getTotalPages(CertificateFilter filter);
 
+    int getTotalCertificate();
 
 }

@@ -46,9 +46,7 @@ public class AdminCertificateServlet extends BaseController {
         try {
             CertificateFilter filter = new CertificateFilter();
 
-            // 2. Sử dụng RequestUtils để lấy điều kiện tìm kiếm và xử lý ngoại lệ tự động
-            filter.setCertificateCode(RequestUtils.getParameterAsString(request, "certificateCode", ""));
-            filter.setUserName(RequestUtils.getParameterAsString(request, "username", ""));
+            filter.setSearchName(RequestUtils.getParameterAsString(request, "searchName", ""));
             filter.setStatus(RequestUtils.getParameterAsStatus(request, "status"));
             filter.setCourseId(RequestUtils.getParameterAsInt(request, "courseId", 0));
 
@@ -70,10 +68,17 @@ public class AdminCertificateServlet extends BaseController {
 
             request.setAttribute("currentPageNumber", filter.getPage());
             request.setAttribute("totalPages", totalPages);
-//            request.setAttribute("totalCertificates", certificateService.);
+            request.setAttribute("totalCertificates", certificateService.getTotalCertificate());
             request.setAttribute("currentPage", "certificate");
 
-            request.getRequestDispatcher("/views/pages/admin/certificate/certificate-management.jsp").forward(request, response);
+            String type = request.getParameter("renderType");
+            if ("partial".equals(type)) {
+                // Chỉ render phần nội dung bảng
+                this.forward(request, response, "/views/pages/admin/certificate/certificate-fragment.jsp");
+            } else {
+                // Render toàn bộ trang như cũ
+                request.getRequestDispatcher("/views/pages/admin/certificate/certificate-management.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             request.setAttribute("errorMessage", "Lỗi hệ thống: " + e.getMessage());

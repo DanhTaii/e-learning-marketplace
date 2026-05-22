@@ -44,4 +44,9 @@ public class AdminCertificateServiceImp implements AdminCertificateService {
         return (int) Math.ceil((double) totalCertificates / filter.getLimit());
     }
 
+    @Override
+    public int getTotalCertificate() {
+        return adminCertificateDao.countTotal();
+    }
+
 }
