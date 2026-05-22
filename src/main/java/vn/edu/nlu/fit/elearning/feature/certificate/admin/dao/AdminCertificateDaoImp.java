@@ -4,10 +4,12 @@ import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.certificate.CertificateFilter;
 import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
 import vn.edu.nlu.fit.elearning.feature.certificate.admin.dto.CertificateAdminDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.dto.CertificateDetailAdminDto;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class AdminCertificateDaoImp extends BaseDao implements AdminCertificateDao {
 
@@ -59,6 +61,30 @@ public class AdminCertificateDaoImp extends BaseDao implements AdminCertificateD
             String sql = "SELECT COUNT(id) FROM certificates";
             return handle.createQuery(sql).mapTo(Integer.class).one();
         });
+    }
+
+    @Override
+    public Optional<CertificateDetailAdminDto> findByCertificateCode(String code) {
+        // Câu lệnh SQL lấy "TẤT TẦN TẬT" thông tin
+        final String sql = "SELECT cert.id, cert.certificate_code as certificateCode, " +
+                "c.title as courseTitle, " +
+                "u.first_name as firstName, u.last_name as lastName, " +
+                "cert.issue_date as issueDate, cert.status, cert.pdf_url as pdfUrl, " +
+                "e.created_at as enrollmentDate, " +
+                "cert.issue_date as completionDate, " + // Thường ngày cấp chứng chỉ cũng chính là ngày hoàn thành khóa học
+                "(SELECT COALESCE(SUM(l.duration_minutes), 0) / 60.0 FROM lessons l WHERE l.course_id = c.id) AS durationHours " +
+                "FROM certificates cert " +
+                "JOIN courses c ON cert.course_id = c.id " +
+                "JOIN users u ON cert.user_id = u.id " +
+                "LEFT JOIN enrollments e ON e.user_id = u.id AND e.course_id = c.id " +
+                "WHERE cert.certificate_code = :code";
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("code", code)
+                        .mapToBean(CertificateDetailAdminDto.class)
+                        .findFirst()
+        );
     }
 
     private String buildWhereClause(CertificateFilter filter, Map<String, Object> params) {

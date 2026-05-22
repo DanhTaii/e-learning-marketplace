@@ -4,6 +4,7 @@ import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.certificate.Cert
 import vn.edu.nlu.fit.elearning.feature.certificate.admin.dao.AdminCertificateDao;
 import vn.edu.nlu.fit.elearning.feature.certificate.admin.dao.AdminCertificateDaoImp;
 import vn.edu.nlu.fit.elearning.feature.certificate.admin.dto.CertificateAdminDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.admin.dto.CertificateDetailAdminDto;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +48,14 @@ public class AdminCertificateServiceImp implements AdminCertificateService {
     @Override
     public int getTotalCertificate() {
         return adminCertificateDao.countTotal();
+    }
+
+    @Override
+    public Optional<CertificateDetailAdminDto> getCertificateDetail(String code) {
+        if (code == null || code.trim().isEmpty()) {
+            return Optional.empty();
+        }
+        return adminCertificateDao.findByCertificateCode(code);
     }
 
 }

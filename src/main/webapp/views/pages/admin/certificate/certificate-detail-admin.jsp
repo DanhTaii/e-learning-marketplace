@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/course/course-content.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-course-admin.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -29,7 +30,7 @@
 <div class="web">
     <div class="web__container">
         <div class="grid">
-            <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
+            <jsp:include page="/views/layouts/admin/header-cert-admin.jsp"/>
             <div class="layout mt-4 mb-4">
 
                 <!-- CỘT TRÁI: BẢN PREVIEW CHỨNG CHỈ -->
@@ -90,7 +91,7 @@
                         <div class="mb-4">
                             <span class="info-label">Trạng thái</span>
                             <c:choose>
-                                <c:when test="${certificateDetail.status eq 'VALID'}">
+                                <c:when test="${certificateDetail.status eq 'ACTIVE'}">
                                     <span class="status-badge valid">Hợp lệ</span>
                                 </c:when>
                                 <c:otherwise>
@@ -102,7 +103,7 @@
                         <!-- Nút chức năng của Admin -->
                         <div class="cert-actions mb-4">
                             <c:choose>
-                                <c:when test="${certificateDetail.status eq 'VALID'}">
+                                <c:when test="${certificateDetail.status eq 'ACTIVE'}">
                                     <button type="button" class="btn btn-danger w-100" onclick="showRevokeModal()">
                                         <i class="fa-solid fa-lock"></i> Thu hồi Chứng chỉ
                                     </button>
