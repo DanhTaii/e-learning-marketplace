@@ -143,7 +143,7 @@
             <c:if test="${userRoles.contains('ADMIN_USER') || userRoles.contains('SUPER_ADMIN')}">
                 <li>
                     <a href="admin/requests">
-                        <div class="menu-item__student ${currentPage == 'users' ? 'student-list' : ''} ">
+                        <div class="menu-item__student ${currentPage == 'requests' ? 'student-list' : ''} ">
                                     <span class="container-1__menu-items">
 
                                         <i class="fa-solid fa-address-book"></i>

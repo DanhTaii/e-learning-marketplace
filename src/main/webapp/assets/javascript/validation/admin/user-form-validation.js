@@ -2,30 +2,45 @@ $('#userForm').on('submit', function (e) {
 
     let isValid = true;
 
-    const fullName = $('#fullName').val().trim();
+    const firstName = $('#firstName').val().trim();
+    const lastName = $('#lastName').val().trim();
     const username = $('#username').val().trim();
     const email = $('#email').val().trim();
     const password = $('#password').val().trim();
     const confirmPassword = $('#confirmPassword').val().trim();
 
     // clear errors
-    $('#error_fullName').text('');
     $('#error_username').text('');
     $('#error_email').text('');
     $('#error_password').text('');
     $('#error_confirmPassword').text('');
+    $('#error_firstName').text('');
+    $('#error_lastName').text('');
 
-    // FULL NAME
-    if (!fullName) {
-        $('#error_fullName').text('Họ tên không được để trống!');
+    if (!firstName) {
+        $('#error_firstName').text('Họ không được để trống!');
         isValid = false;
     } else {
 
         // hỗ trợ tiếng Việt có dấu
         const fullNameRegex = /^[A-Za-zÀ-ỹ\s]+$/;
 
-        if (!fullNameRegex.test(fullName)) {
-            $('#error_fullName').text('Họ tên không hợp lệ!');
+        if (!fullNameRegex.test(firstName)) {
+            $('#error_firstName').text('Họ không hợp lệ!');
+            isValid = false;
+        }
+    }
+
+    if (!lastName) {
+        $('#error_lastName').text('Tên không được để trống!');
+        isValid = false;
+    } else {
+
+        // hỗ trợ tiếng Việt có dấu
+        const fullNameRegex = /^[A-Za-zÀ-ỹ\s]+$/;
+
+        if (!fullNameRegex.test(lastName)) {
+            $('#error_lastName').text('Tên không hợp lệ!');
             isValid = false;
         }
     }
