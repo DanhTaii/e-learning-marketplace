@@ -469,4 +469,30 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
         );
     }
 
+    @Override
+    public List<CourseCardDto> findCoursesByUserId(int userId) {
+
+        String sql = """
+        SELECT c.id, c.title, c.subtitle, c.level, c.price, c.discount_price AS discountPrice, c.thumbnail_url AS thumbnailUrl,
+            COALESCE(AVG(r.rating), 0) AS avgRating,
+            (SELECT COUNT(*)
+             FROM enrollments e2
+             WHERE e2.course_id = c.id
+            ) AS studentCount
+        FROM enrollments e
+        JOIN courses c ON e.course_id = c.id
+        LEFT JOIN reviews r ON r.course_id = c.id
+        WHERE e.user_id = :userId
+        GROUP BY c.id
+        ORDER BY e.created_at DESC
+    """;
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("userId", userId)
+                        .mapToBean(CourseCardDto.class)
+                        .list()
+        );
+    }
+
 }

@@ -17,8 +17,6 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=1.0.1">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 <div class="web">
@@ -150,6 +148,7 @@
     <jsp:include page="/views/components/toast.jsp"/>
 </div>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/personal/profile/change-information.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

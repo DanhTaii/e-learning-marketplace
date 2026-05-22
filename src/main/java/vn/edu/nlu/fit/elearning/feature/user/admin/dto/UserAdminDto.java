@@ -1,8 +1,10 @@
 package vn.edu.nlu.fit.elearning.feature.user.admin.dto;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class UserAdminDto {
     private int id;
@@ -19,11 +21,28 @@ public class UserAdminDto {
     private String avatarUrl;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-
+    // THÊM VÀO ĐÂY
+    private List<CourseCardDto> courses;
     public UserAdminDto() {
     }
 
-    public UserAdminDto(Integer id, String firstName, String lastName, String username, int roleId, String roleName, String email, String password, String confirmPassword, String phone, BaseStatus status, String avatarUrl, Timestamp createdAt, Timestamp updatedAt) {
+    public UserAdminDto(
+            Integer id,
+            String firstName,
+            String lastName,
+            String username,
+            int roleId,
+            String roleName,
+            String email,
+            String password,
+            String confirmPassword,
+            String phone,
+            BaseStatus status,
+            String avatarUrl,
+            Timestamp createdAt,
+            Timestamp updatedAt,
+            List<CourseCardDto> courses
+    ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,6 +57,15 @@ public class UserAdminDto {
         this.avatarUrl = avatarUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.courses = courses;
+    }
+
+    public List<CourseCardDto> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<CourseCardDto> courses) {
+        this.courses = courses;
     }
 
     public int getRoleId() {

@@ -213,4 +213,9 @@ public class CourseServiceImpl implements CourseService {
         return courseDao.countFilterCourses(filter);
     }
 
+    @Override
+    public List<CourseCardDto> getCoursesByUserId(int userId) {
+        return courseDao.findCoursesByUserId(userId);
+    }
+
 }

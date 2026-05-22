@@ -31,4 +31,6 @@ public interface CourseDao {
     List<CourseCardDto> filterCourses(AllCourseFilter filter);
 
     int countFilterCourses(AllCourseFilter filter);
+
+    List<CourseCardDto> findCoursesByUserId(int userId);
 }

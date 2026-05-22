@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
-
-    <%-- CSS Page --%>
-    <link rel="stylesheet" href="assets/css/admin/pages/category/category-create.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/user/user-create.css?v=<%=System.currentTimeMillis()%>">
 
     <%-- Base & Component --%>
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
@@ -54,6 +53,19 @@
                     </div>
 
                     <div class="form-container">
+                        <div class="form-actions mt-4">
+                            <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end !important;">
+                                <a href="admin/users" class="btn-cancel-modern"
+                                   style="text-decoration: none;">
+                                    Hủy bỏ
+                                </a>
+
+                                <button type="submit" class="btn-submit-modern w-100">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    ${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}
+                                </button>
+                            </div>
+                        </div>
                         <form id="userForm" action="admin/user/detail" method="post" class="form-modern">
                             <input type="hidden" name="id" value="${user != null ? user.id : ''}"/>
 
@@ -208,6 +220,99 @@
                                             <input type="text" class="input-modern readonly-field"
                                                    value="${user.updatedAt}" readonly>
                                         </div>
+                                    </div>
+                                </c:if>
+                                <%-- Danh sách khóa học của người dùng --%>
+                                <c:if test="${not empty user and user.id > 0}">
+                                    <div class="user-course-section mt-4">
+                                        <div class="container-2__header-modern">
+                                            <h2 class="header__title-modern">
+                                                Khóa học đã đăng ký
+                                            </h2>
+                                        </div>
+                                        <c:choose>
+                                            <c:when test="${not empty user.courses}">
+                                                <div class="user-course-list">
+                                                    <c:forEach items="${user.courses}" var="c">
+                                                        <div class="user-course-item product-card-container">
+                                                            <a href="course-detail?id=${c.id}" class="turn-page">
+                                                                <div class="product__small-advertisement">
+                                                                    <div class="small-advertisement__image">
+                                                                        <img src="${c.thumbnailUrl}"
+                                                                             alt="${c.title}"
+                                                                             class="img-2">
+                                                                    </div>
+                                                                    <div class="small-advertisement__content">
+                                                                        <div class="content__top">
+                                                                            <div class="content__author-name text-medium content__author-name-2">
+                                                                                    ${c.authorName}
+                                                                            </div>
+                                                                            <div class="content__rate content__rate-2">
+
+                                                                                <div class="rate__icon">
+                                                                                    <i class="text-medium fa-regular fa-star"></i>
+                                                                                </div>
+                                                                                <div class="text-medium rate__number">
+                                                                                        ${c.avgRating}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-paragraph test-text">
+                                                                            <p>${c.title}</p>
+                                                                        </div>
+                                                                        <div class="content__quick-info">
+
+                                                                            <div class="quick-info__level">
+                                                                                <div class="level__icon icon">
+                                                                                    <i class="text-medium fa-solid fa-signal"></i>
+                                                                                </div>
+                                                                                <div class="level__text text-medium">
+                                                                                        ${c.level.vietnameseName}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="quick-info__users">
+                                                                                <div class="users__icon icon">
+                                                                                    <i class="text-medium fa-solid fa-users"></i>
+                                                                                </div>
+                                                                                <div class="users__text text-medium">
+                                                                                        ${c.studentCount}
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="quick-info__time">
+                                                                                <div class="time__icon icon">
+                                                                                    <i class="text-medium fa-regular fa-clock"></i>
+                                                                                </div>
+                                                                                <div class="time__text text text-medium">
+                                                                                        ${c.durationText}
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="content__price">
+                                                                            <div class="price__new">
+                                                                                    ${c.discountedPrice}
+                                                                            </div>
+                                                                            <div class="price__old">
+                                                                                    ${c.originPrice}
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="search-empty-state">
+                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                                                    <div class="search-empty-title">Người dùng chưa sở hữu khóa học nào</div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </c:if>
 
