@@ -74,4 +74,9 @@ public class VoucherServiceImpl implements VoucherService {
     public void increaseUsedCount(int voucherId) {
         voucherDao.increaseUsedCount(voucherId);
     }
+
+    @Override
+    public boolean hasUserUsedVoucher(Integer userId, Integer id) {
+      return  voucherDao.hasUserUsedVoucher(userId,id);
+    }
 }

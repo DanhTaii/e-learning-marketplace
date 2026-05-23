@@ -15,4 +15,7 @@ public interface VoucherService {
     VoucherResultDTO applyVoucher(Integer userId, String code, double cartTotal) throws Exception;
 
     void increaseUsedCount(int voucherId);
+
+    boolean hasUserUsedVoucher(Integer userId, Integer id);
+
 }
