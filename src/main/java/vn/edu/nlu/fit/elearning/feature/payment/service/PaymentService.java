@@ -22,5 +22,5 @@ public interface PaymentService {
 
     String generateVNPAYUrl(Order order, HttpServletRequest request);
 
-    PaymentSummaryDTO calculatePaymentSummary(CartService cart, Voucher voucher);
+    PaymentSummaryDTO calculatePaymentSummary(Integer userId,CartService cart, Voucher voucher);
 }

@@ -24,7 +24,7 @@ public class Order implements Serializable {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private List<OrderItem> items = new ArrayList<>();
-
+    private Integer voucherId;
     public Order() {}
 
     public int getId() { return id; }
@@ -70,6 +70,14 @@ public class Order implements Serializable {
 
     public String getUsernameSnapshot() {
         return usernameSnapshot;
+    }
+
+    public Integer getVoucherId() {
+        return voucherId;
+    }
+
+    public void setVoucherId(Integer voucherId) {
+        this.voucherId = voucherId;
     }
 
     public void setUsernameSnapshot(String usernameSnapshot) {

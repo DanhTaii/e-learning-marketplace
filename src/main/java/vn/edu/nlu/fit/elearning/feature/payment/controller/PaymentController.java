@@ -35,13 +35,15 @@ private  transient PaymentService paymentService;
         HttpSession session = request.getSession();
         CartService ICartService = (CartService) session.getAttribute("cart");
 
+        Integer userId = (Integer) session.getAttribute("userId");
+
         if (ICartService == null || ICartService.getSelectedQuantity() == 0) {
             response.sendRedirect(request.getContextPath() + "/personal/cart");
             return;
         }
         Voucher sessionVoucher = (Voucher) session.getAttribute("appliedVoucher");
 
-        PaymentSummaryDTO summaryDTO = paymentService.calculatePaymentSummary(ICartService, sessionVoucher);
+        PaymentSummaryDTO summaryDTO = paymentService.calculatePaymentSummary(userId,ICartService, sessionVoucher);
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();
 
         if (sessionVoucher != null && summaryDTO.getAppliedVoucher() == null) {

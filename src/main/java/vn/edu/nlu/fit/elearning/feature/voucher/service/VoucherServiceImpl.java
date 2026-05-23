@@ -31,11 +31,24 @@ public class VoucherServiceImpl implements VoucherService {
         return voucherDao.findByCode(code);
     }
     @Override
-    public VoucherResultDTO applyVoucher(String code, double cartTotal) throws Exception {
+    public VoucherResultDTO applyVoucher(Integer userId, String code, double cartTotal) throws Exception {
         Voucher voucher = voucherDao.findByCode(code);
 
         if (voucher == null || voucher.getActive() == VoucherStatus.INACTIVE) {
-            throw new Exception("Mã giảm giá không tồn tại hoặc đã hết hạn!");
+            throw new Exception("Mã giảm giá không tồn tại hoặc không hoạt động!");
+        }
+        long currentTime = System.currentTimeMillis();
+        if (voucher.getEndDate() != null && voucher.getEndDate().getTime() < currentTime) {
+            throw new Exception("Mã giảm giá đã hết hạn sử dụng!");
+        }
+        if (voucher.getStartDate() != null && voucher.getStartDate().getTime() > currentTime) {
+            throw new Exception("Mã giảm giá chưa đến thời gian áp dụng!");
+        }
+        if (voucher.getUsageLimit() != null && voucher.getUsedCount() >= voucher.getUsageLimit()) {
+            throw new Exception("Mã giảm giá đã hết lượt sử dụng!");
+        }
+        if (userId != null && voucherDao.hasUserUsedVoucher(userId, voucher.getId())) {
+            throw new Exception("Bạn đã sử dụng mã giảm giá này rồi!");
         }
 
         if (cartTotal < voucher.getMinOrderValue().doubleValue()) {
@@ -55,5 +68,10 @@ public class VoucherServiceImpl implements VoucherService {
         double finalTotal = Math.max(0, cartTotal - discountAmount);
 
         return new VoucherResultDTO(voucher, discountAmount, finalTotal);
+    }
+
+    @Override
+    public void increaseUsedCount(int voucherId) {
+        voucherDao.increaseUsedCount(voucherId);
     }
 }
