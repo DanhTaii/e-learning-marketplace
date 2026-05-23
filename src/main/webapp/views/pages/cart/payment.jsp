@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/cart/payment.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/cart/voucher.css?v=<%=System.currentTimeMillis()%>">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -107,9 +108,27 @@
                         </div>
                     </div>
                     <div class="grid__column-4">
+
                         <div class="invoice">
                             <div class="invoice__info">
                                 <div class="info__detail info">
+                                    <div class="checkout__discount checkout-discount-wrapper">
+                                        <div class="checkout-discount-header">
+        <span class="text-medium checkout-discount-title">
+            <i class="fa-solid fa-ticket"></i> Voucher / Khuyến mãi
+        </span>
+                                            <a href="#" onclick="event.preventDefault(); openModal('voucherModal')" class="checkout-discount-link">
+                                                Chọn mã <i class="fa-solid fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+
+                                        <div id="applied-voucher-info" class="applied-voucher-box" style="display: ${not empty sessionScope.appliedVoucher ? 'flex' : 'none'};">
+                                            <div class="applied-voucher-box-left">
+                                                <span id="applied-voucher-code" class="applied-voucher-code">${sessionScope.appliedVoucher.code}</span>
+                                            </div>
+                                            <a href="#" onclick="removeVoucher(event)" class="btn-remove-voucher">Bỏ chọn</a>
+                                        </div>
+                                    </div>
                                     <span class="detail__title ">Tóm tắt hóa đơn</span>
                                     <div class="detail__price">
                                         <div class="price__original">
@@ -186,10 +205,108 @@
             </div>
         </div>
     </div>
+    <div id="voucherModal" class="voucher-modal">
+        <div class="voucher-modal-overlay" onclick="closeModal('voucherModal')"></div>
+        <div class="voucher-modal-content">
+            <div class="voucher-modal-header">
+                <h3>Mã khuyến mãi</h3>
+                <button class="btn-close-modal" onclick="closeModal('voucherModal')">&times;</button>
+            </div>
+            <div class="voucher-modal-body">
+                <c:choose>
+                    <c:when test="${not empty sessionScope.userId}">
+                        <div class="voucher-input-group">
+                            <input type="text" id="manualVoucherCode" placeholder="Nhập mã giảm giá...">
+                            <button onclick="applyManualVoucher()">Áp dụng</button>
+                        </div>
+                        <input type="hidden" id="savedVoucherCode" value="${not empty sessionScope.appliedVoucher ? sessionScope.appliedVoucher.code : ''}">
+                        <div class="voucher-list">
+                            <c:forEach var="v" items="${listVoucher}">
+                                <div class="voucher-item">
+                                    <div class="voucher-icon">
+                                        <div class="voucher-title">${v.code}</div>
+                                    </div>
+                                    <div class="voucher-info">
+                                        <div class="voucher-title">${v.title}</div>
+                                        <div class="voucher-desc">${v.description}</div>
+                                        <div class="voucher-exp">
+                                            HSD: <fmt:formatDate value="${v.endDate}" pattern="dd-MM-yyyy" />
+                                        </div>
+
+                                        <c:if test="${not empty v.usageLimit and v.usageLimit > 0}">
+                                            <div class="voucher-usage-wrapper">
+                                                <div class="voucher-usage-bar">
+                                                    <div class="voucher-usage-progress" style="width: ${(v.usedCount / v.usageLimit) * 100}%;"></div>
+                                                </div>
+                                                <div class="voucher-usage-text">
+                                                    <span>Đã dùng: ${v.usedCount} / ${v.usageLimit}</span>
+                                                    <c:if test="${(v.usedCount / v.usageLimit) > 0.8}">
+                                                        <span style="color: #dc3545; font-weight: 600;">Sắp hết!</span>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                    </div>
+                                    <div>
+                                        <c:choose>
+                                            <%-- Trường hợp 1: User đã dùng voucher này rồi (Check qua DB) --%>
+                                            <c:when test="${v.usedByCurrentUser}">
+                                                <button class="btn-select-voucher" disabled
+                                                        style="background-color: #d6d6d6; color: #888; border: none; cursor: not-allowed; opacity: 0.7;">
+                                                    Đã sử dụng
+                                                </button>
+                                            </c:when>
+
+                                            <%-- Trường hợp 2: Voucher đã hết lượt sử dụng trên hệ thống --%>
+                                            <c:when test="${not empty v.usageLimit and v.usedCount >= v.usageLimit}">
+                                                <button class="btn-select-voucher" disabled
+                                                        style="background-color: #d6d6d6; color: #888; border: none; cursor: not-allowed; opacity: 0.7;">
+                                                    Hết lượt
+                                                </button>
+                                            </c:when>
+
+                                            <%-- Trường hợp 3: Voucher khả dụng --%>
+                                            <c:otherwise>
+                                                <button class="btn-select-voucher" onclick="selectVoucher('${v.code}')">
+                                                    Dùng
+                                                </button>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+                            <c:if test="${empty listVoucher}">
+                                <p style="text-align: center; padding: 20px; color: #888;">Hiện không có mã giảm giá nào khả dụng.</p>
+                            </c:if>
+                        </div>
+                    </c:when>
+
+                    <c:otherwise>
+                        <div class="auth-required-state">
+                            <div class="auth-icon-wrapper">
+                                <i class="fa-solid fa-user-lock"></i>
+                            </div>
+                            <h4 class="auth-title">Bạn chưa đăng nhập</h4>
+                            <p class="auth-desc">
+                                Vui lòng đăng nhập để xem các mã giảm giá dành riêng cho thành viên.
+                            </p>
+                            <a href="sign-in" class="btn-select-voucher btn-login-now">
+                                Đăng nhập ngay
+                            </a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+    </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
     <jsp:include page="/views/components/toast.jsp"/>
 
 </div>
 <script src="assets/javascript/features/cart/payment-modal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/cart/voucher.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/modal/modal.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
