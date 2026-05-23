@@ -424,3 +424,66 @@ ul {
 .voucher-amount {
     color: #ffffff; /* Đổi màu tiền thành trắng */
 }
+/* ========================================================
+   VOUCHER / KHUYẾN MÃI (DARK THEME - PAYMENT PAGE)
+   ======================================================== */
+
+.checkout-discount-wrapper {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkout-discount-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-discount-title {
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #ffffff;
+}
+
+.checkout-discount-title i {
+    color: #ffffff;
+    margin-right: 5px;
+}
+
+.checkout-discount-link {
+    color: #4db8ff;
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.checkout-discount-link i {
+    font-size: 1.2rem;
+}
+
+/* Hộp hiển thị mã voucher đã được chọn */
+.applied-voucher-box {
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.applied-voucher-code {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.btn-remove-voucher {
+    color: #ff6b6b;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.btn-remove-voucher:hover {
+    color: #ff4747; /* Hiệu ứng đổi màu đỏ đậm hơn khi hover vào nút Xóa */
+}

@@ -29,6 +29,7 @@ public class Voucher implements Serializable {
 
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private boolean usedByCurrentUser;
 
     public Voucher() {
     }
@@ -171,5 +172,11 @@ public class Voucher implements Serializable {
         isActive = active;
     }
 
+    public boolean isUsedByCurrentUser() {
+        return usedByCurrentUser;
+    }
 
+    public void setUsedByCurrentUser(boolean usedByCurrentUser) {
+        this.usedByCurrentUser = usedByCurrentUser;
+    }
 }

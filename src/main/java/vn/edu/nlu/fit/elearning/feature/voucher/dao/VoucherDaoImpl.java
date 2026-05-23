@@ -1,15 +1,9 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
-import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
-import vn.edu.nlu.fit.elearning.feature.tag.dao.TagDao;
-import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
-import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class VoucherDaoImpl extends BaseDao implements VoucherDao {
     public List<Voucher> findAll() {
@@ -48,4 +42,33 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
         });
     }
 
+    // tăng lượt sử dụng voucher lên 1 khi người dùng sử dụng voucher
+    @Override
+    public void increaseUsedCount(Integer voucherId) {
+        getJdbi().useHandle(handle -> {
+            String sql = "UPDATE vouchers SET used_count = used_count + 1 WHERE id = :voucherId";
+            handle.createUpdate(sql)
+                    .bind("voucherId", voucherId)
+                    .execute();
+        });
+    }
+
+    //hàm check voucher trong order có không để ngăn người dùng spam voucher
+    @Override
+    public boolean hasUserUsedVoucher(Integer userId, Integer voucherId) {
+        return getJdbi().withHandle(handle -> {
+            String sql = "SELECT COUNT(id) FROM orders " +
+                    "WHERE user_id = :userId " +
+                    "AND voucher_id = :voucherId " +
+                    "AND status = 'PAID'";
+
+            int count = handle.createQuery(sql)
+                    .bind("userId", userId)
+                    .bind("voucherId", voucherId)
+                    .mapTo(Integer.class)
+                    .one();
+
+            return count > 0;
+        });
+    }
 }

@@ -13,6 +13,7 @@ import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,13 +21,14 @@ import java.util.List;
 @WebServlet(name = "PaymentController", value = "/payment")
 public class PaymentController extends HttpServlet {
     PaymentMethodService paymentMethodService;
-private  transient PaymentService paymentService;
+    private transient PaymentService paymentService;
+    private transient VoucherService voucherService;
     @Override
     public void init() throws ServletException {
         super.init();
         this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
         this.paymentService = BeanContainer.getBean(PaymentService.class);
-
+        this.voucherService = BeanContainer.getBean(VoucherService.class);
     }
 
     @Override
@@ -35,20 +37,29 @@ private  transient PaymentService paymentService;
         HttpSession session = request.getSession();
         CartService ICartService = (CartService) session.getAttribute("cart");
 
+        Integer userId = (Integer) session.getAttribute("userId");
+
         if (ICartService == null || ICartService.getSelectedQuantity() == 0) {
             response.sendRedirect(request.getContextPath() + "/personal/cart");
             return;
         }
         Voucher sessionVoucher = (Voucher) session.getAttribute("appliedVoucher");
 
-        PaymentSummaryDTO summaryDTO = paymentService.calculatePaymentSummary(ICartService, sessionVoucher);
+        PaymentSummaryDTO summaryDTO = paymentService.calculatePaymentSummary(userId, ICartService, sessionVoucher);
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllPaymentMethods();
 
         if (sessionVoucher != null && summaryDTO.getAppliedVoucher() == null) {
             session.removeAttribute("appliedVoucher");
             session.removeAttribute("discountAmount");
         }
-
+        List<Voucher> vouchers = voucherService.findValidVouchers();
+        if (userId != null) {
+            for (Voucher v : vouchers) {
+                boolean hasUsed = voucherService.hasUserUsedVoucher(userId, v.getId());
+                v.setUsedByCurrentUser(hasUsed);
+            }
+        }
+        request.setAttribute("listVoucher", vouchers);
         request.setAttribute("summary", summaryDTO);
         request.setAttribute("paymentMethod", paymentMethods);
         request.getRequestDispatcher("views/pages/cart/payment.jsp").forward(request, response);

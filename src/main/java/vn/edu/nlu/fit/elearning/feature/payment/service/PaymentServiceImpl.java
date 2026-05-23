@@ -24,7 +24,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 
     public PaymentServiceImpl(PaymentDao pd) {
-        this.pd = new PaymentDaoImpl();
+        this.pd = pd;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class PaymentServiceImpl implements PaymentService {
         return VnpayConstants.vnp_PayUrl + "?" + queryUrl + "&vnp_SecureHash=" + vnpSecureHash;
     }
     @Override
-    public PaymentSummaryDTO calculatePaymentSummary(CartService cart, Voucher voucher) {
+    public PaymentSummaryDTO calculatePaymentSummary(Integer userId,CartService cart, Voucher voucher) {
         double subTotal = cart.getFinalPriceTotal();
         double discountAmount = 0;
         double finalTotal = subTotal;
@@ -116,7 +116,7 @@ public class PaymentServiceImpl implements PaymentService {
                 VoucherService vService = BeanContainer.getBean(VoucherService.class);
 
                 if (vService != null) {
-                    var result = vService.applyVoucher(voucher.getCode(), subTotal);
+                    var result = vService.applyVoucher(userId,voucher.getCode(), subTotal);
                     discountAmount = result.getDiscountAmount();
                     finalTotal = result.getFinalTotal();
                 } else {
