@@ -42,7 +42,8 @@ public class VNPayReturnController extends HttpServlet {
                 cartService.removeSelected();
                 session.setAttribute("cart", cartService);
             }
-
+            session.removeAttribute("appliedVoucher");
+            session.removeAttribute("discountAmount");
             session.setAttribute("flashSuccess", "Thanh toán thành công! Chúc bạn học tốt.");
             response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + order.getId());
         } else {

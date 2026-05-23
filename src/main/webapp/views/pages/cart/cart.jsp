@@ -341,7 +341,30 @@
                                         </c:if>
                                     </div>
                                     <div>
-                                        <button class="btn-select-voucher" onclick="selectVoucher('${v.code}')">Dùng</button>
+                                        <c:choose>
+                                            <%-- Trường hợp 1: User đã dùng voucher này rồi (Check qua DB) --%>
+                                            <c:when test="${v.usedByCurrentUser}">
+                                                <button class="btn-select-voucher" disabled
+                                                        style="background-color: #d6d6d6; color: #888; border: none; cursor: not-allowed; opacity: 0.7;">
+                                                    Đã sử dụng
+                                                </button>
+                                            </c:when>
+
+                                            <%-- Trường hợp 2: Voucher đã hết lượt sử dụng trên hệ thống --%>
+                                            <c:when test="${not empty v.usageLimit and v.usedCount >= v.usageLimit}">
+                                                <button class="btn-select-voucher" disabled
+                                                        style="background-color: #d6d6d6; color: #888; border: none; cursor: not-allowed; opacity: 0.7;">
+                                                    Hết lượt
+                                                </button>
+                                            </c:when>
+
+                                            <%-- Trường hợp 3: Voucher khả dụng --%>
+                                            <c:otherwise>
+                                                <button class="btn-select-voucher" onclick="selectVoucher('${v.code}')">
+                                                    Dùng
+                                                </button>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </c:forEach>

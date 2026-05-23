@@ -12,6 +12,10 @@ public interface VoucherService {
     List<Voucher> findAll();
     List<Voucher> findValidVouchers();
     Voucher findByCode(String code);
+    VoucherResultDTO applyVoucher(Integer userId, String code, double cartTotal) throws Exception;
 
-    VoucherResultDTO applyVoucher(String code, double cartTotal) throws Exception;
+    void increaseUsedCount(int voucherId);
+
+    boolean hasUserUsedVoucher(Integer userId, Integer id);
+
 }

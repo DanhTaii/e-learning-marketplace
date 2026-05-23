@@ -47,6 +47,11 @@ public class ApplyVoucherController extends BaseController {
 
         try {
             HttpSession session = request.getSession();
+            Integer userId = (Integer) session.getAttribute("userId");
+            if (userId == null) {
+                throw new Exception("Bạn cần đăng nhập để sử dụng mã giảm giá!");
+            }
+
             CartService c = (CartService) session.getAttribute("cart");
             if (c == null) c = new CartServiceImpl();
 
@@ -54,14 +59,16 @@ public class ApplyVoucherController extends BaseController {
                 throw new Exception("Giỏ hàng của bạn đang trống!");
             }
 
-            VoucherResultDTO result = voucherService.applyVoucher(code, c.getFinalPriceTotal());
+            VoucherResultDTO result = voucherService.applyVoucher(userId,code, c.getFinalPriceTotal());
             String formattedFinalTotal = DataFormatting.formatAndConvert(result.getFinalTotal());
+            String formattedDiscountAmount = DataFormatting.formatAndConvert(result.getDiscountAmount());
             session.setAttribute("appliedVoucher", result.getVoucher());
             session.setAttribute("discountAmount", result.getDiscountAmount());
 
             jsonResponse.addProperty("status", "success");
             jsonResponse.addProperty("message", "Áp dụng mã thành công!");
             jsonResponse.addProperty("discountAmount", result.getDiscountAmount());
+            jsonResponse.addProperty("discountAmountFormatted", formattedDiscountAmount);
             jsonResponse.addProperty("finalTotalFormatted", formattedFinalTotal);
             jsonResponse.addProperty("code", result.getVoucher().getCode());
 

@@ -8,4 +8,8 @@ public interface VoucherDao {
     List<Voucher> findAll();
     List<Voucher> findValidVouchers();
     Voucher findByCode(String code);
+
+    void increaseUsedCount(Integer voucherId);
+
+    boolean hasUserUsedVoucher(Integer userId, Integer voucherId);
 }

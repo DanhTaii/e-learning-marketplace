@@ -24,6 +24,7 @@ import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserDetailResponse;
 import vn.edu.nlu.fit.elearning.feature.user.student.service.UserService;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     private UserLessonProgressService userLessonProgressService;
     private PaymentService paymentService;
     private UserService userService;
-
+    private VoucherService voucherService;
     public OrderServiceImpl(OrderDao orderDao) {
         this.orderDao = orderDao;
     }
@@ -50,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         if (this.userLessonProgressService == null) this.userLessonProgressService = BeanContainer.getBean(UserLessonProgressService.class);
         if (this.paymentService == null) this.paymentService = BeanContainer.getBean(PaymentService.class);
         if (this.userService == null) this.userService = BeanContainer.getBean(UserService.class);
+        if (this.voucherService == null) this.voucherService = BeanContainer.getBean(VoucherService.class);
     }
     @Override
     public int createOrder(Order order) {
@@ -128,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrderPending(Integer userId, CartService cart, int paymentMethodId, Voucher voucher) {
         ensureServices();
-        PaymentSummaryDTO summary = paymentService.calculatePaymentSummary(cart, voucher);
+        PaymentSummaryDTO summary = paymentService.calculatePaymentSummary(userId,cart, voucher);
         Order order = new Order();
         order.setOrderCode("ORD" + System.currentTimeMillis());
         order.setUserId(userId);
@@ -140,6 +142,10 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatus.PENDING);
         String currentUsername = userService.getUserById(userId).getUsername();
         order.setUsernameSnapshot(currentUsername);
+
+        if (summary.getAppliedVoucher() != null) {
+            order.setVoucherId(summary.getAppliedVoucher().getId());
+        }
         int orderId = this.createOrder(order);
         order.setId(orderId);
 
@@ -173,6 +179,10 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatus.PAID);
         order.setPaidAt(new java.sql.Timestamp(System.currentTimeMillis()));
         orderDao.update(order);
+
+        if (order.getVoucherId() != null){
+            voucherService.increaseUsedCount(order.getVoucherId());
+        }
 
         // 2. Tạo quyền truy cập (Enrollment & Progress)
         List<OrderItem> items = orderItemService.getCartItems(order.getId());

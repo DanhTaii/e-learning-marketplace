@@ -32,16 +32,19 @@ public class ShowCartController extends HttpServlet {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
 
+        List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
+        request.setAttribute("coursesLastest", coursesLastest);
+
+        List<Voucher> vouchers = voucherService.findValidVouchers();
         if (userId != null) {
-            List<Voucher> vouchers = voucherService.findValidVouchers();
-            request.setAttribute("listVoucher", vouchers);
+            for (Voucher v : vouchers) {
+                boolean hasUsed = voucherService.hasUserUsedVoucher(userId, v.getId());
+                v.setUsedByCurrentUser(hasUsed);
+            }
         } else {
             request.setAttribute("listVoucher", null);
         }
 
-        List<CourseCardDto> coursesLastest = indexService.getSixCoursesLast(userId);
-        List<Voucher> vouchers = voucherService.findValidVouchers();
-        request.setAttribute("coursesLastest", coursesLastest);
         request.setAttribute("listVoucher", vouchers);
 
         request.getRequestDispatcher("/views/pages/cart/cart.jsp").forward(request, response);
