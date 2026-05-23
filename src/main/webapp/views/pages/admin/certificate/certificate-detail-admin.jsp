@@ -104,12 +104,12 @@
                         <div class="cert-actions mb-4">
                             <c:choose>
                                 <c:when test="${certificateDetail.status eq 'ACTIVE'}">
-                                    <button type="button" class="btn btn-danger w-100" onclick="showRevokeModal()">
+                                    <button type="button" class="btn btn-danger w-100" onclick="setupConfirmModal({action: 'revoke_cert', ids: ${certificateDetail.id}, url: 'admin/certificate/action', isBulk: false})">
                                         <i class="fa-solid fa-lock"></i> Thu hồi Chứng chỉ
                                     </button>
                                 </c:when>
                                 <c:otherwise>
-                                    <button type="button" class="btn btn-success w-100" onclick="showReinstateModal()">
+                                    <button type="button" class="btn btn-success w-100" onclick="setupConfirmModal({action: 'reinstate_cert', ids: ${certificateDetail.id}, url: 'admin/certificate/action', isBulk: false})">
                                         <i class="fa-solid fa-lock-open"></i> Cấp lại Chứng chỉ
                                     </button>
                                 </c:otherwise>

@@ -131,7 +131,7 @@
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
                                     <input id="currentQueryId" type="hidden" name="currentQuery"
                                            value="${pageContext.request.queryString}">
-
+                                    <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
                                     <div class="container-2__dynamic-content" id="certificateTableBody">
                                         <jsp:include page="/views/pages/admin/certificate/certificate-fragment.jsp"/>
                                     </div>

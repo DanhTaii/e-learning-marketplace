@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     setupAutoFilter({
         formId: 'filterForm',
-        tableBodyId:'certificateTableBody',
-        url:'admin/certificates'
+        tableBodyId: 'certificateTableBody',
+        url: 'admin/certificates'
     })
 })
 

@@ -23,8 +23,8 @@
 
     <jsp:include page="/views/components/bulk-action-bar.jsp">
         <jsp:param name="showDuplicate" value="false"/>
-        <jsp:param name="showUpdateStatus" value="false"/>
-        <jsp:param name="showArchive" value="true"/>
+        <jsp:param name="showUpdateStatus" value="true"/>
+        <jsp:param name="showArchive" value="false"/>
         <jsp:param name="showRestore" value="false"/>
         <jsp:param name="showDelete" value="false"/>
     </jsp:include>

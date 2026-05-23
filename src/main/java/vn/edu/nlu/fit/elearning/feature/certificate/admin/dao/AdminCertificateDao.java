@@ -14,5 +14,8 @@ public interface AdminCertificateDao {
 
     int countTotal();
 
-    Optional<CertificateDetailAdminDto> findByCertificateCode(String code);
+    Optional<CertificateDetailAdminDto> findById(int id);
+
+    boolean updateStatus(List<Integer> id);
+
 }

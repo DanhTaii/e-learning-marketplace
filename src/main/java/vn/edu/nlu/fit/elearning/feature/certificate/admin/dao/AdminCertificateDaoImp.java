@@ -64,7 +64,7 @@ public class AdminCertificateDaoImp extends BaseDao implements AdminCertificateD
     }
 
     @Override
-    public Optional<CertificateDetailAdminDto> findByCertificateCode(String code) {
+    public Optional<CertificateDetailAdminDto> findById(int id) {
         // Câu lệnh SQL lấy "TẤT TẦN TẬT" thông tin
         final String sql = "SELECT cert.id, cert.certificate_code as certificateCode, " +
                 "c.title as courseTitle, " +
@@ -77,14 +77,30 @@ public class AdminCertificateDaoImp extends BaseDao implements AdminCertificateD
                 "JOIN courses c ON cert.course_id = c.id " +
                 "JOIN users u ON cert.user_id = u.id " +
                 "LEFT JOIN enrollments e ON e.user_id = u.id AND e.course_id = c.id " +
-                "WHERE cert.certificate_code = :code";
+                "WHERE cert.id = :code";
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
-                        .bind("code", code)
+                        .bind("code", id)
                         .mapToBean(CertificateDetailAdminDto.class)
                         .findFirst()
         );
+    }
+
+    @Override
+    public boolean updateStatus(List<Integer> id) {
+        final String sql = "UPDATE certificates " +
+                "SET status = CASE " +
+                "WHEN status = 'ACTIVE' THEN 'INACTIVE' " +
+                "ELSE 'ACTIVE' " +
+                "END " +
+                "WHERE id IN (<ids>)";
+        int updatedRows = getJdbi().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bindList("ids", id)
+                        .execute()
+        );
+        return updatedRows > 0;
     }
 
     private String buildWhereClause(CertificateFilter filter, Map<String, Object> params) {

@@ -15,5 +15,8 @@ public interface AdminCertificateService {
 
     int getTotalCertificate();
 
-    Optional<CertificateDetailAdminDto> getCertificateDetail(String code);
+    Optional<CertificateDetailAdminDto> getCertificateDetail(int id);
+
+    boolean changeCertificateStatus(List<Integer> id);
+
 }

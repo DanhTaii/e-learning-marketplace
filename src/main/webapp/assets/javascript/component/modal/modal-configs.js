@@ -58,5 +58,25 @@ const MODAL_CONFIGS = {
         titleClass: 'title-danger',
         icon: 'fa-trash',
         showReason: false
+    },
+    revoke_cert: {
+        title: 'thu hồi chứng chỉ',
+        message: 'Chứng chỉ sẽ bị thu hồi!',
+        btnText: 'Thu hồi',
+
+        btnClass: 'btn-danger',
+        titleClass: 'title-danger',
+        icon: 'fa-lock',
+        showReason: false
+    },
+    reinstate_cert: {
+        title: 'cấp lại chứng chỉ',
+        message: 'Chứng chỉ sẽ được cấp lại!',
+        btnText: 'Cấp lại',
+
+        btnClass: 'btn-primary',
+        titleClass: 'title-primary',
+        icon: 'fa-lock-open',
+        showReason: false
     }
 };

@@ -34,14 +34,14 @@
                     </c:choose>
                 </td>
                 <td class="action-btns">
-                    <a href="admin/certificate/detail?code=${cert.certificateCode}" class="icon-action-btn">
+                    <a href="admin/certificate/detail?id=${cert.id}" class="icon-action-btn">
                         <i class="fa-solid fa-eye"></i>
                     </a>
-                    <button onclick="setupConfirmModal({action: 'revoke', ids: ${cert.id}, url: 'admin/certificate/action', isBulk: false})"
-                            type="button"
-                            class="icon-action-btn">
-                        <i class="fa-solid fa-lock"></i>
-                    </button>
+<%--                    <button onclick="setupConfirmModal({action: 'revoke', ids: ${cert.id}, url: 'admin/certificate/action', isBulk: false})"--%>
+<%--                            type="button"--%>
+<%--                            class="icon-action-btn">--%>
+<%--                        <i class="fa-solid fa-lock"></i>--%>
+<%--                    </button>--%>
                 </td>
             </tr>
         </c:forEach>

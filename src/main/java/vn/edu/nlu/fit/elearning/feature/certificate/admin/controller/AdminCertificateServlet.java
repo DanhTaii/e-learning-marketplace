@@ -88,7 +88,31 @@ public class AdminCertificateServlet extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendError(HttpServletResponse.SC_FORBIDDEN, "POST method is not supported for this endpoint.");
+        try {
+            List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+            String action = RequestUtils.getParameterAsString(request, "action", null);
+
+            boolean result = false;
+            if (action != null) {
+                switch (action) {
+                    case "update_status":
+                        result = certificateService.changeCertificateStatus(ids);
+                        if (result) {
+                            request.getSession().setAttribute("flashSuccess", "Cập nhật trạng thái chứng chỉ thành công!");
+                            response.sendRedirect(request.getContextPath() + "/admin/certificates");
+                            return;
+                        }
+                        break;
+
+                    default:
+                        handleError(request, response, "Thao tác thực hiện thất bại ! ");
+                        break;
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
     }
 
 }

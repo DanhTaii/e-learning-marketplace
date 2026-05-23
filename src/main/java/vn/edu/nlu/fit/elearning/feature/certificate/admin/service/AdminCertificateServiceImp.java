@@ -51,11 +51,13 @@ public class AdminCertificateServiceImp implements AdminCertificateService {
     }
 
     @Override
-    public Optional<CertificateDetailAdminDto> getCertificateDetail(String code) {
-        if (code == null || code.trim().isEmpty()) {
-            return Optional.empty();
-        }
-        return adminCertificateDao.findByCertificateCode(code);
+    public Optional<CertificateDetailAdminDto> getCertificateDetail(int id) {
+        return adminCertificateDao.findById(id);
+    }
+
+    @Override
+    public boolean changeCertificateStatus(List<Integer> id) {
+        return adminCertificateDao.updateStatus(id);
     }
 
 }
