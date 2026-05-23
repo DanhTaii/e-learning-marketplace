@@ -38,6 +38,18 @@
             </c:if>
             <c:if test="${userRoles.contains('ADMIN_COURSE') || userRoles.contains('SUPER_ADMIN')}">
                 <li>
+                    <a href="admin/certificates">
+                        <div class="menu-item__student ${currentPage == 'certificate' ? 'student-list' : ''}">
+                                    <span class="container-1__menu-items menu-item__course">
+                                        <i class="fa-solid fa-award"></i>
+                                        <span>Chứng chỉ</span>
+                                    </span>
+                        </div>
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${userRoles.contains('ADMIN_COURSE') || userRoles.contains('SUPER_ADMIN')}">
+                <li>
                     <a href="admin/courses">
                         <div class="menu-item__student ${currentPage == 'courses' ? 'student-list' : ''}">
                                     <span class="container-1__menu-items menu-item__course">

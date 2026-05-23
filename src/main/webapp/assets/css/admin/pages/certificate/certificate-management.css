@@ -1,0 +1,18 @@
+.modern-table th:first-child {
+    width: 3%; !important;
+}
+.modern-table th:nth-child(2) {
+    width: 18%; !important;
+}
+
+.modern-table th:nth-child(3) {
+    width: 20%; !important;
+}
+
+.modern-table th:nth-child(4) {
+    width: 35%; !important;
+}
+
+.modern-table th:nth-child(5) {
+    width: 16%; !important;
+}

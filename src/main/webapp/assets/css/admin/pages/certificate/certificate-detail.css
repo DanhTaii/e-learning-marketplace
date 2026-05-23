@@ -1,0 +1,53 @@
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.status-badge.valid {
+    background-color: #e0f8e9;
+    color: #008a3d;
+    border: 1px solid #008a3d;
+}
+
+.status-badge.revoked {
+    background-color: #fbe0e0;
+    color: #c92a2a;
+    border: 1px solid #c92a2a;
+}
+
+.verification-link-box {
+    display: flex;
+    align-items: center;
+    background-color: #f1f3f5;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.verification-link-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    font-size: var(--text-lg);
+    color: #495057;
+}
+
+.btn-copy-link {
+    border: none;
+    background-color: #3498db;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.btn-copy-link:hover {
+    background-color: #2980b9;
+}
+

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
-import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.service.CertificateService;
 import vn.edu.nlu.fit.elearning.feature.enrollment.dto.EnrollmentDetailDto;
 import vn.edu.nlu.fit.elearning.feature.enrollment.service.EnrollmentService;
 import vn.edu.nlu.fit.elearning.feature.lesson_progress.dto.LessonProgressDTO;

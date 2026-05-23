@@ -1,7 +1,7 @@
-package vn.edu.nlu.fit.elearning.feature.certificate.dao;
+package vn.edu.nlu.fit.elearning.feature.certificate.student.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseCrudDao;
-import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
 
 public interface CertificateDao extends BaseCrudDao<Certificate, Integer> {

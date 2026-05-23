@@ -1,8 +1,23 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: DanhTai
+  Date: 5/23/2026
+  Time: 12:48 AM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header class="admin-header-modern">
+
+    <!-- LEFT -->
     <div class="header-left">
+
+        <a href="admin/certificates" class="btn-back-course">
+            <i class="fa-solid fa-arrow-left"></i>
+            Quay về chứng chỉ
+        </a>
+
         <nav class="breadcrumb-nav">
             <span class="bc-parent">Admin</span>
             <i class="fa-solid fa-chevron-right bc-separator"></i>
@@ -36,6 +51,7 @@
         </nav>
     </div>
 
+    <!-- RIGHT -->
     <div class="header-right">
         <a href="${pageContext.request.contextPath}/index" class="header-action-item view-site-link">
             <i class="fa-solid fa-house"></i>
@@ -64,4 +80,5 @@
             </div>
         </div>
     </div>
+
 </header>

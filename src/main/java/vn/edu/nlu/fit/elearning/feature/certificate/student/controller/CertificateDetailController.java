@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.certificate.controller;
+package vn.edu.nlu.fit.elearning.feature.certificate.student.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -9,15 +9,11 @@ import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
-import vn.edu.nlu.fit.elearning.feature.certificate.dao.CertificateDaoImp;
-import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
-import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateService;
-import vn.edu.nlu.fit.elearning.feature.certificate.service.CertificateServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.service.CertificateService;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @WebServlet(name = "CertificateDetailController", value = "/personal/my-course/certificate")
 public class CertificateDetailController extends BaseController {

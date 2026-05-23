@@ -1,6 +1,6 @@
-package vn.edu.nlu.fit.elearning.feature.certificate.service;
+package vn.edu.nlu.fit.elearning.feature.certificate.student.service;
 
-import vn.edu.nlu.fit.elearning.feature.certificate.dto.CertificateDetailDto;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
 
 public interface CertificateService {
