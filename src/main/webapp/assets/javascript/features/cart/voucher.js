@@ -1,6 +1,5 @@
 // Khi bấm nút "Dùng" ở một Voucher
-function selectVoucher(code,isReload = false) {
-
+function selectVoucher(code, isReload = false) {
     closeModal('voucherModal');
 
     fetch('apply-voucher', {
@@ -13,9 +12,22 @@ function selectVoucher(code,isReload = false) {
             if (data.status === 'success') {
                 closeModal('voucherModal');
 
-                // Hiện box báo đã chọn mã
-                document.getElementById('applied-voucher-info').style.display = 'flex';
-                document.getElementById('applied-voucher-code').innerText = "Mã: " + data.code;
+                // 1. Hiển thị box báo đã chọn mã ở phía trên
+                const appliedBox = document.getElementById('applied-voucher-info');
+                const appliedCode = document.getElementById('applied-voucher-code');
+                if (appliedBox) appliedBox.style.display = 'flex';
+                if (appliedCode) appliedCode.innerText = "Mã: " + data.code;
+
+                // 2. Cập nhật dòng hiển thị số tiền giảm của Voucher trong Tóm tắt hóa đơn
+                const voucherRow = document.getElementById('voucher-discount-row');
+                const voucherLabel = document.getElementById('voucher-discount-label');
+                const voucherAmount = document.getElementById('voucher-discount-amount');
+
+                if (voucherRow && voucherLabel && voucherAmount) {
+                    voucherLabel.innerHTML = `<i class="fa-solid fa-ticket"></i> Voucher (${data.code}):`;
+                    voucherAmount.innerText = " - " + data.discountAmountFormatted;
+                    voucherRow.style.display = 'flex';
+                }
 
                 const finalPriceEl = document.getElementById('display-final-price');
                 if(finalPriceEl) {
@@ -44,24 +56,29 @@ function applyManualVoucher() {
 
 // Khi bấm nút "Bỏ chọn" mã
 function removeVoucher(e) {
-        if(e) e.preventDefault();
+    if(e) e.preventDefault();
 
-        fetch('remove-voucher', { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('applied-voucher-info').style.display = 'none';
+    fetch('remove-voucher', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const appliedBox = document.getElementById('applied-voucher-info');
+                if (appliedBox) appliedBox.style.display = 'none';
 
-                    const manualInput = document.getElementById('manualVoucherCode');
-                    if (manualInput) manualInput.value = '';
+                const manualInput = document.getElementById('manualVoucherCode');
+                if (manualInput) manualInput.value = '';
 
-                    const finalPriceEl = document.getElementById('display-final-price');
-                    if (finalPriceEl) {
-                        finalPriceEl.innerText = data.originalTotalFormatted;
-                    }
+                const voucherRow = document.getElementById('voucher-discount-row');
+                if (voucherRow) {
+                    voucherRow.style.display = 'none';
                 }
-            });
 
+                const finalPriceEl = document.getElementById('display-final-price');
+                if (finalPriceEl) {
+                    finalPriceEl.innerText = data.originalTotalFormatted;
+                }
+            }
+        });
 }
 window.addEventListener('pageshow', function(event) {
     const hiddenInput = document.getElementById('savedVoucherCode');

@@ -140,17 +140,15 @@
                                             <span class="price__discount text-medium amount">- ${sessionScope.cart.formatedDiscountPriceTotal}</span>
 
                                         </div>
-                                        <c:if test="${not empty summary.appliedVoucher}">
-                                            <div class="price__discount voucher-row">
-                                                <span class="price__discount text-medium discount voucher-label">
-                                                    <i class="fa-solid fa-ticket"></i> Voucher (${summary.appliedVoucher.code}):
-                                                </span>
-                                                <span class="price__discount text-medium amount voucher-amount"> - ${summary.discountStr} </span>
-                                            </div>
-                                        </c:if>
+                                        <div id="voucher-discount-row" class="price__discount voucher-row" style="display: ${not empty summary.appliedVoucher ? 'flex' : 'none'};">
+    <span id="voucher-discount-label" class="price__discount text-medium discount voucher-label">
+        <i class="fa-solid fa-ticket"></i> Voucher (${summary.appliedVoucher.code}):
+    </span>
+                                            <span id="voucher-discount-amount" class="price__discount text-medium amount voucher-amount"> - ${summary.discountStr} </span>
+                                        </div>
                                         <div class="price__total index">
                                             <span class="price__total ">Tổng cộng (${sessionScope.cart.selectedQuantity}): </span>
-                                            <span class="price__total text-medium amount">${summary.totalToPayStr}</span>
+                                            <span id="display-final-price" class="price__total text-medium amount">${summary.totalToPayStr}</span>
                                         </div>
 
 

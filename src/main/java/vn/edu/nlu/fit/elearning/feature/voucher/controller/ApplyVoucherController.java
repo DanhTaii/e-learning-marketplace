@@ -61,12 +61,14 @@ public class ApplyVoucherController extends BaseController {
 
             VoucherResultDTO result = voucherService.applyVoucher(userId,code, c.getFinalPriceTotal());
             String formattedFinalTotal = DataFormatting.formatAndConvert(result.getFinalTotal());
+            String formattedDiscountAmount = DataFormatting.formatAndConvert(result.getDiscountAmount());
             session.setAttribute("appliedVoucher", result.getVoucher());
             session.setAttribute("discountAmount", result.getDiscountAmount());
 
             jsonResponse.addProperty("status", "success");
             jsonResponse.addProperty("message", "Áp dụng mã thành công!");
             jsonResponse.addProperty("discountAmount", result.getDiscountAmount());
+            jsonResponse.addProperty("discountAmountFormatted", formattedDiscountAmount);
             jsonResponse.addProperty("finalTotalFormatted", formattedFinalTotal);
             jsonResponse.addProperty("code", result.getVoucher().getCode());
 
