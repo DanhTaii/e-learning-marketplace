@@ -29,7 +29,7 @@
         <form class="contact-form"
               action="${pageContext.request.contextPath}/api/contact"
               method="post">
-
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
             <div class="contact-form__group">
                 <label>Email</label>
                 <input type="email" name="email" class="input-style" value="${sessionScope.userSession.email}"

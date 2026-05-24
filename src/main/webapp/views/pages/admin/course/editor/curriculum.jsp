@@ -29,7 +29,7 @@
 
         <form id="lessonForm" action="admin/course/curriculum" method="post" class="form-modern"
               enctype="multipart/form-data">
-
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
             <input type="hidden" name="courseId" value="${course.id}">
             <input type="hidden" name="lessonId" value="${lesson.id}">
 

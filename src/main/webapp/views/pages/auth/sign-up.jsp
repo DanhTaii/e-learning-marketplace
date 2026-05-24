@@ -34,6 +34,7 @@
                     <div class="box-2-2-1">
 
                         <form action="sign-up" class="form" method="post" id="myForm">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">ĐĂNG KÝ</div>
                             <span class="add-to-fix-3"> ${requestScope.error} </span>
                             <div class="form__input input-1">

@@ -32,6 +32,7 @@
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2-2">
                         <form action="forgot-password" method="post" class="form">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">QUÊN MẬT KHẨU</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">Vui lòng nhập email của bạn để đặt lại mật khẩu!</span>

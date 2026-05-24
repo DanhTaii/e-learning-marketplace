@@ -90,6 +90,7 @@
                     </div>
 
                     <form action="personal/account-profile" method="POST" id="myForm" class="personal-detail-form">
+                        <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                         <div class="form-section">
                             <div class="section-header">
                                 <span class="section-indicator"></span>

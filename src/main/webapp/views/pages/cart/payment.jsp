@@ -32,6 +32,7 @@
     <jsp:include page="/views/layouts/header-simple.jsp"/>
     <div class="web__container">
         <form id="payment-main-form" action="confirm-payment" method="post" class="payment-layout">
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
             <div class="grid">
 
                 <div class="payment-layout">

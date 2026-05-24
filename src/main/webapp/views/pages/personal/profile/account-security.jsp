@@ -86,6 +86,7 @@
                 </div>
 
                 <form action="change-password" method="post" id="myForm">
+                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                     <c:set var="user" value="${sessionScope.userSession}"/>
                     <div class="form-section">
                         <div class="section-header">

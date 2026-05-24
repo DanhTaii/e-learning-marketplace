@@ -33,7 +33,7 @@
                               method="POST"
                               class="form"
                               id="otpForm">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">KIỂM TRA EMAIL</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">

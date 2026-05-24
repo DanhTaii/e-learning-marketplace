@@ -24,6 +24,7 @@
                  class="user__avatar2">
         </div>
         <form action="my-course/review/create" method="post" id="myForm">
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
             <div><span id="error_comment" class="error-client"></span></div>
             <div><span id="error_rating" class="error-client"></span></div>
             <div class="box__input">

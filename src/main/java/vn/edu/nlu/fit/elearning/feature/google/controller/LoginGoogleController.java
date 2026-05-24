@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.google.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.google.service.GoogleConstants;
 import vn.edu.nlu.fit.elearning.feature.auth.service.AuthService;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class LoginGoogleController extends HttpServlet {
 
     private AuthService authService;
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(LoginGoogleController.class);
 
     @Override
     public void init() throws ServletException {
@@ -25,29 +27,35 @@ public class LoginGoogleController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String code = request.getParameter("code"); // Mã code từ Google trả về
+        try {
+            String code = request.getParameter("code"); // Mã code từ Google trả về
 
-        if (code == null || code.isEmpty()) {
+            if (code == null || code.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/sign-in?error=failed");
+                return;
+            }
+
+            // Lấy Redirect URI đúng cho môi trường hiện tại
+            String currentRedirectUri = GoogleConstants.getRedirectUri();
+
+            // Đổi mã code lấy token
+            String accessToken = GoogleUtils.getToken(code, currentRedirectUri);
+
+            // Bước 2: Dùng Access Token lấy thông tin User (Email, Tên, Avatar)
+            GoogleUser googleUser = GoogleUtils.getUserInfo(accessToken);
+
+            User user = authService.processSocialLogin(googleUser);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("userSession", user);
+            session.setAttribute("userId", user.getId());
+
+            response.sendRedirect(request.getContextPath() + "/index");
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Lỗi khi xử lý đăng nhập Google: ", e);
             response.sendRedirect(request.getContextPath() + "/sign-in?error=failed");
-            return;
         }
-
-        // Lấy Redirect URI đúng cho môi trường hiện tại
-        String currentRedirectUri = GoogleConstants.getRedirectUri();
-
-        // Đổi mã code lấy token
-        String accessToken = GoogleUtils.getToken(code, currentRedirectUri);
-
-        // Bước 2: Dùng Access Token lấy thông tin User (Email, Tên, Avatar)
-        GoogleUser googleUser = GoogleUtils.getUserInfo(accessToken);
-
-        User user = authService.processSocialLogin(googleUser);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("userSession", user);
-        session.setAttribute("userId", user.getId());
-
-        response.sendRedirect(request.getContextPath() + "/index");
     }
 
     @Override

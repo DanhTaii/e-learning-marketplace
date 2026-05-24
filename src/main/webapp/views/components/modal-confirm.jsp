@@ -34,6 +34,7 @@
       method="POST"
       class="form"
       style="display: none">
+    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
     <input id="input-delete-id" type="hidden" name="id">
     <input id="input-delete-type" type="hidden" name="actionType">
     <input id="input-delete-reason" type="hidden" name="deleteReason">

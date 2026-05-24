@@ -127,6 +127,7 @@
                                 </form>
 
                                 <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
                                     <div id="tagTableBody">
                                         <jsp:include page="/views/pages/admin/tag/tag-fragment.jsp"/>

@@ -49,7 +49,7 @@
                     <!-- FORM -->
                     <div class="form-container">
                         <form action="admin/super/role/detail" method="post" class="form-modern">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id"
                                    value="${role != null ? role.id : ''}"/>
 

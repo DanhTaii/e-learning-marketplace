@@ -17,7 +17,7 @@ import java.util.Set;
 @WebFilter(filterName = "AdminAuthFilter", urlPatterns = "/admin/*")
 public class AdminAuthFilter implements Filter {
 
-    private transient AuthService authService;
+    private AuthService authService;
     private static final Logger logger = LoggerFactory.getLogger(AdminAuthFilter.class);
 
     @Override

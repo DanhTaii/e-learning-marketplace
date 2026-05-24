@@ -63,7 +63,7 @@
                     <div class="form-container">
 
                         <form id="requestForm" action="admin/request/detail" method="post" class="form-modern">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${contact != null ? contact.id : ''}" />
 
                             <div class="tag-create-card">

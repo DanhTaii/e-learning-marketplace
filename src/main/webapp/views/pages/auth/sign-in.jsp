@@ -53,6 +53,7 @@
 
                         %>
                         <form action="sign-in" class="form" method="post" id="myForm">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
                             <div class="add-to-fix-1">

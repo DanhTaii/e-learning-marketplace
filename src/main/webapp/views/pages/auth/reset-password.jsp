@@ -33,6 +33,8 @@
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2-2">
                         <form action="reset-password" method="post" class="form" id="myForm">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
                             <div class="form__title text-big-title">TẠO MẬT KHẨU MỚI</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">

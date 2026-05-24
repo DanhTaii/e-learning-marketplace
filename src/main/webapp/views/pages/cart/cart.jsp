@@ -57,6 +57,7 @@
 
                                     <div class="scrollable-order-list">
                                         <form action="cart-manager" id="cartForm" method="post">
+                                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                             <ul>
                                                 <c:forEach var="p" items="${sessionScope.cart.list}">
                                                     <li>

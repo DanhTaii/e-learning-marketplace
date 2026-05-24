@@ -45,6 +45,7 @@
                     <div class="form-container">
                         <form id="lessonForm" action="admin/lesson/detail" method="post" class="form-modern"
                               enctype="multipart/form-data">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <c:if test="${lesson != null}">
                                 <input type="hidden" name="id" value="${lesson.id}"/>
                                 <input type="hidden" name="oldOrderIndex" value="${lesson.orderIndex}"/>

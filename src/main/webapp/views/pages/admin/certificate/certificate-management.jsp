@@ -128,6 +128,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/certificates">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
                                     <input id="currentQueryId" type="hidden" name="currentQuery"
                                            value="${pageContext.request.queryString}">

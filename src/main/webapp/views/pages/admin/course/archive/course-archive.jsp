@@ -125,6 +125,7 @@
                                 </form>
 
                                 <form id="archiveBulkForm" method="POST" action="admin/courses/archive">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 

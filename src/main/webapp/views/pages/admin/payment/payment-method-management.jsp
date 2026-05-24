@@ -133,7 +133,7 @@
                 <div id="payment-method-detail" class="modal modal__course-detail">
                     <div class="modal__course-content">
                         <form action="${pageContext.request.contextPath}/admin/payment-methods/update" method="post">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="course__header">
                                 <div class="course__title">
                                     <i class="fa-solid fa-credit-card"></i>

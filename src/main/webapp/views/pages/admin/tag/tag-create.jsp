@@ -45,6 +45,7 @@
 
                     <div class="form-container">
                         <form id="tagForm" action="admin/tag/detail" method="post" class="form-modern">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${tag != null ? tag.id : ''}" />
                             <div class="tag-create-card">
 

@@ -166,6 +166,7 @@
                                 </form>
 
                                 <form action="admin/courses" method="POST" id="bulkActionForm">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
                                     <input id="deleteReasonId" type="hidden" name="deleteReason" value="">

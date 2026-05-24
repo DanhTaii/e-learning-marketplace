@@ -4,6 +4,7 @@
 
 <div class="form-container">
     <form id="courseForm" action="admin/course/editor" method="post">
+        <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
         <c:if test="${course != null}">
             <input type="hidden" name="courseId" value="${course.id}"/>
         </c:if>
