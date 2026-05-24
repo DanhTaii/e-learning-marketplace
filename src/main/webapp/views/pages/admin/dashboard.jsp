@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <base href="${pageContext.request.contextPath}/">
@@ -165,5 +166,6 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

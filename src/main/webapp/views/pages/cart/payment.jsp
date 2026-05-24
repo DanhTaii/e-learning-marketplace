@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Payment</title>
     <meta name="viewport"
@@ -303,6 +304,7 @@
     <jsp:include page="/views/components/toast.jsp"/>
 
 </div>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/cart/payment-modal.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/cart/voucher.js?v=<%=System.currentTimeMillis()%>"></script>

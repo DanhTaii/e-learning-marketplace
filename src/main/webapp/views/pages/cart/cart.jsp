@@ -5,6 +5,7 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
+        <meta name="csrf-token" content="${sessionScope.csrfToken}">
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -395,6 +396,7 @@
         </div>
     </div>
     <jsp:include page="/views/components/toast.jsp"/>
+    <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="assets/javascript/features/cart/voucher.js?v=<%=System.currentTimeMillis()%>"></script>

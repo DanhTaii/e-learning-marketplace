@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Lesson Create</title>
     <base href="${pageContext.request.contextPath}/">
@@ -198,7 +199,7 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/admin/lesson/lesson-create.js?v=<%=System.currentTimeMillis()%>"></script>
@@ -207,4 +208,5 @@
 
 <%-- Javascript Validation--%>
 <script src="assets/javascript/validation/admin/lesson-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

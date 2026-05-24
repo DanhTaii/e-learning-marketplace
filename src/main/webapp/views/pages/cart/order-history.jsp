@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Order History</title>
     <meta name="viewport"
@@ -92,5 +93,6 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

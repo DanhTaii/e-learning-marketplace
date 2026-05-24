@@ -4,6 +4,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Tạo / Cập nhật vai trò</title>
     <base href="${pageContext.request.contextPath}/">
@@ -188,10 +189,10 @@
         </div>
     </div>
 </div>
-
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/role/role-create.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/admin/category-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

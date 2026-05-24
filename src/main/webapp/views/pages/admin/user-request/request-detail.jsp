@@ -4,6 +4,7 @@
 <!doctype html>
 <html lang="vi">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width,
@@ -186,11 +187,12 @@
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 
-</body>
-
 <%-- Javascript --%>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</body>
+
 
 </html>

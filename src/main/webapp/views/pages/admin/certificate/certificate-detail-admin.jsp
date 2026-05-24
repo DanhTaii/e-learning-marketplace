@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Chi tiết Chứng chỉ - Admin</title>
     <base href="${pageContext.request.contextPath}/">
@@ -168,6 +169,7 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
 </html>

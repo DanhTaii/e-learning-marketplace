@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>All Classes</title>
     <base href="${pageContext.request.contextPath}/">
@@ -316,5 +317,6 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
     <jsp:include page="/views/components/toast.jsp"/>
 </div>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

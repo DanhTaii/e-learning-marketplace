@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Chứng nhận hoàn thành khóa học</title>
     <base href="${pageContext.request.contextPath}/">
@@ -140,6 +141,7 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="assets/javascript/features/certificate/certificate.js?v=<%=System.currentTimeMillis()%>"></script>
 
