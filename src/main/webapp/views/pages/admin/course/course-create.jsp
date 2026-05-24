@@ -55,7 +55,7 @@
 
                             <button type="submit" class="btn-submit-modern w-100">
                                 <i class="fa-solid fa-floppy-disk"></i>
-                                ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
+                                <c:out value="${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}"/>
                             </button>
                         </div>
 
@@ -181,7 +181,7 @@
                                     <c:forEach items="${categories}" var="cat">
                                         <option value="${cat.id}"
                                             ${(param.category_id == cat.id || course.categoryId == cat.id) ? 'selected' : ''}>
-                                                ${cat.name}
+                                                <c:out value="${cat.name}"/>
                                         </option>
                                     </c:forEach>
                                 </select>
@@ -218,7 +218,7 @@
                                                     <c:if test="${course != null && courseTagIdList.contains(tag.id)}">
                                                         checked
                                                     </c:if>/>
-                                                ${tag.name}
+                                                <c:out value="${tag.name}"/>
                                         </label>
                                     </c:forEach>
                                 </div>
@@ -230,7 +230,7 @@
                                 <label class="title-style">Mục tiêu khóa học</label>
                                 <textarea id="courseGoals" name="goals" class="input-modern textarea-modern"
                                           placeholder="Học viên sẽ đạt được gì sau khóa học?"
-                                >${course != null ? course.goals : param.goals}</textarea>
+                                ><c:out value="${course != null ? course.goals : param.goals}"/></textarea>
                                 <span class="error-client" id="error_courseGoals"></span>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
                                 <label class="title-style">Mô tả chi tiết</label>
                                 <textarea id="courseDescription" name="description"
                                           class="input-modern textarea-modern"
-                                          placeholder="Viết mô tả đầy đủ về khóa học tại đây...">${course != null ? course.description : param.description}</textarea>
+                                          placeholder="Viết mô tả đầy đủ về khóa học tại đây..."><c:out value="${course != null ? course.description : param.description}"/></textarea>
                                 <span class="error-client" id="error_courseDescription"></span>
                             </div>
                         </div>

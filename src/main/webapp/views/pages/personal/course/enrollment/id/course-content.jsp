@@ -30,7 +30,7 @@
             <div class="grid__column-8 column1">
 
                 <div class="course-header-container">
-                    <h1 class="course-title">${enrollmentDetail.title}</h1>
+                    <h1 class="course-title"><c:out value="${enrollmentDetail.title}"/></h1>
                     <input id="enrollment-id" type="hidden" name="enrollmentId" value="${enrollmentDetail.id}">
                     <input id="course-id" type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
 
@@ -111,9 +111,9 @@
                     <div class="content__header">
                         <span class="text-4xl bold">Danh sách bài học</span>
                         <span class="text-xl light header-subtitle">
-                            ${enrollmentDetail.listLesson.size()} bài học
+                            <c:out value="${enrollmentDetail.listLesson.size()}"/> bài học
                             •
-                            ${enrollmentDetail.durationText}
+                            <c:out value="${enrollmentDetail.durationText}"/>
                         </span>
                     </div>
                     <hr>
@@ -135,10 +135,10 @@
                                 </div>
                                 <div class="box__column2">
                                     <div class="column2__header">
-                                        <span class="text-lg regular header">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
+                                        <span class="text-lg regular header">Bài <c:out value="${l.orderIndex}"/> : <c:out value="${l.lessonTitle}"/></span>
                                     </div>
                                     <div class="column2__duration">
-                                        <span class="text-lg light">${l.durationMinutes}p</span>
+                                        <span class="text-lg light"><c:out value="${l.durationMinutes}"/>p</span>
                                     </div>
                                 </div>
                             </div>

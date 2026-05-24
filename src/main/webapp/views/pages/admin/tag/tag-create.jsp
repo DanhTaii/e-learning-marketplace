@@ -37,7 +37,7 @@
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            ${(not empty tag and tag.id > 0) ? 'Cập nhật thẻ' : 'Tạo mới thẻ'}
+                            <c:out value="${(not empty tag and tag.id > 0) ? 'Cập nhật thẻ' : 'Tạo mới thẻ'}"/>
                         </h2>
                         <a href="admin/tags" class="btn-back">
                             <i class="fa-solid fa-backward-step"></i> Trở về
@@ -57,7 +57,7 @@
                                                value="${not empty tag.name ? tag.name : param.nameTag}"
                                                placeholder="Nhập tiêu đề..." minlength="3" maxlength="255" required>
                                         <span class="error-client" id="error_tagTitle">
-                                            ${errors.nameTag}
+                                            <c:out value="${errors.nameTag}"/>
                                         </span>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                         <input type="text" name="slug" class="input-modern" id="tagSlug"
                                                value="${not empty tag.slug ? tag.slug : param.slug}"
                                                placeholder="Nhập tên slug..." minlength="3" maxlength="255" required>
-                                        <span class="error-client" id="error_slug">${errors.slug}</span>
+                                        <span class="error-client" id="error_slug"><c:out value="${errors.slug}"/></span>
                                     </div>
                                 </div>
 
@@ -86,7 +86,7 @@
                                             Hoạt động
                                         </option>
                                     </select>
-                                    <span class="error-client" id="error_status">${errors.status}</span>
+                                    <span class="error-client" id="error_status"><c:out value="${errors.status}"/></span>
                                 </div>
 
                                 <c:if test="${tag != null and tag.id > 0}">
@@ -113,7 +113,7 @@
 
                                         <button type="submit" class="btn-submit-modern w-100">
                                             <i class="fa-solid fa-floppy-disk"></i>
-                                            ${(not empty tag and tag.id > 0) ? 'Cập nhật' : 'Thêm thẻ'}
+                                            <c:out value="${(not empty tag and tag.id > 0) ? 'Cập nhật' : 'Thêm thẻ'}"/>
                                         </button>
                                     </div>
 

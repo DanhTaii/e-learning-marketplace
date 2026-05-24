@@ -43,7 +43,7 @@
                                 </span>
                             </div>
                             <c:if test="${error != null}">
-                                <span class="add-to-fix"> ${error} </span>
+                                <span class="add-to-fix"> <c:out value="${error}"/> </span>
                             </c:if>
                             <div class="form__input form__input-1">
                                 <input type="password" name="password" class="input-text text-big"

@@ -39,8 +39,8 @@
 
                         <div class="container-2__price">
                             <div class="container-2__price">
-                                <span class="container-2__sold-price">${c.discountedPrice}</span>
-                                <span class="container-2__original-price">${c.originPrice}</span>
+                                <span class="container-2__sold-price"><c:out value="${c.discountedPrice}"/></span>
+                                <span class="container-2__original-price"><c:out value="${c.originPrice}"/></span>
                             </div>
                         </div>
                         <div class="container-2__option-group">
@@ -95,7 +95,7 @@
                                         Thời lượng:
                                      </span>
                                     <span class="text-li style__text style__text-var">
-                                        ${c.durationText}
+                                        <c:out value="${c.durationText}"/>
                                     </span>
                                 </li>
                                 <li class="text-li style__text-2">
@@ -103,7 +103,7 @@
                                          Giáo trình:
                                     </span>
                                     <span class="text-li style__text style__text-var">
-                                         ${c.lessonCount} bài giảng
+                                         <c:out value="${c.lessonCount}"/> bài giảng
                                     </span>
                                 </li>
                                 <li class="text-li style__text-2">
@@ -132,15 +132,15 @@
                                 <div class="">
                                     <a href="result-search/by-category?id=${category.id}"
                                        class="section-1__breadcrumb-name section-1__breadcrumb-item">
-                                            ${category.name}
+                                            <c:out value="${category.name}"/>
                                     </a>
                                 </div>
                             </c:if>
                         </div>
 
-                        <div class="section-1__main-title text-big-title">${c.title}</div>
+                        <div class="section-1__main-title text-big-title"><c:out value="${c.title}"/></div>
 
-                        <div class="section-1__sub-title text-big">${c.subtitle}.
+                        <div class="section-1__sub-title text-big"><c:out value="${c.subtitle}"/>.
                         </div>
 
                         <div class="section-1__rating">
@@ -152,7 +152,7 @@
                                                       maxFractionDigits="1"
                                                       minFractionDigits="1"
                                                       var="formattedRating"/>
-                                    <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                    <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                 </div>
                                 <div class="section-1__star section-1__rating-star-item text-mini">
                                     <i class="fa-duotone fa-solid fa-star"></i>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                             <div class="section-1__rating-item section-1__rating-quantity text-mini">
-                                (${fn:length(reviewDtos)}
+                                (<c:out value="${fn:length(reviewDtos)}"/>
                                 rating)
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                         <div class="section-1__creator">
                             <span class="section-1__creator-title text-big font__sub-title">Giảng viên</span>
                             <a href="instructor-profile.jsp"
-                               class="section-1__creator-name text-big turn-page">${c.authorName}</a>
+                               class="section-1__creator-name text-big turn-page"><c:out value="${c.authorName}"/></a>
                         </div>
 
                         <div class="section-1__updated">
@@ -206,7 +206,7 @@
                                                         <i class="fa-duotone fa-solid fa-check"></i>
                                                     </div>
                                                     <div class="li-skill__container-item content__skill">
-                                                            ${fn:trim(goal)}
+                                                            <c:out value="${fn:trim(goal)}"/>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -221,7 +221,7 @@
                         <div class="section-6__title style__sub-title">Giới thiệu khóa học</div>
                         <c:forEach var="des" items="${fn:split(c.description, ';')}">
                             <div class="section-6__content text-big font__sub-title">
-                                    ${fn:trim(des)}
+                                    <c:out value="${fn:trim(des)}"/>
                             </div>
                         </c:forEach>
                         <br>
@@ -243,7 +243,7 @@
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
                                         <c:forEach var="t" items="${tags}">
                                             <a href="result-search/by-tag?id=${t.id}" class="turn-page">
-                                                <li class="section-3_li">${t.name}</li>
+                                                <li class="section-3_li"><c:out value="${t.name}"/></li>
                                             </a>
                                         </c:forEach>
                                     </ul>
@@ -260,10 +260,10 @@
                         <div class="section-4__sub-duration">
                             <ul class="">
                                 <li class=" text-big first font__sub-title">
-                                    ${c.lessonCount} bài giảng
+                                    <c:out value="${c.lessonCount}"/> bài giảng
                                 </li>
                                 <li class="text-big font__sub-title">
-                                    ${c.durationText}
+                                    <c:out value="${c.durationText}"/>
                                 </li>
                             </ul>
                         </div>
@@ -275,9 +275,9 @@
                                         <div class="section-4__lesson-information">
                                             <div class="section-4__lesson-icon text-medium"><i
                                                     class="fa-solid fa-play"></i></div>
-                                            <div class="section-4__lesson-title text-medium">Bài ${lesson.orderIndex}
-                                                : ${lesson.title}</div>
-                                            <div class="section-4__lesson-time text-medium">${lesson.durationMinutes}
+                                            <div class="section-4__lesson-title text-medium">Bài <c:out value="${lesson.orderIndex}"/>
+                                                : <c:out value="${lesson.title}"/></div>
+                                            <div class="section-4__lesson-time text-medium"><c:out value="${lesson.durationMinutes}"/>
                                                 phút
                                             </div>
                                         </div>
@@ -302,14 +302,14 @@
                                         <div class="comment__box">
                                             <div class="box__name box">
                                                 <div class="review-in4">
-                                                    <span class="review__name">${review.userName}</span>
+                                                    <span class="review__name"><c:out value="${review.userName}"/></span>
                                                     <span class="review__time"><fmt:formatDate
                                                             value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                                                 </div>
                                             </div>
                                             <div class="box__date box">
                                                 <div class="star">
-                                                    <div class="text-medium regular">${review.rating}</div>
+                                                    <div class="text-medium regular"><c:out value="${review.rating}"/></div>
                                                     <div class="star-icon">
                                                         <i class="fa-solid fa-star icon"></i>
                                                         <i class="fa-solid fa-star icon"></i>
@@ -320,7 +320,7 @@
                                                 </div>
                                             </div>
                                             <div class="box__comment box">
-                                                <span>${review.comment}</span>
+                                                <span><c:out value="${review.comment}"/></span>
                                             </div>
                                         </div>
                                     </div>

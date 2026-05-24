@@ -36,7 +36,7 @@
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            ${(not empty lesson and lesson.id > 0) ? 'Cập nhật bài học' : 'Tạo mới bài học'}
+                            <c:out value="${(not empty lesson and lesson.id > 0) ? 'Cập nhật bài học' : 'Tạo mới bài học'}"/>
                         </h2>
                         <a href="admin/lessons" class="btn-back">
                             <i class="fa-solid fa-backward-step"></i> Trở về
@@ -60,11 +60,11 @@
                                         <select class="input-modern" name="idCourse" id="selectCourse">
                                             <option value="0">--- Chọn khóa học ---</option>
                                             <c:forEach var="c" items="${listCourse}">
-                                                <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : param.idCourse}>${c.title}</option>
+                                                <option value="${c.id}" ${lesson.courseId == c.id ? 'selected' : param.idCourse}><c:out value="${c.title}"/></option>
                                             </c:forEach>
                                         </select>
 
-                                        <span class="error-client" id="error_idCourse">${errors.idCourse}</span>
+                                        <span class="error-client" id="error_idCourse"><c:out value="${errors.idCourse}"/></span>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Thứ tự bài học</label>
@@ -72,7 +72,7 @@
                                                value="${lesson != null ? lesson.orderIndex : param.orderIndex}"
                                                placeholder="Ví dụ: 1">
                                         <span class="error-client" id="error_orderIndex">
-                                            ${errors.orderIndex}
+                                            <c:out value="${errors.orderIndex}"/>
                                         </span>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                                value="${lesson != null ? lesson.title : param.nameLesson}"
                                                placeholder="Nhập tiêu đề...">
                                         <span class="error-client" id="error_lessonTitle">
-                                            ${errors.nameLesson}
+                                            <c:out value="${errors.nameLesson}"/>
                                         </span>
                                     </div>
                                     <div class="form-group flex-1">
@@ -94,7 +94,7 @@
                                                value="${lesson != null ? lesson.durationMinutes : param.duration_minutesLesson}"
                                                placeholder="Phút">
                                         <span class="error-client" id="error_durationMinutes">
-                                            ${errors.durationMinutes}
+                                            <c:out value="${errors.durationMinutes}"/>
                                         </span>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                             Hoạt động - Học viên có thể xem
                                         </option>
                                     </select>
-                                    <span class="error-client" id="error_status">${errors.status}</span>
+                                    <span class="error-client" id="error_status"><c:out value="${errors.status}"/></span>
                                 </div>
 
                                 <c:if test="${lesson != null and lesson.id > 0}">
@@ -143,7 +143,7 @@
                                             <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
                                                    value="${lesson != null ? lesson.videoUrl : param.urlVideo}"
                                                    placeholder="https://www.youtube.com/watch?v=...">
-                                            <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
+                                            <span class="error-client" id="error_videoUrl"><c:out value="${errors.urlVideo}"/></span>
                                         </div>
                                     </div>
 
@@ -177,7 +177,7 @@
 
                                         <button type="submit" class="btn-submit-modern w-100">
                                             <i class="fa-solid fa-floppy-disk"></i>
-                                            ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
+                                            <c:out value="${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}"/>
                                         </button>
                                     </div>
 

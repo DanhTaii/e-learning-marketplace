@@ -39,7 +39,7 @@
                     <!-- HEADER -->
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            ${(not empty role and role.id > 0) ? 'Cập nhật vai trò' : 'Tạo mới vai trò'}
+                            <c:out value="${(not empty role and role.id > 0) ? 'Cập nhật vai trò' : 'Tạo mới vai trò'}"/>
                         </h2>
 
                         <a href="admin/super/roles" class="btn-back">
@@ -64,7 +64,7 @@
 
                                     <button type="submit" class="btn-submit-modern">
                                         <i class="fa-solid fa-floppy-disk"></i>
-                                        ${(role != null && role.id > 0) ? 'Cập nhật' : 'Tạo Role'}
+                                        <c:out value="${(role != null && role.id > 0) ? 'Cập nhật' : 'Tạo Role'}"/>
                                     </button>
                                 </div>
 
@@ -78,7 +78,7 @@
                                            required>
 
                                     <span class="error-client" id="error_name">
-                                        ${errors.name}
+                                        <c:out value="${errors.name}"/>
                                     </span>
                                 </div>
 
@@ -87,9 +87,9 @@
                                     <textarea name="description"
                                               class="input-modern"
                                               rows="3"
-                                              placeholder="Nhập mô tả...">${role != null ? role.description : ''}</textarea>
+                                              placeholder="Nhập mô tả..."><c:out value="${role != null ? role.description : ''}"/></textarea>
                                     <span class="error-client" id="error_description">
-                                        ${errors.description}
+                                        <c:out value="${errors.description}"/>
                                     </span>
                                 </div>
 
@@ -107,7 +107,7 @@
                                             Hoạt động
                                         </option>
                                     </select>
-                                    <span class="error-client" id="error_status">${errors.status}</span>
+                                    <span class="error-client" id="error_status"><c:out value="${errors.status}"/></span>
                                 </div>
 
                                 <c:if test="${role != null and role.id > 0}">
@@ -134,7 +134,7 @@
                                             <div class="permission-card">
 
                                                 <div class="permission-card-header">
-                                                    <span class="permission-card-title">${group.key}</span>
+                                                    <span class="permission-card-title"><c:out value="${group.key}"/></span>
                                                     <a href="#" class="select-all">Select All</a>
                                                 </div>
 
@@ -144,8 +144,8 @@
                                                         <label class="permission-row">
 
                                                             <div class="permission-info">
-                                                                <span class="permission-name">${perm.name}</span>
-                                                                <span class="permission-desc">${perm.description}</span>
+                                                                <span class="permission-name"><c:out value="${perm.name}"/></span>
+                                                                <span class="permission-desc"><c:out value="${perm.description}"/></span>
                                                             </div>
 
                                                             <input type="checkbox"
@@ -176,7 +176,7 @@
 
                                     <button type="submit" class="btn-submit-modern">
                                         <i class="fa-solid fa-floppy-disk"></i>
-                                        ${(role != null && role.id > 0) ? 'Cập nhật' : 'Tạo Role'}
+                                        <c:out value="${(role != null && role.id > 0) ? 'Cập nhật' : 'Tạo Role'}"/>
                                     </button>
                                 </div>
 

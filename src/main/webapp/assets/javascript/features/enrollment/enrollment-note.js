@@ -51,7 +51,7 @@ function initSaveNoteButton({btnSaveNote, noteInput, cloudinaryPlayer}) {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-CSRF-Token': getCsrfToken()
             },
-            body: `lessonId=${currentLessonId}&noteTime=${noteTime}&content=${encodeURIComponent(content)}`
+            body: `lessonId=<c:out value="${currentLessonId}"/>&noteTime=<c:out value="${noteTime}"/>&content=<c:out value="${encodeURIComponent(content)}"/>`
         })
             .then(response => {
                 return response.json()
@@ -83,7 +83,7 @@ function loadLessonNotes(lessonId) {
     const container = document.getElementById('notes-list-container');
     const emptyState = document.getElementById('empty-note-state');
 
-    fetch(`personal/my-course/note?lessonId=${lessonId}`, {
+    fetch(`personal/my-course/note?lessonId=<c:out value="${lessonId}"/>`, {
         headers: {
             'X-CSRF-Token': getCsrfToken()
         }
@@ -102,7 +102,7 @@ function loadLessonNotes(lessonId) {
             }
 
             container.insertAdjacentHTML('beforeend',
-                `<div class="header-note-list-container mb-2">Ghi chú đã lưu ( ${data.length} )</div>`
+                `<div class="header-note-list-container mb-2">Ghi chú đã lưu ( <c:out value="${data.length}"/> )</div>`
             );
             // nếu có data thì tạo vòng lặp để chèn dữ liệu vào HTML
             data.forEach(note => {
@@ -118,7 +118,7 @@ function renderNoteCard(container, note) {
                     <div class="note-card" data-note-id="${note.id}">
                         <div class="note-card-header">
                             <div class="note-time-badge-saved" onclick="seekToTime(${note.noteTime})">
-                                <i class="fa-regular fa-clock"></i> ${formatTime(note.noteTime)}
+                                <i class="fa-regular fa-clock"></i> <c:out value="${formatTime(note.noteTime)}"/>
                             </div>
                             
                             <div class="note-actions">
@@ -132,7 +132,7 @@ function renderNoteCard(container, note) {
                                 </button>
                             </div>
                         </div>
-                        <div class="note-card-content">${note.content}</div>
+                        <div class="note-card-content"><c:out value="${note.content}"/></div>
                     </div>
                 `;
     // Chèn note-card trên vào thẻ chứa là container (có sẵn bên JSP)
@@ -216,7 +216,7 @@ function triggerInlineEditNote(noteId, noteCard, currentContent) {
     noteActionDiv.style.display = 'none';
 
     noteCardContentDiv.innerHTML = `
-        <textarea id="edit-textarea-${noteId}" class="edit-note-textarea">${currentContent}</textarea>
+        <textarea id="edit-textarea-${noteId}" class="edit-note-textarea"><c:out value="${currentContent}"/></textarea>
         
         <div class="edit-note-actions">
             <button type="button" class="btn-edit-note btn-cancel-edit">Hủy</button>

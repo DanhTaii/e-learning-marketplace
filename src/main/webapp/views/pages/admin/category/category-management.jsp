@@ -51,7 +51,7 @@
                                             Quản lý tất cả danh mục
                                         </span>
                                         <span class="header__count">
-                                            ${listCategories.size()} danh mục
+                                            <c:out value="${listCategories.size()}"/> danh mục
                                         </span>
                                     </div>
                                 </div>

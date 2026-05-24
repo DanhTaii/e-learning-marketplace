@@ -55,7 +55,7 @@
                     <div class="grid summary-box">
                         <div class="box__row1">
                             <span class="row1__id text">Mã đơn hàng:</span>
-                            <span class="number">${order.orderCode}</span>
+                            <span class="number"><c:out value="${order.orderCode}"/></span>
                         </div>
                         <div class="box__row2">
                             <span class="row2__time text">Ngày:</span>
@@ -63,19 +63,19 @@
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Giá gốc:</span>
-                            <span class="number">${order.formatTotal}</span>
+                            <span class="number"><c:out value="${order.formatTotal}"/></span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Số tiền giảm:</span>
-                            <span class="number">-${order.formatDiscount}</span>
+                            <span class="number">-<c:out value="${order.formatDiscount}"/></span>
                         </div>
                         <div class="box__row3">
                             <span class="row3__total text">Tổng cộng:</span>
-                            <span class="number">${order.formatFinal}</span>
+                            <span class="number"><c:out value="${order.formatFinal}"/></span>
                         </div>
                         <div class="box__row4">
                             <span class="row4__payment-method text">Phương thức thanh toán:</span>
-                            <span class="number">${paymentMethod.name}</span>
+                            <span class="number"><c:out value="${paymentMethod.name}"/></span>
                         </div>
 
 
@@ -102,13 +102,13 @@
                                              alt="${item.courseTitle}" class="image">
                                     </div>
                                     <div class="content__name text-paragraph">
-                                        <p class="items__name ">${item.courseTitle}</p>
+                                        <p class="items__name "><c:out value="${item.courseTitle}"/></p>
                                     </div>
 
                                 </div>
 
                                 <div class="items__price">
-                                    <span class="amount-discounted ">${item.priceAtPurchaseFormat} </span>
+                                    <span class="amount-discounted "><c:out value="${item.priceAtPurchaseFormat}"/> </span>
                                 </div>
 
                             </div>

@@ -51,7 +51,7 @@
                                                 Quản lý tất cả vai trò
                                         </span>
                                         <span class="header__count">
-                                            ${listRoles.size()} vai trò
+                                            <c:out value="${listRoles.size()}"/> vai trò
                                         </span>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                                 <c:forEach var="perm" items="${listPermissions}">
                                                     <option value="${perm.id}"
                                                         ${filter.permissionId == perm.id ? 'selected' : ''}>
-                                                            ${perm.name}
+                                                            <c:out value="${perm.name}"/>
                                                     </option>
                                                 </c:forEach>
                                             </select>

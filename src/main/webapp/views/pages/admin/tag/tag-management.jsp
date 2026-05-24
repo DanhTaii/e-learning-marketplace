@@ -42,7 +42,7 @@
                                     Thẻ
                                     <div class="header__meta">
                                         <span class="header__subtitle">Quản lý tất cả thẻ</span>
-                                        <span class="header__count">${listTags.size()} thẻ</span>
+                                        <span class="header__count"><c:out value="${listTags.size()}"/> thẻ</span>
                                     </div>
                                 </div>
 

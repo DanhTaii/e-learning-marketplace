@@ -36,7 +36,7 @@
                         <ul class="container__category-list text-li">
                             <c:forEach var="c" items="${categories}">
                                 <a href="result-search/by-category?id=${c.id}" class="turn-page">
-                                    <li class="container__category-list-item text-li">${c.name}</li>
+                                    <li class="container__category-list-item text-li"><c:out value="${c.name}"/></li>
                                 </a>
                             </c:forEach>
                         </ul>
@@ -53,23 +53,23 @@
                                          alt="" class="img-1">
                                 </div>
                                 <div class="big-advertisement__content">
-                                    <div class="content__title">${courseMostPopular.title}</div>
+                                    <div class="content__title"><c:out value="${courseMostPopular.title}"/></div>
                                     <div class="content__information">
                                         <div class="content__quick-info for-fix">
                                             <div class="quick-info__level">
                                                 <div class="level__icon icon"><i
                                                         class="text-medium fa-solid fa-signal"></i></div>
-                                                <div class="level__text text-medium">${courseMostPopular.level.vietnameseName}</div>
+                                                <div class="level__text text-medium"><c:out value="${courseMostPopular.level.vietnameseName}"/></div>
                                             </div>
                                             <div class="quick-info__users">
                                                 <div class="users__icon icon"><i
                                                         class="text-medium fa-solid fa-users"></i></div>
-                                                <div class="users__text text-medium">${courseMostPopular.studentCount}</div>
+                                                <div class="users__text text-medium"><c:out value="${courseMostPopular.studentCount}"/></div>
                                             </div>
                                             <div class="quick-info__time">
                                                 <div class="time__icon icon"><i
                                                         class="text-medium fa-regular fa-clock"></i></div>
-                                                <div class="time__text text text-medium">${courseMostPopular.durationText}</div>
+                                                <div class="time__text text text-medium"><c:out value="${courseMostPopular.durationText}"/></div>
                                             </div>
                                             <div class="quick-info__time ">
                                                 <div class="rate__icon"><i
@@ -77,15 +77,15 @@
                                                 <fmt:formatNumber value="${courseMostPopular.avgRating}" type="number"
                                                                   maxFractionDigits="1" minFractionDigits="1"
                                                                   var="formattedRating"/>
-                                                <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                                <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="content__price content__price-2">
                                             <div class="price__new">
-                                                    ${courseMostPopular.discountedPrice}
+                                                    <c:out value="${courseMostPopular.discountedPrice}"/>
                                             </div>
-                                            <div class="price__old">${courseMostPopular.originPrice}
+                                            <div class="price__old"><c:out value="${courseMostPopular.originPrice}"/>
                                             </div>
                                         </div>
                                         <br>
@@ -136,7 +136,7 @@
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
-                                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                        <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
@@ -144,32 +144,32 @@
                                                                               maxFractionDigits="1"
                                                                               minFractionDigits="1"
                                                                               var="formattedRating"/>
-                                                            <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                                            <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                                         </div>
                                                     </div>
-                                                    <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                                    <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
                                                     <div class="content__quick-info">
                                                         <div class="quick-info__level">
                                                             <div class="level__icon icon"><i
                                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
+                                                            <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
                                                         </div>
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">${c.studentCount}</div>
+                                                            <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
                                                                     class="text-medium fa-regular fa-clock"></i></div>
-                                                            <div class="time__text text text-medium">${c.durationText}</div>
+                                                            <div class="time__text text text-medium"><c:out value="${c.durationText}"/></div>
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new">${c.discountedPrice}
+                                                        <div class="price__new"><c:out value="${c.discountedPrice}"/>
 
                                                         </div>
-                                                        <div class="price__old">${c.originPrice}
+                                                        <div class="price__old"><c:out value="${c.originPrice}"/>
                                                         </div>
                                                     </div>
 
@@ -224,7 +224,7 @@
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
-                                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                        <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
@@ -232,31 +232,31 @@
                                                                               maxFractionDigits="1"
                                                                               minFractionDigits="1"
                                                                               var="formattedRating"/>
-                                                            <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                                            <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                                         </div>
                                                     </div>
-                                                    <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                                    <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
                                                     <div class="content__quick-info">
                                                         <div class="quick-info__level">
                                                             <div class="level__icon icon"><i
                                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
+                                                            <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
                                                         </div>
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">${c.studentCount}</div>
+                                                            <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
                                                                     class="text-medium fa-regular fa-clock"></i></div>
-                                                            <div class="time__text text text-medium">${c.durationText}</div>
+                                                            <div class="time__text text text-medium"><c:out value="${c.durationText}"/></div>
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new">${c.discountedPrice}
+                                                        <div class="price__new"><c:out value="${c.discountedPrice}"/>
                                                         </div>
-                                                        <div class="price__old">${c.originPrice}
+                                                        <div class="price__old"><c:out value="${c.originPrice}"/>
 
                                                         </div>
                                                     </div>
@@ -311,7 +311,7 @@
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
-                                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                        <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
                                                         <div class="content__rate content__rate-2">
                                                             <div class="rate__icon"><i
                                                                     class="text-medium fa-regular fa-star"></i></div>
@@ -319,31 +319,31 @@
                                                                               maxFractionDigits="1"
                                                                               minFractionDigits="1"
                                                                               var="formattedRating"/>
-                                                            <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                                            <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                                         </div>
                                                     </div>
-                                                    <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                                    <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
                                                     <div class="content__quick-info">
                                                         <div class="quick-info__level">
                                                             <div class="level__icon icon"><i
                                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
+                                                            <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
                                                         </div>
                                                         <div class="quick-info__users">
                                                             <div class="users__icon icon"><i
                                                                     class="text-medium fa-solid fa-users"></i></div>
-                                                            <div class="users__text text-medium">${c.studentCount}</div>
+                                                            <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
                                                         </div>
                                                         <div class="quick-info__time">
                                                             <div class="time__icon icon"><i
                                                                     class="text-medium fa-regular fa-clock"></i></div>
-                                                            <div class="time__text text text-medium">${c.durationText}</div>
+                                                            <div class="time__text text text-medium"><c:out value="${c.durationText}"/></div>
                                                         </div>
                                                     </div>
                                                     <div class="content__price">
-                                                        <div class="price__new">${c.discountedPrice}
+                                                        <div class="price__new"><c:out value="${c.discountedPrice}"/>
                                                         </div>
-                                                        <div class="price__old">${c.originPrice}</div>
+                                                        <div class="price__old"><c:out value="${c.originPrice}"/></div>
                                                     </div>
                                                     <div class="hover-actions">
                                                         <c:choose>

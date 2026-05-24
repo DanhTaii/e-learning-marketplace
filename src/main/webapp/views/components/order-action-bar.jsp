@@ -4,7 +4,7 @@
 <div class="floating-action-bar" id="actionBar" style="display: none;">
     <div class="action-info">
         <span class="count-badge" id="selectedCount">0</span>
-        <span>Đã chọn ${param.label != null ? param.label : 'đơn hàng'}</span>
+        <span>Đã chọn <c:out value="${param.label != null ? param.label : 'đơn hàng'}"/></span>
 
         <div class="revenue-info">
             <i class="fa-solid fa-sack-dollar"></i>

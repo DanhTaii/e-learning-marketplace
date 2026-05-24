@@ -43,7 +43,7 @@
                                             Quản lý tất cả đơn hàng
                                         </span>
                                     <span class="header__count">
-                                            ${totalOrders} đơn hàng
+                                            <c:out value="${totalOrders}"/> đơn hàng
                                         </span>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                             <select name="courseId">
                                                 <option value="">Tất cả khóa học</option>
                                                 <c:forEach var="c" items="${listCourse}">
-                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
                                                 </c:forEach>
                                             </select>
                                         </div>

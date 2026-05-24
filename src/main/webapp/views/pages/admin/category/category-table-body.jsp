@@ -9,11 +9,11 @@
             <tr>
                 <td><input type="checkbox" class="category-checkbox item-checkbox" value="${cate.id}"></td>
 
-                <td>${cate.name}</td>
+                <td><c:out value="${cate.name}"/></td>
 
-                <td>${cate.slug}</td>
+                <td><c:out value="${cate.slug}"/></td>
 
-                <td>${cate.parentId}</td>
+                <td><c:out value="${cate.parentId}"/></td>
 
                 <td>
                     <fmt:formatDate value="${cate.createdAt}" pattern="dd/MM/yyyy"/>

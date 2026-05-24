@@ -10,12 +10,12 @@
                 <td><input type="checkbox" class="category-checkbox item-checkbox" value="${user.id}"></td>
                 <td>
                     <div class="title">
-                            ${empty user.username ? "Chưa cập nhật" : user.username}
+                            <c:out value="${empty user.username ? 'Chưa cập nhật' : user.username}"/>
                     </div>
                 </td>
                 <td>
                     <div class="course-row__font-content">
-                            ${user.email}
+                            <c:out value="${user.email}"/>
                     </div>
                 </td>
                 <td>

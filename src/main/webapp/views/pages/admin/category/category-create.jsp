@@ -41,7 +41,7 @@
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            ${(not empty category and category.id > 0) ? 'Cập nhật danh mục' : 'Tạo mới danh mục'}
+                            <c:out value="${(not empty category and category.id > 0) ? 'Cập nhật danh mục' : 'Tạo mới danh mục'}"/>
                         </h2>
                         <a href="admin/categories" class="btn-back">
                             <i class="fa-solid fa-backward-step"></i> Trở về
@@ -61,7 +61,7 @@
                                                value="${not empty category.name ? category.name : param.nameCategory}"
                                                placeholder="Nhập tiêu đề..." minlength="3" maxlength="255" required>
                                         <span class="error-client" id="error_categoryTitle">
-                                            ${errors.nameCategory}
+                                            <c:out value="${errors.nameCategory}"/>
                                         </span>
                                     </div>
                                     <div class="form-group flex-1">
@@ -69,7 +69,7 @@
                                         <input type="number" name="parentId" class="input-modern" id="parentId"
                                                value="${category != null ? category.parentId : ''}"
                                                placeholder="Ví dụ: 0" min="0" required>
-                                        <span class="error-client" id="error_parentId">${errors.parentId}</span>
+                                        <span class="error-client" id="error_parentId"><c:out value="${errors.parentId}"/></span>
                                     </div>
                                 </div>
 
@@ -79,7 +79,7 @@
                                         <input type="text" name="slug" class="input-modern" id="categorySlug"
                                                value="${not empty category.slug ? category.slug : param.slug}"
                                                placeholder="Nhập tên slug..." minlength="3" maxlength="255" required>
-                                        <span class="error-client" id="error_slug">${errors.slug}</span>
+                                        <span class="error-client" id="error_slug"><c:out value="${errors.slug}"/></span>
                                     </div>
                                 </div>
 
@@ -97,7 +97,7 @@
                                             Hoạt động
                                         </option>
                                     </select>
-                                    <span class="error-client" id="error_status">${errors.status}</span>
+                                    <span class="error-client" id="error_status"><c:out value="${errors.status}"/></span>
                                 </div>
 
                                 <c:if test="${category != null and category.id > 0}">
@@ -124,7 +124,7 @@
 
                                         <button type="submit" class="btn-submit-modern w-100">
                                             <i class="fa-solid fa-floppy-disk"></i>
-                                            ${(not empty category and category.id > 0) ? 'Cập nhật' : 'Thêm danh mục'}
+                                            <c:out value="${(not empty category and category.id > 0) ? 'Cập nhật' : 'Thêm danh mục'}"/>
                                         </button>
                                     </div>
 

@@ -39,7 +39,7 @@
                             <div class="form__span">
                                 <span class="span__text text-medium">
                                     Chúng tôi đã gửi mã đặt lại đến
-                                    <strong class="text-medium">${sessionScope.resetEmail}</strong>,
+                                    <strong class="text-medium"><c:out value="${sessionScope.resetEmail}"/></strong>,
                                     hãy nhập mã gồm 5 ký tự được đề cập trong email!
                                 </span>
                             </div>
@@ -47,7 +47,7 @@
                             <!-- Hiển thị lỗi nếu có -->
                             <c:if test="${not empty requestScope.error}">
                                 <div class="error-message text-big">
-                                        ${requestScope.error}
+                                        <c:out value="${requestScope.error}"/>
                                 </div>
                             </c:if>
 

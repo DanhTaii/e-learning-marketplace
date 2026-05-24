@@ -94,7 +94,7 @@
                                     <label class="label-style">
                                         Nội dung yêu cầu
                                     </label>
-                                    <textarea class="input-modern readonly-field" rows="8" readonly>${contact.message}
+                                    <textarea class="input-modern readonly-field" rows="8" readonly><c:out value="${contact.message}"/>
                                     </textarea>
                                 </div>
 
@@ -125,7 +125,7 @@
                                     <textarea name="adminReply"
                                               class="input-modern"
                                               rows="6"
-                                              placeholder="Nhập phản hồi cho người dùng...">${contact.adminReply}</textarea>
+                                              placeholder="Nhập phản hồi cho người dùng..."><c:out value="${contact.adminReply}"/></textarea>
                                 </div>
 
                                 <c:if test="${contact != null and contact.id > 0}">

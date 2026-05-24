@@ -56,7 +56,7 @@
 
                                 <div class="archive-summary-card">
                                     <div class="summary-label">TỔNG LƯU TRỮ</div>
-                                    <div class="summary-value">${totalArchived != null ? totalArchived : 128}</div>
+                                    <div class="summary-value"><c:out value="${totalArchived != null ? totalArchived : 128}"/></div>
                                     <div class="summary-footer">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
                                     </div>
@@ -100,7 +100,7 @@
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
                                                     <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

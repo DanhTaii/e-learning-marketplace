@@ -50,7 +50,7 @@
                                                 Quản lý tất cả chứng chỉ
                                         </span>
                                         <span class="header__count">
-                                                ${totalCertificates} chứng chỉ
+                                                <c:out value="${totalCertificates}"/> chứng chỉ
                                         </span>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
                                                     <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

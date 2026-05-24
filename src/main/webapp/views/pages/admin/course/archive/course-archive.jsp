@@ -56,7 +56,7 @@
 
                                 <div class="archive-summary-card">
                                     <div class="summary-label">TỔNG LƯU TRỮ</div>
-                                    <div class="summary-value">${totalArchived != null ? totalArchived : 0}</div>
+                                    <div class="summary-value"><c:out value="${totalArchived != null ? totalArchived : 0}"/></div>
                                     <div class="summary-footer">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
                                     </div>
@@ -100,7 +100,7 @@
                                                 <select name="categoryId">
                                                     <option value="">Tất cả danh mục</option>
                                                     <c:forEach var="c" items="${listCategories}">
-                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}>${c.name}</option>
+                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}><c:out value="${c.name}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

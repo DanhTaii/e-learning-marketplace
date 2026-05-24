@@ -59,13 +59,13 @@
 
                             <div class="add-to-fix-1">
 <%--                                <span class="add-to-fix-2"> <%= error %> </span>--%>
-                                    <span class="add-to-fix-2"> ${error} </span>
+                                    <span class="add-to-fix-2"> <c:out value="${error}"/> </span>
                             </div>
                             <div class="form__input input-1">
                                 <input class="input-text text-big" placeholder="Nhập email của bạn"
                                        id='login_email' name="email"
                                        value="${param.email}">
-                                <span id="error_email" class="error-client">${errors.email}</span>
+                                <span id="error_email" class="error-client"><c:out value="${errors.email}"/></span>
                             </div>
 
                             <div class="form__input input-2">
@@ -77,7 +77,7 @@
                                     <i class="fa-regular fa-eye" id="togglePassword"></i>
                                 </div>
 
-                                <span id="error_pass" class="error-client">${errors.password}</span>
+                                <span id="error_pass" class="error-client"><c:out value="${errors.password}"/></span>
                             </div>
                             <div class="form__sign-in-option">
                                 <div class="sign-in-option-1">

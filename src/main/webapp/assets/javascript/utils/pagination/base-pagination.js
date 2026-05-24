@@ -67,7 +67,7 @@ function renderPagination(pageResponse, onPageChange) {
     const infoText = document.getElementById('pagination-info');
     if (infoText) {
         infoText.textContent =
-            `Trang ${current}/${total} - Tổng ${pageResponse.totalElement || 0} bản ghi`;
+            `Trang ${current}/${total} - Tổng <c:out value="${pageResponse.totalElement || 0}"/> bản ghi`;
     }
 }
 

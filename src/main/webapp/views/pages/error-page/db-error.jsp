@@ -27,8 +27,8 @@
                 <c:if test="${sessionScope.userSession.role == 'ADMIN'}">
                     <div style="background: #f8d7da; padding: 15px; border: 1px solid red;">
                         <h3>Thông tin kỹ thuật (Chỉ Admin thấy):</h3>
-                        <p><strong>Loại lỗi:</strong> ${pageContext.errorData.throwable}</p>
-                        <p><strong>Thông điệp:</strong> ${pageContext.errorData.throwable.message}</p>
+                        <p><strong>Loại lỗi:</strong> <c:out value="${pageContext.errorData.throwable}"/></p>
+                        <p><strong>Thông điệp:</strong> <c:out value="${pageContext.errorData.throwable.message}"/></p>
                         <p><strong>Vị trí lỗi:</strong></p>
                     </div>
                 </c:if>

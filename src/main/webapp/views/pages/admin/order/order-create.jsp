@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết đơn hàng #${order.orderCode}</title>
+    <title>Chi tiết đơn hàng #<c:out value="${order.orderCode}"/></title>
     <base href="${pageContext.request.contextPath}/">
 
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
@@ -41,23 +41,23 @@
                         <!-- Thông tin đơn hàng -->
                         <div class="order-info-section">
                             <div class="order-info-header">
-                                <h3 class="text-header">Mã đơn hàng: <span class="text-header">${order.orderCode}</span>
+                                <h3 class="text-header">Mã đơn hàng: <span class="text-header"><c:out value="${order.orderCode}"/></span>
                                 </h3>
                                 <span class="order-status ${order.status == 'PAID' ? 'status-paid' : 'status-pending'}">
-                                    ${order.status}
+                                    <c:out value="${order.status}"/>
                                 </span>
                             </div>
 
                             <div class="order-info-grid">
                                 <div class="info-item">
                                     <label>Khách hàng</label>
-                                                                        <p>${order.usernameSnapshot}</p>
+                                                                        <p><c:out value="${order.usernameSnapshot}"/></p>
                                 </div>
                                 <div class="info-item">
                                     <label>Phương thức thanh toán</label>
-                                                                        <p> ${order.paymentMethodId == 1 ? 'Momo' :
+                                                                        <p> <c:out value="${order.paymentMethodId == 1 ? 'Momo' :
                                                                                 (order.paymentMethodId == 2 ? 'VNPAY' :
-                                                                                        (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}</p>
+                                                                                        (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}"/></p>
                                 </div>
                                 <div class="info-item">
                                     <label>Thời gian tạo</label>
@@ -92,7 +92,7 @@
 
                         <!-- Bảng khóa học đã mua -->
                         <div class="order-items-section">
-                            <h3>Khóa học đã mua (${orderItems.size()} khóa)</h3>
+                            <h3>Khóa học đã mua (<c:out value="${orderItems.size()}"/> khóa)</h3>
                             <table class="order-items-table">
                                 <thead>
                                 <tr>
@@ -108,7 +108,7 @@
                                             <img src="${item.thumbnailUrl}" alt="${item.courseTitle}"
                                                  class="item-thumbnail">
                                         </td>
-                                        <td class="title-cell">${item.courseTitle}</td>
+                                        <td class="title-cell"><c:out value="${item.courseTitle}"/></td>
                                         <td class="price-cell">
                                             <fmt:formatNumber value="${item.priceAtPurchase}" groupingUsed="true"/> VNĐ
                                         </td>

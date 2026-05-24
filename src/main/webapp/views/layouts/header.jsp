@@ -33,7 +33,7 @@
                                 <ul class="browse__box-category-list list">
                                     <c:forEach var="c" items="${categories}">
                                         <a href="result-search/by-category?id=${c.id}" class="turn-page">
-                                            <li class="browse__box-category-list-item text-list-item text-li">${c.name}</li>
+                                            <li class="browse__box-category-list-item text-list-item text-li"><c:out value="${c.name}"/></li>
                                         </a>
                                     </c:forEach>
                                 </ul>
@@ -63,7 +63,7 @@
                                         <li class="browse__container-box-2-list-item">
                                             <div class="item-box">
                                                 <a href="result-search/by-tag?id=${t.id}"
-                                                   class="text-list-item text-list-item-2 text-li turn-page">${t.name}</a>
+                                                   class="text-list-item text-list-item-2 text-li turn-page"><c:out value="${t.name}"/></a>
                                             </div>
                                         </li>
                                     </c:forEach>
@@ -104,7 +104,7 @@
                         <div class="cart-icon-wrapper">
                             <i class="text-header fa-solid fa-cart-shopping"></i>
                             <span id="cart-count" class="cart-badge">
-                                    ${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}
+                                    <c:out value="${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}"/>
                             </span>
                         </div>
                     </a>
@@ -132,7 +132,7 @@
                                          onerror="this.onerror=null; this.src='${defaultImg}';">
                                 </div>
                                 <div class="user__profile-name">
-                                    <a href="" class="name-text text-header">${userSession.username}</a>
+                                    <a href="" class="name-text text-header"><c:out value="${userSession.username}"/></a>
                                 </div>
                                 <div class="user__profile-bio">
                                     <a href="" class="bio-text">Thêm tiểu sử</a>
@@ -186,7 +186,7 @@
                             <div class="cart-icon-wrapper">
                                 <i class="text-header fa-solid fa-cart-shopping"></i>
                                 <span id="cart-count" class="cart-badge">
-                                        ${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}
+                                        <c:out value="${not empty sessionScope.cart ? sessionScope.cart.totalQuantity : 0}"/>
                                 </span>
                             </div>
                         </a>

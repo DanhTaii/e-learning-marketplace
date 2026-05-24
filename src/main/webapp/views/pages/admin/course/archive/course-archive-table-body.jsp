@@ -8,13 +8,13 @@
             <tr>
                 <td><input type="checkbox" name="item-checkbox" class="item-checkbox" value="${item.id}"></td>
                 <td>
-                    <div class="content__title">${item.title}</div>
+                    <div class="content__title"><c:out value="${item.title}"/></div>
                 </td>
-                <td>${item.categoryName}</td>
+                <td><c:out value="${item.categoryName}"/></td>
                 <td><fmt:formatDate value="${item.deletedAt}"
                                     pattern="dd/MM/yyyy"/></td>
                 <td>
-                    <span class="badge badge-reason">${item.deleteReason}</span>
+                    <span class="badge badge-reason"><c:out value="${item.deleteReason}"/></span>
                 </td>
                 <td class="action-btns">
                     <button onclick="setupConfirmModal({action: 'restore', ids: ${item.id}, url: 'admin/course/action', isBulk: false})"

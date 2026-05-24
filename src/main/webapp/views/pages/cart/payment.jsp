@@ -52,7 +52,7 @@
 
                                             <div class="payment-item__content">
                                                 <img src="${method.iconUrl}" alt="${method.name}">
-                                                <span>${method.name}</span>
+                                                <span><c:out value="${method.name}"/></span>
 
                                                 <div class="select-badge"><i class="fa-solid fa-circle-check"></i></div>
                                             </div>
@@ -91,12 +91,12 @@
                                                         </div>
                                                         <div class="content__name">
 
-                                                            <p class="items__name ">${p.course.title}</p>
+                                                            <p class="items__name "><c:out value="${p.course.title}"/></p>
 
                                                         </div>
                                                     </div>
                                                     <div class="order-item__price">
-                                                    <span class="amount-discounted">${p.priceFormat} <i
+                                                    <span class="amount-discounted"><c:out value="${p.priceFormat}"/> <i
                                                             class="fa-solid fa-tag price-icon"></i></span>
 
                                                     </div>
@@ -126,7 +126,7 @@
 
                                         <div id="applied-voucher-info" class="applied-voucher-box" style="display: ${not empty sessionScope.appliedVoucher ? 'flex' : 'none'};">
                                             <div class="applied-voucher-box-left">
-                                                <span id="applied-voucher-code" class="applied-voucher-code">${sessionScope.appliedVoucher.code}</span>
+                                                <span id="applied-voucher-code" class="applied-voucher-code"><c:out value="${sessionScope.appliedVoucher.code}"/></span>
                                             </div>
                                             <a href="#" onclick="removeVoucher(event)" class="btn-remove-voucher">Bỏ chọn</a>
                                         </div>
@@ -135,22 +135,22 @@
                                     <div class="detail__price">
                                         <div class="price__original">
                                             <span class="price__original text-medium original">Giá gốc: </span>
-                                            <span class="price__original text-medium amount">${sessionScope.cart.formatedTotal}</span>
+                                            <span class="price__original text-medium amount"><c:out value="${sessionScope.cart.formatedTotal}"/></span>
                                         </div>
                                         <div class="price__discount">
                                             <span class="price__discount text-medium discount">Số tiền giảm: </span>
-                                            <span class="price__discount text-medium amount">- ${sessionScope.cart.formatedDiscountPriceTotal}</span>
+                                            <span class="price__discount text-medium amount">- <c:out value="${sessionScope.cart.formatedDiscountPriceTotal}"/></span>
 
                                         </div>
                                         <div id="voucher-discount-row" class="price__discount voucher-row" style="display: ${not empty summary.appliedVoucher ? 'flex' : 'none'};">
     <span id="voucher-discount-label" class="price__discount text-medium discount voucher-label">
-        <i class="fa-solid fa-ticket"></i> Voucher (${summary.appliedVoucher.code}):
+        <i class="fa-solid fa-ticket"></i> Voucher (<c:out value="${summary.appliedVoucher.code}"/>):
     </span>
-                                            <span id="voucher-discount-amount" class="price__discount text-medium amount voucher-amount"> - ${summary.discountStr} </span>
+                                            <span id="voucher-discount-amount" class="price__discount text-medium amount voucher-amount"> - <c:out value="${summary.discountStr}"/> </span>
                                         </div>
                                         <div class="price__total index">
-                                            <span class="price__total ">Tổng cộng (${sessionScope.cart.selectedQuantity}): </span>
-                                            <span id="display-final-price" class="price__total text-medium amount">${summary.totalToPayStr}</span>
+                                            <span class="price__total ">Tổng cộng (<c:out value="${sessionScope.cart.selectedQuantity}"/>): </span>
+                                            <span id="display-final-price" class="price__total text-medium amount"><c:out value="${summary.totalToPayStr}"/></span>
                                         </div>
 
 
@@ -224,11 +224,11 @@
                             <c:forEach var="v" items="${listVoucher}">
                                 <div class="voucher-item">
                                     <div class="voucher-icon">
-                                        <div class="voucher-title">${v.code}</div>
+                                        <div class="voucher-title"><c:out value="${v.code}"/></div>
                                     </div>
                                     <div class="voucher-info">
-                                        <div class="voucher-title">${v.title}</div>
-                                        <div class="voucher-desc">${v.description}</div>
+                                        <div class="voucher-title"><c:out value="${v.title}"/></div>
+                                        <div class="voucher-desc"><c:out value="${v.description}"/></div>
                                         <div class="voucher-exp">
                                             HSD: <fmt:formatDate value="${v.endDate}" pattern="dd-MM-yyyy" />
                                         </div>
@@ -239,7 +239,7 @@
                                                     <div class="voucher-usage-progress" style="width: ${(v.usedCount / v.usageLimit) * 100}%;"></div>
                                                 </div>
                                                 <div class="voucher-usage-text">
-                                                    <span>Đã dùng: ${v.usedCount} / ${v.usageLimit}</span>
+                                                    <span>Đã dùng: <c:out value="${v.usedCount}"/> / <c:out value="${v.usageLimit}"/></span>
                                                     <c:if test="${(v.usedCount / v.usageLimit) > 0.8}">
                                                         <span style="color: #dc3545; font-weight: 600;">Sắp hết!</span>
                                                     </c:if>

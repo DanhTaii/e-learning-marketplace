@@ -12,13 +12,13 @@
                            value="${cert.id}">
                 </td>
                 <td>
-                    <div class="cert-code content__title text-bold">${cert.certificateCode}</div>
+                    <div class="cert-code content__title text-bold"><c:out value="${cert.certificateCode}"/></div>
                 </td>
                 <td>
-                    <div class="user-name content__title">${cert.username}</div>
+                    <div class="user-name content__title"><c:out value="${cert.username}"/></div>
                 </td>
                 <td>
-                    <div class="content__title">${cert.courseTitle}</div>
+                    <div class="content__title"><c:out value="${cert.courseTitle}"/></div>
                 </td>
                 <td class="text-light">
                     <fmt:formatDate value="${cert.issueDate}" pattern="dd/MM/yyyy"/>

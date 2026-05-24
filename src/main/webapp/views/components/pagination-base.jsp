@@ -56,7 +56,7 @@
         <c:if test="${i > 1 && i < param.totalPages}">
             <li class="pagination-item ${i == param.currentPageNumber ? 'pagination-item--active' : ''}">
                 <a href="${basePaginationUrl}${hasQuery ? '&' : '?'}page=${i}"
-                   class="pagination-item__link">${i}</a>
+                   class="pagination-item__link"><c:out value="${i}"/></a>
             </li>
         </c:if>
     </c:forEach>
@@ -70,7 +70,7 @@
     <c:if test="${param.totalPages > 1}">
         <li class="pagination-item ${param.currentPageNumber == param.totalPages ? 'pagination-item--active' : ''}">
             <a href="${basePaginationUrl}${hasQuery ? '&' : '?'}page=${param.totalPages}"
-               class="pagination-item__link">${param.totalPages}</a>
+               class="pagination-item__link"><c:out value="${param.totalPages}"/></a>
         </li>
     </c:if>
 

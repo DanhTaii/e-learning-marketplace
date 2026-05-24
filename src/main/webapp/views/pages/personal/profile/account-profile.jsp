@@ -38,8 +38,8 @@
                             </div>
                         </div>
                         <div class="profile-block__info">
-                            <h2 class="profile-block__title">${userProfile.username}</h2>
-                            <p class="profile-block__email">${userProfile.email}</p>
+                            <h2 class="profile-block__title"><c:out value="${userProfile.username}"/></h2>
+                            <p class="profile-block__email"><c:out value="${userProfile.email}"/></p>
                         </div>
                     </div>
 

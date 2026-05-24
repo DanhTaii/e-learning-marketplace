@@ -12,7 +12,7 @@
                 <a href="admin/course/editor?id=${course.id}&lessonId=${l.id}"
                    class="lesson-item ${lesson != null && lesson.id == l.id ? 'active' : ''}">
                     <i class="fa-solid fa-play"></i>
-                        ${l.title}
+                        <c:out value="${l.title}"/>
                 </a>
             </c:forEach>
         </div>
@@ -48,7 +48,7 @@
                                value="${not empty param.nameLesson ? param.nameLesson : (lesson != null ? lesson.title : '')}"
                                placeholder="Nhập tiêu đề...">
                         <span class="error-client" id="error_lessonTitle">
-                            ${errors.nameLesson}
+                            <c:out value="${errors.nameLesson}"/>
                         </span>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                value="${lesson != null ? lesson.orderIndex : param.orderIndex}"
                                placeholder="Ví dụ: 1">
                         <span class="error-client" id="error_orderIndex">
-                            ${errors.orderIndex}
+                            <c:out value="${errors.orderIndex}"/>
                         </span>
                     </div>
                     <div class="form-group flex-1">
@@ -70,7 +70,7 @@
                                value="${not empty param.duration_minutesLesson ? param.duration_minutesLesson : (lesson != null ? lesson.durationMinutes : '')}"
                                placeholder="Phút">
                         <span class="error-client" id="error_durationMinutes">
-                            ${errors.durationMinutes}
+                            <c:out value="${errors.durationMinutes}"/>
                         </span>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             Hoạt động - Học viên có thể xem
                         </option>
                     </select>
-                    <span class="error-client" id="error_status">${errors.status}</span>
+                    <span class="error-client" id="error_status"><c:out value="${errors.status}"/></span>
                 </div>
 
                 <c:if test="${lesson != null and lesson.id > 0}">
@@ -119,7 +119,7 @@
                             <input type="text" id="videoUrlInput" name="urlVideo" class="input-modern"
                                    value="${not empty param.urlVideo ? param.urlVideo : (lesson != null ? lesson.videoUrl : '')}"
                                    placeholder="https://www.youtube.com/watch?v=...">
-                            <span class="error-client" id="error_videoUrl">${errors.urlVideo}</span>
+                            <span class="error-client" id="error_videoUrl"><c:out value="${errors.urlVideo}"/></span>
                         </div>
                     </div>
 
@@ -154,7 +154,7 @@
 
                     <button type="submit" class="btn-submit-modern w-100">
                         <i class="fa-solid fa-floppy-disk"></i>
-                        ${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}
+                        <c:out value="${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}"/>
                     </button>
                 </div>
 

@@ -49,7 +49,7 @@
                                             Quản lý tất cả người dùng
                                         </span>
                                         <span class="header__count">
-                                            ${listUsers.size()} người dùng
+                                            <c:out value="${listUsers.size()}"/> người dùng
                                         </span>
                                     </div>
                                 </div>

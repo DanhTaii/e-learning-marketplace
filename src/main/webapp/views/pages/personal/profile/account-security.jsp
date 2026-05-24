@@ -35,8 +35,8 @@
                         </div>
                     </div>
                     <div class="profile-block__info">
-                        <h2 class="profile-block__title">${user.username}</h2>
-                        <p class="profile-block__email">${user.email}</p>
+                        <h2 class="profile-block__title"><c:out value="${user.username}"/></h2>
+                        <p class="profile-block__email"><c:out value="${user.email}"/></p>
                     </div>
                 </div>
 

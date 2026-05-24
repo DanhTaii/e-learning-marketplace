@@ -50,12 +50,12 @@
                             <div class="cert-content">
                                 <p class="cert-intro">CHỨNG NHẬN RẰNG</p>
                                 <!-- Tên học viên lấy từ DB -->
-                                <h1 class="cert-student-name">${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName)  : 'Nguyễn Văn A'}</h1>
+                                <h1 class="cert-student-name"><c:out value="${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName)  : 'Nguyễn Văn A'}"/></h1>
 
                                 <p class="cert-desc">đã hoàn thành xuất sắc chương trình học và bài kiểm tra của khóa
                                     học</p>
                                 <!-- Tên khóa học -->
-                                <h2 class="cert-course-name">${not empty certificateDetail.courseTitle ? certificateDetail.courseTitle : 'Kỹ năng Giao tiếp Chuyên nghiệp'}</h2>
+                                <h2 class="cert-course-name"><c:out value="${not empty certificateDetail.courseTitle ? certificateDetail.courseTitle : 'Kỹ năng Giao tiếp Chuyên nghiệp'}"/></h2>
                                 <p class="cert-platform">Được chứng nhận thông qua nền tảng đào tạo E-Learning
                                     Workspace</p>
                             </div>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="footer-item align-right">
                                     <span class="footer-label">MÃ CHỨNG CHỈ</span>
-                                    <span class="footer-value">${certificateDetail.certificateCode}</span>
+                                    <span class="footer-value"><c:out value="${certificateDetail.certificateCode}"/></span>
                                 </div>
                             </div>
                         </div>
@@ -125,11 +125,11 @@
                     <ul class="cert-info-list">
                         <li>
                             <span class="info-label">Học viên</span>
-                            <span class="info-value bold">${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName) : 'Nguyễn Văn A'}</span>
+                            <span class="info-value bold"><c:out value="${not empty certificateDetail ? certificateDetail.firstName.concat(' ').concat(certificateDetail.lastName) : 'Nguyễn Văn A'}"/></span>
                         </li>
                         <li>
                             <span class="info-label">Thời lượng học</span>
-                            <span class="info-value">${certificateDetail.durationText}</span>
+                            <span class="info-value"><c:out value="${certificateDetail.durationText}"/></span>
                         </li>
                     </ul>
                 </div>

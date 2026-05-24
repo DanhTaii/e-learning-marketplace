@@ -43,17 +43,17 @@
                                             <div class="content__author-name text-medium">Quản trị viên</div>
                                             <div class="content__rate">
                                                 <div class="rate__icon"><i class="text-medium fa-regular fa-star"></i></div>
-<%--                                                <div class="text-medium rate__number">${e.rating}</div>--%>
+<%--                                                <div class="text-medium rate__number"><c:out value="${e.rating}"/></div>--%>
                                                 <fmt:formatNumber value="${e.rating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
-                                                <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                                <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                             </div>
                                         </div>
-                                        <div class="text-paragraph test-text"><p>${e.title}</p></div>
+                                        <div class="text-paragraph test-text"><p><c:out value="${e.title}"/></p></div>
                                         <div class="progress-display">
                                             <div class="progress-display__crossbar"></div>
                                             <div class="progress-display__percentage" style="width: ${e.percentCompleted}%"></div>
                                         </div>
-                                        <div class="progress__text">Đã hoàn thành ${e.percentCompleted}%</div>
+                                        <div class="progress__text">Đã hoàn thành <c:out value="${e.percentCompleted}"/>%</div>
                                     </div>
                                 </div>
                             </a>

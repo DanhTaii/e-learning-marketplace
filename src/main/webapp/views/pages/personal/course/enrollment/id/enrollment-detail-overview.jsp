@@ -14,7 +14,7 @@
 <div class="container__overview">
     <div class="container__title-video mt-4">
         <div class="title-video">
-            <span id="mainLessonTitle" class="text-3xl regular">${enrollmentDetail.title}</span>
+            <span id="mainLessonTitle" class="text-3xl regular"><c:out value="${enrollmentDetail.title}"/></span>
         </div>
     </div>
 
@@ -28,17 +28,17 @@
                 </div>
             </div>
             <div class="number-rating">
-                <span class="text-sm light">${enrollmentDetail.reviewCount} đánh giá</span></div>
+                <span class="text-sm light"><c:out value="${enrollmentDetail.reviewCount}"/> đánh giá</span></div>
         </div>
 
         <div class="sub-header__student-count sub__header">
-            <div class="count"><span class="text-xl">${enrollmentDetail.studentCount}</span></div>
+            <div class="count"><span class="text-xl"><c:out value="${enrollmentDetail.studentCount}"/></span></div>
 
             <div class="student"><span class="text-sm light">Học viên</span></div>
 
         </div>
         <div class="sub-header__duration sub__header">
-            <div class="time"><span class="text-xl">${enrollmentDetail.durationText}</span></div>
+            <div class="time"><span class="text-xl"><c:out value="${enrollmentDetail.durationText}"/></span></div>
 
             <div class="total"><span class="text-sm light">Tổng cộng</span></div>
 
@@ -70,7 +70,7 @@
 
             <div class="info-content">
                 <div class="text-lg description__content">
-                    ${enrollmentDetail.description}
+                    <c:out value="${enrollmentDetail.description}"/>
                 </div>
             </div>
         </div>

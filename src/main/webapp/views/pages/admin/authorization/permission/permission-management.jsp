@@ -96,7 +96,7 @@
                                                     <c:forEach var="group" items="${listPermissionGroups}">
                                                         <option value="${group}"
                                                             ${param.groupName == group ? 'selected' : ''}>
-                                                                ${group}
+                                                                <c:out value="${group}"/>
                                                         </option>
                                                     </c:forEach>
 

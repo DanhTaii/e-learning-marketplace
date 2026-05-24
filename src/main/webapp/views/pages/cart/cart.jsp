@@ -35,7 +35,7 @@
                         <div class="shopping-cart">
                             <span class="shopping-cart__title text-big-title h1">Giỏ hàng</span>
                             <span class="shopping-cart__summary summary text-paragraph ">
-                            <span class="text-2xl" id="display-total-selected-qty">Sản phẩm (${sessionScope.cart.totalQuantity})</span>
+                            <span class="text-2xl" id="display-total-selected-qty">Sản phẩm (<c:out value="${sessionScope.cart.totalQuantity}"/>)</span>
                         </span>
 
                             <c:choose>
@@ -79,22 +79,22 @@
                                                                     </div>
                                                                     <div class="detail__info">
                                                                         <div class="info__name-group">
-                                                                            <span class="name__title text-paragraph"><p>${p.course.title}</p></span>
+                                                                            <span class="name__title text-paragraph"><p><c:out value="${p.course.title}"/></p></span>
                                                                         </div>
                                                                         <div class="info__rating-group">
                                                                             <span class="rating-group__tags tags text-mini">Bestseller</span>
-                                                                            <span class="rating-group__rating rating text-mini">${p.course.avgRating}
+                                                                            <span class="rating-group__rating rating text-mini"><c:out value="${p.course.avgRating}"/>
                                                                             <i class="fa-solid fa-star"
                                                                                ></i>
                                                                         </span>
                                                                             <span class="rating-group__rating-count ratings-count text-mini">
-                                                                            (${p.course.studentCount} rating)
+                                                                            (<c:out value="${p.course.studentCount}"/> rating)
                                                                         </span>
                                                                         </div>
                                                                         <div class="info__stats course-stats">
-                                                                            <span class="stats__hours text-mini">${p.course.durationText}</span>
-                                                                            <span class="stats__lecture text-mini">• ${p.course.lessonCount} Bài giảng</span>
-                                                                            <span class="stats__level text-mini">• ${p.course.level.vietnameseName}</span>
+                                                                            <span class="stats__hours text-mini"><c:out value="${p.course.durationText}"/></span>
+                                                                            <span class="stats__lecture text-mini">• <c:out value="${p.course.lessonCount}"/> Bài giảng</span>
+                                                                            <span class="stats__level text-mini">• <c:out value="${p.course.level.vietnameseName}"/></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -110,13 +110,13 @@
                                                                 </div>
                                                                 <div class="cart-items__price items-price">
                                                                     <div><span class="price-discounted">
-                                                                    ${p.course.discountedPrice}
+                                                                    <c:out value="${p.course.discountedPrice}"/>
 
                                                                     <i class="fa-solid fa-tag price-icon"
                                                                        ></i>
                                                                 </span></div>
                                                                     <div><span class="price-origin">
-                                                                   ${p.course.originPrice}
+                                                                   <c:out value="${p.course.originPrice}"/>
                                                                 </span></div>
                                                                 </div>
                                                             </div>
@@ -151,7 +151,7 @@
                                                onchange="handleSelectAll(this)">
                                     </div>
                                     <label for="checkAll" class="choose text-medium">
-                                        Chọn tất cả (${sessionScope.cart.totalQuantity})
+                                        Chọn tất cả (<c:out value="${sessionScope.cart.totalQuantity}"/>)
                                     </label>
                                     <a href="#" onclick="removeSelectedAjax(event)" class="text-medium remove">Xóa</a>
                                     <a href="#" onclick="wishlistSelectedAjax(event)" class="text-medium wishlisted"
@@ -182,14 +182,14 @@
                                         <div class="total__label">
                                             <div class="label">
                                                 <div class="label__name">
-                                                    <span class="text-medium " id="display-selected-qty">Tổng cộng (${sessionScope.cart.selectedQuantity}):</span>
+                                                    <span class="text-medium " id="display-selected-qty">Tổng cộng (<c:out value="${sessionScope.cart.selectedQuantity}"/>):</span>
                                                 </div>
                                                 <div class="charge-note">Chưa tính phí</div>
                                             </div>
                                             <div class="total__price">
-                                                <span class="price-discounted1" id="display-final-price">${sessionScope.cart.formatedFinalPriceTotal}</span>
+                                                <span class="price-discounted1" id="display-final-price"><c:out value="${sessionScope.cart.formatedFinalPriceTotal}"/></span>
                                                 <span class="price-origin" id="display-total-price">
-                                                        ${sessionScope.cart.formatedTotal}</span>
+                                                        <c:out value="${sessionScope.cart.formatedTotal}"/></span>
                                             </div>
                                         </div>
                                     </div>
@@ -227,37 +227,37 @@
                                             </div>
                                             <div class="small-advertisement__content">
                                                 <div class="content__top">
-                                                    <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                    <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
                                                     <div class="content__rate content__rate-2">
                                                         <div class="rate__icon"><i
                                                                 class="text-medium fa-regular fa-star"></i></div>
-                                                        <div class="text-medium rate__number">${c.avgRating}</div>
+                                                        <div class="text-medium rate__number"><c:out value="${c.avgRating}"/></div>
                                                     </div>
                                                 </div>
-                                                <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                                <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
                                                 <div class="content__quick-info">
                                                     <div class="quick-info__level">
                                                         <div class="level__icon icon"><i
                                                                 class="text-medium fa-solid fa-signal"></i></div>
-                                                        <div class="level__text text-medium">${c.level.vietnameseName}</div>
+                                                        <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
                                                     </div>
                                                     <div class="quick-info__users">
                                                         <div class="users__icon icon"><i
                                                                 class="text-medium fa-solid fa-users"></i></div>
-                                                        <div class="users__text text-medium">${c.studentCount}</div>
+                                                        <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
                                                     </div>
                                                     <div class="quick-info__time">
                                                         <div class="time__icon icon"><i
                                                                 class="text-medium fa-regular fa-clock"></i></div>
-                                                        <div class="time__text text-medium">${c.durationText}</div>
+                                                        <div class="time__text text-medium"><c:out value="${c.durationText}"/></div>
                                                     </div>
                                                 </div>
                                                 <div class="content__price">
                                                     <div class="price__new">
-                                                       ${c.discountedPrice}
+                                                       <c:out value="${c.discountedPrice}"/>
                                                     </div>
                                                     <div class="price__old">
-                                                       ${c.originPrice}
+                                                       <c:out value="${c.originPrice}"/>
                                                     </div>
                                                 </div>
                                                 <div class="hover-actions">
@@ -319,11 +319,11 @@
                             <c:forEach var="v" items="${listVoucher}">
                                 <div class="voucher-item">
                                     <div class="voucher-icon">
-                                        <div class="voucher-title">${v.code}</div>
+                                        <div class="voucher-title"><c:out value="${v.code}"/></div>
                                     </div>
                                     <div class="voucher-info">
-                                        <div class="voucher-title">${v.title}</div>
-                                        <div class="voucher-desc">${v.description}</div>
+                                        <div class="voucher-title"><c:out value="${v.title}"/></div>
+                                        <div class="voucher-desc"><c:out value="${v.description}"/></div>
                                         <div class="voucher-exp">
                                             HSD: <fmt:formatDate value="${v.endDate}" pattern="dd-MM-yyyy" />
                                         </div>
@@ -334,7 +334,7 @@
                                                     <div class="voucher-usage-progress" style="width: ${(v.usedCount / v.usageLimit) * 100}%;"></div>
                                                 </div>
                                                 <div class="voucher-usage-text">
-                                                    <span>Đã dùng: ${v.usedCount} / ${v.usageLimit}</span>
+                                                    <span>Đã dùng: <c:out value="${v.usedCount}"/> / <c:out value="${v.usageLimit}"/></span>
                                                     <c:if test="${(v.usedCount / v.usageLimit) > 0.8}">
                                                         <span style="color: #dc3545; font-weight: 600;">Sắp hết!</span>
                                                     </c:if>

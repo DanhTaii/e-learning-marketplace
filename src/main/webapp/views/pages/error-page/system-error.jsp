@@ -33,7 +33,7 @@
                 <%-- Sửa lại dòng bị lỗi ở đây --%>
                 <p class="error-msg"><strong>Loại lỗi:</strong> <%= exception != null ? exception.getClass().getName() : "N/A" %>
                 </p>
-                <p class="error-msg"><strong>Thông điệp:</strong> ${pageContext.errorData.throwable.message}</p>
+                <p class="error-msg"><strong>Thông điệp:</strong> <c:out value="${pageContext.errorData.throwable.message}"/></p>
 
             </div>
             </c:if>

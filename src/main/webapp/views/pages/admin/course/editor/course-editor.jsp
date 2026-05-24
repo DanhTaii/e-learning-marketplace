@@ -42,7 +42,7 @@
 <%--                        </div>--%>
 
                         <h2 class="course-title">
-                            ${course != null ? course.title : "Tạo mới khóa học"}
+                            <c:out value="${course != null ? course.title : 'Tạo mới khóa học'}"/>
                         </h2>
                     </div>
 

@@ -69,7 +69,7 @@
 
         <div class="admin-profile-box">
             <div class="profile-info">
-                <span class="profile-name">${sessionScope.userSession.username}
+                <span class="profile-name"><c:out value="${sessionScope.userSession.username}"/>
 <%--                    ${sessionScope.userSession.firstName}--%>
                 </span>
                 <span class="profile-role">Quản trị viên</span>
