@@ -43,11 +43,14 @@ function handleStateAfterRemoval(data) {
     }
 }
 
-function executeSingleAction(event, url, element,successMessage) {
+function executeSingleAction(event, url, element, successMessage) {
     event.preventDefault();
     fetch(url, {
         method: 'GET',
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': getCsrfToken()
+        }
     })
         .then(response => response.json())
         .then(data => {
@@ -60,11 +63,16 @@ function executeSingleAction(event, url, element,successMessage) {
         .catch(error => {
             console.error('Lỗi khi thao tác:', error);
             // Hiện toast thông báo lỗi nếu có
-            toast({title: 'Thất bại!', message: 'Vui lòng đăng nhập để sử dụng tính năng này', type: 'error', duration: 3000});
+            toast({
+                title: 'Thất bại!',
+                message: 'Vui lòng đăng nhập để sử dụng tính năng này',
+                type: 'error',
+                duration: 3000
+            });
         });
 }
 
-function executeBulkAction(event, url, errorMessage,successMessage) {
+function executeBulkAction(event, url, errorMessage, successMessage) {
     event.preventDefault();
     const checkedItems = document.querySelectorAll('input[name="itemSelected"]:checked');
 
@@ -75,7 +83,7 @@ function executeBulkAction(event, url, errorMessage,successMessage) {
 
     fetch(url, {
         method: 'GET',
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
+        headers: {'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-Token': getCsrfToken()}
     })
         .then(response => response.json())
         .then(data => {
@@ -90,7 +98,12 @@ function executeBulkAction(event, url, errorMessage,successMessage) {
         })
         .catch(error => {
             console.error('Lỗi thao tác hàng loạt:', error);
-            toast({title: 'Thất bại!', message: 'Vui lòng đăng nhập để dùng tính năng này ', type: 'error', duration: 3000});
+            toast({
+                title: 'Thất bại!',
+                message: 'Vui lòng đăng nhập để dùng tính năng này ',
+                type: 'error',
+                duration: 3000
+            });
         });
 }
 
@@ -99,7 +112,7 @@ function updateSelectionAjax() {
 
     fetch('cart-manager', {
         method: 'POST',
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        headers: {'X-Requested-With': 'XMLHttpRequest','X-CSRF-Token': getCsrfToken()},
         body: new URLSearchParams(new FormData(form))
     })
         .then(response => response.json())
@@ -114,7 +127,7 @@ function handleSelectAll(checkbox) {
 
     fetch('cart-manager?action=selectAll&status=' + isChecked, {
         method: 'GET',
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
+        headers: {'X-Requested-With': 'XMLHttpRequest','X-CSRF-Token': getCsrfToken()}
     })
         .then(response => response.json())
         .then(data => {

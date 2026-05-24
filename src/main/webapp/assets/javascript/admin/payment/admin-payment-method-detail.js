@@ -1,7 +1,11 @@
 function showPaymentMethodDetail(id) {
     console.log("Đã bấm nút Sửa cho ID:", id);
 
-    fetch('admin/payment-methods/detail?id=' + id)
+    fetch('admin/payment-methods/detail?id=' + id, {
+        headers: {
+            'X-CSRF-Token': getCsrfToken()
+        }
+    })
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json();

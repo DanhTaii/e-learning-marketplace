@@ -104,7 +104,9 @@ function getPaginationModel(current, total) {
 
 function createPaginationLoader(url, renderData) {
     return function load(page = 1, size = 10) {
-        fetch(`${url}?page=${page}&size=${size}`)
+        fetch(`${url}?page=${page}&size=${size}`, {
+            headers: {'X-CSRF-Token': getCsrfToken()}
+        })
             .then(res => res.json())
             .then(data => {
                 renderData(data.data); // render list

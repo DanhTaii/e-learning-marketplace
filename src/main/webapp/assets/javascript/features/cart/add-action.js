@@ -7,7 +7,8 @@ function addToWishlist(e, btn, courseId) {
     fetch('personal/my-wishlist?courseId=' + courseId, {
         method: 'POST',
         headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': getCsrfToken()
         },
     })
         .then(response => {
@@ -41,7 +42,8 @@ function addToCart(e, courseId) {
     fetch('add-cart?id=' + courseId, {
         method: 'GET',
         headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': getCsrfToken()
         }
     })
         .then(response => {

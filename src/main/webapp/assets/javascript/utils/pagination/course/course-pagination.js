@@ -1,7 +1,11 @@
 function loadAdminCourses(page = 1) {
     const params = buildFilterParams(page);
 
-    fetch(`api/admin/courses?${params}`)
+    fetch(`api/admin/courses?${params}`, {
+        headers: {
+            'X-CSRF-Token': getCsrfToken()
+        }
+    })
         .then(res => {
             if (!res.ok) throw new Error("Network response was not ok");
             return res.json();

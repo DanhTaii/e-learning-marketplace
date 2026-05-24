@@ -49,6 +49,7 @@ function initSaveNoteButton({btnSaveNote, noteInput, cloudinaryPlayer}) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-Token': getCsrfToken()
             },
             body: `lessonId=${currentLessonId}&noteTime=${noteTime}&content=${encodeURIComponent(content)}`
         })
@@ -82,7 +83,11 @@ function loadLessonNotes(lessonId) {
     const container = document.getElementById('notes-list-container');
     const emptyState = document.getElementById('empty-note-state');
 
-    fetch(`personal/my-course/note?lessonId=${lessonId}`)
+    fetch(`personal/my-course/note?lessonId=${lessonId}`, {
+        headers: {
+            'X-CSRF-Token': getCsrfToken()
+        }
+    })
         .then(response => {
             return response.json()
         })
@@ -256,7 +261,8 @@ async function updateNote(noteId, newContent) {
         const response = await fetch('personal/my-course/note/action', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-Token': getCsrfToken()
             },
             // Phải mã hóa content không thì sẽ lỗi
             body: `action=update&noteId=${noteId}&content=${encodeURIComponent(newContent)}`
