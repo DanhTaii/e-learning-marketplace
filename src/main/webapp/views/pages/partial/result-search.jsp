@@ -6,6 +6,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -32,13 +33,13 @@
             <div class="grid__row-2">
                 <div class="container__title text-big-title">
                     <c:if test="${not empty cate}">
-                        ${cate.name}
+                        <c:out value="${cate.name}"/>
                     </c:if>
                     <c:if test="${empty cate and not empty search}">
-                        Kết quả cho từ khóa: "${search}"
+                        Kết quả cho từ khóa: "<c:out value="${search}"/>"
                     </c:if>
                     <c:if test="${empty cate and empty search and not empty tag}">
-                        Tag: ${tag.name}
+                        Tag: <c:out value="${tag.name}"/>
                     </c:if>
                     <c:if test="${empty cate and empty search and empty tag}">
                         Tất cả khóa học
@@ -482,36 +483,36 @@
                                         </div>
                                         <div class="small-advertisement__content">
                                             <div class="content__top">
-                                                <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                                <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
                                                 <div class="content__rate content__rate-2">
                                                     <div class="rate__icon"><i
                                                             class="text-medium fa-regular fa-star"></i></div>
                                                     <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
-                                                    <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                                    <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                                 </div>
                                             </div>
-                                            <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                            <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
                                             <div class="content__quick-info">
                                                 <div class="quick-info__level">
                                                     <div class="level__icon icon"><i
                                                             class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium">${c.level.vietnameseName}</div>
+                                                    <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
                                                 </div>
                                                 <div class="quick-info__users">
                                                     <div class="users__icon icon"><i
                                                             class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium">${c.studentCount}</div>
+                                                    <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
                                                 </div>
                                                 <div class="quick-info__time">
                                                     <div class="time__icon icon"><i
                                                             class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text text-medium">${c.durationText}</div>
+                                                    <div class="time__text text text-medium"><c:out value="${c.durationText}"/></div>
                                                 </div>
                                             </div>
                                             <div class="content__price">
-                                                <div class="price__new">${c.discountedPrice}
+                                                <div class="price__new"><c:out value="${c.discountedPrice}"/>
                                                 </div>
-                                                <div class="price__old">${c.originPrice}</div>
+                                                <div class="price__old"><c:out value="${c.originPrice}"/></div>
                                             </div>
 
                                             <div class="hover-actions">
@@ -595,7 +596,7 @@
                         <c:forEach var="i" begin="${currentPage - 2 < 1 ? 1 : currentPage - 2}" end="${currentPage + 2}">
                             <c:if test="${i > 1 && i < totalPages}">
                                 <li class="pagination-item ${i == currentPage ? 'pagination-item--active' : ''}">
-                                    <a href="${paginationUrl}&page=${i}" class="pagination-item__link">${i}</a>
+                                    <a href="${paginationUrl}&page=${i}" class="pagination-item__link"><c:out value="${i}"/></a>
                                 </li>
                             </c:if>
                         </c:forEach>
@@ -610,7 +611,7 @@
                         <!-- Trang cuối -->
                         <c:if test="${totalPages > 1}">
                             <li class="pagination-item ${currentPage == totalPages ? 'pagination-item--active' : ''}">
-                                <a href="${paginationUrl}&page=${totalPages}" class="pagination-item__link">${totalPages}</a>
+                                <a href="${paginationUrl}&page=${totalPages}" class="pagination-item__link"><c:out value="${totalPages}"/></a>
                             </li>
                         </c:if>
 
@@ -631,5 +632,6 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
     <jsp:include page="/views/components/toast.jsp"/>
 </div>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

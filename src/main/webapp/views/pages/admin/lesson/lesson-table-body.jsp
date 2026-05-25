@@ -15,13 +15,13 @@
                     <div class="lesson-info">
                         <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
                         <div class="lesson-text">
-                            <div class="content__title">${lesson.title}</div>
-                            <div class="content__sub-title">Chương ${lesson.orderIndex} • Bài ${lesson.orderIndex}</div>
+                            <div class="content__title"><c:out value="${lesson.title}"/></div>
+                            <div class="content__sub-title">Chương <c:out value="${lesson.orderIndex}"/> • Bài <c:out value="${lesson.orderIndex}"/></div>
                         </div>
                     </div>
                 </td>
                     <%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
-                <td class="text-bold">${lesson.durationMinutes}:00</td>
+                <td class="text-bold"><c:out value="${lesson.durationMinutes}"/>:00</td>
                 <td class="text-light">
                     <fmt:formatDate value="${lesson.createdAt}" pattern="dd/MM/yyyy"/>
                 </td>

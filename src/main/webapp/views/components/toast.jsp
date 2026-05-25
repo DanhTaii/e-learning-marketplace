@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -12,6 +13,7 @@
 
 <div id="toast"></div>
 
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script>
     window.flashError = '${sessionScope.flashError}';
     window.flashSuccess = '${sessionScope.flashSuccess}';
@@ -25,5 +27,4 @@
 <script src="assets/javascript/ui/notification.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/modal/modal.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/modal/modal-configs.js?v=<%=System.currentTimeMillis()%>"></script>
-
 </html>

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Course Achieve</title>
     <base href="${pageContext.request.contextPath}/">
@@ -55,7 +56,7 @@
 
                                 <div class="archive-summary-card">
                                     <div class="summary-label">TỔNG LƯU TRỮ</div>
-                                    <div class="summary-value">${totalArchived != null ? totalArchived : 0}</div>
+                                    <div class="summary-value"><c:out value="${totalArchived != null ? totalArchived : 0}"/></div>
                                     <div class="summary-footer">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
                                     </div>
@@ -99,7 +100,7 @@
                                                 <select name="categoryId">
                                                     <option value="">Tất cả danh mục</option>
                                                     <c:forEach var="c" items="${listCategories}">
-                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}>${c.name}</option>
+                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}><c:out value="${c.name}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -125,6 +126,7 @@
                                 </form>
 
                                 <form id="archiveBulkForm" method="POST" action="admin/courses/archive">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
@@ -149,10 +151,12 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/course/course-archive.js?v=<%=System.currentTimeMillis()%>"></script>
+
+</body>
 
 </html>

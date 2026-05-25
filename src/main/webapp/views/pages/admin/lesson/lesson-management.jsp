@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Lesson Management</title>
     <base href="${pageContext.request.contextPath}/">
@@ -48,7 +49,7 @@
                                                 Quản lý tất cả bài học
                                         </span>
                                         <span class="header__count">
-                                                ${totalLessons} bài học
+                                                <c:out value="${totalLessons}"/> bài học
                                         </span>
                                     </div>
                                 </div>
@@ -119,7 +120,7 @@
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
                                                     <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -149,6 +150,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
@@ -171,12 +173,13 @@
 </div>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
 <%-- Javascript --%>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/lesson/lesson-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 
 </html>

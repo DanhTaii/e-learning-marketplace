@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Kiểu thanh toán </title>
     <base href="${pageContext.request.contextPath}/">
@@ -36,7 +37,7 @@
                         <div class="container-2__body">
 
 
-                            <div class="title__admin">Tất cả phương thức thanh toán (${listPaymentMethods.size()})</div>
+                            <div class="title__admin">Tất cả phương thức thanh toán (<c:out value="${listPaymentMethods.size()}"/>)</div>
                             <div class="container-2__filter">
                                 <form action="admin/payment-methods/search"
                                       method="get" class="form">
@@ -80,12 +81,12 @@
                                         <tr>
                                             <td>
                                                 <div class="course-row__title title course-row__style-text">
-                                                        ${pm.name}
+                                                        <c:out value="${pm.name}"/>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="course-row__title title course-row__style-text">
-                                                        ${pm.code}
+                                                        <c:out value="${pm.code}"/>
                                                 </div>
                                             </td>
                                             <td>
@@ -133,7 +134,7 @@
                 <div id="payment-method-detail" class="modal modal__course-detail">
                     <div class="modal__course-content">
                         <form action="${pageContext.request.contextPath}/admin/payment-methods/update" method="post">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="course__header">
                                 <div class="course__title">
                                     <i class="fa-solid fa-credit-card"></i>
@@ -191,7 +192,7 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
-
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/payment/admin-payment-method-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

@@ -13,29 +13,29 @@
                            data-status="${order.status}"></td>
                 <td>
                     <div class="course-row__title title course-row__style-text">
-                            ${order.orderCode}
+                            <c:out value="${order.orderCode}"/>
                     </div>
                 </td>
                 <td>
                     <div class="course-row__font-content">
-                            ${order.usernameSnapshot}
+                            <c:out value="${order.usernameSnapshot}"/>
                     </div>
                 </td>
                 <td>
                     <div class="course-row__font-content">
-                            ${order.finalAmount}
+                            <c:out value="${order.finalAmount}"/>
                     </div>
                 </td>
                 <td>
                     <div class="course-row__font-content">
-                            ${order.paymentMethodId == 1 ? 'Momo' :
+                            <c:out value="${order.paymentMethodId == 1 ? 'Momo' :
                                     (order.paymentMethodId == 2 ? 'VNPAY' :
-                                            (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}
+                                            (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}"/>
                     </div>
                 </td>
                 <td>
                     <div class="course-row__font-content course-row__status ">
-                            ${order.status}
+                            <c:out value="${order.status}"/>
                     </div>
                 </td>
                 <td>

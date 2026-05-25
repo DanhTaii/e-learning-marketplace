@@ -4,7 +4,7 @@ function selectVoucher(code, isReload = false) {
 
     fetch('apply-voucher', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRF-Token': getCsrfToken()},
         body: 'code=' + encodeURIComponent(code)
     })
         .then(res => res.json())
@@ -30,12 +30,17 @@ function selectVoucher(code, isReload = false) {
                 }
 
                 const finalPriceEl = document.getElementById('display-final-price');
-                if(finalPriceEl) {
+                if (finalPriceEl) {
                     finalPriceEl.innerText = data.finalTotalFormatted;
                 }
 
                 if (!isReload) {
-                    toast({title: 'Áp dụng thành công!', message: 'Mã giảm giá đã được áp dụng', type: 'success', duration: 3000});
+                    toast({
+                        title: 'Áp dụng thành công!',
+                        message: 'Mã giảm giá đã được áp dụng',
+                        type: 'success',
+                        duration: 3000
+                    });
                 }
             } else {
                 if (!isReload) {
@@ -49,16 +54,21 @@ function applyManualVoucher() {
     const codeInput = document.getElementById('manualVoucherCode');
     const code = codeInput ? codeInput.value.trim() : '';
 
-    if(code !== "") {
+    if (code !== "") {
         selectVoucher(code);
     }
 }
 
 // Khi bấm nút "Bỏ chọn" mã
 function removeVoucher(e) {
-    if(e) e.preventDefault();
+    if (e) e.preventDefault();
 
-    fetch('remove-voucher', { method: 'POST' })
+    fetch('remove-voucher', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-Token': getCsrfToken()
+        }
+    })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
@@ -80,7 +90,8 @@ function removeVoucher(e) {
             }
         });
 }
-window.addEventListener('pageshow', function(event) {
+
+window.addEventListener('pageshow', function (event) {
     const hiddenInput = document.getElementById('savedVoucherCode');
 
     if (hiddenInput && hiddenInput.value.trim() !== '') {

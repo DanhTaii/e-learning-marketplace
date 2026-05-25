@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`admin/tags?${queryString}`, {
             method: 'GET',
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': getCsrfToken()
             }
         })
             .then(response => {

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Certificate Management</title>
     <base href="${pageContext.request.contextPath}/">
@@ -49,7 +50,7 @@
                                                 Quản lý tất cả chứng chỉ
                                         </span>
                                         <span class="header__count">
-                                                ${totalCertificates} chứng chỉ
+                                                <c:out value="${totalCertificates}"/> chứng chỉ
                                         </span>
                                     </div>
                                 </div>
@@ -109,7 +110,7 @@
                                                 <select name="courseId">
                                                     <option value="">Tất cả khóa học</option>
                                                     <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>${c.title}</option>
+                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -128,6 +129,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/certificates">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
                                     <input id="currentQueryId" type="hidden" name="currentQuery"
                                            value="${pageContext.request.queryString}">
@@ -146,12 +148,15 @@
 </div>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
+
 <%-- Javascript --%>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/certificate/certificate-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+
+</body>
 
 </html>

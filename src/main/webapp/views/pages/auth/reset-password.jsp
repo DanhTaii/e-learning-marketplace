@@ -3,6 +3,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -33,6 +34,8 @@
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2-2">
                         <form action="reset-password" method="post" class="form" id="myForm">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
                             <div class="form__title text-big-title">TẠO MẬT KHẨU MỚI</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">
@@ -40,7 +43,7 @@
                                 </span>
                             </div>
                             <c:if test="${error != null}">
-                                <span class="add-to-fix"> ${error} </span>
+                                <span class="add-to-fix"> <c:out value="${error}"/> </span>
                             </c:if>
                             <div class="form__input form__input-1">
                                 <input type="password" name="password" class="input-text text-big"
@@ -67,7 +70,7 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/auth/reset-password.js?v=<%=System.currentTimeMillis()%>"></script>
-
+</body>
 </html>

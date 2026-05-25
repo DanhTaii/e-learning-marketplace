@@ -6,6 +6,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -53,17 +54,18 @@
 
                         %>
                         <form action="sign-in" class="form" method="post" id="myForm">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
                             <div class="add-to-fix-1">
 <%--                                <span class="add-to-fix-2"> <%= error %> </span>--%>
-                                    <span class="add-to-fix-2"> ${error} </span>
+                                    <span class="add-to-fix-2"> <c:out value="${error}"/> </span>
                             </div>
                             <div class="form__input input-1">
                                 <input class="input-text text-big" placeholder="Nhập email của bạn"
                                        id='login_email' name="email"
                                        value="${param.email}">
-                                <span id="error_email" class="error-client">${errors.email}</span>
+                                <span id="error_email" class="error-client"><c:out value="${errors.email}"/></span>
                             </div>
 
                             <div class="form__input input-2">
@@ -75,7 +77,7 @@
                                     <i class="fa-regular fa-eye" id="togglePassword"></i>
                                 </div>
 
-                                <span id="error_pass" class="error-client">${errors.password}</span>
+                                <span id="error_pass" class="error-client"><c:out value="${errors.password}"/></span>
                             </div>
                             <div class="form__sign-in-option">
                                 <div class="sign-in-option-1">
@@ -119,8 +121,10 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/auth/sign-in.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
+
 </html>

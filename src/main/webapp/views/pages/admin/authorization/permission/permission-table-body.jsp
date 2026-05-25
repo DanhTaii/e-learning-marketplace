@@ -14,18 +14,18 @@
                 <td>
                     <div class="lesson-info">
                         <div class="lesson-text">
-                            <div class="content__title">${permission.name}</div>
-<%--                            <div class="content__sub-title">Chương ${lesson.orderIndex} • Bài ${lesson.orderIndex}</div>--%>
+                            <div class="content__title"><c:out value="${permission.name}"/></div>
+<%--                            <div class="content__sub-title">Chương <c:out value="${lesson.orderIndex}"/> • Bài <c:out value="${lesson.orderIndex}"/></div>--%>
                         </div>
                     </div>
                 </td>
                     <%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
 
                 <td class="text-light">
-                    ${permission.description}
+                    <c:out value="${permission.description}"/>
                 </td>
                 <td class="text-light">
-                    ${permission.groupName}
+                    <c:out value="${permission.groupName}"/>
                 </td>
                 <td class="text-light">
                     <fmt:formatDate value="${permission.createdAt}" pattern="dd/MM/yyyy"/>

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>My wishlist</title>
     <base href="${pageContext.request.contextPath}/">
@@ -49,37 +50,37 @@
                                 </div>
                                 <div class="small-advertisement__content">
                                     <div class="content__top">
-                                        <div class="content__author-name text-medium content__author-name-2">${c.authorName}</div>
+                                        <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
                                         <div class="content__rate content__rate-2">
                                             <div class="rate__icon"><i
                                                     class="text-medium fa-regular fa-star"></i></div>
                                             <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
-                                            <div class="text-medium rate__number">${fn:replace(formattedRating, ',', '.')}</div>
+                                            <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                         </div>
                                     </div>
-                                    <div class="text-paragraph test-text"><p>${c.title}</p></div>
+                                    <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
                                     <div class="content__quick-info">
                                         <div class="quick-info__level">
                                             <div class="level__icon icon"><i
                                                     class="text-medium fa-solid fa-signal"></i></div>
-                                            <div class="level__text text-medium">${c.level.vietnameseName}</div>
+                                            <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
                                         </div>
                                         <div class="quick-info__users">
                                             <div class="users__icon icon"><i
                                                     class="text-medium fa-solid fa-users"></i></div>
-                                            <div class="users__text text-medium">${c.studentCount}</div>
+                                            <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
                                         </div>
                                         <div class="quick-info__time">
                                             <div class="time__icon icon"><i
                                                     class="text-medium fa-regular fa-clock"></i></div>
-                                            <div class="time__text text text-medium">${c.durationText}</div>
+                                            <div class="time__text text text-medium"><c:out value="${c.durationText}"/></div>
                                         </div>
                                     </div>
                                     <div class="content__price">
                                         <div class="price__new">
-                                             ${c.discountedPrice}
+                                             <c:out value="${c.discountedPrice}"/>
                                         </div>
-                                        <div class="price__old">${c.originPrice}
+                                        <div class="price__old"><c:out value="${c.originPrice}"/>
                                         </div>
                                     </div>
                                     <div class="hover-actions">
@@ -120,7 +121,7 @@
 
 <jsp:include page="/views/layouts/footer.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
-
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

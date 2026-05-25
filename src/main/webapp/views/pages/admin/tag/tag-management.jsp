@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Tag Management</title>
     <base href="${pageContext.request.contextPath}/">
@@ -41,7 +42,7 @@
                                     Thẻ
                                     <div class="header__meta">
                                         <span class="header__subtitle">Quản lý tất cả thẻ</span>
-                                        <span class="header__count">${listTags.size()} thẻ</span>
+                                        <span class="header__count"><c:out value="${listTags.size()}"/> thẻ</span>
                                     </div>
                                 </div>
 
@@ -127,6 +128,7 @@
                                 </form>
 
                                 <form id="bulkActionForm" method="POST" action="admin/lessons">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
                                     <div id="tagTableBody">
                                         <jsp:include page="/views/pages/admin/tag/tag-fragment.jsp"/>
@@ -143,9 +145,10 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/tag/tag-management.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

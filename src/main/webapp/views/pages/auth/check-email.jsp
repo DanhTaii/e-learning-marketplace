@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -33,12 +34,12 @@
                               method="POST"
                               class="form"
                               id="otpForm">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">KIỂM TRA EMAIL</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">
                                     Chúng tôi đã gửi mã đặt lại đến
-                                    <strong class="text-medium">${sessionScope.resetEmail}</strong>,
+                                    <strong class="text-medium"><c:out value="${sessionScope.resetEmail}"/></strong>,
                                     hãy nhập mã gồm 5 ký tự được đề cập trong email!
                                 </span>
                             </div>
@@ -46,7 +47,7 @@
                             <!-- Hiển thị lỗi nếu có -->
                             <c:if test="${not empty requestScope.error}">
                                 <div class="error-message text-big">
-                                        ${requestScope.error}
+                                        <c:out value="${requestScope.error}"/>
                                 </div>
                             </c:if>
 
@@ -90,6 +91,7 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/auth/check-email.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

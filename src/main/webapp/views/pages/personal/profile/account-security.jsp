@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Profile security</title>
     <base href="${pageContext.request.contextPath}/">
@@ -34,8 +35,8 @@
                         </div>
                     </div>
                     <div class="profile-block__info">
-                        <h2 class="profile-block__title">${user.username}</h2>
-                        <p class="profile-block__email">${user.email}</p>
+                        <h2 class="profile-block__title"><c:out value="${user.username}"/></h2>
+                        <p class="profile-block__email"><c:out value="${user.email}"/></p>
                     </div>
                 </div>
 
@@ -86,6 +87,7 @@
                 </div>
 
                 <form action="change-password" method="post" id="myForm">
+                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                     <c:set var="user" value="${sessionScope.userSession}"/>
                     <div class="form-section">
                         <div class="section-header">
@@ -140,7 +142,8 @@
 
 <jsp:include page="/views/layouts/footer.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/personal/profile/change-password.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

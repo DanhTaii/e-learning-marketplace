@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Order History</title>
     <meta name="viewport"
@@ -46,15 +47,15 @@
                                             </div>
                                             <div class="box__row2">
                                                 <div class="row2__column1-order">
-                                                    <span class="text"><span class="text1">Mã đơn hàng: </span>${order.orderCode}</span>
+                                                    <span class="text"><span class="text1">Mã đơn hàng: </span><c:out value="${order.orderCode}"/></span>
                                                 </div>
                                                 <div class="row2__column2-total">
                                                 <span class="text"><span class="text1">Tổng cộng: </span>
-                                                    ${order.formatFinal}
+                                                    <c:out value="${order.formatFinal}"/>
                                                 </span>
                                                 </div>
                                                 <div class="row2__column3-payment-method">
-                                                    <span class="text"><span class="text1">Phương thức thanh toán: </span>${order.paymentMethodName}</span>
+                                                    <span class="text"><span class="text1">Phương thức thanh toán: </span><c:out value="${order.paymentMethodName}"/></span>
                                                 </div>
                                                 <a href="receipt?orderId=${order.id}" class="turn-page">
                                                     <div class="row2__column4-btn-receipt header__button receipt-box">
@@ -62,7 +63,7 @@
                                                     </div>
                                                 </a>
                                                 <div class="row2__column4-success">
-                                                    <span class="text">${order.status}</span>
+                                                    <span class="text"><c:out value="${order.status}"/></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,5 +93,6 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

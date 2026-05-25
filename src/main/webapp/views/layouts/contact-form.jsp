@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -29,7 +30,7 @@
         <form class="contact-form"
               action="${pageContext.request.contextPath}/api/contact"
               method="post">
-
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
             <div class="contact-form__group">
                 <label>Email</label>
                 <input type="email" name="email" class="input-style" value="${sessionScope.userSession.email}"
@@ -60,5 +61,6 @@
         </form>
     </div>
 </div>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>User Management</title>
 
@@ -48,7 +49,7 @@
                                             Quản lý tất cả người dùng
                                         </span>
                                         <span class="header__count">
-                                            ${listUsers.size()} người dùng
+                                            <c:out value="${listUsers.size()}"/> người dùng
                                         </span>
                                     </div>
                                 </div>
@@ -154,6 +155,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/users">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
                                     <div class="container-2__dynamic-content" id="userTableBody">
@@ -170,10 +172,11 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/user/user-management.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

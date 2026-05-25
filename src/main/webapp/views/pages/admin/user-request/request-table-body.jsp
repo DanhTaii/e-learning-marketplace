@@ -9,11 +9,11 @@
             <tr>
                 <td><input type="checkbox" class="request-checkbox item-checkbox" value="${request.id}"></td>
 
-                <td>${request.email}</td>
+                <td><c:out value="${request.email}"/></td>
 
-                <td>${request.subject}</td>
+                <td><c:out value="${request.subject}"/></td>
 
-                <td>${request.message}</td>
+                <td><c:out value="${request.message}"/></td>
 
                 <td>
                     <fmt:formatDate value="${request.createdAt}" pattern="dd/MM/yyyy"/>

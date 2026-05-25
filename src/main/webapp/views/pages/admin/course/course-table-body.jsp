@@ -11,19 +11,19 @@
         </td>
         <td>
             <div class="content__title">
-                    ${course.title}
+                    <c:out value="${course.title}"/>
             </div>
-            <div class="content__sub-title">Cấp độ: ${course.level.vietnameseName} • ${course.durationText}</div>
+            <div class="content__sub-title">Cấp độ: <c:out value="${course.level.vietnameseName}"/> • <c:out value="${course.durationText}"/></div>
         </td>
 
         <td>
             <div class="content__title">
-                    ${course.categoryName}
+                    <c:out value="${course.categoryName}"/>
             </div>
         </td>
 
         <td>
-            <div class="course-row__total__enrollment course-row__font-content">${course.studentCount}</div>
+            <div class="course-row__total__enrollment course-row__font-content"><c:out value="${course.studentCount}"/></div>
         </td>
             <%--                                                <td>--%>
             <%--                                                    <div class="course-row__level course-row__font-content">--%>

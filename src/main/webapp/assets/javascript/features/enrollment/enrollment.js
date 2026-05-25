@@ -118,7 +118,7 @@ function saveVideoLastWatched() {
         // Bắt đầu fetch dữ liệu
         fetch('personal/my-course/update-time', {
             method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRF-Token': getCsrfToken()},
             body: `lessonId=${currentLessonId}&lastWatchedTime=${currentTime}`
         })
             .then(response => {
@@ -167,6 +167,7 @@ function updateProgress(lessonId, isCompleted, enrollmentId, courseId) {
         headers: {
             //Dùng để nói với Server cái dữ liệu gửi trong Body có định dạng giống hệt như một cái Form HTML truyền thống
             'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRF-Token': getCsrfToken()
         },
         body: `lessonId=${lessonId}&completed=${isCompleted}&enrollmentId=${enrollmentId}`
     })

@@ -4,6 +4,7 @@
 <!doctype html>
 <html lang="vi">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width,
@@ -63,7 +64,7 @@
                     <div class="form-container">
 
                         <form id="requestForm" action="admin/request/detail" method="post" class="form-modern">
-
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${contact != null ? contact.id : ''}" />
 
                             <div class="tag-create-card">
@@ -93,7 +94,7 @@
                                     <label class="label-style">
                                         Nội dung yêu cầu
                                     </label>
-                                    <textarea class="input-modern readonly-field" rows="8" readonly>${contact.message}
+                                    <textarea class="input-modern readonly-field" rows="8" readonly><c:out value="${contact.message}"/>
                                     </textarea>
                                 </div>
 
@@ -124,7 +125,7 @@
                                     <textarea name="adminReply"
                                               class="input-modern"
                                               rows="6"
-                                              placeholder="Nhập phản hồi cho người dùng...">${contact.adminReply}</textarea>
+                                              placeholder="Nhập phản hồi cho người dùng..."><c:out value="${contact.adminReply}"/></textarea>
                                 </div>
 
                                 <c:if test="${contact != null and contact.id > 0}">
@@ -186,11 +187,12 @@
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 
-</body>
-
 <%-- Javascript --%>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</body>
+
 
 </html>

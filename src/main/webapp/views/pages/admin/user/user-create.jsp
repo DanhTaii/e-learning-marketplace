@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
 
     <title>
-        ${(not empty user and user.id > 0)
+        <c:out value="${(not empty user and user.id > 0)
                 ? 'Cập nhật người dùng'
-                : 'Tạo mới người dùng'}
+                : 'Tạo mới người dùng'}"/>
     </title>
 
     <base href="${pageContext.request.contextPath}/">
@@ -43,7 +44,7 @@
                 <div class="grid__column-10 container-2">
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
-                            ${(not empty user and user.id > 0) ? 'Chi tiết người dùng' : 'Tạo mới người dùng'}
+                            <c:out value="${(not empty user and user.id > 0) ? 'Chi tiết người dùng' : 'Tạo mới người dùng'}"/>
                         </h2>
 
                         <a href="admin/users" class="btn-back">
@@ -62,11 +63,12 @@
 
                                 <button type="submit" class="btn-submit-modern w-100">
                                     <i class="fa-solid fa-floppy-disk"></i>
-                                    ${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}
+                                    <c:out value="${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}"/>
                                 </button>
                             </div>
                         </div>
                         <form id="userForm" action="admin/user/detail" method="post" class="form-modern">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${user != null ? user.id : ''}"/>
 
                             <div class="category-create-card">
@@ -75,9 +77,9 @@
                                         <label class="label-style">Họ</label>
                                         <input type="text" id="firstName" name="firstName" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
-                                               value="${not empty user.firstName ? user.firstName : param.firstName}"
+                                               value="<c:out value="${not empty user.firstName ? user.firstName : param.firstName}"/>"
                                                placeholder="Nhập họ..."
-                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <c:out value="${(not empty user and user.id > 0) ? 'readonly' : ''}"/>>
 
                                         <span class="error-client" id="error_firstName"></span>
                                     </div>
@@ -87,9 +89,9 @@
 
                                         <input type="text" id="lastName" name="lastName" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
-                                               value="${not empty user.lastName ? user.lastName : param.lastName}"
+                                               value="<c:out value="${not empty user.lastName ? user.lastName : param.lastName}"/>"
                                                placeholder="Nhập tên..."
-                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <c:out value="${(not empty user and user.id > 0) ? 'readonly' : ''}"/>>
 
                                         <span class="error-client" id="error_lastName"></span>
                                     </div>
@@ -100,9 +102,9 @@
                                         <label class="label-style">Username</label>
                                         <input type="text" id="username" name="username" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
-                                               value="${not empty user.username ? user.username : param.username}"
+                                               value="<c:out value="${not empty user.username ? user.username : param.username}"/>"
                                                placeholder="Nhập username..."
-                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <c:out value="${(not empty user and user.id > 0) ? 'readonly' : ''}"/>>
                                         <span class="error-client" id="error_username"></span>
                                     </div>
                                 </div>
@@ -112,9 +114,9 @@
                                         <label class="label-style">Email</label>
                                         <input type="email" id="email" name="email" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
-                                               value="${not empty user.email ? user.email : param.email}"
+                                               value="<c:out value="${not empty user.email ? user.email : param.email}"/>"
                                                placeholder="Nhập email..."
-                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <c:out value="${(not empty user and user.id > 0) ? 'readonly' : ''}"/>>
                                         <span class="error-client" id="error_email"></span>
                                     </div>
 
@@ -122,9 +124,9 @@
                                         <label class="label-style">Số điện thoại</label>
                                         <input type="text" id="phone" name="phone" class="input-modern
                                                ${(not empty user and user.id > 0) ? 'readonly-field' : ''}"
-                                               value="${not empty user.phone ? user.phone : param.phone}"
+                                               value="<c:out value="${not empty user.phone ? user.phone : param.phone}"/>"
                                                placeholder="Nhập số điện thoại..."
-                                        ${(not empty user and user.id > 0) ? 'readonly' : ''}>
+                                        <c:out value="${(not empty user and user.id > 0) ? 'readonly' : ''}"/>>
 
                                         <span class="error-client" id="error_phone"></span>
                                     </div>
@@ -136,14 +138,14 @@
                                             <label class="label-style">Mật khẩu</label>
                                             <input type="password" name="password" id="password"
                                                    class="input-modern" placeholder="Nhập mật khẩu...">
-                                            <span class="error-client" id="error_password">${errors.password}</span>
+                                            <span class="error-client" id="error_password"><c:out value="${errors.password}"/></span>
                                         </div>
 
                                         <div class="form-group flex-1">
                                             <label class="label-style">Xác nhận mật khẩu</label>
                                             <input type="password" name="confirmPassword" id="confirmPassword"
                                                    class="input-modern" placeholder="Nhập lại mật khẩu...">
-                                            <span class="error-client" id="error_confirmPassword">${errors.confirmPassword}</span>
+                                            <span class="error-client" id="error_confirmPassword"><c:out value="${errors.confirmPassword}"/></span>
                                         </div>
                                     </div>
                                 </c:if>
@@ -173,7 +175,7 @@
                                                 Quản trị đơn hàng
                                             </option>
                                         </select>
-                                        <span class="error-client">${errors.roleId}</span>
+                                        <span class="error-client"><c:out value="${errors.roleId}"/></span>
                                     </div>
 
                                     <div class="form-group flex-1">
@@ -188,7 +190,7 @@
                                                 Bị khóa
                                             </option>
                                         </select>
-                                        <span class="error-client">${errors.status}</span>
+                                        <span class="error-client"><c:out value="${errors.status}"/></span>
                                     </div>
                                 </div>
 
@@ -243,7 +245,7 @@
                                                                     <div class="small-advertisement__content">
                                                                         <div class="content__top">
                                                                             <div class="content__author-name text-medium content__author-name-2">
-                                                                                    ${c.authorName}
+                                                                                    <c:out value="${c.authorName}"/>
                                                                             </div>
                                                                             <div class="content__rate content__rate-2">
 
@@ -251,12 +253,12 @@
                                                                                     <i class="text-medium fa-regular fa-star"></i>
                                                                                 </div>
                                                                                 <div class="text-medium rate__number">
-                                                                                        ${c.avgRating}
+                                                                                        <c:out value="${c.avgRating}"/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="text-paragraph test-text">
-                                                                            <p>${c.title}</p>
+                                                                            <p><c:out value="${c.title}"/></p>
                                                                         </div>
                                                                         <div class="content__quick-info">
 
@@ -265,7 +267,7 @@
                                                                                     <i class="text-medium fa-solid fa-signal"></i>
                                                                                 </div>
                                                                                 <div class="level__text text-medium">
-                                                                                        ${c.level.vietnameseName}
+                                                                                        <c:out value="${c.level.vietnameseName}"/>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="quick-info__users">
@@ -273,7 +275,7 @@
                                                                                     <i class="text-medium fa-solid fa-users"></i>
                                                                                 </div>
                                                                                 <div class="users__text text-medium">
-                                                                                        ${c.studentCount}
+                                                                                        <c:out value="${c.studentCount}"/>
                                                                                 </div>
                                                                             </div>
 
@@ -282,7 +284,7 @@
                                                                                     <i class="text-medium fa-regular fa-clock"></i>
                                                                                 </div>
                                                                                 <div class="time__text text text-medium">
-                                                                                        ${c.durationText}
+                                                                                        <c:out value="${c.durationText}"/>
                                                                                 </div>
                                                                             </div>
 
@@ -290,10 +292,10 @@
 
                                                                         <div class="content__price">
                                                                             <div class="price__new">
-                                                                                    ${c.discountedPrice}
+                                                                                    <c:out value="${c.discountedPrice}"/>
                                                                             </div>
                                                                             <div class="price__old">
-                                                                                    ${c.originPrice}
+                                                                                    <c:out value="${c.originPrice}"/>
                                                                             </div>
                                                                         </div>
 
@@ -324,7 +326,7 @@
 
                                         <button type="submit" class="btn-submit-modern w-100">
                                             <i class="fa-solid fa-floppy-disk"></i>
-                                            ${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}
+                                            <c:out value="${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}"/>
                                         </button>
                                     </div>
                                 </div>
@@ -342,10 +344,11 @@
 
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="assets/javascript/admin/user/user-create.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/admin/user-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

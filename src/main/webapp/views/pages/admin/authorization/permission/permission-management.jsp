@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Quyền</title>
     <base href="${pageContext.request.contextPath}/">
@@ -95,7 +96,7 @@
                                                     <c:forEach var="group" items="${listPermissionGroups}">
                                                         <option value="${group}"
                                                             ${param.groupName == group ? 'selected' : ''}>
-                                                                ${group}
+                                                                <c:out value="${group}"/>
                                                         </option>
                                                     </c:forEach>
 
@@ -122,6 +123,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/permissions">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
                                     <div class="container-2__dynamic-content" id="permissionTableBody">
                                         <jsp:include page="/views/pages/admin/authorization/permission/permission-fragment.jsp"/>
@@ -137,12 +139,13 @@
 </div>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
 <%-- Javascript --%>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/permission/permission-management.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 
 </html>

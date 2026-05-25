@@ -127,7 +127,8 @@ async function executeAjaxAction({url, method = 'POST', body = {}, onSuccess = n
         const response = await fetch(url, {
             method: method,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-Token': getCsrfToken()
             },
             body: new URLSearchParams(body)
         })

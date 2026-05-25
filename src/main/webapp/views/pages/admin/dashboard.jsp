@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <base href="${pageContext.request.contextPath}/">
@@ -68,7 +69,7 @@
                                                 <div class="card-title">Đơn hàng</div>
                                                 <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                                             </div>
-                                            <div class="card-content__number">${orderCount}</div>
+                                            <div class="card-content__number"><c:out value="${orderCount}"/></div>
                                         </div>
                                     </li>
                                     <li>
@@ -77,7 +78,7 @@
                                                 <div>Người dùng</div>
                                                 <div class="card-icon"><i class="fa-solid fa-user"></i></div>
                                             </div>
-                                            <div class="card-content__number">${userCount}</div>
+                                            <div class="card-content__number"><c:out value="${userCount}"/></div>
                                         </div>
                                     </li>
                                     <li>
@@ -86,7 +87,7 @@
                                                 <div>Khóa học</div>
                                                 <div class="card-icon"><i class="fa-solid fa-tags"></i></div>
                                             </div>
-                                            <div class="card-content__number">${courseCount}</div>
+                                            <div class="card-content__number"><c:out value="${courseCount}"/></div>
                                         </div>
                                     </li>
                                 </ul>
@@ -124,7 +125,7 @@
                                                                           maxFractionDigits="1"/>tr
                                                     </span>
                                                     </div>
-                                                    <span class="bar-label">${item.orderDate}</span>
+                                                    <span class="bar-label"><c:out value="${item.orderDate}"/></span>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -148,9 +149,9 @@
                                         <tbody>
                                         <c:forEach var="c" items="${popularCourses}" varStatus="loop">
                                             <tr>
-                                                <td>${loop.index + 1}</td>
-                                                <td>${c.title}</td>
-                                                <td>${c.studentCount}</td>
+                                                <td><c:out value="${loop.index + 1}"/></td>
+                                                <td><c:out value="${c.title}"/></td>
+                                                <td><c:out value="${c.studentCount}"/></td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -165,5 +166,6 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

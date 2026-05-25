@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
+
     <meta charset="UTF-8">
     <title>Vai trò</title>
     <base href="${pageContext.request.contextPath}/">
@@ -49,7 +51,7 @@
                                                 Quản lý tất cả vai trò
                                         </span>
                                         <span class="header__count">
-                                            ${listRoles.size()} vai trò
+                                            <c:out value="${listRoles.size()}"/> vai trò
                                         </span>
                                     </div>
                                 </div>
@@ -103,7 +105,7 @@
                                                 <c:forEach var="perm" items="${listPermissions}">
                                                     <option value="${perm.id}"
                                                         ${filter.permissionId == perm.id ? 'selected' : ''}>
-                                                            ${perm.name}
+                                                            <c:out value="${perm.name}"/>
                                                     </option>
                                                 </c:forEach>
                                             </select>
@@ -132,6 +134,7 @@
                                     </div>
                                 </form>
                                 <form id="bulkActionForm" method="POST" action="admin/super/roles">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
 
                                     <div class="container-2__dynamic-content" id="roleTableBody">
@@ -148,12 +151,14 @@
 </div>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <%-- Javascript --%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/role/role-management.js?v=<%=System.currentTimeMillis()%>"></script>
+
+</body>
 
 </html>

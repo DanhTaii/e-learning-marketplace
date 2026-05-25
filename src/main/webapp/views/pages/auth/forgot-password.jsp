@@ -3,6 +3,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -32,6 +33,7 @@
                 <div class="grid__column-8 fix-padding-2">
                     <div class="box-2-2-2">
                         <form action="forgot-password" method="post" class="form">
+                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <div class="form__title text-big-title">QUÊN MẬT KHẨU</div>
                             <div class="form__span">
                                 <span class="span__text text-medium">Vui lòng nhập email của bạn để đặt lại mật khẩu!</span>
@@ -62,5 +64,6 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

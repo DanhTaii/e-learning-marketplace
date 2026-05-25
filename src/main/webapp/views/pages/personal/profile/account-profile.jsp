@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Profile user</title>
     <base href="${pageContext.request.contextPath}/">
@@ -37,8 +38,8 @@
                             </div>
                         </div>
                         <div class="profile-block__info">
-                            <h2 class="profile-block__title">${userProfile.username}</h2>
-                            <p class="profile-block__email">${userProfile.email}</p>
+                            <h2 class="profile-block__title"><c:out value="${userProfile.username}"/></h2>
+                            <p class="profile-block__email"><c:out value="${userProfile.email}"/></p>
                         </div>
                     </div>
 
@@ -90,6 +91,7 @@
                     </div>
 
                     <form action="personal/account-profile" method="POST" id="myForm" class="personal-detail-form">
+                        <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                         <div class="form-section">
                             <div class="section-header">
                                 <span class="section-indicator"></span>
@@ -147,8 +149,9 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
     <jsp:include page="/views/components/toast.jsp"/>
 </div>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/personal/profile/change-information.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 </html>

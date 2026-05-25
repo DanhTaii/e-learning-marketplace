@@ -53,7 +53,8 @@ function setupAutoFilter({formId, tableBodyId, url, deplay = 500}) {
         fetch(`${url}?${queryString}`, {
             method: 'GET',
             header: {
-                "X-Requested-With": "XMLHttpRequest"
+                "X-Requested-With": "XMLHttpRequest",
+                'X-CSRF-Token': getCsrfToken()
             }
         })
             .then(response => {

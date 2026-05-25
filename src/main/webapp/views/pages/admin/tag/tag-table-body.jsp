@@ -8,9 +8,9 @@
         <c:forEach var="t" items="${listTags}">
             <tr>
                 <td><input type="checkbox" class="tag-checkbox item-checkbox" value="${t.id}"></td>
-                <td>${t.name}</td>
-                <td>${t.slug}</td>
-                <td>${t.courseCount}</td>
+                <td><c:out value="${t.name}"/></td>
+                <td><c:out value="${t.slug}"/></td>
+                <td><c:out value="${t.courseCount}"/></td>
                 <td>
                     <fmt:formatDate value="${t.createdAt}" pattern="dd/MM/yyyy"/>
                 </td>

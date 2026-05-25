@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
     <title>Course Content</title>
     <base href="${pageContext.request.contextPath}/">
@@ -29,7 +30,7 @@
             <div class="grid__column-8 column1">
 
                 <div class="course-header-container">
-                    <h1 class="course-title">${enrollmentDetail.title}</h1>
+                    <h1 class="course-title"><c:out value="${enrollmentDetail.title}"/></h1>
                     <input id="enrollment-id" type="hidden" name="enrollmentId" value="${enrollmentDetail.id}">
                     <input id="course-id" type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
 
@@ -110,9 +111,9 @@
                     <div class="content__header">
                         <span class="text-4xl bold">Danh sách bài học</span>
                         <span class="text-xl light header-subtitle">
-                            ${enrollmentDetail.listLesson.size()} bài học
+                            <c:out value="${enrollmentDetail.listLesson.size()}"/> bài học
                             •
-                            ${enrollmentDetail.durationText}
+                            <c:out value="${enrollmentDetail.durationText}"/>
                         </span>
                     </div>
                     <hr>
@@ -134,10 +135,10 @@
                                 </div>
                                 <div class="box__column2">
                                     <div class="column2__header">
-                                        <span class="text-lg regular header">Bài ${l.orderIndex} : ${l.lessonTitle}</span>
+                                        <span class="text-lg regular header">Bài <c:out value="${l.orderIndex}"/> : <c:out value="${l.lessonTitle}"/></span>
                                     </div>
                                     <div class="column2__duration">
-                                        <span class="text-lg light">${l.durationMinutes}p</span>
+                                        <span class="text-lg light"><c:out value="${l.durationMinutes}"/>p</span>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +154,7 @@
 </div>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-</body>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
@@ -162,5 +163,6 @@
 <script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/features/enrollment/enrollment-note.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
+</body>
 
 </html>

@@ -14,7 +14,7 @@
 
     <!-- Header -->
     <div class="review-box__header style__sub-title">
-        <span>${enrollmentDetail.reviewCount} đánh giá</span>
+        <span><c:out value="${enrollmentDetail.reviewCount}"/> đánh giá</span>
     </div>
 
     <!-- Form nhập đánh giá -->
@@ -24,6 +24,7 @@
                  class="user__avatar2">
         </div>
         <form action="my-course/review/create" method="post" id="myForm">
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
             <div><span id="error_comment" class="error-client"></span></div>
             <div><span id="error_rating" class="error-client"></span></div>
             <div class="box__input">
@@ -54,21 +55,21 @@
                     <div class="comment__box">
                         <div class="box__name box">
                             <div class="review-in4">
-                                <span class="review__name">${review.userName}</span>
+                                <span class="review__name"><c:out value="${review.userName}"/></span>
                                 <span class="review__time"><fmt:formatDate
                                         value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                             </div>
                         </div>
                         <div class="box__date box">
                             <div class="star">
-                                <div class="text-medium regular">${review.rating}</div>
+                                <div class="text-medium regular"><c:out value="${review.rating}"/></div>
                                 <div class="star-icon">
                                     <i class="fa-solid fa-star"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="box__comment box">
-                            <span>${review.comment}</span>
+                            <span><c:out value="${review.comment}"/></span>
                         </div>
                     </div>
                 </div>

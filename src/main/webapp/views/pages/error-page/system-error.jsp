@@ -3,6 +3,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <title>Lỗi cơ sở dữ liệu - SoftSkill</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/base/base.css">
@@ -32,7 +33,7 @@
                 <%-- Sửa lại dòng bị lỗi ở đây --%>
                 <p class="error-msg"><strong>Loại lỗi:</strong> <%= exception != null ? exception.getClass().getName() : "N/A" %>
                 </p>
-                <p class="error-msg"><strong>Thông điệp:</strong> ${pageContext.errorData.throwable.message}</p>
+                <p class="error-msg"><strong>Thông điệp:</strong> <c:out value="${pageContext.errorData.throwable.message}"/></p>
 
             </div>
             </c:if>
@@ -43,5 +44,6 @@
 </div>
 
 
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

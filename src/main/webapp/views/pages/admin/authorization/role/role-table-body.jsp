@@ -14,13 +14,13 @@
                 <td>
                     <div class="lesson-info">
                         <div class="lesson-text">
-                            <div class="content__title">${role.name}</div>
+                            <div class="content__title"><c:out value="${role.name}"/></div>
                         </div>
                     </div>
                 </td>
 
                 <td class="text-light">
-                    ${role.description}
+                    <c:out value="${role.description}"/>
                 </td>
                 <td>
                     <c:choose>
