@@ -38,8 +38,27 @@
         <location>/views/pages/error-page/500.jsp</location>
     </error-page>
 
-    <welcome-file-list>
-        <welcome-file>index</welcome-file>
-    </welcome-file-list>
+    <!-- Khi request đi qua, JavaMelody sẽ lẳng lặng bật đồng hồ bấm giờ,
+    ghi nhận xem request này tốn bao nhiêu RAM, chạy hết mấy câu lệnh SQL, -->
+    <filter>
+        <filter-name>javamelody</filter-name>
+        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+        <init-param>
+            <param-name>authorized-users</param-name>
+            <param-value>admin:123456,quantri:MatKhauSieuKho123</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>javamelody</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Mỗi khi có một người dùng mới truy cập web (tạo ra một Session),
+    Listener này sẽ đếm +1. Khi họ tắt trình duyệt hoặc hết hạn đăng nhập, nó trừ đi -1.
+    Nhờ đó Dashboard mới hiển thị được biểu đồ Http sessions (số người đang online).-->
+    <listener>
+        <listener-class>net.bull.javamelody.SessionListener</listener-class>
+    </listener>
 
 </web-app>

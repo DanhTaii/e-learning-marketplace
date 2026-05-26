@@ -60,6 +60,9 @@ dependencies {
 
     // Thư viện Jsoup để chống XSS
     implementation 'org.jsoup:jsoup:1.17.2'
+
+    // Thư viện giám sát hệ thống JavaMelody - Monitoring
+    implementation 'net.bull.javamelody:javamelody-core:2.1.0'
 }
 
 // Đóng gói file WAR với tên e-learning.war
