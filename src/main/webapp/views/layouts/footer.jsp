@@ -96,6 +96,14 @@
         <%--                    <li class="footer__text text-medium">Lựa chọn quyền riêng tư của bạn</li>--%>
         <%--                </ul>--%>
         <%--            </div>--%>
+<%--            https://wabi.id.vn/privacy--%>
+            <div class="grid">
+                <a class="turn-page" href="views/pages/partial/privacy.jsp">
+                    <p class="ul__text text-medium">
+                        Chính sách bảo mật
+                    </p>
+                </a>
+            </div>
         <div class="grid">
             <p class="ul__text text-medium">Chịu trách nhiệm quản lý nội dung: Nhóm 57</p>
         </div>

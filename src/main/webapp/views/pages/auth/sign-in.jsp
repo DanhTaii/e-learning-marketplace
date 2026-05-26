@@ -111,6 +111,12 @@
                                         <img class="image" src="assets/image/search.png" alt="Google">
                                     </div>
                                 </a>
+                                <a href=""
+                                   class="social-link">
+                                    <div class="socials__box google">
+                                        <img class="image" src="assets/image/facebook.png" alt="Facebook">
+                                    </div>
+                                </a>
                             </div>
                         </form>
                     </div>
