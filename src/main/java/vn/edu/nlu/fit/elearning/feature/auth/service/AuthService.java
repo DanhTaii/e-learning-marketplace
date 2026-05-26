@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
+import vn.edu.nlu.fit.elearning.feature.facebook.model.FacebookUser;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
 import vn.edu.nlu.fit.elearning.feature.google.model.GoogleUser;
@@ -21,5 +22,7 @@ public interface AuthService {
     Set<String> getUserPermissions(Integer userId);
 
     Set<String> getUserRoles(Integer userId);
+
+    User processFacebookLogin(FacebookUser facebookUser);
 
 }

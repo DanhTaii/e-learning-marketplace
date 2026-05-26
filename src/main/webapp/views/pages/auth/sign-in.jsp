@@ -111,7 +111,7 @@
                                         <img class="image" src="assets/image/search.png" alt="Google">
                                     </div>
                                 </a>
-                                <a href=""
+                                <a href="https://www.facebook.com/v19.0/dialog/oauth?client_id=${initParam.FACEBOOK_APP_ID}&redirect_uri=https://wabi.id.vn/sign-in/facebook&scope=email,public_profile"
                                    class="social-link">
                                     <div class="socials__box google">
                                         <img class="image" src="assets/image/facebook.png" alt="Facebook">

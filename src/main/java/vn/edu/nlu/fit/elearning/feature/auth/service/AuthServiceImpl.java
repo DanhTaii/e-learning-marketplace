@@ -2,6 +2,7 @@ package vn.edu.nlu.fit.elearning.feature.auth.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.feature.auth.dto.LoginRequestDto;
+import vn.edu.nlu.fit.elearning.feature.facebook.model.FacebookUser;
 import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
@@ -149,5 +150,23 @@ public class AuthServiceImpl implements AuthService {
         return userService.getRolesByUserId(userId);
     }
 
+    public User processFacebookLogin(
+            FacebookUser facebookUser) {
+
+        User user =
+                userService.getEntityByEmail(facebookUser.getEmail());
+
+        if (user == null) {
+
+            user = new User();
+            user.setEmail(facebookUser.getEmail());
+            user.setFirstName(facebookUser.getName());
+            user.setAvatarUrl(facebookUser.getAvatar());
+
+            userAdminService.createUser(user);
+        }
+
+        return user;
+    }
 
 }
