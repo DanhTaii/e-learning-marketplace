@@ -29,12 +29,22 @@
                     <div class="profile-block">
                         <div class="profile-block__avatar">
                             <div class="fix-image-box">
-                                <c:set var="defaultImg" value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
+                                <form action="personal/upload-avatar" method="post" enctype="multipart/form-data" id="avatarForm">
 
-                                <img src="${not empty userProfile.avatarUrl ? userProfile.avatarUrl : defaultImg}"
-                                     alt="Avatar"
-                                     class="turn-page fix-image"
-                                     onerror="this.onerror=null; this.src='${defaultImg}';">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
+                                    <div class="fix-image-box">
+
+                                        <c:set var="defaultImg"
+                                               value="https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg"/>
+
+                                        <img id="avatarPreview"
+                                             src="${not empty userProfile.avatarUrl ? userProfile.avatarUrl : defaultImg}"
+                                             alt="Avatar" class="turn-page fix-image">
+
+                                        <input type="file" id="avatarInput" name="avatar" accept="image/*" hidden>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div class="profile-block__info">
@@ -99,6 +109,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="style__sub-title">Tên</label>
+                                <input type="text" name="lastname" id="last_name" value="${userProfile.lastName}" placeholder="Chưa cập nhật">
+                                <span id="error_username" class="error-client"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="style__sub-title">Họ</label>
+                                <input type="text" name="firstname" id="first_name" value="${userProfile.firstName}"placeholder="Chưa cập nhật">
+                                <span id="error_username" class="error-client"></span>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="style__sub-title">Tên người dùng</label>
                                 <input type="text" name="username" id="user_name" value="${userProfile.username}">
                                 <span id="error_username" class="error-client"></span>
@@ -123,23 +145,23 @@
                             </div>
                         </div>
 
-                        <div class="form-section">
-                            <div class="section-header">
-                                <span class="section-indicator"></span>
-                                <h2 class="section-title">Link ảnh URL</h2>
-                            </div>
+<%--                        <div class="form-section">--%>
+<%--                            <div class="section-header">--%>
+<%--                                <span class="section-indicator"></span>--%>
+<%--                                <h2 class="section-title">Link ảnh URL</h2>--%>
+<%--                            </div>--%>
 
-                            <div class="form-group">
-                                <label class="style__sub-title">Link ảnh avatar</label>
-                                <input type="text" name="avatarUrl" value="${userProfile.avatarUrl}" placeholder="Chưa cập nhật" id="user_url">
-                                <span id="error_url" class="error-client"></span>
-                            </div>
-                        </div>
+<%--                            <div class="form-group">--%>
+<%--                                <label class="style__sub-title">Link ảnh avatar</label>--%>
+<%--                                <input type="text" name="avatarUrl" value="${userProfile.avatarUrl}" placeholder="Chưa cập nhật" id="user_url">--%>
+<%--                                <span id="error_url" class="error-client"></span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
-                        <div class="form-actions">
-                            <button type="reset" class="btn-secondary ">Hủy bỏ</button>
-                            <button type="submit" class="btn-primary dark-button">Lưu thay đổi</button>
-                        </div>
+<%--                        <div class="form-actions">--%>
+<%--                            <button type="reset" class="btn-secondary ">Hủy bỏ</button>--%>
+<%--                            <button type="submit" class="btn-primary dark-button">Lưu thay đổi</button>--%>
+<%--                        </div>--%>
                     </form>
                 </div>
             </div>
@@ -149,9 +171,10 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
     <jsp:include page="/views/components/toast.jsp"/>
 </div>
+</body>
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/personal/profile/change-information.js?v=<%=System.currentTimeMillis()%>"></script>
-</body>
+<script src="assets/javascript/validation/personal/profile/change-avatar.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

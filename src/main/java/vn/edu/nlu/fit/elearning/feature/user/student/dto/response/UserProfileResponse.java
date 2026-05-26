@@ -11,11 +11,14 @@ public class UserProfileResponse {
     private Role role;
     private BaseStatus status;
     private String avatarUrl;
+    private String firstName;
+    private String lastName;
 
     public UserProfileResponse() {
     }
 
-    public UserProfileResponse(int id, String username, String email, String phone, Role role, BaseStatus status, String avatarUrl) {
+    public UserProfileResponse(int id, String username, String email, String phone, Role role, BaseStatus status, String avatarUrl, String firstName,
+    String lastName) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -23,6 +26,24 @@ public class UserProfileResponse {
         this.role = role;
         this.status = status;
         this.avatarUrl = avatarUrl;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getId() {

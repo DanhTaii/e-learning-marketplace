@@ -150,4 +150,14 @@ public int countUsersByTimeRange(String timeRange){
         return userDao.getFailedAttemptsByEmail(email);
     }
 
+    @Override
+    public boolean updateAvatar(int userId, String avatarUrl) {
+
+        if (avatarUrl == null || avatarUrl.trim().isEmpty()) {
+            throw new IllegalArgumentException("Avatar không hợp lệ!");
+        }
+
+        return userDao.updateAvatar(userId, avatarUrl) > 0;
+    }
+
 }
