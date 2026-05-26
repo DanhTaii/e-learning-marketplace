@@ -47,4 +47,8 @@ public interface UserService {
     int lockUserAccount(String email);
 
     int getFailedAttemptsByEmail(String email);
+
+    boolean updateAvatar(int userId, String avatarUrl);
+
+    
 }

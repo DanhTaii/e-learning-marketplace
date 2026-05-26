@@ -35,4 +35,6 @@ public interface UserDao {
 
     int getFailedAttemptsByEmail(String email);
 
+    int updateAvatar(int userId, String avatarUrl);
+
 }

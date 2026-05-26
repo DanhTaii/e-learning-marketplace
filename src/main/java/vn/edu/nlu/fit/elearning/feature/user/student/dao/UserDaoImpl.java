@@ -174,6 +174,20 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         );
     }
 
+    @Override
+    public int updateAvatar(int userId, String avatarUrl) {
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+                    UPDATE users
+                    SET avatar_url = :avatarUrl,
+                        updated_at = CURRENT_TIMESTAMP
+                    WHERE id = :userId
+                    """)
+                        .bind("avatarUrl", avatarUrl)
+                        .bind("userId", userId)
+                        .execute()
+        );
+    }
 
 
 }
