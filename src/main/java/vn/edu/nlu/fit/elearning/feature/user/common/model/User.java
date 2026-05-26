@@ -17,6 +17,8 @@ public class User implements Serializable {
     private String avatarUrl;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private String provider;
+    private String providerId;
 
     public User() {
     }
@@ -127,6 +129,22 @@ public class User implements Serializable {
 
     public void setStatus(BaseStatus status) {
         this.status = status;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
 
     @Override

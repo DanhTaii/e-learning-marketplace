@@ -38,6 +38,17 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         });
     }
 
+    public User findByProviderAndProviderId(String provider, String providerId) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT * FROM users WHERE provider = :provider AND provider_id = :providerId")
+                        .bind("provider", provider)
+                        .bind("providerId", providerId)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
     @Override
     public boolean findUserByUsername(String username) {
         return getJdbi().withHandle(handle -> {
@@ -73,6 +84,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     .one() > 0;
         });
     }
+
     @Override
     public int countUsersByTimeRange(String timeRange) {
         String timeCondition = buildTimeCondition(timeRange, "created_at");
@@ -117,15 +129,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                         .list())
         );
     }
+
     @Override
     public int increaseFailedAttempts(String email) {
         return getJdbi().withHandle(handle ->
                 handle.createUpdate("""
-                UPDATE users
-                SET failed_attempts = failed_attempts + 1,
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE email = :email
-            """)
+                                    UPDATE users
+                                    SET failed_attempts = failed_attempts + 1,
+                                        updated_at = CURRENT_TIMESTAMP
+                                    WHERE email = :email
+                                """)
                         .bind("email", email)
                         .execute()
         );
@@ -135,11 +148,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public int resetFailedAttempts(String email) {
         return getJdbi().withHandle(handle ->
                 handle.createUpdate("""
-                UPDATE users
-                SET failed_attempts = 0,
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE email = :email
-            """)
+                                    UPDATE users
+                                    SET failed_attempts = 0,
+                                        updated_at = CURRENT_TIMESTAMP
+                                    WHERE email = :email
+                                """)
                         .bind("email", email)
                         .execute()
         );
@@ -149,11 +162,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public int lockUserAccount(String email) {
         return getJdbi().withHandle(handle ->
                 handle.createUpdate("""
-                UPDATE users
-                SET status = 'INACTIVE',
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE email = :email
-            """)
+                                    UPDATE users
+                                    SET status = 'INACTIVE',
+                                        updated_at = CURRENT_TIMESTAMP
+                                    WHERE email = :email
+                                """)
                         .bind("email", email)
                         .execute()
         );
@@ -163,10 +176,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public int getFailedAttemptsByEmail(String email) {
         return getJdbi().withHandle(handle ->
                 handle.createQuery("""
-                SELECT failed_attempts
-                FROM users
-                WHERE email = :email
-            """)
+                                    SELECT failed_attempts
+                                    FROM users
+                                    WHERE email = :email
+                                """)
                         .bind("email", email)
                         .mapTo(Integer.class)
                         .findFirst()
@@ -178,11 +191,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public int updateAvatar(int userId, String avatarUrl) {
         return getJdbi().withHandle(handle ->
                 handle.createUpdate("""
-                    UPDATE users
-                    SET avatar_url = :avatarUrl,
-                        updated_at = CURRENT_TIMESTAMP
-                    WHERE id = :userId
-                    """)
+                                UPDATE users
+                                SET avatar_url = :avatarUrl,
+                                    updated_at = CURRENT_TIMESTAMP
+                                WHERE id = :userId
+                                """)
                         .bind("avatarUrl", avatarUrl)
                         .bind("userId", userId)
                         .execute()

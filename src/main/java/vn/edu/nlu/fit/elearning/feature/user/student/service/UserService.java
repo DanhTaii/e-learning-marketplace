@@ -20,6 +20,12 @@ public interface UserService {
 
     UserShortResponse getUserByEmail(String email);
 
+    //Lấy toàn bộ thông tin người dùng
+    User getEntityByProviderAndProviderId(String provider, String providerId);
+
+    //Lấy thông tin người dùng vừa đủ, không lấy quá nhiều trường không cần thiết
+    UserShortResponse getUserByProviderAndProviderId(String provider, String providerId);
+
     UserProfileResponse getProfileById(int id);
 
     //Thao tác đến user

@@ -56,6 +56,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserShortResponse getUserByProviderAndProviderId(String provider, String providerId) {
+        User user = userDao.findByProviderAndProviderId(provider, providerId);
+        return UserMapper.toUserShortDto(user);
+    }
+
+    @Override
+    public User getEntityByProviderAndProviderId(String provider, String providerId) {
+        return userDao.findByProviderAndProviderId(provider, providerId);
+    }
+
+    @Override
     public UserProfileResponse getProfileById(int id) {
         User user = userDao.findById(id);
         return UserMapper.toUserProfileDto(user);
@@ -115,10 +126,11 @@ public class UserServiceImpl implements UserService {
     public boolean existsUserByEmail(String email) {
         return userDao.existsUserByEmail(email);
     }
-@Override
-public int countUsersByTimeRange(String timeRange){
+
+    @Override
+    public int countUsersByTimeRange(String timeRange) {
         return userDao.countUsersByTimeRange(timeRange);
-}
+    }
 
     @Override
     public Set<String> getPermissionsByUserId(Integer userId) {

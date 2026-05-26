@@ -11,7 +11,7 @@ import java.util.Set;
 public interface AuthService {
     UserShortResponse login(LoginRequestDto loginRequestDto);
 
-    User processSocialLogin(GoogleUser googleUser);
+    UserShortResponse processSocialLogin(GoogleUser googleUser);
 
     boolean register(String email, String username, String password);
 
@@ -23,6 +23,6 @@ public interface AuthService {
 
     Set<String> getUserRoles(Integer userId);
 
-    User processFacebookLogin(FacebookUser facebookUser);
+    UserShortResponse processFacebookLogin(FacebookUser facebookUser);
 
 }

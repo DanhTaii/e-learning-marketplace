@@ -15,8 +15,30 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
 
     public int create(User user) {
         return getJdbi().withHandle(handle -> {
-            return handle.createUpdate("INSERT INTO users (id, email, username, password, avatar_url, status) " +
-                            "VALUES (:id, :email, :username, :password, :avatarUrl, :status)")
+            return handle.createUpdate("""
+                                INSERT INTO users (
+                                    email,
+                                    first_name,
+                                    last_name,
+                                    username,
+                                    password,
+                                    avatar_url,
+                                    status,
+                                    provider,
+                                    provider_id
+                                )
+                                VALUES (
+                                    :email,
+                                    :firstName,
+                                    :lastName,
+                                    :username,
+                                    :password,
+                                    :avatarUrl,
+                                    :status,
+                                    :provider,
+                                    :providerId
+                                )
+                            """)
                     .bindBean(user)
                     .bind("status", "ACTIVE")
                     .execute();
@@ -26,14 +48,14 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
     @Override
     public List<UserAdminDto> findAll() {
         String sql = """
-        SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.username,
-            u.email, u.phone, u.status,
-            u.avatar_url AS avatarUrl, u.created_at AS createdAt, u.updated_at AS updatedAt, r.name AS roleName
-        FROM users u
-        LEFT JOIN user_roles ur ON u.id = ur.user_id
-        LEFT JOIN roles r ON ur.role_id = r.id
-        ORDER BY u.created_at DESC
-    """;
+                    SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.username,
+                        u.email, u.phone, u.status,
+                        u.avatar_url AS avatarUrl, u.created_at AS createdAt, u.updated_at AS updatedAt, r.name AS roleName
+                    FROM users u
+                    LEFT JOIN user_roles ur ON u.id = ur.user_id
+                    LEFT JOIN roles r ON ur.role_id = r.id
+                    ORDER BY u.created_at DESC
+                """;
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
                         .mapToBean(UserAdminDto.class)
@@ -114,18 +136,18 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         Map<String, Object> params = new HashMap<>();
         String whereClause = buildUserWhereClause(filter, params);
         String sql = """
-        SELECT u.id, u.first_name AS firstName, u.last_name AS lastName,
-            u.username, u.email, u.phone, u.status, u.avatar_url AS avatarUrl, u.created_at AS createdAt,
-            u.updated_at AS updatedAt, r.name AS roleName
-        FROM users u
-        LEFT JOIN user_roles ur ON u.id = ur.user_id
-        LEFT JOIN roles r ON ur.role_id = r.id
-    """
+                    SELECT u.id, u.first_name AS firstName, u.last_name AS lastName,
+                        u.username, u.email, u.phone, u.status, u.avatar_url AS avatarUrl, u.created_at AS createdAt,
+                        u.updated_at AS updatedAt, r.name AS roleName
+                    FROM users u
+                    LEFT JOIN user_roles ur ON u.id = ur.user_id
+                    LEFT JOIN roles r ON ur.role_id = r.id
+                """
                 + whereClause +
                 """
-                ORDER BY u.created_at DESC
-                LIMIT :limit OFFSET :offset
-                """;
+                        ORDER BY u.created_at DESC
+                        LIMIT :limit OFFSET :offset
+                        """;
 
         return getJdbi().withHandle(handle -> {
 
@@ -152,11 +174,11 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         String whereClause = buildUserWhereClause(filter, params);
 
         String sql = """
-        SELECT COUNT(DISTINCT u.id)
-        FROM users u
-        LEFT JOIN user_roles ur ON u.id = ur.user_id
-        LEFT JOIN roles r ON ur.role_id = r.id
-    """
+                    SELECT COUNT(DISTINCT u.id)
+                    FROM users u
+                    LEFT JOIN user_roles ur ON u.id = ur.user_id
+                    LEFT JOIN roles r ON ur.role_id = r.id
+                """
                 + whereClause;
 
         return getJdbi().withHandle(handle -> {
@@ -218,14 +240,14 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
     @Override
     public UserAdminDto findById(int id) {
         String sql = """
-        SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.username, u.email,
-               u.phone, u.status, u.avatar_url AS avatarUrl, u.created_at AS createdAt, u.updated_at AS updatedAt,
-               r.id AS roleId,  r.name AS roleName
-        FROM users u
-        LEFT JOIN user_roles ur ON u.id = ur.user_id
-        LEFT JOIN roles r ON ur.role_id = r.id
-        WHERE u.id = :id
-    """;
+                    SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.username, u.email,
+                           u.phone, u.status, u.avatar_url AS avatarUrl, u.created_at AS createdAt, u.updated_at AS updatedAt,
+                           r.id AS roleId,  r.name AS roleName
+                    FROM users u
+                    LEFT JOIN user_roles ur ON u.id = ur.user_id
+                    LEFT JOIN roles r ON ur.role_id = r.id
+                    WHERE u.id = :id
+                """;
 
         return getJdbi().withHandle(handle ->
                 handle.createQuery(sql)
@@ -240,20 +262,20 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
     public int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status) {
         return getJdbi().inTransaction(handle -> {
             handle.createUpdate("""
-            UPDATE users
-            SET status = :status
-            WHERE id = :userId
-        """).bind("status", status.name())
-            .bind("userId", userId)
-            .execute();
+                                UPDATE users
+                                SET status = :status
+                                WHERE id = :userId
+                            """).bind("status", status.name())
+                    .bind("userId", userId)
+                    .execute();
 
             handle.createUpdate("""
-            UPDATE user_roles
-            SET role_id = :roleId
-            WHERE user_id = :userId
-        """).bind("roleId", roleId)
-            .bind("userId", userId)
-            .execute();
+                                UPDATE user_roles
+                                SET role_id = :roleId
+                                WHERE user_id = :userId
+                            """).bind("roleId", roleId)
+                    .bind("userId", userId)
+                    .execute();
             return 1;
         });
     }
@@ -264,27 +286,27 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         return getJdbi().inTransaction(handle -> {
 
             int userId = handle.createUpdate("""
-            INSERT INTO users (
-                first_name,
-                last_name,
-                username,
-                email,
-                password,
-                phone,
-                avatar_url,
-                status
-            )
-            VALUES (
-                :firstName,
-                :lastName,
-                :username,
-                :email,
-                :password,
-                :phone,
-                :avatarUrl,
-                :status
-            )
-        """)
+                                INSERT INTO users (
+                                    first_name,
+                                    last_name,
+                                    username,
+                                    email,
+                                    password,
+                                    phone,
+                                    avatar_url,
+                                    status
+                                )
+                                VALUES (
+                                    :firstName,
+                                    :lastName,
+                                    :username,
+                                    :email,
+                                    :password,
+                                    :phone,
+                                    :avatarUrl,
+                                    :status
+                                )
+                            """)
                     .bindBean(user)
                     .bind("status", user.getStatus().name())
                     .executeAndReturnGeneratedKeys("id")
@@ -292,9 +314,9 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
                     .one();
 
             handle.createUpdate("""
-            INSERT INTO user_roles(user_id, role_id)
-            VALUES(:userId, :roleId)
-        """)
+                                INSERT INTO user_roles(user_id, role_id)
+                                VALUES(:userId, :roleId)
+                            """)
                     .bind("userId", userId)
                     .bind("roleId", user.getRoleId())
                     .execute();
