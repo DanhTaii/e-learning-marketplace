@@ -53,6 +53,7 @@ dependencies {
 
     implementation 'com.sendgrid:sendgrid-java:4.9.3'
 
+    // Thư viện ghi log hệ thống (SLF4J + Logback)
     implementation 'org.slf4j:slf4j-api:2.0.13'
     implementation 'ch.qos.logback:logback-classic:1.5.6'
 

@@ -1,0 +1,34 @@
+<configuration>
+    <!-- ConsoleAppender: Định nghĩa một cổng xuất dữ liệu ra màn hình Console của IntelliJ
+    Mục đích là theo dõi trực tiếp khi đang chạy thử code dưới localhost.-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--    <property name="LOG_DIR" value="D:/JAVA/WEB_EX/e-learning/logs" />-->
+    <property name="LOG_DIR" value="${catalina.base}/logs" />
+
+    <!-- RollingFileAppender: Nó không chỉ ghi log vào ổ đĩa mà còn biết "cuộn" (roll) -
+    tức là tự động phân tách file cũ và file mới để tránh file bị quá nặng. -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/e-learning.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Tên file log hiện tại đang được ghi vào. Nó nằm trong thư mục logs ở ngay thư mục gốc dự án. -->
+            <fileNamePattern>${LOG_DIR}/e-learning.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Hệ thống chỉ giữ lại file log của 30 ngày gần nhất. Đến ngày thứ 31, nó sẽ tự động xóa file -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Khi đặt là info, hệ thống sẽ bỏ qua các log chi tiết thừa thãi của hệ thống (TRACE, DEBUG)
+    và chỉ cho phép các log mang tính thông tin (INFO), cảnh báo (WARN), và lỗi nghiêm trọng (ERROR) được đi qua. -->
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
