@@ -68,7 +68,7 @@ dependencies {
 
 // Đóng gói file WAR với tên e-learning.war
 war {
-    archiveFileName = 'e-learning.war'
+    archiveFileName = 'ROOT.war'
 }
 
 // Hỗ trợ tiếng Việt khi compile

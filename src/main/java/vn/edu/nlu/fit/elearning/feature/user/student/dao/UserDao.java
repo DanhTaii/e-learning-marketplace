@@ -14,6 +14,8 @@ public interface UserDao {
 
     User findUserByEmail(String email);
 
+    User findByProviderAndProviderId(String provider, String providerId);
+
     boolean findUserByUsername(String username);
 
     int resetPassword(String newPassword, String userMail);

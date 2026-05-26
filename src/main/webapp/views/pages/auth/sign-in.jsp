@@ -1,4 +1,5 @@
 <%@ page import="vn.edu.nlu.fit.elearning.feature.google.service.GoogleConstants" %>
+<%@ page import="vn.edu.nlu.fit.elearning.feature.facebook.service.FacebookConstants" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -44,7 +45,7 @@
                                 error = request.getParameter("error");
                             }
 
-                            if ("auth_required".equals(error)) {
+                            if ("auth_required" .equals(error)) {
                                 error = "Vui lòng đăng nhập để thực hiện tính năng này!";
                             }
 
@@ -58,8 +59,8 @@
                             <div class="form__title text-big-title">ĐĂNG NHẬP</div>
 
                             <div class="add-to-fix-1">
-<%--                                <span class="add-to-fix-2"> <%= error %> </span>--%>
-                                    <span class="add-to-fix-2"> <c:out value="${error}"/> </span>
+                                <%--                                <span class="add-to-fix-2"> <%= error %> </span>--%>
+                                <span class="add-to-fix-2"> <c:out value="${error}"/> </span>
                             </div>
                             <div class="form__input input-1">
                                 <input class="input-text text-big" placeholder="Nhập email của bạn"
@@ -111,7 +112,7 @@
                                         <img class="image" src="assets/image/search.png" alt="Google">
                                     </div>
                                 </a>
-                                <a href="https://www.facebook.com/v19.0/dialog/oauth?client_id=${initParam.FACEBOOK_APP_ID}&redirect_uri=https://wabi.id.vn/sign-in/facebook&scope=email,public_profile"
+                                <a href="https://www.facebook.com/v19.0/dialog/oauth?client_id=<%=FacebookConstants.FACEBOOK_APP_ID%>&redirect_uri=<%=FacebookConstants.getRedirectUri()%>&response_type=code&scope=email,public_profile&auth_type=rerequest"
                                    class="social-link">
                                     <div class="socials__box google">
                                         <img class="image" src="assets/image/facebook.png" alt="Facebook">

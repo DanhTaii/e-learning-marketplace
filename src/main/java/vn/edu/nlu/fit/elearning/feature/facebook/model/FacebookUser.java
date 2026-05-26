@@ -1,12 +1,27 @@
 package vn.edu.nlu.fit.elearning.feature.facebook.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class FacebookUser implements Serializable {
 
+    @SerializedName("id")
     private String id;
-    private String name;
+
+//    @SerializedName("name")
+//    private String name;
+
+    @SerializedName("first_name")
+    private String firstName; // Tự động map từ first_name
+
+    @SerializedName("last_name")
+    private String lastName;   // Tự động map từ last_name
+
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("picture")
     private Picture picture;
 
     public static class Picture {
@@ -49,12 +64,29 @@ public class FacebookUser implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -71,5 +103,15 @@ public class FacebookUser implements Serializable {
 
     public void setPicture(Picture picture) {
         this.picture = picture;
+    }
+
+    @Override
+    public String toString() {
+        return "FacebookUser{" +
+                "id='" + id + '\'' +
+//                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", picture=" + picture +
+                '}';
     }
 }

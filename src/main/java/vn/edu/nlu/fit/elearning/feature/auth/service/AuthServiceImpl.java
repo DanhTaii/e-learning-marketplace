@@ -62,23 +62,25 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User processSocialLogin(GoogleUser googleUser) {
-        User user = userService.getEntityByEmail(googleUser.getEmail());
+    public UserShortResponse processSocialLogin(GoogleUser googleUser) {
+        UserShortResponse user = userService.getUserByEmail(googleUser.getEmail());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getGiven_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getFamily_name());
 //        System.out.println("Tên lấy từ Google: " + googleUser.getName());
 
         if (user == null) {
-            user = new User();
-            user.setEmail(googleUser.getEmail());
+            User newUser = new User();
+            newUser.setEmail(googleUser.getEmail());
             // Gọi đúng tên biến mới
-            user.setUsername(googleUser.getName());
-            user.setAvatarUrl(googleUser.getPicture());
+            newUser.setUsername(googleUser.getName());
+            newUser.setAvatarUrl(googleUser.getPicture());
 
-            user.setPassword("");
+            newUser.setPassword("");
 
             // Lưu vào database và lấy lại ID vừa tạo
-            userAdminService.createUser(user);
+            userAdminService.createUser(newUser);
+
+            user = userService.getUserByEmail(googleUser.getEmail());
         } else {
             // 3. Nếu ĐÃ CÓ: Cập nhật lại ảnh đại diện hoặc tên nếu Google có thay đổi
             user.setAvatarUrl(googleUser.getPicture());
@@ -141,29 +143,39 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Set<String> getUserPermissions(Integer userId){
+    public Set<String> getUserPermissions(Integer userId) {
         return userService.getPermissionsByUserId(userId);
     }
 
     @Override
-    public Set<String> getUserRoles(Integer userId){
+    public Set<String> getUserRoles(Integer userId) {
         return userService.getRolesByUserId(userId);
     }
 
-    public User processFacebookLogin(
-            FacebookUser facebookUser) {
+    public UserShortResponse processFacebookLogin(FacebookUser facebookUser) {
+        UserShortResponse user = userService.getUserByProviderAndProviderId("FACEBOOK", facebookUser.getId());
 
-        User user =
-                userService.getEntityByEmail(facebookUser.getEmail());
+        String email = facebookUser.getEmail();
+
+        // Xử lý việc có mail hay không có mail
+        if (email == null || email.trim().isEmpty()) {
+            // Nếu không có mail, tự sinh: "1503723471434396@facebook.wabi.id.vn"
+            email = facebookUser.getId() + "@facebook.wabi.id.vn";
+        }
 
         if (user == null) {
+            User newUser = new User();
+            newUser.setProvider("FACEBOOK");
+            newUser.setProviderId(facebookUser.getId());
+            newUser.setEmail(email);
+            newUser.setFirstName(facebookUser.getFirstName());
+            newUser.setLastName(facebookUser.getLastName());
+            newUser.setAvatarUrl(facebookUser.getAvatar());
+            newUser.setPassword("");
 
-            user = new User();
-            user.setEmail(facebookUser.getEmail());
-            user.setFirstName(facebookUser.getName());
-            user.setAvatarUrl(facebookUser.getAvatar());
+            userAdminService.createUser(newUser);
 
-            userAdminService.createUser(user);
+            user = userService.getUserByProviderAndProviderId("FACEBOOK", facebookUser.getId());
         }
 
         return user;
