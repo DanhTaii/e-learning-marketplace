@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.common.container;
 
+import vn.edu.nlu.fit.elearning.common.cache.CacheService;
+import vn.edu.nlu.fit.elearning.common.cache.CaffeineCacheImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDao;
 import vn.edu.nlu.fit.elearning.feature.access_token.dao.AccessTokenDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.access_token.service.AccessTokenService;
@@ -219,6 +221,10 @@ public class BeanContainer {
 
         AdminCertificateDao adminCertificateDao = new AdminCertificateDaoImp();
         beans.put(AdminCertificateService.class, new AdminCertificateServiceImp(adminCertificateDao));
+
+        // Khởi tạo CacheService với CaffeineCacheImpl và thêm vào container
+        CacheService cacheService = new CaffeineCacheImpl();
+        beans.put(CacheService.class, cacheService);
     }
 
     public static <T> T getBean(Class<T> clazz){
