@@ -81,9 +81,9 @@
     </div>
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/auth/sign-up.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/auth/sign-up.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
