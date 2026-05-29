@@ -12,6 +12,10 @@ import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
+import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
+import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
+import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,18 +24,23 @@ import java.util.List;
 public class OrderManagementController extends BaseController {
 
     private OrderService orderService;
-private CourseAdminService courseAdminService;
+    private CourseAdminService courseAdminService;
+    private PaymentMethodService paymentMethodService;
+
     @Override
     public void init() throws ServletException {
         super.init();
         this.orderService = BeanContainer.getBean(OrderService.class);
         this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OrderFilter filter = new OrderFilter();
         filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
         filter.setCourseId(RequestUtils.getParameterAsInt(request, "courseId", 0));
+        filter.setPaymentMethodId(RequestUtils.getParameterAsInt(request, "paymentMethodId", 0));
         filter.setCode(RequestUtils.getParameterAsString(request, "code", ""));
         filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
@@ -42,6 +51,8 @@ private CourseAdminService courseAdminService;
 
         List<Order> listOrders = orderService.searchOrders(filter);
         List<Course> listCourses = courseAdminService.getAllCourses();
+        List<PaymentMethod> listPaymentMethods = paymentMethodService.getAllPaymentMethods();
+        request.setAttribute("listPaymentMethods", listPaymentMethods);
         request.setAttribute("listOrders", listOrders);
         request.setAttribute("totalOrders", orderService.getTotalOrders());
         request.setAttribute("filter", filter);

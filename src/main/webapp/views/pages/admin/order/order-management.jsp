@@ -113,6 +113,16 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
+
+                                        <div class="filter-group">
+                                            <label>Phương thức thanh toán</label>
+                                            <select name="paymentMethodId">
+                                                <option value="">Tất cả phương thức thanh toán </option>
+                                                <c:forEach var="p" items="${listPaymentMethods}">
+                                                    <option value="${p.id}" ${param.paymentMethodId == p.id ? 'selected' : ''}><c:out value="${p.name}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="filter-actions">
                                         <a href="admin/categories" class="btn-clear">

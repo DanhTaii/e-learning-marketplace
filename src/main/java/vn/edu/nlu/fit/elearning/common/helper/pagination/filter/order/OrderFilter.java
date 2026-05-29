@@ -11,16 +11,18 @@ public class OrderFilter extends BaseSearchFilter {
     private String name;        // searchName
     private String code;        // code
     private int courseId;
+    private int paymentMethodId;
     private Timestamp fromDate;
     private Timestamp toDate;
     private OrderStatus status;
 
     public OrderFilter() {}
 
-    public OrderFilter(String name, String code, int courseId, Timestamp fromDate, Timestamp toDate, OrderStatus status) {
+    public OrderFilter(String name, String code, int courseId, int paymentMethodId, Timestamp fromDate, Timestamp toDate, OrderStatus status) {
         this.name = name;
         this.code = code;
         this.courseId = courseId;
+        this.paymentMethodId = paymentMethodId;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.status = status;
@@ -72,5 +74,13 @@ public class OrderFilter extends BaseSearchFilter {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public int getPaymentMethodId() {
+        return paymentMethodId;
+    }
+
+    public void setPaymentMethodId(int paymentMethodId) {
+        this.paymentMethodId = paymentMethodId;
     }
 }

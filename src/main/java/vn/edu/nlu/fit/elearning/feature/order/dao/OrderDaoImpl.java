@@ -194,6 +194,10 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
             where.append(" AND EXISTS (SELECT 1 FROM order_items oi WHERE oi.order_id = o.id AND oi.course_id = :courseIdSearch)");
             params.put("courseIdSearch", filter.getCourseId());
         }
+        if (filter.getPaymentMethodId() > 0) {
+            where.append(" AND o.payment_method_id = :paymentMethodId");
+            params.put("paymentMethodId", filter.getPaymentMethodId());
+        }
 
         if (filter.getFromDate() != null) {
             where.append(" AND o.created_at >= :fromDate");
