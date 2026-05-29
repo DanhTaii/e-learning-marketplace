@@ -90,23 +90,21 @@
                             <div class="order-amount">
                                 <div class="amount-row">
                                     <span class="text-big">Tổng tiền gốc:</span>
-                                    <span class="price text-big"><fmt:formatNumber value="${order.totalAmount}"
-                                                                                   groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big"><c:out value="${order.formatTotal}"></c:out></span>
                                 </div>
                                 <div class="amount-row">
                                     <span class="text-big">Giảm giá:</span>
-                                    <span class="price text-big">-<fmt:formatNumber value="${order.discountAmount}"
-                                                                                    groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big">-<c:out value="${order.formatDiscount}"> </c:out></span>
                                 </div>
                                 <div class="amount-row">
                                     <span class="text-big"> Voucher:</span>
-                                    <span class="price text-big">-<fmt:formatNumber value="${order.voucherAmount}"
-                                                                                    groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big">-<c:out value="${order.formatVoucherAmount}"></c:out>
+                                                                                   </span>
                                 </div>
                                 <div class="amount-row total">
                                     <span class="text-big">Thành tiền:</span>
-                                    <span class="price text-big"><fmt:formatNumber value="${order.finalAmount}"
-                                                                                   groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big"><c:out value="${order.formatFinal}"></c:out>
+                                                                                  </span>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +129,7 @@
                                         </td>
                                         <td class="title-cell"><c:out value="${item.courseTitle}"/></td>
                                         <td class="price-cell">
-                                            <fmt:formatNumber value="${item.priceAtPurchase}" groupingUsed="true"/> VNĐ
+                                            <c:out value="${item.priceAtPurchaseFormat}" ></c:out>
                                         </td>
                                     </tr>
                                 </c:forEach>

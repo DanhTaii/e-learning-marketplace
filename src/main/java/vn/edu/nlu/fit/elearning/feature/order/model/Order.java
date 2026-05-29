@@ -108,5 +108,7 @@ public class Order implements Serializable {
     public String getFormatFinal(){
         return formatAndConvert(this.finalAmount);
     }
-
+    public String getFormatVoucherAmount(){
+        return formatAndConvert(this.voucherAmount);
+    }
 }

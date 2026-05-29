@@ -23,7 +23,7 @@
                 </td>
                 <td>
                     <div class="course-row__font-content">
-                            <c:out value="${order.finalAmount}"/>
+                            <c:out value="${order.formatFinal}"/>
                     </div>
                 </td>
                 <td>
@@ -34,9 +34,25 @@
                     </div>
                 </td>
                 <td>
-                    <div class="course-row__font-content course-row__status ">
-                            <c:out value="${order.status}"/>
-                    </div>
+                    <c:choose>
+                    <c:when test="${order.status == 'PAID'}">
+                        <span class="badge course-row__status-public">
+                            PAID
+                        </span>
+                    </c:when>
+
+                    <c:when test="${order.status == 'PENDING'}">
+                        <span class="badge course-row__status-pending">
+                            PENDING
+                        </span>
+                    </c:when>
+
+                    <c:when test="${order.status == 'FAILED'}">
+                        <span class="badge course-row__status-failed">
+                            FAILED
+                        </span>
+                    </c:when>
+                    </c:choose>
                 </td>
                 <td>
                     <div class="course-row__created course-row__font-content">
