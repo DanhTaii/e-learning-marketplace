@@ -115,6 +115,16 @@
                         </div>
                     </a>
                 </li>
+                <li>
+                    <a href="admin/vouchers">
+                        <div class="menu-item__student ${currentPage == 'vouchers' ? 'student-list' : ''}">
+                                        <span class="container-1__menu-items menu-item__order">
+                                            <i class="fa-solid fa-ticket"></i>
+                                            <span>Voucher</span>
+                                        </span>
+                        </div>
+                    </a>
+                </li>
             </c:if>
             <c:if test="${userRoles.contains('SUPER_ADMIN')}">
                 <li>
