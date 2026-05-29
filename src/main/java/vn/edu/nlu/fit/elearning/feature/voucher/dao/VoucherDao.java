@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.dao;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface VoucherDao {
     void increaseUsedCount(Integer voucherId);
 
     boolean hasUserUsedVoucher(Integer userId, Integer voucherId);
+
+    List<Voucher> getVoucherBySearch(VoucherFilter filter);
+
+    int countVouchersByFilter(VoucherFilter filter);
 }

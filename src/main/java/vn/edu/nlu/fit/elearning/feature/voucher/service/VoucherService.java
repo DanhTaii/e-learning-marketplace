@@ -1,6 +1,8 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
+import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
 import vn.edu.nlu.fit.elearning.feature.tag.model.Tag;
 import vn.edu.nlu.fit.elearning.feature.voucher.dto.VoucherResultDTO;
@@ -18,4 +20,7 @@ public interface VoucherService {
 
     boolean hasUserUsedVoucher(Integer userId, Integer id);
 
+    List<Voucher> searchVouchers(VoucherFilter filter);
+
+    int getCountVouchersByFilter(VoucherFilter filter);
 }

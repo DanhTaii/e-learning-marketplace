@@ -25,7 +25,7 @@ public class Voucher implements Serializable {
 
     private Integer usageLimit;
     private Integer usedCount;
-    private VoucherStatus isActive;
+    private VoucherStatus status;
 
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -34,22 +34,12 @@ public class Voucher implements Serializable {
     public Voucher() {
     }
 
-    public Voucher(Integer id, String code, String title, String description, String discountType, BigDecimal discountValue, BigDecimal minOrderValue, BigDecimal maxDiscountValue, Timestamp startDate, Timestamp endDate, Integer usageLimit, Integer usedCount, VoucherStatus isActive, Timestamp createdAt, Timestamp updatedAt) {
-        this.id = id;
-        this.code = code;
-        this.title = title;
-        this.description = description;
-        this.discountType = discountType;
-        this.discountValue = discountValue;
-        this.minOrderValue = minOrderValue;
-        this.maxDiscountValue = maxDiscountValue;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.usageLimit = usageLimit;
-        this.usedCount = usedCount;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public VoucherStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(VoucherStatus status) {
+        this.status = status;
     }
 
     public Integer getId() {
@@ -162,14 +152,6 @@ public class Voucher implements Serializable {
 
     public void setUsedCount(Integer usedCount) {
         this.usedCount = usedCount;
-    }
-
-    public VoucherStatus getActive() {
-        return isActive;
-    }
-
-    public void setActive(VoucherStatus active) {
-        isActive = active;
     }
 
     public boolean isUsedByCurrentUser() {

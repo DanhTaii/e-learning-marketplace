@@ -111,8 +111,8 @@
                                                 <label>Loại giảm giá</label>
                                                 <select name="discountType">
                                                     <option value="" ${empty param.discountType ? 'selected' : ''}>Tất cả loại</option>
-                                                    <option value="PERCENTAGE" ${param.discountType == 'PERCENTAGE' ? 'selected' : ''}>Phần trăm (%)</option>
-                                                    <option value="FIXED_AMOUNT" ${param.discountType == 'FIXED_AMOUNT' ? 'selected' : ''}>Số tiền cố định</option>
+                                                    <option value="PERCENT" ${param.discountType == 'PERCENT' ? 'selected' : ''}>Phần trăm (%)</option>
+                                                    <option value="FIXED" ${param.discountType == 'FIXED' ? 'selected' : ''}>Số tiền cố định</option>
                                                 </select>
                                             </div>
 

@@ -4,55 +4,78 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <c:choose>
-    <c:when test="${not empty listLessons}">
-
-        <c:forEach var="lesson" items="${listLessons}">
+    <%-- Kiểm tra danh sách listVoucher được truyền từ Controller --%>
+    <c:when test="${not empty listVoucher}">
+        <c:forEach var="v" items="${listVoucher}">
             <tr>
-                <td><input type="checkbox" name="item-checkbox" class="lesson-checkbox item-checkbox"
-                           value="${lesson.id}">
-                </td>
                 <td>
-                    <div class="lesson-info">
-                        <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
-                        <div class="lesson-text">
-                            <div class="content__title"><c:out value="${lesson.title}"/></div>
-                            <div class="content__sub-title">Chương <c:out value="${lesson.orderIndex}"/> • Bài <c:out value="${lesson.orderIndex}"/></div>
-                        </div>
-                    </div>
+                    <input type="checkbox" name="item-checkbox" class="voucher-checkbox item-checkbox" value="${v.id}">
                 </td>
-                    <%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
-                <td class="text-bold"><c:out value="${lesson.durationMinutes}"/>:00</td>
-                <td class="text-light">
-                    <fmt:formatDate value="${lesson.createdAt}" pattern="dd/MM/yyyy"/>
+
+                <td class="text-bold">
+                    <span class="code-badge title"><c:out value="${v.code}"/></span>
                 </td>
+
+                <td>
+                    <div class="content__title"><c:out value="${v.title}"/></div>
+                </td>
+
                 <td>
                     <c:choose>
-                        <c:when test="${lesson.videoUrl != null && lesson.videoUrl != ''}">
-                            <i class="fa-solid fa-circle-check icon-success"></i>
+                        <c:when test="${v.discountType eq 'PERCENT'}">
+                            <span class="badge type-percentage">Phần trăm (%)</span>
                         </c:when>
                         <c:otherwise>
-                            <i class="fa-solid fa-circle-exclamation icon-danger"></i>
+                            <span class="badge type-fixed">Số tiền cố định</span>
                         </c:otherwise>
                     </c:choose>
                 </td>
+
+                <td class="text-bold">
+                    <c:choose>
+                        <c:when test="${v.discountType eq 'PERCENT'}">
+                            <fmt:formatNumber value="${v.discountValue}" type="number"/>%
+                        </c:when>
+                        <c:otherwise>
+                            <fmt:formatNumber value="${v.discountValue}" type="number" maxFractionDigits="0"/>đ
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+
+                <td class="text-light">
+                    <fmt:formatDate value="${v.startDate}" pattern="dd/MM/yyyy"/> -
+                    <fmt:formatDate value="${v.endDate}" pattern="dd/MM/yyyy"/>
+                </td>
+
+                <td>
+                    <span class="text-bold"><c:out value="${v.usedCount}"/></span> /
+                    <span class="text-muted">
+                        <c:choose>
+                            <c:when test="${empty v.usageLimit || v.usageLimit == 0}">∞</c:when>
+                            <c:otherwise><c:out value="${v.usageLimit}"/></c:otherwise>
+                        </c:choose>
+                    </span>
+                </td>
+
                 <td>
                     <c:choose>
-                        <c:when test="${lesson.status eq 'ACTIVE'}">
+                        <c:when test="${v.status eq 'ACTIVE'}">
                             <span class="badge course-row__status-public">Hoạt động</span>
                         </c:when>
-                        <c:otherwise>
-                            <span class="badge course-row-status-unactive">Bản nháp</span>
-                        </c:otherwise>
+                        <c:when test="${v.status eq 'INACTIVE'}">
+                            <span class="badge course-row-status-unactive">Tạm dừng</span>
+                        </c:when>
                     </c:choose>
                 </td>
+
+                    <%-- THAO TÁC --%>
                 <td class="action-btns">
-                    <a href="admin/lesson/detail?id=${lesson.id}" class="js-edit-link">
-                        <button type="button" class="icon-action-btn"><i
-                                class="fa-solid fa-pen"></i></button>
+                    <a href="admin/vouchers/detail?id=${v.id}" class="js-edit-link">
+                        <button type="button" class="icon-action-btn">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
                     </a>
-                    <button onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/action', isBulk: false})"
-                            type="button"
-                            class="icon-action-btn">
+                    <button onclick="setupConfirmModal({action: 'archive', ids: ${v.id}, url: 'admin/vouchers/action', isBulk: false})" type="button" class="icon-action-btn">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
@@ -60,13 +83,14 @@
         </c:forEach>
     </c:when>
 
+    <%-- KHÔNG TÌM THẤY KẾT QUẢ --%>
     <c:otherwise>
         <tr>
-            <td colspan="7">
+            <td colspan="9">
                 <div class="search-empty-state">
-                    <i class="fa-solid fa-book-open search-empty-icon"></i>
+                    <i class="fa-solid fa-ticket search-empty-icon"></i>
                     <div class="search-empty-title">
-                        Không tìm thấy bài học nào phù hợp
+                        Không tìm thấy voucher nào phù hợp
                     </div>
                 </div>
             </td>

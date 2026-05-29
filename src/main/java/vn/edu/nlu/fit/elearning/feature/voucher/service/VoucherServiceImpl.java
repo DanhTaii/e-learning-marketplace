@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.VoucherStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
 import vn.edu.nlu.fit.elearning.feature.voucher.dao.VoucherDao;
 import vn.edu.nlu.fit.elearning.feature.voucher.dto.VoucherResultDTO;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
@@ -34,7 +35,7 @@ public class VoucherServiceImpl implements VoucherService {
     public VoucherResultDTO applyVoucher(Integer userId, String code, double cartTotal) throws Exception {
         Voucher voucher = voucherDao.findByCode(code);
 
-        if (voucher == null || voucher.getActive() == VoucherStatus.INACTIVE) {
+        if (voucher == null || voucher.getStatus() == VoucherStatus.INACTIVE) {
             throw new Exception("Mã giảm giá không tồn tại hoặc không hoạt động!");
         }
         long currentTime = System.currentTimeMillis();
@@ -78,5 +79,13 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public boolean hasUserUsedVoucher(Integer userId, Integer id) {
       return  voucherDao.hasUserUsedVoucher(userId,id);
+    }
+    @Override
+    public List<Voucher> searchVouchers(VoucherFilter filter) {
+        return voucherDao.getVoucherBySearch(filter);
+    }
+    @Override
+    public int getCountVouchersByFilter(VoucherFilter filter) {
+        return voucherDao.countVouchersByFilter(filter);
     }
 }

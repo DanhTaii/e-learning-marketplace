@@ -29,8 +29,31 @@ public class VoucherManagementController extends BaseController {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        VoucherFilter filter = new VoucherFilter();
+        filter.setName(RequestUtils.getParameterAsString(request, "name", ""));
+        filter.setDiscountType(RequestUtils.getParameterAsString(request, "discountType", ""));
+        filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
+        filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
+        filter.setStatus(RequestUtils.getParameterAsVoucherStatus(request, "status"));
 
+        // Nhận diện trạng thái checkbox "Sắp hết hạn" từ bộ lọc JSP
+        boolean expiredSoon = request.getParameter("expiredSoon") != null;
+        filter.setExpiredSoon(expiredSoon);
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
+        // 2. Gọi nghiệp vụ Service lấy dữ liệu và tổng số lượng ban đầu
+        List<Voucher> listVouchers = voucherService.searchVouchers(filter);
+        request.setAttribute("listVoucher", listVouchers);
+        request.setAttribute("totalVouchers", voucherService.findAll().size()); // Hoặc hàm đếm tổng tất cả tương đương trong hệ thống
+        request.setAttribute("filter", filter);
+
+        int totalRecords = voucherService.getCountVouchersByFilter(filter);
+        int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
+
+        request.setAttribute("currentPageNumber", filter.getPage());
+        request.setAttribute("currentPage", "vouchers");
+        request.setAttribute("totalPages", totalPages);
 
         // Kiểm tra cơ chế render AJAX Partial hay Toàn trang (Full-page)
         String type = request.getParameter("renderType");
