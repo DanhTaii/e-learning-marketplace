@@ -52,13 +52,27 @@ function setupAutoFilter({formId, tableBodyId, url, deplay = 500}) {
 
         fetch(`${url}?${queryString}`, {
             method: 'GET',
-            header: {
+            headers: {
                 "X-Requested-With": "XMLHttpRequest",
                 'X-CSRF-Token': getCsrfToken()
             }
         })
             .then(response => {
                 if (!response.ok) throw new Error('Network was not ok !')
+                const revenueAmountHeader = response.headers.get('X-Revenue-Amount');
+                const revenueTitleHeader = response.headers.get('X-Revenue-Title');
+                if (revenueAmountHeader) {
+                    const amountEl = document.getElementById('revenueCardAmount');
+                    if (amountEl) {
+                        amountEl.innerText = decodeURIComponent(revenueAmountHeader.replace(/\+/g, '%20'));
+                    }
+                }
+                if (revenueTitleHeader) {
+                    const titleEl = document.getElementById('revenueCardTitle');
+                    if (titleEl) {
+                        titleEl.innerText = decodeURIComponent(revenueTitleHeader.replace(/\+/g, '%20'));
+                    }
+                }
                 return response.text()
             })
             .then(html => {

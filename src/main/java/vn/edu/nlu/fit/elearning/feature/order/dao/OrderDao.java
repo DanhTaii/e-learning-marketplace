@@ -41,4 +41,7 @@ public interface OrderDao {
     double getRevenueTotalByTimeRange(String timeRange);
 
     int countUsersByTimeRange(String timeRange);
+
+    //card kpi ở order-admin
+    double getTotalRevenueByDateRange(String fromDate, String toDate);
 }
