@@ -7,41 +7,71 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
+import vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.order.service.OrderService;
+import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
+import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentServiceImpl;
+import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
+import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet(name = "OrderManagementController", value = "/admin/orders")
 public class OrderManagementController extends BaseController {
 
     private OrderService orderService;
-private CourseAdminService courseAdminService;
+    private CourseAdminService courseAdminService;
+    private PaymentMethodService paymentMethodService;
+    private VoucherService voucherService;
+
     @Override
     public void init() throws ServletException {
         super.init();
         this.orderService = BeanContainer.getBean(OrderService.class);
         this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
+        this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
+        this.voucherService = BeanContainer.getBean(VoucherService.class);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OrderFilter filter = new OrderFilter();
         filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
         filter.setCourseId(RequestUtils.getParameterAsInt(request, "courseId", 0));
+        filter.setPaymentMethodId(RequestUtils.getParameterAsInt(request, "paymentMethodId", 0));
         filter.setCode(RequestUtils.getParameterAsString(request, "code", ""));
         filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
         filter.setStatus(RequestUtils.getParameterAsOrderStatus(request, "status"));
+        filter.setVoucherCode(RequestUtils.getParameterAsString(request, "voucherCode", ""));
 
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
+        String fromDate = request.getParameter("fromDate");
+        String toDate = request.getParameter("toDate");
+
+        double totalPaidAmount = orderService.getTotalRevenueByDateRange(fromDate, toDate);
+        String formattedTotalPaid = DataFormatting.formatAndConvert((int) totalPaidAmount);
+        request.setAttribute("totalPaidAmount", formattedTotalPaid);
+
+        request.setAttribute("oldFromDate", fromDate);
+        request.setAttribute("oldToDate", toDate);
+
         List<Order> listOrders = orderService.searchOrders(filter);
         List<Course> listCourses = courseAdminService.getAllCourses();
+        List<PaymentMethod> listPaymentMethods = paymentMethodService.getAllPaymentMethods();
+
+        request.setAttribute("listVouchers", voucherService.findAll());
+        request.setAttribute("listPaymentMethods", listPaymentMethods);
         request.setAttribute("listOrders", listOrders);
         request.setAttribute("totalOrders", orderService.getTotalOrders());
         request.setAttribute("filter", filter);
@@ -57,7 +87,14 @@ private CourseAdminService courseAdminService;
 
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {
+            boolean hasFilter = (fromDate != null && !fromDate.trim().isEmpty()) || (toDate != null && !toDate.trim().isEmpty());
+            String cardTitle = hasFilter ? "Doanh thu kỳ lọc" : "Tổng doanh thu toàn bộ";
 
+            String encodedAmount = URLEncoder.encode(formattedTotalPaid, StandardCharsets.UTF_8.toString());
+            String encodedTitle = URLEncoder.encode(cardTitle, StandardCharsets.UTF_8.toString());
+
+            response.setHeader("X-Revenue-Amount", encodedAmount);
+            response.setHeader("X-Revenue-Title", encodedTitle);
             this.forward(request, response, "/views/pages/admin/order/order-fragment.jsp");
         } else {
             this.forward(request, response, "/views/pages/admin/order/order-management.jsp");

@@ -18,7 +18,7 @@ public class VoucherServiceImpl implements VoucherService {
 
     @Override
     public List<Voucher> findAll() {
-        return List.of();
+        return voucherDao.findAll();
     }
 
     @Override
