@@ -183,3 +183,18 @@
     background: #001529;
     transform: translateY(-2px);
 }
+.order-info-grid {
+    display: flex;            /* Chuyển từ grid sang flex */
+    flex-wrap: nowrap;        /* Ép không cho rớt dòng */
+    gap: 15px;                /* Giảm gap xuống một chút để đỡ chật */
+    margin-bottom: 25px;
+}
+
+.info-item {
+    flex: 1;                  /* Bắt buộc các ô chia đều chiều rộng bằng nhau */
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    min-width: 0;             /* Mẹo giúp nội dung bên trong không phá vỡ layout khi quá dài */
+}

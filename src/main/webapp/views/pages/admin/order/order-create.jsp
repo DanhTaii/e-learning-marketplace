@@ -12,7 +12,7 @@
     <base href="${pageContext.request.contextPath}/">
 
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
@@ -41,7 +41,8 @@
                         <!-- Thông tin đơn hàng -->
                         <div class="order-info-section">
                             <div class="order-info-header">
-                                <h3 class="text-header">Mã đơn hàng: <span class="text-header"><c:out value="${order.orderCode}"/></span>
+                                <h3 class="text-header">Mã đơn hàng: <span class="text-header"><c:out
+                                        value="${order.orderCode}"/></span>
                                 </h3>
                                 <span class="order-status ${order.status == 'PAID' ? 'status-paid' : 'status-pending'}">
                                     <c:out value="${order.status}"/>
@@ -51,13 +52,28 @@
                             <div class="order-info-grid">
                                 <div class="info-item">
                                     <label>Khách hàng</label>
-                                                                        <p><c:out value="${order.usernameSnapshot}"/></p>
+                                    <p><c:out value="${order.usernameSnapshot}"/></p>
                                 </div>
                                 <div class="info-item">
                                     <label>Phương thức thanh toán</label>
-                                                                        <p> <c:out value="${order.paymentMethodId == 1 ? 'Momo' :
+                                    <p><c:out value="${order.paymentMethodId == 1 ? 'Momo' :
                                                                                 (order.paymentMethodId == 2 ? 'VNPAY' :
                                                                                         (order.paymentMethodId == 3 ? 'ZaloPay' : 'Chưa chọn'))}"/></p>
+                                </div>
+                                <div class="info-item">
+                                    <label>Mã Voucher áp dụng</label>
+                                    <p>
+                                        <c:choose>
+                                            <c:when test="${not empty order.voucherCode}">
+
+                        <c:out value="${order.voucherCode}"/>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p style="color: gray;">Không áp dụng</p>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </p>
                                 </div>
                                 <div class="info-item">
                                     <label>Thời gian tạo</label>
@@ -79,8 +95,13 @@
                                 </div>
                                 <div class="amount-row">
                                     <span class="text-big">Giảm giá:</span>
-                                    <span class="price text-big"><fmt:formatNumber value="${order.discountAmount}"
-                                                                                   groupingUsed="true"/> VNĐ</span>
+                                    <span class="price text-big">-<fmt:formatNumber value="${order.discountAmount}"
+                                                                                    groupingUsed="true"/> VNĐ</span>
+                                </div>
+                                <div class="amount-row">
+                                    <span class="text-big"> Voucher:</span>
+                                    <span class="price text-big">-<fmt:formatNumber value="${order.voucherAmount}"
+                                                                                    groupingUsed="true"/> VNĐ</span>
                                 </div>
                                 <div class="amount-row total">
                                     <span class="text-big">Thành tiền:</span>

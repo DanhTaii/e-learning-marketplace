@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="filter-actions">
-                                        <a href="admin/categories" class="btn-clear">
+                                        <a href="admin/orders" class="btn-clear">
                                             <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                         </a>
                                         <button type="submit" class="dark-button btn-submit">

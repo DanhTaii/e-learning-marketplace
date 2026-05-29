@@ -15,8 +15,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 
     @Override
     public int create(Order entity) {
-        String sql = "INSERT INTO orders (order_code, user_id, username_snapshot, payment_method_id, total_amount, discount_amount, final_amount, status,voucher_id)\n" +
-                "VALUES (:orderCode, :userId,:usernameSnapshot, :paymentMethodId, :totalAmount, :discountAmount, :finalAmount, :status,:voucherId)";
+        String sql = "INSERT INTO orders (order_code, user_id, username_snapshot, payment_method_id, total_amount, discount_amount,voucher_amount,final_amount, status,voucher_id)\n" +
+                "VALUES (:orderCode, :userId,:usernameSnapshot, :paymentMethodId, :totalAmount, :discountAmount, :voucherAmount ,:finalAmount, :status,:voucherId)";
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate(sql)
                     .bindBean(entity)
@@ -29,9 +29,10 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     @Override
     public Order findById(Integer orderId) {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
-                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
-                "o.paid_at, o.created_at, o.updated_at,  o.username_snapshot " +
+                "o.total_amount, o.discount_amount,o.voucher_amount, o.final_amount, o.status, " +
+                "o.paid_at, o.created_at, o.updated_at,  o.username_snapshot, o.voucher_id ,v.code AS voucherCode " +
                 "FROM orders o " +
+                "LEFT JOIN vouchers v ON o.voucher_id = v.id "+
                 "WHERE o.id = :id";
 
         return getJdbi().withHandle(handle ->
@@ -44,7 +45,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     }
     public Order findByCode(String orderCode) {
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
-                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.total_amount, o.discount_amount,o.voucher_amount, o.final_amount, o.status, " +
                 "o.paid_at, o.created_at, o.updated_at, o.voucher_id " +
                 "FROM orders o " +
                 "WHERE o.order_code = :orderCode";
@@ -148,7 +149,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         Map<String, Object> params = new HashMap<>();
         String whereClause = buildOrderWhereClause(filter, params);
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
-                "o.total_amount, o.discount_amount, o.final_amount, o.status, " +
+                "o.total_amount, o.discount_amount, o.voucher_amount ,o.final_amount, o.status, " +
                 "o.paid_at, o.created_at, o.updated_at, o.username_snapshot " +
                 "FROM orders o "
                 + whereClause

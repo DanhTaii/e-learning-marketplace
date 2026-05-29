@@ -18,6 +18,7 @@ public class Order implements Serializable {
     private Integer paymentMethodId;
     private int totalAmount;
     private int discountAmount;
+    private int voucherAmount;
     private int finalAmount;
     private OrderStatus status;
     private Timestamp paidAt;
@@ -25,8 +26,22 @@ public class Order implements Serializable {
     private Timestamp updatedAt;
     private List<OrderItem> items = new ArrayList<>();
     private Integer voucherId;
+    private String voucherCode;
     public Order() {}
+    public String getVoucherCode() {
+        return voucherCode;
+    }
 
+    public void setVoucherCode(String voucherCode) {
+        this.voucherCode = voucherCode;
+    }
+    public int getVoucherAmount() {
+        return voucherAmount;
+    }
+
+    public void setVoucherAmount(int voucherAmount) {
+        this.voucherAmount = voucherAmount;
+    }
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
