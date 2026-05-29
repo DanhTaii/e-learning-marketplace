@@ -123,6 +123,17 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
+                                        <div class="filter-group">
+                                            <label>Mã Voucher</label>
+                                            <select name="voucherCode">
+                                                <option value="">Tất cả voucher</option>
+                                                <c:forEach var="v" items="${listVouchers}">
+                                                    <option value="${v.code}" ${param.voucherCode == v.code ? 'selected' : ''}>
+                                                        <c:out value="${v.code}"/>
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="filter-actions">
                                         <a href="admin/orders" class="btn-clear">

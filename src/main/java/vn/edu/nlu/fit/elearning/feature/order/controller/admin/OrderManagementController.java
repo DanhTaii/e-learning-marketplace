@@ -16,6 +16,7 @@ import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentService;
 import vn.edu.nlu.fit.elearning.feature.payment.service.PaymentServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
+import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +27,7 @@ public class OrderManagementController extends BaseController {
     private OrderService orderService;
     private CourseAdminService courseAdminService;
     private PaymentMethodService paymentMethodService;
+    private VoucherService voucherService;
 
     @Override
     public void init() throws ServletException {
@@ -33,6 +35,7 @@ public class OrderManagementController extends BaseController {
         this.orderService = BeanContainer.getBean(OrderService.class);
         this.courseAdminService = BeanContainer.getBean(CourseAdminService.class);
         this.paymentMethodService = BeanContainer.getBean(PaymentMethodService.class);
+        this.voucherService = BeanContainer.getBean(VoucherService.class);
     }
 
     @Override
@@ -45,6 +48,7 @@ public class OrderManagementController extends BaseController {
         filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
         filter.setStatus(RequestUtils.getParameterAsOrderStatus(request, "status"));
+        filter.setVoucherCode(RequestUtils.getParameterAsString(request, "voucherCode", ""));
 
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
@@ -52,6 +56,8 @@ public class OrderManagementController extends BaseController {
         List<Order> listOrders = orderService.searchOrders(filter);
         List<Course> listCourses = courseAdminService.getAllCourses();
         List<PaymentMethod> listPaymentMethods = paymentMethodService.getAllPaymentMethods();
+
+        request.setAttribute("listVouchers", voucherService.findAll());
         request.setAttribute("listPaymentMethods", listPaymentMethods);
         request.setAttribute("listOrders", listOrders);
         request.setAttribute("totalOrders", orderService.getTotalOrders());

@@ -150,7 +150,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         String whereClause = buildOrderWhereClause(filter, params);
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.voucher_amount ,o.final_amount, o.status, " +
-                "o.paid_at, o.created_at, o.updated_at, o.username_snapshot " +
+                "o.paid_at, o.created_at, o.updated_at, o.username_snapshot, o.voucher_id " +
                 "FROM orders o "
                 + whereClause
                 + " ORDER BY o.created_at DESC LIMIT :limit OFFSET :offset";
@@ -190,7 +190,10 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
             where.append(" AND o.order_code LIKE :code");
             params.put("code", "%" + filter.getCode().trim() + "%");
         }
-
+        if (filter.getVoucherCode() != null && !filter.getVoucherCode().trim().isEmpty()) {
+            where.append(" AND EXISTS (SELECT 1 FROM vouchers v WHERE v.id = o.voucher_id AND v.code = :voucherCode)");
+            params.put("voucherCode", filter.getVoucherCode().trim());
+        }
         if (filter.getCourseId() > 0) {
             where.append(" AND EXISTS (SELECT 1 FROM order_items oi WHERE oi.order_id = o.id AND oi.course_id = :courseIdSearch)");
             params.put("courseIdSearch", filter.getCourseId());

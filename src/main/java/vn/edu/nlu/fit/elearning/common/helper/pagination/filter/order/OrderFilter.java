@@ -7,7 +7,7 @@ import vn.edu.nlu.fit.elearning.common.helper.pagination.base.BaseSearchFilter;
 import java.sql.Timestamp;
 
 public class OrderFilter extends BaseSearchFilter {
-
+    private String voucherCode;
     private String name;        // searchName
     private String code;        // code
     private int courseId;
@@ -26,6 +26,14 @@ public class OrderFilter extends BaseSearchFilter {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.status = status;
+    }
+
+    public String getVoucherCode() {
+        return voucherCode;
+    }
+
+    public void setVoucherCode(String voucherCode) {
+        this.voucherCode = voucherCode;
     }
 
     public String getName() {
