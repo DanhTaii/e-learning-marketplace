@@ -322,16 +322,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     }
     @Override
     public int countOrdersByTimeRange(String timeRange) {
-        String timeCondition = buildTimeCondition(timeRange, "created_at");
-
-        String sql = "SELECT COUNT(id) FROM orders WHERE " + timeCondition;
-
-        return getJdbi().withHandle(handle -> {
-            return handle.createQuery(sql)
-                    .mapTo(Integer.class)
-                    .findFirst()
-                    .orElse(0);
-        });
+        return countTableByTimeRange("orders", timeRange);
     }
     @Override
     public double getRevenueTotalByTimeRange(String timeRange) {
@@ -348,14 +339,35 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     }
     @Override
     public int countUsersByTimeRange(String timeRange) {
+        return countTableByTimeRange("users", timeRange);
+    }
+
+    private int countTableByTimeRange(String tableName, String timeRange) {
         String timeCondition = buildTimeCondition(timeRange, "created_at");
-        String sql = "SELECT COUNT(id) FROM users WHERE " + timeCondition;
+        String sql = "SELECT COUNT(id) FROM " + tableName + " WHERE " + timeCondition;
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapTo(Integer.class)
+                        .findFirst()
+                        .orElse(0)
+        );
+    }
+    //card kpi ở order-admin
+    @Override
+    public double getTotalRevenueByDateRange(String fromDate, String toDate) {
+        String sql = "SELECT COALESCE(SUM(o.final_amount), 0) " +
+                "FROM orders o " +
+                "WHERE o.status = 'PAID' " +
+                "AND (:fromDate IS NULL OR :fromDate = '' OR DATE(o.created_at) >= :fromDate) " +
+                "AND (:toDate IS NULL OR :toDate = '' OR DATE(o.created_at) <= :toDate)";
 
         return getJdbi().withHandle(handle -> {
             return handle.createQuery(sql)
-                    .mapTo(Integer.class)
-                    .findFirst()
-                    .orElse(0);
+                    .bind("fromDate", fromDate)
+                    .bind("toDate", toDate)
+                    .mapTo(Double.class)
+                    .one();
         });
     }
 }

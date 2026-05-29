@@ -47,6 +47,28 @@
                                         </span>
                                 </div>
                             </div>
+                            <div class="header__revenue-card">
+                                <div class="revenue-card__icon">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+
+                                <div class="revenue-card__content">
+        <span class="revenue-card__title" id="revenueCardTitle">
+            <c:choose>
+                <c:when test="${not empty param.fromDate || not empty param.toDate}">
+                    Doanh thu kỳ lọc
+                </c:when>
+                <c:otherwise>
+                    Tổng doanh thu toàn bộ
+                </c:otherwise>
+            </c:choose>
+        </span>
+
+                                    <span class="revenue-card__amount" id="revenueCardAmount">
+            <c:out value="${totalPaidAmount}"></c:out>
+        </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="container-2__body">
                             <form method="get" action="admin/orders" class="advanced-filter" id="filterForm">
@@ -86,9 +108,15 @@
                                             <label>Trạng thái</label>
                                             <select name="status">
                                                 <option value="" ${empty param.status ? 'selected' : ''}>Tất cả</option>
-                                                <option value="PAID" ${param.status == 'PAID' ? 'selected' : ''}>Thanh toán thành công</option>
-                                                <option value="FAILED" ${param.status == 'FAILED' ? 'selected' : ''}>Thanh toán thất bại</option>
-                                                <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>Đang thanh toán</option>
+                                                <option value="PAID" ${param.status == 'PAID' ? 'selected' : ''}>Thanh
+                                                    toán thành công
+                                                </option>
+                                                <option value="FAILED" ${param.status == 'FAILED' ? 'selected' : ''}>
+                                                    Thanh toán thất bại
+                                                </option>
+                                                <option value="PENDING" ${param.status == 'PENDING' ? 'selected' : ''}>
+                                                    Đang thanh toán
+                                                </option>
                                             </select>
                                         </div>
 
@@ -109,7 +137,8 @@
                                             <select name="courseId">
                                                 <option value="">Tất cả khóa học</option>
                                                 <c:forEach var="c" items="${listCourse}">
-                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
+                                                    <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}>
+                                                        <c:out value="${c.title}"/></option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -117,9 +146,10 @@
                                         <div class="filter-group">
                                             <label>Phương thức thanh toán</label>
                                             <select name="paymentMethodId">
-                                                <option value="">Tất cả phương thức thanh toán </option>
+                                                <option value="">Tất cả phương thức thanh toán</option>
                                                 <c:forEach var="p" items="${listPaymentMethods}">
-                                                    <option value="${p.id}" ${param.paymentMethodId == p.id ? 'selected' : ''}><c:out value="${p.name}"/></option>
+                                                    <option value="${p.id}" ${param.paymentMethodId == p.id ? 'selected' : ''}>
+                                                        <c:out value="${p.name}"/></option>
                                                 </c:forEach>
                                             </select>
                                         </div>

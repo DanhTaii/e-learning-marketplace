@@ -46,4 +46,6 @@ public interface OrderService {
     int countOrdersByTimeRange(String timeRange);
 
     double getRevenueTotalByTimeRange(String timeRange);
+
+    double getTotalRevenueByDateRange(String fromDate, String toDate);
 }

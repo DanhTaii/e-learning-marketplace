@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.order.OrderFilter;
+import vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
@@ -19,6 +20,8 @@ import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServ
 import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet(name = "OrderManagementController", value = "/admin/orders")
@@ -53,6 +56,16 @@ public class OrderManagementController extends BaseController {
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
+        String fromDate = request.getParameter("fromDate");
+        String toDate = request.getParameter("toDate");
+
+        double totalPaidAmount = orderService.getTotalRevenueByDateRange(fromDate, toDate);
+        String formattedTotalPaid = DataFormatting.formatAndConvert((int) totalPaidAmount);
+        request.setAttribute("totalPaidAmount", formattedTotalPaid);
+
+        request.setAttribute("oldFromDate", fromDate);
+        request.setAttribute("oldToDate", toDate);
+
         List<Order> listOrders = orderService.searchOrders(filter);
         List<Course> listCourses = courseAdminService.getAllCourses();
         List<PaymentMethod> listPaymentMethods = paymentMethodService.getAllPaymentMethods();
@@ -74,7 +87,14 @@ public class OrderManagementController extends BaseController {
 
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {
+            boolean hasFilter = (fromDate != null && !fromDate.trim().isEmpty()) || (toDate != null && !toDate.trim().isEmpty());
+            String cardTitle = hasFilter ? "Doanh thu kỳ lọc" : "Tổng doanh thu toàn bộ";
 
+            String encodedAmount = URLEncoder.encode(formattedTotalPaid, StandardCharsets.UTF_8.toString());
+            String encodedTitle = URLEncoder.encode(cardTitle, StandardCharsets.UTF_8.toString());
+
+            response.setHeader("X-Revenue-Amount", encodedAmount);
+            response.setHeader("X-Revenue-Title", encodedTitle);
             this.forward(request, response, "/views/pages/admin/order/order-fragment.jsp");
         } else {
             this.forward(request, response, "/views/pages/admin/order/order-management.jsp");
