@@ -27,7 +27,7 @@
                         </c:when>
                         <c:otherwise>
                             <div class="course-row__status course-row__font-content course-row-status-unactive">
-                                Không hoạt động
+                                Tạm dừng
                             </div>
                         </c:otherwise>
                     </c:choose>

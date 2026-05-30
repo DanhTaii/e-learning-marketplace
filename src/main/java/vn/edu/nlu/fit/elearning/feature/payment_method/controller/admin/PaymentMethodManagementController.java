@@ -58,6 +58,13 @@ public class PaymentMethodManagementController extends BaseController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
 
+        String query = request.getParameter("currentQuery");
+        String newPath = "/admin/payment-methods" + (query != null && !query.isEmpty() ? "?" + query : "");
+
+        this.redirect(request, response, newPath);
     }
+
 }
