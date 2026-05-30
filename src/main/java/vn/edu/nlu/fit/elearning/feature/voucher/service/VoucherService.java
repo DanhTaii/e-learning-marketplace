@@ -42,4 +42,10 @@ public interface VoucherService {
     int getCountVouchersArchiveByFilter(VoucherArchiveFilter filter);
 
     int restoreVouchersByIds(List<Integer> ids);
+
+    int createVoucher(Voucher voucher);
+
+    boolean updateVoucher(Voucher voucher);
+
+    boolean checkVoucherCode(String code);
 }

@@ -37,7 +37,7 @@
                             <fmt:formatNumber value="${v.discountValue}" type="number"/>%
                         </c:when>
                         <c:otherwise>
-                            <fmt:formatNumber value="${v.discountValue}" type="number" maxFractionDigits="0"/>đ
+                            <c:out value="${v.formatDiscountValue}"></c:out>
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -70,7 +70,7 @@
 
                     <%-- THAO TÁC --%>
                 <td class="action-btns">
-                    <a href="admin/vouchers/detail?id=${v.id}" class="js-edit-link">
+                    <a href="admin/voucher/detail?id=${v.id}" class="js-edit-link">
                         <button type="button" class="icon-action-btn">
                             <i class="fa-solid fa-pen"></i>
                         </button>

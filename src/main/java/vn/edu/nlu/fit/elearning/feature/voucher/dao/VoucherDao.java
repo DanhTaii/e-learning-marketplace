@@ -11,6 +11,9 @@ public interface VoucherDao {
 
     int create(Voucher entity);
 
+    boolean update(Voucher entity);
+
+
     List<Voucher> findAll();
     List<Voucher> findValidVouchers();
     Voucher findByCode(String code);

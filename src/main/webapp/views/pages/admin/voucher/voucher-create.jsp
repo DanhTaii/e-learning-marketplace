@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,13 +119,13 @@
                                     <div class="form-group flex-1">
                                         <label class="label-style">Ngày bắt đầu</label>
                                         <input type="datetime-local" name="startDate" class="input-modern"
-                                               value="${voucher != null ? voucher.startDate : param.startDate}">
+                                               value="<fmt:formatDate value="${voucher.startDate}" pattern="yyyy-MM-dd'T'HH:mm" />">
                                         <span class="error-client" id="error_startDate"><c:out value="${errors.startDate}"/></span>
                                     </div>
                                     <div class="form-group flex-1">
                                         <label class="label-style">Ngày kết thúc</label>
                                         <input type="datetime-local" name="endDate" class="input-modern"
-                                               value="${voucher != null ? voucher.endDate : param.endDate}">
+                                               value="<fmt:formatDate value="${voucher.endDate}" pattern="yyyy-MM-dd'T'HH:mm" />">
                                         <span class="error-client" id="error_endDate"><c:out value="${errors.endDate}"/></span>
                                     </div>
                                 </div>
@@ -141,10 +142,10 @@
                                         <label class="label-style">Trạng thái hiển thị</label>
                                         <select class="input-modern" name="status">
                                             <option value="INACTIVE" ${(voucher.status == 'INACTIVE' || param.status == 'INACTIVE' ) ? 'selected' : ''}>
-                                                Vô hiệu hóa - Khách không dùng được
+                                                Vô hiệu hóa
                                             </option>
                                             <option value="ACTIVE" ${(voucher.status == 'ACTIVE' || param.status == 'ACTIVE' )? 'selected' : ''}>
-                                                Hoạt động - Có thể áp dụng
+                                                Hoạt động
                                             </option>
                                         </select>
                                         <span class="error-client" id="error_status"><c:out value="${errors.status}"/></span>

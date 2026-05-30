@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
+
 public class Voucher implements Serializable {
     private Integer id;
     private String code;
@@ -16,9 +18,9 @@ public class Voucher implements Serializable {
     // Loại giảm giá: "FIXED" hoặc "PERCENT"
     private String discountType;
 
-    private BigDecimal discountValue;
-    private BigDecimal minOrderValue;
-    private BigDecimal maxDiscountValue;
+    private int discountValue;
+    private int minOrderValue;
+    private Integer maxDiscountValue;
 
     private Timestamp startDate;
     private Timestamp endDate;
@@ -112,27 +114,27 @@ public class Voucher implements Serializable {
         this.discountType = discountType;
     }
 
-    public BigDecimal getDiscountValue() {
+    public int getDiscountValue() {
         return discountValue;
     }
 
-    public void setDiscountValue(BigDecimal discountValue) {
+    public void setDiscountValue(int discountValue) {
         this.discountValue = discountValue;
     }
 
-    public BigDecimal getMinOrderValue() {
+    public int getMinOrderValue() {
         return minOrderValue;
     }
 
-    public void setMinOrderValue(BigDecimal minOrderValue) {
+    public void setMinOrderValue(int minOrderValue) {
         this.minOrderValue = minOrderValue;
     }
 
-    public BigDecimal getMaxDiscountValue() {
+    public Integer getMaxDiscountValue() {
         return maxDiscountValue;
     }
 
-    public void setMaxDiscountValue(BigDecimal maxDiscountValue) {
+    public void setMaxDiscountValue(Integer maxDiscountValue) {
         this.maxDiscountValue = maxDiscountValue;
     }
 
@@ -190,5 +192,8 @@ public class Voucher implements Serializable {
 
     public void setUsedByCurrentUser(boolean usedByCurrentUser) {
         this.usedByCurrentUser = usedByCurrentUser;
+    }
+    public String getFormatDiscountValue(){
+        return formatAndConvert(this.discountValue);
     }
 }

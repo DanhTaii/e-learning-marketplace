@@ -56,18 +56,18 @@ public class VoucherServiceImpl implements VoucherService {
             throw new Exception("Bạn đã sử dụng mã giảm giá này rồi!");
         }
 
-        if (cartTotal < voucher.getMinOrderValue().doubleValue()) {
+        if (cartTotal < voucher.getMinOrderValue()) {
             throw new Exception("Đơn hàng chưa đạt giá trị tối thiểu " + voucher.getMinOrderValue() + "đ");
         }
 
         double discountAmount = 0;
         if ("FIXED".equals(voucher.getDiscountType())) {
-            discountAmount = voucher.getDiscountValue().doubleValue();
+            discountAmount = voucher.getDiscountValue();
         } else if ("PERCENT".equals(voucher.getDiscountType())) {
-            discountAmount = cartTotal * (voucher.getDiscountValue().doubleValue() / 100);
+            discountAmount = cartTotal * ((double) voucher.getDiscountValue() / 100);
 
-            if (voucher.getMaxDiscountValue() != null && discountAmount > voucher.getMaxDiscountValue().doubleValue()) {
-                discountAmount = voucher.getMaxDiscountValue().doubleValue();
+            if (voucher.getMaxDiscountValue() != null && discountAmount > voucher.getMaxDiscountValue()) {
+                discountAmount = voucher.getMaxDiscountValue();
             }
         }
         double finalTotal = Math.max(0, cartTotal - discountAmount);
@@ -174,6 +174,29 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public int restoreVouchersByIds(List<Integer> ids) {
         return voucherDao.restoreVouchersByIds(ids);
+    }
+
+    @Override
+    public int createVoucher(Voucher voucher) {
+        try {
+            return voucherDao.create(voucher);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    @Override
+    public boolean updateVoucher(Voucher voucher) {
+        try {
+            return voucherDao.update(voucher);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    @Override
+    public boolean checkVoucherCode(String code) {
+
+        return voucherDao.findByCode(code) != null;
     }
 }
 

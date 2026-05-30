@@ -38,6 +38,32 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
         });
     }
     @Override
+    public boolean update(Voucher entity) {
+        String sql = "UPDATE vouchers SET " +
+                "code = :code, " +
+                "title = :title, " +
+                "description = :description, " +
+                "discount_type = :discountType, " +
+                "discount_value = :discountValue, " +
+                "min_order_value = :minOrderValue, " +
+                "max_discount_value = :maxDiscountValue, " +
+                "usage_limit = :usageLimit, " +
+                "start_date = :startDate, " +
+                "end_date = :endDate, " +
+                "status = :status, " +
+                "updated_at = NOW() " + // Cập nhật lại thời gian sửa đổi
+                "WHERE id = :id";
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bindBean(entity)
+                    .execute() > 0;
+        });
+    }
+
+
+
+    @Override
     public List<Voucher> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT * FROM vouchers WHERE is_deleted = 0 ORDER BY created_at DESC")
