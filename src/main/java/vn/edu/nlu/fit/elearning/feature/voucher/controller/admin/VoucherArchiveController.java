@@ -82,5 +82,49 @@ public class VoucherArchiveController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 1. Lấy danh sách ID từ checkbox (Bulk action) hoặc id lẻ từ nút icon action (Single action)
+        List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        int singleId = RequestUtils.getParameterAsInt(request, "id", 0);
+
+        if (singleId > 0) {
+            ids = List.of(singleId);
+        }
+
+        String query = request.getParameter("currentQuery");
+        String queryString = (query != null && !query.isEmpty()) ? "?" + query : "";
+        String newPath = "/admin/vouchers/archive" + queryString;
+
+        int result = 0;
+
+        if (action == null || ids == null || ids.isEmpty()) {
+            this.redirect(request, response, newPath);
+            return;
+        }
+
+        switch (action) {
+            case "delete":
+                result = voucherService.deleteVouchersByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Xóa vĩnh viễn " + result + " voucher thành công", newPath);
+                    return;
+                }
+                break;
+
+            case "restore":
+                result = voucherService.restoreVouchersByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Khôi phục " + result + " voucher thành công", newPath);
+                    return;
+                }
+                break;
+
+            default:
+                handleError(request, response, "Thao tác thực hiện thất bại!");
+                break;
+        }
+
+        // Nếu result = 0 (Thất bại) thì load lại trang
+        this.redirect(request, response, newPath);
     }
 }

@@ -18,11 +18,11 @@
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${item.discountType eq 'PERCENT'}">
-                            <fmt:formatNumber value="${item.discountValue}" type="number"/>%
+                        <c:when test="${v.discountType eq 'PERCENT'}">
+                            <span class="badge type-percentage">Phần trăm (%)</span>
                         </c:when>
                         <c:otherwise>
-                            <fmt:formatNumber value="${item.discountValue}" type="number" maxFractionDigits="0"/>đ
+                            <span class="badge type-fixed">Số tiền cố định</span>
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -32,19 +32,7 @@
                 <td>
                     <span class="badge badge-reason"><c:out value="${item.deleteReason}"/></span>
                 </td>
-                <td class="action-btns">
-                        <%-- Đổi endpoint URL xử lý modal confirm về admin/vouchers/archive --%>
-                    <button onclick="setupConfirmModal({action: 'restore', ids: ${item.id}, url: 'admin/vouchers/archive', isBulk: false})"
-                            type="button"
-                            class="icon-action-btn">
-                        <i class="fa-solid fa-rotate-left"></i>
-                    </button>
-                    <button onclick="setupConfirmModal({action: 'delete', ids: ${item.id}, url: 'admin/vouchers/archive', isBulk: false})"
-                            type="button"
-                            class="icon-action-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </td>
+
             </tr>
         </c:forEach>
     </c:when>

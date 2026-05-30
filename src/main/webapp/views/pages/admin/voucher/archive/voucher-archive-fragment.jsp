@@ -11,7 +11,6 @@
             <th>LOẠI GIẢM GIÁ</th>
             <th>NGÀY LƯU TRỮ</th>
             <th>LÝ DO</th>
-            <th>THAO TÁC</th>
         </tr>
         </thead>
         <tbody>
