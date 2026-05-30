@@ -6,19 +6,19 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 public class UserProfileRequest {
     private String username;
     private String email;
+    private String firstName;
+    private String lastName;
     private String phone;
-    private Role role;
     private BaseStatus status;
     private String avatarUrl;
 
     public UserProfileRequest() {
     }
 
-    public UserProfileRequest(String username, String email, String phone, Role role, BaseStatus status, String avatarUrl) {
+    public UserProfileRequest(String username, String email, String phone, String firstName, String lastName, BaseStatus status, String avatarUrl) {
         this.username = username;
         this.email = email;
         this.phone = phone;
-        this.role = role;
         this.status = status;
         this.avatarUrl = avatarUrl;
     }
@@ -39,20 +39,28 @@ public class UserProfileRequest {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public BaseStatus getStatus() {

@@ -78,24 +78,14 @@ public class UserServiceImpl implements UserService {
     public boolean updateUserProfile(int userId, UserProfileRequest req) {
         String newUsername = req.getUsername();
         String newPhone = req.getPhone();
-        String avatarUrl = req.getAvatarUrl();
         User currentUser = userDao.findById(userId);
 
         if (newUsername == null || newUsername.trim().isEmpty()) {
             throw new IllegalArgumentException("Tên hiển thị không được để trống!");
         }
-        if (avatarUrl == null || avatarUrl.trim().isEmpty()) {
-            throw new IllegalArgumentException("Đường link ảnh không được để trống!");
-        }
 
         //So sánh bằng object sẽ an toàn do nếu dùng equal sẽ không xử lý được TH null
         boolean isUsernameChanged = !newUsername.equals(currentUser.getUsername());
-        boolean isPhoneChanged = !Objects.equals(newPhone, currentUser.getPhone());
-        boolean isAvatarChanged = !Objects.equals(avatarUrl, currentUser.getAvatarUrl());
-
-        if (!isUsernameChanged && !isPhoneChanged && !isAvatarChanged) {
-            throw new IllegalArgumentException("Bạn chưa thay đổi thông tin nào.");
-        }
 
         if (isUsernameChanged && userDao.findUserByUsername(newUsername)) {
             throw new IllegalArgumentException("Tên người dùng đã tồn tại !");
@@ -105,10 +95,12 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Số điện thoại không hợp lệ!");
         }
 
-        currentUser.setUsername(newUsername);
-        currentUser.setPhone(newPhone);
-        currentUser.setAvatarUrl(avatarUrl);
-        return userAdminDao.update(currentUser) > 0;
+        currentUser.setFirstName(req.getFirstName());
+        currentUser.setLastName(req.getLastName());
+        currentUser.setUsername(req.getUsername());
+        currentUser.setEmail(req.getEmail());
+        currentUser.setPhone(req.getPhone());
+        return userDao.updateProfile(currentUser) > 0;
     }
 
     @Override
