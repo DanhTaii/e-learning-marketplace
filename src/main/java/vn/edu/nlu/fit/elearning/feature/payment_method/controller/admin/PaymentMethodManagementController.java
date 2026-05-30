@@ -64,6 +64,36 @@ public class PaymentMethodManagementController extends BaseController {
         String query = request.getParameter("currentQuery");
         String newPath = "/admin/payment-methods" + (query != null && !query.isEmpty() ? "?" + query : "");
 
+        int result = 0;
+
+        if (action != null && ids != null && !ids.isEmpty()) {
+            switch (action) {
+                case "toggleStatus":
+                case "update_status":
+                    for (Integer id : ids) {
+                        PaymentMethod pm = paymentMethodService.getPaymentMethodById(id);
+                        if (pm != null) {
+                            // Đảo ngược trạng thái hiện tại (ACTIVE <-> INACTIVE)
+                            String newStatus = "ACTIVE".equals(pm.getStatus()) ? "INACTIVE" : "ACTIVE";
+                            pm.setStatus(newStatus);
+                            if (paymentMethodService.updatePaymentMethod(pm) > 0) {
+                                result++;
+                            }
+                        }
+                    }
+                    if (result > 0) {
+                        handleSuccess(request, response, "Cập nhật trạng thái " + " phương thức thanh toán thành công", newPath);
+                        return;
+                    }
+                    break;
+
+                default:
+                    // Chặn các hành động không được phép (xóa, nhân bản...)
+                    request.getSession().setAttribute("flashError", "Thao tác bị từ chối! Chỉ được phép cập nhật trạng thái.");
+                    break;
+            }
+        }
+
         this.redirect(request, response, newPath);
     }
 

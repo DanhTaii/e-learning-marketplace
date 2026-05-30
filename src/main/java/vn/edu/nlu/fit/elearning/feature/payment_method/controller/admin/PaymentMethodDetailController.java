@@ -55,14 +55,12 @@ public class PaymentMethodDetailController extends BaseController {
         String status = request.getParameter("status");
 
         try {
-            // Lấy thực thể gốc từ database lên
             PaymentMethod paymentMethod = paymentMethodService.getPaymentMethodById(id);
             if (paymentMethod == null) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy phương thức thanh toán để cập nhật");
                 return;
             }
 
-            // ĐÚNG YÊU CẦU: Chỉ cho phép cập nhật trạng thái hoạt động (status) ngoài ra không sửa gì khác
             paymentMethod.setStatus(status);
 
             int result = paymentMethodService.updatePaymentMethod(paymentMethod);
@@ -73,10 +71,10 @@ public class PaymentMethodDetailController extends BaseController {
             }
 
             // Chuyển hướng quay lại chính trang chi tiết vừa sửa để reload dữ liệu mới
-            this.redirect(request, response, "/admin/payment-methods/detail?id=" + id);
+            this.redirect(request, response, "/admin/payment-method/detail?id=" + id);
         } catch (Exception e) {
             request.getSession().setAttribute("flashError", "Lỗi hệ thống: " + e.getMessage());
-            this.redirect(request, response, "/admin/payment-methods/detail?id=" + id);
+            this.redirect(request, response, "/admin/payment-method/detail?id=" + id);
         }
     }
 }

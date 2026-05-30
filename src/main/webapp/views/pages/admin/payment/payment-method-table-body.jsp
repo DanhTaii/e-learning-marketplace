@@ -6,8 +6,7 @@
     <c:when test="${not empty listPaymentMethods}">
         <c:forEach items="${listPaymentMethods}" var="pm">
             <tr>
-                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${pm.id}"
-                           data-status="${pm.status}"></td>
+                <td><input type="checkbox" class="category-checkbox item-checkbox" name="item-checkbox" value="${pm.id}" data-status="${pm.status}"></td>
                 <td>
                     <div class="course-row__title title course-row__style-text">
                         <c:out value="${pm.name}"/>

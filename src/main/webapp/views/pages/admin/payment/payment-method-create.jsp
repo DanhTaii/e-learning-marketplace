@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="order-detail-card payment-detail-layout">
-                        <form action="admin/payment-methods/detail" method="POST" style="width: 100%;">
+                        <form action="admin/payment-method/detail" method="POST" style="width: 100%;">
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${paymentMethod.id}">
 
@@ -91,7 +91,7 @@
 
                                 <div class="order-amount" style="margin-top: 30px; border-top: 1px solid #f1f5f9; padding-top: 20px; display: flex; justify-content: flex-end;">
                                     <button type="submit" class="dark-button" style="padding: 12px 28px; font-size: 1.3rem; font-weight: 500; cursor: pointer; border-radius: 6px;">
-                                        <i class="fa-solid fa-floppy-disk" style="margin-right: 6px;"></i> Lưu thay đổi trạng thái
+                                        <i class="fa-solid fa-floppy-disk" style="margin-right: 6px;"></i> Lưu thay đổi
                                     </button>
                                 </div>
                             </div>
