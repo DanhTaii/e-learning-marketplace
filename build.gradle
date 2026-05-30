@@ -64,6 +64,9 @@ dependencies {
 
     // Thư viện giám sát hệ thống JavaMelody - Monitoring
     implementation 'net.bull.javamelody:javamelody-core:2.1.0'
+
+    // Thêm Caffeine Cache
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
 }
 
 // Đóng gói file WAR với tên e-learning.war

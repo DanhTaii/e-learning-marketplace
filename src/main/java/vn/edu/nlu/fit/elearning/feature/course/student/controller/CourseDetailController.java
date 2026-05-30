@@ -63,8 +63,11 @@ public class CourseDetailController extends HttpServlet {
         request.setAttribute("lessons", lessons);
 
         // này làm cho tags
+        System.out.println("=============BẮT ĐẦU LẤY DANH SÁCH TAGS THEO KHÓA HỌC");
         List<TagDto> tags = tagService.getTagsByCourseId(id);
-        request.setAttribute("tags", tags);
+        System.out.println("=============KẾT THÚC LẤY DANH SÁCH TAGS THEO KHÓA HỌC");
+        System.out.println(tags.size());
+        System.out.println(tags.toString());
 
         // này làm cho category
         Category category = categoryService.getCategoryById(c.getCategoryId());
