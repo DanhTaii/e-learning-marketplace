@@ -6,15 +6,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
 
 import java.io.IOException;
 
-@WebServlet(name = "PaymentMethodDetailController", value = "/admin/payment-methods/detail")
-public class PaymentMethodDetailController extends HttpServlet {
+@WebServlet(name = "PaymentMethodDetailController", value = "/admin/payment-method/detail")
+public class PaymentMethodDetailController extends BaseController {
     private PaymentMethodService paymentMethodService;
 
     @Override
@@ -24,28 +26,55 @@ public class PaymentMethodDetailController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
         try {
-            String idStr = request.getParameter("id");
-            if (idStr == null || idStr.isEmpty()) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            int id = RequestUtils.getParameterAsInt(request, "id", -1);
+
+            if (id > 0) {
+                PaymentMethod paymentMethod = paymentMethodService.getPaymentMethodById(id);
+                if (paymentMethod != null) {
+                    request.setAttribute("paymentMethod", paymentMethod);
+                } else {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy phương thức thanh toán");
+                    return;
+                }
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID phương thức thanh toán không hợp lệ");
                 return;
             }
 
-            int id = Integer.parseInt(idStr);
-            PaymentMethod pm = paymentMethodService.getPaymentMethodById(id);
-
-            if (pm != null) {
-                String json = new Gson().toJson(pm);
-                response.getWriter().write(json);
-            } else {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            }
+            // Forward tới giao diện chi tiết vừa dựng
+            this.forward(request, response, "/views/pages/admin/payment/payment-method-create.jsp");
         } catch (Exception e) {
-            e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            log("Unexpected error in PaymentMethodDetailController", e);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi hệ thống");
+        }
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = RequestUtils.getParameterAsInt(request, "id", -1);
+        String status = request.getParameter("status");
+
+        try {
+            PaymentMethod paymentMethod = paymentMethodService.getPaymentMethodById(id);
+            if (paymentMethod == null) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy phương thức thanh toán để cập nhật");
+                return;
+            }
+
+            paymentMethod.setStatus(status);
+
+            int result = paymentMethodService.updatePaymentMethod(paymentMethod);
+            if (result > 0) {
+                request.getSession().setAttribute("flashSuccess", "Cập nhật trạng thái phương thức thanh toán thành công!");
+            } else {
+                request.getSession().setAttribute("flashError", "Lỗi hệ thống! Không thể cập nhật trạng thái.");
+            }
+
+            // Chuyển hướng quay lại chính trang chi tiết vừa sửa để reload dữ liệu mới
+            this.redirect(request, response, "/admin/payment-method/detail?id=" + id);
+        } catch (Exception e) {
+            request.getSession().setAttribute("flashError", "Lỗi hệ thống: " + e.getMessage());
+            this.redirect(request, response, "/admin/payment-method/detail?id=" + id);
         }
     }
 }

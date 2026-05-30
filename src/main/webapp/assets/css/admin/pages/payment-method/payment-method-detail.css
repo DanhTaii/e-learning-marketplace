@@ -1,0 +1,101 @@
+/* ==========================================================================
+   CSS CUSTOM CHO TRANG CHI TIẾT PHƯƠNG THỨC THANH TOÁN (PAYMENT METHOD DETAIL)
+   ========================================================================== */
+
+/* Reset lại cấu trúc Grid để phân bổ dòng rộng rãi */
+.payment-detail-layout .order-info-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+}
+
+/* Biến đổi các ô thông tin thành hàng ngang chuẩn chỉnh, không bị bó thành hộp */
+.payment-detail-layout .info-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 16px 20px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    min-height: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Đẩy label sang trái và nội dung text/hình ảnh sang phải */
+.payment-detail-layout .info-item label {
+    width: 240px !important;
+    min-width: 240px !important;
+    margin-bottom: 0 !important;
+    color: #64748b !important;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+}
+
+/* Format phần hiển thị dữ liệu Read-only */
+.payment-detail-layout .info-item p {
+    margin: 0 !important;
+    color: #1e293b !important;
+    font-size: 1.4rem !important;
+    font-weight: 500 !important;
+}
+
+/* Fix riêng cho ô chứa Logo bớt trống trải */
+.payment-detail-layout .info-item p img {
+    height: 32px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+    display: block;
+}
+
+/* Style lại khu vực "Thay đổi trạng thái" (Ô nét đứt) trải dài sang xịn mịn */
+.payment-detail-layout .info-item[style*="grid-column"] {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background-color: #f8fafc !important;
+    border: 1px dashed #6366f1 !important; /* Đổi sang viền màu Indigo cho nổi bật */
+    padding: 20px !important;
+    margin-top: 10px !important;
+}
+
+/* Label trạng thái bên trong ô nét đứt */
+.payment-detail-layout .info-item[style*="grid-column"] label {
+    color: #4f46e5 !important;
+    font-size: 1.4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Thiết kế lại hộp Select option cho đúng chuẩn hiện đại */
+.payment-detail-layout select[name="status"] {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: 40px !important;
+    padding: 0 12px !important;
+    border-radius: 6px !important;
+    border: 1px solid #cbd5e1 !important;
+    font-size: 1.35rem !important;
+    font-weight: 500 !important;
+    color: #334155 !important;
+    background-color: #ffffff !important;
+    outline: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.payment-detail-layout select[name="status"]:focus {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
+}
+
+/* Fix lại thanh màu xanh nhạt bọc nút lưu */
+.payment-detail-layout .order-amount {
+    background-color: transparent !important; /* Bỏ màu nền xanh nhạt cũ */
+    border-top: 1px solid #e2e8f0 !important;
+    padding-top: 20px !important;
+    margin-top: 24px !important;
+}

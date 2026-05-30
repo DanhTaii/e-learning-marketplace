@@ -10,17 +10,22 @@
     <meta charset="UTF-8">
     <title>Kiểu thanh toán </title>
     <base href="${pageContext.request.contextPath}/">
+    <%-- Admin Layout Css--%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-management.css?v=<%=System.currentTimeMillis()%>">
+
+    <%--  Admin Component Css  --%>
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/course-edit.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/payment-method-management.css?v=<%=System.currentTimeMillis()%>">
-
 </head>
 <body>
 <div class="web">
@@ -30,169 +35,90 @@
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
                 <div class="grid__column-10 container-2">
                     <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
-                    <div class="grid__row-2 container-2__grid">
-                        <div class="container-2__header">
-                            <div class="header__title">Kiểu thanh toán</div>
-                        </div>
-                        <div class="container-2__body">
+                    <div class="container-2__content-body">
+                        <div class="grid__row-2 container-2__grid">
+                            <div class="container-2__header">
+                                <div class="header__title">
+                                    Phương thức thanh toán
+                                    <div class="header__meta">
+                                        <span class="header__subtitle">
+                                                Quản lý tất cả phương thức thanh tóan
+                                        </span>
+                                        <span class="header__count">
+                                               <c:out value="${totalPaymentMethods}"/> phương thức
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-2__body">
+                                <form method="get" action="admin/payment-methods" class="advanced-filter" id="filterForm">
+                                    <script>
+                                        //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
+                                        //Nó sẽ vô tình trạng đóng mở ngay lập tức
+                                        //Để đoạn script ở đây để nó trong lúc load HTML,CSS có thể load được luôn
+                                        if (localStorage.getItem('admin_filter_status') === 'closed') {
+                                            document.getElementById('filterForm').classList.add('collapsed');
+                                        }
+                                    </script>
+                                    <div class="filter-header" onclick="toggleFilter()">
+                                        <h2 class="filter-title">
+                                            <i class="fa-solid fa-filter"></i>
+                                            Bộ lọc nâng cao
+                                        </h2>
+                                        <div class="filter-toggle-icon" id="toggleIcon">
+                                            <i class="fa-solid fa-sliders"></i>
+                                        </div>
+                                    </div>
 
+                                    <div class="filter-content" id="filterContent">
+                                        <div class="filter-grid">
 
-                            <div class="title__admin">Tất cả phương thức thanh toán (<c:out value="${listPaymentMethods.size()}"/>)</div>
-                            <div class="container-2__filter">
-                                <form action="admin/payment-methods/search"
-                                      method="get" class="form">
-                                    <div class="filter__selection">
-                                        <div class="filter__selection-input">
-                                            <div class="filter__selection-items filter__selection-name">
-                                                <div class="filter__selection-title filter__item-name">Tên phương
-                                                    thức:
+                                            <div class="filter-group">
+                                                <label>Tên phương thức</label>
+                                                <div class="input-with-icon">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                    <input type="text" name="searchName" value="${param.searchName}"
+                                                           placeholder="Nhập tên phương thức...">
                                                 </div>
-                                                <input
-                                                        placeholder=""
-                                                        type="text"
-                                                        name="searchName"
-                                                        class="admin-input__long"
-                                                        value="${param.searchName}">
                                             </div>
                                         </div>
-
-                                        <div class="filter__button-search">
-                                            <button type="submit" class="admin-search-btn">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </button>
+                                        <div class="filter-actions">
+                                            <a href="admin/payment-methods" class="btn-clear">
+                                                <i class="fa-solid fa-rotate-left"></i> Đặt lại
+                                            </a>
+                                            <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                                <form id="bulkActionForm" method="POST" action="admin/payment-methods">
+                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+                                    <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
+                                    <input type="hidden" name="action" id="bulkActionInput" value="">
 
-                            <div class="container-2__list-student">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>Tên phương thức</th>
-                                        <th>Code</th>
-                                        <th>Trạng thái</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                    </thead>
+                                    <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
 
-                                    <tbody>
-                                    <c:forEach items="${listPaymentMethods}" var="pm">
-                                        <tr>
-                                            <td>
-                                                <div class="course-row__title title course-row__style-text">
-                                                        <c:out value="${pm.name}"/>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="course-row__title title course-row__style-text">
-                                                        <c:out value="${pm.code}"/>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${pm.status == 'ACTIVE'}">
-                                                        <div class="course-row__status course-row__font-content course-row__status-public">
-                                                            Hoạt động
-                                                        </div>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <div class="course-row__status course-row__font-content course-row-status-unactive">
-                                                            Không hoạt động
-                                                        </div>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
+                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
+                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 
-                                            <td class="action__button">
-                                                <button type="button" onclick="showPaymentMethodDetail(${pm.id})"
-                                                        class="icon-action-btn">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    <c:if test="${empty listPaymentMethods}">
-                                        <tr>
-                                            <td colspan="7"> <%-- Số 7 này tương ứng với 7 cột của bảng --%>
-                                                <div class="search-empty-state">
-                                                    <i class="fa-solid fa-book-open search-empty-icon"></i>
-                                                    <div class="search-empty-title">
-                                                        Không tìm thấy kiểu thanh toán nào
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                    </tbody>
-                                </table>
+                                    <div class="container-2__dynamic-content" id="lessonTableBody">
+                                        <jsp:include page="/views/pages/admin/payment/payment-method-fragment.jsp"/>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div id="payment-method-detail" class="modal modal__course-detail">
-                    <div class="modal__course-content">
-                        <form action="${pageContext.request.contextPath}/admin/payment-methods/update" method="post">
-                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
-                            <div class="course__header">
-                                <div class="course__title">
-                                    <i class="fa-solid fa-credit-card"></i>
-                                    <span id="modal-title" class="text-header"></span>
-                                </div>
-                                <div class="x__icon" onclick="closePaymentMethodModal()">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </div>
-                            <div class="course-body">
-                                <div class="user-info-grid">
-                                    <input id="detail-id" type="hidden" name="id">
-
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-tag"></i> Tên phương thức</label>
-                                        <input id="detail-name" type="text" class="input__create" name="name"disabled>
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-code"></i> Mã phương thức (Code)</label>
-                                        <input id="detail-code" type="text" class="input__create" name="code" disabled>
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-image"></i> Icon URL</label>
-                                        <input id="detail-iconUrl" type="text" class="input__create" name="iconUrl" disabled>
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-power-off"></i> Trạng thái</label>
-                                        <select id="detail-status" class="input__create" name="status">
-                                            <option value="ACTIVE">Hoạt động</option>
-                                            <option value="INACTIVE">Không hoạt động</option>
-                                        </select>
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-plus"></i> Ngày tạo</label>
-                                        <input id="detail-created" type="text" class="input__create" disabled>
-                                    </div>
-                                    <div class="info-group">
-                                        <label><i class="fa-solid fa-calendar-check"></i> Ngày cập nhật</label>
-                                        <input id="detail-updated" type="text" class="input__create" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="button btn-cancel" onclick="closePaymentMethodModal()">
-                                        Hủy
-                                    </button>
-                                    <button type="submit" class="button dark-button">Lưu thay đổi</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/payment/admin-payment-method-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/payment/payment-method-management.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

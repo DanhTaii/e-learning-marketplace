@@ -1,26 +1,14 @@
 package vn.edu.nlu.fit.elearning.feature.payment_method.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.payment.PaymentMethodFilter;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PaymentMethodDaoImpl extends BaseDao implements PaymentMethodDao {
-
-    @Override
-    public int create(PaymentMethod entity) {
-        String sql = "INSERT INTO payment_methods (name, code, icon_url, status) " +
-                "VALUES (:name, :code, :iconUrl, :status)";
-
-        return getJdbi().withHandle(handle ->
-                handle.createUpdate(sql)
-                        .bind("name", entity.getName())
-                        .bind("code", entity.getCode())
-                        .bind("iconUrl", entity.getIconUrl())
-                        .bind("status", entity.getStatus())
-                        .execute()
-        );
-    }
 
     @Override
     public PaymentMethod findById(Integer id) {
@@ -87,6 +75,62 @@ public class PaymentMethodDaoImpl extends BaseDao implements PaymentMethodDao {
             return handle.createUpdate(sql)
                     .bind("id", id)
                     .execute();
+        });
+    }
+    @Override
+    public List<PaymentMethod> findPaymentMethodsByFilter(PaymentMethodFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildPaymentMethodWhereClause(filter, params);
+
+        String sql = "SELECT id, name, code, icon_url, status, created_at, updated_at FROM payment_methods "
+                + whereClause
+                + " ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+            return query.mapToBean(PaymentMethod.class).list();
+        });
+    }
+
+    @Override
+    public int countPaymentMethodsByFilter(PaymentMethodFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildPaymentMethodWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(*) FROM payment_methods " + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildPaymentMethodWhereClause(PaymentMethodFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            where.append(" AND name LIKE :nameSearch");
+            params.put("nameSearch", "%" + filter.getName().trim() + "%");
+        }
+
+        if (filter.getStatus() != null) {
+            where.append(" AND status = :status");
+            params.put("status", filter.getStatus().name());
+        }
+
+        return where.toString();
+    }
+
+    @Override
+    public int countAllPaymentMethods() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM payment_methods")
+                    .mapTo(Integer.class)
+                    .one();
         });
     }
 }
