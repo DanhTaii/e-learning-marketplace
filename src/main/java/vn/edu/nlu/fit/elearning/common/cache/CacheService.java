@@ -5,6 +5,9 @@ public interface CacheService {
 
     Object get(String key);
 
+    // Hàm get nâng cao, tự động ép kiểu theo Class truyền vào
+    <T> T get(String key, Class<T> clazz);
+
     // Xóa 1 cache cụ thể khi dữ liệu thay đổi
     void invalidate(String key);
 

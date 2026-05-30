@@ -16,7 +16,7 @@ public interface TagService {
 
     int updateTag(Tag tag);
 
-    int deleteTag(int tagId);
+//    int deleteTag(int tagId);
 
     List<Tag> getAllTagsByName(String name);
 
@@ -26,7 +26,7 @@ public interface TagService {
 
     List<Tag> searchTags(TagFilter filter);
 
-    int countTags();
+//    int countTags();
 
     boolean existsByName(String name);
 

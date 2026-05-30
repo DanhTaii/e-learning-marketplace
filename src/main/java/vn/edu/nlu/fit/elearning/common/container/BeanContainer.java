@@ -129,6 +129,12 @@ public class BeanContainer {
     private static final Map<Class<?>, Object> beans = new HashMap<>();
 
     static {
+
+        // Khởi tạo CacheService với CaffeineCacheImpl và thêm vào container
+        CacheService cacheService = new CaffeineCacheImpl();
+        beans.put(CacheService.class, cacheService);
+
+        // Khởi tạo các bean khác
         AccessTokenDao accessTokenDao = new AccessTokenDaoImpl();
         beans.put(AccessTokenService.class, new AccessTokenServiceImpl(accessTokenDao));
 
@@ -144,7 +150,7 @@ public class BeanContainer {
         beans.put(AuthService.class, new AuthServiceImpl(userService, userAdminService));
 
         CategoryDao categoryDao = new CategoryDaoImpl();
-        beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao));
+        beans.put(CategoryService.class, new CategoryServiceImpl(categoryDao, cacheService));
 
         CourseAdminDao courseAdminDao = new CourseAdminDaoImpl();
         beans.put(CourseAdminService.class, new CourseAdminServiceImpl(courseAdminDao));
@@ -186,7 +192,7 @@ public class BeanContainer {
         beans.put(ReviewService.class, new ReviewServiceImpl(reviewDao));
 
         TagDao tagDao = new TagDaoImpl();
-        beans.put(TagService.class, new TagServiceImpl(tagDao));
+        beans.put(TagService.class, new TagServiceImpl(tagDao, cacheService));
 
         IndexDao indexDao = new IndexDaoImpl();
         beans.put(IndexService.class, new IndexServiceImpl(indexDao));
@@ -222,9 +228,6 @@ public class BeanContainer {
         AdminCertificateDao adminCertificateDao = new AdminCertificateDaoImp();
         beans.put(AdminCertificateService.class, new AdminCertificateServiceImp(adminCertificateDao));
 
-        // Khởi tạo CacheService với CaffeineCacheImpl và thêm vào container
-        CacheService cacheService = new CaffeineCacheImpl();
-        beans.put(CacheService.class, cacheService);
     }
 
     public static <T> T getBean(Class<T> clazz){

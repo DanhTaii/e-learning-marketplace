@@ -36,6 +36,19 @@ public class CaffeineCacheImpl implements CacheService{
     }
 
     @Override
+    public <T> T get(String key, Class<T> clazz) {
+        if (key == null) {
+            return null;
+        }
+        Object value = cache.getIfPresent(key);
+        // Kiểm tra xem dữ liệu lấy ra có đúng kiểu (Class) mình mong muốn không
+        if (value != null && clazz.isInstance(value)) {
+            return clazz.cast(value); // Ép kiểu an toàn và trả về
+        }
+        return null;
+    }
+
+    @Override
     public void invalidate(String key) {
         if (key != null) {
             cache.invalidate(key);
