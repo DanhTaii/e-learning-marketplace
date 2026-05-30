@@ -17,7 +17,10 @@ public class VoucherServiceImpl implements VoucherService {
         this.voucherDao = voucherDao;
     }
 
-
+    @Override
+    public Voucher findById(Integer id) {
+        return voucherDao.findById(id);
+    }
     @Override
     public List<Voucher> findAll() {
         return voucherDao.findAll();

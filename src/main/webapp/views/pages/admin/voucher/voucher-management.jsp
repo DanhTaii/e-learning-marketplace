@@ -59,7 +59,7 @@
                                         <span>Kho lưu trữ</span>
                                     </a>
                                     <button type="button" class="dark-button">
-                                        <a href="admin/vouchers/detail" class="admin-create-link">
+                                        <a href="admin/voucher/detail" class="admin-create-link">
                                             <i class="fa-solid fa-plus"></i>Tạo mới
                                         </a>
                                     </button>

@@ -12,6 +12,8 @@ import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 import java.util.List;
 
 public interface VoucherService {
+    Voucher findById(Integer id);
+
     List<Voucher> findAll();
     List<Voucher> findValidVouchers();
     Voucher findByCode(String code);
