@@ -1,4 +1,4 @@
-package vn.edu.nlu.fit.elearning.feature.voucher.controller;
+package vn.edu.nlu.fit.elearning.feature.voucher.controller.user;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -8,13 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
-import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting;
-import vn.edu.nlu.fit.elearning.feature.cart.model.Cart;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartService;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
-import vn.edu.nlu.fit.elearning.feature.voucher.dto.VoucherResultDTO;
-import vn.edu.nlu.fit.elearning.feature.voucher.service.VoucherService;
 
 import java.io.IOException;
 
