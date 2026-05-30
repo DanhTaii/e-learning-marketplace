@@ -66,6 +66,61 @@ public class VoucherManagementController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Phương thức POST không được hỗ trợ cho endpoint này");
+        // 1. Lấy các tham số từ request
+        String action = RequestUtils.getParameterAsString(request, "action", null);
+        List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
+        String deleteReason = RequestUtils.getParameterAsString(request, "deleteReason", null);
+
+        // 2. Xử lý đường dẫn redirect (có giữ lại các query parameter như search, filter, page...)
+        String query = request.getParameter("currentQuery");
+        String queryString = (query != null && !query.isEmpty()) ? "?" + query : "";
+        String newPath = "/admin/vouchers" + queryString; // Đổi đường dẫn thành /admin/vouchers
+
+        int result = 0;
+
+        // Nếu không có action hoặc không có id nào được chọn thì quay lại trang hiện tại
+        if (action == null || ids == null || ids.isEmpty()) {
+            this.redirect(request, response, newPath);
+            return;
+        }
+
+        // 3. Xử lý các action tương ứng
+        switch (action) {
+            case "archive":
+                if (deleteReason == null || deleteReason.isEmpty()) {
+                    deleteReason = "Không có lý do cụ thể";
+                }
+                // Gọi tới hàm lưu trữ của VoucherService
+                result = voucherService.archiveVouchersByIds(ids, deleteReason);
+                if (result > 0) {
+                    handleSuccess(request, response, "Lưu trữ " + result + " voucher thành công", newPath);
+                    return;
+                }
+                break;
+
+            case "update_status":
+                // Gọi tới hàm cập nhật trạng thái của VoucherService
+                result = voucherService.changeVouchersStatusByIds(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Cập nhật trạng thái " + result + " voucher thành công", newPath);
+                    return;
+                }
+                break;
+
+            case "duplicate":
+                result = voucherService.bulkDuplicateVouchers(ids);
+                if (result > 0) {
+                    handleSuccess(request, response, "Nhân bản " + result + " voucher thành công", newPath);
+                    return;
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        // Nếu không có result > 0 (nghĩa là xử lý thất bại) thì redirect bình thường
+        this.redirect(request, response, newPath);
     }
+
 }

@@ -23,4 +23,12 @@ public interface VoucherService {
     List<Voucher> searchVouchers(VoucherFilter filter);
 
     int getCountVouchersByFilter(VoucherFilter filter);
+
+    int changeVouchersStatusByIds(List<Integer> ids);
+
+    int archiveVouchersByIds(List<Integer> ids, String deleteReason);
+
+    int deleteVouchersByIds(List<Integer> ids);
+
+    int bulkDuplicateVouchers(List<Integer> ids);
 }

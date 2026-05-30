@@ -9,6 +9,33 @@ import java.util.List;
 import java.util.Map;
 
 public class VoucherDaoImpl extends BaseDao implements VoucherDao {
+
+    @Override
+    public Voucher findById(Integer id) {
+        return getJdbi().withHandle(handle -> {
+            String sql = "SELECT * FROM vouchers WHERE id = :id";
+            return handle.createQuery(sql)
+                    .bind("id", id)
+                    .mapToBean(Voucher.class)
+                    .findFirst()
+                    .orElse(null);
+        });
+    }
+
+    @Override
+    public int create(Voucher entity) {
+        String sql = "INSERT INTO vouchers (code, title, description, discount_type, discount_value, " +
+                "min_order_value, max_discount_value, usage_limit, used_count, start_date, end_date, status) " +
+                "VALUES (:code, :title, :description, :discountType, :discountValue, " +
+                ":minOrderValue, :maxDiscountValue, :usageLimit, :usedCount, :startDate, :endDate, :status)";
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate(sql)
+                    .bindBean(entity)
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
     @Override
     public List<Voucher> findAll() {
         return getJdbi().withHandle(handle -> {
@@ -140,5 +167,50 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
         }
 
         return where.toString();
+    }
+    @Override
+    public int changeVouchersStatusByIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().withHandle(handle -> {
+            String sql = "UPDATE vouchers " +
+                    "SET status = CASE WHEN status = 'ACTIVE' THEN 'INACTIVE' ELSE 'ACTIVE' END " +
+                    "WHERE id IN (<ids>)";
+            return handle.createUpdate(sql)
+                    .bindList("ids", ids)
+                    .execute();
+        });
+    }
+
+    @Override
+    public int archiveVouchersByIds(List<Integer> ids, String deleteReason) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().withHandle(handle -> {
+            // Lưu ý: Logic này giả định bảng vouchers của bạn có các cột: is_deleted, deleted_at, delete_reason tương tự như bảng lessons
+            String sql = "UPDATE vouchers " +
+                    "SET deleted_at = CASE WHEN is_deleted = 0 THEN NOW() ELSE NULL END, " +
+                    "is_deleted = 1 - is_deleted, " +
+                    "delete_reason = :deleteReason, " +
+                    "status = 'INACTIVE' " +
+                    "WHERE id IN (<ids>)";
+
+            return handle.createUpdate(sql)
+                    .bindList("ids", ids)
+                    .bind("deleteReason", deleteReason)
+                    .execute();
+        });
+    }
+
+    @Override
+    public int deleteVouchersByIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().withHandle(handle -> {
+            String sql = "DELETE FROM vouchers WHERE id IN (<ids>)";
+            return handle.createUpdate(sql)
+                    .bindList("ids", ids)
+                    .execute();
+        });
     }
 }

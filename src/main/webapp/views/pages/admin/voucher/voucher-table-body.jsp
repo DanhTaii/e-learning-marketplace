@@ -75,9 +75,6 @@
                             <i class="fa-solid fa-pen"></i>
                         </button>
                     </a>
-                    <button onclick="setupConfirmModal({action: 'archive', ids: ${v.id}, url: 'admin/vouchers/action', isBulk: false})" type="button" class="icon-action-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
                 </td>
             </tr>
         </c:forEach>

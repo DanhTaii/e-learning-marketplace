@@ -8,7 +8,7 @@
 <head>
     <meta name="csrf-token" content="${sessionScope.csrfToken}">
     <meta charset="UTF-8">
-    <title>Lesson Management</title>
+    <title>Voucher Management</title>
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Admin Layout Css--%>

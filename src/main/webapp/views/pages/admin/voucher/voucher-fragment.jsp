@@ -25,11 +25,11 @@
     </table>
 
     <jsp:include page="/views/components/bulk-action-bar.jsp">
-        <jsp:param name="showDuplicate" value="false"/>
+        <jsp:param name="showDuplicate" value="true"/>
         <jsp:param name="showUpdateStatus" value="true"/>
         <jsp:param name="showArchive" value="true"/>
         <jsp:param name="showRestore" value="false"/>
-        <jsp:param name="showDelete" value="true"/>
+        <jsp:param name="showDelete" value="false"/>
     </jsp:include>
 </div>
 

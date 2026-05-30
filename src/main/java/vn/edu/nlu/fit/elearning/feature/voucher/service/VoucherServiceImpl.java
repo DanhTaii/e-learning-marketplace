@@ -88,4 +88,68 @@ public class VoucherServiceImpl implements VoucherService {
     public int getCountVouchersByFilter(VoucherFilter filter) {
         return voucherDao.countVouchersByFilter(filter);
     }
+    @Override
+    public int changeVouchersStatusByIds(List<Integer> ids) {
+        try {
+            return voucherDao.changeVouchersStatusByIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log lỗi ra console nếu có để dễ debug
+            return 0;
+        }
+    }
+
+    @Override
+    public int archiveVouchersByIds(List<Integer> ids, String deleteReason) {
+        try {
+            return voucherDao.archiveVouchersByIds(ids, deleteReason);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteVouchersByIds(List<Integer> ids) {
+        try {
+            return voucherDao.deleteVouchersByIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    @Override
+    public int bulkDuplicateVouchers(List<Integer> ids) {
+        int count = 0;
+        for (Integer id : ids) {
+            Voucher original = voucherDao.findById(id);
+            if (original != null) {
+                Voucher clone = new Voucher();
+
+
+                String suffix = "_CP" + (System.currentTimeMillis() % 1000);
+                clone.setCode(original.getCode() + suffix);
+
+                // Sao chép các thông tin khác
+                clone.setTitle(original.getTitle() + " (Bản sao)");
+                clone.setDescription(original.getDescription());
+                clone.setDiscountType(original.getDiscountType());
+                clone.setDiscountValue(original.getDiscountValue());
+                clone.setMinOrderValue(original.getMinOrderValue());
+                clone.setMaxDiscountValue(original.getMaxDiscountValue());
+                clone.setUsageLimit(original.getUsageLimit());
+
+                clone.setUsedCount(0);       // Reset số lượt đã dùng về 0
+                clone.setStatus(VoucherStatus.valueOf("INACTIVE")); // Để trạng thái ẩn/tạm dừng để admin kiểm tra lại trước khi mở
+                clone.setStartDate(original.getStartDate());
+                clone.setEndDate(original.getEndDate());
+
+                // Tiến hành lưu vào DB thông qua DAO
+                if (voucherDao.create(clone) > 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }
+
