@@ -1,0 +1,19 @@
+.modern-table th:nth-child(1) { width: 3% !important; }  /* Checkbox */
+.modern-table th:nth-child(2) { width: 12% !important; } /* Mã Voucher */
+.modern-table th:nth-child(3) { width: 15% !important; } /* Tên Voucher */
+.modern-table th:nth-child(5) { width: 10% !important; } /* Giá trị giảm */
+.modern-table th:nth-child(6) { width: 15% !important; } /* Hạn sử dụng */
+.modern-table th:nth-child(7) { width: 10% !important; } /* Số lượt dùng */
+.modern-table .badge,
+.modern-table td:nth-child(4) {
+    white-space: nowrap !important;
+}
+
+/* Đảm bảo badge hiển thị dạng khối để background bọc kín chữ */
+.modern-table .badge {
+    display: inline-block;
+    text-align: center;
+}
+.modern-table th:nth-child(4) { width: 14% !important; } /* Loại giảm giá: Tăng từ 12% lên 14% */
+.modern-table th:nth-child(8) { width: 12% !important; } /* Trạng thái: Tăng từ 10% lên 12% */
+.modern-table th:nth-child(9) { width: 9% !important; }

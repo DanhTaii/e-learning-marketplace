@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.OrderStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.enums.VoucherStatus;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -67,7 +68,19 @@ public class RequestUtils {
             return null;
         }
     }
+    public static VoucherStatus getParameterAsVoucherStatus(HttpServletRequest request, String paramStatus) {
+        String value = request.getParameter(paramStatus);
 
+        if (value == null || value.trim().isEmpty()) {
+            return null;
+        }
+
+        try {
+            return VoucherStatus.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
     public static Role getParameterAsRole(HttpServletRequest request, String paramRole) {
         String value = getParameterAsString(request, paramRole, "USER");
         try {

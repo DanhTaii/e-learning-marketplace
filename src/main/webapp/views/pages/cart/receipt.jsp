@@ -69,6 +69,12 @@
                             <span class="row3__total text">Số tiền giảm:</span>
                             <span class="number">-<c:out value="${order.formatDiscount}"/></span>
                         </div>
+                        <c:if test="${not empty order.voucherCode && order.voucherAmount > 0}">
+                            <div class="box__row3">
+                                <span class="row3__total text">Voucher áp dụng (<strong ><c:out value="${order.voucherCode}"/></strong>):</span>
+                                <span class="number">-<c:out value="${order.formatVoucherAmount}"/></span>
+                            </div>
+                        </c:if>
                         <div class="box__row3">
                             <span class="row3__total text">Tổng cộng:</span>
                             <span class="number"><c:out value="${order.formatFinal}"/></span>
@@ -97,7 +103,7 @@
                             <div class="grid__row-2">
                             <div class="order-items">
                                 <div class="items__content">
-                                    <div class="content__image"">
+                                    <div class="content__image">
                                         <img srcset="${item.thumbnailUrl}"
                                              alt="${item.courseTitle}" class="image">
                                     </div>

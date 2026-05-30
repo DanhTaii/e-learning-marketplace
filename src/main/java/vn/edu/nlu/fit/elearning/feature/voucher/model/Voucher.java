@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import static vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting.formatAndConvert;
+
 public class Voucher implements Serializable {
     private Integer id;
     private String code;
@@ -16,40 +18,60 @@ public class Voucher implements Serializable {
     // Loại giảm giá: "FIXED" hoặc "PERCENT"
     private String discountType;
 
-    private BigDecimal discountValue;
-    private BigDecimal minOrderValue;
-    private BigDecimal maxDiscountValue;
+    private int discountValue;
+    private int minOrderValue;
+    private Integer maxDiscountValue;
 
     private Timestamp startDate;
     private Timestamp endDate;
 
     private Integer usageLimit;
     private Integer usedCount;
-    private VoucherStatus isActive;
+    private VoucherStatus status;
 
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private boolean usedByCurrentUser;
 
+
+    private boolean isDeleted;
+
+    private Timestamp deletedAt;
+
+    private String deleteReason;
     public Voucher() {
     }
 
-    public Voucher(Integer id, String code, String title, String description, String discountType, BigDecimal discountValue, BigDecimal minOrderValue, BigDecimal maxDiscountValue, Timestamp startDate, Timestamp endDate, Integer usageLimit, Integer usedCount, VoucherStatus isActive, Timestamp createdAt, Timestamp updatedAt) {
-        this.id = id;
-        this.code = code;
-        this.title = title;
-        this.description = description;
-        this.discountType = discountType;
-        this.discountValue = discountValue;
-        this.minOrderValue = minOrderValue;
-        this.maxDiscountValue = maxDiscountValue;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.usageLimit = usageLimit;
-        this.usedCount = usedCount;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public String getDeleteReason() {
+        return deleteReason;
+    }
+
+    public void setDeleteReason(String deleteReason) {
+        this.deleteReason = deleteReason;
+    }
+
+    public VoucherStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(VoucherStatus status) {
+        this.status = status;
     }
 
     public Integer getId() {
@@ -92,27 +114,27 @@ public class Voucher implements Serializable {
         this.discountType = discountType;
     }
 
-    public BigDecimal getDiscountValue() {
+    public int getDiscountValue() {
         return discountValue;
     }
 
-    public void setDiscountValue(BigDecimal discountValue) {
+    public void setDiscountValue(int discountValue) {
         this.discountValue = discountValue;
     }
 
-    public BigDecimal getMinOrderValue() {
+    public int getMinOrderValue() {
         return minOrderValue;
     }
 
-    public void setMinOrderValue(BigDecimal minOrderValue) {
+    public void setMinOrderValue(int minOrderValue) {
         this.minOrderValue = minOrderValue;
     }
 
-    public BigDecimal getMaxDiscountValue() {
+    public Integer getMaxDiscountValue() {
         return maxDiscountValue;
     }
 
-    public void setMaxDiscountValue(BigDecimal maxDiscountValue) {
+    public void setMaxDiscountValue(Integer maxDiscountValue) {
         this.maxDiscountValue = maxDiscountValue;
     }
 
@@ -164,19 +186,14 @@ public class Voucher implements Serializable {
         this.usedCount = usedCount;
     }
 
-    public VoucherStatus getActive() {
-        return isActive;
-    }
-
-    public void setActive(VoucherStatus active) {
-        isActive = active;
-    }
-
     public boolean isUsedByCurrentUser() {
         return usedByCurrentUser;
     }
 
     public void setUsedByCurrentUser(boolean usedByCurrentUser) {
         this.usedByCurrentUser = usedByCurrentUser;
+    }
+    public String getFormatDiscountValue(){
+        return formatAndConvert(this.discountValue);
     }
 }
