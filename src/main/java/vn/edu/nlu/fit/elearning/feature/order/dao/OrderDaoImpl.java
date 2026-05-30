@@ -310,7 +310,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
                 "o.status, o.created_at, pm.name AS paymentMethodName " +
                 "FROM orders o " +
                 "JOIN payment_methods pm ON o.payment_method_id = pm.id " +
-                "WHERE o.user_id = :userId " +
+                "WHERE o.user_id = :userId AND o.status = 'PAID' " +
                 "ORDER BY o.created_at DESC";
 
         return getJdbi().withHandle(handle ->
