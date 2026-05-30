@@ -136,8 +136,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUserId(userId);
         order.setPaymentMethodId(paymentMethodId);
         order.setTotalAmount((int) cart.getTotal());
-        int totalDiscount = (int) cart.getDiscountPriceTotal() + (int) summary.getDiscountAmount();
-        order.setDiscountAmount(totalDiscount);
+        order.setDiscountAmount((int) cart.getDiscountPriceTotal());
+        order.setVoucherAmount((int) summary.getDiscountAmount());
         order.setFinalAmount((int) summary.getFinalTotal());
         order.setStatus(OrderStatus.PENDING);
         String currentUsername = userService.getUserById(userId).getUsername();
@@ -249,5 +249,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public double getRevenueTotalByTimeRange(String timeRange) {
         return orderDao.getRevenueTotalByTimeRange(timeRange);
+    }
+    @Override
+    public double getTotalRevenueByDateRange(String fromDate, String toDate) {
+        return orderDao.getTotalRevenueByDateRange(fromDate, toDate);
     }
 }

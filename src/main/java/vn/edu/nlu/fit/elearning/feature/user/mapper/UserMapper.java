@@ -19,6 +19,8 @@ public class UserMapper {
         dto.setId(entity.getId());
         dto.setUsername(entity.getUsername());
         dto.setEmail(entity.getEmail());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
         dto.setPhone(entity.getPhone());
         dto.setAvatarUrl(entity.getAvatarUrl());
         dto.setStatus(entity.getStatus());

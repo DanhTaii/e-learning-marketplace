@@ -52,9 +52,16 @@ public class AccountProfileController extends HttpServlet {
         String phone = request.getParameter("phone");
         String name = request.getParameter("username");
         String avatarUrl = request.getParameter("avatarUrl");
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String email = request.getParameter("email");
+
         profileRequest.setPhone(phone);
         profileRequest.setUsername(name);
         profileRequest.setAvatarUrl(avatarUrl);
+        profileRequest.setFirstName(firstName);
+        profileRequest.setLastName(lastName);
+        profileRequest.setEmail(email);
         try {
             // Gọi Service để xử lý
             boolean isSuccess = userService.updateUserProfile(userId, profileRequest);

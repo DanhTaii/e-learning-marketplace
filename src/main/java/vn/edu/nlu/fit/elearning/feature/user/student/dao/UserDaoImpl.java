@@ -202,5 +202,38 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         );
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return getJdbi().withHandle(handle ->
+                handle.createQuery("""
+                    SELECT *
+                    FROM users
+                    WHERE username = :username
+                    """)
+                        .bind("username", username)
+                        .mapToBean(User.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+    @Override
+    public int updateProfile(User user) {
+        return getJdbi().withHandle(handle ->
+                handle.createUpdate("""
+                    UPDATE users
+                    SET first_name = :firstName,
+                        last_name = :lastName,
+                        username = :username,
+                        email = :email,
+                        phone = :phone,
+                        updated_at = CURRENT_TIMESTAMP
+                    WHERE id = :id
+                    """)
+                        .bindBean(user)
+                        .execute()
+        );
+    }
+
+
 
 }
