@@ -6,6 +6,7 @@
     <table class="modern-table">
         <thead>
         <tr>
+            <th><input type="checkbox" id="selectAll"></th>
             <th>Tên phương thức</th>
             <th>Code</th>
             <th>Trạng thái</th>

@@ -27,7 +27,24 @@ public class PaymentMethodManagementController extends BaseController {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        PaymentMethodFilter filter = new PaymentMethodFilter();
 
+        filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
+
+        filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
+        filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
+
+        List<PaymentMethod> listPaymentMethods = paymentMethodService.getPaymentMethodsByFilter(filter);
+
+        int totalRecords = paymentMethodService.getCountPaymentMethodsByFilter(filter);
+        int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
+
+        request.setAttribute("listPaymentMethods", listPaymentMethods);
+        request.setAttribute("totalPaymentMethods", paymentMethodService.getTotalPaymentMethods());
+        request.setAttribute("filter", filter);
+        request.setAttribute("currentPageNumber", filter.getPage());
+        request.setAttribute("currentPage", "payment-methods");
+        request.setAttribute("totalPages", totalPages);
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {
             // Chỉ render phần nội dung bảng (Cần tách riêng bảng html ra fragment giống lesson)

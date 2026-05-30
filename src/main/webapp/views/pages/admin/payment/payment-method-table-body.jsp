@@ -6,6 +6,8 @@
     <c:when test="${not empty listPaymentMethods}">
         <c:forEach items="${listPaymentMethods}" var="pm">
             <tr>
+                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${pm.id}"
+                           data-status="${pm.status}"></td>
                 <td>
                     <div class="course-row__title title course-row__style-text">
                         <c:out value="${pm.name}"/>
@@ -32,10 +34,12 @@
                 </td>
 
                 <td class="action__button">
-                    <button type="button" onclick="showPaymentMethodDetail(${pm.id})"
-                            class="icon-action-btn">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
+                    <a href="admin/payment-method/detail?id=${pm.id}" class="turn-page">
+                        <button type="button"
+                                class="icon-action-btn">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </a>
                 </td>
             </tr>
         </c:forEach>

@@ -45,7 +45,7 @@
                                                 Quản lý tất cả phương thức thanh tóan
                                         </span>
                                         <span class="header__count">
-                                               <c:out value="${listPaymentMethods.size()}"/> phương thức
+                                               <c:out value="${totalPaymentMethods}"/> phương thức
                                         </span>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/lessons" class="btn-clear">
+                                            <a href="admin/payment-methods" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
@@ -112,8 +112,13 @@
         </div>
     </div>
 </div>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/payment/admin-payment-method-detail.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/payment/payment-method-management.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

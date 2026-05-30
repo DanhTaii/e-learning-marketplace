@@ -1,11 +1,11 @@
 package vn.edu.nlu.fit.elearning.feature.payment_method.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.payment.PaymentMethodFilter;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 
 import java.util.List;
 
 public interface PaymentMethodService {
-    int createPaymentMethod(PaymentMethod paymentMethod);
 
     List<PaymentMethod> getAllPaymentMethods();
 
@@ -16,4 +16,10 @@ public interface PaymentMethodService {
     boolean deletePaymentMethod(int id);
 
     List<PaymentMethod> getAllPaymentMethodsByName(String name);
+
+    List<PaymentMethod> getPaymentMethodsByFilter(PaymentMethodFilter filter);
+
+    int getCountPaymentMethodsByFilter(PaymentMethodFilter filter);
+
+    int getTotalPaymentMethods();
 }

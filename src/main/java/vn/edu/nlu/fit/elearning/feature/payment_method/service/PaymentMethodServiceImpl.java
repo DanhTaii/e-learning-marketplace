@@ -1,7 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.payment_method.service;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.payment.PaymentMethodFilter;
 import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDao;
-import vn.edu.nlu.fit.elearning.feature.payment_method.dao.PaymentMethodDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 
 import java.util.List;
@@ -14,12 +14,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         this.pmd = paymentMethodDao;
     }
 
-    @Override
-    public int createPaymentMethod(PaymentMethod paymentMethod) {
-          return   pmd.create(paymentMethod);
 
-
-    }
 
     @Override
     public List<PaymentMethod> getAllPaymentMethods() {
@@ -45,5 +40,19 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Override
     public List<PaymentMethod> getAllPaymentMethodsByName(String name) {
         return pmd.findByName(name);
+    }
+    @Override
+    public List<PaymentMethod> getPaymentMethodsByFilter(PaymentMethodFilter filter) {
+        return pmd.findPaymentMethodsByFilter(filter);
+    }
+
+    @Override
+    public int getCountPaymentMethodsByFilter(PaymentMethodFilter filter) {
+        return pmd.countPaymentMethodsByFilter(filter);
+    }
+
+    @Override
+    public int getTotalPaymentMethods() {
+        return pmd.countAllPaymentMethods();
     }
 }
