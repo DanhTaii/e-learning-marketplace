@@ -39,4 +39,8 @@ public interface UserDao {
 
     int updateAvatar(int userId, String avatarUrl);
 
+    User findByUsername(String username);
+
+    int updateProfile(User user);
+
 }
