@@ -3,16 +3,18 @@ package vn.edu.nlu.fit.elearning.feature.payment_method.controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.payment.PaymentMethodFilter;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.payment_method.model.PaymentMethod;
 import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodService;
-import vn.edu.nlu.fit.elearning.feature.payment_method.service.PaymentMethodServiceImpl;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminPaymentMethodController", value = "/admin/payment-methods")
-public class AdminPaymentMethodController extends HttpServlet {
+@WebServlet(name = "PaymentMethodManagementController", value = "/admin/payment-methods")
+public class PaymentMethodManagementController extends BaseController {
 
     private PaymentMethodService paymentMethodService;
 
@@ -25,11 +27,15 @@ public class AdminPaymentMethodController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<PaymentMethod> listPaymentMethods = paymentMethodService.getAllPaymentMethods();
-        request.setAttribute("listPaymentMethods", listPaymentMethods);
-        request.setAttribute("currentPage", "payment-methods");
-        request.getRequestDispatcher("/views/pages/admin/payment/payment-method-management.jsp")
-                .forward(request, response);
+
+        String type = request.getParameter("renderType");
+        if ("partial".equals(type)) {
+            // Chỉ render phần nội dung bảng (Cần tách riêng bảng html ra fragment giống lesson)
+            this.forward(request, response, "/views/pages/admin/payment/payment-method-fragment.jsp");
+        } else {
+            // Render toàn bộ trang
+            this.forward(request, response, "/views/pages/admin/payment/payment-method-management.jsp");
+        }
     }
 
     @Override
