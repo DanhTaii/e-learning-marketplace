@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.tag.TagFilter;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
 import vn.edu.nlu.fit.elearning.feature.order.model.Order;
 import vn.edu.nlu.fit.elearning.feature.tag.dto.TagDto;
@@ -31,4 +32,12 @@ public interface VoucherService {
     int deleteVouchersByIds(List<Integer> ids);
 
     int bulkDuplicateVouchers(List<Integer> ids);
+
+    int getTotalVouchersArchive();
+
+    List<Voucher> getArchivedVouchersByFilter(VoucherArchiveFilter filter);
+
+    int getCountVouchersArchiveByFilter(VoucherArchiveFilter filter);
+
+    int restoreVouchersByIds(List<Integer> ids);
 }

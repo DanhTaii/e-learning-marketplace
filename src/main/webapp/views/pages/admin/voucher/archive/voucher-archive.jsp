@@ -48,15 +48,15 @@
                                     <a href="admin/vouchers">
                                         <i class="fa-solid fa-chevron-left bc-separator"></i>
                                     </a>
-                                    Lưu trữ bài học
+                                    Lưu trữ mã giảm giá
                                     <div class="header__meta">
-                                        <span class="header__subtitle">Quản lý và khôi phục các bài giảng đã tạm ngưng hoặc lỗi thời</span>
+                                        <span class="header__subtitle">Quản lý và khôi phục các chương trình khuyến mãi đã xóa hoặc tạm hoãn</span>
                                     </div>
                                 </div>
 
                                 <div class="archive-summary-card">
                                     <div class="summary-label">TỔNG LƯU TRỮ</div>
-                                    <div class="summary-value"><c:out value="${totalArchived != null ? totalArchived : 128}"/></div>
+                                    <div class="summary-value"><c:out value="${totalArchived != null ? totalArchived : 0}"/></div>
                                     <div class="summary-footer">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Tự động xóa sau 30 ngày
                                     </div>
@@ -64,12 +64,9 @@
                             </div>
 
                             <div class="container-2__body">
-                                <form method="get" action="admin/vouchers/archive" class="advanced-filter"
-                                      id="filterForm">
+                                <%-- Form bộ lọc nâng cao dành cho voucher --%>
+                                <form method="get" action="admin/vouchers/archive" class="advanced-filter" id="filterForm">
                                     <script>
-                                        //Thường sẽ load toàn bộ HTML,CSS trước nên lúc chuyển trang hay sao đó
-                                        //Nó sẽ vô tình trạng đóng mở ngay lập tức
-                                        //Để đoạn script ở đây để nó trong lúc load HTML,CSS có thể load được luôn
                                         if (localStorage.getItem('admin_filter_status') === 'closed') {
                                             document.getElementById('filterForm').classList.add('collapsed');
                                         }
@@ -87,37 +84,29 @@
                                     <div class="filter-content" id="filterContent">
                                         <div class="filter-grid">
                                             <div class="filter-group">
-                                                <label>Tìm kiếm bài học</label>
+                                                <label>Tìm kiếm voucher</label>
                                                 <div class="input-with-icon">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                     <input type="text" name="searchName" value="${param.searchName}"
-                                                           placeholder="Nhập tên bài học...">
+                                                           placeholder="Nhập mã hoặc tiêu đề voucher...">
                                                 </div>
                                             </div>
 
-                                            <div class="filter-group">
-                                                <label>Thuộc khóa học</label>
-                                                <select name="courseId">
-                                                    <option value="">Tất cả khóa học</option>
-                                                    <c:forEach var="c" items="${listCourse}">
-                                                        <option value="${c.id}" ${param.courseId == c.id ? 'selected' : ''}><c:out value="${c.title}"/></option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
+                                            <%-- Đã loại bỏ phần chọn Khóa học (Course) không liên quan --%>
 
                                             <div class="filter-group">
-                                                <label>Từ ngày</label>
+                                                <label>Từ ngày xóa</label>
                                                 <input type="date" name="deletedFromDate" value="${param.deletedFromDate}">
                                             </div>
 
                                             <div class="filter-group">
-                                                <label>Đến ngày</label>
+                                                <label>Đến ngày xóa</label>
                                                 <input type="date" name="deletedToDate" value="${param.deletedToDate}">
                                             </div>
 
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/lessons/archive" class="btn-clear">
+                                            <a href="admin/vouchers/archive" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">Áp dụng bộ lọc</button>
@@ -125,20 +114,15 @@
                                     </div>
                                 </form>
 
-                                <form id="archiveBulkForm" method="POST" action="admin/lessons/archive">
+                                <%-- Form xử lý hành động hàng loạt (POST) --%>
+                                <form id="archiveBulkForm" method="POST" action="admin/vouchers/archive">
                                     <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
-                                    <%-- LẤY RA HÀNH ĐỘNG NGƯỜI DÙNG MUỐN THỰC HIỆN Ở HIỆN TẠI --%>
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
+                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
 
-                                    <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
-                                    <input id="currentQueryId" type="hidden" name="currentQuery"
-                                           value="${pageContext.request.queryString}">
-
-                                    <div class="container-2__dynamic-content" id="lessonTableBody">
-                                        <jsp:include
-                                                page="/views/pages/admin/lesson/archive/lesson-archive-fragment.jsp"/>
+                                    <div class="container-2__dynamic-content" id="voucherTableBody">
+                                        <jsp:include page="/views/pages/admin/voucher/archive/voucher-archive-fragment.jsp"/>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -157,5 +141,4 @@
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/voucher/voucher-archive.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
-
 </html>

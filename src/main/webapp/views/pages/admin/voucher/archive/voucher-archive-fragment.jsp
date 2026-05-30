@@ -6,19 +6,22 @@
         <thead>
         <tr>
             <th><input type="checkbox" id="selectAllArchive"></th>
-            <th>TIÊU ĐỀ BÀI HỌC</th>
-            <th>KHÓA HỌC</th>
+            <th>MÃ VOUCHER</th>
+            <th>TIÊU ĐỀ VOUCHER</th>
+            <th>LOẠI GIẢM GIÁ</th>
             <th>NGÀY LƯU TRỮ</th>
             <th>LÝ DO</th>
             <th>THAO TÁC</th>
         </tr>
         </thead>
         <tbody>
-        <jsp:include page="/views/pages/admin/lesson/archive/lesson-archive-table-body.jsp"/>
+        <jsp:include page="/views/pages/admin/voucher/archive/voucher-archive-table-body.jsp"/>
         </tbody>
     </table>
+
+    <%-- Thanh hành động hàng loạt (Bulk Actions) --%>
     <jsp:include page="/views/components/bulk-action-bar.jsp">
-        <jsp:param name="label" value="bài học"/>
+        <jsp:param name="label" value="voucher"/>
         <jsp:param name="showDuplicate" value="false"/>
         <jsp:param name="showUpdateStatus" value="false"/>
         <jsp:param name="showArchive" value="false"/>
@@ -28,7 +31,7 @@
 </div>
 
 <jsp:include page="/views/components/pagination-base.jsp">
-    <jsp:param name="baseUrl" value="admin/lessons/archive"/>
+    <jsp:param name="baseUrl" value="admin/vouchers/archive"/>
     <jsp:param name="currentPageNumber" value="${filter.page}"/>
     <jsp:param name="totalPages" value="${totalPages}"/>
 </jsp:include>

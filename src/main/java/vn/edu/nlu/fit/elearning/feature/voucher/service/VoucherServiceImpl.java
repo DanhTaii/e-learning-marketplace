@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.VoucherStatus;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
 import vn.edu.nlu.fit.elearning.feature.voucher.dao.VoucherDao;
 import vn.edu.nlu.fit.elearning.feature.voucher.dto.VoucherResultDTO;
@@ -150,6 +151,26 @@ public class VoucherServiceImpl implements VoucherService {
             }
         }
         return count;
+    }
+
+    @Override
+    public int getTotalVouchersArchive() {
+        return voucherDao.countAllVouchersArchive();
+    }
+
+    @Override
+    public List<Voucher> getArchivedVouchersByFilter(VoucherArchiveFilter filter) {
+        return voucherDao.findArchivedVouchersByFilter(filter);
+    }
+
+    @Override
+    public int getCountVouchersArchiveByFilter(VoucherArchiveFilter filter) {
+        return voucherDao.countVouchersArchiveByFilter(filter);
+    }
+
+    @Override
+    public int restoreVouchersByIds(List<Integer> ids) {
+        return voucherDao.restoreVouchersByIds(ids);
     }
 }
 

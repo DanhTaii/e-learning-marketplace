@@ -1,5 +1,6 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.dao;
 
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
@@ -27,4 +28,12 @@ public interface VoucherDao {
     int archiveVouchersByIds(List<Integer> ids, String deleteReason);
 
     int deleteVouchersByIds(List<Integer> ids);
+
+    int countAllVouchersArchive();
+
+    List<Voucher> findArchivedVouchersByFilter(VoucherArchiveFilter filter);
+
+    int countVouchersArchiveByFilter(VoucherArchiveFilter filter);
+
+    int restoreVouchersByIds(List<Integer> ids);
 }

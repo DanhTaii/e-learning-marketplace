@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.voucher.dao;
 
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
+import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherArchiveFilter;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.voucher.VoucherFilter;
 import vn.edu.nlu.fit.elearning.feature.voucher.model.Voucher;
 
@@ -39,8 +40,7 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
     @Override
     public List<Voucher> findAll() {
         return getJdbi().withHandle(handle -> {
-            String sql = "SELECT * FROM vouchers ORDER BY created_at DESC";
-            return handle.createQuery(sql)
+            return handle.createQuery("SELECT * FROM vouchers WHERE is_deleted = 0 ORDER BY created_at DESC")
                     .mapToBean(Voucher.class)
                     .list();
         });
@@ -165,7 +165,7 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
         if (filter.getExpiredSoon() != null && filter.getExpiredSoon()) {
             where.append(" AND v.end_date >= NOW() AND v.end_date <= DATE_ADD(NOW(), INTERVAL 3 DAY)");
         }
-
+        where.append(" AND v.is_deleted = 0");
         return where.toString();
     }
     @Override
@@ -209,6 +209,84 @@ public class VoucherDaoImpl extends BaseDao implements VoucherDao {
         return getJdbi().withHandle(handle -> {
             String sql = "DELETE FROM vouchers WHERE id IN (<ids>)";
             return handle.createUpdate(sql)
+                    .bindList("ids", ids)
+                    .execute();
+        });
+    }
+
+    @Override
+    public int countAllVouchersArchive() {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery("SELECT COUNT(*) FROM vouchers WHERE is_deleted = 1")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
+    @Override
+    public List<Voucher> findArchivedVouchersByFilter(VoucherArchiveFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String whereClause = buildArchivedVoucherWhereClause(filter, params);
+
+        String sql = "SELECT v.id, v.code, v.title, v.description, v.discount_type, v.discount_value, " +
+                "v.min_order_value, v.max_discount_value, v.usage_limit, v.used_count, " +
+                "v.start_date, v.end_date, v.status, v.created_at, v.updated_at, v.deleted_at, v.delete_reason " +
+                "FROM vouchers v "
+                + whereClause
+                + " ORDER BY v.deleted_at DESC LIMIT :limit OFFSET :offset";
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            query.bind("limit", filter.getSize());
+            query.bind("offset", (filter.getPage() - 1) * filter.getSize());
+            return query.mapToBean(Voucher.class).list();
+        });
+    }
+
+    @Override
+    public int countVouchersArchiveByFilter(VoucherArchiveFilter filter) {
+        Map<String, Object> params = new HashMap<>();
+        String where = buildArchivedVoucherWhereClause(filter, params);
+
+        String sql = "SELECT COUNT(*) FROM vouchers v" + where;
+
+        return getJdbi().withHandle(handle -> {
+            var query = handle.createQuery(sql);
+            params.forEach(query::bind);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    private String buildArchivedVoucherWhereClause(VoucherArchiveFilter filter, Map<String, Object> params) {
+        StringBuilder where = new StringBuilder(" WHERE 1=1");
+
+        if (filter.getName() != null && !filter.getName().trim().isEmpty()) {
+            where.append(" AND (v.title LIKE :nameSearch OR v.code LIKE :nameSearch)");
+            params.put("nameSearch", "%" + filter.getName().trim() + "%");
+        }
+
+        if (filter.getDeletedFromDate() != null) {
+            where.append(" AND v.deleted_at >= :fromDate");
+            params.put("fromDate", filter.getDeletedFromDate());
+        }
+
+        if (filter.getDeletedToDate() != null) {
+            where.append(" AND v.deleted_at <= :toDate");
+            params.put("toDate", filter.getDeletedToDate());
+        }
+
+        where.append(" AND v.is_deleted = 1");
+
+        return where.toString();
+    }
+
+    @Override
+    public int restoreVouchersByIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) return 0;
+
+        return getJdbi().withHandle(handle -> {
+            return handle.createUpdate("UPDATE vouchers SET is_deleted = 0 WHERE id IN (<ids>)")
                     .bindList("ids", ids)
                     .execute();
         });

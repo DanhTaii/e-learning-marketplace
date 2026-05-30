@@ -31,7 +31,37 @@ public class Voucher implements Serializable {
     private Timestamp updatedAt;
     private boolean usedByCurrentUser;
 
+
+    private boolean isDeleted;
+
+    private Timestamp deletedAt;
+
+    private String deleteReason;
     public Voucher() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public String getDeleteReason() {
+        return deleteReason;
+    }
+
+    public void setDeleteReason(String deleteReason) {
+        this.deleteReason = deleteReason;
     }
 
     public VoucherStatus getStatus() {
