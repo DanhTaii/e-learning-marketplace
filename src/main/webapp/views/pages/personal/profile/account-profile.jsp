@@ -158,10 +158,10 @@
 <%--                            </div>--%>
 <%--                        </div>--%>
 
-<%--                        <div class="form-actions">--%>
-<%--                            <button type="reset" class="btn-secondary ">Hủy bỏ</button>--%>
-<%--                            <button type="submit" class="btn-primary dark-button">Lưu thay đổi</button>--%>
-<%--                        </div>--%>
+                        <div class="form-actions">
+                            <button type="reset" class="btn-secondary ">Hủy bỏ</button>
+                            <button type="submit" class="btn-primary dark-button">Lưu thay đổi</button>
+                        </div>
                     </form>
                 </div>
             </div>

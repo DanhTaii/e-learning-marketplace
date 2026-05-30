@@ -16,28 +16,8 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
     public int create(User user) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("""
-                                INSERT INTO users (
-                                    email,
-                                    first_name,
-                                    last_name,
-                                    username,
-                                    password,
-                                    avatar_url,
-                                    status,
-                                    provider,
-                                    provider_id
-                                )
-                                VALUES (
-                                    :email,
-                                    :firstName,
-                                    :lastName,
-                                    :username,
-                                    :password,
-                                    :avatarUrl,
-                                    :status,
-                                    :provider,
-                                    :providerId
-                                )
+                                INSERT INTO users ( email, first_name, last_name, username, password, avatar_url, status, provider, provider_id)
+                                VALUES ( :email, :firstName, :lastName, :username, :password, :avatarUrl, :status, :provider, :providerId)
                             """)
                     .bindBean(user)
                     .bind("status", "ACTIVE")
