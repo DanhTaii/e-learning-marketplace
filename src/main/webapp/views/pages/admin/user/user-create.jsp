@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/pages/user/user-create.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/order-edit.css?v=<%=System.currentTimeMillis()%>">
 
     <%-- Base & Component --%>
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
@@ -232,78 +233,33 @@
                                         </div>
                                         <c:choose>
                                             <c:when test="${not empty user.courses}">
-                                                <div class="user-course-list">
-                                                    <c:forEach items="${user.courses}" var="c">
-                                                        <div class="user-course-item product-card-container">
-                                                            <a href="course-detail?id=${c.id}" class="turn-page">
-                                                                <div class="product__small-advertisement">
-                                                                    <div class="small-advertisement__image">
-                                                                        <img src="${c.thumbnailUrl}"
-                                                                             alt="${c.title}"
-                                                                             class="img-2">
-                                                                    </div>
-                                                                    <div class="small-advertisement__content">
-                                                                        <div class="content__top">
-                                                                            <div class="content__author-name text-medium content__author-name-2">
-                                                                                    <c:out value="${c.authorName}"/>
-                                                                            </div>
-                                                                            <div class="content__rate content__rate-2">
-
-                                                                                <div class="rate__icon">
-                                                                                    <i class="text-medium fa-regular fa-star"></i>
-                                                                                </div>
-                                                                                <div class="text-medium rate__number">
-                                                                                        <c:out value="${c.avgRating}"/>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="text-paragraph test-text">
-                                                                            <p><c:out value="${c.title}"/></p>
-                                                                        </div>
-                                                                        <div class="content__quick-info">
-
-                                                                            <div class="quick-info__level">
-                                                                                <div class="level__icon icon">
-                                                                                    <i class="text-medium fa-solid fa-signal"></i>
-                                                                                </div>
-                                                                                <div class="level__text text-medium">
-                                                                                        <c:out value="${c.level.vietnameseName}"/>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="quick-info__users">
-                                                                                <div class="users__icon icon">
-                                                                                    <i class="text-medium fa-solid fa-users"></i>
-                                                                                </div>
-                                                                                <div class="users__text text-medium">
-                                                                                        <c:out value="${c.studentCount}"/>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="quick-info__time">
-                                                                                <div class="time__icon icon">
-                                                                                    <i class="text-medium fa-regular fa-clock"></i>
-                                                                                </div>
-                                                                                <div class="time__text text text-medium">
-                                                                                        <c:out value="${c.durationText}"/>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="content__price">
-                                                                            <div class="price__new">
-                                                                                    <c:out value="${c.discountedPrice}"/>
-                                                                            </div>
-                                                                            <div class="price__old">
-                                                                                    <c:out value="${c.originPrice}"/>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </c:forEach>
+                                                <div class="order-items-section">
+                                                    <table class="order-items-table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Ảnh</th>
+                                                            <th>Tên khóa học</th>
+                                                            <th>Giá hiện tại</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <c:forEach items="${user.courses}" var="c">
+                                                            <tr>
+                                                                <td class="thumbnail-cell">
+                                                                    <img src="<c:out value='${c.thumbnailUrl}'/>"
+                                                                         alt="<c:out value='${c.title}'/>"
+                                                                         class="item-thumbnail">
+                                                                </td>
+                                                                <td class="title-cell">
+                                                                        <c:out value="${c.title}"/>
+                                                                </td>
+                                                                <td class="price-cell">
+                                                                    <c:out value="${c.discountedPrice}"/>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
