@@ -157,6 +157,24 @@
                                                        value="${param.toDate}">
                                             </div>
 
+                                            <div class="filter-group">
+                                                <label>Sở hữu khóa học</label>
+
+                                                <select name="hasCourse">
+                                                    <option value="">Tất cả</option>
+
+                                                    <option value="true"
+                                                    ${param.hasCourse == 'true' ? 'selected' : ''}>
+                                                        Đã sở hữu khóa học
+                                                    </option>
+
+                                                    <option value="false"
+                                                    ${param.hasCourse == 'false' ? 'selected' : ''}>
+                                                        Chưa sở hữu khóa học
+                                                    </option>
+                                                </select>
+                                            </div>
+
                                         </div>
                                         <div class="filter-actions">
                                             <a href="admin/users" class="btn-clear">

@@ -15,7 +15,19 @@ public class UserFilter extends BaseSearchFilter {
     private Timestamp fromDate;
     private Timestamp toDate;
 
+    private Boolean hasCourse;
+
     public UserFilter() {
+    }
+
+    public UserFilter(String username, String email, String roleName, BaseStatus status, Timestamp fromDate, Timestamp toDate, Boolean hasCourse) {
+        this.username = username;
+        this.email = email;
+        this.roleName = roleName;
+        this.status = status;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.hasCourse = hasCourse;
     }
 
     public String getUsername() {
@@ -64,5 +76,13 @@ public class UserFilter extends BaseSearchFilter {
 
     public void setToDate(Timestamp toDate) {
         this.toDate = toDate;
+    }
+
+    public Boolean getHasCourse() {
+        return hasCourse;
+    }
+
+    public void setHasCourse(Boolean hasCourse) {
+        this.hasCourse = hasCourse;
     }
 }

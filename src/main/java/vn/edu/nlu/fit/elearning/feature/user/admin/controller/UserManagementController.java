@@ -37,6 +37,12 @@ public class UserManagementController extends BaseController {
         filter.setFromDate(RequestUtils.getParameterAsFromDate(request, "fromDate", null));
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
 
+        String hasCourse = RequestUtils.getParameterAsString(request, "hasCourse", "");
+
+        if (!hasCourse.isBlank()) {
+            filter.setHasCourse(Boolean.parseBoolean(hasCourse));
+        }
+
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
