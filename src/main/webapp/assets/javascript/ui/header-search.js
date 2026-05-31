@@ -34,8 +34,8 @@ input.addEventListener("keyup", function () {
                 // Gán nội dung
                 div.innerHTML = `
                     <img class="suggestion__img" src="${course.thumbnailUrl}">
-                    <div class="suggestion__title"><c:out value="${course.title}"/></div>
-                    <div class="suggestion__price"><c:out value="${course.price - course.discountPrice}"/>đ</div>
+                    <div class="suggestion__title">${course.title}</div>
+                    <div class="suggestion__price">${course.price - course.discountPrice}đ</div>
                 `;
 
                 div.addEventListener("click", function (e) {
