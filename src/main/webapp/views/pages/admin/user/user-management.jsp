@@ -143,9 +143,41 @@
                                                 </select>
                                             </div>
 
+                                            <div class="filter-group">
+                                                <label>Từ ngày</label>
+                                                <input type="date"
+                                                       name="fromDate"
+                                                       value="${param.fromDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date"
+                                                       name="toDate"
+                                                       value="${param.toDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Sở hữu khóa học</label>
+
+                                                <select name="hasCourse">
+                                                    <option value="">Tất cả</option>
+
+                                                    <option value="true"
+                                                    ${param.hasCourse == 'true' ? 'selected' : ''}>
+                                                        Đã sở hữu khóa học
+                                                    </option>
+
+                                                    <option value="false"
+                                                    ${param.hasCourse == 'false' ? 'selected' : ''}>
+                                                        Chưa sở hữu khóa học
+                                                    </option>
+                                                </select>
+                                            </div>
+
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/categories" class="btn-clear">
+                                            <a href="admin/users" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">

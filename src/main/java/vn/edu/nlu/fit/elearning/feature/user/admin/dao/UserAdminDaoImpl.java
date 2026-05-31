@@ -171,10 +171,7 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         });
     }
 
-    private String buildUserWhereClause(
-            UserFilter filter,
-            Map<String, Object> params
-    ) {
+    private String buildUserWhereClause(UserFilter filter, Map<String, Object> params) {
 
         StringBuilder where = new StringBuilder(" WHERE 1=1 ");
 
@@ -210,8 +207,28 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
 
         // to date
         if (filter.getToDate() != null) {
-            where.append(" AND u.created_at <= :toDate ");
+            where.append(" AND DATE(u.created_at) <= :toDate ");
             params.put("toDate", filter.getToDate());
+        }
+
+        if (filter.getHasCourse() != null) {
+            if (filter.getHasCourse()) {
+                where.append("""
+            AND EXISTS (
+                SELECT 1
+                FROM enrollments e
+                WHERE e.user_id = u.id
+            )
+        """);
+            } else {
+                where.append("""
+            AND NOT EXISTS (
+                SELECT 1
+                FROM enrollments e
+                WHERE e.user_id = u.id
+            )
+        """);
+            }
         }
 
         return where.toString();
