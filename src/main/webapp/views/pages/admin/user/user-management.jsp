@@ -143,9 +143,23 @@
                                                 </select>
                                             </div>
 
+                                            <div class="filter-group">
+                                                <label>Từ ngày</label>
+                                                <input type="date"
+                                                       name="fromDate"
+                                                       value="${param.fromDate}">
+                                            </div>
+
+                                            <div class="filter-group">
+                                                <label>Đến ngày</label>
+                                                <input type="date"
+                                                       name="toDate"
+                                                       value="${param.toDate}">
+                                            </div>
+
                                         </div>
                                         <div class="filter-actions">
-                                            <a href="admin/categories" class="btn-clear">
+                                            <a href="admin/users" class="btn-clear">
                                                 <i class="fa-solid fa-rotate-left"></i> Đặt lại
                                             </a>
                                             <button type="submit" class="dark-button btn-submit">
