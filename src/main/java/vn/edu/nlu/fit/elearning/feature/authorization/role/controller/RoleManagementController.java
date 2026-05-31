@@ -58,6 +58,7 @@ public class RoleManagementController extends BaseController {
             request.setAttribute("filter", filter);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("currentPageNumber", filter.getPage());
+            request.setAttribute("currentPage", "roles");
 
             String type = request.getParameter("renderType");
 

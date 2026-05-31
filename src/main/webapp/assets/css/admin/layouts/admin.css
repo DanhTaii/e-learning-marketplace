@@ -749,3 +749,8 @@ td:last-child, th:last-child {
         opacity: 1;
     }
 }
+.course-row__font-content{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
