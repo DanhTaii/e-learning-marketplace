@@ -22,17 +22,17 @@ public class CourseValidator {
             errors.put("courseSubtitle", subtitleError);
         }
 
-        // Mục tiêu
-        String goalsError = ValidationUtils.checkLength(course.getGoals(), "Mục tiêu", 20, 1000);
-        if (goalsError != null) {
-            errors.put("courseGoals", goalsError);
-        }
-
-        // Mô tả
-        String descriptionError = ValidationUtils.checkLength(course.getDescription(), "Mô tả", 50, 5000);
-        if (descriptionError != null) {
-            errors.put("courseDescription", descriptionError);
-        }
+//        // Mục tiêu
+//        String goalsError = ValidationUtils.checkLength(course.getGoals(), "Mục tiêu", 20, 1000);
+//        if (goalsError != null) {
+//            errors.put("courseGoals", goalsError);
+//        }
+//
+//        // Mô tả
+//        String descriptionError = ValidationUtils.checkLength(course.getDescription(), "Mô tả", 50, 5000);
+//        if (descriptionError != null) {
+//            errors.put("courseDescription", descriptionError);
+//        }
 
         // Giá gốc
         if (course.getPrice() <= 0) {
@@ -59,11 +59,11 @@ public class CourseValidator {
                     "Cấp độ khóa học không hợp lệ");
         }
 
-        // Thumbnail
-        if (ValidationUtils.isEmpty(course.getThumbnailUrl())) {
-            errors.put("courseThumbnail",
-                    "Vui lòng chọn ảnh đại diện");
-        }
+//        // Thumbnail
+//        if (ValidationUtils.isEmpty(course.getThumbnailUrl())) {
+//            errors.put("courseThumbnail",
+//                    "Vui lòng chọn ảnh đại diện");
+//        }
 
         return errors;
     }

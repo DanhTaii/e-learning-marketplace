@@ -494,3 +494,92 @@ table td {
 .outline-button:active {
     transform: scale(0.97);
 }
+
+
+/* ========================================================
+   PHẦN IMPORT EXCEL (COURSE MANAGEMENT)
+======================================================== */
+
+/* 1. Hộp thoại báo lỗi */
+.import-error-box {
+    background-color: #fff3f3;
+    border-left: 4px solid #dc3545;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.import-error-title {
+    color: #dc3545;
+    margin-top: 0;
+    font-size: 15px;
+}
+
+.import-error-list {
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
+/* 2. Thanh ngang chức năng Import */
+.import-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border: 1px dashed #adb5bd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.import-bar-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.import-bar-icon {
+    font-size: 24px;
+    color: #198754;
+}
+
+.import-bar-title {
+    display: block;
+    font-size: 15px;
+    color: #333;
+}
+
+.import-bar-subtitle {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+/* 3. Form và Input tải file */
+.import-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.import-file-input {
+    font-size: 13px;
+    padding: 6px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: white;
+}
+
+.import-btn {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.import-btn-download {
+    text-decoration: none;
+    font-size: var(--text-lg);
+}

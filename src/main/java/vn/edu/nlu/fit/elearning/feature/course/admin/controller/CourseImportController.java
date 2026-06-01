@@ -3,6 +3,8 @@ package vn.edu.nlu.fit.elearning.feature.course.admin.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
@@ -21,6 +23,7 @@ import java.util.List;
 public class CourseImportController extends HttpServlet {
 
     private transient CourseAdminService courseAdminService;
+    private static final Logger logger = LoggerFactory.getLogger(CourseImportController.class);
 
     @Override
     public void init() throws ServletException {
@@ -30,7 +33,7 @@ public class CourseImportController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "GET method is not supported for this endpoint.");
+        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Phương thức GET không hỗ trợ cho endpoint này !");
     }
 
     @Override
@@ -47,16 +50,21 @@ public class CourseImportController extends HttpServlet {
 
                 courseAdminService.createListCourses(courses);
 
-                request.getSession().setAttribute("successMessage", "Imported " + courses.size() + " courses successfully!");
+                request.getSession().setAttribute("flashSuccess", "Tải lên " + courses.size() + " khóa học thành công !");
             } else {
-                request.getSession().setAttribute("errorMessage", "No valid courses found in the file or file is empty.");
+                request.getSession().setAttribute("flashError", "File excel không được để trống hoặc không đúng định dạng");
+            }
+
+            if (!errorMessages.isEmpty()) {
+                request.getSession().setAttribute("importErrors", errorMessages);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.getSession().setAttribute("errorMessage", "An error occurred during file processing: " + e.getMessage());
+            request.getSession().setAttribute("flashError", "Có lỗi xảy khi thực hiện tải file");
+            logger.error("An error occurred during file processing: ", e);
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/course");
+        response.sendRedirect(request.getContextPath() + "/admin/courses");
     }
 }
