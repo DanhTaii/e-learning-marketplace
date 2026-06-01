@@ -86,46 +86,48 @@
     </div>
 
     <!-- Danh sách đánh giá hoặc empty state -->
-    <c:choose>
-        <c:when test="${not empty enrollmentDetail.listReviews}">
-            <c:forEach var="review" items="${enrollmentDetail.listReviews}">
-                <div class="review-box__comment">
-                    <div class="comment__user header__user">
-                        <img src="${review.thumbnailUrl}" alt="" class="user__avatar1">
-                    </div>
-                    <div class="comment__box">
-                        <div class="box__name box">
-                            <div class="review-in4">
-                                <span class="review__name"><c:out value="${review.userName}"/></span>
-                                <span class="review__time"><fmt:formatDate
-                                        value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
-                            </div>
+    <div id="reviews-list-container">
+        <c:choose>
+            <c:when test="${not empty enrollmentDetail.listReviews}">
+                <c:forEach var="review" items="${enrollmentDetail.listReviews}">
+                    <div class="review-box__comment">
+                        <div class="comment__user header__user">
+                            <img src="${review.thumbnailUrl}" alt="" class="user__avatar1">
                         </div>
-                        <div class="box__date box">
-                            <div class="star">
-                                <div class="text-medium regular"><c:out value="${review.rating}"/></div>
-                                <div class="star-icon">
-                                    <i class="fa-solid fa-star"></i>
+                        <div class="comment__box">
+                            <div class="box__name box">
+                                <div class="review-in4">
+                                    <span class="review__name"><c:out value="${review.userName}"/></span>
+                                    <span class="review__time"><fmt:formatDate
+                                            value="${review.createdAt}" pattern="yyyy-MM-dd "/></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="box__comment box">
-                            <span><c:out value="${review.comment}"/></span>
+                            <div class="box__date box">
+                                <div class="star">
+                                    <div class="text-medium regular"><c:out value="${review.rating}"/></div>
+                                    <div class="star-icon">
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box__comment box">
+                                <span><c:out value="${review.comment}"/></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </c:forEach>
-        </c:when>
+                </c:forEach>
+            </c:when>
 
-        <c:otherwise>
-            <!-- Empty state khi chưa có đánh giá -->
-            <div class="empty-state">
-                <i class="fa-solid fa-comments empty-icon"></i>
-                <div class="empty-title">Chưa có đánh giá nào</div>
-                <div class="empty-description">
-                    Hãy là người đầu tiên để lại đánh giá cho khóa học này.
+            <c:otherwise>
+                <!-- Empty state khi chưa có đánh giá -->
+                <div class="empty-state">
+                    <i class="fa-solid fa-comments empty-icon"></i>
+                    <div class="empty-title">Chưa có đánh giá nào</div>
+                    <div class="empty-description">
+                        Hãy là người đầu tiên để lại đánh giá cho khóa học này.
+                    </div>
                 </div>
-            </div>
-        </c:otherwise>
-    </c:choose>
+            </c:otherwise>
+        </c:choose>
+    </div>
 </div>

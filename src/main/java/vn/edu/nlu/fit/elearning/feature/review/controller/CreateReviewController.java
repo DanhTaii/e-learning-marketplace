@@ -3,6 +3,7 @@ package vn.edu.nlu.fit.elearning.feature.review.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
@@ -15,6 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "CreateReviewController", value = "/my-course/review/create")
 public class CreateReviewController extends HttpServlet {
     private ReviewService reviewService;
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(CreateReviewController.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -24,24 +26,35 @@ public class CreateReviewController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "GET method is not supported for this endpoint.");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String comment = request.getParameter("comment");
-        double rating = Double.parseDouble(request.getParameter("rating"));
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
-        int courseId = Integer.parseInt(request.getParameter("courseId"));
-        int userId = SessionUtils.getCurrentUserId(request);
-        ReviewDto newReview = new ReviewDto();
+        try {
+            String comment = request.getParameter("comment");
+            double rating = Double.parseDouble(request.getParameter("rating"));
+            int courseId = Integer.parseInt(request.getParameter("courseId"));
+            int userId = SessionUtils.getCurrentUserId(request);
 
-        newReview.setUserId(userId);
-        newReview.setCourseId(courseId);
-        newReview.setComment(comment);
-        newReview.setRating(rating);
-        reviewService.createReview(newReview);
+            ReviewDto newReview = new ReviewDto();
+            newReview.setUserId(userId);
+            newReview.setCourseId(courseId);
+            newReview.setComment(comment);
+            newReview.setRating(rating);
 
-        response.sendRedirect(request.getContextPath() + "/personal/my-course/detail?courseId=" + courseId);
+            // Lưu vào DB
+            reviewService.createReview(newReview);
+
+            // Trả về JSON thành công
+            response.getWriter().write("{\"status\":\"success\"}");
+        } catch (Exception e) {
+            // Trả về JSON thất bại nếu có lỗi
+            response.getWriter().write("{\"status\":\"error\", \"message\":\"" + e.getMessage() + "\"}");
+            logger.error("Error creating review: ", e);
+        }
     }
 }
