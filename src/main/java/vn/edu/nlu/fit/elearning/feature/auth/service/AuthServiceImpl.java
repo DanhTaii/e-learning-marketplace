@@ -92,19 +92,41 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean register(String email, String username, String password) {
+    public boolean register(String email, String fullName, String password) {
 
-        if (userService.existsUserByUsername(username)) {
-            throw new IllegalArgumentException("Tên người dùng đã tồn tại");
+        fullName = fullName.trim().replaceAll("\\s+", " ");
+
+        String[] parts = fullName.split(" ");
+
+        String firstName;
+        String lastName = "";
+
+        if (parts.length == 1) {
+            firstName = parts[0];
+        } else {
+            firstName = parts[parts.length - 1];
+
+            StringBuilder lastNameBuilder = new StringBuilder();
+
+            for (int i = 0; i < parts.length - 1; i++) {
+                if (i > 0) {
+                    lastNameBuilder.append(" ");
+                }
+                lastNameBuilder.append(parts[i]);
+            }
+            lastName = lastNameBuilder.toString();
         }
 
         HashUtils.validatePassword(password);
+        String hashPass = HashUtils.hashpassword(password);
 
         User user = new User();
-        String hashPass = HashUtils.hashpassword(password);
         user.setEmail(email);
-        user.setUsername(username);
+        user.setUsername(fullName);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setPassword(hashPass);
+
         return userAdminService.createUser(user) > 0;
     }
 

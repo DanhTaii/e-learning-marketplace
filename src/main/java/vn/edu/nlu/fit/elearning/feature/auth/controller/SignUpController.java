@@ -39,13 +39,11 @@ public class SignUpController extends HttpServlet {
 
         try {
             String email = request.getParameter("email");
-            String username = request.getParameter("username");
+            String fullName = request.getParameter("fullName");
             String password = request.getParameter("password");
             String confirmPassword = request.getParameter("confirmPassword");
 
-            Map<String, String> errors = SignUpValidator.validate(
-                    email, username, password, confirmPassword, userService
-            );
+            Map<String, String> errors = SignUpValidator.validate(email, fullName, password, confirmPassword, userService);
 
             if (!errors.isEmpty()) {
                 request.setAttribute("errors", errors);
@@ -67,14 +65,14 @@ public class SignUpController extends HttpServlet {
             }
 
             // Gửi email chứa mã
-            if (!SendGridService.sendEmail(email, token, username)) {
+            if (!SendGridService.sendEmail(email, token, fullName)) {
                 throw new RuntimeException("Gửi email xác nhận thất bại!");
             }
 
             // Lưu thông tin đăng ký vào session để dùng ở CheckEmailController
             HttpSession session = request.getSession();
             session.setAttribute("signupEmail", email);
-            session.setAttribute("signupUsername", username);
+            session.setAttribute("signupFullName", fullName);
             session.setAttribute("signupPassword", password);
             session.setMaxInactiveInterval(10 * 60); // 10 phút
 

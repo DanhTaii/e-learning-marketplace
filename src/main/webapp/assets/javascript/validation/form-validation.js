@@ -2,20 +2,33 @@ const Validator = {
     checkPassword: function (password) {
         if (!password) return "Mật khẩu không được để trống";
         if (password.length < 8) return "Mật khẩu phải có ít nhất 8 ký tự";
-        if (password.length > 20) return "Mật khẩu không được quá 25 ký tự";
+        if (password.length > 25) return "Mật khẩu không được quá 25 ký tự";
         if (!/[A-Z]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa";
         if (!/[a-z]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ cái viết thường";
         if (!/[0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 chữ số";
         if (!/[^A-Za-z0-9]/.test(password)) return "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt";
         return null;
     },
-    checkUsername: function (username) {
-        if (!username) return "Vui lòng nhập tên đăng nhập";
-        if (username.length < 3) return "Tên đăng nhập phải có ít nhất 3 ký tự";
-        if (username.length > 16) return "Tên đăng nhập không được dài quá 16 kí tự"
-        if (!/^[a-zA-Z0-9]+$/.test(username)) {
-            return "Tên đăng nhập không được chứa ký tự đặc biệt, khoảng trắng hoặc dấu tiếng Việt";
+    checkFullName: function (fullName) {
+        if (!fullName) {
+            return "Vui lòng nhập họ tên";
         }
+
+        fullName = fullName.trim();
+
+        if (fullName.length < 2) {
+            return "Họ tên quá ngắn";
+        }
+
+        if (fullName.length > 100) {
+            return "Họ tên quá dài";
+        }
+
+        const regex = /^[\p{L}\s]+$/u;
+        if (!regex.test(fullName)) {
+            return "Họ tên chỉ được chứa chữ cái và khoảng trắng";
+        }
+
         return null;
     },
 
@@ -38,14 +51,12 @@ const Validator = {
     },
 
     checkPhone: function (phone) {
-        const regex = /^\d{10,11}$/;
-
-        if (!regex.test(phone)) {
-            return "Số điện thoại phải có 10 hoặc 11 chữ số";
+        if (!phone) {
+            return "Vui lòng nhập số điện thoại";
         }
 
-        if (!/^[a-zA-Z0-9]+$/.test(phone)) {
-            return "Số điện thoại không được chứa ký tự";
+        if (!/^\d{10,11}$/.test(phone)) {
+            return "Số điện thoại phải có 10 hoặc 11 chữ số";
         }
 
         return null;

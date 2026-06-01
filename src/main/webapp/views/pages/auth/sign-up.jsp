@@ -44,9 +44,9 @@
                                 <span id="error_email" class="error-client"><c:out value="${errors.email}"/></span>
                             </div>
                             <div class="form__input input-2">
-                                <input type="text" class="input-text text-big" placeholder="Nhập tên người dùng"
-                                       name="username" value="${param.username}" id="name">
-                                <span id="error_username" class="error-client"><c:out value="${errors.username}"/></span>
+                                <input type="text" class="input-text text-big" placeholder="Nhập họ và tên"
+                                       name="fullName" value="${param.fullName}" id="fullName">
+                                <span id="error_fullName" class="error-client"><c:out value="${errors.fullName}"/></span>
                             </div>
                             <div class="form__input input-3">
                                 <div class="password-group">

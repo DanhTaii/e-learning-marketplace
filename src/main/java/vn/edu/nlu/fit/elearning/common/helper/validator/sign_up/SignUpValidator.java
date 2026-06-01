@@ -14,7 +14,7 @@ public class SignUpValidator {
 
     public static Map<String, String> validate(
             String email,
-            String username,
+            String fullName,
             String password,
             String confirmPassword,
             UserService userService
@@ -26,8 +26,8 @@ public class SignUpValidator {
             errors.put("email", "Email không được để trống!");
         }
 
-        if (username == null || username.isEmpty()) {
-            errors.put("username", "Tên người dùng không được để trống!");
+        if (fullName == null || fullName.isEmpty()) {
+            errors.put("fullName", "Tên người dùng không được để trống!");
         }
 
         if (password == null || password.isEmpty()) {
@@ -64,24 +64,23 @@ public class SignUpValidator {
             errors.put("email", "Email đã tồn tại!");
         }
 
-        // 5. Username validate
-        if (username != null && !username.isEmpty()) {
+        // 5. fullName validate
+        if (fullName != null && !fullName.isEmpty()) {
 
-            if (username.length() < 3 || username.length() > 20) {
-                errors.put("username", "Tên người dùng phải từ 3 đến 20 ký tự!");
-            } else if (!username.matches("^[a-zA-Z0-9._]+$")) {
-                errors.put("username", "Chỉ được chứa chữ, số, . hoặc _");
-            } else if (userService.existsUserByUsername(username.toLowerCase())) {
-                errors.put("username", "Tên người dùng đã tồn tại!");
-            } else if (isReservedWord(username)) {
-                errors.put("username", "Tên người dùng không hợp lệ!");
+            if (fullName.length() < 2 || fullName.length() > 50) {
+                errors.put("fullName", "Họ tên phải từ 2 đến 50 ký tự!");
+            }
+            else if (!fullName.matches("^[\\p{L}\\s]+$")) {
+                errors.put("fullName", "Họ tên chỉ được chứa chữ cái và khoảng trắng!");
+            } else if (isReservedWord(fullName)) {
+                errors.put("fullName", "Tên người dùng không hợp lệ!");
             }
         }
 
         return errors;
     }
 
-    private static boolean isReservedWord(String username) {
-        return username != null && RESERVED_WORDS.contains(username.toLowerCase());
+    private static boolean isReservedWord(String fullName) {
+        return fullName != null && RESERVED_WORDS.contains(fullName.toLowerCase());
     }
 }

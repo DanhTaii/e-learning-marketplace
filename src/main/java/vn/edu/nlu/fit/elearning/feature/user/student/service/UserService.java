@@ -56,5 +56,7 @@ public interface UserService {
 
     boolean updateAvatar(int userId, String avatarUrl);
 
+
+    boolean createRegisteredUser(User user);
     
 }
