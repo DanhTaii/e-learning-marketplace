@@ -44,4 +44,6 @@ public interface CourseAdminDao {
     int countArchivedByFilter(CourseArchivedFilter filter);
 
     int countCoursesByTimeRange(String timeRange);
+
+    int createList(List<Course> courses);
 }
