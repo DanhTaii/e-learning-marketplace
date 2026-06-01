@@ -3,8 +3,31 @@
 
 
 <div class="form-container">
-    <form id="courseForm" action="admin/course/editor" method="post">
+    <form id="courseForm" action="admin/course/editor" method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
+        <div class="form-actions mb-5">
+            <div style="display: flex; gap: 10px; flex: 1;">
+                <a href="admin/courses" class="btn-cancel-modern"
+                   style="text-decoration: none;">
+                    Hủy bỏ
+                </a>
+
+                <button type="submit" class="btn-submit-modern w-100">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <c:out value="${(not empty course and course.id > 0) ? 'Cập nhật' : 'Thêm khóa học'}"/>
+                </button>
+            </div>
+
+            <c:if test="${course != null and course.id > 0}">
+                <button type="button" class="btn-delete-modern"
+                        onclick="setupConfirmModal({action: 'archive', ids: ${course.id}, url: 'admin/course/action', isBulk: false})">
+                    <i class="fa-solid fa-trash-can"></i>
+                    Xóa khóa học
+                </button>
+            </c:if>
+        </div>
+
         <c:if test="${course != null}">
             <input type="hidden" name="courseId" value="${course.id}"/>
         </c:if>
@@ -45,24 +68,23 @@
             </div>
             <div class="form-column-4">
                 <div class="form-group">
-                    <label class="title-style">Link ảnh khóa học</label>
+                    <label class="title-style">Ảnh khóa học (Tải lên hoặc dán link)</label>
+
+                    <input type="file" name="thumbnailFile" id="thumbnail-file" class="input-modern mb-2"
+                           accept="image/png, image/jpeg, image/webp"
+                           style="padding: 8px;">
+
                     <input name="thumbnail" type="text" id="thumbnail-input" class="input-modern"
-                           placeholder="Dán link ảnh . . ."
+                           placeholder="Hoặc dán link ảnh . . ."
                            value="${course != null ? course.thumbnailUrl : param.thumbnail}">
 
                     <div class="image-preview-container mt-3">
-                        <%-- Tính toán URL hiển thị: Ưu tiên URL từ khóa học -> Nếu rỗng thì lấy ảnh mặc định --%>
                         <c:set var="previewUrl"
                                value="${not empty course.thumbnailUrl ? course.thumbnailUrl : 'assets/image/image-not-found.webp'}"/>
-
-                        <%-- Nếu là trang tạo mới (course null) và chưa có link ảnh từ param, cũng dùng ảnh mặc định --%>
                         <c:if test="${empty course && empty param.thumbnail}">
                             <c:set var="previewUrl" value="assets/image/image-not-found.webp"/>
                         </c:if>
-
-                        <img id="image-preview"
-                             src="${previewUrl}"
-                             alt="Preview">
+                        <img id="image-preview" src="${previewUrl}" alt="Preview">
                     </div>
                 </div>
             </div>
@@ -114,7 +136,7 @@
                     <c:forEach items="${categories}" var="cat">
                         <option value="${cat.id}"
                             ${(param.category_id == cat.id || course.categoryId == cat.id) ? 'selected' : ''}>
-                                <c:out value="${cat.name}"/>
+                            <c:out value="${cat.name}"/>
                         </option>
                     </c:forEach>
                 </select>
@@ -151,7 +173,7 @@
                                     <c:if test="${course != null && courseTagIdList.contains(tag.id)}">
                                         checked
                                     </c:if>/>
-                                <c:out value="${tag.name}"/>
+                            <c:out value="${tag.name}"/>
                         </label>
                     </c:forEach>
                 </div>
@@ -173,7 +195,8 @@
                 <label class="title-style">Mô tả chi tiết</label>
                 <textarea id="courseDescription" name="description"
                           class="input-modern textarea-modern"
-                          placeholder="Viết mô tả đầy đủ về khóa học tại đây..."><c:out value="${course != null ? course.description : param.description}"/></textarea>
+                          placeholder="Viết mô tả đầy đủ về khóa học tại đây..."><c:out
+                        value="${course != null ? course.description : param.description}"/></textarea>
                 <span class="error-client" id="error_courseDescription"></span>
             </div>
         </div>
