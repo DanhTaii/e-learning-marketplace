@@ -44,46 +44,55 @@
 <%--        </form>--%>
 <%--    </div>--%>
 
-    <div class="comment-input-box modern-review-form">
-        <div class="comment__user2 header__user">
-            <img src="${sessionScope.userSession.avatarUrl}" alt="Avatar" class="user__avatar2">
-        </div>
-
-        <form action="my-course/review/create" method="post" id="myForm" class="review-form-container">
-            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
-            <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
-
-            <div class="error-wrapper">
-                <span id="error_rating" class="error-client"></span>
-                <span id="error_comment" class="error-client"></span>
+    <c:if test="${!enrollmentDetail.isReviewed}">
+        <div class="comment-input-box modern-review-form">
+            <div class="comment__user2 header__user">
+                <img src="${sessionScope.userSession.avatarUrl}" alt="Avatar" class="user__avatar2">
             </div>
 
-            <div class="review-input-wrapper">
-                <div class="rating-selection">
-                    <span class="rating-label">Chất lượng khóa học:</span>
-                    <div class="star-rating-interactive">
-                        <i class="fa-regular fa-star star-item" data-value="1"></i>
-                        <i class="fa-regular fa-star star-item" data-value="2"></i>
-                        <i class="fa-regular fa-star star-item" data-value="3"></i>
-                        <i class="fa-regular fa-star star-item" data-value="4"></i>
-                        <i class="fa-regular fa-star star-item" data-value="5"></i>
+            <form action="my-course/review/create" method="post" id="myForm" class="review-form-container">
+                <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+                <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
+
+                <div class="error-wrapper">
+                    <span id="error_rating" class="error-client"></span>
+                    <span id="error_comment" class="error-client"></span>
+                </div>
+
+                <div class="review-input-wrapper">
+                    <div class="rating-selection">
+                        <span class="rating-label">Chất lượng khóa học:</span>
+                        <div class="star-rating-interactive">
+                            <i class="fa-regular fa-star star-item" data-value="1"></i>
+                            <i class="fa-regular fa-star star-item" data-value="2"></i>
+                            <i class="fa-regular fa-star star-item" data-value="3"></i>
+                            <i class="fa-regular fa-star star-item" data-value="4"></i>
+                            <i class="fa-regular fa-star star-item" data-value="5"></i>
+                        </div>
+                        <input type="hidden" name="rating" id="ratingInput" value="0">
+                        <span id="ratingDisplay" class="rating-display" style="display: none;">0</span>
                     </div>
-                    <input type="hidden" name="rating" id="ratingInput" value="0">
-                    <span id="ratingDisplay" class="rating-display" style="display: none;">0</span>
-                </div>
 
-                <textarea name="comment" class="review-textarea"
-                          placeholder="Khóa học này thế nào? Hãy chia sẻ cảm nhận của bạn nhé..."
-                          id="user_comment"></textarea>
+                    <textarea name="comment" class="review-textarea"
+                              placeholder="Khóa học này thế nào? Hãy chia sẻ cảm nhận của bạn nhé..."
+                              id="user_comment"></textarea>
 
-                <div class="review-actions">
-                    <button class="btn-submit-modern" type="submit">
-                        <i class="fa-solid fa-paper-plane"></i> Gửi đánh giá
-                    </button>
+                    <div class="review-actions">
+                        <button class="btn-submit-modern" type="submit">
+                            <i class="fa-solid fa-paper-plane"></i> Gửi đánh giá
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </c:if>
+
+    <c:if test="${enrollmentDetail.isReviewed}">
+        <div id="already-reviewed-msg" class="already-reviewed-msg mt-3" style="padding: 20px; background: #eef2ff; border-radius: 8px; color: #4f46e5;
+                    font-weight: 500; margin-bottom: 2rem; font-size: var(--text-lg)">
+            <i class="fa-solid fa-circle-check"></i> Cảm ơn bạn đã để lại đánh giá cho khóa học này!
+        </div>
+    </c:if>
 
     <!-- Danh sách đánh giá hoặc empty state -->
     <div id="reviews-list-container">

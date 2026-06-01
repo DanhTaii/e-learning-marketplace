@@ -21,6 +21,7 @@ public class EnrollmentDetailDto implements Serializable {
     private List<ReviewDto> listReviews;
     private String description;
     private String goals;
+    private boolean isReviewed;
 
     public EnrollmentDetailDto() {
     }
@@ -135,6 +136,14 @@ public class EnrollmentDetailDto implements Serializable {
 
     public void setGoals(String goals) {
         this.goals = goals;
+    }
+
+    public boolean getIsReviewed() {
+        return isReviewed;
+    }
+
+    public void setIsReviewed(boolean reviewed) {
+        isReviewed = reviewed;
     }
 
     public String getDurationText() {

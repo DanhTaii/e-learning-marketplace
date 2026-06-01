@@ -40,6 +40,13 @@ public class CreateReviewController extends HttpServlet {
             int courseId = Integer.parseInt(request.getParameter("courseId"));
             int userId = SessionUtils.getCurrentUserId(request);
 
+            boolean hasReviewed = reviewService.isReviewExist(userId, courseId);
+
+            if (hasReviewed) {
+                response.getWriter().write("{\"status\":\"error\", \"message\":\"Bạn đã đánh giá khóa học này rồi!\"}");
+                return;
+            }
+
             ReviewDto newReview = new ReviewDto();
             newReview.setUserId(userId);
             newReview.setCourseId(courseId);

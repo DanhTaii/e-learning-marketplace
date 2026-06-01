@@ -107,6 +107,14 @@ async function handleReviewSubmit(e) {
         if (data.status === 'success') {
             toast({ title: 'Thành công!', message: 'Đánh giá của bạn đã được ghi nhận.', type: 'success', duration: 3000 });
 
+            // Thêm dòng này để ẨN FORM ĐÁNH GIÁ đi ngay lập tức
+            const formContainer = document.querySelector('.modern-review-form');
+            // const alreadyReviewedMessage = document.querySelector('.already-reviewed-message');
+            if (formContainer) {
+                formContainer.style.display = 'none'; // Giấu form đi
+                // alreadyReviewedMessage.style.display = 'block'; // Hiện thông báo đã đánh giá
+            }
+
             resetReviewFormState(commentInput, ratingInput);
             appendNewReviewToDOM(rating, comment);
 
