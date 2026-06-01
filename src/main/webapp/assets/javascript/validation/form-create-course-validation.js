@@ -19,7 +19,7 @@ const Validator = {
 
     checkLength: function (value, min, max, label) {
             const length = value.trim().length;
-            if (length === 0) return `Vui lòng nhập <c:out value="${label}"/>`;
+            if (length === 0) return `Vui lòng nhập ${label}`;
             if (length < min) return `${label} phải có ít nhất ${min} ký tự`;
             if (length > max) return `${label} không được vượt quá ${max} ký tự`;
             return null;

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.edu.nlu.fit.elearning.common.base.BaseController;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.external.cloudinary.CloudinaryService;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Level;
 import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.common.utils.validation.ValidationUtils;
@@ -25,6 +26,11 @@ import java.util.List;
 
 
 @WebServlet(name = "CourseEditorController", value = "/admin/course/editor")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB: File lớn hơn 2MB sẽ ghi tạm ra đĩa
+        maxFileSize = 1024 * 1024 * 5,       // 5MB: Kích thước tối đa của 1 file
+        maxRequestSize = 1024 * 1024 * 10    // 10MB: Kích thước tối đa của toàn bộ request
+)
 public class CourseEditorController extends BaseController {
     private CourseAdminService cs;
     private TagService tagService;
@@ -90,6 +96,19 @@ public class CourseEditorController extends BaseController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Lấy link từ ô text trước
+            String thumbnailUrl = request.getParameter("thumbnail");
+
+            try {
+                Part filePart = request.getPart("thumbnailFile");
+                // Kiểm tra xem user có chọn file không
+                if (filePart != null && filePart.getSize() > 0) {
+                    thumbnailUrl = CloudinaryService.uploadFile(filePart, "elearning/courses");
+                }
+            } catch (Exception e) {
+                logger.error("Lỗi khi upload ảnh khóa học: " + e.getMessage());
+            }
+
             String courseId = request.getParameter("courseId");
             String title = request.getParameter("title");
             String subtitle = request.getParameter("subtitle");
@@ -162,7 +181,10 @@ public class CourseEditorController extends BaseController {
             course.setDiscountPrice(discountPrice);
             course.setCategoryId(categoryId);
             course.setIsPublic(Boolean.parseBoolean(request.getParameter("status")));
-            course.setThumbnailUrl(request.getParameter("thumbnail"));
+//            course.setThumbnailUrl(request.getParameter("thumbnail"));
+
+            course.setThumbnailUrl(thumbnailUrl);
+
             course.setAuthorName("Quản trị viên");
             course.setLevel(level);
 
