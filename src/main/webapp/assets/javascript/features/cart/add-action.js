@@ -60,7 +60,10 @@ function addToCart(e, courseId) {
             if (cartElement) {
                 cartElement.innerText = newCount;
             }
-            if (window.location.href.includes("cart")) {
+            if (
+                window.location.href.includes("cart") ||
+                window.location.href.includes("my-wishlist")
+            ) {
                 window.location.reload();
             } else {
                 toast({

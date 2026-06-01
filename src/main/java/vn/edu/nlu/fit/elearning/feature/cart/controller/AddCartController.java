@@ -13,6 +13,7 @@ import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseCardDto;
 import vn.edu.nlu.fit.elearning.feature.cart.service.CartServiceImpl;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
 import vn.edu.nlu.fit.elearning.feature.course.student.service.CourseService;
+import vn.edu.nlu.fit.elearning.feature.wishlist.service.WishlistService;
 
 import java.io.IOException;
 
@@ -22,12 +23,14 @@ public class AddCartController extends HttpServlet {
 
     private CourseService courseService;
     private CartSyncService cartSyncService;
+    private WishlistService wishlistService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.courseService = BeanContainer.getBean(CourseService.class);
         this.cartSyncService = BeanContainer.getBean(CartSyncService.class);
+        this.wishlistService = BeanContainer.getBean(WishlistService.class);
     }
 
     @Override
@@ -49,6 +52,9 @@ public class AddCartController extends HttpServlet {
 
         if (userIdObj != null) {
             cartSyncService.saveSessionToDatabase(userIdObj, (CartServiceImpl) c);
+
+            // Xóa khóa học khỏi wishlist nếu đang tồn tại
+            wishlistService.removeCourseFromWishlist(userIdObj, id);
         }
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
