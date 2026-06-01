@@ -54,7 +54,7 @@
             </div>
 
             <div class="contact-form__actions">
-                <button type="button" id="cancelContact">Hủy</button>
+                <button type="button" id="cancelContact" class="btn">Hủy</button>
                 <button type="submit" class="dark-button">Gửi</button>
             </div>
 
