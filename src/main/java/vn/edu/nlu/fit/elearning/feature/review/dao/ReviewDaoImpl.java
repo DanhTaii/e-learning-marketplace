@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ReviewDaoImpl extends BaseDao implements ReviewDao {
 
-//    @Override
-@Override
-public List<ReviewDto> findAll() {
+    //    @Override
+    @Override
+    public List<ReviewDto> findAll() {
         return getJdbi().withHandle(handle -> {
             return handle.createQuery("SELECT r.id AS review_id, r.user_id, u.first_name, u.last_name, u.email, r.course_id, c.title AS course_title, r.rating, r.comment, r.created_at\n" +
                     "FROM reviews r\n" +
@@ -20,10 +20,10 @@ public List<ReviewDto> findAll() {
     }
 
     @Override
-    public int create(ReviewDto entity){
+    public int create(ReviewDto entity) {
         return getJdbi().withHandle(handle -> {
             return handle.createUpdate("INSERT INTO reviews(user_id, course_id, rating, comment)\n" +
-                    "VALUES (:userId, :courseId, :rating, :comment)")
+                            "VALUES (:userId, :courseId, :rating, :comment)")
                     .bindBean(entity)
                     .execute();
         });
@@ -38,7 +38,19 @@ public List<ReviewDto> findAll() {
                     "FROM reviews r\n" +
                     "JOIN users u ON r.user_id = u.id\n" +
                     "WHERE r.course_id = :course_id\n" +
-                    "ORDER BY r.created_at DESC;").bind("course_id",courseId).mapToBean(ReviewDto.class).list();
+                    "ORDER BY r.created_at DESC;").bind("course_id", courseId).mapToBean(ReviewDto.class).list();
+        });
+    }
+
+    @Override
+    public boolean isExist(int userId, int courseId) {
+        return getJdbi().withHandle(handle -> {
+            Integer count = handle.createQuery("SELECT COUNT(*) FROM reviews WHERE user_id = :userId AND course_id = :courseId")
+                    .bind("userId", userId)
+                    .bind("courseId", courseId)
+                    .mapTo(Integer.class)
+                    .one();
+            return count != null && count > 0;
         });
     }
 

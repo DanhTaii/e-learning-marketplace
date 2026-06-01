@@ -8,4 +8,6 @@ public interface ReviewService {
     int createReview(ReviewDto review);
 
     List<ReviewDto> getReviewsByCourseId(int courseId);
+
+    boolean isReviewExist(int userId, int courseId);
 }

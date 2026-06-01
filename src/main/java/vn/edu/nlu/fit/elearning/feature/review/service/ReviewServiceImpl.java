@@ -25,4 +25,9 @@ public class ReviewServiceImpl implements ReviewService {
         return rd.findByCourseId(courseId);
     }
 
+    @Override
+    public boolean isReviewExist(int userId, int courseId) {
+        return rd.isExist(userId, courseId);
+    }
+
 }

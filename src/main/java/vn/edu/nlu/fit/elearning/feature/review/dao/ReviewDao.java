@@ -11,4 +11,6 @@ public interface ReviewDao {
     int create(ReviewDto entity);
 
     List<ReviewDto> findByCourseId(int courseId);
+
+    boolean isExist(int userId, int courseId);
 }

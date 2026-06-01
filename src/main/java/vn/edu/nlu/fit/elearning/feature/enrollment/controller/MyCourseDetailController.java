@@ -46,6 +46,10 @@ public class MyCourseDetailController extends HttpServlet {
             int courseId = Integer.parseInt(request.getParameter("courseId"));
 
             EnrollmentDetailDto enrollmentDetail = enrollmentService.getEnrollmentDetail(userId, courseId);
+
+            boolean isReviewed = reviewService.isReviewExist(userId, courseId);
+            enrollmentDetail.setIsReviewed(isReviewed);
+
             List<ReviewDto> reviewDtos = reviewService.getReviewsByCourseId(courseId);
             enrollmentDetail.setListReviews(reviewDtos);
 
@@ -58,7 +62,7 @@ public class MyCourseDetailController extends HttpServlet {
             request.setAttribute("enrollmentDetail", enrollmentDetail);
             request.getRequestDispatcher("/views/pages/personal/course/enrollment/id/course-content.jsp").forward(request, response);
         } catch (Exception e) {
-            logger.error("Lỗi tải thông tin khóa học đăng ký: " + e.getMessage());
+            logger.error("Lỗi tải thông tin khóa học đăng ký: {}", e.getMessage());
         }
     }
 
