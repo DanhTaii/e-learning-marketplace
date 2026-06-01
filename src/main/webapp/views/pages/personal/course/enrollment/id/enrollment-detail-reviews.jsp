@@ -18,28 +18,69 @@
     </div>
 
     <!-- Form nhập đánh giá -->
-    <div class="comment-input-box">
-        <div class="comment__user2 header__user">
-            <img src="${sessionScope.userSession.avatarUrl}" alt=""
-                 class="user__avatar2">
-        </div>
-        <form action="my-course/review/create" method="post" id="myForm">
-            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
-            <div><span id="error_comment" class="error-client"></span></div>
-            <div><span id="error_rating" class="error-client"></span></div>
-            <div class="box__input">
-                <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
-                <input type="text" name="comment" class="input-style"
-                       placeholder="Viết bình luận..." id="user_comment">
+<%--    <div class="comment-input-box">--%>
+<%--        <div class="comment__user2 header__user">--%>
+<%--            <img src="${sessionScope.userSession.avatarUrl}" alt=""--%>
+<%--                 class="user__avatar2">--%>
+<%--        </div>--%>
+<%--        <form action="my-course/review/create" method="post" id="myForm">--%>
+<%--            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">--%>
+<%--            <div><span id="error_comment" class="error-client"></span></div>--%>
+<%--            <div><span id="error_rating" class="error-client"></span></div>--%>
+<%--            <div class="box__input">--%>
+<%--                <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">--%>
+<%--                <input type="text" name="comment" class="input-style"--%>
+<%--                       placeholder="Viết bình luận..." id="user_comment">--%>
 
-                <input type="number" class="input__number" name="rating" id="ratingInput" min="0"
-                       max="5" step="0.1" oninput="validateRating(this)">
-                <div class="star">
-                    <i class="fa-solid fa-star"></i>
-                    <span id="ratingDisplay" class="rating-display">0</span>
-                    <span class="num">/5</span>
+<%--                <input type="number" class="input__number" name="rating" id="ratingInput" min="0"--%>
+<%--                       max="5" step="0.1" oninput="validateRating(this)">--%>
+<%--                <div class="star">--%>
+<%--                    <i class="fa-solid fa-star"></i>--%>
+<%--                    <span id="ratingDisplay" class="rating-display">0</span>--%>
+<%--                    <span class="num">/5</span>--%>
+<%--                </div>--%>
+<%--                <button class="dark-button button__add" type="submit">Gửi</button>--%>
+<%--            </div>--%>
+<%--        </form>--%>
+<%--    </div>--%>
+
+    <div class="comment-input-box modern-review-form">
+        <div class="comment__user2 header__user">
+            <img src="${sessionScope.userSession.avatarUrl}" alt="Avatar" class="user__avatar2">
+        </div>
+
+        <form action="my-course/review/create" method="post" id="myForm" class="review-form-container">
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+            <input type="hidden" name="courseId" value="${enrollmentDetail.courseId}">
+
+            <div class="error-wrapper">
+                <span id="error_rating" class="error-client"></span>
+                <span id="error_comment" class="error-client"></span>
+            </div>
+
+            <div class="review-input-wrapper">
+                <div class="rating-selection">
+                    <span class="rating-label">Chất lượng khóa học:</span>
+                    <div class="star-rating-interactive">
+                        <i class="fa-regular fa-star star-item" data-value="1"></i>
+                        <i class="fa-regular fa-star star-item" data-value="2"></i>
+                        <i class="fa-regular fa-star star-item" data-value="3"></i>
+                        <i class="fa-regular fa-star star-item" data-value="4"></i>
+                        <i class="fa-regular fa-star star-item" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating" id="ratingInput" value="0">
+                    <span id="ratingDisplay" class="rating-display" style="display: none;">0</span>
                 </div>
-                <button class="dark-button button__add" type="submit">Gửi</button>
+
+                <textarea name="comment" class="review-textarea"
+                          placeholder="Khóa học này thế nào? Hãy chia sẻ cảm nhận của bạn nhé..."
+                          id="user_comment"></textarea>
+
+                <div class="review-actions">
+                    <button class="btn-submit-modern" type="submit">
+                        <i class="fa-solid fa-paper-plane"></i> Gửi đánh giá
+                    </button>
+                </div>
             </div>
         </form>
     </div>

@@ -4,9 +4,11 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.SessionUtils;
 import vn.edu.nlu.fit.elearning.feature.review.dto.ReviewDto;
 import vn.edu.nlu.fit.elearning.feature.review.service.ReviewService;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
+import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserShortResponse;
 
 import java.io.IOException;
 
@@ -31,8 +33,7 @@ public class CreateReviewController extends HttpServlet {
         double rating = Double.parseDouble(request.getParameter("rating"));
 
         int courseId = Integer.parseInt(request.getParameter("courseId"));
-        User user = (User) request.getSession().getAttribute("userSession");
-        int userId = user.getId();
+        int userId = SessionUtils.getCurrentUserId(request);
         ReviewDto newReview = new ReviewDto();
 
         newReview.setUserId(userId);
@@ -41,6 +42,6 @@ public class CreateReviewController extends HttpServlet {
         newReview.setRating(rating);
         reviewService.createReview(newReview);
 
-        response.sendRedirect(request.getContextPath() + "/my-course/detail?courseId=" + courseId);
+        response.sendRedirect(request.getContextPath() + "/personal/my-course/detail?courseId=" + courseId);
     }
 }
