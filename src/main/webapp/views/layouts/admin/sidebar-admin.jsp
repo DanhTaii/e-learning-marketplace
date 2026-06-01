@@ -143,7 +143,7 @@
                         <div class="menu-item__student ${currentPage == 'permissions' ? 'student-list' : ''}">
                                         <span class="container-1__menu-items menu-item__order">
 
-                                            <i class="fa-solid fa-credit-card"></i>
+                                            <i class="fa-solid fa-shield-halved"></i>
                                             <span>Quyền</span>
                                         </span>
                         </div>

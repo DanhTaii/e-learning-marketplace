@@ -69,6 +69,13 @@ public class ResultSearchByTagsController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
+        request.setAttribute("sortPrice", sortPrice);
+        request.setAttribute("level", level);
+        request.setAttribute("priceRange", priceRange);
+        request.setAttribute("rating", rating);
+        request.setAttribute("duration", duration);
+        request.setAttribute("popular", popular);
+
         // Lấy list + phân trang
         List<CourseCardDto> listCourse = courseService.filterCoursesByTagWithPagination(
                 idTag, sortPrice, level, priceRange, rating, duration, popular,
@@ -89,8 +96,8 @@ public class ResultSearchByTagsController extends HttpServlet {
 
         // Set base URL cho phân trang
         StringBuilder paginationUrl = new StringBuilder(request.getContextPath());
-        paginationUrl.append(request.getServletPath());  // /result-search/by-tag
-        paginationUrl.append("?id=").append(idTag);      // bắt đầu bằng ?id=...
+        paginationUrl.append(request.getServletPath());
+        paginationUrl.append("?id=").append(idTag);
 
         if (sortPrice != null) paginationUrl.append("&sortPrice=").append(sortPrice);
         if (level != null) paginationUrl.append("&level=").append(level);
