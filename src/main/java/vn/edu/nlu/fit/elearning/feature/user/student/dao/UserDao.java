@@ -43,4 +43,6 @@ public interface UserDao {
 
     int updateProfile(User user);
 
+    int createRegisteredUser(User user);
+
 }

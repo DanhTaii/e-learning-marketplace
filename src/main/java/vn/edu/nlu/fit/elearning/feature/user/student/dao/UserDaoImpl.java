@@ -234,6 +234,32 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         );
     }
 
+    @Override
+    public int createRegisteredUser(User user) {
+
+        return getJdbi().inTransaction(handle -> {
+
+            Integer userId = handle.createUpdate("""
+                INSERT INTO users ( email, first_name, last_name, username, password, avatar_url, status)
+                VALUES (:email, :firstName, :lastName, :username, :password, :avatarUrl, :status)
+                """)
+                    .bindBean(user)
+                    .bind("status", "ACTIVE")
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(Integer.class)
+                    .one();
+
+            handle.createUpdate("""
+                INSERT INTO user_roles (user_id, role_id)
+                VALUES (:userId,:roleId)
+                """)
+                    .bind("userId", userId)
+                    .bind("roleId", 5)
+                    .execute();
+
+            return userId;
+        });
+    }
 
 
 }

@@ -35,32 +35,36 @@ public class ResultSearchByCategoriesController extends HttpServlet {
             userId = (Integer) session.getAttribute("userId");
         }
 
-        // Lấy id category
         int idCategory;
         try {
-            idCategory = Integer.parseInt(request.getParameter("id"));
-        } catch (NumberFormatException | NullPointerException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid category ID");
+            idCategory = Integer.parseInt(
+                    request.getParameter("id")
+            );
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid category id");
             return;
         }
 
         Category cate = categoryService.getCategoryById(idCategory);
+
         request.setAttribute("cate", cate);
         request.setAttribute("mode", "category");
 
-        // Lấy page
         int page = 1;
-        String pageParam = request.getParameter("page");
-        if (pageParam != null && !pageParam.isEmpty()) {
-            try {
-                page = Integer.parseInt(pageParam);
-                if (page < 1) page = 1;
-            } catch (NumberFormatException e) {
+
+        try {
+            page = Integer.parseInt(
+                    request.getParameter("page")
+            );
+
+            if (page < 1) {
                 page = 1;
             }
+
+        } catch (Exception ignored) {
         }
 
-        // Lấy filter params
+
         String sortPrice = request.getParameter("sortPrice");
         String level = request.getParameter("level");
         String priceRange = request.getParameter("priceRange");
@@ -68,45 +72,52 @@ public class ResultSearchByCategoriesController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
-        // Lấy danh sách khóa học đã lọc + phân trang
-        List<CourseCardDto> listCourse = courseService.filterCoursesByCategoryWithPagination(
-                idCategory, sortPrice, level, priceRange, rating, duration, popular,
-                page, PAGE_SIZE, userId
-        );
 
-        // Đếm tổng số khóa học sau lọc
-        int totalCourses = courseService.countFilteredCoursesByCategory(
-                idCategory,
-                sortPrice,
-                level,
-                priceRange,
-                rating,
-                duration,
-                popular
-        );
+        List<CourseCardDto> listCourse = courseService.filterCoursesByCategoryWithPagination(idCategory, sortPrice, level, priceRange, rating, duration, popular, page, PAGE_SIZE, userId);
 
-        int totalPages = totalCourses == 0 ? 1 : (int) Math.ceil((double) totalCourses / PAGE_SIZE);
+        int totalCourses = courseService.countFilteredCoursesByCategory(idCategory, sortPrice, level, priceRange, rating, duration, popular);
 
-        // Set attributes
+        int totalPages = Math.max(1, (int) Math.ceil((double) totalCourses / PAGE_SIZE));
+
         request.setAttribute("listCourse", listCourse);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("sortPrice", sortPrice);
+        request.setAttribute("level", level);
+        request.setAttribute("priceRange", priceRange);
+        request.setAttribute("rating", rating);
+        request.setAttribute("duration", duration);
+        request.setAttribute("popular", popular);
 
-        // Set base URL cho phân trang trong JSP
-        StringBuilder paginationUrl = new StringBuilder(request.getContextPath());
-        paginationUrl.append(request.getServletPath());
+        StringBuilder paginationUrl = new StringBuilder(request.getContextPath() + request.getServletPath());
 
         paginationUrl.append("?id=").append(idCategory);
 
-        if (sortPrice != null) paginationUrl.append("&sortPrice=").append(sortPrice);
-        if (level != null) paginationUrl.append("&level=").append(level);
-        if (priceRange != null) paginationUrl.append("&priceRange=").append(priceRange);
-        if (rating != null) paginationUrl.append("&rating=").append(rating);
-        if (duration != null) paginationUrl.append("&duration=").append(duration);
-        if (popular != null) paginationUrl.append("&popular=").append(popular);
+        if (sortPrice != null && !sortPrice.isBlank()) {
+            paginationUrl.append("&sortPrice=").append(sortPrice);
+        }
+
+        if (level != null && !level.isBlank()) {
+            paginationUrl.append("&level=").append(level);
+        }
+
+        if (priceRange != null && !priceRange.isBlank()) {
+            paginationUrl.append("&priceRange=").append(priceRange);
+        }
+
+        if (rating != null && !rating.isBlank()) {
+            paginationUrl.append("&rating=").append(rating);
+        }
+
+        if (duration != null && !duration.isBlank()) {
+            paginationUrl.append("&duration=").append(duration);
+        }
+
+        if (popular != null && !popular.isBlank()) {
+            paginationUrl.append("&popular=").append(popular);
+        }
 
         request.setAttribute("paginationUrl", paginationUrl.toString());
-
         request.getRequestDispatcher("/views/pages/partial/result-search.jsp").forward(request, response);
     }
 

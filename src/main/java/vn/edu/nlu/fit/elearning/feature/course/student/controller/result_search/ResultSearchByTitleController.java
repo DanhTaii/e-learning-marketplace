@@ -98,6 +98,13 @@ public class ResultSearchByTitleController extends HttpServlet {
         String duration = request.getParameter("duration");
         String popular = request.getParameter("popular");
 
+        request.setAttribute("sortPrice", sortPrice);
+        request.setAttribute("level", level);
+        request.setAttribute("priceRange", priceRange);
+        request.setAttribute("rating", rating);
+        request.setAttribute("duration", duration);
+        request.setAttribute("popular", popular);
+
         // Lấy list + phân trang
         List<CourseCardDto> listCourse = courseService.filterCoursesByTitleWithPagination(
                 search, sortPrice, level, priceRange, rating, duration, popular,
@@ -109,7 +116,7 @@ public class ResultSearchByTitleController extends HttpServlet {
                 search, sortPrice, level, priceRange, rating, duration, popular
         );
 
-        int totalPages = (int) Math.ceil((double) totalCourses / PAGE_SIZE);
+        int totalPages = totalCourses == 0 ? 1 : (int) Math.ceil((double) totalCourses / PAGE_SIZE);
 
         // Set attributes
         request.setAttribute("listCourse", listCourse);

@@ -28,7 +28,7 @@ public class SendGridService {
         return token.toString();
     }
 
-    public static boolean sendEmail(String email, String code, String name) {
+    public static boolean sendEmail(String email, String code, String fullName) {
 
         Email from = new Email("no-reply@e-learning.id.vn");
 
@@ -39,7 +39,7 @@ public class SendGridService {
         String htmlContent =
                 "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;'>"
                         + "<h2 style='color: #4CAF50; text-align: center;'>Xác Thực Tài Khoản Softskill</h2>"
-                        + "<p>Xin chào <b>" + name + "</b>,</p>"
+                        + "<p>Xin chào <b>" + fullName + "</b>,</p>"
                         + "<p>Đây là mã xác nhận của bạn:</p>"
                         + "<div style='text-align: center; margin: 30px 0;'>"
                         + "<span style='font-size: 24px; font-weight: bold; letter-spacing: 5px; background: #f4f4f4; padding: 10px 20px; border-radius: 5px; border: 1px dashed #4CAF50;'>"

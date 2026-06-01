@@ -164,4 +164,9 @@ public class UserServiceImpl implements UserService {
         return userDao.updateAvatar(userId, avatarUrl) > 0;
     }
 
+    @Override
+    public boolean createRegisteredUser(User user) {
+        return userDao.createRegisteredUser(user) > 0;
+    }
+
 }

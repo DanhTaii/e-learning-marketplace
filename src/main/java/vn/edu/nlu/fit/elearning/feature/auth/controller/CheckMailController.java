@@ -13,14 +13,14 @@ import java.io.IOException;
 @WebServlet(name = "CheckMailController", value = "/check-email")
 public class CheckMailController extends HttpServlet {
 
-    private AuthService AuthService;
-    private AccessTokenService AccessTokenService;
+    private AuthService authService;
+    private AccessTokenService accessTokenService;
     private UserService userService;
 
     @Override
     public void init() throws ServletException {
-        this.AuthService = BeanContainer.getBean(AuthService.class);
-        this.AccessTokenService =BeanContainer.getBean(AccessTokenService.class);
+        this.authService = BeanContainer.getBean(AuthService.class);
+        this.accessTokenService =BeanContainer.getBean(AccessTokenService.class);
         this.userService =BeanContainer.getBean(UserService.class);
     }
 
@@ -63,9 +63,9 @@ public class CheckMailController extends HttpServlet {
                 return;
             }
 
-            boolean isValid = AccessTokenService.validateResetToken(user.getId(), otp);
+            boolean isValid = accessTokenService.validateResetToken(user.getId(), otp);
             if (isValid) {
-                AccessTokenService.markAsUsed(otp);
+                accessTokenService.markAsUsed(otp);
                 session.setAttribute("resetUserId", user.getId());
                 session.setAttribute("userMail", user.getEmail()); // thêm dòng này để ResetPasswordController dùng
                 response.sendRedirect(request.getContextPath() + "/reset-password");
@@ -78,17 +78,17 @@ public class CheckMailController extends HttpServlet {
         // Trường hợp đăng ký
         else if (session.getAttribute("signupEmail") != null) {
             String email = (String) session.getAttribute("signupEmail");
-            String username = (String) session.getAttribute("signupUsername");
+            String fullName = (String) session.getAttribute("signupFullName");
             String password = (String) session.getAttribute("signupPassword");
 
-            boolean isValid = AccessTokenService.validateSignupToken(otp);
+            boolean isValid = accessTokenService.validateSignupToken(otp);
             if (isValid) {
-                AccessTokenService.markAsUsed(otp);
+                accessTokenService.markAsUsed(otp);
 
-                boolean created = AuthService.register(email.trim(), username.trim(), password.trim());
+                boolean created = authService.register(email.trim(), fullName.trim(), password.trim());
                 if (created) {
                     session.removeAttribute("signupEmail");
-                    session.removeAttribute("signupUsername");
+                    session.removeAttribute("signupFullName");
                     session.removeAttribute("signupPassword");
                     request.setAttribute("success", "Xác nhận thành công! Bạn có thể đăng nhập.");
                     request.getSession().setAttribute("flashSuccess", "Đăng ký thành công!");
