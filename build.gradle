@@ -67,6 +67,12 @@ dependencies {
 
     // Thêm Caffeine Cache
     implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
+
+    // Thư viện cơ bản của Apache POI
+    implementation 'org.apache.poi:poi:5.2.5'
+
+    // Thư viện hỗ trợ định dạng Excel mới (.xlsx)
+    implementation 'org.apache.poi:poi-ooxml:5.2.5'
 }
 
 // Đóng gói file WAR với tên e-learning.war

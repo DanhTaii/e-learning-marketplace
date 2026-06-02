@@ -1,6 +1,9 @@
 package vn.edu.nlu.fit.elearning.feature.course.admin.service;
 
+import org.apache.poi.ss.usermodel.*;
+import vn.edu.nlu.fit.elearning.common.helper.excel.CourseExcelParser;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
+import vn.edu.nlu.fit.elearning.common.utils.excel.ExcelReaderUtils;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseAdminDto;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dto.CourseArchive;
@@ -8,6 +11,8 @@ import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class CourseAdminServiceImpl implements CourseAdminService {
@@ -75,7 +80,7 @@ public class CourseAdminServiceImpl implements CourseAdminService {
         for (int id : ids) {
             Course odinary = this.getCourseById(id);
 
-            if(odinary != null) {
+            if (odinary != null) {
                 Course clone = new Course();
                 clone.setTitle("Bản sao của " + odinary.getTitle());
                 clone.setSubtitle(odinary.getSubtitle());
@@ -92,7 +97,7 @@ public class CourseAdminServiceImpl implements CourseAdminService {
                 clone.setThumbnailUrl(odinary.getThumbnailUrl());
 
                 result = this.createCourse(clone);
-                if(result > 0) {
+                if (result > 0) {
                     count++;
                 }
             }
@@ -139,8 +144,20 @@ public class CourseAdminServiceImpl implements CourseAdminService {
     public int countArchivedCourses(CourseArchivedFilter filter) {
         return cd.countArchivedByFilter(filter);
     }
+
     @Override
-    public int countCoursesByTimeRange(String timeRange){
+    public int countCoursesByTimeRange(String timeRange) {
         return cd.countCoursesByTimeRange(timeRange);
     }
+
+    @Override
+    public int createListCourses(List<Course> courses) {
+        return cd.createList(courses);
+    }
+
+    @Override
+    public List<Course> importCoursesFromExcel(InputStream inputStream, List<String> errorMessages) throws IOException, Exception {
+        return ExcelReaderUtils.readExcel(inputStream, CourseExcelParser::parseRowToCourse, errorMessages);
+    }
+
 }

@@ -1,5 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.course.admin.dao;
 
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.statement.PreparedBatch;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseArchivedFilter;
 import vn.edu.nlu.fit.elearning.common.utils.StringUtils;
@@ -340,6 +342,7 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
                     .execute();
         });
     }
+
     @Override
     public int countCoursesByTimeRange(String timeRange) {
         String timeCondition = buildTimeCondition(timeRange, "created_at");
@@ -351,5 +354,38 @@ public class CourseAdminDaoImpl extends BaseDao implements CourseAdminDao {
                     .findFirst()
                     .orElse(0);
         });
+    }
+
+    public int createList(List<Course> courses) {
+        if (courses == null || courses.isEmpty()) {
+            return 0;
+        }
+
+        String sql = "INSERT INTO courses (title, subtitle, price, discount_price, level, category_id, is_public) " +
+                "VALUES (:title, :subtitle, :price, :discountPrice, :level, :categoryId, :isPublic)";
+
+        try {
+            return getJdbi().withHandle(handle -> {
+                PreparedBatch batch = handle.prepareBatch(sql);
+
+                for (Course course : courses) {
+                    // bindBean sẽ tự động map các thuộc tính của object Course
+                    // với các tham số trong câu SQL (:title, :subtitle, ...)
+                    // thông qua các hàm getter (getTitle(), getSubtitle(), ...)
+                    batch.bindBean(course).add();
+                }
+
+                // Thực thi toàn bộ batch
+                int[] insertedRows = batch.execute();
+
+                System.out.println("Batch insert completed. Total rows affected: " + insertedRows.length);
+                return insertedRows.length;
+            });
+
+        } catch (Exception e) {
+            System.err.println("Error during batch insert of courses.");
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

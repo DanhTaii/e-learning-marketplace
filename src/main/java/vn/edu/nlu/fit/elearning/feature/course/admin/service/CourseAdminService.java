@@ -10,6 +10,8 @@ import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.course.CourseFilter;
 import vn.edu.nlu.fit.elearning.feature.lesson.dto.LessonArchive;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public interface CourseAdminService {
@@ -56,4 +58,8 @@ public interface CourseAdminService {
 
 
     int countCoursesByTimeRange(String timeRange);
+
+    int createListCourses(List<Course> courses);
+
+    List<Course> importCoursesFromExcel(InputStream inputStream, List<String> errorMessages) throws IOException, Exception;
 }

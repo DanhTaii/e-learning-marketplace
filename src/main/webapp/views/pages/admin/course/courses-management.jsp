@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/course/courses-management.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet"
+          href="assets/css/admin/pages/course/courses-management.css?v=<%=System.currentTimeMillis()%>">
 
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
@@ -117,9 +118,14 @@
                                             <div class="filter-group">
                                                 <label>Trạng thái</label>
                                                 <select name="isPublic">
-                                                    <option value="" ${empty param.isPublic ? 'selected' : ''}>Tất cả</option>
-                                                    <option value="public" ${param.isPublic == 'public' ? 'selected' : ''}>Công khai</option>
-                                                    <option value="private" ${param.isPublic == 'private' ? 'selected' : ''}>Riêng tư</option>
+                                                    <option value="" ${empty param.isPublic ? 'selected' : ''}>Tất cả
+                                                    </option>
+                                                    <option value="public" ${param.isPublic == 'public' ? 'selected' : ''}>
+                                                        Công khai
+                                                    </option>
+                                                    <option value="private" ${param.isPublic == 'private' ? 'selected' : ''}>
+                                                        Riêng tư
+                                                    </option>
                                                 </select>
                                             </div>
 
@@ -129,7 +135,8 @@
                                                 <select name="categoryId">
                                                     <option value="">Tất cả danh mục</option>
                                                     <c:forEach var="c" items="${listCategories}">
-                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}><c:out value="${c.name}"/></option>
+                                                        <option value="${c.id}" ${param.categoryId == c.id ? 'selected' : ''}>
+                                                            <c:out value="${c.name}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -146,10 +153,17 @@
                                             <div class="filter-group">
                                                 <label>Cấp độ</label>
                                                 <select name="level">
-                                                    <option value="" ${empty param.level ? 'selected' : ''}>Tất cả</option>
-                                                    <option value="beginner" ${param.level == 'beginner' ? 'selected' : ''}>Sơ cấp</option>
-                                                    <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>Trung cấp</option>
-                                                    <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>Cao cấp</option>
+                                                    <option value="" ${empty param.level ? 'selected' : ''}>Tất cả
+                                                    </option>
+                                                    <option value="beginner" ${param.level == 'beginner' ? 'selected' : ''}>
+                                                        Sơ cấp
+                                                    </option>
+                                                    <option value="intermediate" ${param.level == 'intermediate' ? 'selected' : ''}>
+                                                        Trung cấp
+                                                    </option>
+                                                    <option value="advanced" ${param.level == 'advanced' ? 'selected' : ''}>
+                                                        Cao cấp
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -166,6 +180,56 @@
                                     </div>
                                 </form>
 
+                                <div class="mt-3">
+                                    <%-- 1. Khu vực hiển thị thông báo lỗi/thành công --%>
+                                    <c:if test="${not empty sessionScope.importErrors}">
+                                        <div class="import-error-box">
+                                            <h4 class="import-error-title">
+                                                <i class="fa-solid fa-circle-exclamation"></i> Lỗi Import Excel!
+                                            </h4>
+                                            <ul class="import-error-list">
+                                                <c:forEach items="${sessionScope.importErrors}" var="error">
+                                                    <li>${error}</li>
+                                                </c:forEach>
+                                            </ul>
+                                        </div>
+                                        <c:remove var="importErrors" scope="session"/>
+                                    </c:if>
+
+                                    <%-- 2. Thanh Import nằm ngang --%>
+                                    <div class="import-bar">
+                                        <div class="import-bar-info">
+                                            <i class="fa-solid fa-file-excel import-bar-icon"></i>
+                                            <div>
+                                                <strong class="import-bar-title">Nhập dữ liệu hàng loạt</strong>
+                                                <span class="import-bar-subtitle">Tải lên file .xlsx để thêm nhiều khóa học cùng lúc</span>
+                                            </div>
+                                        </div>
+
+                                        <form action="admin/course/import/excel" method="POST"
+                                              enctype="multipart/form-data" class="import-form">
+                                            <%-- Token bảo mật --%>
+                                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
+                                            <%-- Input chọn file --%>
+                                            <input type="file" name="excelFile" accept=".xlsx" required
+                                                   class="import-file-input">
+
+                                            <%-- Nút Tải lên --%>
+                                            <button type="submit" class="dark-button import-btn"
+                                                    onclick="this.innerHTML='<i class=\'fa-solid fa-spinner fa-spin\'></i> Đang xử lý...'; this.style.opacity='0.7';">
+                                                <i class="fa-solid fa-upload"></i> Upload
+                                            </button>
+
+                                            <%-- Nút Tải file mẫu --%>
+                                            <a href="assets/template/excel/course/Course_Import_Template.xlsx"
+                                               class="outline-button import-btn import-btn-download" download>
+                                                <i class="fa-solid fa-download"></i> File mẫu
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+
                                 <form action="admin/courses" method="POST" id="bulkActionForm">
                                     <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">
@@ -173,7 +237,8 @@
                                     <input id="deleteReasonId" type="hidden" name="deleteReason" value="">
 
                                     <%-- LẤY RA CÁC PARAMS NGƯỜI ĐANG NHẬP HIỆN TẠI --%>
-                                    <input id="currentQueryId" type="hidden" name="currentQuery" value="${pageContext.request.queryString}">
+                                    <input id="currentQueryId" type="hidden" name="currentQuery"
+                                           value="${pageContext.request.queryString}">
 
                                     <div class="container-2__dynamic-content" id="courseTableBody">
                                         <jsp:include page="/views/pages/admin/course/course-fragment.jsp"/>
