@@ -190,6 +190,17 @@
 }
 
 /* ========================= Phan danh sách review ======================== */
+.section-7__review {
+    padding-bottom: 0.5rem;
+}
+
+.reviews-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 2rem;
+}
+
 .review-box__header {
     padding: 20px 20px 0 20px;
 
@@ -282,12 +293,13 @@
 
 /* ================== FORM ĐÁNH GIÁ ================== */
 .modern-review-form {
-    display: flex;
+    /*display: flex;*/
     /*Đưa avatar lên ngang hàng đầu*/
     align-items: flex-start !important;
-    gap: 16px;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    /*gap: 16px;*/
+    /*margin-top: 2rem;*/
+    /*margin-bottom: 3rem;*/
+    margin: 20px;
     padding: 24px;
     background-color: #f8fafc;
     border-radius: 12px;
@@ -494,10 +506,10 @@
 /*phan comment nguoi dùng nhap vao (input)*/
 .comment-input-box {
     display: flex;
-    align-items: flex-end;
-    margin-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    width: 100%;
+    /*align-items: flex-end;*/
+    /*margin-top: 2.5rem;*/
+    /*padding-bottom: 2.5rem;*/
+    /*width: 100%;*/
 }
 
 .box__input {
@@ -564,6 +576,7 @@
 
 .comment__user2 {
     margin-right: 1rem;
+    margin-left: 0 !important;
 }
 
 form {
@@ -949,4 +962,25 @@ form {
 
 .btn-save-edit:hover {
     background: #1e293b;
+}
+
+/*===========================================*/
+/*HIỂN THỊ THÔNG BÁO ĐÃ ĐÁNH GIÁ*/
+/*===========================================*/
+.already-reviewed-msg {
+    padding: 20px;
+    background: #eef2ff;
+    border-radius: 8px;
+    color: #4f46e5;
+    font-weight: 500;
+    font-size: var(--text-lg);
+    margin: 2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.already-reviewed-msg .fa-circle-check {
+    font-size: 1.8rem;
 }

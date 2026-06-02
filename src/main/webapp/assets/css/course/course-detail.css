@@ -23,7 +23,7 @@
 .course-detail__container {
     margin-top: -35rem;
     position: relative; /* Bắt buộc phải có position thì z-index mới có tác dụng */
-    z-index: 2;         /* Phải lớn hơn z-index: 1 của .dark-bg */
+    z-index: 2; /* Phải lớn hơn z-index: 1 của .dark-bg */
     /*margin-top: -30rem; !* Giữ nguyên logic kéo nội dung lên trên của bạn *!*/
 }
 
@@ -113,6 +113,7 @@
     padding-top: 3rem;
     color: var(--white-color);
     line-height: 4rem;
+    min-height: 11rem;
 }
 
 .section-1__sub-title {
@@ -403,7 +404,7 @@
     align-items: flex-start;
 }
 
-.regular{
+.regular {
     color: var(--text-body-color);
 }
 
@@ -504,6 +505,7 @@ img {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.6rem;
+    width: 100%;
 }
 
 .container-2__original-price {
@@ -511,6 +513,7 @@ img {
     color: red;
     font-weight: bold;
     font-size: var(--text-base);
+    margin-left: auto;
 }
 
 .container-2__discount {
@@ -523,6 +526,7 @@ img {
     font-size: 2.4rem;
     color: var(--blue);
     font-weight: bold;
+    margin-right: auto;
 }
 
 .container-2__option-group {
@@ -625,7 +629,7 @@ img {
     padding-bottom: 1rem;
 }
 
-.style__text-2{
+.style__text-2 {
     color: var(--text-body-color) !important;
 }
 
@@ -634,10 +638,16 @@ img {
     font-weight: 300;
 }
 
+.container-2__img {
+    /*width: 100%;*/
+    height: 210px;
+    overflow: hidden;
+}
+
 .container-2__img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ảnh sẽ luôn đẹp không bị móp */
+    object-fit: cover;
     display: block;
 }
 
@@ -666,19 +676,20 @@ img {
     font-weight: 600;
 }
 
-.header__button.add__button{
-    margin-bottom: 3rem;
+.header__button.add__button {
+    /*margin-bottom: 3rem;*/
 }
 
-.star-icon .icon{
-    color:#FFD43B; font-size:1rem;
+.star-icon .icon {
+    color: #FFD43B;
+    font-size: 1rem;
 }
 
 /* Sửa lại row chính */
 .course-detail__container .grid__row-2 {
     display: flex;
     flex-wrap: wrap; /* Cho phép xuống hàng khi hết chỗ */
-    gap: 30px;       /* Khoảng cách giữa 2 cột */
+    gap: 30px; /* Khoảng cách giữa 2 cột */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -686,15 +697,15 @@ img {
 
 /* Cột bên trái (Nội dung bài học) */
 .container-1.grid__column-8 {
-    flex: 1;          /* Tự động lấy không gian còn lại */
+    flex: 1; /* Tự động lấy không gian còn lại */
     min-width: 600px; /* Đảm bảo nội dung không bị quá hẹp */
     padding: 0;
 }
 
 /* Cột bên phải (Sidebar thanh toán) */
 .container-2.grid__column-4-in-12 {
-    width: 390px;     /* Giữ cố định độ rộng sidebar trên Laptop/PC */
-    flex-shrink: 0;   /* Không cho phép sidebar bị bóp nhỏ */
+    width: 390px; /* Giữ cố định độ rộng sidebar trên Laptop/PC */
+    flex-shrink: 0; /* Không cho phép sidebar bị bóp nhỏ */
 }
 
 /* Responsive cho Tablet & Mobile */

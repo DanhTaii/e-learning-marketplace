@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
+import vn.edu.nlu.fit.elearning.common.utils.servlet.RequestUtils;
 import vn.edu.nlu.fit.elearning.feature.category.service.CategoryService;
 import vn.edu.nlu.fit.elearning.feature.course.student.dto.CourseDetailDto;
 import vn.edu.nlu.fit.elearning.feature.course.admin.service.CourseAdminService;
@@ -68,6 +69,7 @@ public class CourseDetailController extends HttpServlet {
         System.out.println("=============KẾT THÚC LẤY DANH SÁCH TAGS THEO KHÓA HỌC");
         System.out.println(tags.size());
         System.out.println(tags.toString());
+        request.setAttribute("tagsByCourse", tags);
 
         // này làm cho category
         Category category = categoryService.getCategoryById(c.getCategoryId());

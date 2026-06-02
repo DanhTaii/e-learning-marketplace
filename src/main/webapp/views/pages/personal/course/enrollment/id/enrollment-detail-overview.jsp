@@ -12,9 +12,9 @@
 
 
 <div class="container__overview">
-    <div class="container__title-video mt-4">
+    <div class="container__title-video">
         <div class="title-video">
-            <span id="mainLessonTitle" class="text-3xl regular"><c:out value="${enrollmentDetail.title}"/></span>
+            <span id="mainLessonTitle" class="text-3xl bold"><c:out value="${enrollmentDetail.title}"/></span>
         </div>
     </div>
 
