@@ -88,14 +88,14 @@
     </c:if>
 
     <c:if test="${enrollmentDetail.isReviewed}">
-        <div id="already-reviewed-msg" class="already-reviewed-msg mt-3" style="padding: 20px; background: #eef2ff; border-radius: 8px; color: #4f46e5;
-                    font-weight: 500; margin-bottom: 2rem; font-size: var(--text-lg)">
-            <i class="fa-solid fa-circle-check"></i> Cảm ơn bạn đã để lại đánh giá cho khóa học này!
+        <div id="already-reviewed-msg" class="already-reviewed-msg">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Cảm ơn bạn đã để lại đánh giá cho khóa học này!</span>
         </div>
     </c:if>
 
     <!-- Danh sách đánh giá hoặc empty state -->
-    <div id="reviews-list-container">
+    <div id="reviews-list-container" class="reviews-list-container">
         <c:choose>
             <c:when test="${not empty enrollmentDetail.listReviews}">
                 <c:forEach var="review" items="${enrollmentDetail.listReviews}">
@@ -129,7 +129,7 @@
 
             <c:otherwise>
                 <!-- Empty state khi chưa có đánh giá -->
-                <div class="empty-state">
+                <div class="empty-state" style="margin-bottom: 20px">
                     <i class="fa-solid fa-comments empty-icon"></i>
                     <div class="empty-title">Chưa có đánh giá nào</div>
                     <div class="empty-description">

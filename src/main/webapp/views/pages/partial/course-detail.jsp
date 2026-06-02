@@ -43,7 +43,7 @@
                                 <span class="container-2__original-price"><c:out value="${c.originPrice}"/></span>
                             </div>
                         </div>
-                        <div class="container-2__option-group">
+                        <div class="container-2__option-group mb-3">
                             <c:choose>
 
                                 <c:when test="${c.enrolled}">
@@ -241,7 +241,7 @@
                                 <div class="section-3__list-skill">
                                     <ul class="section-3_ul">
                                         <%-- fn:split dùng để tách chuỗi thành mảng--%>
-                                        <c:forEach var="t" items="${tags}">
+                                        <c:forEach var="t" items="${tagsByCourse}">
                                             <a href="result-search/by-tag?id=${t.id}" class="turn-page">
                                                 <li class="section-3_li"><c:out value="${t.name}"/></li>
                                             </a>
