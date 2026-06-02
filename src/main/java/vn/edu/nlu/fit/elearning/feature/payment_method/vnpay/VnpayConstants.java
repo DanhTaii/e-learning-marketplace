@@ -22,6 +22,7 @@ public class VnpayConstants {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_ReturnUrl = "http://localhost:8080/e_learning_war_exploded/vnpay-return";
+    public static String vnp_ReturnUrlDeploy = "https://wabi.id.vn/vnpay-return";
     public static String vnp_TmnCode = "NZL7QQA9";
     public static String secretKey = "H5T47UZPE5QOYC3CUJNYTA2RRRL06I7D";
 //    public static String vnp_IpUrl = "https://abcd-1234.ngrok-free.app/e_learning_war_exploded/vnpay-ipn";
@@ -120,5 +121,15 @@ public class VnpayConstants {
         String signValue = hashAllFields(fields);
 
         return signValue.equals(vnp_SecureHash);
+    }
+
+    public static String getReturnUrl() {
+        String env = System.getenv("ENV");
+
+        if ("production".equalsIgnoreCase(env)) {
+            return vnp_ReturnUrlDeploy;
+        }
+
+        return vnp_ReturnUrl;
     }
 }
