@@ -47,7 +47,8 @@ public class CertificateDownloadController extends BaseController {
                 }
 
                 // LẤY RA FILE PDF ĐÓ DỰA TRÊN ĐƯỜNG DẪN CỦA MÁY CHỦ HIỆN TẠI + ĐƯỜNG DẪN FILE
-                String absolutePath = request.getServletContext().getRealPath(cert.getPdfUrl());
+//                String absolutePath = request.getServletContext().getRealPath(cert.getPdfUrl());
+                String absolutePath = "/opt/elearning/certificates/" + cert.getPdfUrl();
                 File fileDownload = new File(absolutePath);
 
                 // KIỂM TRA FILE TỒN TẠI
