@@ -8,14 +8,17 @@ import java.util.Locale;
 
 public class DataFormatting {
     public static String formatAndConvert(double priceInVND) {
-        Locale df = Locale.getDefault(Locale.Category.FORMAT);
+//        Locale df = Locale.getDefault(Locale.Category.FORMAT);
+
+        Locale df = new Locale("vi", "VN");
         NumberFormat nf = NumberFormat.getCurrencyInstance(df);
-        double finalPrice = priceInVND;
-        String country = df.getCountry();
-        if ("US".equals(country)) {
-            finalPrice = priceInVND / 25000.0;
-        }
-        return nf.format(finalPrice);
+//        double finalPrice = priceInVND;
+//        String country = df.getCountry();
+//        if ("US".equals(country)) {
+//            finalPrice = priceInVND / 25000.0;
+//        }
+//        return nf.format(finalPrice);
+        return nf.format(priceInVND);
     }
 
     public static String formatDuration(double durationHours) {

@@ -71,7 +71,7 @@ public class PaymentServiceImpl implements PaymentService {
         vnpParams.put("vnp_OrderInfo", "Thanh toan don hang " + order.getOrderCode());
         vnpParams.put("vnp_OrderType", "other");
         vnpParams.put("vnp_Locale", "vn");
-        vnpParams.put("vnp_ReturnUrl", VnpayConstants.vnp_ReturnUrl);
+        vnpParams.put("vnp_ReturnUrl", VnpayConstants.getReturnUrl());
         vnpParams.put("vnp_IpAddr", VnpayConstants.getIpAddress(request));
 //        vnpParams.put("vnp_IpUrl", VnpayConstants.vnp_IpUrl);
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
