@@ -21,8 +21,9 @@ public class PdfHelper {
 
     //Khi deploy thì phải dùng cái File.separator do sẽ không biết chạy trên HĐH là window hay linux
     private static final String RELATIVE_CERT_DIR = "assets" + File.separator + "certificates";
-    private static final String RELATIVE_FONT_PATH = "assets" + File.separator + "fonts" + File.separator + "static" + File.separator + "Roboto-Semibold.ttf";
+    private static final String RELATIVE_FONT_PATH = "assets" + File.separator + "fonts" + File.separator + "static" + File.separator + "Roboto-SemiBold.ttf";
     private static final String RELATIVE_TEMPLATE_PATH = "assets" + File.separator + "image" + File.separator + "certificate-template.png";
+    public static final String CERTIFICATE_STORAGE = "/opt/elearning/certificates";
 
     private static final Logger logger = LoggerFactory.getLogger(PdfHelper.class);
 
@@ -58,13 +59,15 @@ public class PdfHelper {
     public static PdfResult generateCertificate(String realPath, String userName, String courseName, Timestamp completionDate, String certCode) throws IOException, Exception {
         try {
             //Tạo ra các đường dẫn vật lý tuyệt đối theo máy chủ đang chạy
-            String destDir = realPath + File.separator + RELATIVE_CERT_DIR;
+//            String destDir = realPath + File.separator + RELATIVE_CERT_DIR;
+            String destDir = CERTIFICATE_STORAGE;
             String absolutePdfPath = destDir + File.separator + certCode + ".pdf";
 
             String fontPath = realPath + File.separator + RELATIVE_FONT_PATH;
             String templatePath = realPath + File.separator + RELATIVE_TEMPLATE_PATH;
 
-            String dbRelativePath = "/assets/certificates/" + certCode + ".pdf";
+//            String dbRelativePath = "/assets/certificates/" + certCode + ".pdf";
+            String dbRelativePath = certCode + ".pdf";
 
             // KIỂM TRA SỰ TỒN TẠI CỦA FOLDER
             File directory = new File(destDir);
