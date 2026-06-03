@@ -33,4 +33,6 @@ public interface UserAdminDao {
 
     int create(UserAdminDto user);
 
+    int createList(List<User> users);
+
 }

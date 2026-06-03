@@ -2,7 +2,9 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.service;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
 import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
+import vn.edu.nlu.fit.elearning.common.helper.excel.UserExcelParser;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
+import vn.edu.nlu.fit.elearning.common.utils.excel.ExcelReaderUtils;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
@@ -10,6 +12,7 @@ import vn.edu.nlu.fit.elearning.feature.user.mapper.UserMapper;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusRequest;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserTableResponse;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class UserAdminServiceImpl implements UserAdminService {
@@ -71,6 +74,16 @@ public class UserAdminServiceImpl implements UserAdminService {
     @Override
     public int createUser(UserAdminDto user) {
         return userAdminDao.create(user);
+    }
+
+    @Override
+    public int createListUsers(List<User> users) {
+        return userAdminDao.createList(users);
+    }
+
+    @Override
+    public List<User> importUsersFromExcel(InputStream inputStream, List<String> errorMessages) throws Exception {
+        return ExcelReaderUtils.readExcel(inputStream, UserExcelParser::parseRowToUser, errorMessages);
     }
 
 }

@@ -322,4 +322,25 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
         });
     }
 
+    @Override
+    public int createList(List<User> users) {
+        if (users == null || users.isEmpty()) {
+            return 0;
+        }
+
+        String sql = """
+        INSERT INTO users(first_name, last_name, username, email, password, phone, status)
+        VALUES(:firstName, :lastName, :username, :email, :password, :phone, 'ACTIVE')
+        """;
+
+        return getJdbi().withHandle(handle -> {
+            var batch = handle.prepareBatch(sql);
+            for (User user : users) {
+                batch.bindBean(user).add();
+            }
+            int[] result = batch.execute();
+            return result.length;
+        });
+    }
+
 }

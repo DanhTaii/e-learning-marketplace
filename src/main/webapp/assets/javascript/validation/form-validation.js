@@ -14,10 +14,11 @@ const Validator = {
             return "Vui lòng nhập họ tên";
         }
 
-        fullName = fullName.trim();
+        fullName = fullName.trim().replace(/\s+/g, " ");
+        const parts = fullName.split(" ");
 
-        if (fullName.length < 2) {
-            return "Họ tên quá ngắn";
+        if (parts.length < 2) {
+            return "Họ tên phải có ít nhất 2 từ";
         }
 
         if (fullName.length > 100) {
