@@ -31,60 +31,31 @@ public class UserImportController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(
-            HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Part filePart = request.getPart("excelFile");
-
         List<String> errorMessages = new ArrayList<>();
 
-        try (InputStream input =
-                     filePart.getInputStream()) {
-
-            List<User> users =
-                    userAdminService.importUsersFromExcel(
-                            input,
-                            errorMessages
-                    );
+        try (InputStream input = filePart.getInputStream()) {
+            List<User> users = userAdminService.importUsersFromExcel(input, errorMessages);
 
             if (users != null && !users.isEmpty()) {
-
                 userAdminService.createListUsers(users);
-
-                request.getSession().setAttribute(
-                        "flashSuccess",
-                        "Tải lên "
-                                + users.size()
-                                + " người dùng thành công!"
-                );
+                request.getSession().setAttribute("flashSuccess", "Tải lên " + users.size() + " người dùng thành công!");
             } else {
-                request.getSession().setAttribute(
-                        "flashError",
-                        "File excel không hợp lệ"
-                );
+                request.getSession().setAttribute("flashError", "File excel không hợp lệ");
             }
 
             if (!errorMessages.isEmpty()) {
-                request.getSession().setAttribute(
-                        "importErrors",
-                        errorMessages
+                request.getSession().setAttribute("importErrors", errorMessages
                 );
             }
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
-            request.getSession().setAttribute(
-                    "flashError",
-                    "Có lỗi xảy ra khi import file"
-            );
+            request.getSession().setAttribute("flashError", "Có lỗi xảy ra khi import file");
         }
 
-        response.sendRedirect(
-                request.getContextPath() + "/admin/users"
-        );
+        response.sendRedirect(request.getContextPath() + "/admin/users");
     }
 }
