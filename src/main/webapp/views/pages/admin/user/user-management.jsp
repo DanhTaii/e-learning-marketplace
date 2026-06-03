@@ -229,7 +229,7 @@
                                             </button>
 
                                             <%-- Nút Tải file mẫu --%>
-                                            <a href="assets/template/excel/course/User_Import_Template.xlsx"
+                                            <a href="assets/template/excel/user/User_Import_Template.xlsx"
                                                class="outline-button import-btn import-btn-download" download>
                                                 <i class="fa-solid fa-download"></i> File mẫu
                                             </a>
