@@ -186,6 +186,57 @@
                                         </div>
                                     </div>
                                 </form>
+
+                                <div class="mt-3">
+                                    <%-- 1. Khu vực hiển thị thông báo lỗi/thành công --%>
+                                    <c:if test="${not empty sessionScope.importErrors}">
+                                        <div class="import-error-box">
+                                            <h4 class="import-error-title">
+                                                <i class="fa-solid fa-circle-exclamation"></i> Lỗi Import Excel!
+                                            </h4>
+                                            <ul class="import-error-list">
+                                                <c:forEach items="${sessionScope.importErrors}" var="error">
+                                                    <li>${error}</li>
+                                                </c:forEach>
+                                            </ul>
+                                        </div>
+                                        <c:remove var="importErrors" scope="session"/>
+                                    </c:if>
+
+                                    <%-- 2. Thanh Import nằm ngang --%>
+                                    <div class="import-bar">
+                                        <div class="import-bar-info">
+                                            <i class="fa-solid fa-file-excel import-bar-icon"></i>
+                                            <div>
+                                                <strong class="import-bar-title">Nhập dữ liệu hàng loạt</strong>
+                                                <span class="import-bar-subtitle">Tải lên file .xlsx để thêm nhiều người dùng cùng lúc</span>
+                                            </div>
+                                        </div>
+
+                                        <form action="admin/user/import/excel" method="POST"
+                                              enctype="multipart/form-data" class="import-form">
+                                            <%-- Token bảo mật --%>
+                                            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
+                                            <%-- Input chọn file --%>
+                                            <input type="file" name="excelFile" accept=".xlsx" required
+                                                   class="import-file-input">
+
+                                            <%-- Nút Tải lên --%>
+                                            <button type="submit" class="dark-button import-btn"
+                                                    onclick="this.innerHTML='<i class=\'fa-solid fa-spinner fa-spin\'></i> Đang xử lý...'; this.style.opacity='0.7';">
+                                                <i class="fa-solid fa-upload"></i> Upload
+                                            </button>
+
+                                            <%-- Nút Tải file mẫu --%>
+                                            <a href="assets/template/excel/user/User_Import_Template.xlsx"
+                                               class="outline-button import-btn import-btn-download" download>
+                                                <i class="fa-solid fa-download"></i> File mẫu
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+
                                 <form id="bulkActionForm" method="POST" action="admin/users">
                                     <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                                     <input type="hidden" name="action" id="bulkActionInput" value="">

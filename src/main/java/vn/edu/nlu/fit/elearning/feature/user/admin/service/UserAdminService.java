@@ -8,6 +8,7 @@ import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserProfileRequ
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusRequest;
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserTableResponse;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface UserAdminService {
@@ -31,5 +32,9 @@ public interface UserAdminService {
     int updateUserRoleAndStatus(int userId, int roleId, BaseStatus status);
 
     int createUser(UserAdminDto user);
+
+    List<User> importUsersFromExcel(InputStream inputStream, List<String> errorMessages) throws Exception;
+
+    int createListUsers(List<User> users);
 
 }
