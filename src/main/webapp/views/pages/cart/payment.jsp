@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" href="assets/fonts/static/." as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="assets/css/base/modal-notification.css?v=<%=System.currentTimeMillis()%>">
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 <div class="web">

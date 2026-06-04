@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/pages/dashboard.css?v=<%=System.currentTimeMillis()%>">
 
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 
