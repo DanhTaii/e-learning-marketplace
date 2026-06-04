@@ -30,11 +30,6 @@
                             <i class="fa-solid fa-pen"></i>
                         </button>
                     </a>
-                    <button type="button"
-                            onclick="openConfirmModal(${t.id}, 'admin/tag/delete', 'Bạn có chắc chắn muốn xóa thẻ này?')"
-                            class="icon-action-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
                 </td>
 
             </tr>
