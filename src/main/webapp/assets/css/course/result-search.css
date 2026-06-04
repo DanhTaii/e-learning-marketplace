@@ -216,3 +216,12 @@
     /*display: none;*/
     margin: 15px 0;
 }
+
+.content__type input{
+    cursor: pointer;
+}
+
+.fix-btn-2{
+    background-color: var(--hover-color) !important;
+    text-decoration: none !important;
+}

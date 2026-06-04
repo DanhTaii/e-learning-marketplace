@@ -33,13 +33,13 @@
             <div class="grid__row-2">
                 <div class="container__title text-big-title">
                     <c:if test="${not empty cate}">
-                        <c:out value="${cate.name}"/>
+                        Danh mục: <c:out value="${cate.name}"/>
                     </c:if>
                     <c:if test="${empty cate and not empty search}">
                         Kết quả cho từ khóa: "<c:out value="${search}"/>"
                     </c:if>
                     <c:if test="${empty cate and empty search and not empty tag}">
-                        Tag: <c:out value="${tag.name}"/>
+                        Loại: <c:out value="${tag.name}"/>
                     </c:if>
                     <c:if test="${empty cate and empty search and empty tag}">
                         Tất cả khóa học
@@ -52,143 +52,162 @@
                                 <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo tag trước đó
                                       nếu không thì nó sẽ reset và tự lọc lại chỉ theo cái phần lọc vừa được chọn--%>
                             <input type="hidden" name="id" value="${tag.id}">
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Giá cả</div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Giá cả</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="radio" name="sortPrice" value="desc"${sortPrice == 'desc' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Cao đến thấp</div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="radio" name="sortPrice"
+                                                   value="desc"${sortPrice == 'desc' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Cao đến thấp</div>
+                                        </div>
+                                    </div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="radio" name="sortPrice" value="asc"${sortPrice == 'asc' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Thấp đến cao</div>
-                                                </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="radio" name="sortPrice"
+                                                   value="asc"${sortPrice == 'asc' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Thấp đến cao</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Mức độ</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="level"
+                                                   value="beginner"${level == 'beginner' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Sơ cấp</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="level"
+                                                   value="intermediate"${level == 'intermediate' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trung cấp</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="level"
+                                                   value="advanced"${level == 'advanced' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Nâng cao</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Mức giá</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="priceRange"
+                                                   value="under500"${priceRange == 'under500' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 500.000đ</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="priceRange"
+                                                   value="under1500"${priceRange == 'under1500' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 1.500.000đ</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="priceRange"
+                                                   value="over1500"${priceRange == 'over1500' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trên 1.500.000đ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Đánh giá</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="rating"
+                                                   value="low"${rating == 'low' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
+                                            ></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Mức độ</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="level" value="beginner"${level == 'beginner' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Sơ cấp</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="level" value="intermediate"${level == 'intermediate' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trung cấp</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="level" value="advanced"${level == 'advanced' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Nâng cao</div>
-                                                </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="rating"
+                                                   value="high"${rating == 'high' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
+                                            ></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Mức giá</div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Thời lượng</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="priceRange" value="under500"${priceRange == 'under500' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 500.000đ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="priceRange" value="under1500"${priceRange == 'under1500' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 1.500.000đ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="priceRange" value="over1500"${priceRange == 'over1500' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trên 1.500.000đ</div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="duration"
+                                                   value="short"${duration == 'short' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 5 giờ</div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Đánh giá</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="rating" value="low"${rating == 'low' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
-                                                    ></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="rating" value="high"${rating == 'high' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
-                                                    ></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="duration"
+                                                   value="medium"${duration == 'medium' ? 'checked' : ''}>
+                                            <div class="type__text text-big">5 - 10 giờ</div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Thời lượng</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="duration" value="short"${duration == 'short' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 5 giờ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="duration" value="medium"${duration == 'medium' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">5 - 10 giờ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="duration" value="long"${duration == 'long' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trên 10 giờ</div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="duration"
+                                                   value="long"${duration == 'long' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trên 10 giờ</div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Phổ biến</div>
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="popular" value="true"${popular == 'true' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Phổ biến</div>
-                                                </div>
-                                            </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Phổ biến</div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="popular"
+                                                   value="true"${popular == 'true' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Phổ biến</div>
                                         </div>
                                     </div>
-                                    <button class="user__profile-btn button__btn text-header"
-                                            type="submit">Lọc
-                                    </button>
-                            <button class="user__profile-btn button__btn text-header"
-                                    type="submit">Lọc
-                            </button>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:10px;">
+                                <button class="user__profile-btn button__btn text-header"
+                                        type="submit">
+                                    Lọc
+                                </button>
+
+                                <a href="result-search/by-tag?id=${tag.id}"
+                                   class="user__profile-btn button__btn text-header fix-btn-2">
+                                    Đặt lại
+                                </a>
+                            </div>
                         </form>
                     </c:if>
                     <c:if test="${mode == 'category'}">
@@ -202,14 +221,16 @@
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="radio" name="sortPrice" value="desc"${sortPrice == 'desc' ? 'checked' : ''}>
+                                            <input type="radio" name="sortPrice"
+                                                   value="desc"${sortPrice == 'desc' ? 'checked' : ''}>
                                             <div class="type__text text-big">Cao đến thấp</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="radio" name="sortPrice" value="asc"${sortPrice == 'asc' ? 'checked' : ''}>
+                                            <input type="radio" name="sortPrice"
+                                                   value="asc"${sortPrice == 'asc' ? 'checked' : ''}>
                                             <div class="type__text text-big">Thấp đến cao</div>
                                         </div>
                                     </div>
@@ -221,21 +242,24 @@
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="level" value="beginner"${level == 'beginner' ? 'checked' : ''}>
+                                            <input type="checkbox" name="level"
+                                                   value="beginner"${level == 'beginner' ? 'checked' : ''}>
                                             <div class="type__text text-big">Sơ cấp</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="level" value="intermediate"${level == 'intermediate' ? 'checked' : ''}>
+                                            <input type="checkbox" name="level"
+                                                   value="intermediate"${level == 'intermediate' ? 'checked' : ''}>
                                             <div class="type__text text-big">Trung cấp</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="level" value="advanced"${level == 'advanced' ? 'checked' : ''}>
+                                            <input type="checkbox" name="level"
+                                                   value="advanced"${level == 'advanced' ? 'checked' : ''}>
                                             <div class="type__text text-big">Nâng cao</div>
                                         </div>
                                     </div>
@@ -247,21 +271,24 @@
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="priceRange" value="under500"${priceRange == 'under500' ? 'checked' : ''}>
+                                            <input type="checkbox" name="priceRange"
+                                                   value="under500"${priceRange == 'under500' ? 'checked' : ''}>
                                             <div class="type__text text-big">Dưới 500.000đ</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="priceRange" value="under1500"${priceRange == 'under1500' ? 'checked' : ''}>
+                                            <input type="checkbox" name="priceRange"
+                                                   value="under1500"${priceRange == 'under1500' ? 'checked' : ''}>
                                             <div class="type__text text-big">Dưới 1.500.000đ</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="priceRange" value="over1500"${priceRange == 'over1500' ? 'checked' : ''}>
+                                            <input type="checkbox" name="priceRange"
+                                                   value="over1500"${priceRange == 'over1500' ? 'checked' : ''}>
                                             <div class="type__text text-big">Trên 1.500.000đ</div>
                                         </div>
                                     </div>
@@ -273,18 +300,20 @@
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="rating" value="low"${rating == 'low' ? 'checked' : ''}>
+                                            <input type="checkbox" name="rating"
+                                                   value="low"${rating == 'low' ? 'checked' : ''}>
                                             <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
-                                                                                      ></i>
+                                            ></i>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="rating" value="high"${rating == 'high' ? 'checked' : ''}>
+                                            <input type="checkbox" name="rating"
+                                                   value="high"${rating == 'high' ? 'checked' : ''}>
                                             <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
-                                                                                      ></i>
+                                            ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -296,21 +325,24 @@
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="duration" value="short"${duration == 'short' ? 'checked' : ''}>
+                                            <input type="checkbox" name="duration"
+                                                   value="short"${duration == 'short' ? 'checked' : ''}>
                                             <div class="type__text text-big">Dưới 5 giờ</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="duration" value="medium"${duration == 'medium' ? 'checked' : ''}>
+                                            <input type="checkbox" name="duration"
+                                                   value="medium"${duration == 'medium' ? 'checked' : ''}>
                                             <div class="type__text text-big">5 - 10 giờ</div>
                                         </div>
                                     </div>
 
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="duration" value="long"${duration == 'long' ? 'checked' : ''}>
+                                            <input type="checkbox" name="duration"
+                                                   value="long"${duration == 'long' ? 'checked' : ''}>
                                             <div class="type__text text-big">Trên 10 giờ</div>
                                         </div>
                                     </div>
@@ -321,15 +353,24 @@
                                     <div class="box__title text-big">Phổ biến</div>
                                     <div class="box__content">
                                         <div class="content__type">
-                                            <input type="checkbox" name="popular" value="true"${popular == 'true' ? 'checked' : ''}>
+                                            <input type="checkbox" name="popular"
+                                                   value="true"${popular == 'true' ? 'checked' : ''}>
                                             <div class="type__text text-big">Phổ biến</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button class="user__profile-btn button__btn text-header"
-                                    type="submit">Lọc
-                            </button>
+                            <div style="display:flex; gap:10px;">
+                                <button class="user__profile-btn button__btn text-header"
+                                        type="submit">
+                                    Lọc
+                                </button>
+
+                                <a href="result-search/by-category?id=${cate.id}"
+                                   class="user__profile-btn button__btn text-header fix-btn-2">
+                                    Đặt lại
+                                </a>
+                            </div>
                         </form>
                     </c:if>
                     <c:if test="${mode == 'title'}">
@@ -337,140 +378,162 @@
                                 <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo title trước đó
                                       nếu không thì nó sẽ reset và tự lọc lại chỉ theo cái phần lọc vừa được chọn--%>
                             <input type="hidden" name="title" value="${search}">
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Giá cả</div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Giá cả</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="radio" name="sortPrice" value="desc"${sortPrice == 'desc' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Cao đến thấp</div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="radio" name="sortPrice"
+                                                   value="desc"${sortPrice == 'desc' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Cao đến thấp</div>
+                                        </div>
+                                    </div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="radio" name="sortPrice" value="asc"${sortPrice == 'asc' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Thấp đến cao</div>
-                                                </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="radio" name="sortPrice"
+                                                   value="asc"${sortPrice == 'asc' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Thấp đến cao</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Mức độ</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="level"
+                                                   value="beginner"${level == 'beginner' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Sơ cấp</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="level"
+                                                   value="intermediate"${level == 'intermediate' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trung cấp</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="level"
+                                                   value="advanced"${level == 'advanced' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Nâng cao</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Mức giá</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="priceRange"
+                                                   value="under500"${priceRange == 'under500' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 500.000đ</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="priceRange"
+                                                   value="under1500"${priceRange == 'under1500' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 1.500.000đ</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="priceRange"
+                                                   value="over1500"${priceRange == 'over1500' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trên 1.500.000đ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Đánh giá</div>
+
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="rating"
+                                                   value="low"${rating == 'low' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
+                                            ></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Mức độ</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="level" value="beginner"${level == 'beginner' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Sơ cấp</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="level" value="intermediate"${level == 'intermediate' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trung cấp</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="level" value="advanced"${level == 'advanced' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Nâng cao</div>
-                                                </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="rating"
+                                                   value="high"${rating == 'high' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
+                                            ></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Mức giá</div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Thời lượng</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="priceRange" value="under500"${priceRange == 'under500' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 500.000đ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="priceRange" value="under1500"${priceRange == 'under1500' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 1.500.000đ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="priceRange" value="over1500"${priceRange == 'over1500' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trên 1.500.000đ</div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="duration"
+                                                   value="short"${duration == 'short' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Dưới 5 giờ</div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Đánh giá</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="rating" value="low"${rating == 'low' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 3<i class=" text-big fa-solid fa-star"
-                                                    ></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="rating" value="high"${rating == 'high' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trên 3<i class=" text-big fa-solid fa-star"
-                                                    ></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="duration"
+                                                   value="medium"${duration == 'medium' ? 'checked' : ''}>
+                                            <div class="type__text text-big">5 - 10 giờ</div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Thời lượng</div>
 
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="duration" value="short"${duration == 'short' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Dưới 5 giờ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="duration" value="medium"${duration == 'medium' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">5 - 10 giờ</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="duration" value="long"${duration == 'long' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Trên 10 giờ</div>
-                                                </div>
-                                            </div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="duration"
+                                                   value="long"${duration == 'long' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Trên 10 giờ</div>
                                         </div>
                                     </div>
-                                    <div class="container__filter">
-                                        <div class="filter__box">
-                                            <div class="box__title text-big">Phổ biến</div>
-                                            <div class="box__content">
-                                                <div class="content__type">
-                                                    <input type="checkbox" name="popular" value="true"${popular == 'true' ? 'checked' : ''}>
-                                                    <div class="type__text text-big">Phổ biến</div>
-                                                </div>
-                                            </div>
+                                </div>
+                            </div>
+                            <div class="container__filter">
+                                <div class="filter__box">
+                                    <div class="box__title text-big">Phổ biến</div>
+                                    <div class="box__content">
+                                        <div class="content__type">
+                                            <input type="checkbox" name="popular"
+                                                   value="true"${popular == 'true' ? 'checked' : ''}>
+                                            <div class="type__text text-big">Phổ biến</div>
                                         </div>
                                     </div>
-                                    <button class="user__profile-btn button__btn text-header"
-                                            type="submit">Lọc
-                                    </button>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:10px;">
+                                <button class="user__profile-btn button__btn text-header"
+                                        type="submit">
+                                    Lọc
+                                </button>
+
+                                <a href="result-search/by-title?title=${search}"
+                                   class="user__profile-btn button__btn text-header fix-btn-2">
+                                    Đặt lại
+                                </a>
+                            </div>
                         </form>
                     </c:if>
                 </div>
@@ -489,30 +552,38 @@
                                         </div>
                                         <div class="small-advertisement__content">
                                             <div class="content__top">
-                                                <div class="content__author-name text-medium content__author-name-2"><c:out value="${c.authorName}"/></div>
+                                                <div class="content__author-name text-medium content__author-name-2">
+                                                    <c:out value="${c.authorName}"/></div>
                                                 <div class="content__rate content__rate-2">
                                                     <div class="rate__icon"><i
                                                             class="text-medium fa-regular fa-star"></i></div>
-                                                    <fmt:formatNumber value="${c.avgRating}" type="number" maxFractionDigits="1" minFractionDigits="1" var="formattedRating"/>
-                                                    <div class="text-medium rate__number"><c:out value="${fn:replace(formattedRating, ',', '.')}"/></div>
+                                                    <fmt:formatNumber value="${c.avgRating}" type="number"
+                                                                      maxFractionDigits="1" minFractionDigits="1"
+                                                                      var="formattedRating"/>
+                                                    <div class="text-medium rate__number"><c:out
+                                                            value="${fn:replace(formattedRating, ',', '.')}"/></div>
                                                 </div>
                                             </div>
-                                            <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p></div>
+                                            <div class="text-paragraph test-text"><p><c:out value="${c.title}"/></p>
+                                            </div>
                                             <div class="content__quick-info">
                                                 <div class="quick-info__level">
                                                     <div class="level__icon icon"><i
                                                             class="text-medium fa-solid fa-signal"></i></div>
-                                                    <div class="level__text text-medium"><c:out value="${c.level.vietnameseName}"/></div>
+                                                    <div class="level__text text-medium"><c:out
+                                                            value="${c.level.vietnameseName}"/></div>
                                                 </div>
                                                 <div class="quick-info__users">
                                                     <div class="users__icon icon"><i
                                                             class="text-medium fa-solid fa-users"></i></div>
-                                                    <div class="users__text text-medium"><c:out value="${c.studentCount}"/></div>
+                                                    <div class="users__text text-medium"><c:out
+                                                            value="${c.studentCount}"/></div>
                                                 </div>
                                                 <div class="quick-info__time">
                                                     <div class="time__icon icon"><i
                                                             class="text-medium fa-regular fa-clock"></i></div>
-                                                    <div class="time__text text text-medium"><c:out value="${c.durationText}"/></div>
+                                                    <div class="time__text text text-medium"><c:out
+                                                            value="${c.durationText}"/></div>
                                                 </div>
                                             </div>
                                             <div class="content__price">
@@ -525,7 +596,9 @@
                                                 <c:choose>
                                                     <c:when test="${c.enrolled}">
 
-                                                        <button type="button"  class="btn-add-cart dark-button" style="font-size: 1.5rem;background-color: #01FF85;color: #002333" onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                        <button type="button" class="btn-add-cart dark-button"
+                                                                style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
+                                                                onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
                                                             Vào học ngay
                                                         </button>
 
@@ -599,10 +672,12 @@
                         </c:if>
 
                         <!-- Các trang gần currentPage -->
-                        <c:forEach var="i" begin="${currentPage - 2 < 1 ? 1 : currentPage - 2}" end="${currentPage + 2}">
+                        <c:forEach var="i" begin="${currentPage - 2 < 1 ? 1 : currentPage - 2}"
+                                   end="${currentPage + 2}">
                             <c:if test="${i > 1 && i < totalPages}">
                                 <li class="pagination-item ${i == currentPage ? 'pagination-item--active' : ''}">
-                                    <a href="${paginationUrl}&page=${i}" class="pagination-item__link"><c:out value="${i}"/></a>
+                                    <a href="${paginationUrl}&page=${i}" class="pagination-item__link"><c:out
+                                            value="${i}"/></a>
                                 </li>
                             </c:if>
                         </c:forEach>
@@ -617,7 +692,8 @@
                         <!-- Trang cuối -->
                         <c:if test="${totalPages > 1}">
                             <li class="pagination-item ${currentPage == totalPages ? 'pagination-item--active' : ''}">
-                                <a href="${paginationUrl}&page=${totalPages}" class="pagination-item__link"><c:out value="${totalPages}"/></a>
+                                <a href="${paginationUrl}&page=${totalPages}" class="pagination-item__link"><c:out
+                                        value="${totalPages}"/></a>
                             </li>
                         </c:if>
 
