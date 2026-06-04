@@ -103,6 +103,11 @@
                         Chính sách bảo mật
                     </p>
                 </a>
+                <a class="turn-page" href="views/pages/partial/verify-certificate.jsp">
+                    <p class="ul__text text-medium">
+                        Kiểm định chứng chỉ
+                    </p>
+                </a>
             </div>
         <div class="grid">
             <p class="ul__text text-medium">Chịu trách nhiệm quản lý nội dung: Nhóm 57</p>
