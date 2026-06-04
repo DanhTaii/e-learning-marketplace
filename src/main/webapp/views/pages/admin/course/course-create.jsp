@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 

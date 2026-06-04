@@ -24,7 +24,8 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
-    </head>
+    <link rel="icon" type="image/png" href="assets/image/logo.jpg">
+</head>
     <body>
     <div class="web">
         <jsp:include page="/views/layouts/header.jsp"/>

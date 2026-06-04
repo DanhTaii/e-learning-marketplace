@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/profile/profile.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 <jsp:include page="/views/layouts/header.jsp"/>

@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>header</title>
     <link rel="stylesheet" href="assets/css/base/header-simple.css?v=<%=System.currentTimeMillis()%>">
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
     <header class="web__header">

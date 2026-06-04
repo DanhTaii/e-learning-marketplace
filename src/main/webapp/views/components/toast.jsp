@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 
 <div id="toast"></div>
