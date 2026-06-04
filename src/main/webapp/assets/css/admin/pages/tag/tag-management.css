@@ -5,6 +5,10 @@
     width: 23%; !important;
 }
 
+.modern-table th:nth-child(5) {
+    width: 12%;
+}
+
 .modern-table th:nth-child(6) {
-    width: 15%;
+    width: 12%;
 }

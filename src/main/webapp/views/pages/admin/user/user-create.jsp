@@ -245,7 +245,8 @@
                                                         </thead>
                                                         <tbody>
                                                         <c:forEach items="${user.courses}" var="c">
-                                                            <tr>
+                                                            <tr onclick="window.location.href='admin/course/editor?id=${c.id}'"
+                                                                style="cursor: pointer;">
                                                                 <td class="thumbnail-cell">
                                                                     <img src="<c:out value='${c.thumbnailUrl}'/>"
                                                                          alt="<c:out value='${c.title}'/>"

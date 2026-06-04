@@ -50,17 +50,39 @@
                     </div>
 
                     <div class="form-container">
-                        <form id="categoryForm" action="admin/category/detail" method="post" class="form-modern">
+                        <form id="categoryForm" action="admin/category/detail" method="post" class="form-modern" novalidate>
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${category != null ? category.id : ''}" />
                             <div class="category-create-card">
+
+                                <div class="form-actions mb-4">
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/categories" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
+
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            <c:out value="${(not empty category and category.id > 0) ? 'Cập nhật' : 'Thêm danh mục'}"/>
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${category != null and category.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="setupConfirmModal({action: 'delete', ids: ${category.id}, url: 'admin/category/delete', isBulk: false})">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa danh mục
+                                        </button>
+                                    </c:if>
+                                </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Tiêu đề danh mục</label>
                                         <input type="text" name="nameCategory" class="input-modern" id="categoryTitle"
                                                value="${not empty category.name ? category.name : param.nameCategory}"
-                                               placeholder="Nhập tiêu đề..." minlength="3" maxlength="255" required>
+                                               placeholder="Nhập tiêu đề..." minlength="3" maxlength="255">
                                         <span class="error-client" id="error_categoryTitle">
                                             <c:out value="${errors.nameCategory}"/>
                                         </span>
@@ -69,7 +91,7 @@
                                         <label class="label-style">Parent ID</label>
                                         <input type="number" name="parentId" class="input-modern" id="parentId"
                                                value="${category != null ? category.parentId : ''}"
-                                               placeholder="Ví dụ: 0" min="0" required>
+                                               placeholder="Ví dụ: 0" min="0">
                                         <span class="error-client" id="error_parentId"><c:out value="${errors.parentId}"/></span>
                                     </div>
                                 </div>
@@ -79,14 +101,14 @@
                                         <label class="label-style">Tiêu đề slug</label>
                                         <input type="text" name="slug" class="input-modern" id="categorySlug"
                                                value="${not empty category.slug ? category.slug : param.slug}"
-                                               placeholder="Nhập tên slug..." minlength="3" maxlength="255" required>
+                                               placeholder="Nhập tên slug..." minlength="3" maxlength="255">
                                         <span class="error-client" id="error_slug"><c:out value="${errors.slug}"/></span>
                                     </div>
                                 </div>
 
                                 <div class="form-group mt-3">
                                     <label class="label-style">Trạng thái hiển thị</label>
-                                    <select class="input-modern" name="status" required>
+                                    <select class="input-modern" name="status">
                                         <option value="INACTIVE"
                                         ${(category != null && category.status.name() == 'INACTIVE')
                                                 || param.status == 'INACTIVE' ? 'selected' : ''}>
@@ -131,7 +153,7 @@
 
                                     <c:if test="${category != null and category.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="openConfirmModal(${category.id}, 'admin/category/delete', 'Bạn có chắc chắn muốn xóa danh mục này?')">
+                                                onclick="setupConfirmModal({action: 'delete', ids: ${category.id}, url: 'admin/category/delete', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa danh mục
                                         </button>

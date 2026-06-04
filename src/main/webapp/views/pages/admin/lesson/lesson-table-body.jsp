@@ -21,9 +21,9 @@
                     </div>
                 </td>
                     <%--                                                <td class="course-name">Soft Skills Masterclass</td>--%>
-                <td class="text-bold"><c:out value="${lesson.durationMinutes}"/>:00</td>
+                <td class="text-bold"><c:out value="${lesson.durationText}"/></td>
                 <td class="text-light">
-                    <fmt:formatDate value="${lesson.createdAt}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${lesson.createdAt}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td>
                     <c:choose>

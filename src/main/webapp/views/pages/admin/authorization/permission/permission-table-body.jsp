@@ -28,7 +28,7 @@
                     <c:out value="${permission.groupName}"/>
                 </td>
                 <td class="text-light">
-                    <fmt:formatDate value="${permission.createdAt}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${permission.createdAt}" pattern="yyyy-MM-dd"/>
                 </td>
             </tr>
         </c:forEach>

@@ -38,7 +38,27 @@
                 <input type="hidden" name="oldOrderIndex" value="${lesson.orderIndex}"/>
                 <input type="hidden" name="oldCourseId" value="${lesson.courseId}"/>
             </c:if>
+            <div class="form-actions mb-4">
+                <div style="display: flex; gap: 10px; flex: 1;">
+                    <a href="admin/lessons" class="btn-cancel-modern"
+                       style="text-decoration: none;">
+                        Hủy bỏ
+                    </a>
 
+                    <button type="submit" class="btn-submit-modern w-100">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <c:out value="${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}"/>
+                    </button>
+                </div>
+
+                <c:if test="${lesson != null and lesson.id > 0}">
+                    <button type="button" class="btn-delete-modern"
+                            onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/course/curriculum/action', isBulk: false})">
+                        <i class="fa-solid fa-trash-can"></i>
+                        Xóa bài học
+                    </button>
+                </c:if>
+            </div>
             <div class="lesson-create-card">
 
                 <div class="form-row">

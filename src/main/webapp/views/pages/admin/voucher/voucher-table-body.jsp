@@ -43,8 +43,8 @@
                 </td>
 
                 <td class="text-light">
-                    <fmt:formatDate value="${v.startDate}" pattern="dd/MM/yyyy"/> -
-                    <fmt:formatDate value="${v.endDate}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${v.startDate}" pattern="yyyy-MM-dd"/> -
+                    <fmt:formatDate value="${v.endDate}" pattern="yyyy-MM-dd"/>
                 </td>
 
                 <td>

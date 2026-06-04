@@ -16,7 +16,7 @@
                 <td><c:out value="${request.message}"/></td>
 
                 <td>
-                    <fmt:formatDate value="${request.createdAt}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${request.createdAt}" pattern="yyyy-MM-dd"/>
                 </td>
 
                 <td>
