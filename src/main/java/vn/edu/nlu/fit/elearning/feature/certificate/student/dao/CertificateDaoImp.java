@@ -3,8 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.certificate.student.dao;
 import vn.edu.nlu.fit.elearning.common.database.BaseDao;
 import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateInfo;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CertificateDaoImp extends BaseDao implements CertificateDao {
     @Override
@@ -64,6 +66,25 @@ public class CertificateDaoImp extends BaseDao implements CertificateDao {
                     .bind("courseId", courseId)
                     .mapToBean(CertificateDetailDto.class)
                     .findFirst().orElse(null);
+        });
+    }
+
+    @Override
+    public Optional<CertificateInfo> findByCertificateCode(String code) {
+        return getJdbi().withHandle(handle -> {
+            return handle.createQuery(
+                            "SELECT cert.certificate_code AS certificateCode, " +
+                                    "u.first_name, u.last_name, " +
+                                    "c.title AS courseName, " +
+                                    "cert.issue_date AS issueDate, " +
+                                    "cert.pdf_url AS pdfUrl " +
+                                    "FROM certificates cert " +
+                                    "JOIN courses c ON cert.course_id = c.id " +
+                                    "JOIN users u ON u.id = cert.user_id " +
+                                    "WHERE cert.certificate_code = :code AND cert.pdf_url IS NOT NULL AND cert.status = 'ACTIVE'")
+                    .bind("code", code)
+                    .mapToBean(CertificateInfo.class)
+                    .findFirst();
         });
     }
 

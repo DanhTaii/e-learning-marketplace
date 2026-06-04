@@ -44,7 +44,9 @@
                 <!-- SEARCH -->
                 <div class="verify-search-card">
                     <div class="verify-search-form">
-                        <input type="text" id="certificateCode" class="verify-search-input" placeholder="Nhập mã chứng chỉ...">
+                        <input type="text" id="certificateCode" class="verify-search-input"
+                               placeholder="Nhập mã chứng chỉ..." name="certificateCode"
+                               value="${param.certificateCode != null ? '' : param.certificateCode}">
                         <button type="button" class="verify-search-button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <span>Xác minh</span>
@@ -80,52 +82,42 @@
 
                                 <div class="info-row">
                                     <div class="info-label">Mã chứng chỉ</div>
-                                    <div class="info-content">CERT-2024-001</div>
+                                    <div class="info-content" id="cert-code"></div>
                                 </div>
 
                                 <div class="info-row">
                                     <div class="info-label">Học viên</div>
-                                    <div class="info-content">Nguyễn Văn A</div>
+                                    <div class="info-content" id="cert-student"></div>
                                 </div>
 
                                 <div class="info-row">
                                     <div class="info-label">Khóa học</div>
-                                    <div class="info-content">
-                                        Lập trình Java Web từ A-Z
-                                    </div>
+                                    <div class="info-content" id="cert-course"></div>
                                 </div>
 
-                                <div class="info-row">
-                                    <div class="info-label">Giảng viên</div>
-                                    <div class="info-content">
-                                        Trần Thị B
-                                    </div>
-                                </div>
+<%--                                <div class="info-row">--%>
+<%--                                    <div class="info-label">Giảng viên</div>--%>
+<%--                                    <div class="info-content" id="cert-lecturer"></div>--%>
+<%--                                </div>--%>
 
-                                <div class="info-row">
-                                    <div class="info-label">Ngày hoàn thành</div>
-                                    <div class="info-content">
-                                        18/07/2024
-                                    </div>
-                                </div>
+<%--                                <div class="info-row">--%>
+<%--                                    <div class="info-label">Ngày hoàn thành</div>--%>
+<%--                                    <div class="info-content" id="cert-completion-date"></div>--%>
+<%--                                </div>--%>
 
                                 <div class="info-row">
                                     <div class="info-label">Ngày cấp</div>
-                                    <div class="info-content">
-                                        20/07/2024
-                                    </div>
+                                    <div class="info-content" id="cert-issue-date"></div>
                                 </div>
 
-                                <div class="info-row">
-                                    <div class="info-label">Điểm hoàn thành</div>
-                                    <div class="info-content">
-                                        95%
-                                    </div>
-                                </div>
+<%--                                <div class="info-row">--%>
+<%--                                    <div class="info-label">Điểm hoàn thành</div>--%>
+<%--                                    <div class="info-content" id="cert-score"></div>--%>
+<%--                                </div>--%>
                             </div>
-                            <div class="verify-actions">
-                                <a href="#" class="btn-certificate">Xem chứng chỉ</a>
-                            </div>
+<%--                            <div class="verify-actions">--%>
+<%--                                <a href="#" class="btn-certificate">Xem chứng chỉ</a>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                     <!-- ERROR -->
@@ -135,7 +127,7 @@
                             <h3>
                                 Không tìm thấy chứng chỉ
                             </h3>
-                            <p>
+                            <p id="error-message">
                                 Mã chứng chỉ không tồn tại hoặc đã bị thu hồi.
                             </p>
                         </div>
@@ -148,36 +140,8 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const btn = document.querySelector('.verify-search-button');
-        const input = document.getElementById('certificateCode');
-
-        const emptyState = document.getElementById('emptyState');
-        const successState = document.getElementById('successState');
-        const errorState = document.getElementById('errorState');
-
-        btn.addEventListener('click', () => {
-
-            const code = input.value.trim();
-
-            emptyState.style.display = 'none';
-            successState.style.display = 'none';
-            errorState.style.display = 'none';
-
-            if (code === '') {
-                emptyState.style.display = 'block';
-            } else if (code === '123') {
-                successState.style.display = 'block';
-            } else {
-                errorState.style.display = 'block';
-            }
-        });
-    });
-</script>
-
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/certificate/verify-certificate.js?v=<%=System.currentTimeMillis()%>"></script>
 
 </body>
 </html>

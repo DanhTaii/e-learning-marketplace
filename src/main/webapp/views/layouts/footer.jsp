@@ -103,7 +103,7 @@
                         Chính sách bảo mật
                     </p>
                 </a>
-                <a class="turn-page" href="views/pages/partial/verify-certificate.jsp">
+                <a class="turn-page" href="certificate/verify">
                     <p class="ul__text text-medium">
                         Kiểm định chứng chỉ
                     </p>
