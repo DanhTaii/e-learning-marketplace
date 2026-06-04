@@ -6,6 +6,7 @@ import vn.edu.nlu.fit.elearning.common.helper.PdfHelper;
 import vn.edu.nlu.fit.elearning.feature.certificate.student.dao.CertificateDao;
 import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateInfo;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDao;
 import vn.edu.nlu.fit.elearning.feature.course.admin.dao.CourseAdminDaoImpl;
 import vn.edu.nlu.fit.elearning.feature.course.common.model.Course;
@@ -15,6 +16,7 @@ import vn.edu.nlu.fit.elearning.feature.user.student.dao.UserDaoImpl;
 
 import java.sql.Timestamp;
 import java.time.Year;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CertificateServiceImpl implements CertificateService {
@@ -87,4 +89,13 @@ public class CertificateServiceImpl implements CertificateService {
             return 0;
         }
     }
+
+    @Override
+    public Optional<CertificateInfo> verifyCertificate(String code) {
+        if (code == null || code.trim().isEmpty()) {
+            return Optional.empty();
+        }
+        return certificateDao.findByCertificateCode(code.trim());
+    }
+
 }

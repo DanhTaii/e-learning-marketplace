@@ -2,6 +2,9 @@ package vn.edu.nlu.fit.elearning.feature.certificate.student.service;
 
 import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateDetailDto;
 import vn.edu.nlu.fit.elearning.feature.certificate.model.Certificate;
+import vn.edu.nlu.fit.elearning.feature.certificate.student.dto.CertificateInfo;
+
+import java.util.Optional;
 
 public interface CertificateService {
     int createCertificate(Certificate cert);
@@ -13,4 +16,6 @@ public interface CertificateService {
     CertificateDetailDto getCertificateByUserIdAndCourseId(int userId, int courseId);
 
     public int processAndGenerateCertificate(Certificate cert, String realPath);
+
+    Optional<CertificateInfo> verifyCertificate(String code);
 }
