@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-container">
-                        <form id="tagForm" action="admin/tag/detail" method="post" class="form-modern">
+                        <form id="tagForm" action="admin/tag/detail" method="post" class="form-modern" novalidate>
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${tag != null ? tag.id : ''}" />
                             <div class="tag-create-card">
@@ -66,7 +66,7 @@
 
                                     <c:if test="${tag != null and tag.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="openConfirmModal(${tag.id}, 'admin/tag/delete', 'Bạn có chắc chắn muốn xóa thẻ này?')">
+                                                onclick="setupConfirmModal({action: 'delete', ids: ${tag.id}, url: 'admin/tag/delete', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa thẻ
                                         </button>
@@ -78,7 +78,7 @@
                                         <label class="label-style">Tiêu đề thẻ</label>
                                         <input type="text" name="nameTag" class="input-modern" id="tagTitle"
                                                value="${not empty tag.name ? tag.name : param.nameTag}"
-                                               placeholder="Nhập tiêu đề..." minlength="3" maxlength="255" required>
+                                               placeholder="Nhập tiêu đề..." minlength="3" maxlength="255">
                                         <span class="error-client" id="error_tagTitle">
                                             <c:out value="${errors.nameTag}"/>
                                         </span>
@@ -90,14 +90,14 @@
                                         <label class="label-style">Tiêu đề slug</label>
                                         <input type="text" name="slug" class="input-modern" id="tagSlug"
                                                value="${not empty tag.slug ? tag.slug : param.slug}"
-                                               placeholder="Nhập tên slug..." minlength="3" maxlength="255" required>
+                                               placeholder="Nhập tên slug..." minlength="3" maxlength="255">
                                         <span class="error-client" id="error_slug"><c:out value="${errors.slug}"/></span>
                                     </div>
                                 </div>
 
                                 <div class="form-group mt-3">
                                     <label class="label-style">Trạng thái hiển thị</label>
-                                    <select class="input-modern" name="status" required>
+                                    <select class="input-modern" name="status">
                                         <option value="INACTIVE"
                                         ${(tag != null && tag.status.name() == 'INACTIVE')
                                                 || param.status == 'INACTIVE' ? 'selected' : ''}>
@@ -142,7 +142,7 @@
 
                                     <c:if test="${tag != null and tag.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="openConfirmModal(${tag.id}, 'admin/tag/delete', 'Bạn có chắc chắn muốn xóa thẻ này?')">
+                                                onclick="setupConfirmModal({action: 'delete', ids: ${tag.id}, url: 'admin/tag/delete', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa thẻ
                                         </button>

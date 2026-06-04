@@ -50,7 +50,7 @@
 
                     <!-- FORM -->
                     <div class="form-container">
-                        <form action="admin/super/role/detail" method="post" class="form-modern">
+                        <form action="admin/super/role/detail" method="post" class="form-modern" novalidate>
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id"
                                    value="${role != null ? role.id : ''}"/>
@@ -76,7 +76,7 @@
                                            class="input-modern"
                                            value="${role != null ? role.name : ''}"
                                            placeholder="Ví dụ: ADMIN, MODERATOR"
-                                           required>
+                                    >
 
                                     <span class="error-client" id="error_name">
                                         <c:out value="${errors.name}"/>
@@ -96,7 +96,7 @@
 
                                 <div class="form-group mt-3">
                                     <label class="label-style">Trạng thái hiển thị</label>
-                                    <select class="input-modern" name="status" required>
+                                    <select class="input-modern" name="status">
                                         <option value="INACTIVE"
                                         ${(role != null && role.status.name() == 'INACTIVE')
                                                 || param.status == 'INACTIVE' ? 'selected' : ''}>
