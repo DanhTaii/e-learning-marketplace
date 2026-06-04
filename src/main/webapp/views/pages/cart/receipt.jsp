@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/base/default.css">
     <link rel="stylesheet" href="assets/css/cart/receipt.css?v=1.0.2">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 
 <body>

@@ -25,6 +25,7 @@
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 <div class="web">
@@ -49,6 +50,28 @@
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${tag != null ? tag.id : ''}" />
                             <div class="tag-create-card">
+
+                                <div class="form-actions mb-4">
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/tags" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
+
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            <c:out value="${(not empty tag and tag.id > 0) ? 'Cập nhật' : 'Thêm thẻ'}"/>
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${tag != null and tag.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="openConfirmModal(${tag.id}, 'admin/tag/delete', 'Bạn có chắc chắn muốn xóa thẻ này?')">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa thẻ
+                                        </button>
+                                    </c:if>
+                                </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">

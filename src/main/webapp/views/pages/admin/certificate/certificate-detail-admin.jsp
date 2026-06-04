@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="assets/css/admin/pages/certificate/certificate-detail.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
 
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 

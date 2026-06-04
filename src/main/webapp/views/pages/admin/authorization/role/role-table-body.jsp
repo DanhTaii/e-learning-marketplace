@@ -33,7 +33,7 @@
                     </c:choose>
                 </td>
                 <td class="text-light">
-                    <fmt:formatDate value="${role.createdAt}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${role.createdAt}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td class="action-btns">
                     <a href="admin/super/role/detail?id=${role.id}">

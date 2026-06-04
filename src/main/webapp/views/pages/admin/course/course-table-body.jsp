@@ -51,7 +51,7 @@
 
                 <fmt:formatDate
                         value="${course.createdAt}"
-                        pattern="dd-MM-YYYY"/>
+                        pattern="yyyy-MM-dd"/>
             </div>
         </td>
         <td class="action__button">

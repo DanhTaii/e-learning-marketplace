@@ -2,3 +2,11 @@
 .modern-table th:nth-child(2) {
     width: 27%; !important;
 }
+
+.modern-table th:nth-child(5) {
+    width: 12%;
+}
+
+.modern-table th:nth-child(6) {
+    width: 12%;
+}

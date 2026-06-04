@@ -7,7 +7,7 @@
     <table class="modern-table">
         <thead>
         <tr>
-            <th><input type="checkbox" id="selectAll"></th>
+<%--            <th><input type="checkbox" id="selectAll"></th>--%>
             <th>Tên người dùng</th>
             <th>Email</th>
             <th>Vai trò</th>
@@ -22,10 +22,10 @@
         </tbody>
     </table>
 
-    <jsp:include page="/views/components/bulk-action-bar.jsp">
-        <jsp:param name="label" value="người dùng"/>
-        <jsp:param name="showDuplicate" value="true"/>
-    </jsp:include>
+<%--    <jsp:include page="/views/components/bulk-action-bar.jsp">--%>
+<%--        <jsp:param name="label" value="người dùng"/>--%>
+<%--        <jsp:param name="showDuplicate" value="true"/>--%>
+<%--    </jsp:include>--%>
 
 </div>
 <jsp:include page="/views/components/pagination-base.jsp">

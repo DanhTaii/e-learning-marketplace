@@ -5,7 +5,7 @@
     <a href="index">
         <div class="container-1__logo">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>Intellect</span>
+            <span>Softskill</span>
         </div>
     </a>
     <div class="container-1__menu">

@@ -7,7 +7,7 @@
     <c:when test="${not empty listCategories}">
         <c:forEach var="cate" items="${listCategories}">
             <tr>
-                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${cate.id}"></td>
+<%--                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${cate.id}"></td>--%>
 
                 <td><c:out value="${cate.name}"/></td>
 
@@ -16,7 +16,7 @@
                 <td><c:out value="${cate.parentId}"/></td>
 
                 <td>
-                    <fmt:formatDate value="${cate.createdAt}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${cate.createdAt}" pattern="yyyy-MM-dd"/>
                 </td>
 
                 <td>
@@ -36,7 +36,11 @@
                             <i class="fa-solid fa-pen"></i>
                         </button>
                     </a>
-
+                    <button onclick="setupConfirmModal({action: 'delete', ids: ${cate.id}, url: 'admin/category/delete', isBulk: false})"
+                            type="button"
+                            class="icon-action-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </td>
             </tr>
         </c:forEach>

@@ -1,6 +1,7 @@
 package vn.edu.nlu.fit.elearning.feature.lesson.model;
 
 import vn.edu.nlu.fit.elearning.common.helper.enums.BaseStatus;
+import vn.edu.nlu.fit.elearning.common.utils.format.DataFormatting;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -141,5 +142,9 @@ public class Lesson implements Serializable {
 
     public void setDeleteReason(String deleteReason) {
         this.deleteReason = deleteReason;
+    }
+
+    public String getDurationText() {
+        return DataFormatting.formatDurationFromMinutes(this.durationMinutes);
     }
 }

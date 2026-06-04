@@ -21,7 +21,7 @@
                     <div class="content__title"><c:out value="${cert.courseTitle}"/></div>
                 </td>
                 <td class="text-light">
-                    <fmt:formatDate value="${cert.issueDate}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${cert.issueDate}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td>
                     <c:choose>

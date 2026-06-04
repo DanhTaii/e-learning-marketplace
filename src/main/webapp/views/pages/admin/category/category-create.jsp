@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
 
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 
@@ -53,6 +54,28 @@
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${category != null ? category.id : ''}" />
                             <div class="category-create-card">
+
+                                <div class="form-actions mb-4">
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/categories" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
+
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            <c:out value="${(not empty category and category.id > 0) ? 'Cập nhật' : 'Thêm danh mục'}"/>
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${category != null and category.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="openConfirmModal(${category.id}, 'admin/category/delete', 'Bạn có chắc chắn muốn xóa danh mục này?')">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa danh mục
+                                        </button>
+                                    </c:if>
+                                </div>
 
                                 <div class="form-row mt-3">
                                     <div class="form-group flex-2">

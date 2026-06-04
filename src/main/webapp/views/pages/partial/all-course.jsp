@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
     <script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
 
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 <div class="web">

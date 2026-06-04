@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 
@@ -54,6 +55,29 @@
                             </c:if>
 
                             <div class="lesson-create-card">
+
+                                <div class="form-actions mb-4">
+                                    <div style="display: flex; gap: 10px; flex: 1;">
+                                        <a href="admin/lessons" class="btn-cancel-modern"
+                                           style="text-decoration: none;">
+                                            Hủy bỏ
+                                        </a>
+
+                                        <button type="submit" class="btn-submit-modern w-100">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            <c:out value="${(not empty lesson and lesson.id > 0) ? 'Cập nhật' : 'Thêm bài học'}"/>
+                                        </button>
+                                    </div>
+
+                                    <c:if test="${lesson != null and lesson.id > 0}">
+                                        <button type="button" class="btn-delete-modern"
+                                                onclick="setupConfirmModal({action: 'archive', ids: ${lesson.id}, url: 'admin/lesson/action', isBulk: false})">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Xóa bài học
+                                        </button>
+                                    </c:if>
+                                </div>
+
                                 <div class="form-row">
                                     <div class="form-group flex-2">
                                         <label class="label-style">Khóa học mục tiêu</label>

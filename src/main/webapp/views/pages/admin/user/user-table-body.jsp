@@ -7,7 +7,7 @@
     <c:when test="${not empty listUsers}">
         <c:forEach var="user" items="${listUsers}">
             <tr>
-                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${user.id}"></td>
+<%--                <td><input type="checkbox" class="category-checkbox item-checkbox" value="${user.id}"></td>--%>
                 <td>
                     <div class="title">
                             <c:out value="${empty user.username ? 'Chưa cập nhật' : user.username}"/>
@@ -73,7 +73,7 @@
                         <fmt:setLocale value="en_US" scope="page"/>
 
                         <fmt:formatDate value="${user.createdAt}"
-                                        pattern="dd-MM-YYYY"/>
+                                        pattern="yyyy-MM-dd"/>
                     </div>
                 </td>
                 <td class="action__button">

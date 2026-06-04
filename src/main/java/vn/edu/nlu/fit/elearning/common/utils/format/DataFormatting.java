@@ -33,6 +33,19 @@ public class DataFormatting {
         }
     }
 
+    public static String formatDurationFromMinutes(int totalMinutes) {
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        if (hours == 0) {
+            return minutes + "p";
+        } else if (minutes == 0) {
+            return hours + "h";
+        } else {
+            return hours + "h " + minutes + "p";
+        }
+    }
+
     public static String formatTimestamp(Timestamp ts) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return ts.toLocalDateTime().format(formatter);

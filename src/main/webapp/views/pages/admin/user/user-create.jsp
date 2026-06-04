@@ -31,6 +31,7 @@
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
+<link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 
 <body>
@@ -244,7 +245,8 @@
                                                         </thead>
                                                         <tbody>
                                                         <c:forEach items="${user.courses}" var="c">
-                                                            <tr>
+                                                            <tr onclick="window.location.href='admin/course/editor?id=${c.id}'"
+                                                                style="cursor: pointer;">
                                                                 <td class="thumbnail-cell">
                                                                     <img src="<c:out value='${c.thumbnailUrl}'/>"
                                                                          alt="<c:out value='${c.title}'/>"

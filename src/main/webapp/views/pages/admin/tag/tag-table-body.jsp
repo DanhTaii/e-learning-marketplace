@@ -7,12 +7,12 @@
     <c:when test="${not empty listTags}">
         <c:forEach var="t" items="${listTags}">
             <tr>
-                <td><input type="checkbox" class="tag-checkbox item-checkbox" value="${t.id}"></td>
+<%--                <td><input type="checkbox" class="tag-checkbox item-checkbox" value="${t.id}"></td>--%>
                 <td><c:out value="${t.name}"/></td>
                 <td><c:out value="${t.slug}"/></td>
                 <td><c:out value="${t.courseCount}"/></td>
                 <td>
-                    <fmt:formatDate value="${t.createdAt}" pattern="dd/MM/yyyy"/>
+                    <fmt:formatDate value="${t.createdAt}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td>
                     <c:choose>
@@ -30,6 +30,11 @@
                             <i class="fa-solid fa-pen"></i>
                         </button>
                     </a>
+                    <button onclick="setupConfirmModal({action: 'delete', ids: ${t.id}, url: 'admin/tag/delete', isBulk: false})"
+                            type="button"
+                            class="icon-action-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </td>
 
             </tr>
