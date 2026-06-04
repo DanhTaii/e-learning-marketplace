@@ -30,7 +30,6 @@ public class CategoryManagementController extends BaseController {
 
         CategoryFilter filter = new CategoryFilter();
 
-        // 🔍 Map filter từ request
         filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
         filter.setSlug(RequestUtils.getParameterAsString(request, "slug", ""));
         filter.setParentId(RequestUtils.getParameterAsInt(request, "parentId", -1) == -1
@@ -41,17 +40,14 @@ public class CategoryManagementController extends BaseController {
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
         filter.setStatus(RequestUtils.getParameterAsStatus(request, "status"));
 
-        // 📄 Pagination
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
-        // 📦 Data
         List<Category> listCategories = categoryService.getCategoriesByFilter(filter);
 
         int totalRecords = categoryService.getCountCategoriesByFilter(filter);
         int totalPages = (int) Math.ceil((double) totalRecords / filter.getSize());
 
-        // 📤 set attribute
         request.setAttribute("listCategories", listCategories);
         request.setAttribute("totalCategories", totalRecords);
         request.setAttribute("filter", filter);
@@ -59,7 +55,6 @@ public class CategoryManagementController extends BaseController {
         request.setAttribute("currentPage", "categories");
         request.setAttribute("totalPages", totalPages);
 
-        // ⚡ AJAX render
         String type = request.getParameter("renderType");
         if ("partial".equals(type)) {
             this.forward(request, response, "/views/pages/admin/category/category-fragment.jsp");

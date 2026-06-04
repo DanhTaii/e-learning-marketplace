@@ -37,11 +37,6 @@
                         </button>
                     </a>
 
-                    <button type="button"
-                            onclick="openConfirmModal(${cate.id}, 'admin/category/delete', 'Bạn có chắc chắn muốn xóa danh mục này?')"
-                            class="icon-action-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
                 </td>
             </tr>
         </c:forEach>

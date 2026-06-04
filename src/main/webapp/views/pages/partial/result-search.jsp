@@ -52,6 +52,17 @@
                                 <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo tag trước đó
                                       nếu không thì nó sẽ reset và tự lọc lại chỉ theo cái phần lọc vừa được chọn--%>
                             <input type="hidden" name="id" value="${tag.id}">
+                                    <div style="display:flex; gap:10px;">
+                                        <button class="user__profile-btn button__btn text-header"
+                                                type="submit">
+                                            Lọc
+                                        </button>
+
+                                        <a href="result-search/by-tag?id=${tag.id}"
+                                           class="user__profile-btn button__btn text-header fix-btn-2">
+                                            Đặt lại
+                                        </a>
+                                    </div>
                             <div class="container__filter">
                                 <div class="filter__box">
                                     <div class="box__title text-big">Giá cả</div>
@@ -215,6 +226,17 @@
                                 <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo category trước đó
                                       nếu không thì nó sẽ reset và tự lọc lại chỉ theo cái phần lọc vừa được chọn--%>
                             <input type="hidden" name="id" value="${cate.id}">
+                            <div style="display:flex; gap:10px;">
+                                <button class="user__profile-btn button__btn text-header"
+                                        type="submit">
+                                    Lọc
+                                </button>
+
+                                <a href="result-search/by-category?id=${cate.id}"
+                                   class="user__profile-btn button__btn text-header fix-btn-2">
+                                    Đặt lại
+                                </a>
+                            </div>
                             <div class="container__filter">
                                 <div class="filter__box">
                                     <div class="box__title text-big">Giá cả</div>
@@ -378,6 +400,17 @@
                                 <%-- phải có dòng này để khi lọc theo bộ lọc thì vẫn giữ là đã theo title trước đó
                                       nếu không thì nó sẽ reset và tự lọc lại chỉ theo cái phần lọc vừa được chọn--%>
                             <input type="hidden" name="title" value="${search}">
+                            <div style="display:flex; gap:10px;">
+                                <button class="user__profile-btn button__btn text-header"
+                                        type="submit">
+                                    Lọc
+                                </button>
+
+                                <a href="result-search/by-title?title=${search}"
+                                   class="user__profile-btn button__btn text-header fix-btn-2">
+                                    Đặt lại
+                                </a>
+                            </div>
                             <div class="container__filter">
                                 <div class="filter__box">
                                     <div class="box__title text-big">Giá cả</div>

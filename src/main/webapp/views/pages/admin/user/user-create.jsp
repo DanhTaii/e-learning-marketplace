@@ -55,20 +55,20 @@
                     </div>
 
                     <div class="form-container">
-                        <div class="form-actions mt-4">
-                            <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end !important;">
-                                <a href="admin/users" class="btn-cancel-modern"
-                                   style="text-decoration: none;">
-                                    Hủy bỏ
-                                </a>
-
-                                <button type="submit" class="btn-submit-modern w-100">
-                                    <i class="fa-solid fa-floppy-disk"></i>
-                                    <c:out value="${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}"/>
-                                </button>
-                            </div>
-                        </div>
                         <form id="userForm" action="admin/user/detail" method="post" class="form-modern">
+                            <div class="form-actions mt-4">
+                                <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end !important;">
+                                    <a href="admin/users" class="btn-cancel-modern"
+                                       style="text-decoration: none;">
+                                        Hủy bỏ
+                                    </a>
+
+                                    <button type="submit" class="btn-submit-modern w-100">
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                        <c:out value="${(not empty user and user.id > 0) ? 'Cập nhật' : 'Thêm người dùng'}"/>
+                                    </button>
+                                </div>
+                            </div>
                             <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
                             <input type="hidden" name="id" value="${user != null ? user.id : ''}"/>
 
