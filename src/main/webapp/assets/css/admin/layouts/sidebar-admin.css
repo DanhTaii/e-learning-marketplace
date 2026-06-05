@@ -22,7 +22,7 @@
     align-items: center;
     gap: 12px;
     color: #fff;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .container-1__logo i {
@@ -74,22 +74,118 @@ a {
 .student-list:hover {
     background: var(--bright-blue);
 }
+
 .student-list {
     background: var(--bright-blue);
 }
 
-.menu-item__student span{
+.menu-item__student span {
     font-size: var(--text-xl);
 }
-.menu-item__student .fa-solid{
+
+.menu-item__student .fa-solid {
     font-size: var(--text-xl);
 }
+
 .menu-item__student:hover {
     background: var(--bright-blue);
 }
+
 .menu-item__student {
     width: 100%;
     height: 100%;
     border-radius: 3px;
     padding: 0.5rem;
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.6) !important;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s;
+
+    z-index: 9998;
+
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ======================================================
+   RESPONSIVE SIDEBAR ADMIN
+====================================================== */
+/* --- Tablet (Từ 768px đến 1024px) --- */
+@media (max-width: 1024px) {
+    /* Cố định Sidebar 220px */
+    .container-1 {
+        width: 220px !important;
+    }
+
+    /* Bắt chính xác cột chứa Sidebar */
+    .grid__row-2 > .grid__column-2 {
+        width: 220px !important;
+        flex: 0 0 220px !important;
+        max-width: 220px !important;
+    }
+
+    /* Nội dung chiếm không gian còn lại (100% trừ đi 220px) */
+    .grid__row-2 > .grid__column-10 {
+        flex: 1 !important;
+        width: calc(100% - 220px) !important;
+        max-width: calc(100% - 220px) !important;
+    }
+}
+
+/* --- Mobile (Dưới 768px) --- */
+@media (max-width: 768px) {
+    /* Dùng selector cực mạnh để đè bẹp mọi lệnh width: 0 cũ */
+    .grid__row-2 > .grid__column-2.container-1 {
+        position: fixed !important;
+        top: 0 !important;
+        left: -280px !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        overflow-y: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex: none !important;
+        border: none !important;
+    }
+
+    /* Khi Javascript kích hoạt class .active -> Kéo Menu trượt vào trong */
+    .grid__row-2 > .grid__column-2.container-1.active {
+        left: 0 !important;
+    }
+
+    /* Đảm bảo phần nội dung chính vẫn bung full 100% màn hình */
+    .grid__row-2 > .grid__column-10 {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Hiện nút bấm Hamburger để mở menu */
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 22px;
+    }
 }

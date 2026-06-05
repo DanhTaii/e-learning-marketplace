@@ -167,6 +167,8 @@
     </div>
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

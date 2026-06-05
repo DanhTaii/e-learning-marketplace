@@ -4,6 +4,9 @@
 <header class="admin-header-modern">
     <div class="header-left">
         <nav class="breadcrumb-nav">
+            <button id="menu-toggle" class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <span class="bc-parent">Admin</span>
             <i class="fa-solid fa-chevron-right bc-separator"></i>
             <span class="bc-current">
@@ -38,17 +41,17 @@
     </div>
 
     <div class="header-right">
-        <a href="${pageContext.request.contextPath}/index" class="header-action-item view-site-link">
-            <i class="fa-solid fa-house"></i>
-            <span>View Website</span>
-        </a>
+<%--        <a href="${pageContext.request.contextPath}/index" class="header-action-item view-site-link">--%>
+<%--            <i class="fa-solid fa-house"></i>--%>
+<%--            <span>View Website</span>--%>
+<%--        </a>--%>
 
-        <div class="header-divider"></div>
+<%--        <div class="header-divider"></div>--%>
 
-        <div class="header-action-item notification-wrapper">
-            <i class="fa-solid fa-bell"></i>
-            <span class="notif-dot"></span>
-        </div>
+<%--        <div class="header-action-item notification-wrapper">--%>
+<%--            <i class="fa-solid fa-bell"></i>--%>
+<%--            <span class="notif-dot"></span>--%>
+<%--        </div>--%>
 
         <div class="header-divider"></div>
 

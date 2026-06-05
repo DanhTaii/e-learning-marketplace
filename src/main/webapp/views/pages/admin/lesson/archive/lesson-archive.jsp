@@ -152,8 +152,10 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/lesson/lesson-archive.js?v=<%=System.currentTimeMillis()%>"></script>
