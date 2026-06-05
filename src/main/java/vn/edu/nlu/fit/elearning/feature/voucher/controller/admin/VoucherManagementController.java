@@ -66,10 +66,30 @@ public class VoucherManagementController extends BaseController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         // 1. Lấy các tham số từ request
         String action = RequestUtils.getParameterAsString(request, "action", null);
+        if (action == null || action.isEmpty()) {
+            action = RequestUtils.getParameterAsString(request, "actionType", null);
+        }
+
         List<Integer> ids = RequestUtils.getParameterAsListInt(request, "item-checkbox");
         String deleteReason = RequestUtils.getParameterAsString(request, "deleteReason", null);
+
+        if (ids == null || ids.isEmpty()) {
+            int singleId = RequestUtils.getParameterAsInt(request, "id", 0);
+            if (singleId > 0) {
+                ids = List.of(singleId);
+            } else {
+                String idsParam = request.getParameter("ids");
+                if (idsParam != null && !idsParam.isEmpty()) {
+                    try {
+                        ids = List.of(Integer.parseInt(idsParam));
+                    } catch (NumberFormatException ignored) {}
+                }
+            }
+        }
 
         // 2. Xử lý đường dẫn redirect (có giữ lại các query parameter như search, filter, page...)
         String query = request.getParameter("currentQuery");

@@ -69,7 +69,7 @@
 
                                     <c:if test="${voucher != null and voucher.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="setupConfirmModal({action: 'archive', ids: ${voucher.id}, url: 'admin/voucher/action', isBulk: false})">
+                                                onclick="setupConfirmModal({action: 'archive', ids: ${voucher.id}, url: 'admin/vouchers', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa voucher
                                         </button>
@@ -206,7 +206,7 @@
 
                                     <c:if test="${voucher != null and voucher.id > 0}">
                                         <button type="button" class="btn-delete-modern"
-                                                onclick="setupConfirmModal({action: 'archive', ids: ${voucher.id}, url: 'admin/voucher/action', isBulk: false})">
+                                                onclick="setupConfirmModal({action: 'archive', ids: ${voucher.id}, url: 'admin/vouchers', isBulk: false})">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Xóa voucher
                                         </button>
