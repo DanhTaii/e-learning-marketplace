@@ -6,7 +6,7 @@ ul {
     padding: 0;
 }
 
-/*Phan box chua tat ca*/
+/* Phan box chua tat ca */
 .payment-success-layout {
     background-color: var(--white-color);
     border: 1px solid var(--light-grey);
@@ -15,7 +15,7 @@ ul {
     border-radius: 7px;
 }
 
-/*Phan box chua cac header*/
+/* Phan box chua cac header */
 .header-box {
     border-bottom: 1px solid var(--light-grey);
     padding: 40px 30px;
@@ -44,7 +44,7 @@ ul {
     text-align: center;
 }
 
-/*phan box chua summary*/
+/* phan box chua summary */
 .summary-box {
     padding: 40px 30px;
     display: flex;
@@ -73,7 +73,7 @@ ul {
     font-size: var(--text-2xl);
 }
 
-/*Nut home va nut my class*/
+/* Nut home va nut my class */
 .button-box {
     display: flex;
     justify-content: center;
@@ -92,10 +92,9 @@ ul {
     flex-direction: column;
     align-items: center;
     width: 100%;
-
 }
 
-/*Phan sub title o khung order detail*/
+/* Phan sub title o khung order detail */
 .title__2 {
     display: flex;
     justify-content: space-between;
@@ -122,7 +121,7 @@ ul {
     padding-right: 4.5rem;
 }
 
-/*Khung chua cac items*/
+/* Khung chua cac items */
 .scrollable-order-list {
     border-radius: 7px;
     max-height: 300px;
@@ -148,7 +147,6 @@ ul {
 .items__content {
     display: flex;
     align-items: center;
-
 }
 
 .content__image {
@@ -171,7 +169,6 @@ ul {
     flex-shrink: 0;
     text-align: right;
     padding-right: 2.5rem;
-
 }
 
 .amount-origin {
@@ -179,7 +176,6 @@ ul {
     font-weight: var(--fw-light);
     text-decoration: line-through;
     color: red;
-
 }
 
 .amount-discounted {
@@ -192,9 +188,145 @@ ul {
     max-width: 450px;
 }
 
-
-/*CSS cho phan receipt trong order-history co nut back ve*/
+/* CSS cho phan receipt trong order-history co nut back ve */
 .icon-return {
     padding: 0;
+}
 
+/* ======================================================= */
+/* RESPONSIVE CHO TABLET                   */
+/* ======================================================= */
+@media (max-width: 1024px) {
+    .payment-success-layout {
+        margin: 30px 15px;
+        padding: 30px 20px;
+    }
+
+    .button-box {
+        gap: 2rem;
+    }
+
+    .content__name {
+        max-width: 300px;
+    }
+
+    .price-header {
+        padding-right: 1rem;
+    }
+
+    .items__price {
+        padding-right: 0;
+    }
+}
+
+/* ======================================================= */
+/* RESPONSIVE CHO MOBILE                */
+/* ======================================================= */
+@media (max-width: 767px) {
+    /* 1. Thu nhỏ khung ngoài cùng */
+    .payment-success-layout {
+        margin: 20px 0 !important;
+        padding: 20px 15px !important;
+    }
+
+    /* 2. Phần Header */
+    .header-box {
+        padding: 20px 0 !important;
+    }
+    .box__row2-header {
+        flex-direction: column !important;
+        gap: 15px !important;
+        align-items: flex-start !important;
+    }
+
+    /* 3. Phần thông tin hóa đơn */
+    .summary-box {
+        padding: 20px 0 !important;
+    }
+    .box__row1, .box__row2, .box__row3, .box__row4 {
+        flex-direction: column !important;
+        gap: 5px !important;
+        margin-bottom: 15px !important;
+    }
+    .text {
+        font-size: 1.4rem !important;
+        color: var(--light-grey);
+    }
+    .number {
+        font-size: 1.6rem !important;
+        margin-left: 0 !important;
+        font-weight: 700 !important;
+    }
+
+    /* 4. Phần chi tiết khóa học */
+    .title__2 {
+        padding: 0 !important;
+        margin-top: 2rem !important;
+    }
+    .price-header {
+        display: none !important;
+    }
+
+    .order-items {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 15px 0 !important;
+    }
+    .items__content {
+        width: 100% !important;
+        align-items: flex-start !important;
+    }
+    .content__image {
+        width: 120px !important;
+        height: auto !important;
+        margin-right: 15px !important;
+    }
+    .content__name {
+        max-width: 100% !important;
+    }
+    .items__price {
+        width: 100% !important;
+        text-align: right !important;
+        padding-right: 0 !important;
+        margin-top: 15px !important;
+    }
+
+    /* 5. KHẮC PHỤC TRIỆT ĐỂ NÚT BẤM DÍNH NHAU */
+    .payment-success-layout .button-box {
+        /*DÙNG BLOCK BTH THAY VÌ FLEXBOX*/
+        display: block !important;
+        margin-top: 20px !important;
+    }
+
+    .payment-success-layout .button-box a.turn-page {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 15px !important;
+    }
+
+    .payment-success-layout .button-box a.turn-page:last-child {
+        /* Nút cuối cùng thì không cần đẩy nữa */
+        margin-bottom: 0 !important;
+    }
+
+    .payment-success-layout .button-box .button,
+    .payment-success-layout .button-box .header__button {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    .payment-success-layout .button-box .home-btn.button__btn,
+    .payment-success-layout .button-box .home-btn {
+        width: 100% !important;
+        height: 45px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        padding: 0 !important;
+    }
 }

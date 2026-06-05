@@ -61,6 +61,7 @@ body.dark-mode .btn-secondary {
     position: sticky;
     top: 20px;
     overflow: hidden;
+    margin-bottom: 2rem;
 }
 body.dark-mode .profile-sidebar {
     background: var(--sub-background-color);

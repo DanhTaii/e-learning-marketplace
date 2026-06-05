@@ -416,45 +416,129 @@
     margin-bottom: 10px;
 }
 
-/* =========================================
-   RESPONSIVE (Cho điện thoại)
-   ========================================= */
-@media (max-width: 768px) {
-    .verify-search-form {
-        flex-direction: column;
+/* ===================================================== */
+/* TABLET */
+/* ===================================================== */
+@media (max-width: 1024px) {
+
+    .verify-page {
+        gap: 30px !important;
+    }
+
+    .verify-title {
+        font-size: 2.2rem !important;
+        line-height: 3rem !important;
+    }
+
+    .verify-subtitle {
+        font-size: 1.05rem !important;
+        line-height: 1.8rem !important;
+        padding: 0 15px !important;
+    }
+
+    .verify-search-card {
+        padding: 18px !important;
+    }
+
+    .verify-search-input {
+        padding: 15px 20px !important;
+    }
+
+    .verify-search-button {
+        padding: 0 24px !important;
+        font-size: var(--text-xl) !important;
+    }
+
+    .verify-card {
+        padding: 35px 25px !important;
+    }
+
+    .verify-icon {
+        font-size: 4.5rem !important;
     }
 
     .verify-info {
-        grid-template-columns: 1fr; /* Trở về 1 cột trên mobile */
+        gap: 20px !important;
     }
 
-    .verify-card {
-        padding: 30px 20px;
-    }
-}
-
-/* Responsive Design */
-@media (min-width: 768px) {
-    .success .card-body {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 40px;
+    .btn-certificate {
+        padding: 12px 24px !important;
     }
 }
 
+
+/* ===================================================== */
+/* MOBILE */
+/* ===================================================== */
 @media (max-width: 767px) {
-    body {
-        padding: 15px;
+
+    .verify-page {
+        gap: 25px !important;
+        min-height: auto !important;
     }
 
-    .verify-header h1 {
-        font-size: 2rem;
+    .verify-title {
+        font-size: 2rem !important;
+        line-height: 2.5rem !important;
+    }
+
+    .verify-subtitle {
+        font-size: 1rem !important;
+        line-height: 1.6rem !important;
+        padding: 0 10px !important;
+    }
+
+    .verify-search-card {
+        padding: 15px !important;
     }
 
     .verify-search-form {
-        flex-direction: column;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .verify-search-input {
+        padding: 14px 16px !important;
+        font-size: var(--text-lg) !important;
+        width: 100% !important;
+    }
+
+    .verify-search-button {
+        width: 100% !important;
+        height: 48px !important;
+        font-size: var(--text-lg) !important;
+        justify-content: center !important;
     }
 
     .verify-card {
-        padding: 25px;
+        padding: 25px 15px !important;
+    }
+
+    .verify-icon {
+        font-size: 4rem !important;
+        margin-bottom: 15px !important;
+    }
+
+    .verify-info {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .verify-status {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+
+    .verify-status span {
+        font-size: 1.5rem !important;
+    }
+
+    .verify-actions {
+        text-align: center !important;
+    }
+
+    .btn-certificate {
+        width: 100% !important;
     }
 }

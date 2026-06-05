@@ -133,6 +133,11 @@
                                                 <div class="small-advertisement__image">
                                                     <img src="${c.thumbnailUrl}"
                                                          alt="${c.title}" class="img-2">
+
+                                                    <div class="home-product-item__favourite">
+                                                        <i class="fa-solid fa-check"></i>
+                                                        <span>Yêu thích</span>
+                                                    </div>
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
@@ -201,10 +206,6 @@
                                                             <i class="fa-solid fa-heart"></i>
                                                         </button>
                                                     </div>
-                                                </div>
-                                                <div class="home-product-item__favourite">
-                                                    <i class="fa-solid fa-check"></i>
-                                                    <span>Yêu thích</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -221,6 +222,11 @@
                                                 <div class="small-advertisement__image">
                                                     <img src="${c.thumbnailUrl}"
                                                          alt="${c.title}" class="img-2">
+
+                                                    <div class="home-product-item__favourite">
+                                                        <i class="fa-solid fa-check"></i>
+                                                        <span>Mới nhất</span>
+                                                    </div>
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
@@ -289,10 +295,6 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="home-product-item__favourite">
-                                                    <i class="fa-solid fa-check"></i>
-                                                    <span>Mới nhất</span>
-                                                </div>
                                             </div>
                                         </a>
                                     </div>
@@ -308,6 +310,11 @@
                                                 <div class="small-advertisement__image">
                                                     <img src="${c.thumbnailUrl}"
                                                          alt="${c.title}" class="img-2">
+
+                                                    <div class="home-product-item__favourite">
+                                                        <i class="fa-solid fa-check"></i>
+                                                        <span>Phổ biến</span>
+                                                    </div>
                                                 </div>
                                                 <div class="small-advertisement__content">
                                                     <div class="content__top">
@@ -373,10 +380,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="home-product-item__favourite">
-                                                    <i class="fa-solid fa-check"></i>
-                                                    <span>Phổ biến</span>
-                                                </div>
+
                                             </div>
                                         </a>
                                     </div>

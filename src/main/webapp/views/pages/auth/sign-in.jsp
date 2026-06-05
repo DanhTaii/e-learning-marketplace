@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/auth/sign-in.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/auth/responsive-auth.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
@@ -34,7 +36,7 @@
             <div class="grid__row-2">
                 <div class="grid__column-4-in-12 fix-padding-1">
                     <div class="box-1 add-to-fix-box-1-2">
-                        <div class="box-1__title text-big-title"> Chào mừng trở lại</div>
+                        <div class="box-1__title text-big-title">CHÀO MỪNG TRỞ LẠI</div>
                         <div class="box-1__content">Nâng cao kỹ năng của bạn.</div>
                     </div>
                 </div>

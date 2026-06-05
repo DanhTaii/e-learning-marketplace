@@ -1,0 +1,110 @@
+/* ======================================================= */
+/* RESPONSIVE CHO TẤT CẢ TRANG AUTH                         */
+/* ======================================================= */
+
+/* ---------- TABLET ---------- */
+@media (max-width: 1024px) {
+
+    .grid-2 {
+        width: 90% !important;
+    }
+
+    /* Box trắng */
+    .box-2,
+    .box-2-2-1,
+    .box-2-2-2 {
+        padding: 40px 30px !important;
+    }
+
+    /* Box xanh */
+    .add-to-fix-box-1,
+    .add-to-fix-box-1-2 {
+        padding: 40px 20px !important;
+    }
+}
+
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 767px) {
+
+    /* Layout 2 cột -> 1 cột */
+    .grid__row-2 {
+        flex-direction: column !important;
+        margin-bottom: 3rem;
+    }
+
+    .grid__column-4-in-12,
+    .grid__column-8 {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* ===== BOX XANH ===== */
+    .add-to-fix-box-1,
+    .add-to-fix-box-1-2 {
+        padding: 30px 20px !important;
+        border-radius: 10px 10px 0 0 !important;
+        height: auto !important;
+        margin-bottom: 0;
+    }
+
+    /* Ảnh reset password */
+    .add-to-fix-box-1 .img {
+        width: 120px !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    .box-1__title {
+        font-size: 3rem !important;
+        padding-bottom: 15px !important;
+        margin-bottom: 15px !important;
+        border-bottom-width: 5px !important;
+    }
+
+    .box-1__content {
+        font-size: 1.8rem !important;
+    }
+
+    /* ===== BOX TRẮNG ===== */
+    .box-2,
+    .box-2-2-1,
+    .box-2-2-2 {
+        padding: 30px 20px 40px !important;
+        border-radius: 0 0 10px 10px !important;
+        margin: 0 !important;
+    }
+
+    /* ===== BUTTON ===== */
+    .form__button,
+    .button,
+    .box-btn {
+        width: 100% !important;
+        height: 45px !important;
+    }
+
+    /* ===== OPTION LOGIN ===== */
+    .form__sign-in-option,
+    .form__helps {
+        flex-direction: column !important;
+    }
+
+    .form__sign-in-option {
+        align-items: flex-start !important;
+        gap: 20px !important;
+    }
+
+    .form__helps {
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+    .help__no--account {
+        margin-bottom: 5px !important;
+    }
+
+    .form__turn-back {
+        padding-bottom: 0 !important;
+    }
+}

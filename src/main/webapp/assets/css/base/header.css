@@ -57,3 +57,168 @@
 .theme-btn.rotate i {
     transform: rotate(360deg);
 }
+
+/* ======================================================= */
+/* RESPONSIVE CHO HEADER    */
+/* ======================================================= */
+
+/* --- Tablet (Dưới 1024px) --- */
+@media (max-width: 1024px) {
+    .header__search {
+        width: 35% !important;
+    }
+
+    /* Ẩn chữ Khóa học của tôi */
+    .header__class {
+        display: none !important;
+    }
+}
+
+/* --- Mobile (Dưới 768px) --- */
+@media (max-width: 767px) {
+    /* Xây dựng lại khung Flexbox cho Header */
+    .header__box {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 10px 15px !important;
+    }
+
+    /* ÉP THỨ TỰ HIỂN THỊ VÀ TĂNG KHOẢNG CÁCH (Nới rộng) */
+    /* Logo ở góc trên cùng bên trái */
+    .header__box > a.turn-page:first-child {
+        order: 1 !important;
+        margin-right: auto !important;
+    }
+
+    /* Danh mục */
+    .header__browse {
+        order: 2 !important;
+        margin-left: 15px !important;
+    }
+
+    /* Cụm Đăng nhập / Đăng ký */
+    .header__button-box {
+        order: 3 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        margin-left: 15px !important;
+        gap: 12px !important;
+    }
+
+    /* Wishlist, Giỏ hàng, User, Theme Mode */
+    .header__wishlist {
+        order: 4 !important;
+        margin-left: 40px !important;
+    }
+
+    .header__cart {
+        order: 5 !important;
+        margin-left: 40px !important;
+    }
+
+    .header__user {
+        order: 6 !important;
+        margin-left: 40px !important;
+    }
+
+    .header__mode {
+        order: 7 !important;
+        margin-left: 40px !important;
+    }
+
+    /* Thanh tìm kiếm - Bị ép xuống hàng 2 */
+    .header__search {
+        order: 10 !important;
+        width: 100% !important;
+        margin: 15px 0 0 0 !important;
+    }
+
+    /* DỌN DẸP CHI TIẾT & TINH CHỈNH KÍCH THƯỚC */
+    .browse__text {
+        display: none !important;
+    }
+
+    .header__browse::after {
+        display: none !important;
+    }
+
+    .header__logo {
+        font-size: 2.2rem !important;
+    }
+
+    .user__avatar, .theme-btn {
+        width: 30px !important;
+        height: 30px !important;
+        margin-left: 0 !important;
+    }
+
+    .header__button {
+        height: 30px !important;
+        width: auto !important;
+    }
+
+    .button__btn {
+        font-size: 1.1rem !important;
+        padding: 0 10px !important; /* Cho nút béo ra một chút dễ bấm */
+    }
+
+    .user__container {
+        right: -10px !important;
+        width: 250px !important;
+    }
+
+    /* Tắt hover cũ của CSS */
+    .header__browse:hover .browse__display {
+        display: none;
+    }
+
+    .header__user:hover .user__display {
+        display: none;
+    }
+
+    /* Class mới sẽ được Javascript kích hoạt */
+    .browse__display.show,
+    .user__display.show {
+        display: block !important;
+    }
+
+    /* Ép khung chứa biến thành hàng dọc và bật thanh cuộn */
+    .browse__container {
+        /* Xếp cột dọc thay vì nằm ngang */
+        flex-direction: column !important;
+        width: 250px !important;
+        left: -100px !important;
+        max-height: 60vh !important;
+        /* Bật thanh cuộn dọc nếu danh sách quá dài */
+        overflow-y: auto !important;
+        padding: 10px !important;
+    }
+
+    /* Xóa sổ các khoảng cách khổng lồ của PC */
+    .browse__container-box-1,
+    .browse__container-box-2 {
+        margin: 0 0 15px 0 !important;
+        width: 100% !important;
+    }
+
+    /* Ẩn cái đường gạch dọc phân cách 2 cột của PC */
+    .browse__container-box-1::after {
+        display: none !important;
+    }
+
+    .browse__box-category {
+        width: 100% !important;
+    }
+
+    /* Chỉnh lại các item bên trong cho gọn */
+    .browse__box-category-list-item,
+    .item-box {
+        width: 100% !important;
+        margin: 2px 0 !important;
+        height: auto !important;
+    }
+}

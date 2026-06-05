@@ -107,3 +107,89 @@
     color: var(--white-color);
 }
 
+/* ======================================================= */
+/* RESPONSIVE CHO TRANG LỊCH SỬ GIAO DỊCH                  */
+/* ======================================================= */
+
+/* --- Tablet (Màn hình vừa: từ 768px đến 1024px) --- */
+@media (max-width: 1024px) {
+    .history-box {
+        padding: 15px !important;
+    }
+
+    /* Cho phép các phần tử bên trong rớt dòng khi hết chỗ */
+    .box__row2 {
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+        padding: 20px 15px !important;
+        /* Đặt gốc tọa độ cho chữ PAID */
+        position: relative !important;
+    }
+
+    /* Thu nhỏ chữ lại một chút cho vừa vặn */
+    .text, .text1 {
+        font-size: 1.5rem !important;
+    }
+
+    /* Mã đơn hàng cho dài 100% chiếm hẳn dòng đầu tiên */
+    .row2__column1-order {
+        width: 100% !important;
+    }
+
+    /* Nút biên lai thu gọn khoảng cách lề */
+    .btn-receipt {
+        padding: 5px 2rem !important;
+    }
+
+    /* Treo chữ PAID lên góc phải trên cùng để tiết kiệm diện tích */
+    .row2__column4-success {
+        position: absolute !important;
+        top: 20px !important;
+        right: 15px !important;
+        font-weight: bold !important;
+        color: var(--bright-green) !important;
+    }
+}
+
+/* Mobile (Điện thoại nhỏ: dưới 768px) */
+@media (max-width: 767px) {
+    /* 1. Phá vỡ hàng ngang, ép các thông tin xếp chồng lên nhau */
+    .box__row2 {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        padding: 15px !important;
+        position: relative !important;
+    }
+
+    /* 2. Ép nút 'Biên lai' dài ra 100% để dễ bấm bằng ngón tay */
+    .box__row2 > a.turn-page {
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+
+    .receipt-box {
+        width: 100% !important;
+        height: 40px !important;
+    }
+
+    .btn-receipt {
+        width: 100% !important;
+        padding: 0 !important;
+        justify-content: center !important;
+    }
+
+    /* 3. Đưa chữ Trạng thái (PAID) vào góc cho đẹp */
+    .row2__column4-success {
+        position: absolute !important;
+        top: 15px !important;
+        right: 15px !important;
+        font-weight: bold !important;
+        color: var(--bright-green) !important;
+    }
+
+    /* Cần set relative cho thẻ cha để giữ chữ PAID ở góc trên cùng bên phải */
+    .box__content {
+        position: relative;
+    }
+}

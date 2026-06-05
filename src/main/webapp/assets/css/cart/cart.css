@@ -87,19 +87,22 @@
     cursor: pointer;
 
 }
-.text-medium.wishlisted{
+
+.text-medium.wishlisted {
     margin-left: 7px;
     text-decoration: none;
 }
 
-.btn-add-cart.dark-button{
+.btn-add-cart.dark-button {
     font-size: 1.5rem;
 }
-.btn-add-cart.dark-button.btn-fix{
+
+.btn-add-cart.dark-button.btn-fix {
     font-size: 1.5rem;
     background-color: #01FF85;
     color: #002333;
 }
+
 .checkout__total {
     display: flex;
     align-items: center;
@@ -180,6 +183,7 @@ p {
     margin-bottom: 5px;
     min-width: 100px;
 }
+
 .info__rating-group .fa-solid.fa-star {
     color: #FFD43B;
     font-size: 1rem;
@@ -252,10 +256,12 @@ p {
     background-color: rgba(180, 23, 23, 0.17);
     border-radius: 2px;
 }
-.remove:hover{
+
+.remove:hover {
     background-color: rgba(180, 23, 23, 0.17);
     border-radius: 2px;
 }
+
 .items-price {
     min-width: 120px;
 }
@@ -269,9 +275,11 @@ p {
     font-weight: var(--fw-bold);
     color: #3722D3;
 }
-.fa-solid.fa-tag.price-icon{
+
+.fa-solid.fa-tag.price-icon {
     color: #3722d3;
 }
+
 .price-discounted1 {
     font-size: var(--text-2xl);
     font-weight: var(--fw-bold);
@@ -448,11 +456,122 @@ a {
     background-color: var(--dark-blue);
     color: var(--white-color);
 }
+
 .button__btn:disabled {
     background-color: #ccc !important;
     cursor: not-allowed !important;
     opacity: 0.7;
 }
-.sub_title__title .text-2xl{
+
+.sub_title__title .text-2xl {
     margin-left: 7rem
+}
+
+/* ===================================================== */
+/* TABLET */
+/* ===================================================== */
+@media (max-width: 1024px) {
+
+    .web__container {
+        padding: 0 20px;
+    }
+
+    .action-price-group {
+        gap: 2rem;
+    }
+
+    .items-action {
+        min-width: auto;
+    }
+
+    .sub-title__action-price-group {
+        margin-right: 0;
+    }
+}
+
+/* ===================================================== */
+/* MOBILE */
+/* ===================================================== */
+@media (max-width: 768px) {
+
+    .cart-items {
+        display: block;
+        padding: 16px;
+    }
+
+    /* hàng trên */
+    .cart-items__detail {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .cart-items__tick {
+        margin: 0 12px 0 0;
+        float: left;
+    }
+
+    .detail__image-container {
+        width: 90px;
+        min-width: 90px;
+        margin-right: 12px;
+    }
+
+    .detail__info {
+        flex: 1;
+    }
+
+    .name__title {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .info__rating-group {
+        margin-top: 8px;
+    }
+
+    /* action + price */
+    .cart-items__action-price-group {
+        margin-top: 12px;
+        margin-left: 102px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .items-action {
+        min-width: auto;
+        align-items: flex-start;
+    }
+
+    .action__link,
+    .action__link1 {
+        margin-bottom: 6px;
+    }
+
+    .items-price {
+        min-width: auto;
+        text-align: right;
+    }
+
+    .price-discounted {
+        font-size: 2rem;
+    }
+
+    .price-origin {
+        font-size: 1.4rem;
+    }
+
+    .checkout__row2 {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .grid__column-4,
+    .grid__column-5 {
+        width: 100%;
+    }
+
 }

@@ -312,7 +312,7 @@
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .review-form-container {
@@ -983,4 +983,119 @@ form {
 
 .already-reviewed-msg .fa-circle-check {
     font-size: 1.8rem;
+}
+
+/* ======================================================= */
+/* RESPONSIVE CHO TRANG HỌC (COURSE CONTENT)               */
+/* ======================================================= */
+
+/* --- Tablet (Màn hình vừa: dưới 1024px) --- */
+@media (max-width: 1024px) {
+    /* Ép Video và Danh sách bài học rớt thành hàng dọc */
+    .layout {
+        flex-direction: column !important;
+        gap: 20px;
+    }
+
+    .grid__column-8.column1,
+    .grid__column-4.column2 {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* Tắt chế độ bám dính (sticky) của Danh sách bài học */
+    .column2 {
+        position: static !important;
+        margin-bottom: 30px !important;
+    }
+
+    /* Hạ chiều cao Video xuống cho vừa mắt trên Tablet */
+    .image-container.imgg {
+        min-height: 400px !important;
+    }
+
+    .image-container iframe,
+    .image-container video,
+    .placeholder-video {
+        height: 400px !important;
+    }
+}
+
+/* --- Mobile (Điện thoại nhỏ: dưới 768px) --- */
+@media (max-width: 767px) {
+    /* Đưa Video về tỷ lệ (16:9), xóa bỏ mốc 500px khổng lồ */
+    .image-container.imgg {
+        min-height: auto !important;
+        aspect-ratio: 16 / 9 !important; /* Tự động tính chiều cao theo chiều rộng */
+    }
+
+    .image-container iframe,
+    .image-container video,
+    .placeholder-video {
+        height: 100% !important;
+        min-height: auto !important;
+    }
+
+    /* Chỉnh lại Khối tiêu đề (Tên khóa học & Vòng tròn tiến độ) */
+    .course-header-container {
+        flex-direction: column !important; /* Xếp dọc */
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+
+    .course-title {
+        font-size: 2rem !important;
+    }
+
+    .circular-progress {
+        margin-left: 0 !important;
+        align-self: center !important;
+    }
+
+    /* Căn chỉnh lại 3 cái Tabs cho đều nhau không bị tràn */
+    .tabs {
+        justify-content: space-between !important;
+        gap: 0 !important;
+    }
+
+    .tab-item {
+        font-size: 1.4rem !important;
+        padding: 10px 5px !important;
+    }
+
+    /* Tab Tổng quan: Ép thông tin (Cấp độ, Thời lượng) rớt dòng gọn gàng */
+    .info-row {
+        grid-template-columns: 1fr !important;
+        gap: 5px !important;
+        padding: 15px 0 !important;
+    }
+
+    .info-label {
+        color: var(--dark-blue) !important;
+    }
+
+    /* Tab Đánh giá: Chỉnh lại form bình luận và nút Gửi */
+    .modern-review-form {
+        flex-direction: column !important; /* Đẩy Avatar lên trên */
+        margin: 0 !important;
+        padding: 15px !important;
+    }
+
+    .review-actions {
+        justify-content: stretch !important;
+    }
+
+    .btn-submit-modern {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* Tab Đánh giá: Chỉnh lại các comment cũ */
+    .review-box__comment {
+        flex-direction: column !important;
+    }
+
+    .comment__user {
+        margin-bottom: 10px !important;
+    }
 }
