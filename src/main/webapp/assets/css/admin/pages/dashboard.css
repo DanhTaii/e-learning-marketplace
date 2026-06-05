@@ -417,3 +417,117 @@
     border-left: none;
     border-right: none;
 }
+
+/* ======================================================= */
+/* RESPONSIVE CHO DASHBOARD                                */
+/* ======================================================= */
+
+/* --- Tablet (Từ 768px đến 1024px) --- */
+@media (max-width: 1024px) {
+    /* 1. Đưa 4 thẻ thông số thành lưới 2x2 */
+    .list-card ul {
+        flex-wrap: wrap !important;
+        gap: 20px !important;
+    }
+    .list-card li {
+        width: calc(50% - 10px) !important; /* 2 cột, trừ đi khoảng cách gap */
+        margin-right: 0 !important;
+    }
+
+    /* 2. Đẩy Biểu đồ và Top Khóa học xuống thành 2 hàng dọc (100%) */
+    .visualization {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    .chart, .top-course {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
+/* --- Mobile (Dưới 769px) --- */
+@media (max-width: 768px) {
+    /* 1. Nút lọc thời gian (7 ngày qua...) bung full 100% dễ bấm */
+    .dashboard-header {
+        justify-content: center !important;
+        margin-bottom: 0 !important;
+    }
+    .filter-form, .time-filter {
+        width: 100% !important;
+    }
+
+    /* 2. Đẩy Biểu đồ và Top Khóa học xuống thành 2 hàng dọc (100%) */
+    .visualization {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    .top-course {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .chart {
+        width: 100% !important;
+        height: 350px !important;
+    }
+
+    /* 3. Xử lý Biểu đồ không bị vỡ */
+    .chart {
+        padding: 15px !important;
+    }
+    .chart__title {
+        font-size: 1.8rem !important;
+        text-align: center;
+    }
+
+    /* Bóp nhỏ các cột trong biểu đồ */
+    .bar-chart__bar {
+        padding: 0 !important;
+    }
+    .bar-item {
+        width: 40px !important;
+    }
+    .column-chart {
+        width: 25px !important;
+    }
+
+    /*Xoay nhãn ngày tháng nghiêng 45 độ để không bị đè lên nhau */
+    .bar-label {
+        font-size: 11px !important;
+        transform: rotate(-45deg);
+        transform-origin: top right;
+        margin-top: 15px !important;
+        margin-right: 15px !important;
+    }
+
+    /* Tăng khoảng trống dưới đáy biểu đồ để chứa chữ nghiêng */
+    .bar-chart {
+        margin-bottom: 6rem !important;
+        margin-top: 4rem !important;
+    }
+
+    /* 4. Xử lý bảng Top Khóa học */
+    .top-course {
+        overflow-x: auto !important;
+    }
+
+    .top-course-table {
+        min-width: 350px !important;
+    }
+
+    /* Hủy bỏ cái min-width: 18rem khổng lồ của cột "Tên khóa học" */
+    .top-course th:nth-child(2),
+    .top-course td:nth-child(2),
+    .top-course-table th:nth-child(2),
+    .top-course-table td:nth-child(2) {
+        min-width: 0 !important;
+        width: 60% !important;
+    }
+
+    .top-course-table th,
+    .top-course-table td {
+        font-size: 13px !important;
+        padding: 10px 5px !important;
+    }
+}
