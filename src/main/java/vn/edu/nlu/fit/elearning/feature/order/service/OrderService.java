@@ -48,4 +48,6 @@ public interface OrderService {
     double getRevenueTotalByTimeRange(String timeRange);
 
     double getTotalRevenueByDateRange(String fromDate, String toDate);
+
+    void checkAndCancelExpiredOrders();
 }

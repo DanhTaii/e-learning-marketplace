@@ -370,4 +370,15 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
                     .one();
         });
     }
+    @Override
+    public void checkAndCancelExpiredOrders() {
+
+        String sql = "UPDATE orders " +
+                "SET status = 'FAILED', updated_at = NOW() " +
+                "WHERE status = 'PENDING' AND created_at <= NOW() - INTERVAL 30 MINUTE";
+
+        getJdbi().useHandle(handle -> {
+            handle.createUpdate(sql).execute();
+        });
+    }
 }
