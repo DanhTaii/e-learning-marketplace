@@ -254,4 +254,9 @@ public class OrderServiceImpl implements OrderService {
     public double getTotalRevenueByDateRange(String fromDate, String toDate) {
         return orderDao.getTotalRevenueByDateRange(fromDate, toDate);
     }
+
+    @Override
+    public void checkAndCancelExpiredOrders() {
+        orderDao.checkAndCancelExpiredOrders();
+    }
 }

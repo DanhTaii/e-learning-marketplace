@@ -44,4 +44,6 @@ public interface OrderDao {
 
     //card kpi ở order-admin
     double getTotalRevenueByDateRange(String fromDate, String toDate);
+
+    void checkAndCancelExpiredOrders();
 }

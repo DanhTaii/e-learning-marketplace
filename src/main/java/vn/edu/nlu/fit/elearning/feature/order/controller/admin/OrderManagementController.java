@@ -43,6 +43,8 @@ public class OrderManagementController extends BaseController {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        orderService.checkAndCancelExpiredOrders();
+
         OrderFilter filter = new OrderFilter();
         filter.setName(RequestUtils.getParameterAsString(request, "searchName", ""));
         filter.setCourseId(RequestUtils.getParameterAsInt(request, "courseId", 0));
