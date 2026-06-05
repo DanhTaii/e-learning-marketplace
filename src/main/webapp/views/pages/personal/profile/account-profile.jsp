@@ -160,6 +160,9 @@
 <%--                        </div>--%>
 
                         <div class="form-actions">
+                            <a href="logout" class="btn-delete-modern">
+                                Đăng xuất
+                            </a>
                             <button type="reset" class="btn-secondary ">Hủy bỏ</button>
                             <button type="submit" class="btn-primary dark-button">Lưu thay đổi</button>
                         </div>

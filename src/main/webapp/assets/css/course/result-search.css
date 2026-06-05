@@ -225,3 +225,84 @@
     background-color: var(--hover-color) !important;
     text-decoration: none !important;
 }
+
+/* ======================================================= */
+/* RESPONSIVE CHO TRANG KẾT QUẢ TÌM KIẾM (RESULT SEARCH)   */
+/* ======================================================= */
+
+/* --- Tablet (Màn hình vừa: dưới 1024px) --- */
+@media (max-width: 1024px) {
+    /* Đẩy Bộ lọc (Cột 3) và Khóa học (Cột 9) rớt xuống thành hàng dọc */
+    .grid__column-3,
+    .grid__colum-9 {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* Trên Tablet, hiển thị 2 khóa học trên 1 hàng ngang */
+    .grid__column-4.product-card-container {
+        width: 50% !important;
+    }
+
+    /* Dàn ngang các hộp bộ lọc ra để đỡ tốn diện tích dọc */
+    .container__filter {
+        display: inline-block;
+        width: 48%;
+        vertical-align: top;
+        margin-right: 1%;
+    }
+}
+
+/* --- Mobile (Điện thoại nhỏ: dưới 768px) --- */
+@media (max-width: 767px) {
+    /* Căn giữa tiêu đề kết quả tìm kiếm */
+    .container__title {
+        font-size: 2.2rem !important;
+        text-align: center;
+        margin: 20px 0 30px !important;
+    }
+
+    /* MA THUẬT UX: Biến cột Bộ lọc thành 1 cái hộp cuộn được */
+    .grid__column-3 {
+        max-height: 250px !important;
+        overflow-y: auto !important;
+        border: 2px solid var(--bright-green);
+        border-radius: 8px;
+        padding: 15px !important;
+        margin-bottom: 30px;
+        background-color: var(--white-color);
+    }
+
+    /* Đưa các hộp lọc trở về xếp dọc bên trong khung cuộn */
+    .container__filter {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Trên Mobile, mỗi khóa học chiếm 100% chiều ngang màn hình */
+    .grid__column-4.product-card-container {
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+
+    /* Chỉnh lại 2 nút Lọc / Đặt lại cho tràn viền dễ bấm */
+    form > div[style*="display:flex"] {
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .user__profile-btn {
+        flex: 1;
+        margin: 0 !important;
+        height: 40px;
+    }
+
+    /* Ẩn chiếc hộp rỗng (thủ phạm viền xanh) ở phần phân trang trên Mobile */
+    .grid__column-3:empty {
+        display: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}

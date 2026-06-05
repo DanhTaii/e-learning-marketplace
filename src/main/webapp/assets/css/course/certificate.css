@@ -312,3 +312,154 @@
     font-size: 1.6rem;
     font-weight: var(--fw-semibold);
 }
+/* ======================================================= */
+/* RESPONSIVE CHO TRANG CHỨNG CHỈ   */
+/* ======================================================= */
+
+/* =========================
+   TABLET
+   ========================= */
+@media (max-width: 1023px) {
+
+    .layout {
+        flex-direction: column !important;
+    }
+
+    .column1,
+    .column2,
+    .grid__column-8,
+    .grid__column-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .column2 {
+        margin-top: 24px !important;
+    }
+
+    .cert-paper {
+        padding: 20px !important;
+    }
+
+    .cert-border {
+        padding: 24px !important;
+    }
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+@media (max-width: 767px) {
+
+    .cert-paper {
+        padding: 12px !important;
+        aspect-ratio: auto !important;
+        min-height: auto !important;
+    }
+
+    .cert-border {
+        padding: 20px 12px !important;
+    }
+
+    .cert-badge {
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 1.8rem !important;
+        top: 12px !important;
+        right: 12px !important;
+    }
+
+    .brand-name {
+        font-size: 1.4rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .brand-sub {
+        font-size: 0.9rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    .cert-intro {
+        font-size: 1rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    .cert-student-name {
+        font-size: 2.2rem !important;
+        margin: 16px 0 !important;
+    }
+
+    .cert-desc {
+        font-size: 1.1rem !important;
+        line-height: 1.5 !important;
+        padding: 0 10px;
+    }
+
+    .cert-course-name {
+        font-size: 1.8rem !important;
+        margin: 16px 0 !important;
+        line-height: 1.4 !important;
+    }
+
+    .cert-platform {
+        font-size: 1.1rem !important;
+        padding: 0 10px;
+    }
+
+    /* GIỮ NGANG FOOTER */
+    .cert-footer {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    .footer-item {
+        flex: 1;
+    }
+
+    .signature-box {
+        text-align: center;
+        align-items: center;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .footer-label {
+        font-size: 0.7rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .footer-value {
+        font-size: 1rem !important;
+        word-break: break-word;
+    }
+
+    .signature-img {
+        height: 24px !important;
+    }
+
+    .cert-ledger-note {
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
+
+    /* PANEL BÊN PHẢI */
+
+    .action-row {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .cert-info-list li {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

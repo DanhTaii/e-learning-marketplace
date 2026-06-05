@@ -12,6 +12,7 @@
     <%-- Layout Admin --%>
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/pages/role/role-create.css?v=<%=System.currentTimeMillis()%>">
 
@@ -36,6 +37,7 @@
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
 
                     <!-- HEADER -->
                     <div class="container-2__header-modern">
@@ -190,10 +192,15 @@
         </div>
     </div>
 </div>
+
+<jsp:include page="/views/components/toast.jsp"/>
+<jsp:include page="/views/components/modal-confirm.jsp"/>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/admin/role/role-create.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="assets/javascript/validation/admin/category-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

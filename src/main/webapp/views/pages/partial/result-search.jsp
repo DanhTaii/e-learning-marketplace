@@ -655,10 +655,6 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="home-product-item__favourite">
-                                            <i class="fa-solid fa-check"></i>
-                                            <span>Yêu thích</span>
-                                        </div>
                                     </div>
                                 </a>
                             </div>

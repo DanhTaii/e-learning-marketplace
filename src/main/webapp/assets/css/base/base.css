@@ -346,8 +346,9 @@ body.dark-mode .container__category-list-item.text-li:hover {
     color: inherit;
     display: block;
 }
-
+/*===================================================*/
 /*Các loại button*/
+/*===================================================*/
 .dark-button {
     border: none;
     color: var(--white-color);
@@ -405,6 +406,31 @@ body.dark-mode .dark-button {
 .button__btn:hover {
     background: #0CDA77;
 }
+
+/*================================== NÚT XÓA ==========================*/
+.btn-delete-modern {
+    background-color: #fff;
+    color: #ef4444;
+    border: 1.5px solid #ef4444;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    margin-right: 5px;
+    font-size: var(--text-base);
+}
+
+.btn-delete-modern:hover {
+    background-color: #ef4444;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
 
 /*Input style*/
 .input-style {
@@ -1351,4 +1377,30 @@ img {
 
 .mb-5 {
     margin-bottom: 4rem;
+}
+
+/* ========================================= */
+/* RESPONSIVE CHO HỆ THỐNG LƯỚI (GRID SYSTEM)*/
+/* ========================================= */
+
+/* Tablet (Màn hình vừa: dưới 1024px) */
+@media (max-width: 1024px) {
+    .grid__column-3,
+    .grid__colum-9 {
+        width: 100%;
+        padding: 0;
+    }
+    .grid__column-4,
+    .grid__column-4-in-12 {
+        width: 50%;
+    }
+}
+
+/* Mobile (Điện thoại nhỏ: dưới 768px) */
+@media (max-width: 767px) {
+    .grid__column-4,
+    .grid__column-4-in-12 {
+        width: 100%;
+        padding: 0;
+    }
 }

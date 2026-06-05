@@ -139,3 +139,85 @@
     background-color: #e2e8f0;
     color: #0f172a;
 }
+
+@media (max-width: 1024px) {
+
+    .form-container{
+        margin:20px;
+        padding:24px;
+    }
+
+    .form-row{
+        gap:20px;
+    }
+
+    .flex-2{
+        flex:2;
+    }
+
+    .flex-1{
+        flex:1;
+    }
+
+    .admin-create__buttons{
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+    }
+
+    .outline-button,
+    .dark-button{
+        margin-right:0;
+    }
+
+
+}
+
+@media (max-width:768px) {
+
+    /*======================================*/
+    /*BODY*/
+    /*======================================*/
+    .form-container{
+        margin:16px;
+        padding:20px;
+    }
+
+    .form-row{
+        flex-direction:column;
+        gap:16px;
+    }
+
+    .flex-1,
+    .flex-2{
+        width:100%;
+        flex:none;
+    }
+
+    .input-modern,
+    select.input-modern,
+    textarea{
+        width:100%;
+    }
+
+    /*=====================================*/
+    /*NÚT HÀNH ĐỘNG*/
+    /*=====================================*/
+    .form-actions{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .form-actions > div{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .btn-cancel-modern,
+    .btn-submit-modern,
+    .btn-delete-modern{
+        width:100%;
+        justify-content:center;
+    }
+
+}

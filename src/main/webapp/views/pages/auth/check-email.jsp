@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/auth/check-email.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/auth/responsive-auth.css?v=<%=System.currentTimeMillis()%>">
+
     <!-- Normalize -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->

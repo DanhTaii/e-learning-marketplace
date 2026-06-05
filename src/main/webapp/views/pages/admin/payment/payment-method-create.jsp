@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/order-edit.css?v=<%=System.currentTimeMillis()%>">
@@ -30,6 +31,7 @@
                 <jsp:include page="/views/layouts/admin/sidebar-admin.jsp"/>
 
                 <div class="grid__column-10 container-2">
+                    <jsp:include page="/views/layouts/admin/header-admin.jsp"/>
                     <div class="container-2__header-modern">
                         <h2 class="header__title-modern">
                             Chi tiết cấu hình phương thức thanh toán
@@ -106,6 +108,9 @@
 </div>
 
 <jsp:include page="/views/components/toast.jsp"/>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

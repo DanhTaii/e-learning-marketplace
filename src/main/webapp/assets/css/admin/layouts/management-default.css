@@ -583,3 +583,125 @@ table td {
     text-decoration: none;
     font-size: var(--text-lg);
 }
+
+/* ======================================================
+   RESPONSIVE ADMIN
+====================================================== */
+@media (max-width: 1024px) {
+
+    .container-2__header-modern{
+        flex-wrap:wrap;
+        gap:16px;
+    }
+
+    .import-bar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .import-form{
+        width:100%;
+    }
+
+    .container-2__list-student{
+        overflow-x:auto;
+    }
+
+    .modern-table{
+        min-width:900px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* ================= HEADER PAGE ================= */
+
+    .container-2__header{
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .admin-create__buttons{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .admin-create__buttons .dark-button,
+    .admin-create__buttons .outline-button{
+        width:100%;
+        margin:0;
+        justify-content:center;
+    }
+
+    /* ================= FILTER ================= */
+
+    .advanced-filter {
+        padding: 16px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-clear,
+    .btn-submit {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* ================= IMPORT EXCEL ================= */
+
+    .import-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .import-bar-info {
+        width: 100%;
+    }
+
+    .import-form {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .import-file-input {
+        width: 100%;
+    }
+
+    .import-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .import-btn-download {
+        margin-right: 0;
+    }
+
+    /* ================= TABLE ================= */
+
+    .container-2__dynamic-content {
+        overflow-x: auto;
+    }
+
+    .container-2__list-student {
+        overflow-x: auto;
+    }
+
+    .modern-table {
+        min-width: 1000px;
+    }
+
+}

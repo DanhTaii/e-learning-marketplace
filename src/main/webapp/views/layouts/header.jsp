@@ -9,8 +9,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>header</title>
-    <link rel="stylesheet" href="assets/css/base/header.css">
-<link rel="icon" type="image/png" href="assets/image/logo.jpg">
+    <link rel="stylesheet" href="assets/css/base/header.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
 <header class="web__header">
@@ -34,7 +34,8 @@
                                 <ul class="browse__box-category-list list">
                                     <c:forEach var="c" items="${categories}">
                                         <a href="result-search/by-category?id=${c.id}" class="turn-page">
-                                            <li class="browse__box-category-list-item text-list-item text-li"><c:out value="${c.name}"/></li>
+                                            <li class="browse__box-category-list-item text-list-item text-li"><c:out
+                                                    value="${c.name}"/></li>
                                         </a>
                                     </c:forEach>
                                 </ul>
@@ -64,7 +65,8 @@
                                         <li class="browse__container-box-2-list-item">
                                             <div class="item-box">
                                                 <a href="result-search/by-tag?id=${t.id}"
-                                                   class="text-list-item text-list-item-2 text-li turn-page"><c:out value="${t.name}"/></a>
+                                                   class="text-list-item text-list-item-2 text-li turn-page"><c:out
+                                                        value="${t.name}"/></a>
                                             </div>
                                         </li>
                                     </c:forEach>
@@ -80,7 +82,7 @@
                 </div>
                 <form action="result-search/by-title" method="get" style="display: flex; flex: 1;">
                     <div class="search__input">
-                        <input type="text" id="search-input"  class="input__text text-medium" name="title"
+                        <input type="text" id="search-input" class="input__text text-medium" name="title"
                                value="${param.title}"
                                placeholder="Tìm kiếm khóa học, kỹ năng,...">
 
@@ -133,7 +135,8 @@
                                          onerror="this.onerror=null; this.src='${defaultImg}';">
                                 </div>
                                 <div class="user__profile-name">
-                                    <a href="" class="name-text text-header"><c:out value="${userSession.username}"/></a>
+                                    <a href="" class="name-text text-header"><c:out
+                                            value="${userSession.username}"/></a>
                                 </div>
                                 <div class="user__profile-bio">
                                     <a href="" class="bio-text">Thêm tiểu sử</a>
@@ -215,5 +218,6 @@
 <script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/ui/dark-mode.js?v=<%=System.currentTimeMillis()%>"></script>
 <script src="assets/javascript/ui/header-search.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/component/header.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
