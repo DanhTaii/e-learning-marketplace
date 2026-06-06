@@ -530,4 +530,61 @@
         font-size: 13px !important;
         padding: 10px 5px !important;
     }
+
+}
+/* Container của phần hiển thị tăng trưởng */
+.card-growth {
+    margin-top: 12px;
+    font-size: 12px; /* Đã set font-size 12px theo yêu cầu */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Base style cho các badge % */
+.growth-badge {
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px; /* Khoảng cách giữa icon và chữ số */
+}
+
+/* Badge Tăng (Xanh lá) */
+.badge-increase {
+    font-size: 1.2rem;
+    color: #10b981;
+    background-color: #d1fae5;
+}
+
+/* Badge Giảm (Đỏ) */
+.badge-decrease {
+    font-size: 1.2rem;
+    color: #ef4444;
+    background-color: #fee2e2;
+}
+
+/* Badge Không đổi (Xám) */
+.badge-neutral {
+    font-size: 1.2rem;
+    color: #6b7280;
+    background-color: #f3f4f6;
+}
+
+/* Chữ "so với kỳ trước" */
+.growth-text {
+    font-size: 1.2rem;
+    color: #6b7280;
+}
+.card-title { /* Thay bằng class tiêu đề thực tế của bạn */
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+
+    /* CHÈN THÊM 2 DÒNG NÀY VÀO ĐỂ SỬA LỖI DÍNH CHỮ */
+    display: block;      /* Đảm bảo trình duyệt hiểu đây là một khối chữ */
+    line-height: 1.4;    /* Khoảng cách dòng chuẩn (bằng 140% kích thước font) */
+
+    margin: 0;
 }

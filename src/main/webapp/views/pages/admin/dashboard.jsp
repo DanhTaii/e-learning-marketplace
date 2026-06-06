@@ -52,15 +52,39 @@
                                     <li>
                                         <div class="card-information">
                                             <div class="card-content">
-                                                <div>Doanh thu</div>
-                                                <div class="card-icon"><i
-                                                        class="fa-solid fa-money-check-dollar"></i></i>
-                                                </div>
+                                                <div class="card-title">Doanh thu</div>
+                                                <div class="card-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
                                             </div>
-                                            <div class="card-content__number"><fmt:formatNumber value="${revenueTotal}"
-                                                                                                type="number"
-                                                                                                pattern="###,###"> </fmt:formatNumber>
-                                                đ
+                                            <div class="card-content__number">
+                                                <fmt:formatNumber value="${revenueTotal}" type="number" pattern="###,###"/> đ
+                                            </div>
+
+                                            <div class="card-growth">
+                                                <c:choose>
+                                                    <%-- Trường hợp Tăng --%>
+                                                    <c:when test="${revenueGrowth > 0}">
+                            <span class="growth-badge badge-increase">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                                +<fmt:formatNumber value="${revenueGrowth}" maxFractionDigits="1"/>%
+                            </span>
+                                                    </c:when>
+
+                                                    <%-- Trường hợp Giảm --%>
+                                                    <c:when test="${revenueGrowth < 0}">
+                            <span class="growth-badge badge-decrease">
+                                <i class="fa-solid fa-arrow-trend-down"></i>
+                                <fmt:formatNumber value="${revenueGrowth}" maxFractionDigits="1"/>%
+                            </span>
+                                                    </c:when>
+
+                                                    <%-- Trường hợp Không đổi --%>
+                                                    <c:otherwise>
+                            <span class="growth-badge badge-neutral">
+                                <i class="fa-solid fa-minus"></i> 0%
+                            </span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <span class="growth-text">so với kỳ trước</span>
                                             </div>
                                         </div>
                                     </li>
@@ -71,26 +95,81 @@
                                                 <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                                             </div>
                                             <div class="card-content__number"><c:out value="${orderCount}"/></div>
+
+                                            <div class="card-growth">
+                                                <c:choose>
+                                                    <%-- Trường hợp Tăng --%>
+                                                    <c:when test="${orderGrowth > 0}">
+                    <span class="growth-badge badge-increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        +<fmt:formatNumber value="${orderGrowth}" maxFractionDigits="1"/>%
+                    </span>
+                                                    </c:when>
+
+                                                    <%-- Trường hợp Giảm --%>
+                                                    <c:when test="${orderGrowth < 0}">
+                    <span class="growth-badge badge-decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <fmt:formatNumber value="${orderGrowth}" maxFractionDigits="1"/>%
+                    </span>
+                                                    </c:when>
+
+                                                    <%-- Trường hợp Không đổi --%>
+                                                    <c:otherwise>
+                    <span class="growth-badge badge-neutral">
+                        <i class="fa-solid fa-equals"></i> 0%
+                    </span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <span class="growth-text">so với kỳ trước</span>
+                                            </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="card-information">
                                             <div class="card-content">
-                                                <div>Người dùng</div>
-                                                <div class="card-icon"><i class="fa-solid fa-user"></i></div>
+                                                <div class="card-title">Người dùng mới</div> <div class="card-icon"><i class="fa-solid fa-user"></i></div>
                                             </div>
                                             <div class="card-content__number"><c:out value="${userCount}"/></div>
+
+                                            <div class="card-growth">
+                                                <c:choose>
+                                                    <c:when test="${userGrowth > 0}">
+                    <span class="growth-badge badge-increase">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        +<fmt:formatNumber value="${userGrowth}" maxFractionDigits="1"/>%
+                    </span>
+                                                    </c:when>
+                                                    <c:when test="${userGrowth < 0}">
+                    <span class="growth-badge badge-decrease">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                        <fmt:formatNumber value="${userGrowth}" maxFractionDigits="1"/>%
+                    </span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                    <span class="growth-badge badge-neutral">
+                        <i class="fa-solid fa-equals"></i> 0%
+                    </span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <span class="growth-text">so với kỳ trước</span>
+                                            </div>
                                         </div>
                                     </li>
+
                                     <li>
-                                        <div class="card-information">
+                                        <div class="card-information" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
                                             <div class="card-content">
-                                                <div>Khóa học</div>
+                                                <div class="card-title">Tổng khóa học</div>
                                                 <div class="card-icon"><i class="fa-solid fa-tags"></i></div>
                                             </div>
                                             <div class="card-content__number"><c:out value="${courseCount}"/></div>
+                                            <div class="card-growth">
+                                                <span class="growth-text">Hoạt động trên hệ thống</span>
+                                            </div>
                                         </div>
                                     </li>
+
                                 </ul>
                             </div>
 
