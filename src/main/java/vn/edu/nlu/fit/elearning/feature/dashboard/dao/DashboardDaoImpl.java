@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DashboardDaoImpl extends BaseDao implements DashboardDao {
 
-
+    @Override
     public List<RevenueDto> findRevenueByTimeRange(String timeRange) {
         String timeCondition;
         String groupBy;
@@ -74,4 +74,139 @@ public class DashboardDaoImpl extends BaseDao implements DashboardDao {
         });
     }
 
+    // ==========================================
+    // LOGIC CHO CÁC THẺ KPI (KỲ HIỆN TẠI)
+    // ==========================================
+
+    @Override
+    public double getCurrentRevenueTotalByTimeRange(String timeRange) {
+        String timeCondition = getCurrentTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COALESCE(SUM(final_amount), 0) FROM orders WHERE status = 'PAID' AND " + timeCondition;
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Double.class).one());
+    }
+
+    @Override
+    public long getCurrentOrderCountByTimeRange(String timeRange) {
+        String timeCondition = getCurrentTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM orders WHERE status = 'PAID' AND " + timeCondition;
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Long.class).one());
+    }
+
+    @Override
+    public long getCurrentUserCountByTimeRange(String timeRange) {
+        String timeCondition = getCurrentTimeCondition(timeRange, "created_at");
+        String sql = "SELECT COUNT(id) FROM users WHERE " + timeCondition;
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Long.class).one());
+    }
+
+    @Override
+    public long getTotalCoursesCount() {
+        String sql = "SELECT COUNT(id) FROM courses";
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Long.class).one());
+    }
+
+    // ==========================================
+    // LOGIC CHO CÁC THẺ KPI (KỲ TRƯỚC)
+    // ==========================================
+
+    @Override
+    public double getPreviousRevenueTotalByTimeRange(String timeRange) {
+        String timeCondition;
+        if (timeRange == null) timeRange = "7days";
+
+        switch (timeRange) {
+            case "today":
+                timeCondition = "DATE(created_at) = CURDATE() - INTERVAL 1 DAY";
+                break;
+            case "month":
+                timeCondition = "MONTH(created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH)";
+                break;
+            case "year":
+                timeCondition = "YEAR(created_at) = YEAR(CURDATE()) - 1";
+                break;
+            case "all":
+                return 0.0;
+            case "7days":
+            default:
+                timeCondition = "created_at >= CURDATE() - INTERVAL 13 DAY AND created_at < CURDATE() - INTERVAL 6 DAY";
+                break;
+        }
+
+        String sql = "SELECT COALESCE(SUM(final_amount), 0) FROM orders WHERE status = 'PAID' AND " + timeCondition;
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Double.class).one());
+    }
+
+    @Override
+    public long getPreviousOrderCountByTimeRange(String timeRange) {
+        String timeCondition;
+        if (timeRange == null) timeRange = "7days";
+
+        switch (timeRange) {
+            case "today":
+                timeCondition = "DATE(created_at) = CURDATE() - INTERVAL 1 DAY";
+                break;
+            case "month":
+                timeCondition = "MONTH(created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH)";
+                break;
+            case "year":
+                timeCondition = "YEAR(created_at) = YEAR(CURDATE()) - 1";
+                break;
+            case "all":
+                return 0;
+            case "7days":
+            default:
+                timeCondition = "created_at >= CURDATE() - INTERVAL 13 DAY AND created_at < CURDATE() - INTERVAL 6 DAY";
+                break;
+        }
+
+        String sql = "SELECT COUNT(id) FROM orders WHERE status = 'PAID' AND " + timeCondition;
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Long.class).one());
+    }
+
+    @Override
+    public long getPreviousUserCountByTimeRange(String timeRange) {
+        String timeCondition;
+        if (timeRange == null) timeRange = "7days";
+
+        switch (timeRange) {
+            case "today":
+                timeCondition = "DATE(created_at) = CURDATE() - INTERVAL 1 DAY";
+                break;
+            case "month":
+                timeCondition = "MONTH(created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH)";
+                break;
+            case "year":
+                timeCondition = "YEAR(created_at) = YEAR(CURDATE()) - 1";
+                break;
+            case "all":
+                return 0;
+            case "7days":
+            default:
+                timeCondition = "created_at >= CURDATE() - INTERVAL 13 DAY AND created_at < CURDATE() - INTERVAL 6 DAY";
+                break;
+        }
+
+        String sql = "SELECT COUNT(id) FROM users WHERE " + timeCondition;
+        return getJdbi().withHandle(handle -> handle.createQuery(sql).mapTo(Long.class).one());
+    }
+
+    // ==========================================
+    // HÀM HELPER ĐỊNH NGHĨA ĐIỀU KIỆN KỲ HIỆN TẠI
+    // ==========================================
+    private String getCurrentTimeCondition(String timeRange, String columnName) {
+        if (timeRange == null) timeRange = "7days";
+        switch (timeRange) {
+            case "today":
+                return "DATE(" + columnName + ") = CURDATE()";
+            case "month":
+                return "MONTH(" + columnName + ") = MONTH(CURDATE()) AND YEAR(" + columnName + ") = YEAR(CURDATE())";
+            case "year":
+                return "YEAR(" + columnName + ") = YEAR(CURDATE())";
+            case "all":
+                return "1 = 1";
+            case "7days":
+            default:
+                return columnName + " >= CURDATE() - INTERVAL 6 DAY AND " + columnName + " < CURDATE() + INTERVAL 1 DAY";
+        }
+    }
 }
