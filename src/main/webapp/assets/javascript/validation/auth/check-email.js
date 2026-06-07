@@ -21,7 +21,7 @@ inputs.forEach((input, index) => {
     input.addEventListener('paste', function (e) {
         e.preventDefault();
         const pastedData = e.clipboardData.getData('text').trim();
-        if (pastedData.length === 5 && /^\d{5}$/.test(pastedData)) {
+        if (pastedData.length === 5 && /^[A-Z0-9]{5}$/.test(pastedData)) {
             for (let i = 0; i < 5; i++) {
                 inputs[i].value = pastedData[i];
             }

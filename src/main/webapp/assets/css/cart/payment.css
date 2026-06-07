@@ -487,3 +487,118 @@ ul {
 .btn-remove-voucher:hover {
     color: #ff4747; /* Hiệu ứng đổi màu đỏ đậm hơn khi hover vào nút Xóa */
 }
+
+/* ========================================================
+   RESPONSIVE DESIGN CHO TRANG THANH TOÁN
+   ======================================================== */
+
+/* Tablet & Mobile (Màn hình dưới 1024px) */
+@media screen and (max-width: 1023px) {
+    /* Chuyển bố cục payment layout từ ngang sang dọc */
+    .payment-layout {
+        flex-direction: column;
+    }
+
+    /* Ép các cột chiếm 100% chiều rộng màn hình */
+    .grid__column-8,
+    .grid__column-4 {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    /* Bỏ sticky của khung tóm tắt hóa đơn để không bị chiếm chỗ màn hình cuộn */
+    .invoice {
+        position: static;
+        margin: 20px 0 50px 0;
+    }
+
+    /* Giảm margin tổng thể của khung nội dung bên trái */
+    .main-payment-wrapper {
+        margin: 3rem 0 0 0;
+    }
+}
+
+/* Mobile nhỏ (Màn hình dưới 768px) */
+@media screen and (max-width: 767px) {
+    /* Giảm padding của các khối chính để tiết kiệm không gian */
+    .main-payment-wrapper {
+        padding: 15px;
+    }
+
+    .info {
+        padding: 2rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .detail__title {
+        font-size: 2.2rem;
+    }
+
+    /* Điều chỉnh các ô phương thức thanh toán: xếp lưới 2 cột hoặc tự động thu nhỏ */
+    .payment-options-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+
+    .payment-item__content {
+        height: 80px;
+        padding: 8px;
+    }
+
+    .payment-item__content img {
+        height: 25px;
+    }
+
+    .payment-item__content span {
+        font-size: 1.2rem;
+    }
+
+    /* Chỉnh lại phần giỏ hàng chi tiết (Hóa đơn) */
+    .title__2 {
+        padding: 0;
+    }
+
+    .price-header {
+        padding-right: 0;
+    }
+
+    .order-item-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 10px;
+    }
+
+    .order-item__info {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .content__name {
+        max-width: 100%;
+    }
+
+    /* Đẩy giá tiền sang phải trên mobile, thẳng hàng với nội dung */
+    .order-item__price {
+        width: 100%;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .scrollable-order-list {
+        max-height: 250px; /* Thu nhỏ chiều cao khu vực cuộn trên mobile */
+    }
+
+    /* Giảm font chữ của phần tóm tắt giá tiền */
+    .price__total {
+        font-size: 1.4rem;
+    }
+
+    .checkout-discount-title {
+        font-size: 1.4rem;
+    }
+}
