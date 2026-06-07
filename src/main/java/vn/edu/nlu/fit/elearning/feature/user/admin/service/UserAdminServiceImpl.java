@@ -5,6 +5,7 @@ import vn.edu.nlu.fit.elearning.common.helper.enums.Role;
 import vn.edu.nlu.fit.elearning.common.helper.excel.UserExcelParser;
 import vn.edu.nlu.fit.elearning.common.helper.pagination.filter.user.UserFilter;
 import vn.edu.nlu.fit.elearning.common.utils.excel.ExcelReaderUtils;
+import vn.edu.nlu.fit.elearning.common.utils.security.HashUtils;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dao.UserAdminDao;
 import vn.edu.nlu.fit.elearning.feature.user.admin.dto.UserAdminDto;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
@@ -13,6 +14,7 @@ import vn.edu.nlu.fit.elearning.feature.user.student.dto.request.UserRoleStatusR
 import vn.edu.nlu.fit.elearning.feature.user.student.dto.response.UserTableResponse;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdminServiceImpl implements UserAdminService {
@@ -83,7 +85,19 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     @Override
     public List<User> importUsersFromExcel(InputStream inputStream, List<String> errorMessages) throws Exception {
-        return ExcelReaderUtils.readExcel(inputStream, UserExcelParser::parseRowToUser, errorMessages);
+        List<User> users = ExcelReaderUtils.readExcel(inputStream, UserExcelParser::parseRowToUser, errorMessages);
+
+        List<User> validUsers = new ArrayList<>();
+        for (User user : users) {
+            if (userAdminDao.existsByEmail(user.getEmail())) {
+                errorMessages.add("Email '" + user.getEmail() + "' đã tồn tại");
+                continue;
+            }
+            user.setPassword(HashUtils.hashpassword(user.getPassword())
+            );
+            validUsers.add(user);
+        }
+        return validUsers;
     }
 
 }

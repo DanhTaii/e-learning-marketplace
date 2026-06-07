@@ -35,4 +35,7 @@ public interface UserAdminDao {
 
     int createList(List<User> users);
 
+    boolean existsByEmail(String email);
+
+
 }
