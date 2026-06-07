@@ -56,16 +56,16 @@
 
                             <div class="form__input otp-inputs">
                                 <input class="input__number text-small-title" type="text" maxlength="1"
-                                       pattern="[A-Z0-9]*" inputmode="numeric" autocomplete="one-time-code"
+                                       pattern="[A-Z0-9]*" inputmode="text" autocomplete="one-time-code"
                                        required autofocus>
                                 <input class="input__number text-small-title" type="text" maxlength="1"
-                                       pattern="[A-Z0-9]*" inputmode="numeric" required>
+                                       pattern="[A-Z0-9]*" inputmode="text" required>
                                 <input class="input__number text-small-title" type="text" maxlength="1"
-                                       pattern="[A-Z0-9]*" inputmode="numeric" required>
+                                       pattern="[A-Z0-9]*" inputmode="text" required>
                                 <input class="input__number text-small-title" type="text" maxlength="1"
-                                       pattern="[A-Z0-9]*" inputmode="numeric" required>
+                                       pattern="[A-Z0-9]*" inputmode="text" required>
                                 <input class="input__number text-small-title" type="text" maxlength="1"
-                                       pattern="[A-Z0-9]*" inputmode="numeric" required>
+                                       pattern="[A-Z0-9]*" inputmode="text" required>
                             </div>
 
                             <!-- Trường ẩn để gửi toàn bộ mã lên server -->
