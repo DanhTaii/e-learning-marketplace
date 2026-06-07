@@ -278,31 +278,27 @@ public class UserAdminDaoImpl extends BaseDao implements UserAdminDao {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        String sql = """
+            SELECT COUNT(*)
+            FROM users
+            WHERE email = :email
+            """;
+
+        return getJdbi().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("email", email)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
+
+    @Override
     public int create(UserAdminDto user) {
-
         return getJdbi().inTransaction(handle -> {
-
             int userId = handle.createUpdate("""
-                                INSERT INTO users (
-                                    first_name,
-                                    last_name,
-                                    username,
-                                    email,
-                                    password,
-                                    phone,
-                                    avatar_url,
-                                    status
-                                )
-                                VALUES (
-                                    :firstName,
-                                    :lastName,
-                                    :username,
-                                    :email,
-                                    :password,
-                                    :phone,
-                                    :avatarUrl,
-                                    :status
-                                )
+                                INSERT INTO users (first_name, last_name, username, email, password, phone, avatar_url, status)
+                                VALUES (:firstName, :lastName, :username, :email, :password, :phone,:avatarUrl, :status)
                             """)
                     .bindBean(user)
                     .bind("status", user.getStatus().name())

@@ -3,8 +3,10 @@ package vn.edu.nlu.fit.elearning.feature.user.admin.controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
-
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import vn.edu.nlu.fit.elearning.common.container.BeanContainer;
 import vn.edu.nlu.fit.elearning.feature.user.admin.service.UserAdminService;
 import vn.edu.nlu.fit.elearning.feature.user.common.model.User;
@@ -34,26 +36,36 @@ public class UserImportController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Part filePart = request.getPart("excelFile");
-        List<String> errorMessages = new ArrayList<>();
+        if (filePart == null || filePart.getSize() == 0) {
+            request.getSession().setAttribute("flashError", "Vui lòng chọn file Excel!");
+            response.sendRedirect(request.getContextPath() + "/admin/users");
+            return;
+        }
 
+        List<String> errorMessages = new ArrayList<>();
         try (InputStream input = filePart.getInputStream()) {
             List<User> users = userAdminService.importUsersFromExcel(input, errorMessages);
 
-            if (users != null && !users.isEmpty()) {
-                userAdminService.createListUsers(users);
-                request.getSession().setAttribute("flashSuccess", "Tải lên " + users.size() + " người dùng thành công!");
-            } else {
-                request.getSession().setAttribute("flashError", "File excel không hợp lệ");
+            if (!errorMessages.isEmpty()) {
+                request.getSession().setAttribute("importErrors", errorMessages);
             }
 
-            if (!errorMessages.isEmpty()) {
-                request.getSession().setAttribute("importErrors", errorMessages
-                );
+            if (users == null || users.isEmpty()) {
+                request.getSession().setAttribute("flashError", "Không có dữ liệu hợp lệ để import!");
+
+            } else {
+                int inserted = userAdminService.createListUsers(users);
+                if (errorMessages.isEmpty()) {
+                    request.getSession().setAttribute("flashSuccess", "Tải lên " + inserted + " người dùng thành công!");
+                } else {
+                    request.getSession().setAttribute("flashSuccess", "Đã import " + inserted + " người dùng, một số dòng bị bỏ qua."
+                    );
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.getSession().setAttribute("flashError", "Có lỗi xảy ra khi import file");
+            request.getSession().setAttribute("flashError", "Có lỗi xảy ra khi import file Excel!");
         }
 
         response.sendRedirect(request.getContextPath() + "/admin/users");
