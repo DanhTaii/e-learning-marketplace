@@ -70,6 +70,18 @@ $(document).ready(function () {
         } else {
             console.log("Mọi thứ ok, chuẩn bị gửi lên Server!");
         }
+
+        //Ẩn đi nút submit sau khi người dùng nhấn vào để tránh việc họ bấm nhiều lần
+        // Lấy ra nút submit bên trong form này
+        const submitBtn = $(this).find('.btn-submit-modern');
+
+        submitBtn.prop('disabled', true).text('Đang lưu...');
+
+        submitBtn.css({
+            'opacity': '0.7',
+            'cursor': 'not-allowed'
+        });
+
         return isValid;
     });
 });

@@ -99,7 +99,15 @@
         margin-left: 15px !important;
     }
 
-    /* Cụm Đăng nhập / Đăng ký */
+    .sign-in {
+        display: none;
+    }
+
+    .header__button.sign-in-box {
+        display: none !important;
+    }
+
+        /* Cụm Đăng nhập / Đăng ký */
     .header__button-box {
         order: 3 !important;
         display: flex !important;

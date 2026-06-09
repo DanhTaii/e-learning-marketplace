@@ -28,18 +28,27 @@ public class CloudinaryService {
         if (filePart == null || filePart.getSize() == 0) {
             throw new IllegalArgumentException("File không được để trống");
         }
+
         String contentType = filePart.getContentType();
         String resourceType = (contentType != null && contentType.startsWith("video/")) ? "video" : "image";
 
-        Map uploadResult = getInstance().uploader().upload(
-                filePart.getInputStream().readAllBytes(),
-                ObjectUtils.asMap(
-                        "folder", folderName,
-                        "resource_type", resourceType
-                )
-        );
+        java.nio.file.Path tempFile = java.nio.file.Files.createTempFile("upload-", "-" + filePart.getSubmittedFileName());
 
-        return (String) uploadResult.get("secure_url");
+        try {
+            filePart.write(tempFile.toString());
+
+            Map uploadResult = getInstance().uploader().upload(
+                    tempFile.toFile(),
+                    ObjectUtils.asMap(
+                            "folder", folderName,
+                            "resource_type", resourceType
+                    )
+            );
+
+            return (String) uploadResult.get("secure_url");
+        } finally {
+            java.nio.file.Files.deleteIfExists(tempFile);
+        }
     }
 
     public static void deleteFile(String publicId) throws IOException {
