@@ -26,9 +26,9 @@ import java.util.Map;
 
 @WebServlet(name = "CourseCurriculumController", value = "/admin/course/curriculum")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024, // 1MB
-        maxFileSize = 150 * 1024 * 1024, // 150MB
-        maxRequestSize = 100 * 1024 * 1024 // 100MB
+        fileSizeThreshold = 1024 * 1024,        // 1MB
+        maxFileSize = 150 * 1024 * 1024,       // 150MB/file
+        maxRequestSize = 200 * 1024 * 1024     // 200MB/request
 )
 public class CourseCurriculumController extends BaseController {
     private transient LessonService lessonService;
