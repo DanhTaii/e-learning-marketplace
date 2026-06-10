@@ -13,10 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Soft Skill</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/card.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/default.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/home.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/card.css?v=${applicationScope.assetVersion}">
 
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
@@ -398,9 +398,9 @@
 </div>
 <jsp:include page="views/components/toast.jsp"/>
 <jsp:include page="views/layouts/contact-form.jsp"/>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/cart/add-action.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/component/contact-form.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/cart/add-action.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/component/contact-form.js?v=${applicationScope.assetVersion}"></script>
 
 </body>
 

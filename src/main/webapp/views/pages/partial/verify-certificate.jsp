@@ -10,10 +10,10 @@
     <title>Kiểm định chứng chỉ</title>
     <base href="${pageContext.request.contextPath}/">
     <!-- Base CSS -->
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="assets/css/verify-certificate.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/verify-certificate.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -21,7 +21,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=${applicationScope.assetVersion}">
 
 <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
@@ -141,8 +141,8 @@
     <jsp:include page="/views/layouts/footer.jsp"/>
 </div>
 
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/certificate/verify-certificate.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/certificate/verify-certificate.js?v=${applicationScope.assetVersion}"></script>
 
 </body>
 </html>

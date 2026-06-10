@@ -10,15 +10,15 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/pages/dashboard.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/pages/dashboard.css?v=${applicationScope.assetVersion}">
 
 <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
@@ -247,7 +247,7 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=${applicationScope.assetVersion}"></script>
 </body>
 </html>

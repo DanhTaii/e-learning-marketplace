@@ -9,17 +9,17 @@
     <meta charset="UTF-8">
     <title>Chứng nhận hoàn thành khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/course/course-content.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/course/course-content.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/course/certificate.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/course/certificate.css?v=${applicationScope.assetVersion}">
 
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=${applicationScope.assetVersion}">
 
 <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
@@ -142,9 +142,9 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="assets/javascript/features/certificate/certificate.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/features/certificate/certificate.js?v=${applicationScope.assetVersion}"></script>
 
 </body>
 </html>

@@ -12,16 +12,16 @@
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Layout Admin --%>
-    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/tag/tag-create.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/pages/tag/tag-create.css?v=${applicationScope.assetVersion}">
 
     <%-- Base & Notification--%>
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -163,13 +163,13 @@
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <%-- Javascript --%>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/base-validator.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/base-validator.js?v=${applicationScope.assetVersion}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/admin/tag/tag-create.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/admin/tag/tag-create.js?v=${applicationScope.assetVersion}"></script>
 
 <%-- Javascript Validation--%>
-<script src="assets/javascript/validation/admin/tag-form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/admin/tag-form-validation.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=${applicationScope.assetVersion}"></script>
 </body>
 </html>

@@ -28,8 +28,16 @@ public abstract class BaseDao {
         config.setJdbcUrl("jdbc:mysql://" + DBProperties.getDbHost() + ":" + DBProperties.getDbPort() + "/" + DBProperties.getDbName());
         config.setUsername(DBProperties.getUsername());
         config.setPassword(DBProperties.getPassword());
+        //Số lượng connection tối đa được phép tồn tại cùng lúc.
         config.setMaximumPoolSize(5);
+        //Luôn giữ 5 connection trong pool mở sẵn
+        config.setMinimumIdle(1);
+        //Connection rảnh quá lâu sẽ bị đóng. => 30s
         config.setIdleTimeout(30000);
+        //Request được phép chờ tối đa bao lâu để lấy connection. => 10s
+        config.setConnectionTimeout(10000);
+        //Tuổi thọ tối đa của 1 connection => 30'
+        config.setMaxLifetime(1800000);
 
         HikariDataSource ds = new HikariDataSource(config);
         jdbi = Jdbi.create(ds);

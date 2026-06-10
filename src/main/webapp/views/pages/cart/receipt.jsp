@@ -160,6 +160,6 @@
 </div>
 
 <jsp:include page="/views/components/toast.jsp"/>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
 </body>
 </html>

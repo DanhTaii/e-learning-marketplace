@@ -11,18 +11,18 @@
     <base href="${pageContext.request.contextPath}/">
 
     <%-- Admin layout CSS --%>
-    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=${applicationScope.assetVersion}">
     <link rel="stylesheet" href="assets/css/base/base.css">
-    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/management-default.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-admin.css?v=${applicationScope.assetVersion}">
     <link rel="stylesheet"
-          href="assets/css/admin/pages/category/category-management.css?v=<%=System.currentTimeMillis()%>">
+          href="assets/css/admin/pages/category/category-management.css?v=${applicationScope.assetVersion}">
 
     <%-- Admin component CSS --%>
     <link rel="stylesheet" href="assets/css/admin/notification.css">
-    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/action-bar.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -155,13 +155,13 @@
 <jsp:include page="/views/components/toast.jsp"/>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/utils/admin-filter.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/component/bulk-action.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/component/selection.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/admin/category/category-management.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/utils/admin-filter.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/utils/admin-toggle-sidebar.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/component/bulk-action.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/component/selection.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/admin/category/category-management.js?v=${applicationScope.assetVersion}"></script>
 
 </body>
 

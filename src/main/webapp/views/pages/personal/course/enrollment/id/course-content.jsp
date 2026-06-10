@@ -9,17 +9,17 @@
     <meta charset="UTF-8">
     <title>Course Content</title>
     <base href="${pageContext.request.contextPath}/">
-    <%--    <link rel="stylesheet" href="assets/css/default.css?v=<%=System.currentTimeMillis()%>">--%>
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/course/course-content.css?v=<%=System.currentTimeMillis()%>">
-    <%--    <link rel="stylesheet" href="assets/css/admin/layouts/header-course-admin.css?v=<%=System.currentTimeMillis()%>">--%>
+    <%--    <link rel="stylesheet" href="assets/css/default.css?v=${applicationScope.assetVersion}">--%>
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/course/course-content.css?v=${applicationScope.assetVersion}">
+    <%--    <link rel="stylesheet" href="assets/css/admin/layouts/header-course-admin.css?v=${applicationScope.assetVersion}">--%>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <%--    <link rel="stylesheet" href="assets/css/fonts.css">--%>
-    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/confirm-modal.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=${applicationScope.assetVersion}">
 
 <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
@@ -155,16 +155,16 @@
 </div>
 <jsp:include page="/views/components/modal-confirm.jsp"/>
 <jsp:include page="/views/components/toast.jsp"/>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/enrollment/enrollment.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/personal/course/rating-star.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/enrollment/enrollment-detail-navbar.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/video-helper.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/enrollment/enrollment-note.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/enrollment/enrollment-review.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/utils/formatter/base.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/form-validation.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/enrollment/enrollment.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/personal/course/rating-star.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/enrollment/enrollment-detail-navbar.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/video-helper.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/enrollment/enrollment-note.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/enrollment/enrollment-review.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/utils/formatter/base.js?v=${applicationScope.assetVersion}"></script>
 </body>
 
 </html>

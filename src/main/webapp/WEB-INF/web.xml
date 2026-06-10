@@ -61,4 +61,10 @@
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>
+            vn.edu.nlu.fit.elearning.common.listener.AppStartupListener
+        </listener-class>
+    </listener>
+
 </web-app>
