@@ -13,8 +13,8 @@
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/profile/profile.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/profile/profile.css?v=${applicationScope.assetVersion}">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
     <link rel="stylesheet" href="assets/css/admin/notification.css?v=1.0.1">
 
@@ -176,9 +176,9 @@
     <jsp:include page="/views/components/toast.jsp"/>
 </div>
 </body>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/personal/profile/change-information.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/personal/profile/change-avatar.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/validation/form-validation.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/personal/profile/change-information.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/personal/profile/change-avatar.js?v=${applicationScope.assetVersion}"></script>
 </html>

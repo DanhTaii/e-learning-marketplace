@@ -8,20 +8,20 @@
     <meta charset="UTF-8">
     <title>Tạo mới khóa học</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/layouts/header-course-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-create.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/sidebar-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/layouts/header-course-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/pages/lesson/lesson-create.css?v=${applicationScope.assetVersion}">
 
 <%--    BODY--%>
-    <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/admin/pages/course/course-edit.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/layouts/form-detail-admin.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/admin/pages/course/course-edit.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
     <link rel="stylesheet" href="assets/fonts/fontawesome-free-7.1.0-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/admin/component/notification.css?v=${applicationScope.assetVersion}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <link rel="icon" type="image/png" href="assets/image/logo.jpg">
@@ -268,9 +268,9 @@
 </div>
 <jsp:include page="/views/components/toast.jsp"/>
 
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/form-create-course-validation.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/admin/create-course-validation.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/form-create-course-validation.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/admin/create-course-validation.js?v=${applicationScope.assetVersion}"></script>
 </body>
 
 </html>

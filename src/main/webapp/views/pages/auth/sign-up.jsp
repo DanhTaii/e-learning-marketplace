@@ -10,11 +10,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đăng ký</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/auth/sign-up.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/auth/responsive-auth.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/default.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/auth/sign-up.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/home.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/auth/responsive-auth.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -86,7 +86,7 @@
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/form-validation.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/validation/auth/sign-up.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/form-validation.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/validation/auth/sign-up.js?v=${applicationScope.assetVersion}"></script>
 </html>

@@ -1520,7 +1520,7 @@
 </div>
 
 <jsp:include page="/views/layouts/footer.jsp"/>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
 
 </body>
 </html>

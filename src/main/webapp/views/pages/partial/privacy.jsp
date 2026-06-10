@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <title>Chính sách quyền riêng tư - SoftSkill</title>
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/privacy.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/privacy.css?v=${applicationScope.assetVersion}">
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">

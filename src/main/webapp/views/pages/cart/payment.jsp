@@ -12,11 +12,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="${pageContext.request.contextPath}/">
-    <link rel="stylesheet" href="assets/css/base/base.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/cart/payment.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/home.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/base/default.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="assets/css/cart/voucher.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/base.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/cart/payment.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/home.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/base/default.css?v=${applicationScope.assetVersion}">
+    <link rel="stylesheet" href="assets/css/cart/voucher.css?v=${applicationScope.assetVersion}">
     <script src="assets/fonts/fontawesome-free-7.1.0-web/js/jquery-3.6.0.min.js"></script>
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="assets/fonts/normalize.css-master/normalize.css">
@@ -26,7 +26,7 @@
 
 
     <link rel="stylesheet" href="assets/fonts/static/." as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="assets/css/base/modal-notification.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/modal-notification.css?v=${applicationScope.assetVersion}">
 <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
@@ -305,10 +305,10 @@
     <jsp:include page="/views/components/toast.jsp"/>
 
 </div>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/cart/payment-modal.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/cart/cart-action.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/features/cart/voucher.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/component/modal/modal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/cart/payment-modal.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/cart/cart-action.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/features/cart/voucher.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/component/modal/modal.js?v=${applicationScope.assetVersion}"></script>
 </body>
 </html>

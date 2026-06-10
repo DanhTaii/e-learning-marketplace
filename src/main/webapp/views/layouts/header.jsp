@@ -9,7 +9,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>header</title>
-    <link rel="stylesheet" href="assets/css/base/header.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="assets/css/base/header.css?v=${applicationScope.assetVersion}">
     <link rel="icon" type="image/png" href="assets/image/logo.jpg">
 </head>
 <body>
@@ -215,9 +215,9 @@
         </div>
     </div>
 </header>
-<script src="assets/javascript/security/security.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/ui/dark-mode.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/ui/header-search.js?v=<%=System.currentTimeMillis()%>"></script>
-<script src="assets/javascript/component/header.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="assets/javascript/security/security.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/ui/dark-mode.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/ui/header-search.js?v=${applicationScope.assetVersion}"></script>
+<script src="assets/javascript/component/header.js?v=${applicationScope.assetVersion}"></script>
 </body>
 </html>
