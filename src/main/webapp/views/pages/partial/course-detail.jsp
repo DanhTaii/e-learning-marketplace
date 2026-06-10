@@ -48,7 +48,7 @@
                             <c:choose>
 
                                 <c:when test="${c.enrolled}">
-                                    <a href="my-course/detail?courseId=${c.id}" class="turn-page">
+                                    <a href="personal/my-course/detail?courseId=${c.id}" class="turn-page">
                                         <div class="header__button add__button">
                                             <button type="button" class="container-2__button-add button__btn">
                                                 Vào học ngay
