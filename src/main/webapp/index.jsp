@@ -95,7 +95,7 @@
 
                                                     <button type="button" class="btn-add-cart dark-button"
                                                             style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
-                                                            onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${courseMostPopular.id}')">
+                                                            onclick="goToCourseContent(event,'${pageContext.request.contextPath}/personal/my-course/detail?courseId=${courseMostPopular.id}')">
                                                         Vào học ngay
                                                     </button>
 
@@ -184,7 +184,7 @@
 
                                                                 <button type="button" class="btn-add-cart dark-button"
                                                                         style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
-                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/personal/my-course/detail?courseId=${c.id}')">
                                                                     Vào học ngay
                                                                 </button>
 
@@ -272,7 +272,7 @@
 
                                                                 <button type="button" class="btn-add-cart dark-button"
                                                                         style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
-                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/personal/my-course/detail?courseId=${c.id}')">
                                                                     Vào học ngay
                                                                 </button>
 
@@ -358,7 +358,7 @@
 
                                                                 <button type="button" class="btn-add-cart dark-button"
                                                                         style="font-size: 1.5rem;background-color: #01FF85;color: #002333"
-                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/my-course/detail?courseId=${c.id}')">
+                                                                        onclick="goToCourseContent(event,'${pageContext.request.contextPath}/personal/my-course/detail?courseId=${c.id}')">
                                                                     Vào học ngay
                                                                 </button>
 
