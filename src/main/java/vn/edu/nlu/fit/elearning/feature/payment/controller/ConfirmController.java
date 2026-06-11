@@ -59,8 +59,8 @@ public class ConfirmController extends HttpServlet {
             String vnpayUrl = paymentService.generateVNPAYUrl(order, request);
             response.sendRedirect(vnpayUrl);
         } else {
-
-            response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + order.getId());
+            session.setAttribute("receipt_order_id", order.getId());
+            response.sendRedirect(request.getContextPath() + "/receipt");
         }
     }
 }
