@@ -40,9 +40,19 @@ PaymentMethodService paymentMethodService;
         if (session != null && session.getAttribute("userId") != null) {
             userId = (Integer) session.getAttribute("userId");
         }
-         int orderId = Integer.parseInt(request.getParameter("orderId"));
+        Integer orderId = (Integer) session.getAttribute("receipt_order_id");
+
+        if (orderId == null) {
+            response.sendRedirect(request.getContextPath() + "/index");
+            return;
+        }
 
         Order order = orderService.getOrderById(orderId);
+
+        if (order == null || order.getUserId() != userId) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Bạn không có quyền xem biên lai này.");
+            return;
+        }
         List<OrderItemDTO> orderItemList = orderItemService.getReceiptByOrderId(orderId);
         PaymentMethod pm = paymentMethodService.getPaymentMethodById(order.getPaymentMethodId());
         request.setAttribute("order",order);
@@ -54,6 +64,18 @@ PaymentMethodService paymentMethodService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String orderIdParam = request.getParameter("orderId");
+
+        if (orderIdParam != null && !orderIdParam.trim().isEmpty()) {
+            try {
+                int orderId = Integer.parseInt(orderIdParam);
+                session.setAttribute("receipt_order_id", orderId);
+            } catch (NumberFormatException e) {
+            }
+        }
+
+        response.sendRedirect(request.getContextPath() + "/receipt");
 
     }
 }

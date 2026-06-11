@@ -58,11 +58,15 @@
                                                 <div class="row2__column3-payment-method">
                                                     <span class="text"><span class="text1">Phương thức thanh toán: </span><c:out value="${order.paymentMethodName}"/></span>
                                                 </div>
-                                                <a href="receipt?orderId=${order.id}" class="turn-page">
+                                                <form action="receipt" method="POST" style="display: inline;">
+                                                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+
+                                                    <input type="hidden" name="orderId" value="${order.id}">
+
                                                     <div class="row2__column4-btn-receipt header__button receipt-box">
-                                                        <button type="button" class="btn-receipt button__btn">Biên lai</button>
+                                                        <button type="submit" class="btn-receipt button__btn">Biên lai</button>
                                                     </div>
-                                                </a>
+                                                </form>
                                                 <div class="row2__column4-success">
                                                     <span class="text"><c:out value="${order.status}"/></span>
                                                 </div>

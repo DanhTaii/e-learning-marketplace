@@ -45,12 +45,18 @@ public class VNPayReturnController extends HttpServlet {
             session.removeAttribute("appliedVoucher");
             session.removeAttribute("discountAmount");
             session.setAttribute("flashSuccess", "Thanh toán thành công! Chúc bạn học tốt.");
-            response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + order.getId());
+            if (order != null) {
+                session.setAttribute("receipt_order_id", order.getId());
+            }
+            response.sendRedirect(request.getContextPath() + "/receipt");
         } else {
             orderService.processPaymentResponse(orderCode, transactionNo, false);
             Order order = orderService.getOrderByCode(orderCode);
             session.setAttribute("flashError", "Giao dịch thất bại hoặc bạn đã hủy thanh toán.");
-            response.sendRedirect(request.getContextPath() + "/receipt?orderId=" + order.getId());
+            if (order != null) {
+                session.setAttribute("receipt_order_id", order.getId());
+            }
+            response.sendRedirect(request.getContextPath() + "/receipt");
         }
     }
 
