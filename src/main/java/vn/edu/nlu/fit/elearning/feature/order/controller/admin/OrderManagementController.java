@@ -54,7 +54,7 @@ public class OrderManagementController extends BaseController {
         filter.setToDate(RequestUtils.getParameterAsToDate(request, "toDate", null));
         filter.setStatus(RequestUtils.getParameterAsOrderStatus(request, "status"));
         filter.setVoucherCode(RequestUtils.getParameterAsString(request, "voucherCode", ""));
-
+        filter.setSortByPrice(RequestUtils.getParameterAsString(request, "sortByPrice", ""));
         filter.setPage(RequestUtils.getParameterAsInt(request, "page", 1));
         filter.setSize(RequestUtils.getParameterAsInt(request, "size", 16));
 
