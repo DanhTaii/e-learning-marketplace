@@ -148,12 +148,20 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
     public List<Order> getOrderBySearch(OrderFilter filter) {
         Map<String, Object> params = new HashMap<>();
         String whereClause = buildOrderWhereClause(filter, params);
+        String orderByClause = " ORDER BY o.created_at DESC"; // Mặc định xếp theo ngày mới nhất
+
+        if (filter.getSortByPrice() != null && "DESC".equalsIgnoreCase(filter.getSortByPrice().trim())) {
+            orderByClause = " ORDER BY o.final_amount DESC, o.created_at DESC";
+        } else if (filter.getSortByPrice() != null && "ASC".equalsIgnoreCase(filter.getSortByPrice().trim())) {
+            orderByClause = " ORDER BY o.final_amount ASC, o.created_at DESC";
+        }
         String sql = "SELECT o.id, o.order_code, o.user_id, o.payment_method_id, " +
                 "o.total_amount, o.discount_amount, o.voucher_amount ,o.final_amount, o.status, " +
                 "o.paid_at, o.created_at, o.updated_at, o.username_snapshot, o.voucher_id " +
                 "FROM orders o "
                 + whereClause
-                + " ORDER BY o.created_at DESC LIMIT :limit OFFSET :offset";
+                + orderByClause
+                + " LIMIT :limit OFFSET :offset";
 
         return getJdbi().withHandle(handle -> {
             var query = handle.createQuery(sql);

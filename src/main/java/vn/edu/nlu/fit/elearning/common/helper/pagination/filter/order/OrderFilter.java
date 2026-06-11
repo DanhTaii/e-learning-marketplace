@@ -15,7 +15,7 @@ public class OrderFilter extends BaseSearchFilter {
     private Timestamp fromDate;
     private Timestamp toDate;
     private OrderStatus status;
-
+    private String sortByPrice;
     public OrderFilter() {}
 
     public OrderFilter(String name, String code, int courseId, int paymentMethodId, Timestamp fromDate, Timestamp toDate, OrderStatus status) {
@@ -27,7 +27,13 @@ public class OrderFilter extends BaseSearchFilter {
         this.toDate = toDate;
         this.status = status;
     }
+    public String getSortByPrice() {
+        return sortByPrice;
+    }
 
+    public void setSortByPrice(String sortByPrice) {
+        this.sortByPrice = sortByPrice;
+    }
     public String getVoucherCode() {
         return voucherCode;
     }

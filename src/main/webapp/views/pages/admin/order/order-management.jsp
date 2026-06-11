@@ -165,6 +165,14 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
+                                        <div class="filter-group">
+                                            <label>Sắp xếp theo số tiền</label>
+                                            <select name="sortByPrice">
+                                                <option value="" ${empty param.sortByPrice ? 'selected' : ''}>Mặc định</option>
+                                                <option value="DESC" ${param.sortByPrice == 'DESC' ? 'selected' : ''}>Giá trị: Từ cao đến thấp</option>
+                                                <option value="ASC" ${param.sortByPrice == 'ASC' ? 'selected' : ''}>Giá trị: Từ thấp đến cao</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="filter-actions">
                                         <a href="admin/orders" class="btn-clear">
