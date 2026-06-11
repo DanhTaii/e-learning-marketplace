@@ -47,15 +47,29 @@
                                 <div class="payment-options-grid">
 
                                     <c:forEach var="method" items="${paymentMethod}" varStatus="status">
-                                        <label class="payment-item">
-                                            <input type="radio" name="payment-method-id"
-                                                   value="${method.id}"${status.first ? 'checked' : ''} >
+                                        <%-- So sánh bằng chữ "VNPAY" (Mã định danh không bao giờ đổi) --%>
+                                        <c:set var="isVNPAY" value="${method.code eq 'vnpay'}" />
+                                        <c:set var="isDisabled" value="${not isVNPAY}" />
+
+                                        <label class="payment-item ${isDisabled ? 'payment-item--disabled' : ''}"
+                                               style="${isDisabled ? 'opacity: 0.5; cursor: not-allowed;' : ''}">
+
+                                            <input type="radio" name="payment-method-id" value="${method.id}"
+                                                ${isVNPAY ? 'checked' : ''}
+                                                ${isDisabled ? 'disabled' : ''}>
 
                                             <div class="payment-item__content">
                                                 <img src="${method.iconUrl}" alt="${method.name}">
-                                                <span><c:out value="${method.name}"/></span>
+                                                <span>
+                <c:out value="${method.name}"/>
+                <c:if test="${isDisabled}">
+                    <span style="font-size: 1.1rem; color: #dc3545; display: block; font-weight: 600;">(Sắp ra mắt)</span>
+                </c:if>
+            </span>
 
-                                                <div class="select-badge"><i class="fa-solid fa-circle-check"></i></div>
+                                                <c:if test="${isVNPAY}">
+                                                    <div class="select-badge"><i class="fa-solid fa-circle-check"></i></div>
+                                                </c:if>
                                             </div>
                                         </label>
                                     </c:forEach>
