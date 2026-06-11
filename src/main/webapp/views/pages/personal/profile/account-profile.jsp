@@ -82,14 +82,43 @@
                                     <span>Lịch sử giao dịch</span>
                                 </a>
                             </li>
-                            <c:if test="${userProfile.role == 'ADMIN'}">
-                                <li>
-                                    <a href="admin/dashboard" class="menu-link">
-                                        <i class="fa-solid fa-chart-line"></i>
-                                        <span>Admin</span>
-                                    </a>
-                                </li>
-                            </c:if>
+                            <c:choose>
+                                <c:when test="${userRoles.contains('SUPER_ADMIN')}">
+                                    <li>
+                                        <a href="admin/dashboard" class="menu-link">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                            <span>Admin</span>
+                                        </a>
+                                    </li>
+                                </c:when>
+
+                                <c:when test="${userRoles.contains('ADMIN_USER')}">
+                                    <li>
+                                        <a href="admin/users" class="menu-link">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                            <span>Admin</span>
+                                        </a>
+                                    </li>
+                                </c:when>
+
+                                <c:when test="${userRoles.contains('ADMIN_COURSE')}">
+                                    <li>
+                                        <a href="admin/courses" class="menu-link">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                            <span>Admin</span>
+                                        </a>
+                                    </li>
+                                </c:when>
+
+                                <c:when test="${userRoles.contains('ADMIN_ORDER')}">
+                                    <li>
+                                        <a href="admin/orders" class="menu-link">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                            <span>Admin</span>
+                                        </a>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                         </ul>
                     </nav>
                 </div>
